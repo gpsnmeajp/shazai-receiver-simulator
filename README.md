@@ -27,6 +27,7 @@ LLMペルソナに「日本人として評定して」と頼む方式はとり�
 | 根拠となる研究と事例（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/evidence.html) / [Markdown](docs/md/EVIDENCE.md)） | 規則ごとの根拠となる研究と事例、確度 |
 | 検証結果と変更履歴（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html) / [Markdown](docs/md/VALIDATION.md)） | 検証結果、既知の限界、次の検証、変更履歴 |
 | 人間のブラインド評定（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html) / [Markdown](docs/md/HUMAN_EVAL.md)） | 人間のブラインド評定の実施手順、盲検化の設計、比較の指標 |
+| 層AのJev（System One）への置き換え（[Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計（未実装・未検証） |
 | [レポート](https://gpsnmeajp.github.io/shazai-receiver-simulator/report.html)（`docs/report.html`） | 図で見る解説と結果 |
 
 ## 使い方
