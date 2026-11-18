@@ -7,7 +7,7 @@
   compare  評定ページが書き出した評定JSONを集め、人間どうしの一致と、自動評価との差を測る。
   synth    試験用の合成評定者を作る（仕組みの動作確認用。結果を検証に使わないこと）。
 
-標準ライブラリのみ。詳細は docs/HUMAN_EVAL.md。
+標準ライブラリのみ。詳細は docs/md/HUMAN_EVAL.md（HTML版は docs/human-eval.html）。
 """
 import argparse
 import glob

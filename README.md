@@ -9,16 +9,25 @@ LLMペルソナに「日本人として評定して」と頼む方式はとり�
 - **層A 観察**：LLMは、回答や場面に何が書かれ、何が描写されているかを記録するだけにします（`observe_prompt.md`）。
 - **層B 受け手**：研究で効く向きが示された性質をもつ受け手の母集団に観察を通し、回答ごとに「失礼／足りない／釣り合う／重すぎる」の分布と、不足・過剰の量を出します（`sim.py`、`population.json`）。
 
+評定の4分類：
+
+- **失礼**：失点の合計が大きい。一文や一つの振る舞いだけでも崩れる
+- **足りない**：謝罪の中身が、受け手が必要とする深さに届かない
+- **釣り合う**：不足も過剰もなく、場面に見合っている
+- **重すぎる**：重さが、受け手の許容を超えている
+
 ## 文書
+
+**図入りの文書サイト：<https://gpsnmeajp.github.io/shazai-receiver-simulator/>**（GitHub Pages。`docs/` 以下を公開）
 
 | 文書 | 内容 |
 |---|---|
-| [docs/DESIGN.md](docs/DESIGN.md) | 目的、範囲、設計原則、決定記録、未解決の問い |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | データの流れ、観察の形式、受け手モデルの式、コマンド、拡張の手順 |
-| [docs/EVIDENCE.md](docs/EVIDENCE.md) | 規則ごとの根拠となる研究と事例、確度 |
-| [docs/VALIDATION.md](docs/VALIDATION.md) | 検証結果、既知の限界、次の検証、変更履歴 |
-| [docs/HUMAN_EVAL.md](docs/HUMAN_EVAL.md) | 人間のブラインド評定の実施手順、盲検化の設計、比較の指標 |
-| `report.html` | 図で見る解説と結果 |
+| 設計思想と目的（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/design.html) / [Markdown](docs/md/DESIGN.md)） | 目的、範囲、設計原則、決定記録、未解決の問い |
+| アーキテクチャ（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/architecture.html) / [Markdown](docs/md/ARCHITECTURE.md)） | データの流れ、観察の形式、受け手モデルの式、コマンド、拡張の手順 |
+| 根拠となる研究と事例（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/evidence.html) / [Markdown](docs/md/EVIDENCE.md)） | 規則ごとの根拠となる研究と事例、確度 |
+| 検証結果と変更履歴（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html) / [Markdown](docs/md/VALIDATION.md)） | 検証結果、既知の限界、次の検証、変更履歴 |
+| 人間のブラインド評定（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html) / [Markdown](docs/md/HUMAN_EVAL.md)） | 人間のブラインド評定の実施手順、盲検化の設計、比較の指標 |
+| [レポート](https://gpsnmeajp.github.io/shazai-receiver-simulator/report.html)（`docs/report.html`） | 図で見る解説と結果 |
 
 ## 使い方
 
@@ -65,7 +74,7 @@ python3 blind.py compare --key human/s01/key.json --ratings "human/s01/ratings/*
     --scenes examples/scenes.json --rater-types -o human/s01/compare
 ```
 
-評定ページは1枚のHTMLで、ブラウザで開くだけで使えます。条件やラベルは伏せられ、出題順は評定者ごとに変わります。同じ項目を後半にもう一度出して、個人の評定の安定性も測ります。比較の結果は、人間どうしの一致を上限の目安として並べ、分布の距離、人間の評定への確率、偏りの向き、場面の種類ごとの差、評定者ごとに最も近い型を報告します。詳細は [docs/HUMAN_EVAL.md](docs/HUMAN_EVAL.md)。
+評定ページは1枚のHTMLで、ブラウザで開くだけで使えます。条件やラベルは伏せられ、出題順は評定者ごとに変わります。同じ項目を後半にもう一度出して、個人の評定の安定性も測ります。比較の結果は、人間どうしの一致を上限の目安として並べ、分布の距離、人間の評定への確率、偏りの向き、場面の種類ごとの差、評定者ごとに最も近い型を報告します。詳細は [人間のブラインド評定](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html)（[Markdown](docs/md/HUMAN_EVAL.md)）。
 
 ## 何を扱えるか
 
@@ -87,4 +96,4 @@ AIのト書きや顔文字は「仮想の身体」として扱います。現実
 
 ## 現在の到達点
 
-v0.4 ベンチマーク（192回答、代理観察）で、条件の順位は筆者と一致しました（「釣り合う」：シミュレータ 51% / 65% / 72%、筆者 48% / 69% / 75%）。ペルソナ評定では順位が逆でした。筆者との一致度はκ=0.28で、ペルソナは0.06です。ただし、型の比率と性質の強さは事前値で、人間のデータで推定していません。詳細と限界は [docs/VALIDATION.md](docs/VALIDATION.md) にあります。
+v0.4 ベンチマーク（192回答、代理観察）で、条件の順位は筆者と一致しました（「釣り合う」：シミュレータ 51% / 65% / 72%、筆者 48% / 69% / 75%）。ペルソナ評定では順位が逆でした。筆者との一致度はκ=0.28で、ペルソナは0.06です。ただし、型の比率と性質の強さは事前値で、人間のデータで推定していません。詳細と限界は [検証結果](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html)（[Markdown](docs/md/VALIDATION.md)）にあります。

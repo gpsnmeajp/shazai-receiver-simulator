@@ -116,6 +116,8 @@
 
 ### 4.2 不満の深さの知覚（`perceive`）
 
+場面から、受け手が感じ取る不満の深さ L（0〜4）を求めます。傷 S はヒステリシス有効時（既定）だけ使います。
+
 ```text
 prior  = min(prior_corrections, 3)
 causes = 0.35·prior + 0.35·push + 0.35·harm + 0.35·[integrity]
@@ -171,6 +173,8 @@ L      = clip(raw + N(0, 0.3), 0, 4)
 演技に見える: 観察の performative_plausibility、なければ min(1, 0.2·max(0, 演じられる表出の合計−2))。
           p^(1/partisanship) の確率で 0.7 の失点                                              [E-06]
 ```
+
+I はシグナルの強さ（`intensity`）です。
 
 ## 5. コマンド
 

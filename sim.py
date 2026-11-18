@@ -301,7 +301,7 @@ WEIGHT_POINTS = [(0, 0.0), (1, 0.5), (2, 1.0), (3, 2.0), (4, 2.5)]
 DEFAULT_CONTEXT = {"failure_frame": "real_task", "apologizer": "ai_assistant", "viewpoint": "victim",
                    "fault_clarity": "clear", "power": 0, "distance": "neutral"}
 
-# シグナルの種類と働き。docs/EVIDENCE.md に根拠を対応づけている
+# シグナルの種類と働き。docs/md/EVIDENCE.md に根拠を対応づけている
 SIGNAL_GROUP = {
     "gaze_down": "appease", "head_bow": "appease", "dejected": "appease", "awkward": "appease",
     "blush": "appease", "tears": "appease", "freeze": "appease",
