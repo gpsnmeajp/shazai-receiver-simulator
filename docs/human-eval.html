@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>人間のブラインド評定</title>
+<meta name="description" content="人間のブラインド評定の実施手順、盲検化の設計、自動評価との比較の指標。">
+<link rel="stylesheet" href="style.css">
+<style>
+.flow .step.give{border-top:3px solid var(--good)}
+.flow .step.keep{border-top:3px solid var(--bad)}
+.blind .card{margin:0}
+.blind .card h3{font-size:.95rem}
+.blind .why{font-size:.84rem;color:var(--muted);border-top:1px dashed var(--grid);padding-top:.35rem;margin-top:.4rem}
+.q{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:.7rem;margin:1rem 0}
+.q .card{margin:0}
+.scale{display:flex;gap:.25rem;margin:.4rem 0 0;flex-wrap:wrap}
+.scale span{font-size:.78rem;border:1px solid var(--ring);border-radius:6px;padding:.05rem .45rem;background:var(--surface)}
+.kbd{font:600 .8rem/1 ui-monospace,Consolas,monospace;border:1px solid var(--axis);border-bottom-width:2px;border-radius:5px;padding:.15rem .4rem;background:var(--card)}
+.metric-up td:first-child{white-space:nowrap;font-weight:600}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 21h14"/><path d="M4 7h16"/><path d="m4 7-3 7a4 4 0 0 0 6 0L4 7z"/><path d="m20 7-3 7a4 4 0 0 0 6 0l-3-7z"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+<symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+<symbol id="i-form" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17v-5"/><path d="M13 17V8"/><path d="M18 17v-9"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6"/><path d="M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7.5 14h9"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6z"/><path d="M14 3v6h6"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/></symbol>
+</svg>
+
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
+<nav class="nav" aria-label="文書">
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html" aria-current="page">人間評定</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+</nav></div></header>
+
+<main>
+<h1>人間によるブラインド評定と、自動評価との差の測定</h1>
+<p class="lead">シミュレータの評定（や、LLMペルソナなど他の自動評価）が、実際の人の受け取り方とどれだけずれているかを測るための仕組みです。</p>
+<p class="note">道具は <code>blind.py</code> と <code>human/rate_template.html</code> です。</p>
+<ul class="toc">
+<li><a href="#flow">1. 流れ</a></li><li><a href="#blind">2. 盲検化の設計</a></li><li><a href="#page">3. 評定ページ</a></li><li><a href="#procedure">4. 実施の手順</a></li><li><a href="#metrics">5. 比較の指標</a></li><li><a href="#test">6. 仕組みの試験</a></li><li><a href="#caveats">7. 限界と注意</a></li><li><a href="#formats">8. ファイル形式</a></li>
+</ul>
+
+<h2 id="flow"><svg class="icon"><use href="#i-layers"/></svg>1. 流れ</h2>
+<div class="flow tight">
+<div class="step o"><b>作例・ベンチマークの回答</b><small><code>examples/scenes.json</code> など</small></div>
+<div class="arrow" aria-hidden="true">→</div>
+<div class="step o"><b><code>blind.py pack</code></b><small>問題束を作る</small></div>
+<div class="arrow" aria-hidden="true">→</div>
+<div class="step give"><b><code>rate.html</code></b><small>評定者に渡す。問題束を埋め込んだ1枚のHTMLで、ブラウザで開くだけ</small></div>
+<div class="step keep"><b><code>key.json</code></b><small>評定者に<b>渡さない</b>。表示IDと元の項目・条件の対応表</small></div>
+<div class="arrow" aria-hidden="true">→</div>
+<div class="step o"><b><code>ratings/*.json</code></b><small>評定者が回答し、評定ファイルを保存して実施者に送る</small></div>
+<div class="arrow" aria-hidden="true">→</div>
+<div class="step b"><b><code>blind.py compare</code></b><small>シミュレータの出力や他の自動評価と比べ、<code>compare.md</code> / <code>compare.json</code> を出す</small></div>
+</div>
+<p class="note">ファイルはすべて <code>human/&lt;session&gt;/</code> の下に置きます。</p>
+
+<h2 id="blind"><svg class="icon"><use href="#i-eyeoff"/></svg>2. 盲検化の設計</h2>
+<div class="grid blind">
+<div class="card"><h3>条件・モデル名・作例のラベル</h3><p>「＋しょんぼり」などのラベルは評定ページに一切含めない。対応表は別ファイルにする。</p><p class="why">評定者が条件を推測して評定を変えないように</p></div>
+<div class="card"><h3>表示ID</h3><p>6桁の乱数。元の項目IDとは無関係。</p><p class="why">IDから条件を推測できないように</p></div>
+<div class="card"><h3>出題順</h3><p>評定者ごとに乱数で並べ替える（評定者IDと問題束IDから決まる）。</p><p class="why">順序の効果を評定者間で打ち消す</p></div>
+<div class="card"><h3>表示の仕方</h3><p>1問に1回答。同じ場面の他の回答と並べない。</p><p class="why">シミュレータは回答を独立に評価するので、条件をそろえる。並べて比べると相対的な評価になる</p></div>
+<div class="card"><h3>場面の立場</h3><p>各問の冒頭に「あなたは本人／第三者／物語の中の参加者／読者」を示す。</p><p class="why">シミュレータの <code>viewpoint</code>・<code>failure_frame</code> と同じ条件で評定してもらうため</p></div>
+<div class="card"><h3>再評定</h3><p>一部の項目（既定4問）を、別の表示IDで後半にもう一度出す。</p><p class="why">同じ人の評定の安定性（自己一致）を測り、自動評価が到達しうる上限の目安にする</p></div>
+</div>
+
+<h2 id="page"><svg class="icon"><use href="#i-form"/></svg>3. 評定ページ</h2>
+<h3>設問</h3>
+<div class="q">
+<div class="card"><h3>1. 釣り合っているか <span class="badge b-mid">必須</span></h3><p>シミュレータの出力と同じ4分類。</p><div class="scale"><span class="rate"><i class="c-rude"></i>失礼</span><span class="rate"><i class="c-light"></i>足りない</span><span class="rate"><i class="c-fit"></i>釣り合う</span><span class="rate"><i class="c-heavy"></i>重すぎる</span></div></div>
+<div class="card"><h3>2. 不満の深さ</h3><p>謝られている側が、どのくらい不満を感じている場面だと思うか。シミュレータの知覚段階と比べます。</p><div class="scale"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span></div></div>
+<div class="card"><h3>3. 誠実に見えるか</h3><p>「釣り合い」と「誠実さ」が分かれる場面を見つけるための副指標です（<a href="design.html#purpose">設計 1章</a>）。</p><div class="scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+<div class="card"><h3>4. 気づいたこと</h3><p>自由記述。</p></div>
+</div>
+
+<h3>任意のアンケート</h3>
+<p>受け手の性質に対応する8問（1〜5）です。性質の値として直接は使わず、「最もよく説明する型」との関係を後で調べるために記録します。心理尺度としての妥当性は確かめていません。</p>
+<div class="tbl"><table>
+<thead><tr><th>欄</th><th>質問</th><th>対応する性質</th></tr></thead>
+<tbody>
+<tr><td><code>detect</code></td><td>相手の口調が急に丁寧になると、怒っているのかなと感じる</td><td>察しの感度</td></tr>
+<tr><td><code>partisanship</code></td><td>謝られるとき、言い方の一つ一つが気になる</td><td>当事者性</td></tr>
+<tr><td><code>repair</code></td><td>謝罪の言葉より、きちんと直してくれることが大事だ</td><td>修復の重視</td></tr>
+<tr><td><code>tolerance_rev</code></td><td>丁寧すぎる謝罪は、かえって負担に感じる</td><td>重さへの耐性（逆）</td></tr>
+<tr><td><code>register</code></td><td>謝る場面での絵文字やくだけた言葉は、やめてほしい</td><td>文体の規範</td></tr>
+<tr><td><code>brevity</code></td><td>AIには、短く要点だけ答えてほしい</td><td>短さの重視</td></tr>
+<tr><td><code>embodiment</code></td><td>AIがしょんぼりしたり、お辞儀したりする表現に気持ちが和らぐ</td><td>仮想の身体の受け取り</td></tr>
+<tr><td><code>memory</code></td><td>一度嫌な思いをすると、なかなか忘れられない</td><td>傷の残りやすさ</td></tr>
+</tbody></table></div>
+
+<h3>操作</h3>
+<ul>
+<li>キーボードの <span class="kbd">1</span>〜<span class="kbd">4</span> で評定し、<span class="kbd">Enter</span> で次へ進みます。</li>
+<li>回答はブラウザに自動保存され、同じ端末・同じブラウザなら続きから再開できます。保存した評定ファイルを読み込んで再開することもできます。</li>
+<li>最後に「評定ファイルを保存」で JSON を書き出します。保存できない環境では、表示された内容をコピーして送ってもらいます。</li>
+<li>所要時間は項目ごとに記録します（極端に短い回答の確認用）。</li>
+</ul>
+
+<h2 id="procedure"><svg class="icon"><use href="#i-list"/></svg>4. 実施の手順</h2>
+<ol class="steps">
+<li><b>問題束を作る</b>
+<pre><code>python3 blind.py pack --scenes examples/scenes.json --repeat 4 --out-dir human/s01
+python3 blind.py pack --runs runs/* --limit 40 --repeat 4 --out-dir human/s02   # ベンチマークから40問</code></pre></li>
+<li><b>評定者に <code>rate.html</code> と評定者IDを渡す</b><p><code>key.json</code> は渡しません。</p></li>
+<li><b>評定ファイルを <code>human/s01/ratings/</code> に集める</b></li>
+<li><b>比較する</b>
+<pre><code>python3 sim.py scenes examples/scenes.json -n 1000 -o out/scenes-result.json
+python3 blind.py compare --key human/s01/key.json --ratings "human/s01/ratings/*.json" \
+    --sim out/scenes-result.json --auto persona=persona.json \
+    --scenes examples/scenes.json --rater-types -o human/s01/compare</code></pre>
+<p>比較するシミュレータの出力は、問題束を作ったのと同じ作例・同じ観察から作ってください。</p></li>
+</ol>
+
+<div class="grid">
+<div class="card"><h3>人数と項目数の目安</h3>
+<ul style="font-size:.92rem;color:var(--ink2)">
+<li>項目ごとの分布を比べるには、1項目あたり<b>10人以上</b>。10人だと、割合の誤差は ±15ポイント程度あります。</li>
+<li>型の比率を推定するには、<b>20〜30人</b>程度が必要です。</li>
+<li>1人あたり<b>20〜40問</b>（20〜40分）が上限の目安です。疲れると評定が粗くなります。</li>
+</ul></div>
+<div class="card"><h3><svg class="icon" style="color:var(--s-sim)"><use href="#i-heart"/></svg>評定者への配慮</h3>
+<ul style="font-size:.92rem;color:var(--ink2)">
+<li>評定者IDは記号にし、名前は入力させません。</li>
+<li>失礼な返答も含まれることを事前に伝え、いつでも中断してよいことを伝えます。</li>
+<li>所属組織で研究倫理の手続きが必要な場合は、それに従ってください。</li>
+</ul></div>
+</div>
+
+<h3>案内文の例</h3>
+<blockquote>AIや登場人物が謝っている短い場面を読み、その返答が場面に釣り合っているかを選んでいただく調査です。正解はなく、あなたの受け取り方を知りたいものです。所要は30分ほどで、途中でやめても構いません。中には失礼に感じる返答も含まれます。添付の rate.html をブラウザで開き、評定者ID「R07」を入力して始めてください。最後に保存されるファイルを返送してください。</blockquote>
+
+<h2 id="metrics"><svg class="icon"><use href="#i-chart"/></svg>5. 比較の指標</h2>
+<h3>上限の目安（人間どうし）</h3>
+<div class="tbl metric-up"><table>
+<thead><tr><th>指標</th><th>意味</th><th>読み方</th></tr></thead>
+<tbody>
+<tr><td>Krippendorff のα（名義）</td><td>人間どうしの一致</td><td>低いほど、人による違いが大きい。「一つの正解」を当てる課題ではないので、低くても異常ではない</td></tr>
+<tr><td>再評定の一致率・κ</td><td>同じ人が同じ項目に同じ評定をする割合</td><td>個人の安定性。自動評価が1人の評定を再現できる上限の目安</td></tr>
+<tr><td>1人抜きの確率</td><td>ある人の評定を、他の人々の分布で予測したときに与える確率</td><td>自動評価の「人間の評定への確率」の上限の目安</td></tr>
+</tbody></table></div>
+<h3>自動評価との差</h3>
+<div class="tbl metric-up"><table>
+<thead><tr><th>指標</th><th>意味</th><th>読み方</th></tr></thead>
+<tbody>
+<tr><td>分布の距離 JSD</td><td>項目ごとの人間の分布と、自動評価の分布の差（0〜1）</td><td>小さいほど近い。母集団としての近さを見る<b>主指標</b></td></tr>
+<tr><td>人間の評定への確率</td><td>自動評価が、各人の実際の評定に与えた確率の平均</td><td>0.25 が当てずっぽう。1人抜きの値に近いほどよい</td></tr>
+<tr><td>最頻評定の一致</td><td>人間の多数派と、自動評価の最頻評定が同じ項目の割合</td><td>一つの判定として見たときの一致</td></tr>
+<tr><td>偏り</td><td>失礼 −2、足りない −1、釣り合う 0、重すぎる +1 の期待値の差（自動 − 人間）</td><td>正なら自動評価が甘い（LLMペルソナはここが大きく正になりやすい）</td></tr>
+<tr><td>評定者ごとの κ</td><td>各人の評定と、自動評価の最頻評定の一致</td><td>誰とは合い、誰とは合わないか</td></tr>
+<tr><td>群ごとの表</td><td>枠組み・場面・条件・段階ごとの分布と距離</td><td>どの種類の場面で外れるか</td></tr>
+<tr><td>不満の深さ</td><td>人間の評定と、シミュレータの知覚段階の平均・相関</td><td>知覚の段階で外れているか、評価の段階で外れているか</td></tr>
+<tr><td>誠実さと「釣り合う」の相関</td><td>人間の誠実さの評定と、シミュレータの「釣り合う」の割合</td><td>低ければ、誠実さと釣り合いが分かれる場面がある</td></tr>
+</tbody></table></div>
+<h3>評定者の型</h3>
+<div class="tbl metric-up"><table>
+<thead><tr><th>指標</th><th>意味</th><th>読み方</th></tr></thead>
+<tbody>
+<tr><td>最もよく説明する型</td><td>型ごとに受け手を抜いて項目ごとの分布を作り、その人の評定に最も高い確率を与える型</td><td>評定者がどの型に近いか</td></tr>
+<tr><td>母集団の外の可能性</td><td>最もよく合う型でも確率が低い評定者</td><td>多ければ、型か軸が足りない</td></tr>
+</tbody></table></div>
+
+<div class="grid">
+<div class="card"><h3>他の自動評価との比較</h3><p><code>--auto 名前=ファイル</code> で、<code>{"ratings": {元の項目ID: {"rating": ...}}}</code> 形式の評定を比べられます。ベンチマークのペルソナや筆者の評定ファイル（<code>persona-P1.json</code>、<code>user-ratings.json</code>）はこの形式のまま使えます。</p></div>
+<div class="card"><h3>既存の評定を人間側に入れる</h3><p><code>python3 blind.py import-benchmark --key ... --ratings user-ratings.json --rater author -o ...</code> で、既存の評定を評定ファイルの形に変換できます。この評定ページで盲検化して集めたものではないため、報告書に注記が付きます。再評定の項目には取り込みません。</p></div>
+</div>
+
+<h2 id="test"><svg class="icon"><use href="#i-flask"/></svg>6. 仕組みの試験（2026-11-18）</h2>
+<p>人間の評定はまだないため、仕組みの動作だけを確かめました。結果は <code>human/session-example/</code> にあります。</p>
+<div class="chart">
+<p class="chart-title">合成評定者12名との比較</p>
+<p class="chart-sub">母集団から抽出し、評定の10%を無作為に置き換えた評定者。母集団から作った評定者なので、シミュレータが近いのは当然で、仕組みの確認にすぎない</p>
+<div class="bars">
+<div class="grp">人間の評定への確率（高いほどよい）</div>
+<div class="lab">シミュレータ</div><div class="track"><div class="fill" style="width:73%;background:var(--s-sim)"></div></div><div class="val">0.73</div>
+<div class="lab">常に「釣り合う」</div><div class="track"><div class="fill" style="width:61%;background:var(--axis)"></div></div><div class="val">0.61</div>
+<div class="grp">分布の距離 JSD（低いほどよい）</div>
+<div class="lab">シミュレータ</div><div class="track"><div class="fill" style="width:5%;background:var(--s-sim)"></div></div><div class="val">0.05</div>
+<div class="lab">常に「釣り合う」</div><div class="track"><div class="fill" style="width:30%;background:var(--axis)"></div></div><div class="val">0.30</div>
+</div>
+<p class="note">合成評定者どうしのα 0.45、再評定の κ 0.79。</p>
+</div>
+<div class="tbl"><table>
+<thead><tr><th>試験</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>評定ページ（ヘッドレスブラウザ、幅390px）</td><td>評定者IDの検証、アンケート、27問の回答、途中での再読み込みと再開（6問目から）、キーボード操作、評定ファイルの書き出しが動作。スクリプトのエラーなし</td></tr>
+<tr><td>型の判定の回復</td><td>合成評定者の元の型を、23問で 5/12 名当てた（偶然なら約2.4名）。型どうしの重なりが大きく、項目が少ないと型の識別は粗い</td></tr>
+<tr><td>外れの検出</td><td>1〜4を順番に押しただけの試験用の回答は「母集団の外の可能性」と判定された（確率 0.29、目安 0.73）</td></tr>
+<tr><td>ベンチマークからの問題束と既存評定の取り込み</td><td>192問の問題束、筆者評定の取り込み、<code>simulate</code> 出力とペルソナ評定の比較が動作</td></tr>
+</tbody></table></div>
+
+<h2 id="caveats"><svg class="icon"><use href="#i-alert"/></svg>7. 限界と注意</h2>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>立場の説明文（本人／第三者／物語の中）は評定に影響します。シミュレータの条件とそろえるために入れていますが、文言を変えたら比較をやり直してください。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>型の判定は「どの型が最も近いか」を示すだけで、23問程度では型を確実には識別できません。項目を増やすか、性質ごとに一点だけ変えた組を増やすと識別しやすくなります。</p></div>
+<div class="callout bad"><svg class="icon"><use href="#i-alert"/></svg><p>合成評定者による試験の数値を、シミュレータの妥当性の証拠として使ってはいけません。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>アンケートは、心理尺度として検証されていません。</p></div>
+
+<h2 id="formats"><svg class="icon"><use href="#i-file"/></svg>8. ファイル形式</h2>
+<h3>問題束（<code>packet.json</code>、<code>rate.html</code> に埋め込み）</h3>
+<pre><code>{"schema": "apology-blind-packet/1", "packet_id": "pk-20261118-xxxxxx", "title": "...", "mode": "independent",
+ "items": [{"id": "4d3871", "block": 1, "framing": "あなたは…", "situation": "…", "messages": [], "answer": "…"}]}</code></pre>
+<h3>対応表（<code>key.json</code>、評定者に渡さない）</h3>
+<pre><code>{"schema": "apology-blind-key/1", "packet_id": "...",
+ "items": {"4d3871": {"source": "scene:S3/C4", "group": "S3", "repeat_of": null,
+                      "meta": {"origin": "scenes", "label": "仮想の代償だけ", "frame": "real_task", "...": "..."}}}}</code></pre>
+<h3>評定ファイル（評定ページが書き出す）</h3>
+<pre><code>{"schema": "apology-blind-rating/1", "packet_id": "...", "rater": {"id": "R07", "questionnaire": {"detect": 4}},
+ "mode": "independent", "order": ["..."], "duration_s": 1520, "finished_at": "...",
+ "ratings": {"4d3871": {"rating": "rude", "level": 3, "sincerity": 2, "comment": "", "ms": 41230}}}</code></pre>
+</main>
+
+<footer>
+<a href="index.html">トップ</a>
+<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/HUMAN_EVAL.md">Markdown 版</a>
+<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub リポジトリ</a>
+</footer>
+</body>
+</html>

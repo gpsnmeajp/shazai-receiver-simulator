@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>設計思想と目的</title>
+<meta name="description" content="受け手シミュレータの目的、範囲、設計原則、決定記録、未解決の問い。">
+<link rel="stylesheet" href="style.css">
+<style>
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:.8rem;margin:1rem 0}
+.principles .card{margin:0;display:flex;flex-direction:column;gap:.2rem}
+.principles .card h3{align-items:flex-start}
+.scope{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media (max-width:640px){.scope{grid-template-columns:1fr}}
+.scope .card{margin:0}
+.scope .in{border-top:3px solid var(--good)}
+.scope .out{border-top:3px solid var(--bad)}
+.dec{display:grid;gap:.7rem;margin:1rem 0}
+.dec .card{margin:0;display:grid;grid-template-columns:4.6rem minmax(0,1fr);gap:.2rem 1rem}
+.dec .card .id{font:700 .9rem/1.6 ui-monospace,Consolas,monospace;color:var(--accent)}
+.dec .card h3{margin:0;font-size:.98rem}
+.dec .card dl{margin:.35rem 0 0;display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:.15rem .6rem;font-size:.88rem}
+.dec .card dt{color:var(--muted)}
+.dec .card dd{margin:0;color:var(--ink2)}
+.dec .st{margin-top:.35rem}
+@media (max-width:560px){.dec .card{grid-template-columns:1fr}.dec .card dl{grid-template-columns:1fr}.dec .card dt{margin-top:.2rem}}
+.b-adopt{background:var(--good-wash);color:var(--good)}
+.b-default{background:var(--accent-wash);color:var(--accent)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 21h14"/><path d="M4 7h16"/><path d="m4 7-3 7a4 4 0 0 0 6 0L4 7z"/><path d="m20 7-3 7a4 4 0 0 0 6 0l-3-7z"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2z"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2.5 2-2.5 4"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></symbol>
+</svg>
+
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
+<nav class="nav" aria-label="文書">
+<a href="design.html" aria-current="page">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+</nav></div></header>
+
+<main>
+<h1>設計思想と目的</h1>
+<p class="lead">このシミュレータの設計の「なぜ」をまとめた文書です。今後設計を変えるときは、まずこの文書の原則と決定記録に照らしてください。</p>
+<p class="note">仕組みの詳細は <a href="architecture.html">アーキテクチャ</a>、根拠となる研究は <a href="evidence.html">根拠</a>、検証結果と変更履歴は <a href="validation.html">検証</a> にあります。</p>
+<ul class="toc">
+<li><a href="#purpose">1. 目的</a></li><li><a href="#principles">2. 設計原則</a></li><li><a href="#decisions">3. 決定記録</a></li><li><a href="#open">4. 未解決の問い</a></li>
+</ul>
+
+<h2 id="purpose"><svg class="icon"><use href="#i-target"/></svg>1. 目的</h2>
+<div class="card hero"><p style="margin:0;font-size:1.02rem;color:var(--ink)"><b>誠実に見える謝罪のかたち、つまり受け手に「釣り合っている」と感じさせる振る舞いとは何か</b>を、受け手の多様さを含めて測ること。</p></div>
+<ul>
+<li>出発点は、SHAZAI Rules（AIの謝罪を日本の文化に合わせる指示）のベンチマークです。そこでは、LLMペルソナによる評定が筆者の評定と大きくずれていました。</li>
+<li>本シミュレータでは、「誠実に見えること」と「釣り合っていると感じること」を実質的に等価なものとして扱います（所有者の判断）。ただし研究上は両者が分かれる場面があります（<a href="evidence.html#E-01">E-01</a>）。分かれる場面では「釣り合い」を主な出力とし、必要に応じて誠実さを副指標として出します。</li>
+<li>対象は、AIアシスタントの現実のタスクでの謝罪、AIキャラクターの謝罪、物語の登場人物の謝罪です。</li>
+</ul>
+
+<h3>範囲</h3>
+<div class="scope">
+<div class="card in"><h3><svg class="icon" style="color:var(--good)"><use href="#i-check"/></svg>使うもの</h3>
+<p><b>外から見える振る舞い</b>だけを扱います。</p>
+<p><b>観測時点（その謝罪の場面）までの経緯</b>を使います。</p></div>
+<div class="card out"><h3><svg class="icon" style="color:var(--bad)"><use href="#i-x"/></svg>使わないもの</h3>
+<p>内面描写や、地の文による評価（「心から反省していた」など）。</p>
+<p>その後の場面で約束が守られたかどうか。これは後の場面を評価するときに、経緯として入ります。</p></div>
+</div>
+
+<h2 id="principles"><svg class="icon"><use href="#i-compass"/></svg>2. 設計原則</h2>
+<div class="principles">
+<div class="card"><h3><span class="k">P1</span>観察と評価を分ける</h3><p>LLMには、回答に何が書かれ、何が描写されているかを記録させるだけにします（層A）。どう受け取るかは、コードで書いた受け手モデルが計算します（層B）。LLMの寛容さ、長い回答を好む癖、書き手の善意を前提に読む癖を、評価の段階から締め出すためです。</p></div>
+<div class="card"><h3><span class="k">P2</span>一つの判定ではなく、反応の分布を出す</h3><p>受け手の母集団を性質の分布として持ち、回答ごとに「失礼／足りない／釣り合う／重すぎる」の割合を出します。謝罪は一番怒っている人に通用するかで決まるので、平均だけでなく「失礼と感じる人の割合」（裾）を重視します。</p></div>
+<div class="card"><h3><span class="k">P3</span>受け手は属性ではなく態度の軸で作る</h3><p>年代や性別のペルソナをLLMに演じさせると、集団の姿を取り違え、平板にします（<a href="evidence.html#A-01">A-01</a>）。そこで、研究で効く向きが示された性質（察しの感度、当事者として読む度合い、修復の重視、重さへの耐性など）で受け手を表します。特定の評定者（筆者を含む）は「正解」ではなく、母集団の中の一点として扱います。</p></div>
+<div class="card"><h3><span class="k">P4</span>減点は足し合わせ、一つの失敗で崩れうるようにする</h3><p>謝罪の評価は平均点ではなく、一番悪い一文や一つの振る舞いで崩れます。失点を合計して閾値で判定するので、一つの大きな失点だけで「失礼」になりえます。</p></div>
+<div class="card"><h3><span class="k">P5</span>不足と過剰を別々の軸で持つ</h3><p>謝罪の中身の不足（必要な中身との差）と、重さの過剰（許容を超えた重さ）は別の現象です。どちらも連続値として出力します。</p></div>
+<div class="card"><h3><span class="k">P6</span>経緯で受け取り方が変わる（ヒステリシス）</h3><p>信頼は損なわれやすく戻りにくいので、同じ回答でも、そこに至る経緯で受け取られ方が変わります。経緯は観測時点までの場面から読みます。</p></div>
+<div class="card"><h3><span class="k">P7</span>シグナルの信用度は場面の枠組みで決まる</h3><p>同じ「しょんぼり」でも、物語の中の登場人物（またはAIキャラクター）の身体として描かれれば本物の合図として読まれます。一方、現実のタスクで失敗したAIのト書きや顔文字は、本物の代償を伴わない仮想の身体です。受け取り方が人によって大きく分かれ、失敗が深刻なほど効きが落ちます。代償も同様です。物語の中では作中の代償が本物として働きますが、現実のタスクでは現実の代償（実際の作業、点検、返金など）しか代償として数えません。</p></div>
+<div class="card"><h3><span class="k">P8</span>シグナルの意味は文脈で反転しうる</h3><p>照れや気まずさの表出は、過失が明白なら相手をなだめますが、曖昧なら後ろめたさの自白として読まれます。謝罪中の笑みは不誠実の信号ですが、物語の中の軽い失敗では愛嬌として受け取る人もいます。</p></div>
+<div class="card"><h3><span class="k">P9</span>すべての規則を根拠に対応づける</h3><p>規則ごとに、根拠となる研究や事例を <a href="evidence.html">根拠</a> に記録し、確度（強・中・仮説）を付けます。数値の大きさは多くが事前値で、人間のデータで推定していないことを明示します。</p></div>
+<div class="card"><h3><span class="k">P10</span>互換性を保つ</h3><p>新しい欄は、既定値では従来と同じ結果になるようにします。後から足した受け手の性質は別の乱数列で引き、既存の検証結果を変えないようにします。</p></div>
+</div>
+
+<h2 id="decisions"><svg class="icon"><use href="#i-list"/></svg>3. 決定記録</h2>
+<div class="legend"><span><span class="badge b-adopt">採用</span>採用済み</span><span><span class="badge b-default">既定で有効</span>v0.6 で既定に変更</span></div>
+<div class="dec">
+<div class="card" id="D-001"><span class="id">D-001</span><div><h3>LLMペルソナ3名による評定をやめ、観察と受け手モデルに分ける</h3><dl><dt>理由</dt><dd>ペルソナ同士の一致はκ=0.72〜0.78、筆者との一致はκ=0.04〜0.11。実質的に1名の寛容な評定者だった</dd><dt>退けた案</dt><dd>ペルソナの性格づけの改良（同じ事前分布から抽出しているに過ぎない）</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+<div class="card" id="D-002"><span class="id">D-002</span><div><h3>受け手を5つの態度の型の混合とする</h3><dl><dt>理由</dt><dd>属性ペルソナは平板化する。型は研究で示された向きから構成できる</dd><dt>退けた案</dt><dd>年代・性別の層</dd></dl><div class="st"><span class="badge b-adopt">採用</span> <span class="note">比率は事前値</span></div></div></div>
+<div class="card" id="D-003"><span class="id">D-003</span><div><h3>筆者の傾向を直接写さず、一般化した知識から組む</h3><dl><dt>理由</dt><dd>目的は日本社会の多様な見方の再現。筆者は検証用の一点</dd><dt>退けた案</dt><dd>筆者の評定への当てはめだけで作る</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+<div class="card" id="D-004"><span class="id">D-004</span><div><h3>失点の合計と、不足・過剰の二軸で評定する</h3><dl><dt>理由</dt><dd>一文で崩れる評価（減点法）と、過剰と不足の非対称を表すため</dd><dt>退けた案</dt><dd>回答全体の総合点</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+<div class="card" id="D-005"><span class="id">D-005</span><div><h3>信頼損傷ヒステリシスを既定で有効にする（<code>--no-hysteresis</code> で無効）</h3><dl><dt>理由</dt><dd>筆者の評定に、経緯を前提にした判断が約15件あった。研究の裏づけも強い</dd><dt>退けた案</dt><dd>オプション指定時だけ有効にする</dd></dl><div class="st"><span class="badge b-default">既定で有効（v0.6）</span> <span class="note">効果は今のデータでは識別できていない</span></div></div></div>
+<div class="card" id="D-006"><span class="id">D-006</span><div><h3>一段改めた謝罪は割り引かない（既定で有効。<code>--no-escalation</code> で無効）</h3><dl><dt>理由</dt><dd>同じ形の謝罪は割り引かれるが、改めた謝罪は別物として受け取られる（筆者のコメントと整合）</dd><dt>退けた案</dt><dd>謝罪を一律に割り引く</dd></dl><div class="st"><span class="badge b-default">既定で有効（v0.6）</span> <span class="note">結果を見た後の追加</span></div></div></div>
+<div class="card" id="D-007"><span class="id">D-007</span><div><h3>外面の振る舞いと観測時点までの経緯だけを使う</h3><dl><dt>理由</dt><dd>目的が「誠実に見えるかたち」であり、受け手が知りうるのは外面だけ</dd><dt>退けた案</dt><dd>内面描写・地の文の断定を使う</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+<div class="card" id="D-008"><span class="id">D-008</span><div><h3>態度・行動のシグナルと場面の枠組み（現実のタスク／物語）を追加</h3><dl><dt>理由</dt><dd>物語・AIキャラクターへ広げるため。AIも仮想の身体と代償を示しうる</dd><dt>退けた案</dt><dd>物語用に別の評価器を作る</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+<div class="card" id="D-009"><span class="id">D-009</span><div><h3>仮想の身体の信用度は、受け手の性質 <code>embodiment</code> と失敗の深刻さで決める</h3><dl><dt>理由</dt><dd>人はコンピュータにも社会的な規則を当てはめるが、同じ共感でもAIからだと評価が下がる。愛嬌の効果は深刻な失敗で弱まる</dd><dt>退けた案</dt><dd>仮想の身体を人の身体と同等に扱う／無視する</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+<div class="card" id="D-010"><span class="id">D-010</span><div><h3>指摘を受けた後の一度の詫びは、誰にとっても過剰ではないとする</h3><dl><dt>理由</dt><dd>軽い指摘への一言の詫びまで「重すぎる」と判定されていた（例題 D1・E1）</dd><dt>退けた案</dt><dd>従来どおり、不満の深さだけで判定する</dd></dl><div class="st"><span class="badge b-adopt">採用</span> <span class="note">ベンチマークの段階2の「重すぎる」が減った</span></div></div></div>
+<div class="card" id="D-011"><span class="id">D-011</span><div><h3>謝罪中の笑み・軽さを強い減点にし、現実の失敗ではさらに重く、物語の中の軽い失敗では軽くする</h3><dl><dt>理由</dt><dd>謝罪中の笑みは不誠実の信号になる。一方で、愛嬌は軽い失敗では効く</dd><dt>退けた案</dt><dd>枠組みによらず一律にする</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+<div class="card" id="D-012"><span class="id">D-012</span><div><h3>人間の評定はブラインドで集め、1問に1回答を独立に出す。出題順は評定者ごとに乱数化し、再評定の項目を後半に入れる</h3><dl><dt>理由</dt><dd>シミュレータと同じ条件（独立評価、立場の明示）で比べ、条件の推測と順序の効果を除き、個人の安定性を上限の目安にするため</dd><dt>退けた案</dt><dd>同じ場面の回答を並べて比べる（筆者のレビュー画面の形式。相対評価になる）</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+<div class="card" id="D-013"><span class="id">D-013</span><div><h3>自動評価との差は、一つの正解との一致ではなく、分布の距離と「人間の評定への確率」で測る</h3><dl><dt>理由</dt><dd>P2（分布を出す）と整合させる。人間どうしの一致や再評定を上限の目安として並べる</dd><dt>退けた案</dt><dd>多数決との κ だけで測る</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+<div class="card" id="D-014"><span class="id">D-014</span><div><h3>評定者ごとの性質は θ の当てはめではなく、型ごとの説明力（評定に与える確率）で判定する</h3><dl><dt>理由</dt><dd>20〜30問では θ の当てはめが過学習し、母集団から抜いた合成評定者でさえ型から遠いと判定された</dd><dt>退けた案</dt><dd>評定者ごとの θ の無作為探索</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
+</div>
+
+<h2 id="open"><svg class="icon"><use href="#i-help"/></svg>4. 未解決の問い</h2>
+<div class="grid">
+<div class="card"><p>型の比率と性質の強さは事前値です。20〜30人程度の評定で、型の混合を推定する必要があります。</p></div>
+<div class="card"><p>ショックの表出の効果は、直接の研究を確認できていません（<span class="badge b-hypo">仮説</span>）。</p></div>
+<div class="card"><p>経緯の効果は、経緯だけを変えた場面の組がないと識別できません（<a href="validation.html">検証</a>）。</p></div>
+<div class="card"><p>「誠実に見えるか」と「釣り合うか」が分かれる場面で、どちらを主にするかは用途によって変わりえます。</p></div>
+<div class="card"><p>物語の読者（第三者の視点）と、ゲームのプレイヤー（謝られた本人の視点）では、受け手の母集団そのものが違う可能性があります。</p></div>
+</div>
+</main>
+
+<footer>
+<a href="index.html">トップ</a>
+<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/DESIGN.md">Markdown 版</a>
+<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub リポジトリ</a>
+</footer>
+</body>
+</html>

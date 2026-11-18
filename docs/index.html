@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>謝罪応答の受け手シミュレータ</title>
+<meta name="description" content="誠実に見える謝罪のかたちを、受け手の多様さを含めて測るツール。">
+<link rel="stylesheet" href="style.css">
+<style>
+.hero{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:1.2rem;align-items:center;margin-top:.5rem}
+@media (max-width:720px){.hero{grid-template-columns:1fr}}
+.kappa{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.kappa .card{text-align:center;padding:.9rem .6rem}
+.kappa .v{font-size:clamp(1.9rem,6vw,2.4rem);font-weight:650;line-height:1.1;font-variant-numeric:tabular-nums}
+.kappa .s{font-size:.82rem;color:var(--ink2)}
+.kappa .sim .v{color:var(--s-sim)}.kappa .per .v{color:var(--s-persona)}
+.kappa .cap{grid-column:1/-1;font-size:.8rem;color:var(--ink2);text-align:center;margin:0}
+/* ドット図 */
+.dots{display:grid;grid-template-columns:minmax(7em,10em) minmax(0,1fr);gap:.1rem .8rem;align-items:center}
+.dots .lab{font-size:.9rem;line-height:1.3}
+.dtrack{position:relative;height:46px}
+.dtrack::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid var(--grid)}
+.dtrack .d{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;box-shadow:0 0 0 2px var(--surface)}
+.dtrack .v{position:absolute;font-size:.72rem;color:var(--ink2);transform:translateX(-50%);white-space:nowrap;font-variant-numeric:tabular-nums}
+.dtrack .v.up{top:-1px}.dtrack .v.dn{bottom:-3px}
+.daxis{position:relative;height:1.2rem;font-size:.72rem;color:var(--muted)}
+.daxis span{position:absolute;transform:translateX(-50%)}
+.rates{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:.6rem;margin:1rem 0}
+.rates .card{margin:0;border-left:4px solid var(--c)}
+.rates .card h3{color:var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0}
+.chips span{font-size:.82rem;background:var(--card);border:1px solid var(--ring);border-radius:999px;padding:.1rem .6rem}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 21h14"/><path d="M4 7h16"/><path d="m4 7-3 7a4 4 0 0 0 6 0L4 7z"/><path d="m20 7-3 7a4 4 0 0 0 6 0l-3-7z"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.3-5 6.5-5s5.7 1.6 6.5 5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 15c2 .6 3.2 2.3 3.5 5"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17v-5"/><path d="M13 17V8"/><path d="M18 17v-9"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5v-17z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6"/><path d="M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7.5 14h9"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2z"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6z"/><path d="M14 3v6h6"/></symbol>
+</svg>
+
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html" aria-current="page"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
+<nav class="nav" aria-label="文書">
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+</nav></div></header>
+
+<main>
+<div class="hero">
+<div>
+<h1>謝罪応答の受け手シミュレータ</h1>
+<p class="lead"><b>誠実に見える謝罪のかたち、つまり受け手に「釣り合っている」と感じさせる振る舞いとは何か</b>を、受け手の多様さを含めて測るツールです。</p>
+<p>AIアシスタントの謝罪、AIキャラクターの謝罪、物語の登場人物の謝罪を扱います。</p>
+<p class="note"><a href="https://github.com/gpsnmeajp/shazai-rules">SHAZAI Rules</a> で、一般的なペルソナ型の LLM Judge が人間の評定をまったく再現できなかった（一般的なチェックリストの方がまだ傾向を反映した）ため、人間の評定により近づけることを目的に作りました。Claude Opus 5.5 で作成しています。</p>
+</div>
+<div class="kappa" aria-label="筆者との一致度">
+<div class="card sim"><div class="v">0.28</div><div class="s">シミュレータ</div></div>
+<div class="card per"><div class="v">0.06</div><div class="s">LLMペルソナ</div></div>
+<p class="cap">筆者の評定との一致度 κ（v0.4 ベンチマーク 192回答）</p>
+</div>
+</div>
+
+<h2><svg class="icon"><use href="#i-layers"/></svg>二つの層に分ける</h2>
+<p>LLMのペルソナに「日本人として評定して」と頼む方法はとりません。評定を二つの層に分けます。</p>
+<div class="flow" role="figure" aria-label="層Aと層Bの流れ">
+<div class="step o"><b>会話・場面・回答</b><small>ベンチマークの回答、物語やAIキャラクターの場面</small></div>
+<div class="arrow" aria-hidden="true">→</div>
+<div class="step a"><b><svg class="icon" style="vertical-align:-.2em"><use href="#i-eye"/></svg> 層A 観察（LLM）</b><small>何が書かれ、何が描写されているかを記録するだけ。良し悪しは判断しない（<code>observe_prompt.md</code>）</small></div>
+<div class="arrow" aria-hidden="true">→</div>
+<div class="step b"><b><svg class="icon" style="vertical-align:-.2em"><use href="#i-users"/></svg> 層B 受け手（コード）</b><small>研究で効く向きが示された性質をもつ受け手の母集団に、観察を通す（<code>sim.py</code>・<code>population.json</code>）</small></div>
+<div class="arrow" aria-hidden="true">→</div>
+<div class="step o"><b>評定の分布</b><small>回答ごとの4分類の割合と、不足・過剰の量</small></div>
+</div>
+
+<div class="rates">
+<div class="card" style="--c:var(--r-rude)"><h3><span class="rate"><i class="c-rude"></i></span>失礼</h3><p>失点の合計が大きい。一文や一つの振る舞いだけでも崩れる</p></div>
+<div class="card" style="--c:var(--r-light)"><h3><span class="rate"><i class="c-light"></i></span>足りない</h3><p>謝罪の中身が、受け手が必要とする深さに届かない</p></div>
+<div class="card" style="--c:var(--r-fit)"><h3><span class="rate"><i class="c-fit"></i></span>釣り合う</h3><p>不足も過剰もなく、場面に見合っている</p></div>
+<div class="card" style="--c:var(--r-heavy)"><h3><span class="rate"><i class="c-heavy"></i></span>重すぎる</h3><p>重さが、受け手の許容を超えている</p></div>
+</div>
+
+<h2><svg class="icon"><use href="#i-chart"/></svg>現在の到達点</h2>
+<div class="chart">
+<p class="chart-title">「釣り合う」と評定された割合（条件別）</p>
+<p class="chart-sub">v0.4 ベンチマーク 192回答・代理観察。シミュレータは条件の順位が筆者と一致し、ペルソナは逆の順位になった</p>
+<div class="legend"><span><i class="dot" style="background:var(--s-user)"></i>筆者</span><span><i class="dot" style="background:var(--s-sim)"></i>シミュレータ</span><span><i class="dot" style="background:var(--s-persona)"></i>ペルソナ多数決</span></div>
+<!-- 軸は 40%〜100%。left = (v-40)/60 -->
+<div class="dots">
+<div class="lab">指示なし</div>
+<div class="dtrack">
+<span class="d" style="left:14%;background:var(--s-user)"></span><span class="v dn" style="left:14%">48</span>
+<span class="d" style="left:17.5%;background:var(--s-sim)"></span><span class="v up" style="left:17.5%">51</span>
+<span class="d" style="left:84.3%;background:var(--s-persona)"></span><span class="v up" style="left:84.3%">91</span>
+</div>
+<div class="lab">一般的な謝罪指示</div>
+<div class="dtrack">
+<span class="d" style="left:48%;background:var(--s-user)"></span><span class="v up" style="left:48%">69</span>
+<span class="d" style="left:41.5%;background:var(--s-sim)"></span><span class="v dn" style="left:41.5%">65</span>
+<span class="d" style="left:63.5%;background:var(--s-persona)"></span><span class="v up" style="left:63.5%">78</span>
+</div>
+<div class="lab">SHAZAI Rules</div>
+<div class="dtrack">
+<span class="d" style="left:58.3%;background:var(--s-user)"></span><span class="v up" style="left:58.3%">75</span>
+<span class="d" style="left:53.5%;background:var(--s-sim)"></span><span class="v dn" style="left:53.5%">72</span>
+<span class="d" style="left:55.7%;background:var(--s-persona)"></span><span class="v dn" style="left:55.7%;margin-left:1.2em">73</span>
+</div>
+<div></div>
+<div class="daxis"><span style="left:0">40%</span><span style="left:33.3%">60%</span><span style="left:66.7%">80%</span><span style="left:100%">100%</span></div>
+</div>
+</div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>型の比率と性質の強さは事前値で、人間のデータから推定したものではありません。詳細と限界は <a href="validation.html">検証結果</a> にあります。</p></div>
+
+<h2><svg class="icon"><use href="#i-book"/></svg>文書</h2>
+<div class="grid">
+<a class="card" href="design.html"><h3><svg class="icon"><use href="#i-compass"/></svg>設計思想と目的</h3><p>目的、範囲、設計原則、決定記録、未解決の問い</p></a>
+<a class="card" href="architecture.html"><h3><svg class="icon"><use href="#i-cog"/></svg>アーキテクチャ</h3><p>データの流れ、観察の形式、受け手モデルの式、コマンド、拡張の手順</p></a>
+<a class="card" href="evidence.html"><h3><svg class="icon"><use href="#i-book"/></svg>根拠となる研究と事例</h3><p>規則ごとの根拠となる研究と事例、確度</p></a>
+<a class="card" href="validation.html"><h3><svg class="icon"><use href="#i-target"/></svg>検証結果と変更履歴</h3><p>検証結果、既知の限界、次の検証、変更履歴</p></a>
+<a class="card" href="human-eval.html"><h3><svg class="icon"><use href="#i-users"/></svg>人間のブラインド評定</h3><p>実施手順、盲検化の設計、比較の指標</p></a>
+<a class="card" href="report.html"><h3><svg class="icon"><use href="#i-chart"/></svg>レポート</h3><p>図で見る解説と結果</p></a>
+</div>
+<p class="note">Markdown 版は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/tree/main/docs/md">docs/md/</a> にあります。</p>
+
+<h2><svg class="icon"><use href="#i-code"/></svg>使い方</h2>
+<p>Python 3.9 以上、標準ライブラリのみで動きます。<code>runs/*</code> は <code>apology-benchmark</code> の実行先ディレクトリ（<code>manifest.json</code> を含む）です。</p>
+<ol class="steps">
+<li><b>層A：観察する</b>
+<pre><code># LLMで観察する（OpenRouter。環境変数 OPENROUTER_API_KEY が必要。中断後は同じコマンドで再開）
+python3 sim.py observe runs/* -o out/obs-llm.json --model anthropic/claude-opus-5.5
+
+# API を使えない場合：既存のチェックリスト判定と表層特徴から代理観察を作る
+python3 sim.py proxy runs/* -o out/obs-proxy.json</code></pre></li>
+<li><b>層B：母集団に通す</b>
+<pre><code># 母集団で評定分布を出す
+python3 sim.py simulate out/obs-llm.json runs/* -n 1000 -o out/sim.json
+
+# 観察済みの場面の組（物語・AIキャラクター等）を母集団に通す
+python3 sim.py scenes examples/scenes.json -n 1000 -o out/scenes-result.json</code></pre></li>
+<li><b>読み解く</b>
+<pre><code># 1人の評定者（user-ratings.json）を最もよく再現する θ を探す
+python3 sim.py fit out/obs-llm.json runs/* --trials 4000 --seed 7 -o out/fit.json
+
+# 1回答について、型ごとの評定とその理由を見る
+python3 sim.py explain out/obs-llm.json runs/* --answer 回答ID</code></pre></li>
+</ol>
+
+<h3>共通の選択肢</h3>
+<div class="tbl"><table>
+<thead><tr><th>選択肢</th><th>働き</th></tr></thead>
+<tbody>
+<tr><td><code>--no-hysteresis</code></td><td>信頼損傷ヒステリシス（経緯で受け取り方が変わる）を無効にする。<b>既定は有効</b></td></tr>
+<tr><td><code>--no-escalation</code></td><td>一段改めた謝罪も割り引く。<b>既定は割り引かない</b>。ヒステリシスが有効なときだけ効く</td></tr>
+<tr><td><code>--seed</code></td><td>乱数の種</td></tr>
+<tr><td><code>-n</code></td><td>受け手の数</td></tr>
+</tbody></table></div>
+<div class="callout"><svg class="icon"><use href="#i-eye"/></svg><p>観察者には、評価対象とは別系統のモデルを使うのが安全です。</p></div>
+
+<h2><svg class="icon"><use href="#i-flask"/></svg>人間のブラインド評定と自動評価の比較</h2>
+<pre><code># 評定用の問題束と評定ページを作る（rate.html を評定者に渡す。key.json は渡さない）
+python3 blind.py pack --scenes examples/scenes.json --repeat 4 --out-dir human/s01
+
+# 集めた評定ファイルと、シミュレータ（や他の自動評価）の差を測る
+python3 blind.py compare --key human/s01/key.json --ratings "human/s01/ratings/*.json" \
+    --sim out/scenes-result.json --auto persona=persona.json \
+    --scenes examples/scenes.json --rater-types -o human/s01/compare</code></pre>
+<p>評定ページは1枚のHTMLで、ブラウザで開くだけで使えます。条件やラベルは伏せられ、出題順は評定者ごとに変わります。同じ項目を後半にもう一度出して、個人の評定の安定性も測ります。</p>
+<p>比較の結果には、人間どうしの一致を上限の目安として並べ、次の項目を報告します。</p>
+<ul>
+<li>分布の距離</li>
+<li>人間の評定に与える確率</li>
+<li>偏りの向き</li>
+<li>場面の種類ごとの差</li>
+<li>評定者ごとに最も近い型</li>
+</ul>
+<p>詳細は <a href="human-eval.html">人間のブラインド評定</a> を参照してください。</p>
+
+<h2><svg class="icon"><use href="#i-target"/></svg>何を扱えるか</h2>
+<div class="grid">
+<div class="card"><h3>謝罪の言葉</h3><div class="chips"><span>冒頭か</span><span>過失を具体的に言う</span><span>負担を言う</span><span>弁解</span><span>条件付き</span><span>相手への指摘</span><span>先を急ぐ</span><span>装飾</span></div></div>
+<div class="card"><h3>一文ごとの悪い読み</h3><p>怒っている相手には、その一文がどう聞こえるか</p></div>
+<div class="card"><h3>身体のシグナル</h3><div class="chips"><span>しょんぼり</span><span>バツが悪そう</span><span>視線を落とす</span><span>言葉数が減る</span><span>赤面</span><span>涙</span><span>ショック</span><span>お辞儀</span><span>土下座</span></div></div>
+<div class="card"><h3>食い違いと代償</h3><div class="chips"><span>笑み</span><span>「てへっ」</span><span>修復の行動</span><span>補償</span><span>自分の何かを差し出す</span><span>宣言だけの代償</span></div></div>
+<div class="card"><h3>場面の枠組み</h3><div class="chips"><span>現実のタスク／物語</span><span>AIアシスタント／AIキャラクター／登場人物</span><span>本人／第三者</span><span>過失が明白／曖昧</span><span>上下と親疎</span></div></div>
+<div class="card"><h3>経緯</h3><div class="chips"><span>指摘の回数</span><span>受け入れた後か</span><span>過去の謝罪の回数</span><span>破られた約束</span></div></div>
+</div>
+<div class="callout"><svg class="icon"><use href="#i-users"/></svg><p>AIのト書きや顔文字は「仮想の身体」として扱います。現実のタスクでは受け取り方が人によって大きく分かれ、失敗が深刻なほど効きが落ちます。物語の中では、作中の身体として読まれます。</p></div>
+</main>
+
+<footer>
+<span>謝罪応答の受け手シミュレータ</span>
+<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub リポジトリ</a>
+<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/README.md">README.md</a>
+</footer>
+</body>
+</html>

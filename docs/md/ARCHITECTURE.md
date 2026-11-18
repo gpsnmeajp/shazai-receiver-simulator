@@ -30,11 +30,11 @@
 | `proxy_scenarios.json` | v0.4 ベンチマーク16場面の事実（代理観察用） |
 | `examples/scenes.json` | 物語・AIキャラクター等の作例の組（観察済み） |
 | `out/` | 検証の出力 |
-| `report.html` | 解説と結果のレポート |
 | `blind.py` | 人間のブラインド評定の問題束づくり、比較、既存評定の取り込み、合成評定者（試験用） |
 | `human/rate_template.html` | 評定ページの雛形（`pack` が問題束を埋め込んで `rate.html` を作る） |
 | `human/session-example/` | 作例から作った問題束の例と、合成評定者による仕組みの試験結果 |
-| `docs/` | 本文書群（人間評定の手順は HUMAN_EVAL.md） |
+| `docs/` | GitHub Pages で公開する文書サイト（`index.html` ほかのHTML版、`report.html` は解説と結果のレポート） |
+| `docs/md/` | 本文書群の Markdown 版（人間評定の手順は HUMAN_EVAL.md） |
 
 ## 3. 観察データの形式
 
