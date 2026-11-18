@@ -289,9 +289,9 @@ python3 sim.py observe runs/* -o out/obs-llm.json          # LLMで観察（OPEN
 python3 sim.py simulate out/obs-llm.json runs/* -n 1000    # 母集団で評定分布
 python3 sim.py fit out/obs-llm.json runs/* --seed 7        # 1人の評定者を再現するθ
 python3 sim.py explain out/obs-llm.json runs/* --answer ID # 型ごとの判定理由
-# 信頼損傷ヒステリシス（simulate / fit / explain 共通）
-python3 sim.py simulate out/obs-llm.json runs/* --hysteresis              # 傷 S を有効に
-python3 sim.py simulate out/obs-llm.json runs/* --hysteresis --escalation # 一段改めた謝罪は割り引かない
+# 信頼損傷ヒステリシスと escalation は既定で有効（simulate / fit / explain / scenes 共通）
+python3 sim.py simulate out/obs-llm.json runs/* --no-escalation  # 一段改めた謝罪も割り引く
+python3 sim.py simulate out/obs-llm.json runs/* --no-hysteresis  # 傷 S を無効に
 # 観察済みの場面の組（物語・AIキャラクター等）
 python3 sim.py scenes examples/scenes.json -n 1000 -o out/scenes-result.json</code></pre>
 <p class="note">参考（ヒステリシス）：Slovic (1993)、Cvetkovich et al. (2002)、中谷内ほか (2014)、Esterwood &amp; Robert (2023)、Schweitzer et al. (2006)、Nesset et al.、Kim et al. (2004)、Dietvorst et al. (2015)、Yang et al. (2021)、McCullough et al. (2003)。</p>

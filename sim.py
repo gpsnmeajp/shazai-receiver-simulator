@@ -232,7 +232,7 @@ def cmd_proxy(args):
 
 # ---------------------------------------------------------------- 層B: 受け手モデル
 
-ESCALATION = False  # --escalation で有効
+ESCALATION = True  # 既定で有効。--no-escalation で無効
 EXPLICIT = {0: 0.0, 1: 1.3, 2: 2.3, 3: 3.3}
 REQ_POINTS = [(0, 0.0), (1, 0.8), (2, 1.5), (3, 3.0), (4, 3.8)]
 
@@ -571,7 +571,7 @@ def cmd_simulate(args):
     rows = [r for r in load_runs(args.runs) if r["aid"] in obs["answers"]]
     panel = sample_panel(pop, args.n, args.seed)
     rng = random.Random(args.seed + 1)
-    result = {"source": obs.get("source"), "n": args.n, "hysteresis": args.hysteresis, "answers": {}}
+    result = {"source": obs.get("source"), "n": args.n, "hysteresis": args.hysteresis, "escalation": ESCALATION, "answers": {}}
     agg = defaultdict(Counter)
     agg_type = defaultdict(Counter)
     for r in rows:
@@ -771,7 +771,7 @@ def cmd_scenes(args):
     pop = load(args.population)
     panel = sample_panel(pop, args.n, args.seed)
     rng = random.Random(args.seed + 1)
-    out = {"source": args.file, "n": args.n, "hysteresis": args.hysteresis, "scenes": []}
+    out = {"source": args.file, "n": args.n, "hysteresis": args.hysteresis, "escalation": ESCALATION, "scenes": []}
     for scene in data["scenes"]:
         sc = merged(DEFAULT_SCENARIO, scene["scenario"])
         ctx = context_of(sc)
@@ -809,6 +809,14 @@ def cmd_scenes(args):
     print(f"詳細 → {args.out}")
 
 
+def add_model_options(p):
+    """追加の改善（ヒステリシス・escalation）は既定で有効。--no-* で無効にする。"""
+    p.add_argument("--hysteresis", action=argparse.BooleanOptionalAction, default=True,
+                   help="信頼損傷ヒステリシス（既定で有効。--no-hysteresis で無効）")
+    p.add_argument("--escalation", action=argparse.BooleanOptionalAction, default=True,
+                   help="一段改めた謝罪は割り引かない（既定で有効。--no-escalation で無効。ヒステリシス有効時のみ効く）")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -824,7 +832,7 @@ def main():
     p.add_argument("file"); p.add_argument("-n", type=int, default=1000)
     p.add_argument("--population", default=str(HERE / "population.json"))
     p.add_argument("--seed", type=int, default=7)
-    p.add_argument("--hysteresis", action="store_true"); p.add_argument("--escalation", action="store_true")
+    add_model_options(p)
     p.add_argument("-o", "--out", default="scenes-result.json")
     p.set_defaults(f=cmd_scenes)
     for name, fn, h in (("simulate", cmd_simulate, "母集団で評定分布を出す"),
@@ -834,8 +842,7 @@ def main():
         p.add_argument("obs"); p.add_argument("runs", nargs="+")
         p.add_argument("--population", default=str(HERE / "population.json"))
         p.add_argument("--seed", type=int, default=7)
-        p.add_argument("--hysteresis", action="store_true", help="信頼損傷ヒステリシスを有効にする")
-        p.add_argument("--escalation", action="store_true", help="一段改めた謝罪は割り引かない（--hysteresis と併用）")
+        add_model_options(p)
         if name == "simulate":
             p.add_argument("-n", type=int, default=500); p.add_argument("--top", type=int, default=8)
             p.add_argument("-o", "--out", default="simulation.json")
@@ -846,7 +853,7 @@ def main():
         p.set_defaults(f=fn)
     args = ap.parse_args()
     global ESCALATION
-    ESCALATION = getattr(args, "escalation", False)
+    ESCALATION = getattr(args, "escalation", True)
     args.f(args)
 
 

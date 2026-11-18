@@ -77,3 +77,4 @@
 | v0.3 | 2026-11-18 | HTMLレポート（`report.html`） | なし |
 | v0.5 | 2026-11-18 | 人間のブラインド評定の仕組み（`blind.py`：pack・compare・import-benchmark・synth、評定ページ `human/rate_template.html`）。`scenes` の出力に知覚段階を追加。D-012〜D-014 | なし（シミュレータの評定は不変）。仕組みの試験結果は HUMAN_EVAL.md 6章 |
 | v0.4 | 2026-11-18 | 場面の枠組み（`context`）、態度・行動のシグナル（`signals`）、`embodiment`、量の軸の出力、`scenes` コマンドと作例、`apology.prompted`。指摘を受けた後の一度の詫びは過剰としない（D-010）。笑み・軽さの扱い（D-011）。設計文書（docs/） | シグナルと枠組みは既定値で無効なので、ベンチマークの評定は D-010 による変化だけ（段階2の「重すぎる」が減り、κ 0.29→0.28、「釣り合う」が各条件 +1.5pt） |
+| v0.6 | 2026-11-19 | ヒステリシスとescalationを既定で有効に（`--no-hysteresis`・`--no-escalation` で無効）。出力JSONに `escalation` を記録 | 既定の実行結果が変わる。従来の既定と同じ結果は `--no-hysteresis --no-escalation` で得られる |

@@ -46,8 +46,8 @@ python3 sim.py scenes examples/scenes.json -n 1000 -o out/scenes-result.json
 
 共通の選択肢：
 
-- `--hysteresis`：信頼損傷ヒステリシス（経緯で受け取り方が変わる）を有効にする
-- `--escalation`：一段改めた謝罪は割り引かない（`--hysteresis` と併用）
+- `--no-hysteresis`：信頼損傷ヒステリシス（経緯で受け取り方が変わる）を無効にする（既定は有効）
+- `--no-escalation`：一段改めた謝罪も割り引く（既定は割り引かない。ヒステリシス有効時のみ効く）
 - `--seed`：乱数の種
 - `-n`：受け手の数
 

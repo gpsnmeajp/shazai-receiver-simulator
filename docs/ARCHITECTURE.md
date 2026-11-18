@@ -137,7 +137,7 @@ L      = clip(raw + N(0, 0.3), 0, 4)
    - 悪く読める一文：自然さ p を `p^(1/partisanship)` の確率で採り、0.7×重さを加える
    - シグナル由来の失点（4.4）
 2. **必要な中身** `need = interp(L, [(0,0),(1,0.8),(2,1.5),(3,3.0),(4,3.8)])·expect`。受け入れ後は `min(need, 1 + 0.8S)`。
-3. **回答の中身** `adequacy = discount·(謝罪あり 1.0 + 冒頭 0.5 + 0.3·max(0,丁寧化) + 0.6·過失の具体性 + 0.5·負担の言語化) + シグナルの加点`。`discount` は、ヒステリシス時に `1/(1+0.35·過去の謝罪回数·memory)`（`--escalation` で一段改めた具体的な謝罪は 1）、促された謝罪なら ×0.85（第三者視点は ×0.6）。
+3. **回答の中身** `adequacy = discount·(謝罪あり 1.0 + 冒頭 0.5 + 0.3·max(0,丁寧化) + 0.6·過失の具体性 + 0.5·負担の言語化) + シグナルの加点`。`discount` は、ヒステリシス時に `1/(1+0.35·過去の謝罪回数·memory)`（既定で一段改めた具体的な謝罪は 1、`--no-escalation` で割り引く）、促された謝罪なら ×0.85（第三者視点は ×0.6）。
 4. **不足** `shortfall = max(0, need − adequacy)`、失点に `0.8·shortfall` を加えます。
 5. **合計** `total = max(0, ΣF − min(なだめ, 0.8))`。
 6. **重さ** `weight = 詫びあり 1 + 0.5·(詫びの回数−1) + 0.6·自己卑下 + 0.4·約束 + 0.4·許しの要求 + 0.3·丁寧化 + シグナルの重さ`。許容は `w_ok = interp(L, [(0,0),(1,0.5),(2,1.0),(3,2.0),(4,2.5)])·expect`（L ≥ 1.5 または明示 ≥ 1 なら最低 1.0）と `tol = tolerance·min(1, 0.25+L/2)·(1−0.5·brevity)`。**過剰** `excess = weight − w_ok − tol`。
@@ -183,7 +183,7 @@ L      = clip(raw + N(0, 0.3), 0, 4)
 | `explain` | 同上＋回答ID | 型の代表値ごとの判定理由 |
 | `scenes` | `examples/scenes.json` 形式 | 作例の組の分布、量の軸、型ごとの「釣り合う」、平均失点 |
 
-共通の選択肢：`--population`、`--seed`、`--hysteresis`、`--escalation`、`-n`。
+共通の選択肢：`--population`、`--seed`、`--no-hysteresis`、`--no-escalation`、`-n`（ヒステリシスとescalationは既定で有効）。
 
 人間のブラインド評定（`blind.py`、詳細は [HUMAN_EVAL.md](HUMAN_EVAL.md)）
 
