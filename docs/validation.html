@@ -36,7 +36,7 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html" aria-current="page">検証</a><a href="human-eval.html">人間評定</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html" aria-current="page">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
@@ -216,7 +216,10 @@
 
 <h2 id="history"><svg class="icon"><use href="#i-layers"/></svg>5. 変更履歴</h2>
 <ul class="timeline">
-<li class="now"><span class="ver">v0.6</span><span class="date">2026-11-19</span>
+<li class="now"><span class="ver">v0.7</span><span class="date">2026-11-19</span>
+<p>組み込み判定モード（<code>check</code>、<code>s1.py</code>、<code>sim.check_turn</code>）と Stop hook の参考実装。層Aを System One の質問に分解して1ターン1リクエストで問う（<a href="jev.html#check">System One 5.8節</a>）。</p>
+<p class="eff">影響：なし（既存のコマンドは不変）。Jev の実際の応答では未検証。</p></li>
+<li><span class="ver">v0.6</span><span class="date">2026-11-19</span>
 <p>ヒステリシスと escalation を既定で有効に（<code>--no-hysteresis</code>・<code>--no-escalation</code> で無効）。出力JSONに <code>escalation</code> を記録。</p>
 <p class="eff">影響：既定の実行結果が変わる。従来の既定と同じ結果は <code>--no-hysteresis --no-escalation</code> で得られる。</p></li>
 <li><span class="ver">v0.5</span><span class="date">2026-11-18</span>

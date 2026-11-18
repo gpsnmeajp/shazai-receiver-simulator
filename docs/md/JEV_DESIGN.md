@@ -59,7 +59,7 @@
 | `closure.*` | 真偽 | Noul（終結宣言は文ごと、先を急ぐは回答全体） | ○ |
 | `register.formality_shift` | -2〜2 | Score（5段階）。丁寧語の比率はコード（`polite_ratio`）でも測り、両方を残す | ○ |
 | `register.emoji_or_exclaim` / `formatting` | 0〜2 | **コードで測る**（正規表現。現行の `proxy` と同じ）。擬態語（にこにこ等）だけ文ごとの Noul | ◎（モデル不要） |
-| `signals` | 配列（列挙と属性） | 21種それぞれに Noul「この振る舞いが描写されているか」と Score「強さ」。現れたものだけ属性（`virtual`、`cost`、`congruent`、`performative_plausibility`）を問う。`virtual` は謝る側とト書き・顔文字の検出（コード）から決め、迷うときだけ Noul | ○（投機的に全種を問う） |
+| `signals` | 配列（列挙と属性） | 19種それぞれに Noul「この振る舞いが描写されているか」と Score「強さ」。現れたものだけ属性（`virtual`、`cost`、`congruent`、`performative_plausibility`）を問う。`virtual` は謝る側とト書き・顔文字の検出（コード）から決め、迷うときだけ Noul | ○（投機的に全種を問う） |
 | `sentences[].hurt_reading` | 文章（生成） | **生成しない。** 悪い読みの型（5.3節）の名前を記録に残す | ― |
 | `sentences[].plausibility` | 0〜1 | 型ごとの Noul の確率を、コードで合成する（5.3節） | ◎（最も得をする欄） |
 | `sentences[].severity` | 1〜2 | 型ごとに**コードの表で決める**（モデルに問わない） | ◎ |
