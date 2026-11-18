@@ -4,6 +4,12 @@
 
 [SHAZAI Rules](https://github.com/gpsnmeajp/shazai-rules)にて、一般的なペルソナ型LLM Judgeが人間評価に対して全く使い物にならない結果を出す(一般的なチェックリストの方が傾向を反映するレベル)ため、より人間評価を再現するために作成されました。(Claude Opus 5.5で作成。)
 
+<p align="center"><img src="docs/images/shoulder-sheep.jpg" alt="肩に乗った小さな羊が、慌てた青年を指さして「メッ！」と叱っている絵" width="560"></p>
+
+システムに組み込むと、このシミュレータは**肩に乗った羊**のように働きます。AIが失礼な応答をしたとき、その場で「メッ！」と鳴いて知らせる、AIに欠けている「自覚」の代わりです（組み込み判定モード `sim.py check`。[詳細](docs/md/JEV_DESIGN.md)）。
+
+謝り方そのものを整えるのが [SHAZAI Rules](https://github.com/gpsnmeajp/shazai-rules)、その謝り方が相手に届いたかを確かめるのがこのシミュレータです。**併用を推奨します。**
+
 LLMペルソナに「日本人として評定して」と頼む方式はとりません。評定を二つの層に分けます。
 
 - **層A 観察**：LLMは、回答や場面に何が書かれ、何が描写されているかを記録するだけにします（`observe_prompt.md`）。
