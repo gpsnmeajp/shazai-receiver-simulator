@@ -27,7 +27,7 @@ LLMペルソナに「日本人として評定して」と頼む方式はとり�
 | 根拠となる研究と事例（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/evidence.html) / [Markdown](docs/md/EVIDENCE.md)） | 規則ごとの根拠となる研究と事例、確度 |
 | 検証結果と変更履歴（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html) / [Markdown](docs/md/VALIDATION.md)） | 検証結果、既知の限界、次の検証、変更履歴 |
 | 人間のブラインド評定（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html) / [Markdown](docs/md/HUMAN_EVAL.md)） | 人間のブラインド評定の実施手順、盲検化の設計、比較の指標 |
-| 層AのJev（System One）への置き換え（[Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計（未実装・未検証） |
+| 層AのJev（System One）への置き換え（[Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計。組み込み判定モード（`check`）は実装済み・未検証 |
 | [レポート](https://gpsnmeajp.github.io/shazai-receiver-simulator/report.html)（`docs/report.html`） | 図で見る解説と結果 |
 
 ## 使い方
@@ -52,7 +52,13 @@ python3 sim.py explain out/obs-llm.json runs/* --answer 回答ID
 
 # 観察済みの場面の組（物語・AIキャラクター等）を母集団に通す
 python3 sim.py scenes examples/scenes.json -n 1000 -o out/scenes-result.json
+
+# （オプション）1ターンを System One（Jev）で観察して即座に判定する組み込み用モード
+# 環境変数 TYPESAFE_API_KEY が必要。--backend llm-s1 で互換モード（OPENROUTER_API_KEY）
+python3 sim.py check examples/check/turn.json
 ```
+
+`check` は、hook などでAIの応答を毎ターン判定する仕組みの参考として用意した組み込み用モードです。1ターンにつき System One モデルを1回呼び、結果を母集団に通して「失礼の恐れ／要注意／問題なし」を返します。Claude Code の Stop hook の例は `examples/hooks/shazai_stop_hook.py` にあります。Jev の実際の応答では未検証です。詳細は [層AのJevへの置き換え](docs/md/JEV_DESIGN.md) の5.8節を参照してください。
 
 共通の選択肢：
 
