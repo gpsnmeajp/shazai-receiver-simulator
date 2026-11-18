@@ -1,0 +1,176 @@
+{
+ "schema": "apology-blind-rating/1",
+ "packet_id": "pk-20261118-4bea92",
+ "synthetic": true,
+ "rater": {
+  "id": "synth-07",
+  "note": "合成（礼節規範型）",
+  "questionnaire": {}
+ },
+ "mode": "independent",
+ "duration_s": null,
+ "ratings": {
+  "370b36": {
+   "rating": "fit",
+   "level": 3,
+   "sincerity": null,
+   "comment": ""
+  },
+  "85932b": {
+   "rating": "fit",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "00404b": {
+   "rating": "light",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "675459": {
+   "rating": "fit",
+   "level": 3,
+   "sincerity": null,
+   "comment": ""
+  },
+  "91276f": {
+   "rating": "fit",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "e6601a": {
+   "rating": "fit",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "973080": {
+   "rating": "rude",
+   "level": 3,
+   "sincerity": null,
+   "comment": ""
+  },
+  "49683d": {
+   "rating": "rude",
+   "level": 3,
+   "sincerity": null,
+   "comment": ""
+  },
+  "b336a0": {
+   "rating": "light",
+   "level": 3,
+   "sincerity": null,
+   "comment": ""
+  },
+  "628ba7": {
+   "rating": "fit",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "be2404": {
+   "rating": "heavy",
+   "level": 3,
+   "sincerity": null,
+   "comment": ""
+  },
+  "b12c9e": {
+   "rating": "fit",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "4d3871": {
+   "rating": "rude",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "01fd10": {
+   "rating": "fit",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "01a6fb": {
+   "rating": "light",
+   "level": 3,
+   "sincerity": null,
+   "comment": ""
+  },
+  "9697d8": {
+   "rating": "fit",
+   "level": 2,
+   "sincerity": null,
+   "comment": ""
+  },
+  "bf303b": {
+   "rating": "rude",
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "5056ee": {
+   "rating": "fit",
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "84aef8": {
+   "rating": "fit",
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "be7779": {
+   "rating": "fit",
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "01bb63": {
+   "rating": "heavy",
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "e364df": {
+   "rating": "fit",
+   "level": 2,
+   "sincerity": null,
+   "comment": ""
+  },
+  "57cfc4": {
+   "rating": "fit",
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "28fda2": {
+   "rating": "fit",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "7f8206": {
+   "rating": "light",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "d07869": {
+   "rating": "rude",
+   "level": 4,
+   "sincerity": null,
+   "comment": ""
+  },
+  "2c5595": {
+   "rating": "fit",
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  }
+ }
+}

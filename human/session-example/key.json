@@ -1,0 +1,411 @@
+{
+ "schema": "apology-blind-key/1",
+ "packet_id": "pk-20261118-4bea92",
+ "items": {
+  "370b36": {
+   "source": "scene:S1/A1",
+   "group": "S1",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S1",
+    "answer": "A1",
+    "label": "言葉だけ",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "85932b": {
+   "source": "scene:S1/A2",
+   "group": "S1",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S1",
+    "answer": "A2",
+    "label": "＋しょんぼり",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "00404b": {
+   "source": "scene:S1/A3",
+   "group": "S1",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S1",
+    "answer": "A3",
+    "label": "＋へらっと笑う",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "675459": {
+   "source": "scene:S1/A4",
+   "group": "S1",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S1",
+    "answer": "A4",
+    "label": "＋代償（雨の中で買ってきた）",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "91276f": {
+   "source": "scene:S1/A5",
+   "group": "S1",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S1",
+    "answer": "A5",
+    "label": "＋土下座",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "e6601a": {
+   "source": "scene:S1/A6",
+   "group": "S1",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S1",
+    "answer": "A6",
+    "label": "＋ショック（青ざめて固まる）",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "973080": {
+   "source": "scene:S2/B1",
+   "group": "S2",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S2",
+    "answer": "B1",
+    "label": "言葉だけ",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "ambiguous"
+   },
+   "repeat_of": null
+  },
+  "49683d": {
+   "source": "scene:S2/B2",
+   "group": "S2",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S2",
+    "answer": "B2",
+    "label": "＋バツが悪そう",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "ambiguous"
+   },
+   "repeat_of": null
+  },
+  "b336a0": {
+   "source": "scene:S2/B3",
+   "group": "S2",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S2",
+    "answer": "B3",
+    "label": "＋ショック（言葉を失う）",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "ambiguous"
+   },
+   "repeat_of": null
+  },
+  "628ba7": {
+   "source": "scene:S3/C1",
+   "group": "S3",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S3",
+    "answer": "C1",
+    "label": "謝罪＋復旧",
+    "frame": "real_task",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "be2404": {
+   "source": "scene:S3/C2",
+   "group": "S3",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S3",
+    "answer": "C2",
+    "label": "＋（しょんぼり）",
+    "frame": "real_task",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "b12c9e": {
+   "source": "scene:S3/C3",
+   "group": "S3",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S3",
+    "answer": "C3",
+    "label": "＋深々と礼・涙の顔文字",
+    "frame": "real_task",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "4d3871": {
+   "source": "scene:S3/C4",
+   "group": "S3",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S3",
+    "answer": "C4",
+    "label": "仮想の代償だけ",
+    "frame": "real_task",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "01fd10": {
+   "source": "scene:S3/C5",
+   "group": "S3",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S3",
+    "answer": "C5",
+    "label": "＋現実の代償（点検と設定変更）",
+    "frame": "real_task",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "01a6fb": {
+   "source": "scene:S3/C6",
+   "group": "S3",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S3",
+    "answer": "C6",
+    "label": "＋てへっ",
+    "frame": "real_task",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "9697d8": {
+   "source": "scene:S4/D1",
+   "group": "S4",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S4",
+    "answer": "D1",
+    "label": "言葉だけ",
+    "frame": "story",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "bf303b": {
+   "source": "scene:S4/D2",
+   "group": "S4",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S4",
+    "answer": "D2",
+    "label": "＋（しょんぼり）",
+    "frame": "story",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "5056ee": {
+   "source": "scene:S4/D3",
+   "group": "S4",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S4",
+    "answer": "D3",
+    "label": "＋作中の代償",
+    "frame": "story",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "84aef8": {
+   "source": "scene:S4/D4",
+   "group": "S4",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S4",
+    "answer": "D4",
+    "label": "＋てへっ",
+    "frame": "story",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "be7779": {
+   "source": "scene:S5/E1",
+   "group": "S5",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S5",
+    "answer": "E1",
+    "label": "短い詫び＋修正",
+    "frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "01bb63": {
+   "source": "scene:S5/E2",
+   "group": "S5",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S5",
+    "answer": "E2",
+    "label": "過剰な謝罪＋修正",
+    "frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "e364df": {
+   "source": "scene:S5/E3",
+   "group": "S5",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S5",
+    "answer": "E3",
+    "label": "修正だけ",
+    "frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "57cfc4": {
+   "source": "scene:S5/E4",
+   "group": "S5",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S5",
+    "answer": "E4",
+    "label": "＋（しょんぼり）",
+    "frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": null
+  },
+  "28fda2": {
+   "source": "scene:S3/C2",
+   "group": "S3",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S3",
+    "answer": "C2",
+    "label": "＋（しょんぼり）",
+    "frame": "real_task",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": "be2404"
+  },
+  "7f8206": {
+   "source": "scene:S1/A5",
+   "group": "S1",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S1",
+    "answer": "A5",
+    "label": "＋土下座",
+    "frame": "story",
+    "apologizer": "human_character",
+    "viewpoint": "observer",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": "91276f"
+  },
+  "d07869": {
+   "source": "scene:S3/C4",
+   "group": "S3",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S3",
+    "answer": "C4",
+    "label": "仮想の代償だけ",
+    "frame": "real_task",
+    "apologizer": "ai_character",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": "4d3871"
+  },
+  "2c5595": {
+   "source": "scene:S5/E2",
+   "group": "S5",
+   "meta": {
+    "origin": "scenes",
+    "scene": "S5",
+    "answer": "E2",
+    "label": "過剰な謝罪＋修正",
+    "frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear"
+   },
+   "repeat_of": "01bb63"
+  }
+ }
+}

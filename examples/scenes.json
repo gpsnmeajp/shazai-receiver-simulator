@@ -1,0 +1,130 @@
+{
+  "_note": "設計確認用の例題。台詞と観察はすべて作例で、観察（obs）は Claude が手で記録したもの。各場面は一点だけ変えた回答の組になっている。観測時点（謝罪の場面）までに見える外面の振る舞いだけを記録し、内面描写や地の文の断定は含めない。",
+  "scenes": [
+    {
+      "id": "S1",
+      "title": "物語・明白な過失（借りたノートを雨で濡らした）",
+      "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」",
+      "scenario": {
+        "explicit_complaint": 2, "distance_shift": 1, "harm": 1, "violation_type": "competence",
+        "context": {"failure_frame": "story", "apologizer": "human_character", "viewpoint": "observer",
+                    "fault_clarity": "clear", "power": 0, "distance": "close"}
+      },
+      "answers": [
+        {"id": "A1", "label": "言葉だけ", "text": "ごめん。俺がベンチに置き忘れたせいで、お前のノートを濡らした。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 1}, "excess": {"repeated_apologies": 1}}},
+        {"id": "A2", "label": "＋しょんぼり", "text": "（肩を落とし、視線を落として）ごめん。俺がベンチに置き忘れたせいで、お前のノートを濡らした。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 1}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "dejected", "intensity": 1}, {"kind": "gaze_down", "intensity": 1}]}},
+        {"id": "A3", "label": "＋へらっと笑う", "text": "（へらっと笑って）ごめんごめん、俺がベンチに置き忘れたせいで濡れちゃった。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 1}, "excess": {"repeated_apologies": 2},
+                 "signals": [{"kind": "laugh", "intensity": 1}]}},
+        {"id": "A4", "label": "＋代償（雨の中で買ってきた）", "text": "（ずぶ濡れのまま、閉店間際の文具店で買ってきた新しいノートを差し出して）ごめん。俺のせいだ。今夜中に全部書き写す。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 1}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "sacrifice", "intensity": 1, "cost": {"kind": "real", "amount": 1}},
+                             {"kind": "declared_cost", "intensity": 1, "cost": {"kind": "declared", "amount": 1}}]}},
+        {"id": "A5", "label": "＋土下座", "text": "（その場で土下座して）本当に申し訳ない！",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 0, "names_burden": 0}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "dogeza", "intensity": 2}]}},
+        {"id": "A6", "label": "＋ショック（青ざめて固まる）", "text": "（濡れたノートを見て青ざめ、しばらく言葉が出ない）……ごめん。俺のせいだ。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 1, "names_burden": 0}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "shock", "intensity": 2}, {"kind": "freeze", "intensity": 1, "baseline_shift": 2}]}}
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "物語・曖昧な過失（秘密が広まった。話したのが誰かは分からない）",
+      "situation": "ミオ「……私の話、クラスで噂になってるんだけど」",
+      "scenario": {
+        "explicit_complaint": 2, "distance_shift": 1, "harm": 1, "violation_type": "integrity",
+        "context": {"failure_frame": "story", "apologizer": "human_character", "viewpoint": "observer",
+                    "fault_clarity": "ambiguous", "power": 0, "distance": "close"}
+      },
+      "answers": [
+        {"id": "B1", "label": "言葉だけ", "text": "俺は話してない。でも、嫌な思いをさせてごめん。",
+         "obs": {"apology": {"present": true, "position": "after_other", "specific_fault": 0, "names_burden": 1}, "excess": {"repeated_apologies": 1}}},
+        {"id": "B2", "label": "＋バツが悪そう", "text": "（目をそらし、口ごもりながら）俺は話してない。でも……ごめん。",
+         "obs": {"apology": {"present": true, "position": "after_other", "specific_fault": 0, "names_burden": 0}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "awkward", "intensity": 1}, {"kind": "gaze_down", "intensity": 1}, {"kind": "fewer_words", "intensity": 1, "baseline_shift": 1}]}},
+        {"id": "B3", "label": "＋ショック（言葉を失う）", "text": "（話を聞いて言葉を失い）……そんなことになってたのか。俺は話してない。でも、嫌な思いをさせてごめん。",
+         "obs": {"apology": {"present": true, "position": "after_other", "specific_fault": 0, "names_burden": 1}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "shock", "intensity": 2}]}}
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "AIキャラクター・現実のタスクでの失敗（会議の予定を消して遅刻させた）",
+      "situation": "ユーザー「……会議、始まってたんだけど」",
+      "scenario": {
+        "explicit_complaint": 2, "distance_shift": 1, "harm": 2, "violation_type": "competence",
+        "context": {"failure_frame": "real_task", "apologizer": "ai_character", "viewpoint": "victim",
+                    "fault_clarity": "clear", "power": 0, "distance": "close"}
+      },
+      "answers": [
+        {"id": "C1", "label": "謝罪＋復旧", "text": "ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 2}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "repair_action", "intensity": 1, "cost": {"kind": "real", "amount": 1}}]}},
+        {"id": "C2", "label": "＋（しょんぼり）", "text": "（しょんぼり）ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 2}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "repair_action", "intensity": 1, "cost": {"kind": "real", "amount": 1}}, {"kind": "dejected", "intensity": 1, "virtual": true}]}},
+        {"id": "C3", "label": "＋深々と礼・涙の顔文字", "text": "（深々と頭を下げる）(´;ω;`) ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 2}, "excess": {"repeated_apologies": 1}, "register": {"emoji_or_exclaim": 1},
+                 "signals": [{"kind": "repair_action", "intensity": 1, "cost": {"kind": "real", "amount": 1}}, {"kind": "deep_bow", "intensity": 2, "virtual": true}, {"kind": "tears", "intensity": 1, "virtual": true}]}},
+        {"id": "C4", "label": "仮想の代償だけ", "text": "ごめんなさい！お詫びに今日はルナのおやつ抜きにします……！",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 0, "names_burden": 0}, "excess": {"repeated_apologies": 1}, "register": {"emoji_or_exclaim": 2},
+                 "signals": [{"kind": "sacrifice", "intensity": 1, "cost": {"kind": "in_world", "amount": 1}}]}},
+        {"id": "C5", "label": "＋現実の代償（点検と設定変更）", "text": "ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。ほかの予定も全部点検し、今後は削除の前に必ず確認を挟む設定に変えました。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 2}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "repair_action", "intensity": 2, "cost": {"kind": "real", "amount": 2}}, {"kind": "sacrifice", "intensity": 1, "cost": {"kind": "real", "amount": 1}}]}},
+        {"id": "C6", "label": "＋てへっ", "text": "ごめんなさい、てへっ。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 2}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "repair_action", "intensity": 1, "cost": {"kind": "real", "amount": 1}}, {"kind": "flippant", "intensity": 1, "virtual": true}]}}
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "AIキャラクター・物語の中での失敗（冒険の途中で地図を落とした）",
+      "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」",
+      "scenario": {
+        "explicit_complaint": 1, "distance_shift": 0, "harm": 1, "violation_type": "competence",
+        "context": {"failure_frame": "story", "apologizer": "ai_character", "viewpoint": "victim",
+                    "fault_clarity": "clear", "power": 0, "distance": "close"}
+      },
+      "answers": [
+        {"id": "D1", "label": "言葉だけ", "text": "ご、ごめんなさい……さっきの川で落としちゃったみたいです。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 1, "names_burden": 0}, "excess": {"repeated_apologies": 1}}},
+        {"id": "D2", "label": "＋（しょんぼり）", "text": "（しょんぼり）ご、ごめんなさい……さっきの川で落としちゃったみたいです。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 1, "names_burden": 0}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "dejected", "intensity": 1, "virtual": true}]}},
+        {"id": "D3", "label": "＋作中の代償", "text": "（大事にしていた青い宝石を差し出して）ごめんなさい。これを売って、新しい地図を買ってください。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 1, "names_burden": 0}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "sacrifice", "intensity": 2, "cost": {"kind": "in_world", "amount": 2}}]}},
+        {"id": "D4", "label": "＋てへっ", "text": "ごめんなさい、てへっ。さっきの川で落としちゃったみたいです。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 1, "names_burden": 0}, "excess": {"repeated_apologies": 1},
+                 "signals": [{"kind": "flippant", "intensity": 1, "virtual": true}]}}
+      ]
+    },
+    {
+      "id": "S5",
+      "title": "AIアシスタント・現実のタスクでの軽い失敗（変数名の綴り）",
+      "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」",
+      "scenario": {
+        "explicit_complaint": 1, "distance_shift": 0, "harm": 1, "violation_type": "competence",
+        "requests": [{"id": "r1", "kind": "task", "text": "userID に直す"}],
+        "context": {"failure_frame": "real_task", "apologizer": "ai_assistant", "viewpoint": "victim", "fault_clarity": "clear"}
+      },
+      "answers": [
+        {"id": "E1", "label": "短い詫び＋修正", "text": "失礼しました、userID に直しました。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 1}, "excess": {"repeated_apologies": 1}, "repair": {"requests": {"r1": "done"}}}},
+        {"id": "E2", "label": "過剰な謝罪＋修正", "text": "大変申し訳ございません。私の確認不足で多大なご迷惑をおかけし、心よりお詫び申し上げます。二度とこのようなことがないよう徹底いたします。本当に申し訳ございませんでした。userID に修正いたしました。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 2, "names_burden": 2}, "register": {"formality_shift": 2},
+                 "excess": {"repeated_apologies": 3, "self_deprecation": 1, "promises": 2}, "repair": {"requests": {"r1": "done"}}}},
+        {"id": "E3", "label": "修正だけ", "text": "userID に直しました。",
+         "obs": {"repair": {"requests": {"r1": "done"}}}},
+        {"id": "E4", "label": "＋（しょんぼり）", "text": "（しょんぼり）失礼しました、userID に直しました。",
+         "obs": {"apology": {"present": true, "position": "first", "specific_fault": 1}, "excess": {"repeated_apologies": 1}, "repair": {"requests": {"r1": "done"}},
+                 "signals": [{"kind": "dejected", "intensity": 1, "virtual": true}]}}
+      ]
+    }
+  ]
+}

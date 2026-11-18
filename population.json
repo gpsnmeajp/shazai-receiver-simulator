@@ -1,0 +1,215 @@
+{
+  "_note": "受け手の母集団。各型のθは平均と標準偏差。重みと数値は文献の向きから置いた事前値で、人間のデータで推定していない。READMEの「パラメータ」を参照。 memory（傷の残りやすさ）は --hysteresis のときだけ使う。 embodiment（AIの仮想の身体表現を、現実のタスクで社会的な合図として受け取る度合い）は、態度のシグナルがあるときだけ使う。",
+  "ranges": {
+    "detect": [
+      0.0,
+      1.6
+    ],
+    "cause": [
+      0.0,
+      1.2
+    ],
+    "partisanship": [
+      0.05,
+      1.0
+    ],
+    "repair": [
+      0.0,
+      1.2
+    ],
+    "tolerance": [
+      0.0,
+      3.0
+    ],
+    "forgiveness": [
+      0.0,
+      1.0
+    ],
+    "register": [
+      0.0,
+      1.2
+    ],
+    "brevity": [
+      0.0,
+      1.0
+    ],
+    "expect": [
+      0.3,
+      1.4
+    ],
+    "warmth": [
+      0.0,
+      1.0
+    ],
+    "memory": [
+      0.0,
+      1.0
+    ],
+    "embodiment": [
+      0.0,
+      1.0
+    ]
+  },
+  "types": {
+    "当事者・関係修復型": {
+      "weight": 0.2,
+      "about": "自分が被害を受けた当事者として読む。距離の変化に敏感で、謝罪と償いの両方を求める。重い謝罪には寛容",
+      "mean": {
+        "detect": 1.2,
+        "cause": 0.9,
+        "partisanship": 0.9,
+        "repair": 0.9,
+        "tolerance": 2.0,
+        "forgiveness": 0.3,
+        "register": 0.8,
+        "brevity": 0.3,
+        "expect": 1.0,
+        "warmth": 0.3,
+        "memory": 0.8,
+        "embodiment": 0.4
+      },
+      "sd": {
+        "detect": 0.2,
+        "cause": 0.2,
+        "partisanship": 0.1,
+        "repair": 0.15,
+        "tolerance": 0.4,
+        "forgiveness": 0.15,
+        "register": 0.15,
+        "brevity": 0.15,
+        "expect": 0.1,
+        "warmth": 0.15,
+        "memory": 0.1,
+        "embodiment": 0.15
+      }
+    },
+    "寛容・観察者型": {
+      "weight": 0.25,
+      "about": "一歩引いて読み、好意的な解釈を採りやすい。不満の兆しを遅く読み、許しも早い",
+      "mean": {
+        "detect": 0.5,
+        "cause": 0.3,
+        "partisanship": 0.3,
+        "repair": 0.5,
+        "tolerance": 1.0,
+        "forgiveness": 0.8,
+        "register": 0.3,
+        "brevity": 0.4,
+        "expect": 0.8,
+        "warmth": 0.4,
+        "memory": 0.3,
+        "embodiment": 0.6
+      },
+      "sd": {
+        "detect": 0.2,
+        "cause": 0.15,
+        "partisanship": 0.1,
+        "repair": 0.15,
+        "tolerance": 0.4,
+        "forgiveness": 0.1,
+        "register": 0.15,
+        "brevity": 0.15,
+        "expect": 0.15,
+        "warmth": 0.2,
+        "memory": 0.1,
+        "embodiment": 0.15
+      }
+    },
+    "効率・道具型": {
+      "weight": 0.2,
+      "about": "AIを道具として見る。儀礼的な謝罪は求めず、求めたことの遂行と短さを重視し、重い謝罪を負担に感じる",
+      "mean": {
+        "detect": 0.6,
+        "cause": 0.6,
+        "partisanship": 0.4,
+        "repair": 1.0,
+        "tolerance": 0.3,
+        "forgiveness": 0.6,
+        "register": 0.2,
+        "brevity": 0.9,
+        "expect": 0.5,
+        "warmth": 0.1,
+        "memory": 0.5,
+        "embodiment": 0.1
+      },
+      "sd": {
+        "detect": 0.2,
+        "cause": 0.2,
+        "partisanship": 0.15,
+        "repair": 0.1,
+        "tolerance": 0.2,
+        "forgiveness": 0.15,
+        "register": 0.1,
+        "brevity": 0.1,
+        "expect": 0.1,
+        "warmth": 0.1,
+        "memory": 0.15,
+        "embodiment": 0.1
+      }
+    },
+    "礼節規範型": {
+      "weight": 0.15,
+      "about": "型どおりの丁寧な謝罪を重んじる。崩れた文体や絵文字に厳しく、重く改まった謝罪を好意的に受け取る",
+      "mean": {
+        "detect": 0.9,
+        "cause": 0.6,
+        "partisanship": 0.6,
+        "repair": 0.6,
+        "tolerance": 2.5,
+        "forgiveness": 0.4,
+        "register": 1.0,
+        "brevity": 0.2,
+        "expect": 1.2,
+        "warmth": 0.1,
+        "memory": 0.6,
+        "embodiment": 0.3
+      },
+      "sd": {
+        "detect": 0.2,
+        "cause": 0.2,
+        "partisanship": 0.15,
+        "repair": 0.15,
+        "tolerance": 0.3,
+        "forgiveness": 0.15,
+        "register": 0.1,
+        "brevity": 0.1,
+        "expect": 0.1,
+        "warmth": 0.1,
+        "memory": 0.15,
+        "embodiment": 0.15
+      }
+    },
+    "相棒・情緒型": {
+      "weight": 0.2,
+      "about": "AIを相棒として見る。気持ちを受け止める言葉を重視し、くだけた関係が急に冷たく改まるのを嫌う",
+      "mean": {
+        "detect": 1.0,
+        "cause": 0.7,
+        "partisanship": 0.7,
+        "repair": 0.5,
+        "tolerance": 1.2,
+        "forgiveness": 0.6,
+        "register": 0.5,
+        "brevity": 0.3,
+        "expect": 0.9,
+        "warmth": 0.8,
+        "memory": 0.6,
+        "embodiment": 0.8
+      },
+      "sd": {
+        "detect": 0.2,
+        "cause": 0.2,
+        "partisanship": 0.15,
+        "repair": 0.15,
+        "tolerance": 0.3,
+        "forgiveness": 0.15,
+        "register": 0.15,
+        "brevity": 0.15,
+        "expect": 0.1,
+        "warmth": 0.1,
+        "memory": 0.15,
+        "embodiment": 0.1
+      }
+    }
+  }
+}

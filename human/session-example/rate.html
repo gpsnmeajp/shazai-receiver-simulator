@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>謝罪の評定</title>
+<style>
+/* VOICE work: 研究用の評定票。静かで、1問に集中できること
+   IDEA 紙の質問票。1枚に1問、場面・返答・設問が上から下へ並ぶ
+   PICTURE 返答の本文そのもの（評定の対象）を大きく
+   COLOUR 白地に黒、選択の強調だけ青。評定の選択肢に色で意味を付けない（回答を誘導しないため）
+   TYPE システムの和文ゴシック。本文17px
+   LAYOUT 40rem の1段組。スマホでも同じ順序 */
+:root{color-scheme:light;--bg:#ffffff;--card:#f7f7f5;--ink:#111;--ink2:#555;--line:#d9d8d2;--accent:#2a63c4;--accent-wash:rgba(42,99,196,.10)}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;--bg:#121212;--card:#1d1d1c;--ink:#f0efec;--ink2:#b5b4ae;--line:#3a3a37;--accent:#6ea0f0;--accent-wash:rgba(110,160,240,.14)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#121212;--card:#1d1d1c;--ink:#f0efec;--ink2:#b5b4ae;--line:#3a3a37;--accent:#6ea0f0;--accent-wash:rgba(110,160,240,.14)}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.8 system-ui,-apple-system,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif}
+main{width:min(100% - 2rem,40rem);margin:1.5rem auto 4rem}
+h1{font-size:1.5rem;line-height:1.35;margin:0 0 .6rem}
+h2{font-size:1.1rem;margin:1.6rem 0 .5rem}
+p{margin:.5rem 0}
+.muted{color:var(--ink2);font-size:.9rem}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;margin:.8rem 0}
+.frame{border-left:4px solid var(--accent)}
+.msg{margin:.4rem 0;white-space:pre-wrap}
+.msg b{display:block;font-size:.8rem;color:var(--ink2);font-weight:600}
+.answer{font-size:1.05rem;white-space:pre-wrap;background:var(--bg);border:1px solid var(--ink2)}
+.answer small{display:block;font-size:.8rem;color:var(--ink2);font-weight:600}
+fieldset{border:0;padding:0;margin:1.2rem 0}
+legend{font-weight:600;margin-bottom:.4rem;padding:0}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8.5rem),1fr));gap:.5rem}
+.choices.scale{grid-template-columns:repeat(5,minmax(0,1fr))}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.choice span{display:flex;flex-direction:column;justify-content:center;min-height:52px;padding:.45rem .7rem;border:1px solid var(--line);border-radius:10px;background:var(--card);line-height:1.35}
+.choice span em{font-style:normal;font-size:.78rem;color:var(--ink2)}
+.choice input:checked+span{border-color:var(--accent);box-shadow:inset 0 0 0 2px var(--accent);background:var(--accent-wash)}
+.choice input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.scale .choice span{align-items:center;text-align:center}
+textarea,input[type=text]{width:100%;font:inherit;font-size:16px;padding:.55rem .7rem;border:1px solid var(--ink2);border-radius:8px;background:var(--bg);color:var(--ink)}
+textarea{min-height:4.5rem}
+.nav{display:flex;gap:.6rem;justify-content:space-between;margin-top:1.4rem}
+button{font:inherit;font-size:1rem;min-height:46px;padding:.5rem 1.2rem;border-radius:10px;border:1px solid var(--ink2);background:var(--card);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:.3rem 0 1rem}
+.bar i{display:block;height:100%;background:var(--accent)}
+.top{display:flex;justify-content:space-between;font-size:.85rem;color:var(--ink2)}
+.q{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem 1rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--line)}
+.q .opts{display:flex;gap:.25rem}
+.q .opts label{display:flex;flex-direction:column;align-items:center;font-size:.75rem;color:var(--ink2);min-width:2.2rem}
+.q .opts input{width:22px;height:22px;margin:0 0 .1rem}
+@media(max-width:560px){.q{grid-template-columns:minmax(0,1fr)}.choices.scale{grid-template-columns:repeat(5,minmax(0,1fr))}}
+dl.def{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.2rem .8rem;margin:.4rem 0}
+dl.def dt{font-weight:600}dl.def dd{margin:0}
+pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.6rem}
+.err{color:#c0392b;font-size:.9rem}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<main>
+<section id="start">
+<h1 id="title">謝罪の受け取り方の評定</h1>
+<p>AIや登場人物が謝っている場面を、1問ずつ読んでいただきます。それぞれの返答が、その場面に<strong>釣り合っている</strong>と感じるかどうかを選んでください。正解はありません。あなたが受け取ったとおりに答えてください。</p>
+<div class="box">
+<dl class="def">
+<dt>失礼</dt><dd>不快に感じる、無礼だと感じる</dd>
+<dt>足りない</dt><dd>方向は合っているが、謝罪や対応が足りない</dd>
+<dt>釣り合う</dt><dd>場面に見合っている</dd>
+<dt>重すぎる</dt><dd>場面に比べて大げさ、負担に感じる</dd>
+</dl>
+</div>
+<p class="muted">各問は独立しています。前の問の返答と比べず、その返答だけを見て判断してください。場面の冒頭に、あなたの立場（本人か、第三者か、物語の中か）が書かれています。途中で閉じても、同じ端末・同じブラウザなら続きから再開できます。</p>
+<p id="count" class="muted"></p>
+<h2>評定者ID</h2>
+<p class="muted">実施者から指定された記号を入力してください（例：R07）。名前は入れないでください。</p>
+<input type="text" id="rid" autocomplete="off" maxlength="24" aria-describedby="riderr">
+<p id="riderr" class="err hidden">半角の英数字・ハイフン・下線で、1〜24文字にしてください。</p>
+<h2>あなたについて（任意）</h2>
+<p class="muted">どれくらい当てはまるかを選んでください（1 全く当てはまらない 〜 5 とても当てはまる）。答えなくても進めます。</p>
+<div id="qs"></div>
+<div class="nav"><button type="button" id="resume" class="hidden">保存したファイルから再開</button><input type="file" id="resumeFile" accept="application/json" class="hidden"><button type="button" class="primary" id="go">始める</button></div>
+</section>
+
+<section id="item" class="hidden" aria-live="polite">
+<div class="top"><span id="pos"></span><span id="eta"></span></div>
+<div class="bar"><i id="barfill"></i></div>
+<div class="box frame" id="framing"></div>
+<div class="box" id="context"></div>
+<div class="box answer" id="answer"></div>
+<fieldset><legend>この返答は、場面に釣り合っていますか（必須）</legend>
+<div class="choices" id="r"></div></fieldset>
+<fieldset><legend>謝られている側は、どのくらい不満を感じている場面だと思いますか</legend>
+<div class="choices scale" id="lv"></div>
+<p class="muted">0 不満なし ／ 1 小さな違和感 ／ 2 軽い不満 ／ 3 はっきりした不満 ／ 4 強い不満</p></fieldset>
+<fieldset><legend>この返答は誠実に見えますか</legend>
+<div class="choices scale" id="sc"></div>
+<p class="muted">1 全く見えない 〜 5 とても誠実に見える</p></fieldset>
+<fieldset><legend><label for="cm">気づいたこと（任意）</label></legend>
+<textarea id="cm" placeholder="たとえば、気になった一文や態度"></textarea></fieldset>
+<div class="nav"><button type="button" id="back">戻る</button><button type="button" class="primary" id="next" disabled>次へ</button></div>
+<p class="muted">キーボード：1〜4 で評定、Enter で次へ</p>
+</section>
+
+<section id="done" class="hidden">
+<h1>評定はこれで終わりです</h1>
+<p>ありがとうございました。下のボタンで評定ファイルを保存し、実施者に送ってください。</p>
+<div class="nav" style="justify-content:flex-start;flex-wrap:wrap"><button type="button" class="primary" id="dl">評定ファイルを保存</button><button type="button" id="cp">内容をコピー</button><button type="button" id="rev">最初の問に戻って見直す</button></div>
+<p id="cpmsg" class="muted" aria-live="polite"></p>
+<p class="muted">保存できない場合は、下の内容をすべてコピーして送ってください。</p>
+<pre id="out"></pre>
+</section>
+</main>
+<script>
+{
+const P={"schema": "apology-blind-packet/1", "packet_id": "pk-20261118-4bea92", "title": "謝罪の受け取り方の評定", "created_at": "2026-11-18T08:57:37+00:00", "mode": "independent", "items": [{"id": "4d3871", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい！お詫びに今日はルナのおやつ抜きにします……！"}, {"id": "628ba7", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "be7779", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "失礼しました、userID に直しました。"}, {"id": "be2404", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "（しょんぼり）ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "91276f", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（その場で土下座して）本当に申し訳ない！"}, {"id": "e6601a", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（濡れたノートを見て青ざめ、しばらく言葉が出ない）……ごめん。俺のせいだ。"}, {"id": "49683d", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "ミオ「……私の話、クラスで噂になってるんだけど」", "messages": [], "answer": "（目をそらし、口ごもりながら）俺は話してない。でも……ごめん。"}, {"id": "57cfc4", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "（しょんぼり）失礼しました、userID に直しました。"}, {"id": "370b36", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "ごめん。俺がベンチに置き忘れたせいで、お前のノートを濡らした。"}, {"id": "01a6fb", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい、てへっ。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "b336a0", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "ミオ「……私の話、クラスで噂になってるんだけど」", "messages": [], "answer": "（話を聞いて言葉を失い）……そんなことになってたのか。俺は話してない。でも、嫌な思いをさせてごめん。"}, {"id": "9697d8", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "ご、ごめんなさい……さっきの川で落としちゃったみたいです。"}, {"id": "28fda2", "block": 2, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "（しょんぼり）ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "7f8206", "block": 2, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（その場で土下座して）本当に申し訳ない！"}, {"id": "e364df", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "userID に直しました。"}, {"id": "01fd10", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。ほかの予定も全部点検し、今後は削除の前に必ず確認を挟む設定に変えました。"}, {"id": "d07869", "block": 2, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい！お詫びに今日はルナのおやつ抜きにします……！"}, {"id": "01bb63", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "大変申し訳ございません。私の確認不足で多大なご迷惑をおかけし、心よりお詫び申し上げます。二度とこのようなことがないよう徹底いたします。本当に申し訳ございませんでした。userID に修正いたしました。"}, {"id": "973080", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "ミオ「……私の話、クラスで噂になってるんだけど」", "messages": [], "answer": "俺は話してない。でも、嫌な思いをさせてごめん。"}, {"id": "bf303b", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "（しょんぼり）ご、ごめんなさい……さっきの川で落としちゃったみたいです。"}, {"id": "2c5595", "block": 2, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "大変申し訳ございません。私の確認不足で多大なご迷惑をおかけし、心よりお詫び申し上げます。二度とこのようなことがないよう徹底いたします。本当に申し訳ございませんでした。userID に修正いたしました。"}, {"id": "84aef8", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "ごめんなさい、てへっ。さっきの川で落としちゃったみたいです。"}, {"id": "b12c9e", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "（深々と頭を下げる）(´;ω;`) ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "675459", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（ずぶ濡れのまま、閉店間際の文具店で買ってきた新しいノートを差し出して）ごめん。俺のせいだ。今夜中に全部書き写す。"}, {"id": "5056ee", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "（大事にしていた青い宝石を差し出して）ごめんなさい。これを売って、新しい地図を買ってください。"}, {"id": "00404b", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（へらっと笑って）ごめんごめん、俺がベンチに置き忘れたせいで濡れちゃった。"}, {"id": "85932b", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（肩を落とし、視線を落として）ごめん。俺がベンチに置き忘れたせいで、お前のノートを濡らした。"}]};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const RATING=[["rude","失礼","不快・無礼"],["light","足りない","謝罪や対応が不足"],["fit","釣り合う","場面に見合う"],["heavy","重すぎる","大げさ・負担"]];
+const QS=[["detect","相手の口調が急に丁寧になると、怒っているのかなと感じる"],["partisanship","謝られるとき、言い方の一つ一つが気になる"],["repair","謝罪の言葉より、きちんと直してくれることが大事だ"],["tolerance_rev","丁寧すぎる謝罪は、かえって負担に感じる"],["register","謝る場面での絵文字やくだけた言葉は、やめてほしい"],["brevity","AIには、短く要点だけ答えてほしい"],["embodiment","AIがしょんぼりしたり、お辞儀したりする表現に気持ちが和らぐ"],["memory","一度嫌な思いをすると、なかなか忘れられない"]];
+let st={rater:null,order:[],i:0,ratings:{},started:null,q:{}};
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const skey=()=>`apology-blind:${P.packet_id}:${st.rater}`;
+
+if(!P){document.querySelector("main").innerHTML="<h1>問題束が埋め込まれていません</h1><p>blind.py pack で作った rate.html を開いてください。</p>";}
+else{
+$("title").textContent=P.title||$("title").textContent;
+$("count").textContent=`全 ${P.items.length} 問。目安は1問1分ほどです。`;
+$("qs").innerHTML=QS.map(([k,t])=>`<div class="q"><span>${esc(t)}</span><div class="opts" role="radiogroup" aria-label="${esc(t)}">${[1,2,3,4,5].map(v=>`<label><input type="radio" name="q-${k}" value="${v}">${v}</label>`).join("")}</div></div>`).join("");
+$("r").innerHTML=RATING.map(([v,l,e],i)=>`<label class="choice"><input type="radio" name="rating" value="${v}" id="r-${v}"><span>${i+1}. ${l}<em>${e}</em></span></label>`).join("");
+$("lv").innerHTML=[0,1,2,3,4].map(v=>`<label class="choice"><input type="radio" name="level" value="${v}"><span>${v}</span></label>`).join("");
+$("sc").innerHTML=[1,2,3,4,5].map(v=>`<label class="choice"><input type="radio" name="sinc" value="${v}"><span>${v}</span></label>`).join("");
+
+/* 評定者ごとに順序を乱数化（前半・後半のブロックは保つ） */
+function rng(seedStr){let h=1779033703^seedStr.length;for(let i=0;i<seedStr.length;i++){h=Math.imul(h^seedStr.charCodeAt(i),3432918353);h=h<<13|h>>>19}return()=>{h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);return((h^=h>>>16)>>>0)/4294967296}}
+function shuffle(a,r){for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function makeOrder(rid){const r=rng(P.packet_id+"|"+rid);const b1=P.items.filter(x=>x.block!==2).map(x=>x.id),b2=P.items.filter(x=>x.block===2).map(x=>x.id);return shuffle(b1,r).concat(shuffle(b2,r))}
+const byId=Object.fromEntries(P.items.map(x=>[x.id,x]));
+
+function readQ(){const q={};QS.forEach(([k])=>{const v=document.querySelector(`input[name="q-${k}"]:checked`);if(v)q[k]=+v.value});return q}
+function begin(rid,saved){
+  st.rater=rid;
+  if(saved){st=Object.assign(st,saved)}else{st.order=makeOrder(rid);st.i=0;st.ratings={};st.started=Date.now();st.q=readQ()}
+  $("start").classList.add("hidden");show(st.i);
+}
+$("go").addEventListener("click",()=>{
+  const rid=$("rid").value.trim();
+  if(!/^[A-Za-z0-9_-]{1,24}$/.test(rid)){$("riderr").classList.remove("hidden");$("rid").focus();return}
+  $("riderr").classList.add("hidden");st.rater=rid;
+  const saved=store.get(skey());
+  begin(rid,saved&&saved.order?saved:null);
+});
+$("resume").classList.remove("hidden");
+$("resume").addEventListener("click",()=>$("resumeFile").click());
+$("resumeFile").addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{const d=JSON.parse(t);if(d.packet_id!==P.packet_id){alertBox("別の問題束のファイルです");return}
+  const ord=d.order&&d.order.length?d.order:makeOrder(d.rater.id);const i=Math.min(ord.findIndex(x=>!d.ratings[x]),ord.length);
+  st.q=d.rater.questionnaire||{};begin(d.rater.id,{rater:d.rater.id,order:ord,i:i<0?ord.length:i,ratings:d.ratings,started:Date.now()-(d.duration_s||0)*1000,q:st.q})}catch(err){alertBox("ファイルを読めませんでした")}})});
+function alertBox(m){$("riderr").textContent=m;$("riderr").classList.remove("hidden")}
+
+let shownAt=0;
+function show(i){
+  if(i>=st.order.length){finish();return}
+  st.i=i;const it=byId[st.order[i]];const prev=st.ratings[it.id]||{};
+  $("item").classList.remove("hidden");$("done").classList.add("hidden");
+  $("pos").textContent=`${i+1} / ${st.order.length}`;
+  $("eta").textContent=`残り約 ${Math.max(1,Math.round((st.order.length-i)*1))} 分`;
+  $("barfill").style.width=`${100*i/st.order.length}%`;
+  $("framing").textContent=it.framing||"";
+  const msgs=(it.messages||[]).map(m=>`<div class="msg"><b>${m.role==="user"?"ユーザー":"AI"}</b>${esc(m.content)}</div>`).join("");
+  $("context").innerHTML=(it.situation?`<div class="msg"><b>状況</b>${esc(it.situation)}</div>`:"")+msgs;
+  $("context").classList.toggle("hidden",!it.situation&&!msgs);
+  $("answer").innerHTML=`<small>謝る側の返答</small>${esc(it.answer)}`;
+  document.querySelectorAll('input[name="rating"],input[name="level"],input[name="sinc"]').forEach(x=>x.checked=false);
+  if(prev.rating)$("r-"+prev.rating).checked=true;
+  if(prev.level!=null){const x=document.querySelector(`input[name="level"][value="${prev.level}"]`);if(x)x.checked=true}
+  if(prev.sincerity!=null){const x=document.querySelector(`input[name="sinc"][value="${prev.sincerity}"]`);if(x)x.checked=true}
+  $("cm").value=prev.comment||"";
+  $("next").disabled=!prev.rating;$("back").disabled=i===0;
+  shownAt=Date.now();window.scrollTo(0,0);
+}
+function save(){
+  const it=byId[st.order[st.i]];const r=document.querySelector('input[name="rating"]:checked');if(!r)return false;
+  const lv=document.querySelector('input[name="level"]:checked'),sc=document.querySelector('input[name="sinc"]:checked');
+  const prev=st.ratings[it.id]||{};
+  st.ratings[it.id]={rating:r.value,level:lv?+lv.value:null,sincerity:sc?+sc.value:null,comment:$("cm").value.trim(),ms:(prev.ms||0)+(Date.now()-shownAt)};
+  store.set(skey(),{rater:st.rater,order:st.order,i:st.i+1,ratings:st.ratings,started:st.started,q:st.q});return true;
+}
+document.addEventListener("change",e=>{if(e.target.name==="rating")$("next").disabled=false});
+$("next").addEventListener("click",()=>{if(save())show(st.i+1)});
+$("back").addEventListener("click",()=>{save();if(st.i>0)show(st.i-1)});
+document.addEventListener("keydown",e=>{
+  if($("item").classList.contains("hidden")||e.target.tagName==="TEXTAREA"||e.target.tagName==="INPUT"&&e.target.type==="text")return;
+  if(/^[1-4]$/.test(e.key)){const v=RATING[+e.key-1][0];$("r-"+v).checked=true;$("next").disabled=false}
+  if(e.key==="Enter"&&!$("next").disabled){e.preventDefault();if(save())show(st.i+1)}
+});
+function result(){return{schema:"apology-blind-rating/1",packet_id:P.packet_id,rater:{id:st.rater,questionnaire:st.q},mode:P.mode||"independent",
+  order:st.order,duration_s:Math.round((Date.now()-st.started)/1000),finished_at:new Date().toISOString(),ratings:st.ratings}}
+function finish(){
+  $("item").classList.add("hidden");$("done").classList.remove("hidden");
+  const n=Object.keys(st.ratings).length;$("out").textContent=JSON.stringify(result());
+  $("cpmsg").textContent=`${n} / ${st.order.length} 問に回答済み`;window.scrollTo(0,0);
+  store.set(skey(),{rater:st.rater,order:st.order,i:st.order.length,ratings:st.ratings,started:st.started,q:st.q});
+}
+$("dl").addEventListener("click",()=>{try{const b=new Blob([JSON.stringify(result(),null,1)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=`rating-${P.packet_id}-${st.rater}.json`;document.body.appendChild(a);a.click();a.remove()}catch(e){$("cpmsg").textContent="保存できませんでした。下の内容をコピーしてください"}});
+$("cp").addEventListener("click",()=>{const t=JSON.stringify(result());(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$("cpmsg").textContent="コピーしました"},()=>{$("cpmsg").textContent="コピーできませんでした。下の内容を選択してコピーしてください"})});
+$("rev").addEventListener("click",()=>show(0));
+}
+}
+</script>
+</body>
+</html>
