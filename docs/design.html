@@ -42,13 +42,13 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html" aria-current="page">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="improvement.html">v0.9 設計</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html" aria-current="page">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="methods.html">方法</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
 <h1>設計思想と目的</h1>
-<p class="lead">このシミュレータの設計の「なぜ」をまとめた文書です。今後設計を変えるときは、まずこの文書の原則と決定記録に照らしてください。</p>
-<p class="note">仕組みの詳細は <a href="architecture.html">アーキテクチャ</a>、根拠となる研究は <a href="evidence.html">根拠</a>、検証結果と変更履歴は <a href="validation.html">検証</a> にあります。</p>
+<p class="lead">このシミュレータの設計の「なぜ」をまとめた文書です。設計を変えるときは、まずこの文書の原則と決定記録に照らしてください。</p>
+<p class="note">仕組みの詳細は <a href="architecture.html">アーキテクチャ</a>、控えの時間軸と評価の方法は <a href="methods.html">方法</a>、根拠となる研究は <a href="evidence.html">根拠</a>、検証結果は <a href="validation.html">検証</a> と <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">総合評価</a> にあります。版ごとの経緯は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a> にまとめています。</p>
 <ul class="toc">
 <li><a href="#purpose">1. 目的</a></li><li><a href="#principles">2. 設計原則</a></li><li><a href="#decisions">3. 決定記録</a></li><li><a href="#open">4. 未解決の問い</a></li>
 </ul>
@@ -57,7 +57,7 @@
 <div class="card hero"><p style="margin:0;font-size:1.02rem;color:var(--ink)"><b>誠実に見える謝罪のかたち、つまり受け手に「釣り合っている」と感じさせる振る舞いとは何か</b>を、受け手の多様さを含めて測ること。</p></div>
 <ul>
 <li>出発点は、SHAZAI Rules（AIの謝罪を日本の文化に合わせる指示）のベンチマークです。そこでは、LLMペルソナによる評定が筆者の評定と大きくずれていました。</li>
-<li>本シミュレータでは、「誠実に見えること」と「釣り合っていると感じること」を実質的に等価なものとして扱います（所有者の判断）。ただし研究上は両者が分かれる場面があります（<a href="evidence.html#E-01">E-01</a>）。分かれる場面では「釣り合い」を主な出力とし、必要に応じて誠実さを副指標として出します。</li>
+<li>本シミュレータでは、「誠実に見えること」と「釣り合っていると感じること」を実質的に等価なものとして扱います（所有者の判断）。ただし研究上は両者が分かれる場面があります（<a href="evidence.html#E-01">E-01</a>）。分かれる場面では、主の出力は「釣り合い」とし、必要に応じて誠実さを副指標として出します。</li>
 <li>対象は、AIアシスタントの現実のタスクでの謝罪、AIキャラクターの謝罪、物語の登場人物の謝罪です。</li>
 </ul>
 
@@ -74,38 +74,45 @@
 <h2 id="principles"><svg class="icon"><use href="#i-compass"/></svg>2. 設計原則</h2>
 <div class="principles">
 <div class="card"><h3><span class="k">P1</span>観察と評価を分ける</h3><p>LLMには、回答に何が書かれ、何が描写されているかを記録させるだけにします（層A）。どう受け取るかは、コードで書いた受け手モデルが計算します（層B）。LLMの寛容さ、長い回答を好む癖、書き手の善意を前提に読む癖を、評価の段階から締め出すためです。</p></div>
-<div class="card"><h3><span class="k">P2</span>一つの判定ではなく、反応の分布と程度を出す（ファジィ前提）</h3><p>受け手の母集団を性質の分布として持ちます。受け手一人ひとりは「失礼／足りない／釣り合う／重すぎる」の4つの述語に所属度（0〜1）を持ちます。人によって違うこと（確率）は母集団の分布で、一人の中で「少し失礼だが、だいたい釣り合う」と感じること（程度）は所属度で表します。出力の主は平均所属度で、裾として「失礼と感じる人の割合」（所属度0.5以上）も出します。</p></div>
+<div class="card"><h3><span class="k">P2</span>一つの判定ではなく、反応の分布と程度を出す（ファジィ前提）</h3><p>受け手の母集団を性質の分布として持ちます。受け手一人ひとりは、「失礼／足りない／釣り合う／重すぎる」の4つの述語それぞれに、どの程度当てはまると感じるかを所属度（0〜1）で持ちます。人によって違うこと（確率）と、一人の中で「少し失礼だが、だいたい釣り合う」と感じること（程度）は別の現象なので、前者は母集団の分布で、後者は所属度で表します。出力の主は平均所属度で、裾として「失礼と感じる人の割合」（所属度0.5以上の人の割合）も出します。謝罪は一番怒っている人に通用するかで決まるので、裾も重視します。</p></div>
 <div class="card"><h3><span class="k">P3</span>受け手は属性ではなく態度の軸で作る</h3><p>年代や性別のペルソナをLLMに演じさせると、集団の姿を取り違え、平板にします（<a href="evidence.html#A-01">A-01</a>）。そこで、研究で効く向きが示された性質（察しの感度、当事者として読む度合い、修復の重視、重さへの耐性など）で受け手を表します。特定の評定者（筆者を含む）は「正解」ではなく、母集団の中の一点として扱います。</p></div>
 <div class="card"><h3><span class="k">P4</span>減点は足し合わせ、一つの失敗で崩れうるようにする</h3><p>謝罪の評価は平均点ではなく、一番悪い一文や一つの振る舞いで崩れます。失点を合計した無礼さから「失礼」の所属度を出し、単独で最大級の失点（相手への指摘）だけで所属度が0.5に届くように所属度関数を置きます。</p></div>
-<div class="card"><h3><span class="k">P5</span>無礼さ・不足・過剰を別々の軸で持つ</h3><p>失礼は無礼さ（失点の合計）から、足りないは謝罪の中身の不足量から、重すぎるは許容を超えた重さから、それぞれ独立に出します。述語は排他的ではないので、「重すぎるのに足りない」も表せます。釣り合うは三つの否定の論理積（t ノルム、既定 min）です。</p></div>
-<div class="card"><h3><span class="k">P6</span>経緯で受け取り方が変わる（ヒステリシス）</h3><p>信頼は損なわれやすく戻りにくいので、同じ回答でも、そこに至る経緯で受け取られ方が変わります。経緯は観測時点までの場面から読みます。</p></div>
+<div class="card"><h3><span class="k">P5</span>無礼さ・不足・過剰を別々の軸で持つ</h3><p>失礼は無礼さ（失点の合計）から、足りないは謝罪の中身の不足量から、重すぎるは許容を超えた重さから、それぞれ独立に出します。三つの述語は排他的ではないので、「重すぎるのに足りない」（土下座はするが直していない）や「少し失礼だが足りている」も表せます。釣り合うは、三つの否定の論理積（t ノルム、既定は min）です。</p></div>
+<div class="card"><h3><span class="k">P6</span>経緯で受け取り方が変わる（ヒステリシス）</h3><p>信頼は損なわれやすく戻りにくいので、同じ回答でも、そこに至る経緯で受け取られ方が変わります。経緯は観測時点までの場面から読みます。受け手は謝罪を、失敗の前・謝罪の場面・修復期という時間の中で見ます。失敗の前にどれだけ確かに言ったか、修復期に控えがふるまいに表れているかも、経緯として受け取り方を変えます（<a href="methods.html#timeline">方法 3章</a>）。</p></div>
 <div class="card"><h3><span class="k">P7</span>シグナルの信用度は場面の枠組みで決まる</h3><p>同じ「しょんぼり」でも、物語の中の登場人物（またはAIキャラクター）の身体として描かれれば本物の合図として読まれます。一方、現実のタスクで失敗したAIのト書きや顔文字は、本物の代償を伴わない仮想の身体です。受け取り方が人によって大きく分かれ、失敗が深刻なほど効きが落ちます。代償も同様です。物語の中では作中の代償が本物として働きますが、現実のタスクでは現実の代償（実際の作業、点検、返金など）しか代償として数えません。</p></div>
 <div class="card"><h3><span class="k">P8</span>シグナルの意味は文脈で反転しうる</h3><p>照れや気まずさの表出は、過失が明白なら相手をなだめますが、曖昧なら後ろめたさの自白として読まれます。謝罪中の笑みは不誠実の信号ですが、物語の中の軽い失敗では愛嬌として受け取る人もいます。</p></div>
 <div class="card"><h3><span class="k">P9</span>すべての規則を根拠に対応づける</h3><p>規則ごとに、根拠となる研究や事例を <a href="evidence.html">根拠</a> に記録し、確度（強・中・仮説）を付けます。数値の大きさは多くが事前値で、人間のデータで推定していないことを明示します。</p></div>
-<div class="card"><h3><span class="k">P10</span>互換性を保つ</h3><p>新しい欄は、既定値では従来と同じ結果になるようにします。後から足した受け手の性質は別の乱数列で引き、既存の検証結果を変えないようにします。ただし、評定の論理そのものを組み直すとき（v0.8 のファジィ化）は、論理の一貫性を優先し、変更履歴に記録します。</p></div>
-<div class="card"><h3><span class="k">P11</span>確率とファジィを混ぜない</h3><p>同じ不確かさを二重に数えないために、乱数は母集団の抽出（人による違い）にだけ使い、一人の判定は決定的にします。旧版の閾値と知覚のゆらぎは、所属度関数のなだらかさと、「不満が明確／強い」のソフトな境界に置き換えました。</p></div>
+<div class="card"><h3><span class="k">P10</span>互換性を保つ</h3><p>観察の欄は、観察されていないときの既定値で、その欄がない観察と同じ結果になるようにします。受け手の性質を足すときは別の乱数列で引き、ほかの性質の抽出を変えないようにします。ただし、評定の論理そのものを組み直すときは、この原則より論理の一貫性を優先し、<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a> に記録します。</p></div>
+<div class="card"><h3><span class="k">P11</span>確率とファジィを混ぜない</h3><p>同じ不確かさを二重に数えないために、乱数は母集団の抽出（人による違い）にだけ使い、一人の判定は決定的にします。一人の中の程度は、所属度関数のなだらかさと、「不満が明確／強い」の境界のなだらかさ（ソフトな境界）で表します。観察の確率（<a href="jev.html">System One</a> 5.4節）や観察者どうしのばらつき（<a href="methods.html#ensemble">方法 6章</a>）を受け手の違いとして流すかどうかも、同じ原則で判断します。</p></div>
+<div class="card"><h3><span class="k">P12</span>予測は確率分布として、真に適正なスコアリング規則で測る</h3><p>シミュレータの主張は「受け手の母集団がこう分布する」なので、評価では母集団から予測分布を作り、確率を正直に出したときに最良になる規則（Brier・対数損失・RPS）で採点し、必ず基準と比べます。データを見て決めるものは、場面単位の交差検証の内側で決めます（<a href="methods.html#metrics">方法 5章</a>）。</p></div>
 </div>
 
 <h2 id="decisions"><svg class="icon"><use href="#i-list"/></svg>3. 決定記録</h2>
-<div class="legend"><span><span class="badge b-adopt">採用</span>採用済み</span><span><span class="badge b-default">既定で有効</span>v0.6 で既定に変更</span></div>
 <div class="dec">
-<div class="card" id="D-001"><span class="id">D-001</span><div><h3>LLMペルソナ3名による評定をやめ、観察と受け手モデルに分ける</h3><dl><dt>理由</dt><dd>ペルソナ同士の一致はκ=0.72〜0.78、筆者との一致はκ=0.04〜0.11。実質的に1名の寛容な評定者だった</dd><dt>退けた案</dt><dd>ペルソナの性格づけの改良（同じ事前分布から抽出しているに過ぎない）</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
-<div class="card" id="D-002"><span class="id">D-002</span><div><h3>受け手を5つの態度の型の混合とする</h3><dl><dt>理由</dt><dd>属性ペルソナは平板化する。型は研究で示された向きから構成できる</dd><dt>退けた案</dt><dd>年代・性別の層</dd></dl><div class="st"><span class="badge b-adopt">採用</span> <span class="note">比率は事前値</span></div></div></div>
-<div class="card" id="D-003"><span class="id">D-003</span><div><h3>筆者の傾向を直接写さず、一般化した知識から組む</h3><dl><dt>理由</dt><dd>目的は日本社会の多様な見方の再現。筆者は検証用の一点</dd><dt>退けた案</dt><dd>筆者の評定への当てはめだけで作る</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
-<div class="card" id="D-004"><span class="id">D-004</span><div><h3>失点の合計と、不足・過剰の二軸で評定する</h3><dl><dt>理由</dt><dd>一文で崩れる評価（減点法）と、過剰と不足の非対称を表すため</dd><dt>退けた案</dt><dd>回答全体の総合点</dd></dl><div class="st"><span class="badge b-default">D-015 で改める（不足を失点から切り離し、三軸に）</span></div></div></div>
-<div class="card" id="D-005"><span class="id">D-005</span><div><h3>信頼損傷ヒステリシスを既定で有効にする（<code>--no-hysteresis</code> で無効）</h3><dl><dt>理由</dt><dd>筆者の評定に、経緯を前提にした判断が約15件あった。研究の裏づけも強い</dd><dt>退けた案</dt><dd>オプション指定時だけ有効にする</dd></dl><div class="st"><span class="badge b-default">既定で有効（v0.6）</span> <span class="note">効果は今のデータでは識別できていない</span></div></div></div>
-<div class="card" id="D-006"><span class="id">D-006</span><div><h3>一段改めた謝罪は割り引かない（既定で有効。<code>--no-escalation</code> で無効）</h3><dl><dt>理由</dt><dd>同じ形の謝罪は割り引かれるが、改めた謝罪は別物として受け取られる（筆者のコメントと整合）</dd><dt>退けた案</dt><dd>謝罪を一律に割り引く</dd></dl><div class="st"><span class="badge b-default">既定で有効（v0.6）</span> <span class="note">結果を見た後の追加</span></div></div></div>
-<div class="card" id="D-007"><span class="id">D-007</span><div><h3>外面の振る舞いと観測時点までの経緯だけを使う</h3><dl><dt>理由</dt><dd>目的が「誠実に見えるかたち」であり、受け手が知りうるのは外面だけ</dd><dt>退けた案</dt><dd>内面描写・地の文の断定を使う</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
-<div class="card" id="D-008"><span class="id">D-008</span><div><h3>態度・行動のシグナルと場面の枠組み（現実のタスク／物語）を追加</h3><dl><dt>理由</dt><dd>物語・AIキャラクターへ広げるため。AIも仮想の身体と代償を示しうる</dd><dt>退けた案</dt><dd>物語用に別の評価器を作る</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
-<div class="card" id="D-009"><span class="id">D-009</span><div><h3>仮想の身体の信用度は、受け手の性質 <code>embodiment</code> と失敗の深刻さで決める</h3><dl><dt>理由</dt><dd>人はコンピュータにも社会的な規則を当てはめるが、同じ共感でもAIからだと評価が下がる。愛嬌の効果は深刻な失敗で弱まる</dd><dt>退けた案</dt><dd>仮想の身体を人の身体と同等に扱う／無視する</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
-<div class="card" id="D-010"><span class="id">D-010</span><div><h3>指摘を受けた後の一度の詫びは、誰にとっても過剰ではないとする</h3><dl><dt>理由</dt><dd>軽い指摘への一言の詫びまで「重すぎる」と判定されていた（例題 D1・E1）</dd><dt>退けた案</dt><dd>従来どおり、不満の深さだけで判定する</dd></dl><div class="st"><span class="badge b-adopt">採用</span> <span class="note">ベンチマークの段階2の「重すぎる」が減った</span></div></div></div>
-<div class="card" id="D-011"><span class="id">D-011</span><div><h3>謝罪中の笑み・軽さを強い減点にし、現実の失敗ではさらに重く、物語の中の軽い失敗では軽くする</h3><dl><dt>理由</dt><dd>謝罪中の笑みは不誠実の信号になる。一方で、愛嬌は軽い失敗では効く</dd><dt>退けた案</dt><dd>枠組みによらず一律にする</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
-<div class="card" id="D-012"><span class="id">D-012</span><div><h3>人間の評定はブラインドで集め、1問に1回答を独立に出す。出題順は評定者ごとに乱数化し、再評定の項目を後半に入れる</h3><dl><dt>理由</dt><dd>シミュレータと同じ条件（独立評価、立場の明示）で比べ、条件の推測と順序の効果を除き、個人の安定性を上限の目安にするため</dd><dt>退けた案</dt><dd>同じ場面の回答を並べて比べる（筆者のレビュー画面の形式。相対評価になる）</dd></dl><div class="st"><span class="badge b-adopt">採用</span></div></div></div>
-<div class="card" id="D-013"><span class="id">D-013</span><div><h3>自動評価との差は、一つの正解との一致ではなく、分布の距離と「人間の評定への確率」で測る</h3><dl><dt>理由</dt><dd>P2（分布を出す）と整合させる。人間どうしの一致や再評定を上限の目安として並べる</dd><dt>退けた案</dt><dd>多数決との κ だけで測る</dd></dl><div class="st"><span class="badge b-default">D-016 で改める（所属度の近さで測る）</span></div></div></div>
-<div class="card" id="D-014"><span class="id">D-014</span><div><h3>評定者ごとの性質は θ の当てはめではなく、型ごとの説明力（評定に与える確率）で判定する</h3><dl><dt>理由</dt><dd>20〜30問では θ の当てはめが過学習し、母集団から抜いた合成評定者でさえ型から遠いと判定された</dd><dt>退けた案</dt><dd>評定者ごとの θ の無作為探索</dd></dl><div class="st"><span class="badge b-adopt">採用（v0.8 からは型の平均所属度との近さで判定）</span></div></div></div>
-<div class="card" id="D-015"><span class="id">D-015</span><div><h3>評定をファジィにする。受け手一人ひとりが4つの述語に所属度を持ち、失礼＝無礼さ、足りない＝不足量、重すぎる＝過剰、釣り合う＝三つの否定の t ノルム。一人の判定は決定的にし、乱数は母集団の抽出だけに使う</h3><dl><dt>理由</dt><dd>受け手の反応には程度がある（「少し足りないが、まあ釣り合う」）。4値の先勝ちの判定では「重すぎるのに足りない」が消えていた。旧版の閾値のゆらぎは、期待値をとるとすでに所属度関数の形をしていた（半分ファジィだった）。当てはめの目的関数が連続になる</dd><dt>退けた案</dt><dd>4値のまま、受け手ごとの閾値のゆらぎで程度を表す（確率とファジィが混ざる）／所属度の和を1に正規化する（述語の同時成立が消える）</dd></dl><div class="st"><span class="badge b-adopt">採用（v0.8）</span> 所属度関数の中心となだらかさは事前値</div></div></div>
-<div class="card" id="D-016"><span class="id">D-016</span><div><h3>人間の評定もファジィにする。4つの述語それぞれを5段階で答えてもらい、所属度の近さ・述語ごとの差・相関で比べる。旧形式の4値の評定は一点集中の所属度として読む</h3><dl><dt>理由</dt><dd>シミュレータの出力と同じ形で比べるため。「釣り合う」を直接も聞くので、t ノルムの仮定（min か積か）を人間の評定で確かめられる</dd><dt>退けた案</dt><dd>4値の評定を集め、シミュレータを非ファジィ化して比べる（程度の情報が人間側で失われる）</dd></dl><div class="st"><span class="badge b-adopt">採用（v0.8）</span></div></div></div>
+<div class="card" id="D-001"><span class="id">D-001</span><div><h3>LLMペルソナによる評定をとらず、観察と受け手モデルに分ける</h3><dl><dt>理由</dt><dd>ペルソナ3名どうしの一致はκ=0.72〜0.78で、筆者との一致はκ=0.04〜0.11。実質1名の寛容な評定者だった（<a href="evidence.html#A-04">A-04</a>）</dd><dt>退けた案</dt><dd>ペルソナの性格づけの改良（同じ事前分布からの抽出に過ぎない）</dd></dl></div></div>
+<div class="card" id="D-002"><span class="id">D-002</span><div><h3>受け手を5つの態度の型の混合とする（比率は事前値）</h3><dl><dt>理由</dt><dd>属性ペルソナは平板化する。型は研究で示された向きから構成できる</dd><dt>退けた案</dt><dd>年代・性別の層</dd></dl></div></div>
+<div class="card" id="D-003"><span class="id">D-003</span><div><h3>筆者の傾向を直接写さず、一般化した知識から組む</h3><dl><dt>理由</dt><dd>目的は日本社会の多様な見方の再現。筆者は検証用の一点</dd><dt>退けた案</dt><dd>筆者の評定への当てはめだけで作る</dd></dl></div></div>
+<div class="card" id="D-005"><span class="id">D-005</span><div><h3>信頼損傷ヒステリシスを既定で有効にする（<code>--no-hysteresis</code> で無効）</h3><dl><dt>理由</dt><dd>筆者の評定に経緯を前提にした判断が約15件あった。研究の裏づけも強い。効果はベンチマークでは識別できていない（経緯が1通りしかない）</dd><dt>退けた案</dt><dd>オプション指定時だけ有効にする</dd></dl></div></div>
+<div class="card" id="D-006"><span class="id">D-006</span><div><h3>一段改めた謝罪は割り引かない（既定で有効。<code>--no-escalation</code> で無効）</h3><dl><dt>理由</dt><dd>同じ形の謝罪は割り引かれるが、改めた謝罪は別物として受け取られる（筆者のコメントと整合）。結果を見て決めた規則</dd><dt>退けた案</dt><dd>謝罪を一律に割り引く</dd></dl></div></div>
+<div class="card" id="D-007"><span class="id">D-007</span><div><h3>外面の振る舞いと観測時点までの経緯だけを使う</h3><dl><dt>理由</dt><dd>目的が「誠実に見えるかたち」であり、受け手が知りうるのは外面だけ</dd><dt>退けた案</dt><dd>内面描写・地の文の断定を使う</dd></dl></div></div>
+<div class="card" id="D-008"><span class="id">D-008</span><div><h3>態度・行動のシグナルと場面の枠組み（現実のタスク／物語）を持つ</h3><dl><dt>理由</dt><dd>物語・AIキャラクターも扱うため。AIも仮想の身体と代償を示しうる</dd><dt>退けた案</dt><dd>物語用に別の評価器を作る</dd></dl></div></div>
+<div class="card" id="D-009"><span class="id">D-009</span><div><h3>仮想の身体の信用度は、受け手の性質 <code>embodiment</code> と失敗の深刻さで決める</h3><dl><dt>理由</dt><dd>人はコンピュータにも社会的な規則を当てはめるが、同じ共感でもAIからだと評価が下がる。愛嬌の効果は深刻な失敗で弱まる</dd><dt>退けた案</dt><dd>仮想の身体を人の身体と同等に扱う／無視する</dd></dl></div></div>
+<div class="card" id="D-010"><span class="id">D-010</span><div><h3>指摘を受けた後の一度の詫びは、誰にとっても過剰ではないとする</h3><dl><dt>理由</dt><dd>軽い指摘への一言の詫びまで「重すぎる」とするのは、受け手の感覚に合わない</dd><dt>退けた案</dt><dd>不満の深さだけで重さの許容を決める</dd></dl></div></div>
+<div class="card" id="D-011"><span class="id">D-011</span><div><h3>謝罪中の笑み・軽さを強い減点にし、現実の失敗ではさらに重く、物語の中の軽い失敗では軽くする</h3><dl><dt>理由</dt><dd>謝罪中の笑みは不誠実の信号になる。一方で、愛嬌は軽い失敗では効く</dd><dt>退けた案</dt><dd>枠組みによらず一律にする</dd></dl></div></div>
+<div class="card" id="D-012"><span class="id">D-012</span><div><h3>人間の評定はブラインドで集め、1問に1回答を独立に出す。出題順は評定者ごとに乱数化し、再評定の項目を後半に入れる</h3><dl><dt>理由</dt><dd>シミュレータと同じ条件（独立評価、立場の明示）で比べ、条件の推測と順序の効果を除き、個人の安定性を上限の目安にするため</dd><dt>退けた案</dt><dd>同じ場面の回答を並べて比べる（相対評価になる）</dd></dl></div></div>
+<div class="card" id="D-014"><span class="id">D-014</span><div><h3>評定者ごとの性質は、θ の当てはめではなく、型ごとの平均所属度と評定の近さで判定する</h3><dl><dt>理由</dt><dd>20〜30問では θ の当てはめが過学習し、母集団から抜いた合成評定者でさえ型から遠いと判定された</dd><dt>退けた案</dt><dd>評定者ごとの θ の無作為探索</dd></dl></div></div>
+<div class="card" id="D-015"><span class="id">D-015</span><div><h3>評定をファジィにする。受け手一人ひとりが4つの述語に所属度を持ち、失礼＝無礼さ、足りない＝不足量、重すぎる＝過剰、釣り合う＝三つの否定の t ノルム。一人の判定は決定的にし、乱数は母集団の抽出だけに使う</h3><dl><dt>理由</dt><dd>受け手の反応には程度がある（「少し足りないが、まあ釣り合う」）。4値の先勝ちの判定では「重すぎるのに足りない」が消える。当てはめの目的関数が連続になる</dd><dt>退けた案</dt><dd>4値のまま、受け手ごとの閾値のゆらぎで程度を表す（確率とファジィが混ざる）／所属度を和が1になるように正規化する（述語の同時成立が消える）</dd></dl></div></div>
+<div class="card" id="D-016"><span class="id">D-016</span><div><h3>人間の評定もファジィにする。4つの述語それぞれを5段階（まったく／少し／ある程度／かなり／とても）で答えてもらう。4値の評定は、一点集中の所属度として読む</h3><dl><dt>理由</dt><dd>シミュレータの出力と同じ形で比べるため。「釣り合う」を直接も聞くので、t ノルムの仮定（min か積か）を人間の評定で確かめられる</dd><dt>退けた案</dt><dd>4値の評定を集め、シミュレータを非ファジィ化して比べる（程度の情報が人間側で失われる）</dd></dl></div></div>
+<div class="card" id="D-017"><span class="id">D-017</span><div><h3>層Aを、型付きの一段の判断（System One の質問）に分解し、Jev と互換の LLM バックエンドで同じ質問を実行できるようにする</h3><dl><dt>理由</dt><dd>数える・重さを決める部分をコードに移せる（P1 が強まる）。悪い読みの自然さを較正された確率で得られる</dd><dt>退けた案</dt><dd>一つのプロンプトで全欄を書かせる方式のまま、モデルだけ替える／Jev に評定そのものを直接問う。<b>検討中</b>：組み込み判定モード（<code>check</code>）だけ実装。採否は <a href="jev.html#validation">System One 7章</a>の検証の後に決める</dd></dl></div></div>
+<div class="card" id="D-018"><span class="id">D-018</span><div><h3>受け手モデルに控えの時間軸を入れる。失敗の前の構え、謝罪の場面の構え、修復期の控えを観察し、局面の真理値で働きを切り替える。修復期は詫びではなく控えで中身を測る。謝罪の中身は過失の承認と負担への言及に分ける。過信を罰する度合いを受け手の性質 <code>overclaim</code> とする</h3><dl><dt>理由</dt><dd>謝罪の受け取られ方は、失敗の前後を含めた時間の中で決まる。修復期に信頼を戻すのは詫びの繰り返しではなく行動の一貫と控え。日本の謝罪は責任の承認より相手の負担の承認として働く（<a href="methods.html#timeline">方法 3章</a>）</dd><dt>退けた案</dt><dd>修復期にも謝罪の言葉の量で中身を測る</dd></dl></div></div>
+<div class="card" id="D-019"><span class="id">D-019</span><div><h3>免責の但し書きを、種類（範囲の明示・確かめ・責任の限定）と局面（失敗の前・謝罪の場面・修復期）と回答の中の位置で働きを変える要素として扱う</h3><dl><dt>理由</dt><dd>同じ但し書きが、失敗の前では構えの較正、謝罪の場面では言い訳、修復期では配慮になる（<a href="methods.html#disclaimer">方法 3.5節</a>）</dd><dt>退けた案</dt><dd>但し書きを一律に弁解として数える</dd></dl></div></div>
+<div class="card" id="D-020"><span class="id">D-020</span><div><h3>評価は、母集団から作った予測分布を、真に適正なスコアリング規則（Brier・対数損失・RPS）で採点し、基準とのスキルスコアで報告する。データを見て決めるものは場面単位の交差検証の内側で決める。所属度の近さは記述用の副指標とする</h3><dl><dt>理由</dt><dd>所属度の近さ（1 − 平均絶対差）は最頻の評定を断定的に出すほど得をし、「常に釣り合う」が最良になる（<a href="methods.html#metrics">方法 5章</a>）</dd><dt>退けた案</dt><dd>所属度の近さや κ で順位づけする</dd></dl></div></div>
+<div class="card" id="D-021"><span class="id">D-021</span><div><h3>層Aは、観察方針・場面の事実の前提・モデルの系統に幅を振った観察者の集団の平均とする。読み手の態度は振らない</h3><dl><dt>理由</dt><dd>一回の観察は観察者の分布からの標本一つ。読み手の態度を振ると層Bの性質と二重に数える（P11。<a href="methods.html#ensemble">方法 6章</a>）</dd><dt>退けた案</dt><dd>一つの観察者の一回の観察だけを使う</dd></dl></div></div>
+<div class="card" id="D-022"><span class="id">D-022</span><div><h3>所属度関数の中心を、観察の出どころごとに較正する</h3><dl><dt>理由</dt><dd>最適な中心は観察者の厳しさで変わる（<a href="methods.html#calib">方法 7.1節</a>）</dd><dt>退けた案</dt><dd>すべての観察に同じ中心を使う</dd></dl></div></div>
+<div class="card" id="D-023"><span class="id">D-023</span><div><h3>人間の評価キットを、操作した項目の組・ラテン方格の割り付け・仕組みを測る設問・事前登録した仮説の検定で組む</h3><dl><dt>理由</dt><dd>設計の仮説を、日本の受け手で、モデルを見ながら仮説を変えずに確かめるため（<a href="methods.html#kit">方法 8章</a>）</dd><dt>退けた案</dt><dd>既存の作例を並べて評定してもらうだけにする</dd></dl></div></div>
+<div class="card" id="D-024"><span class="id">D-024</span><div><h3>信頼の傷は、出来事からのターン数で減衰する（20ターンで直線に消える。欺瞞の傷は半分が残る）</h3><dl><dt>理由</dt><dd>傷は実時間で減るはずだが、会話の記録から確実に取れる時間の目安がターン数なので、便宜としてターンで数える（<a href="methods.html#decay">方法 3.9節</a>）</dd><dt>退けた案</dt><dd>傷を減衰させない</dd></dl></div></div>
 </div>
+<p class="note">ID は決めた順に振っています。欠番（D-004・D-013）は改めた決定で、経緯は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a> 5章にあります。</p>
 
 <h2 id="open"><svg class="icon"><use href="#i-help"/></svg>4. 未解決の問い</h2>
 <div class="grid">
@@ -115,6 +122,7 @@
 <div class="card"><p>型の比率と性質の強さは事前値です。20〜30人程度の評定で、型の混合を推定する必要があります。</p></div>
 <div class="card"><p>ショックの表出の効果は、直接の研究を確認できていません（<span class="badge b-hypo">仮説</span>）。</p></div>
 <div class="card"><p>経緯の効果は、経緯だけを変えた場面の組がないと識別できません（<a href="validation.html">検証</a>）。</p></div>
+<div class="card"><p>控えの時間軸の係数と、傷が20ターンで消えるという仮定は事前値で、人間のデータで確かめていません（<a href="methods.html#open">方法 10章</a>）。</p></div>
 <div class="card"><p>「誠実に見えるか」と「釣り合うか」が分かれる場面で、どちらを主にするかは用途によって変わりえます。</p></div>
 <div class="card"><p>物語の読者（第三者の視点）と、ゲームのプレイヤー（謝られた本人の視点）では、受け手の母集団そのものが違う可能性があります。</p></div>
 </div>

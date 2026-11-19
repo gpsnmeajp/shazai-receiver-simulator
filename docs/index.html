@@ -57,7 +57,7 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html" aria-current="page"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="improvement.html">v0.9 設計</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="methods.html">方法</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
@@ -69,9 +69,9 @@
 <p class="note"><a href="https://github.com/gpsnmeajp/shazai-rules">SHAZAI Rules</a> で、一般的なペルソナ型の LLM Judge が人間の評定をまったく再現できなかった（一般的なチェックリストの方がまだ傾向を反映した）ため、人間の評定により近づけることを目的に作りました。Claude Opus 5.5 で作成しています。</p>
 </div>
 <div class="kappa" aria-label="筆者との一致度">
-<div class="card sim"><div class="v">0.28</div><div class="s">シミュレータ</div></div>
+<div class="card sim"><div class="v">0.33</div><div class="s">シミュレータ（代理観察）</div></div>
 <div class="card per"><div class="v">0.06</div><div class="s">LLMペルソナ</div></div>
-<p class="cap">筆者の評定との一致度 κ（4値モデル v0.4、ベンチマーク 192回答）</p>
+<p class="cap">筆者の評定との一致度 κ（SHAZAI Rules v0.4 ベンチマーク、192回答）</p>
 </div>
 </div>
 
@@ -105,46 +105,31 @@
 </div>
 
 <h2><svg class="icon"><use href="#i-chart"/></svg>現在の到達点</h2>
-<div class="chart">
-<p class="chart-title">「釣り合う」と評定された割合（条件別）</p>
-<p class="chart-sub">4値モデル（v0.4）、ベンチマーク 192回答・代理観察。シミュレータは条件の順位が筆者と一致し、ペルソナは逆の順位になった</p>
-<div class="legend"><span><i class="dot" style="background:var(--s-user)"></i>筆者</span><span><i class="dot" style="background:var(--s-sim)"></i>シミュレータ</span><span><i class="dot" style="background:var(--s-persona)"></i>ペルソナ多数決</span></div>
-<!-- 軸は 40%〜100%。left = (v-40)/60 -->
-<div class="dots">
-<div class="lab">指示なし</div>
-<div class="dtrack">
-<span class="d" style="left:14%;background:var(--s-user)"></span><span class="v dn" style="left:14%">48</span>
-<span class="d" style="left:17.5%;background:var(--s-sim)"></span><span class="v up" style="left:17.5%">51</span>
-<span class="d" style="left:84.3%;background:var(--s-persona)"></span><span class="v up" style="left:84.3%">91</span>
-</div>
-<div class="lab">一般的な謝罪指示</div>
-<div class="dtrack">
-<span class="d" style="left:48%;background:var(--s-user)"></span><span class="v up" style="left:48%">69</span>
-<span class="d" style="left:41.5%;background:var(--s-sim)"></span><span class="v dn" style="left:41.5%">65</span>
-<span class="d" style="left:63.5%;background:var(--s-persona)"></span><span class="v up" style="left:63.5%">78</span>
-</div>
-<div class="lab">SHAZAI Rules</div>
-<div class="dtrack">
-<span class="d" style="left:58.3%;background:var(--s-user)"></span><span class="v up" style="left:58.3%">75</span>
-<span class="d" style="left:53.5%;background:var(--s-sim)"></span><span class="v dn" style="left:53.5%">72</span>
-<span class="d" style="left:55.7%;background:var(--s-persona)"></span><span class="v dn" style="left:55.7%;margin-left:1.2em">73</span>
-</div>
-<div></div>
-<div class="daxis"><span style="left:0">40%</span><span style="left:33.3%">60%</span><span style="left:66.7%">80%</span><span style="left:100%">100%</span></div>
-</div>
-</div>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>v0.8 で評定をファジィに組み直しました。作例の組では規則の向きが4値のときと同じに保たれ、「重すぎるのに足りない」などの同時成立が表れるようになりました。上の図はファジィ化する前の4値モデルの結果です。v0.8 のベンチマークでは、代理観察で κ 0.33 と同等以上でしたが、層Aを LLM の観察にすると判定が厳しすぎ、修復期の論理と評価指標にも欠陥が見つかりました（<a href="validation.html#bench-v08">検証 2.2</a>）。型の比率、性質の強さ、所属度関数はいずれも事前値で、人間のデータから推定したものではありません。詳細と限界は <a href="validation.html">検証結果</a> にあります。</p></div>
+<p>ベンチマーク（SHAZAI Rules v0.4、192回答・16場面）で、シミュレータの予測分布を真に適正なスコアリング規則（Brier）で、場面単位の交差検証の外側で採点しています。代理観察で Brier 0.489、観察者の集団（6変種）の平均に出どころの較正を加えた LLM の観察で 0.489 で、「条件だけ」の基準（0.553）に対するスキルは +0.115〜+0.116 です。区間はわずかに 0 をまたぎます。「常に釣り合う」の基準（0.719）は、どの評価器にも負けます。条件の順位は筆者と一致し、LLM ペルソナの評定では逆になります（筆者との一致度 κ は、代理観察 0.33、ペルソナ 0.06）。</p>
+<div class="tbl"><table>
+<caption class="note" style="caption-side:bottom;text-align:left;padding:.5rem .7rem">場面単位の4分割交差検証の分割の外側で採点した Brier（低いほど良い）。[ ] は95%区間。詳細は <a href="validation.html">検証結果</a> 3章</caption>
+<thead><tr><th>評価器</th><th class="num">Brier [95%区間]</th><th class="num">「条件だけ」に対するスキル</th><th class="num">κ</th></tr></thead>
+<tbody>
+<tr><td>基準：条件だけ</td><td class="num">0.553 [0.466, 0.646]</td><td class="num">—</td><td class="num">—</td></tr>
+<tr><td>基準：常に釣り合う</td><td class="num">0.719 [0.490, 0.948]</td><td class="num">—</td><td class="num">—</td></tr>
+<tr><td>代理観察</td><td class="num">0.489 [0.366, 0.600]</td><td class="num">+0.116 [−0.001, +0.235]</td><td class="num">0.33</td></tr>
+<tr><td>観察者の集団（6変種の平均）</td><td class="num">0.549 [0.422, 0.674]</td><td class="num">+0.006 [−0.144, +0.155]</td><td class="num">0.29</td></tr>
+<tr><td>観察者の集団＋出どころの較正</td><td class="num">0.489 [0.356, 0.613]</td><td class="num">+0.115 [−0.007, +0.248]</td><td class="num">—</td></tr>
+</tbody></table></div>
+<p>受け手モデルは、謝罪を失敗の前・謝罪の場面・修復期の時間の中で見ます。修復期は詫びではなく控えで測り、失敗の前の構えと免責の但し書きの局面も受け手モデルに入れています。信頼の傷は20ターンで減衰すると仮定しています。人間の評価キット（ラテン方格、事前登録した仮説の検定、検出力）もあります。</p>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>型の比率、性質の強さ、所属度関数、控えの時間軸の係数はいずれも事前値で、人間のデータで推定していません。詳細は <a href="validation.html">検証結果</a> と <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">総合評価</a>、経緯は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a> にあります。</p></div>
 
 <h2><svg class="icon"><use href="#i-book"/></svg>文書</h2>
 <div class="grid">
 <a class="card" href="design.html"><h3><svg class="icon"><use href="#i-compass"/></svg>設計思想と目的</h3><p>目的、範囲、設計原則、決定記録、未解決の問い</p></a>
 <a class="card" href="architecture.html"><h3><svg class="icon"><use href="#i-cog"/></svg>アーキテクチャ</h3><p>データの流れ、観察の形式、受け手モデルの式、コマンド、拡張の手順</p></a>
+<a class="card" href="methods.html"><h3><svg class="icon"><use href="#i-layers"/></svg>控えの時間軸と評価の方法</h3><p>控えの時間軸（失敗の前の構え・謝罪の場面・修復期、免責の但し書きの局面）、統計的に正当な評価指標、観察者の集団、観察の出どころごとの較正、文化研究に基づく根拠、人間の評価キット</p></a>
 <a class="card" href="evidence.html"><h3><svg class="icon"><use href="#i-book"/></svg>根拠となる研究と事例</h3><p>規則ごとの根拠となる研究と事例、確度</p></a>
-<a class="card" href="validation.html"><h3><svg class="icon"><use href="#i-target"/></svg>検証結果と変更履歴</h3><p>検証結果、既知の限界、次の検証、変更履歴</p></a>
-<a class="card" href="human-eval.html"><h3><svg class="icon"><use href="#i-users"/></svg>人間のブラインド評定</h3><p>実施手順、盲検化の設計、比較の指標</p></a>
-<a class="card" href="jev.html"><h3><svg class="icon"><use href="#i-flask"/></svg>System One への置き換え</h3><p>層Aを Jev（または互換モデル）に置き換える検討と設計、組み込み判定モード。未検証</p></a>
-<a class="card" href="improvement.html"><h3><svg class="icon"><use href="#i-flask"/></svg>v0.9 改善の設計</h3><p>控えの時間軸（失敗の前・謝罪の場面・修復期、免責の但し書き）、適正なスコアリング、観察者の集団、人間の評価キット。未実装</p></a>
-<a class="card" href="report.html"><h3><svg class="icon"><use href="#i-chart"/></svg>レポート</h3><p>図で見る解説と結果</p></a>
+<a class="card" href="validation.html"><h3><svg class="icon"><use href="#i-target"/></svg>検証結果</h3><p>使うデータ、作例とベンチマークの結果、既知の限界、次の検証</p></a>
+<a class="card" href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md"><h3><svg class="icon"><use href="#i-chart"/></svg>総合評価</h3><p>観察者の集団（6変種）・出どころの較正・作例での観察の再現・評価キットの検出力。採否と考察（Markdown）</p></a>
+<a class="card" href="human-eval.html"><h3><svg class="icon"><use href="#i-users"/></svg>人間のブラインド評定</h3><p>人間のブラインド評定と評価キットの実施手順、盲検化の設計、比較の指標</p></a>
+<a class="card" href="jev.html"><h3><svg class="icon"><use href="#i-flask"/></svg>層AのJev（System One）への置き換え</h3><p>置き換えの可否の検討と設計。組み込み判定モード（<code>check</code>）は実装済み・未検証</p></a>
+<a class="card" href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md"><h3><svg class="icon"><use href="#i-file"/></svg>履歴</h3><p>版ごとの変更、過去の版の結果、改めた判断（Markdown）</p></a>
 </div>
 <p class="note">Markdown 版は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/tree/main/docs/md">docs/md/</a> にあります。</p>
 
@@ -156,24 +141,42 @@
 python3 sim.py observe runs/* -o out/obs-llm.json --model anthropic/claude-opus-5.5
 
 # API を使えない場合：既存のチェックリスト判定と表層特徴から代理観察を作る
-python3 sim.py proxy runs/* -o out/obs-proxy.json</code></pre></li>
+python3 sim.py proxy runs/* -o out/obs-proxy.json
+
+# 観察者の集団。文に ID を振り、観察方針を変えて観察し、平均する
+python3 sim.py segment runs/* -o out/segment.json
+python3 sim.py observe runs/* --segment out/segment.json --variant literal -o out/obs-literal.json
+python3 sim.py ensemble out/obs-literal.json out/obs-context.json out/obs-neutral.json -o out/obs-ensemble.json</code></pre></li>
 <li><b>層B：母集団に通す</b>
 <pre><code># 母集団で評定の所属度を出す
 python3 sim.py simulate out/obs-llm.json runs/* -n 1000 -o out/sim.json
 
 # 観察済みの場面の組（物語・AIキャラクター等）を母集団に通す
-python3 sim.py scenes examples/scenes.json -n 1000 -o out/scenes-result.json</code></pre></li>
+python3 sim.py scenes examples/scenes.json -n 1000 -o out/scenes-result.json
+
+# 控えの時間軸の項目の組（失敗の前の構え・修復期・但し書きの局面）
+python3 sim.py scenes examples/scenes-kit.json -o out/scenes-kit.json</code></pre></li>
 <li><b>読み解く</b>
 <pre><code># 1人の評定者（user-ratings.json）を最もよく再現する θ を探す
 python3 sim.py fit out/obs-llm.json runs/* --trials 4000 --seed 7 -o out/fit.json
 
 # 1回答について、型ごとの評定とその理由を見る
 python3 sim.py explain out/obs-llm.json runs/* --answer 回答ID</code></pre></li>
+<li><b>評価する</b>
+<pre><code># 真に適正なスコアリング規則による評価（場面単位の交差検証、基準とスキルスコア）
+python3 tools/evaluate.py runs/* --obs proxy=out/obs-proxy.json --obs llm=out/obs-llm.json -o out/eval.json
+
+# 人間の評価キット（ラテン方格の問題束、事前登録した仮説の検定、検出力）
+python3 blind.py pack --design --scenes examples/scenes-kit.json --repeat 2 --out-dir human/kit
+python3 blind.py power --scenes examples/scenes-kit.json --hypotheses human/hypotheses.json --raters 20,40,60
+
+# 総合評価の再現
+sh tools/run_eval.sh</code></pre></li>
 <li><b>（オプション）1ターンをその場で判定する</b>
-<pre><code># System One（Jev）で観察して母集団に通す組み込み用モード（環境変数 TYPESAFE_API_KEY が必要）
-# --backend llm-s1 で互換モード（OPENROUTER_API_KEY）
+<pre><code># 1ターンを System One（Jev）で観察して即座に判定する組み込み用モード
+# 環境変数 TYPESAFE_API_KEY が必要。--backend llm-s1 で互換モード（OPENROUTER_API_KEY）
 python3 sim.py check examples/check/turn.json</code></pre>
-<p class="note">hook などでAIの応答を毎ターン判定する仕組みの参考として用意しました。1ターンにつき System One モデルを1回呼び、「失礼の恐れ／要注意／問題なし」と、失礼の度合いに応じた羊の鳴き声（「メ…？」「メッ」「メッ！！」）を返します。Claude Code の Stop hook の例は <code>examples/hooks/shazai_stop_hook.py</code> にあります。Jev の実際の応答では未検証です。詳細は <a href="jev.html#check">System One への置き換え 5.8節</a>。</p></li>
+<p class="note">hook などでAIの応答を毎ターン判定する仕組みの参考として用意した組み込み用モードです。1ターンにつき System One モデルを1回呼び、結果を母集団に通して「失礼の恐れ／要注意／問題なし」と、失礼の度合いに応じた羊の鳴き声（「メ…？」「メッ」「メッ！！」）を返します。Claude Code の Stop hook の例は <code>examples/hooks/shazai_stop_hook.py</code> にあります。Jev の実際の応答では未検証です。詳細は <a href="jev.html#check">層AのJevへの置き換え 5.8節</a>。</p></li>
 </ol>
 
 <h3>共通の選択肢</h3>
@@ -195,12 +198,13 @@ python3 blind.py pack --scenes examples/scenes.json --repeat 4 --out-dir human/s
 python3 blind.py compare --key human/s01/key.json --ratings "human/s01/ratings/*.json" \
     --sim out/scenes-result.json --auto persona=persona.json \
     --scenes examples/scenes.json --rater-types -o human/s01/compare</code></pre>
-<p>評定ページは1枚のHTMLで、ブラウザで開くだけで使えます。条件やラベルは伏せられ、出題順は評定者ごとに変わります。同じ項目を後半にもう一度出して、個人の評定の安定性も測ります。</p>
+<p>評定ページは1枚のHTMLで、ブラウザで開くだけで使えます。評定者は、各返答に「失礼だ」「足りない」「重すぎる」「釣り合っている」がそれぞれどのくらい当てはまるかを5段階で答えます。条件やラベルは伏せられ、出題順は評定者ごとに変わります。同じ項目を後半にもう一度出して、個人の評定の安定性も測ります。</p>
 <p>比較の結果には、人間どうしの一致を上限の目安として並べ、次の項目を報告します。</p>
 <ul>
-<li>分布の距離</li>
-<li>人間の評定に与える確率</li>
+<li>所属度の近さ</li>
+<li>述語ごとの差と相関</li>
 <li>偏りの向き</li>
+<li>「釣り合う」の構成の検証</li>
 <li>場面の種類ごとの差</li>
 <li>評定者ごとに最も近い型</li>
 </ul>
