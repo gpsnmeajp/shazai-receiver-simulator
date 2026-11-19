@@ -1,0 +1,648 @@
+{
+ "schema": "apology-hypotheses/1",
+ "title": "v0.9 の仮説（事前登録）",
+ "fixed_at": "2026-11-19",
+ "_note": "IMPROVEMENT_V09.md 8.1節の仮説を、評価キットの項目の組（examples/scenes-v09.json の design）の上の対比として定義したもの。各対比は、セル（design の値で絞った項目の集まり）の平均の重み付き和。セルは領域をまたいで平均する。measure の値：rude/light/fit/heavy は所属度（0〜1）、trust/remorse/recurrence は 1〜5 を (x−1)/4 で 0〜1 にしたもの。検定は評定者を単位にしたブートストラップ（片側、two-sided は両側）、primary の検定に Holm 法（p 値は標準誤差による正規近似）、有意水準 0.05、効果の最小の大きさ 0.10。H9（t ノルム）は compare の人間どうしの節で別に検定する。データを集める前に固定し、変えた場合は変更履歴に残す。",
+ "alpha": 0.05,
+ "min_effect": 0.1,
+ "hypotheses": [
+  {
+   "id": "H1a",
+   "hyp": "H1",
+   "desc": "断言して外すと、同じ謝罪でも「足りない」が高い",
+   "measure": "light",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "assertive",
+      "answer": "a1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a1"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H1b",
+   "hyp": "H1",
+   "desc": "断言して外すと、同じ謝罪でも「失礼」が高い",
+   "measure": "rude",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "assertive",
+      "answer": "a1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a1"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H2",
+   "hyp": "H2",
+   "desc": "過信への言及は、断言して外した後ほど「足りない」を下げる（交互作用）",
+   "measure": "light",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "assertive",
+      "answer": "a1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "assertive",
+      "answer": "a2"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a1"
+     }
+    },
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a2"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H3a",
+   "hyp": "H3",
+   "desc": "控えめに外すと「失礼」が下がる",
+   "measure": "rude",
+   "direction": "-",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "hedged",
+      "answer": "a1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a1"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H3b",
+   "hyp": "H3",
+   "desc": "控えめに外しても、負担に触れない謝罪は「足りない」",
+   "measure": "light",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "hedged",
+      "answer": "a3"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "hedged",
+      "answer": "a1"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H3c",
+   "hyp": "H3",
+   "desc": "控えめに外した後の謝罪の「重すぎる」（向きは問わない）",
+   "measure": "heavy",
+   "direction": "two-sided",
+   "primary": false,
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "hedged",
+      "answer": "a1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a1"
+     }
+    }
+   ]
+  },
+  {
+   "id": "H4a",
+   "hyp": "H4",
+   "desc": "「確認済み」と偽った後は、過信への言及つきの謝罪でも信頼意図が低い",
+   "measure": "trust",
+   "direction": "-",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "false_verified",
+      "answer": "a2"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "confident",
+      "answer": "a2"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H4b",
+   "hyp": "H4",
+   "desc": "同じく「釣り合う」が低い",
+   "measure": "fit",
+   "direction": "-",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "false_verified",
+      "answer": "a2"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "confident",
+      "answer": "a2"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5a",
+   "hyp": "H5",
+   "desc": "修復期：詫びなしで慎重に作業は、詫び直しより釣り合う",
+   "measure": "fit",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b2"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5b",
+   "hyp": "H5",
+   "desc": "修復期：慎重な作業は、はしゃぐ・軽口より釣り合う",
+   "measure": "fit",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b3"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5c",
+   "hyp": "H5",
+   "desc": "修復期：慎重な作業は、許しの当然視より釣り合う",
+   "measure": "fit",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b4"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5d",
+   "hyp": "H5",
+   "desc": "修復期：慎重な作業は、約束破りより釣り合う",
+   "measure": "fit",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b5"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5e",
+   "hyp": "H5",
+   "desc": "修復期：詫び直しは重すぎる",
+   "measure": "heavy",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b2"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b1"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5f",
+   "hyp": "H5",
+   "desc": "修復期：軽口は失礼",
+   "measure": "rude",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b3"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b1"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5g",
+   "hyp": "H5",
+   "desc": "修復期：許しの当然視は失礼",
+   "measure": "rude",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b4"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b1"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5h",
+   "hyp": "H5",
+   "desc": "修復期：約束破りは許しの当然視より失礼（最も失礼）",
+   "measure": "rude",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b5"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b4"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5i",
+   "hyp": "H5",
+   "desc": "修復期：約束破りは再発の危険を高く感じさせる",
+   "measure": "recurrence",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b5"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b1"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H5j",
+   "hyp": "H5",
+   "desc": "修復期：慎重な作業は軽口より反省が続いていると感じさせる",
+   "measure": "remorse",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b3"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H6",
+   "hyp": "H6",
+   "desc": "親しい関係では、修復期の軽口の「失礼」が弱まる",
+   "measure": "rude",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "B",
+      "answer": "b3",
+      "relation": "普通"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "B",
+      "answer": "b3",
+      "relation": "親しい"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H7",
+   "hyp": "H7",
+   "desc": "過度なぼかしは「重すぎる」より信頼意図を下げる（信頼意図の差 − 重すぎるの差）",
+   "measure": "trust",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a6"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a5"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a5"
+     },
+     "m": "heavy"
+    },
+    {
+     "w": 1,
+     "cell": {
+      "set": "A",
+      "level": "neutral",
+      "answer": "a6"
+     },
+     "m": "heavy"
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H8a",
+   "hyp": "H8",
+   "desc": "失敗の前の但し書きは「釣り合う」を上げる",
+   "measure": "fit",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "C",
+      "phase": "prior",
+      "answer": "c0"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "C",
+      "phase": "none",
+      "answer": "c0"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H8b",
+   "hyp": "H8",
+   "desc": "謝罪の場面の、詫びより前の但し書きは「失礼」を上げる",
+   "measure": "rude",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "C",
+      "phase": "apology",
+      "answer": "c1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "C",
+      "phase": "none",
+      "answer": "c0"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H8c",
+   "hyp": "H8",
+   "desc": "謝罪の場面では、詫びより前の但し書きは後より失礼",
+   "measure": "rude",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "C",
+      "phase": "apology",
+      "answer": "c1"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "C",
+      "phase": "apology",
+      "answer": "c2"
+     }
+    }
+   ],
+   "primary": true
+  },
+  {
+   "id": "H8d",
+   "hyp": "H8",
+   "desc": "修復期の但し書きは「釣り合う」を上げる",
+   "measure": "fit",
+   "direction": "+",
+   "terms": [
+    {
+     "w": 1,
+     "cell": {
+      "set": "C",
+      "phase": "repair",
+      "answer": "c4"
+     }
+    },
+    {
+     "w": -1,
+     "cell": {
+      "set": "C",
+      "phase": "repair",
+      "answer": "c3"
+     }
+    }
+   ],
+   "primary": true
+  }
+ ]
+}

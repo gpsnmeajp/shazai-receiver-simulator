@@ -1,0 +1,465 @@
+{
+ "schema": "apology-blind-rating/2",
+ "packet_id": "pk-20261119-26da4e",
+ "synthetic": true,
+ "list": 27,
+ "rater": {
+  "id": "synth-28",
+  "note": "合成（当事者・関係修復型）",
+  "questionnaire": {}
+ },
+ "mode": "independent",
+ "duration_s": null,
+ "ratings": {
+  "981305": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 0
+  },
+  "bb3820": {
+   "mu": {
+    "rude": 0.25,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 1
+  },
+  "33cea2": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 1
+  },
+  "f47223": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.75,
+    "fit": 0.25,
+    "heavy": 0.0
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 0
+  },
+  "fe7322": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 3,
+   "manip": 3
+  },
+  "a366ac": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 3
+  },
+  "8c1533": {
+   "mu": {
+    "rude": 0.75,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.25
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 3,
+   "manip": 3
+  },
+  "9279b6": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 2,
+   "manip": 3
+  },
+  "547bcd": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 1
+  },
+  "7b76dc": {
+   "mu": {
+    "rude": 1.0,
+    "light": 0.5,
+    "fit": 0.0,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "f2a2cc": {
+   "mu": {
+    "rude": 0.5,
+    "light": 0.5,
+    "fit": 0.5,
+    "heavy": 0.25
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 4,
+   "manip": 2
+  },
+  "ae58e6": {
+   "mu": {
+    "rude": 0.5,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.25
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "c4bf7d": {
+   "mu": {
+    "rude": 1.0,
+    "light": 1.0,
+    "fit": 0.0,
+    "heavy": 0.0
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "12cae6": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "fbec82": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.5,
+    "fit": 0.5,
+    "heavy": 0.25
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "59d61b": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.25
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 4,
+   "manip": 2
+  },
+  "6bdeee": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.5,
+    "fit": 0.5,
+    "heavy": 0.25
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 4,
+   "manip": 1
+  },
+  "836c66": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "471d21": {
+   "mu": {
+    "rude": 0.0,
+    "light": 1.0,
+    "fit": 0.0,
+    "heavy": 0.25
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "e5af40": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.25,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 4,
+   "manip": 2
+  },
+  "adf442": {
+   "mu": {
+    "rude": 1.0,
+    "light": 1.0,
+    "fit": 0.0,
+    "heavy": 0.0
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "7fdcef": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 4,
+   "manip": 2
+  },
+  "6f22ae": {
+   "mu": {
+    "rude": 1.0,
+    "light": 1.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": "",
+   "trust": 4,
+   "manip": 3
+  },
+  "f8c3c6": {
+   "mu": {
+    "rude": 1.0,
+    "light": 0.5,
+    "fit": 0.0,
+    "heavy": 0.75
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "cf7299": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 1
+  },
+  "ad4359": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 3
+  },
+  "dc6a41": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.75,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 3
+  },
+  "6a70a8": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 1
+  },
+  "0b5f19": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 1.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 1
+  },
+  "d3ca74": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 4,
+   "manip": 2
+  },
+  "8ca7db": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 2
+  },
+  "eac6bd": {
+   "mu": {
+    "rude": 0.5,
+    "light": 0.0,
+    "fit": 0.5,
+    "heavy": 0.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 0
+  },
+  "5ba2db": {
+   "mu": {
+    "rude": 0.25,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 1.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 1
+  },
+  "b28a18": {
+   "mu": {
+    "rude": 0.25,
+    "light": 0.5,
+    "fit": 0.75,
+    "heavy": 1.0
+   },
+   "level": 4,
+   "sincerity": null,
+   "comment": "",
+   "trust": 5,
+   "manip": 0
+  },
+  "81c310": {
+   "mu": {
+    "rude": 0.5,
+    "light": 0.5,
+    "fit": 0.5,
+    "heavy": 0.5
+   }
+  }
+ }
+}

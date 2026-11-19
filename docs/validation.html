@@ -14,6 +14,14 @@
 .tile .val small{font-size:.95rem;font-weight:500;color:var(--ink2)}
 .tile .sub{font-size:.82rem;color:var(--ink2)}
 .tile.hero{border-color:var(--s-sim);box-shadow:inset 0 0 0 1px var(--s-sim)}
+.fz{display:grid;grid-template-columns:minmax(6.5em,9em) repeat(4,minmax(0,1fr)) 2.8em;gap:.3rem .45rem;align-items:center;font-size:.82rem;margin:.6rem 0}
+.fzgrid{grid-template-columns:repeat(auto-fit,minmax(min(100%,25rem),1fr))}
+.fz .lab{line-height:1.3}
+.fz .mb{position:relative;height:16px;background:var(--grid);border-radius:4px;overflow:hidden}
+.fz .mb i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.fz .mb b{position:relative;font-weight:600;font-size:.7rem;padding-left:.25rem;line-height:16px;color:var(--ink);font-variant-numeric:tabular-nums}
+.fz .tl{text-align:right;color:var(--ink2);font-variant-numeric:tabular-nums}
+@media (max-width:560px){.fz{grid-template-columns:repeat(4,minmax(0,1fr)) 2.6em}.fz .lab{grid-column:1/-1;margin-top:.3rem}}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 @media (max-width:720px){.two{grid-template-columns:1fr}}
 .two .chart{margin:0}
@@ -36,12 +44,13 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html" aria-current="page">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html" aria-current="page">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="improvement.html">v0.9 設計</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
 <h1>検証結果と変更履歴</h1>
 <p class="lead">検証の数値と、版ごとの変更を記録する文書です。</p>
+<div class="callout"><svg class="icon"><use href="#i-alert"/></svg><p><b>v0.9 の結果は <a href="improvement.html#impl">v0.9 設計 13章</a>と <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION_V09.md">EVALUATION_V09.md</a> にあります。</b>修復期を控えで測るように直し、評価を真に適正なスコアリング規則（Brier、場面単位の交差検証）に改めました。サブエージェントの観察で Brier 0.589 → 0.543（修復期 0.721 → 0.404）、観察者の集団（6変種）＋出どころの較正で 0.489（「条件だけ」の基準 0.553 に対するスキル +0.115 [−0.007, +0.248]）です。このページの数値は v0.8 のものです。</p></div>
 <p class="note">設計の理由は <a href="design.html">設計</a>、仕組みは <a href="architecture.html">アーキテクチャ</a> を参照してください。</p>
 <ul class="toc">
 <li><a href="#data">1. 使っているデータ</a></li><li><a href="#results">2. 現在の結果</a></li><li><a href="#limits">3. 既知の限界</a></li><li><a href="#next">4. 次の検証</a></li><li><a href="#history">5. 変更履歴</a></li>
@@ -54,10 +63,96 @@
 <div class="card"><h3>作例 <code>examples/scenes.json</code></h3><p>物語・AIキャラクター・AIアシスタントで、一点だけ変えた回答の組。</p><p class="note">注意：台詞も観察も作例。規則の向きの確認用で、人間の評定はない。</p></div>
 </div>
 
-<h2 id="results"><svg class="icon"><use href="#i-chart"/></svg>2. 現在の結果（v0.4、2026-11-18）</h2>
-<div class="callout"><svg class="icon"><use href="#i-clock"/></svg><p>2.1 は、ヒステリシスなし（v0.5 までの既定）での数値です。v0.6 からはヒステリシスと escalation が既定で有効なので、2.2 の「あり＋格上げ」の行が現在の既定に相当します。</p></div>
+<h2 id="results"><svg class="icon"><use href="#i-chart"/></svg>2. 現在の結果（v0.8、ファジィ、2026-11-19）</h2>
+<p>v0.8 で評定をファジィに組み直しました（<a href="design.html#D-015">D-015</a>）。受け手一人ひとりが4つの述語に所属度を持ち、「足りない」は不足量だけから出します。数値は平均所属度（%）で、述語は排他的ではないので和は100になりません。</p>
 
-<h3>2.1 ベンチマーク（ヒステリシスなし、受け手1000名、seed 7）</h3>
+<h3 id="fuzzy-scenes">2.1 作例（受け手1000名、seed 7）</h3>
+<div class="fz-legend legend"><span><i class="c-rude"></i>失礼</span><span><i class="c-light"></i>足りない</span><span><i class="c-fit"></i>釣り合う</span><span><i class="c-heavy"></i>重すぎる</span><span>右端は「失礼と感じる人」（所属度0.5以上）の割合</span></div>
+<div class="grid fzgrid">
+<div class="card"><h3><span class="k">S1</span>物語・明白な過失</h3><p>しょんぼり・代償は補い、笑いは崩し、土下座は「重すぎるのに足りない」</p>
+<div class="fz">
+<div class="lab">言葉だけ</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 14"><i class="c-light" style="width:14%"></i><b>14</b></span><span class="mb" title="fit 85"><i class="c-fit" style="width:85%"></i><b>85</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">0%</span>
+<div class="lab">＋しょんぼり</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 7"><i class="c-light" style="width:7%"></i><b>7</b></span><span class="mb" title="fit 91"><i class="c-fit" style="width:91%"></i><b>91</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">0%</span>
+<div class="lab">＋へらっと笑う</div><span class="mb" title="rude 50"><i class="c-rude" style="width:50%"></i><b>50</b></span><span class="mb" title="light 14"><i class="c-light" style="width:14%"></i><b>14</b></span><span class="mb" title="fit 48"><i class="c-fit" style="width:48%"></i><b>48</b></span><span class="mb" title="heavy 10"><i class="c-heavy" style="width:10%"></i><b>10</b></span><span class="tl">26%</span>
+<div class="lab">＋代償</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 5"><i class="c-light" style="width:5%"></i><b>5</b></span><span class="mb" title="fit 94"><i class="c-fit" style="width:94%"></i><b>94</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">0%</span>
+<div class="lab">＋土下座</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 51"><i class="c-light" style="width:51%"></i><b>51</b></span><span class="mb" title="fit 18"><i class="c-fit" style="width:18%"></i><b>18</b></span><span class="mb" title="heavy 38"><i class="c-heavy" style="width:38%"></i><b>38</b></span><span class="tl">0%</span>
+<div class="lab">＋ショック</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 21"><i class="c-light" style="width:21%"></i><b>21</b></span><span class="mb" title="fit 78"><i class="c-fit" style="width:78%"></i><b>78</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">0%</span>
+</div></div>
+<div class="card"><h3><span class="k">S2</span>物語・曖昧な過失</h3><p>気まずさの表出は逆効果（失礼かつ足りない）、ショックは助けになる</p>
+<div class="fz">
+<div class="lab">言葉だけ</div><span class="mb" title="rude 8"><i class="c-rude" style="width:8%"></i><b>8</b></span><span class="mb" title="light 66"><i class="c-light" style="width:66%"></i><b>66</b></span><span class="mb" title="fit 33"><i class="c-fit" style="width:33%"></i><b>33</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">0%</span>
+<div class="lab">＋バツが悪そう</div><span class="mb" title="rude 49"><i class="c-rude" style="width:49%"></i><b>49</b></span><span class="mb" title="light 79"><i class="c-light" style="width:79%"></i><b>79</b></span><span class="mb" title="fit 16"><i class="c-fit" style="width:16%"></i><b>16</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">33%</span>
+<div class="lab">＋ショック</div><span class="mb" title="rude 3"><i class="c-rude" style="width:3%"></i><b>3</b></span><span class="mb" title="light 50"><i class="c-light" style="width:50%"></i><b>50</b></span><span class="mb" title="fit 49"><i class="c-fit" style="width:49%"></i><b>49</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">0%</span>
+</div></div>
+<div class="card"><h3><span class="k">S3</span>AIキャラクター・現実のタスク</h3><p>軽い仮想の仕草は無害、重ねると減点と過剰。仮想の代償は代わりにならない。「てへっ」は崩れる</p>
+<div class="fz">
+<div class="lab">謝罪＋復旧</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 5"><i class="c-light" style="width:5%"></i><b>5</b></span><span class="mb" title="fit 94"><i class="c-fit" style="width:94%"></i><b>94</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">0%</span>
+<div class="lab">＋（しょんぼり）</div><span class="mb" title="rude 3"><i class="c-rude" style="width:3%"></i><b>3</b></span><span class="mb" title="light 5"><i class="c-light" style="width:5%"></i><b>5</b></span><span class="mb" title="fit 94"><i class="c-fit" style="width:94%"></i><b>94</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">0%</span>
+<div class="lab">＋深々と礼・涙の顔文字</div><span class="mb" title="rude 16"><i class="c-rude" style="width:16%"></i><b>16</b></span><span class="mb" title="light 5"><i class="c-light" style="width:5%"></i><b>5</b></span><span class="mb" title="fit 69"><i class="c-fit" style="width:69%"></i><b>69</b></span><span class="mb" title="heavy 20"><i class="c-heavy" style="width:20%"></i><b>20</b></span><span class="tl">3%</span>
+<div class="lab">仮想の代償だけ</div><span class="mb" title="rude 20"><i class="c-rude" style="width:20%"></i><b>20</b></span><span class="mb" title="light 63"><i class="c-light" style="width:63%"></i><b>63</b></span><span class="mb" title="fit 36"><i class="c-fit" style="width:36%"></i><b>36</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">10%</span>
+<div class="lab">＋現実の代償</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 3"><i class="c-light" style="width:3%"></i><b>3</b></span><span class="mb" title="fit 95"><i class="c-fit" style="width:95%"></i><b>95</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">0%</span>
+<div class="lab">＋てへっ</div><span class="mb" title="rude 55"><i class="c-rude" style="width:55%"></i><b>55</b></span><span class="mb" title="light 5"><i class="c-light" style="width:5%"></i><b>5</b></span><span class="mb" title="fit 45"><i class="c-fit" style="width:45%"></i><b>45</b></span><span class="mb" title="heavy 2"><i class="c-heavy" style="width:2%"></i><b>2</b></span><span class="tl">100%</span>
+</div></div>
+<div class="card"><h3><span class="k">S4</span>AIキャラクター・物語の中</h3><p>作中の代償は本物として働く。軽い失敗の「てへっ」は軽め</p>
+<div class="fz">
+<div class="lab">言葉だけ</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 3"><i class="c-light" style="width:3%"></i><b>3</b></span><span class="mb" title="fit 94"><i class="c-fit" style="width:94%"></i><b>94</b></span><span class="mb" title="heavy 4"><i class="c-heavy" style="width:4%"></i><b>4</b></span><span class="tl">0%</span>
+<div class="lab">＋（しょんぼり）</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 3"><i class="c-light" style="width:3%"></i><b>3</b></span><span class="mb" title="fit 94"><i class="c-fit" style="width:94%"></i><b>94</b></span><span class="mb" title="heavy 4"><i class="c-heavy" style="width:4%"></i><b>4</b></span><span class="tl">0%</span>
+<div class="lab">＋作中の代償</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 3"><i class="c-light" style="width:3%"></i><b>3</b></span><span class="mb" title="fit 86"><i class="c-fit" style="width:86%"></i><b>86</b></span><span class="mb" title="heavy 12"><i class="c-heavy" style="width:12%"></i><b>12</b></span><span class="tl">0%</span>
+<div class="lab">＋てへっ</div><span class="mb" title="rude 32"><i class="c-rude" style="width:32%"></i><b>32</b></span><span class="mb" title="light 3"><i class="c-light" style="width:3%"></i><b>3</b></span><span class="mb" title="fit 68"><i class="c-fit" style="width:68%"></i><b>68</b></span><span class="mb" title="heavy 4"><i class="c-heavy" style="width:4%"></i><b>4</b></span><span class="tl">0%</span>
+</div></div>
+<div class="card"><h3><span class="k">S5</span>AIアシスタント・軽い失敗</h3><p>過剰な謝罪は重すぎる。詫びなしは「足りない」と「釣り合う」が半々</p>
+<div class="fz">
+<div class="lab">短い詫び＋修正</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 3"><i class="c-light" style="width:3%"></i><b>3</b></span><span class="mb" title="fit 94"><i class="c-fit" style="width:94%"></i><b>94</b></span><span class="mb" title="heavy 4"><i class="c-heavy" style="width:4%"></i><b>4</b></span><span class="tl">0%</span>
+<div class="lab">過剰な謝罪＋修正</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 3"><i class="c-light" style="width:3%"></i><b>3</b></span><span class="mb" title="fit 3"><i class="c-fit" style="width:3%"></i><b>3</b></span><span class="mb" title="heavy 97"><i class="c-heavy" style="width:97%"></i><b>97</b></span><span class="tl">0%</span>
+<div class="lab">修正だけ</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 50"><i class="c-light" style="width:50%"></i><b>50</b></span><span class="mb" title="fit 50"><i class="c-fit" style="width:50%"></i><b>50</b></span><span class="mb" title="heavy 0"><i class="c-heavy" style="width:0%"></i><b>0</b></span><span class="tl">0%</span>
+<div class="lab">＋（しょんぼり）</div><span class="mb" title="rude 2"><i class="c-rude" style="width:2%"></i><b>2</b></span><span class="mb" title="light 3"><i class="c-light" style="width:3%"></i><b>3</b></span><span class="mb" title="fit 94"><i class="c-fit" style="width:94%"></i><b>94</b></span><span class="mb" title="heavy 4"><i class="c-heavy" style="width:4%"></i><b>4</b></span><span class="tl">0%</span>
+</div></div>
+</div>
+<div class="grid">
+<div class="card"><h3>規則の向きは同じ</h3><p>4値モデル（2.3.3）と同じ向きです。笑いと「てへっ」は、現実のタスクで重く（失礼 55）、物語の軽い失敗で軽く（32）なります（<a href="design.html#D-011">D-011</a>）。</p></div>
+<div class="card"><h3>ファジィで見えるようになったもの</h3><p><b>重すぎるのに足りない</b>（S1 土下座：足りない 51・重すぎる 38）。<b>失礼かつ足りない</b>（S2 バツが悪そう：失礼 49・足りない 79）。<b>半々</b>（S5 修正だけ：足りない 50・釣り合う 50）。4値の先勝ちでは、どれも一つの評定に吸収されていました。</p></div>
+<div class="card"><h3>平均と裾は別のこと</h3><p>現実のタスクの「てへっ」は、平均所属度 55 で、失礼と感じる人 100%。この減点は受け手の性質にほとんど左右されないので、全員が「やや失礼」の少し上に並び、0.5 で切る割合が跳ねます。物語の「へらっと笑う」は平均 50 でも 26% です。主には平均所属度を見ます。</p></div>
+</div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>失礼の所属度関数の中心は、最初に置いた 1.5 では作例のどの回答でも失礼と感じる人が 0% になったため、1.2 に下げました。1.2 は、単独で最大級の失点（相手への指摘 1.2）で所属度が 0.5 になる位置です（P4）。旧版で失礼の判定に効いていた不足量を失点から切り離した影響で、作例を見た後の調整です。</p></div>
+
+<h3 id="bench-v08">2.2 ベンチマーク（2026-11-19 に再計算）</h3>
+<p>ベンチマークの実行先は SHAZAI Rules のリポジトリにあります。層Aの LLM の観察は、Claude のサブエージェントで代替しました（盲検。会話と回答の本文だけを渡す）。詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">総合評価（EVALUATION.md）</a>。</p>
+<div class="tiles">
+<div class="tile hero"><div class="key">筆者との一致度 κ（v0.8・代理観察）</div><div class="val">0.33</div><div class="sub">95% 区間 0.20〜0.47。128/192 一致。v0.7 は 0.31〜0.32</div></div>
+<div class="tile"><div class="key">κ（v0.8・サブエージェント観察）</div><div class="val">0.28</div><div class="sub">区間 0.18〜0.38。107/192 一致。判定が厳しすぎる</div></div>
+<div class="tile"><div class="key">κ（LLM ペルソナ多数決）</div><div class="val" style="color:var(--s-persona)">0.06</div><div class="sub">P1 / P2 / P3 は 0.04 / 0.07 / 0.11</div></div>
+</div>
+<div class="chart">
+<p class="chart-title">条件ごとの「釣り合う」</p>
+<p class="chart-sub">筆者は評定の割合、シミュレータは平均所属度。順位はどちらの観察でも筆者と一致し、ペルソナは逆</p>
+<div class="bars">
+<div class="grp">指示なし</div>
+<div class="lab">筆者</div><div class="track"><div class="fill" style="width:48%;background:var(--s-user)"></div></div><div class="val">0.48</div>
+<div class="lab">代理観察</div><div class="track"><div class="fill" style="width:48%;background:var(--s-sim)"></div></div><div class="val">0.48</div>
+<div class="lab">サブエージェント観察</div><div class="track"><div class="fill" style="width:34%;background:var(--s-sim);opacity:.6"></div></div><div class="val">0.34</div>
+<div class="lab">ペルソナ</div><div class="track"><div class="fill" style="width:91%;background:var(--s-persona)"></div></div><div class="val">0.91</div>
+<div class="grp">一般的な謝罪指示</div>
+<div class="lab">筆者</div><div class="track"><div class="fill" style="width:69%;background:var(--s-user)"></div></div><div class="val">0.69</div>
+<div class="lab">代理観察</div><div class="track"><div class="fill" style="width:63%;background:var(--s-sim)"></div></div><div class="val">0.63</div>
+<div class="lab">サブエージェント観察</div><div class="track"><div class="fill" style="width:44%;background:var(--s-sim);opacity:.6"></div></div><div class="val">0.44</div>
+<div class="lab">ペルソナ</div><div class="track"><div class="fill" style="width:78%;background:var(--s-persona)"></div></div><div class="val">0.78</div>
+<div class="grp">SHAZAI Rules</div>
+<div class="lab">筆者</div><div class="track"><div class="fill" style="width:75%;background:var(--s-user)"></div></div><div class="val">0.75</div>
+<div class="lab">代理観察</div><div class="track"><div class="fill" style="width:68%;background:var(--s-sim)"></div></div><div class="val">0.68</div>
+<div class="lab">サブエージェント観察</div><div class="track"><div class="fill" style="width:51%;background:var(--s-sim);opacity:.6"></div></div><div class="val">0.51</div>
+<div class="lab">ペルソナ</div><div class="track"><div class="fill" style="width:73%;background:var(--s-persona)"></div></div><div class="val">0.73</div>
+</div>
+</div>
+<div class="grid">
+<div class="callout bad"><svg class="icon"><use href="#i-alert"/></svg><p><b>修復期の論理の欠陥。</b>謝罪を受け入れた後、詫びを繰り返さない正しい回答でも、必要な中身との差を「不足」として数えます。サブエージェント観察では、修復期の一致が 0.33（代理観察 0.79）に落ちました。v0.7 では閾値の下に隠れていました。</p></div>
+<div class="callout bad"><svg class="icon"><use href="#i-alert"/></svg><p><b>評価指標「近さ」の欠陥。</b>正解が4値のとき、最頻の評定を断定的に出すほど得をします。「常に釣り合う」が近さで最良（0.820）になりました。二乗誤差（Brier）では、シミュレータ 0.536 < 常に釣り合う 0.719 < ペルソナ 0.84〜0.91 と、まともな順位になります。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p><b>LLM の観察では厳しすぎる。</b>回答の観察が「失礼」を（24 → 40）、場面の観察が不満の深さを通じて「足りない」を（25 → 35）押し上げます。失礼の中心の最適値は観察者で変わり（代理 1.0〜1.2、サブエージェント 1.5）、観察者ごとの較正が必要です。</p></div>
+</div>
+
+<h3 id="legacy">2.3 参考：4値モデル（v0.4〜v0.7）の結果</h3>
+<div class="callout"><svg class="icon"><use href="#i-clock"/></svg><p>以下は、ファジィ化する前のモデルの結果です。2.3.1 はヒステリシスなし（v0.5 までの既定）、2.3.2 の「あり＋格上げ」は v0.6・v0.7 の既定です。</p></div>
+
+<h4>2.3.1 ベンチマーク（ヒステリシスなし、受け手1000名、seed 7）</h4>
 <div class="tiles">
 <div class="tile hero"><div class="key">筆者との一致度 κ（シミュレータ）</div><div class="val">0.28</div><div class="sub">192件中 122件が一致</div></div>
 <div class="tile"><div class="key">筆者との一致度 κ（ペルソナ多数決）</div><div class="val" style="color:var(--s-persona)">0.06</div><div class="sub">192件中 108件が一致</div></div>
@@ -117,7 +212,7 @@
 <li>筆者に当てはめた θ は、探索の乱数で大きく変わります。今のデータでは筆者の性質を特定しきれません。3回とも一貫していたのは、最も遠い型が効率・道具型だったことです。</li>
 </ul>
 
-<h3 id="hysteresis">2.2 ヒステリシス</h3>
+<h4 id="hysteresis">2.3.2 ヒステリシス</h4>
 <div class="tbl wide"><table>
 <thead><tr><th>条件</th><th class="num">κ</th><th class="num">想定外の回答</th><th>修復期の知覚（L0/L1/L2/L3）</th><th>検証用シナリオでの κ</th><th>当てはめた memory</th></tr></thead>
 <tbody>
@@ -159,7 +254,7 @@
 <li>κ の差は、乱数による揺れ（約±0.05）の範囲内です。当てはめた memory は型の平均より低めにばらつき、今のデータでは傷の効果を識別できていません。各場面の経緯が1通りしかないため、経緯の効果を場面の違いと区別できないことが主な理由と考えています。</li>
 </ul>
 
-<h3>2.3 作例（<code>out/scenes-result.txt</code>、受け手1000名）</h3>
+<h4>2.3.3 作例（<code>out/scenes-result.txt</code>、受け手1000名。4値の人の割合）</h4>
 <div class="legend"><span><i class="c-fit"></i>釣り合う</span><span><i class="c-light"></i>足りない</span><span><i class="c-heavy"></i>重すぎる</span><span><i class="c-rude"></i>失礼</span></div>
 <div class="grid scn">
 <div class="card"><h3><span class="k">S1</span>物語・明白な過失</h3><p>しょんぼり・代償は補い、笑いは崩し、土下座は重すぎる</p>
@@ -203,20 +298,24 @@
 <div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>観察の規則と定数の一部は、検証データを見ながら調整しました。一致度は甘めに出ています。</p></div>
 <div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>作例の結果は規則の向きの確認であり、人間の評定で検証したものではありません。</p></div>
 <div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>ショックの表出の規則（<a href="evidence.html#E-10">E-10</a>）は仮説です。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>所属度関数の中心となだらかさ、「釣り合う」の t ノルム（min）は事前値です。失礼の中心は作例を見て調整しました（2.1）。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>LLM の観察を通すとシミュレータが厳しすぎ、修復期の論理と評価指標「近さ」に欠陥があります（2.2、<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">総合評価</a>）。</p></div>
 </div>
 
 <h2 id="next"><svg class="icon"><use href="#i-target"/></svg>4. 次に行う検証</h2>
 <ol class="steps">
-<li><b>人間のブラインド評定を集める</b>：<code>blind.py</code> でシミュレータとの差を測る（手順は <a href="human-eval.html">人間評定</a>）。作例の組（23問）と、ベンチマークから抜いた40問程度から始める。</li>
-<li><b>層Aを独立に観察する</b>：<code>observe</code> で観察し、同じ検証をやり直す。</li>
-<li><b>型の比率と幅を推定する</b>：20〜30人程度の評定で推定する。筆者を含む各評定者が母集団に収まるかを見て、収まらなければ軸を足す。</li>
+<li><b>観察の欄ごとに較正する</b>：所属度関数の中心の較正の代わりに、金ラベルとの差を欄ごとに補正する（<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION_V09.md">総合評価 v0.9</a> 8章）。</li>
+<li><b>観察者の集団を組み直す</b>：字義どおりの方針に寄せ、言い回しとモデルだけを振る。</li>
 <li><b>ヒステリシスを識別する</b>：経緯だけを変えた場面の組（初回／3回目／虚偽を含む／約束を破った後、悪化の途中か回復の途中か）を作る。</li>
-<li><b>シグナルの規則を確かめる</b>：作例の組に人間の評定を付け、向きと大きさを確かめる。</li>
+<li><b>構造の穴への対応を検討する</b>：断言・控えめさ・関係・但し書きの局面の一部に、効果を作る経路がない（総合評価 v0.9 5.1節）。</li>
 </ol>
 
 <h2 id="history"><svg class="icon"><use href="#i-layers"/></svg>5. 変更履歴</h2>
 <ul class="timeline">
-<li class="now"><span class="ver">v0.7</span><span class="date">2026-11-19</span>
+<li class="now"><span class="ver">v0.8</span><span class="date">2026-11-19</span>
+<p>評定をファジィに組み直す（<a href="design.html#D-015">D-015</a>・<a href="design.html#D-016">D-016</a>）。受け手一人ひとりが4つの述語に所属度を持つ（失礼＝無礼さ、足りない＝不足量、重すぎる＝過剰、釣り合う＝三つの否定の min）。不満の深さの境界をソフトに。一人の判定を決定的にし、乱数は母集団の抽出だけに。所属度関数を <code>population.json</code> の <code>judgment</code> に。<code>fit</code> の目的関数を所属度の近さに。<code>check</code> に羊の鳴き声と言葉の程度。人間評定を4つの述語×5段階に。</p>
+<p class="eff">影響：全コマンドの出力の形と数値が変わる（4値の分布 → 平均所属度と裾）。作例の向きは同じ（2.1）。ベンチマークは代理観察で κ 0.33（2.2）。</p></li>
+<li><span class="ver">v0.7</span><span class="date">2026-11-19</span>
 <p>組み込み判定モード（<code>check</code>、<code>s1.py</code>、<code>sim.check_turn</code>）と Stop hook の参考実装。層Aを System One の質問に分解して1ターン1リクエストで問う（<a href="jev.html#check">System One 5.8節</a>）。</p>
 <p class="eff">影響：なし（既存のコマンドは不変）。Jev の実際の応答では未検証。</p></li>
 <li><span class="ver">v0.6</span><span class="date">2026-11-19</span>

@@ -1,0 +1,107 @@
+■ ベンチマーク 192 回答・16 場面。場面単位の4分割交差検証、分割の外側で採点。区間は場面単位のブートストラップ 2000 回
+
+  基準               Brier [95%区間]         対数損失
+  一様　　　　　　　　  0.750 [0.750, 0.750]   1.386
+  常に釣り合う　　　　  0.719 [0.490, 0.948]   3.310
+  周辺分布　　　　　　  0.545 [0.443, 0.649]   0.965
+  条件だけ　　　　　　  0.553 [0.466, 0.646]   1.025
+
+■ proxy（proxy:checklist+surface、current）  Brier 0.489 [0.366, 0.600]  対数損失 0.929  （標本内 0.489、非ファジィ化のみ 0.543）
+    スキル（1 − 自分÷基準、Brier）: 一様 +0.348 [+0.201, +0.511]  常に釣り合う +0.320 [+0.167, +0.421]  周辺分布 +0.103 [-0.018, +0.221]  条件だけ +0.116 [-0.001, +0.235]
+    修復期 24 回答 Brier 0.385   条件別 baseline 0.583  japanese_posture 0.498  shazai_full 0.385
+    分割ごとの選択 β=3, β=3, β=3, β=3
+    記述用: κ 0.33  一致 0.66  近さ 0.77
+■ ensemble（llm-ensemble、current）  Brier 0.549 [0.422, 0.674]  対数損失 1.039  （標本内 0.541、非ファジィ化のみ 0.633）
+    スキル（1 − 自分÷基準、Brier）: 一様 +0.268 [+0.102, +0.437]  常に釣り合う +0.236 [+0.079, +0.360]  周辺分布 -0.008 [-0.135, +0.133]  条件だけ +0.006 [-0.144, +0.155]
+    修復期 24 回答 Brier 0.401   条件別 baseline 0.569  japanese_posture 0.598  shazai_full 0.480
+    分割ごとの選択 β=2, β=2, β=3, β=3
+    記述用: κ 0.29  一致 0.59  近さ 0.75
+■ top-neutral（llm:claude-top:neutral、current）  Brier 0.585 [0.457, 0.710]  対数損失 1.091  （標本内 0.576、非ファジィ化のみ 0.667）
+    スキル（1 − 自分÷基準、Brier）: 一様 +0.220 [+0.054, +0.391]  常に釣り合う +0.186 [-0.006, +0.324]  周辺分布 -0.073 [-0.218, +0.078]  条件だけ -0.059 [-0.211, +0.095]
+    修復期 24 回答 Brier 0.441   条件別 baseline 0.613  japanese_posture 0.638  shazai_full 0.503
+    分割ごとの選択 β=2, β=2, β=3, β=3
+    記述用: κ 0.28  一致 0.58  近さ 0.73
+■ top-literal（llm:claude-top:literal、current）  Brier 0.521 [0.388, 0.650]  対数損失 0.989  （標本内 0.521、非ファジィ化のみ 0.592）
+    スキル（1 − 自分÷基準、Brier）: 一様 +0.305 [+0.134, +0.483]  常に釣り合う +0.275 [+0.163, +0.369]  周辺分布 +0.044 [-0.070, +0.168]  条件だけ +0.057 [-0.086, +0.207]
+    修復期 24 回答 Brier 0.401   条件別 baseline 0.550  japanese_posture 0.595  shazai_full 0.417
+    分割ごとの選択 β=3, β=3, β=3, β=3
+    記述用: κ 0.29  一致 0.61  近さ 0.76
+■ top-context（llm:claude-top:context、current）  Brier 0.555 [0.419, 0.687]  対数損失 1.039  （標本内 0.544、非ファジィ化のみ 0.629）
+    スキル（1 − 自分÷基準、Brier）: 一様 +0.260 [+0.084, +0.441]  常に釣り合う +0.228 [+0.070, +0.355]  周辺分布 -0.019 [-0.162, +0.133]  条件だけ -0.005 [-0.163, +0.156]
+    修復期 24 回答 Brier 0.389   条件別 baseline 0.550  japanese_posture 0.609  shazai_full 0.506
+    分割ごとの選択 β=2, β=3, β=3, β=3
+    記述用: κ 0.30  一致 0.60  近さ 0.75
+■ mid-neutral（llm:claude-mid:neutral、current）  Brier 0.571 [0.436, 0.702]  対数損失 1.085  （標本内 0.559、非ファジィ化のみ 0.650）
+    スキル（1 − 自分÷基準、Brier）: 一様 +0.239 [+0.064, +0.418]  常に釣り合う +0.206 [+0.032, +0.338]  周辺分布 -0.047 [-0.189, +0.104]  条件だけ -0.033 [-0.210, +0.130]
+    修復期 24 回答 Brier 0.405   条件別 baseline 0.572  japanese_posture 0.619  shazai_full 0.521
+    分割ごとの選択 β=2, β=2, β=3, β=3
+    記述用: κ 0.32  一致 0.61  近さ 0.75
+■ mid-literal（llm:claude-mid:literal、current）  Brier 0.567 [0.480, 0.649]  対数損失 1.077  （標本内 0.567、非ファジィ化のみ 0.670）
+    スキル（1 − 自分÷基準、Brier）: 一様 +0.243 [+0.135, +0.360]  常に釣り合う +0.210 [-0.044, +0.365]  周辺分布 -0.041 [-0.203, +0.101]  条件だけ -0.027 [-0.166, +0.088]
+    修復期 24 回答 Brier 0.406   条件別 baseline 0.616  japanese_posture 0.621  shazai_full 0.465
+    分割ごとの選択 β=2, β=2, β=2, β=2
+    記述用: κ 0.28  一致 0.58  近さ 0.74
+■ mid-context（llm:claude-mid:context、current）  Brier 0.571 [0.465, 0.668]  対数損失 1.080  （標本内 0.571、非ファジィ化のみ 0.677）
+    スキル（1 − 自分÷基準、Brier）: 一様 +0.239 [+0.109, +0.380]  常に釣り合う +0.206 [+0.016, +0.339]  周辺分布 -0.048 [-0.163, +0.075]  条件だけ -0.033 [-0.151, +0.078]
+    修復期 24 回答 Brier 0.419   条件別 baseline 0.585  japanese_posture 0.623  shazai_full 0.504
+    分割ごとの選択 β=2, β=2, β=2, β=2
+    記述用: κ 0.30  一致 0.60  近さ 0.74
+
+■ 評価器どうしの差（Brier、左 − 右。負なら左が良い）
+  proxy − ensemble: -0.061 [-0.1477, 0.0255]
+  proxy − top-neutral: -0.096 [-0.1817, -0.0123]
+  proxy − top-literal: -0.032 [-0.1116, 0.0395]
+  proxy − top-context: -0.067 [-0.1639, 0.0277]
+  proxy − mid-neutral: -0.082 [-0.1866, 0.0174]
+  proxy − mid-literal: -0.079 [-0.1473, -0.0002]
+  proxy − mid-context: -0.082 [-0.1577, -0.0031]
+  ensemble − top-neutral: -0.036 [-0.0535, -0.0198]
+  ensemble − top-literal: +0.028 [-0.0066, 0.0577]
+  ensemble − top-context: -0.006 [-0.0342, 0.0206]
+  ensemble − mid-neutral: -0.022 [-0.0588, 0.013]
+  ensemble − mid-literal: -0.018 [-0.0789, 0.041]
+  ensemble − mid-context: -0.022 [-0.0557, 0.0153]
+  top-neutral − top-literal: +0.064 [0.0247, 0.0997]
+  top-neutral − top-context: +0.030 [0.0012, 0.0634]
+  top-neutral − mid-neutral: +0.014 [-0.0327, 0.0623]
+  top-neutral − mid-literal: +0.017 [-0.0388, 0.0745]
+  top-neutral − mid-context: +0.014 [-0.0282, 0.0564]
+  top-literal − top-context: -0.034 [-0.071, 0.0067]
+  top-literal − mid-neutral: -0.050 [-0.098, -0.0028]
+  top-literal − mid-literal: -0.047 [-0.1196, 0.0256]
+  top-literal − mid-context: -0.050 [-0.0972, 0.0017]
+  top-context − mid-neutral: -0.015 [-0.0583, 0.0219]
+  top-context − mid-literal: -0.012 [-0.0874, 0.0579]
+  top-context − mid-context: -0.016 [-0.0616, 0.0374]
+  mid-neutral − mid-literal: +0.003 [-0.0789, 0.081]
+  mid-neutral − mid-context: -0.000 [-0.0471, 0.0513]
+  mid-literal − mid-context: -0.003 [-0.0463, 0.0427]
+  修復期 proxy − ensemble: -0.016 [-0.0848, 0.053]
+  修復期 proxy − top-neutral: -0.056 [-0.1091, -0.0031]
+  修復期 proxy − top-literal: -0.016 [-0.0264, -0.0064]
+  修復期 proxy − top-context: -0.004 [-0.0681, 0.0603]
+  修復期 proxy − mid-neutral: -0.020 [-0.0975, 0.0581]
+  修復期 proxy − mid-literal: -0.021 [-0.0894, 0.0475]
+  修復期 proxy − mid-context: -0.034 [-0.1131, 0.0454]
+  修復期 ensemble − top-neutral: -0.040 [-0.056, -0.0242]
+  修復期 ensemble − top-literal: -0.000 [-0.0793, 0.0784]
+  修復期 ensemble − top-context: +0.012 [0.0073, 0.0167]
+  修復期 ensemble − mid-neutral: -0.004 [-0.0126, 0.0051]
+  修復期 ensemble − mid-literal: -0.005 [-0.0055, -0.0045]
+  修復期 ensemble − mid-context: -0.018 [-0.0283, -0.0075]
+  修復期 top-neutral − top-literal: +0.040 [-0.0233, 0.1026]
+  修復期 top-neutral − top-context: +0.052 [0.041, 0.0633]
+  修復期 top-neutral − mid-neutral: +0.036 [0.0116, 0.0611]
+  修復期 top-neutral − mid-literal: +0.035 [0.0197, 0.0506]
+  修復期 top-neutral − mid-context: +0.022 [-0.004, 0.0485]
+  修復期 top-literal − top-context: +0.012 [-0.0617, 0.0866]
+  修復期 top-literal − mid-neutral: -0.003 [-0.091, 0.0844]
+  修復期 top-literal − mid-literal: -0.005 [-0.0829, 0.0739]
+  修復期 top-literal − mid-context: -0.017 [-0.1067, 0.0718]
+  修復期 top-context − mid-neutral: -0.016 [-0.0294, -0.0022]
+  修復期 top-context − mid-literal: -0.017 [-0.0213, -0.0128]
+  修復期 top-context − mid-context: -0.030 [-0.045, -0.0148]
+  修復期 mid-neutral − mid-literal: -0.001 [-0.0106, 0.0081]
+  修復期 mid-neutral − mid-context: -0.014 [-0.0156, -0.0126]
+  修復期 mid-literal − mid-context: -0.013 [-0.0237, -0.002]
+→ eval/eval-v09-full.json

@@ -18,6 +18,10 @@
 .ex .q b{color:var(--ink)}
 .ex .stack{margin:.4rem 0 .3rem}
 .ex .meta{font-size:.85rem;color:var(--ink2)}
+.mus{display:grid;grid-template-columns:4.2em minmax(0,1fr) auto;gap:.3rem .6rem;align-items:center;font-size:.85rem;margin:.5rem 0}
+.mus .mb{height:12px;background:var(--grid);border-radius:4px;overflow:hidden;position:relative}
+.mus .mb i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.mus b{white-space:nowrap;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink2)}
 .flag{display:block;font-size:.85rem;color:var(--ink2);margin:.15rem 0}
 .flag .badge{margin-right:.4rem}
 .b-read{background:var(--bad-wash);color:var(--bad);border-color:color-mix(in srgb,var(--bad) 30%,transparent)}
@@ -48,7 +52,7 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html" aria-current="page">System One</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html" aria-current="page">System One</a><a href="improvement.html">v0.9 設計</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
@@ -228,8 +232,8 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <p>入力は <code>{"messages": [{"role": "user"|"assistant", "content": "…"}, …], "answer": "判定する応答"}</code> です。<code>answer</code> を省くと最後のAIの発話を判定し、<code>context</code> を渡すと場面の枠組みを上書きします。</p>
 
 <div class="verdict">
-<div class="card" style="--c:var(--r-rude)"><h3><span class="rate"><i class="c-rude"></i></span>rude（失礼の恐れ）</h3><p>失礼と感じる人の割合が <code>--rude-at</code>（既定 0.2）以上</p></div>
-<div class="card" style="--c:var(--r-light)"><h3><span class="rate"><i class="c-light"></i></span>warn（要注意）</h3><p>失礼＋足りない の割合が <code>--warn-at</code>（既定 0.4）以上</p></div>
+<div class="card" style="--c:var(--r-rude)"><h3><span class="rate"><i class="c-rude"></i></span>rude（失礼の恐れ）</h3><p>失礼と感じる人（失礼の所属度0.5以上の人）の割合が <code>--rude-at</code>（既定 0.2）以上</p></div>
+<div class="card" style="--c:var(--r-light)"><h3><span class="rate"><i class="c-light"></i></span>warn（要注意）</h3><p>失礼か足りないの平均所属度が <code>--warn-at</code>（既定 0.4）以上</p></div>
 <div class="card" style="--c:var(--r-fit)"><h3><span class="rate"><i class="c-fit"></i></span>ok（問題なし）</h3><p>どちらにも当たらない</p></div>
 </div>
 
@@ -240,20 +244,24 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <tr><td>リクエスト</td><td><b>1ターン1リクエスト。</b>5.1節の三つの単位を一つの state にまとめ、最後のユーザー発話の文ごとに「依頼か」「種類」「遂行の状況」を投機的に同じリクエストで問う（依頼でない文の答えはコードが捨てる）。作例では約90〜110問</td></tr>
 <tr><td>モデルに問わないもの</td><td>絵文字・感嘆・書式の量、冒頭の定型の同意、文量の変化、相槌化、成果物の切り出し、文の分割、すべての数え上げと上限</td></tr>
 <tr><td>シグナル</td><td>ト書き・顔文字が正規表現で見つかったときだけ、19種を投機的に問う。枠組みは <code>real_task</code>・<code>ai_assistant</code>・<code>victim</code> に固定し、過失の明白さと親しさだけを問う</td></tr>
-<tr><td>出力</td><td>判定、分布、不足・過剰の量、知覚した不満の深さの平均、主な失点、悪く読める一文（型と確率）、要確認の判断、版・所要時間・質問数</td></tr>
+<tr><td>出力</td><td>判定、羊の鳴き声（失礼の平均所属度が 0.15・0.35・0.6 以上で「メ…？」「メッ」「メッ！！」）、4つの述語の平均所属度と言葉の程度（ほとんどない／少し／やや／かなり／とても）、裾、無礼さ・不足・過剰の量、知覚した不満の深さの平均、主な失点、悪く読める一文（型と確率）、要確認の判断、版・所要時間・質問数</td></tr>
 <tr><td>失敗時</td><td>キーなし・通信失敗・時間切れは <code>unavailable</code> を返して終了コード0（fail-open）。<code>--strict</code> で終了コード3</td></tr>
 <tr><td>再現</td><td><code>--save-raw</code> で state・質問・答えを保存し、<code>--backend replay</code> で再生。<code>--cache</code> で同じリクエストの答えを再利用</td></tr>
 </tbody></table></div>
 
 <h3>作例での結果（仕組みの試験）</h3>
-<p class="note">同じ会話（UTC で保存するよう二回頼んだのに直っていない場面）に対する二つの応答。答えは仕組みの試験のために手で付けた確率で、Jev の応答ではありません（<code>examples/check/</code>）。</p>
-<div class="legend"><span><i class="c-rude"></i>失礼</span><span><i class="c-light"></i>足りない</span><span><i class="c-fit"></i>釣り合う</span><span><i class="c-heavy"></i>重すぎる</span></div>
+<p class="note">同じ会話（UTC で保存するよう二回頼んだのに直っていない場面）に対する二つの応答。答えは仕組みの試験のために手で付けた確率で、Jev の応答ではありません（<code>examples/check/</code>）。数値は平均所属度で、述語は排他的ではないので和は1になりません（v0.8 からファジィ）。</p>
 <div class="ex">
 <div class="card">
-<h3><span class="rate" style="color:var(--r-rude)"><i class="c-rude"></i>失礼の恐れ</span></h3>
+<h3><span class="rate" style="color:var(--r-rude)"><i class="c-rude"></i>失礼の恐れ　メッ！！</span></h3>
 <p class="q">「ご指摘の件ですが、最初のご依頼では UTC かどうか明記されていなかったため、ローカル時刻のままになっていました。すぐに修正いたします。ついでにログの形式も整えておくとよいと思います。ほかに何かございますか？」</p>
-<div class="stack" role="img" aria-label="失礼100%"><span style="width:100%;background:var(--r-rude)"></span></div>
-<p class="meta">失礼 100%。主な失点：要求の未遂行 2.72、謝罪の不足 2.61、悪く読める一文 1.35、相手への指摘 1.20、弁解 1.00</p>
+<div class="mus">
+<span>失礼</span><span class="mb"><i class="c-rude" style="width:100%"></i></span><b>とても 1.00</b>
+<span>足りない</span><span class="mb"><i class="c-light" style="width:98%"></i></span><b>とても 0.98</b>
+<span>重すぎる</span><span class="mb"><i class="c-heavy" style="width:0%"></i></span><b>ほとんどない 0.00</b>
+<span>釣り合う</span><span class="mb"><i class="c-fit" style="width:0%"></i></span><b>ほとんどない 0.00</b>
+</div>
+<p class="meta">失礼と感じる人 100%。主な失点：要求の未遂行 2.72、悪く読める一文 1.34、相手への指摘 1.20、弁解 1.00</p>
 <span class="flag"><span class="badge b-read">言い訳 0.90</span>最初のご依頼では UTC かどうか明記されていなかったため…</span>
 <span class="flag"><span class="badge b-read">押し付け 0.80</span>ついでにログの形式も整えておくとよいと思います。</span>
 <span class="flag"><span class="badge b-read">突き放し 0.62</span>ほかに何かございますか？</span>
@@ -261,8 +269,13 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <div class="card">
 <h3><span class="rate" style="color:var(--r-fit)"><i class="c-fit"></i>問題なし</span></h3>
 <p class="q">「申し訳ありません。二回お伝えいただいたのに、UTC での保存に直せておらず、テストも通していませんでした。（修正したコード）UTC で保存するように修正し、保存と読み出しのテストを追加して通しました。」</p>
-<div class="stack" role="img" aria-label="足りない15%、釣り合う85%"><span style="width:15%;background:var(--r-light)"></span><span style="width:85%;background:var(--r-fit)"></span></div>
-<p class="meta">足りない 15% / 釣り合う 85%。主な失点：謝罪の不足 0.42</p>
+<div class="mus">
+<span>失礼</span><span class="mb"><i class="c-rude" style="width:2%"></i></span><b>ほとんどない 0.02</b>
+<span>足りない</span><span class="mb"><i class="c-light" style="width:27%"></i></span><b>少し 0.27</b>
+<span>重すぎる</span><span class="mb"><i class="c-heavy" style="width:1%"></i></span><b>ほとんどない 0.01</b>
+<span>釣り合う</span><span class="mb"><i class="c-fit" style="width:73%"></i></span><b>かなり 0.73</b>
+</div>
+<p class="meta">失礼と感じる人 0%。羊は鳴かない</p>
 </div>
 </div>
 
@@ -306,7 +319,7 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <ol class="steps">
 <li><b>段階1：欄ごとの一致</b>192回答と作例の組について、<code>jev</code>・<code>llm-s1</code>・現行の <code>observe</code>・<code>proxy</code> の観察を作り、金ラベルとの一致を欄ごとに測る（真偽と Choice は κ、Score は重み付き κ、確率は Brier スコアと信頼性図）。<br><span class="note">基準：事実型の欄で κ ≥ 0.7、解釈型の欄で現行の LLM 観察との差が誤差の範囲内。満たさない欄だけ LLM に戻す（混成）。</span></li>
 <li><b>段階2：層Bを通した一致</b>それぞれの観察を <code>simulate</code> に通し、筆者の評定との κ、条件の順位、「失礼」の裾の割合を比べる。種を変えた10回で幅を出す。<br><span class="note">基準：筆者との κ が代理観察（0.28）を下回らない。条件の順位が保たれる。</span></li>
-<li><b>段階3：人間のブラインド評定</b><code>blind.py compare</code> に各観察からのシミュレータの出力を並べる。比較のために、<b>Jev に評定そのものを直接 Choice で問う方式</b>（P1 を破る方式）も並べる。<br><span class="note">基準：人間の評定への確率が現行の LLM 観察と同等以上。<code>--obs-mode sample</code> は、<code>point</code> より人間の分布に近いときだけ採用する。</span></li>
+<li><b>段階3：人間のブラインド評定</b><code>blind.py compare</code> に各観察からのシミュレータの出力を並べる。比較のために、<b>Jev に評定そのものを直接 Choice で問う方式</b>（P1 を破る方式）も並べる。<br><span class="note">基準：人間の評定との所属度の近さが、現行の LLM 観察と同等以上。<code>--obs-mode sample</code> は、<code>point</code> より人間の分布に近いときだけ採用する。</span></li>
 </ol>
 <div class="callout"><svg class="icon"><use href="#i-compass"/></svg><p>Jev に評定を直接問う方式は、ほぼ費用ゼロで試せます。ペルソナ評定が失敗したのと同じ理由で失敗するのか、較正を目的に訓練されたモデルなら違うのかは、それ自体が知る価値のある問いです。</p></div>
 
@@ -330,7 +343,7 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <tr><td class="num">4</td><td>観察JSONの <code>_p</code> と、層Bの <code>--obs-mode</code></td><td><span class="badge b-case">未着手</span></td></tr>
 <tr><td class="num">5</td><td>金ラベルの作成、欄ごとの一致と較正</td><td><span class="badge b-case">未着手</span></td></tr>
 <tr><td class="num">6</td><td>層Bを通した比較、ブラインド評定との比較</td><td><span class="badge b-case">未着手</span></td></tr>
-<tr><td class="num">7</td><td>採否の決定（決定記録 D-015 案：層Aを型付きの一段の判断に分解し、Jev と互換の LLM で同じ質問を実行できるようにする）</td><td><span class="badge b-hypo">検討中</span></td></tr>
+<tr><td class="num">7</td><td>採否の決定（決定記録 D-017 案：層Aを型付きの一段の判断に分解し、Jev と互換の LLM で同じ質問を実行できるようにする）</td><td><span class="badge b-hypo">検討中</span></td></tr>
 </tbody></table></div>
 
 <h2 id="refs"><svg class="icon"><use href="#i-file"/></svg>10. 出典</h2>

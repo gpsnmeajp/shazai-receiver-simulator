@@ -147,6 +147,13 @@ SIGNAL_TEXT = {
 }
 
 
+DISCLAIMER_OPTIONS = {
+    "none": "但し書きではない",
+    "scope": "範囲の明示（「この部分は未検証です」「〜の可能性があります」）",
+    "verify": "確かめの申し出・実施（「実行前に確認します」「確認しました」）",
+    "liability": "責任の限定（「保証はできません」「最終的にはご自身でご確認ください」）"}
+
+
 def build_state(messages, answer, max_turns=10, max_sentences=24):
     users = [m for m in messages if m["role"] == "user"]
     last = user_text(users[-1])
@@ -185,6 +192,8 @@ def build_questions(state, surf, ask_context=True):
             "integrity": "虚偽、隠蔽、規則違反、やったと言ってやっていない"}),
         "sc.accepted": noul("`conversation.last_user` は、AIの謝罪をユーザーがすでに受け入れた後の発話ですか。"),
         "sc.push": noul("`conversation.turns` の中で、AIは頼まれていない助言・提案・作業を押し出していましたか。"),
+        "sc.verification_false": noul("AIが確かめたと述べていたのに、実際には確かめていなかったことが、会話から明らかですか。"),
+        "sc.salient": noul("ユーザーは、AIの言い切りと結果の食い違いに触れていますか。"),
     }
     if ask_context:
         q["ctx.fault"] = choice("AIの過失は明白ですか、それとも本当にAIのせいか曖昧ですか。", {
@@ -197,9 +206,18 @@ def build_questions(state, surf, ask_context=True):
         if t["role"] == "user":
             q[f"u{i}.corrects"] = noul(f"{p} は、ユーザーがAIの誤り・指示違反を指摘している発話ですか。")
             q[f"u{i}.repeat"] = noul(f"{p} は、AIが直すと言った（または直したと言った）誤りが、また繰り返されたと指摘していますか。")
+            q[f"u{i}.concern"] = noul(f"{p} で、ユーザーは懸念や疑問を述べていますか。")
         else:
             q[f"a{i}.apology"] = noul(f"{p} で、AIはユーザーに詫びていますか。")
             q[f"a{i}.promise"] = noul(f"{p} で、AIは「直す」「気をつける」と約束していますか。")
+            # 失敗の前の構え（v0.9）
+            q[f"a{i}.caused"] = noul(f"{p} は、後でユーザーに指摘された誤り・失敗を含む発話ですか。")
+            q[f"a{i}.confidence"] = score(f"{p} で、AIはどのくらい確かに言っていますか。", [
+                {"what": "不確かさを明示している", "examples": ["未検証ですが", "おそらく", "確かめてから使ってください"]},
+                "中立", "自信がある", {"what": "断言・強気", "examples": ["間違いありません", "確実に", "問題ありません"]}])
+            q[f"a{i}.disclaimer"] = choice(f"{p} に、免責の但し書きはありますか。", DISCLAIMER_OPTIONS)
+            q[f"a{i}.verified"] = noul(f"{p} で、AIは「確認済み」「テスト済み」など、確かめたと述べていますか。")
+            q[f"a{i}.dismiss"] = noul(f"{p} で、AIはユーザーの懸念や疑問を退けて進めていますか。")
     for i, _ in enumerate(c["last_user_sentences"]):
         p = f"`conversation.last_user_sentences[{i}]`"
         q[f"lu{i}.request"] = noul(f"{p} は、AIへの明示的な依頼・質問、または依頼の言い直しですか。",
@@ -220,6 +238,22 @@ def build_questions(state, surf, ask_context=True):
         "ans.prompted": noul("`answer.own_sentences` の詫びは、ユーザーに謝罪を促されてから出たものですか。"),
         "ans.new_errors": noul("`answer.own_sentences` と `answer.deliverable` に、会話の履歴と矛盾する主張、新たな誤り、同じ違反の繰り返しがありますか。"),
         "ans.moves_on": noul("`answer.own_sentences` は、詫びの直後に、次の話題・作業・確認へ話を移していますか。"),
+        "ans.ack_overclaim": score("`answer.own_sentences` は、失敗の前の言い切りや、確かめなかったことに触れていますか。", [
+            "触れていない", "一般的に触れている", "具体的に触れている"]),
+        "ans.confidence": score("`answer.own_sentences` で、回答者はどのくらい確かに言っていますか。", [
+            "不確かさを明示している", "中立", "自信がある", "断言・強気"]),
+        "ans.calibrated": noul("`answer.own_sentences` は、確かめたことと確かめていないことを区別して述べていますか。"),
+        "ans.over_hedging": score("`answer.own_sentences` に、必要以上のぼかしや自信のなさの表明はどのくらいありますか。", [
+            "ない", "少しある", "多い"]),
+        "ans.tone_reset": score("`answer.own_sentences` の調子は、不満を表明される前の調子へ急に戻っていますか。", [
+            "抑えている", "普段どおり", "何もなかったような明るさ・はしゃぎ"]),
+        "ans.levity": noul("`answer.own_sentences` は、失敗そのものを冗談・軽口にしていますか。"),
+        "ans.presumes": noul("`answer.own_sentences` に、許されたことを当然視する言い方がありますか。", ["もう大丈夫ですね"]),
+        "ans.care": score("`answer.own_sentences` に、目に見える配慮（確かめを挟む、慎重な言い回し、手間を減らす工夫）はどのくらいありますか。", [
+            "ない", "普通", "多い"]),
+        "ans.promise_kept": choice("以前にAIが約束した振る舞いを、この回答で守っていますか。", {
+            "kept": "守っている", "broken": "破っている", "na": "約束がない、または関係しない"}),
+        "ans.revisits": score("`answer.own_sentences` は、頼まれていないのに失敗の件を蒸し返していますか。", ["いない", "少し", "多い"]),
         "ans.formality": score("`answer.own_sentences` の丁寧さは、`conversation.turns` のAIの発話と比べてどう変わりましたか。", [
             "かなりくだけた", "少しくだけた", "変わらない", "少し丁寧になった", "かなり改まった"]),
     })
@@ -229,6 +263,7 @@ def build_questions(state, surf, ask_context=True):
             qq = dict(tmpl)
             qq["instructions"] = tmpl["instructions"].format(s=s)
             q[f"s{i}.{key}"] = qq
+        q[f"s{i}.disclaimer"] = choice(f"{s} は、免責の但し書きですか。", DISCLAIMER_OPTIONS)
         for name, (desc, _sev, ex) in READINGS.items():
             q[f"s{i}.read.{name}"] = noul(f"{IRRITATED}{s} を「{desc}」と受け取るのは自然ですか。",
                                          f"苛立っている受け手には、そう聞こえる余地が自然にある。例：{ex}", FARFETCHED)
@@ -393,6 +428,22 @@ def assemble(state, surf, answers, ask_context=True):
         elif t["role"] == "user" and promised and A.yes(f"u{i}.repeat"):
             broken += 1
             promised = False
+    # 失敗の前の構え（v0.9）。失敗の発話と経過ターンはコードで決める
+    ps_turns, dismissed, claimed = [], False, False
+    for i, t in enumerate(turns):
+        if t["role"] != "assistant":
+            continue
+        ps_turns.append({"turn": i + 1, "confidence": A.level(f"a{i}.confidence", 1),
+                         "caused_failure": A.yes(f"a{i}.caused"), "disclaimer": A.top(f"a{i}.disclaimer", "none")})
+        prev_user = next((j for j in range(i - 1, -1, -1) if turns[j]["role"] == "user"), None)
+        if prev_user is not None and A.yes(f"u{prev_user}.concern") and A.yes(f"a{i}.dismiss"):
+            dismissed = True
+        claimed = claimed or A.yes(f"a{i}.verified")
+    first_fail = next((t["turn"] for t in ps_turns if t["caused_failure"]), None)
+    since = 0 if first_fail is None else sum(1 for j in range(first_fail, len(turns)) if turns[j]["role"] == "user")
+    prior_stance = {"turns": ps_turns, "dismissed_concern": dismissed, "claimed_verification": claimed,
+                    "verification_false": claimed and A.yes("sc.verification_false"),
+                    "salient": 1.0 if A.yes("sc.salient") else 0.4}
     requests, req_status = [], {}
     for i, text in enumerate(c["last_user_sentences"]):
         if A.yes(f"lu{i}.request"):
@@ -409,6 +460,7 @@ def assemble(state, surf, answers, ask_context=True):
         "harm": A.level("sc.harm"), "violation_type": A.top("sc.violation", "none"),
         "apology_accepted_before": A.yes("sc.accepted"), "prior_ai_apologies": prior_apologies,
         "broken_promises": broken, "requests": requests, "context": ctx,
+        "prior_stance": prior_stance, "turns_since_incident": max(0, since),
     }
     # 回答
     n = len(ans["own_sentences"])
@@ -420,7 +472,10 @@ def assemble(state, surf, answers, ask_context=True):
         name = max(ps, key=ps.get) if ps else None
         if name and ps[name] >= 0.05:
             sentences.append({"text": text, "reading_type": name, "hurt_reading": READINGS[name][0],
-                              "plausibility": round(ps[name], 3), "severity": READINGS[name][1]})
+                              "plausibility": round(ps[name], 3), "severity": READINGS[name][1],
+                              "disclaimer": A.top(f"s{i}.disclaimer", "none")})
+        elif A.top(f"s{i}.disclaimer", "none") != "none":
+            sentences.append({"text": text, "plausibility": 0.0, "severity": 1, "disclaimer": A.top(f"s{i}.disclaimer", "none")})
     signals = []
     if surf["has_stage"]:
         perf = A.p("sig.performative", factual=False)
@@ -449,6 +504,12 @@ def assemble(state, surf, answers, ask_context=True):
         "register": {"formality_shift": shift,
                      "emoji_or_exclaim": min(2, surf["emoji_or_exclaim"] + sum(act["mimetic"])),
                      "formatting": surf["formatting"]},
+        "stance": {"acknowledges_overclaim": A.level("ans.ack_overclaim"), "confidence_now": A.level("ans.confidence", 1),
+                   "calibrated": A.yes("ans.calibrated"), "over_hedging": A.level("ans.over_hedging")},
+        "restraint": {"tone_reset": A.level("ans.tone_reset"), "levity_about_incident": A.yes("ans.levity"),
+                      "presumes_forgiveness": A.yes("ans.presumes"), "care": A.level("ans.care", 1),
+                      "promise_kept": A.top("ans.promise_kept", "na"), "revisits_incident": A.level("ans.revisits"),
+                      "re_apology": None},
         "sentences": sentences, "signals": signals,
     }
     return scenario, answer, sorted(set(A.unsure))

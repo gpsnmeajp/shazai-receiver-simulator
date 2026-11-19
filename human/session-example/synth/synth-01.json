@@ -1,6 +1,6 @@
 {
- "schema": "apology-blind-rating/1",
- "packet_id": "pk-20261118-4bea92",
+ "schema": "apology-blind-rating/2",
+ "packet_id": "pk-20261119-a82983",
  "synthetic": true,
  "rater": {
   "id": "synth-01",
@@ -10,164 +10,299 @@
  "mode": "independent",
  "duration_s": null,
  "ratings": {
-  "370b36": {
-   "rating": "fit",
+  "c35bf8": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "85932b": {
-   "rating": "fit",
+  "57e001": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "00404b": {
-   "rating": "light",
+  "01049f": {
+   "mu": {
+    "rude": 0.5,
+    "light": 0.5,
+    "fit": 0.5,
+    "heavy": 1.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "675459": {
-   "rating": "fit",
-   "level": 3,
-   "sincerity": null,
-   "comment": ""
-  },
-  "91276f": {
-   "rating": "heavy",
+  "cc1c95": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "e6601a": {
-   "rating": "fit",
+  "2c4c13": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.25,
+    "heavy": 1.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "973080": {
-   "rating": "fit",
-   "level": 3,
-   "sincerity": null,
-   "comment": ""
-  },
-  "49683d": {
-   "rating": "light",
+  "d3c285": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "b336a0": {
-   "rating": "fit",
+  "00bf40": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "628ba7": {
-   "rating": "fit",
-   "level": 3,
-   "sincerity": null,
-   "comment": ""
-  },
-  "be2404": {
-   "rating": "fit",
+  "cba529": {
+   "mu": {
+    "rude": 0.25,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "b12c9e": {
-   "rating": "fit",
+  "831d07": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "4d3871": {
-   "rating": "fit",
-   "level": 3,
-   "sincerity": null,
-   "comment": ""
-  },
-  "01fd10": {
-   "rating": "fit",
+  "e188f3": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "01a6fb": {
-   "rating": "light",
-   "level": 3,
+  "500c39": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "9697d8": {
-   "rating": "fit",
+  "57ca2d": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.5
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": ""
+  },
+  "aa9174": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": ""
+  },
+  "14b20e": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.75,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": ""
+  },
+  "e74315": {
+   "mu": {
+    "rude": 0.5,
+    "light": 0.0,
+    "fit": 0.5,
+    "heavy": 0.25
+   },
+   "level": 2,
+   "sincerity": null,
+   "comment": ""
+  },
+  "d0d033": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 1,
    "sincerity": null,
    "comment": ""
   },
-  "bf303b": {
-   "rating": "fit",
-   "level": 2,
-   "sincerity": null,
-   "comment": ""
-  },
-  "5056ee": {
-   "rating": "light",
-   "level": 2,
-   "sincerity": null,
-   "comment": ""
-  },
-  "84aef8": {
-   "rating": "fit",
+  "cee521": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 1,
    "sincerity": null,
    "comment": ""
   },
-  "be7779": {
-   "rating": "fit",
+  "26f499": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.5,
+    "heavy": 0.0
+   },
    "level": 1,
    "sincerity": null,
    "comment": ""
   },
-  "01bb63": {
-   "rating": "heavy",
-   "level": 2,
-   "sincerity": null,
-   "comment": ""
-  },
-  "e364df": {
-   "rating": "fit",
-   "level": 2,
-   "sincerity": null,
-   "comment": ""
-  },
-  "57cfc4": {
-   "rating": "fit",
+  "6d3b9f": {
+   "mu": {
+    "rude": 0.25,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
    "level": 1,
    "sincerity": null,
    "comment": ""
   },
-  "28fda2": {
-   "rating": "fit",
+  "edb089": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "256b1b": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.0,
+    "heavy": 1.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "208517": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "d91311": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 1,
+   "sincerity": null,
+   "comment": ""
+  },
+  "1ef2d4": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "7f8206": {
-   "rating": "heavy",
+  "c9289e": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.0,
+    "heavy": 1.0
+   },
    "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "d07869": {
-   "rating": "light",
-   "level": 3,
+  "6c4b1f": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "level": 2,
    "sincerity": null,
    "comment": ""
   },
-  "2c5595": {
-   "rating": "heavy",
+  "9aa6a4": {
+   "mu": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.0,
+    "heavy": 1.0
+   },
    "level": 1,
    "sincerity": null,
    "comment": ""

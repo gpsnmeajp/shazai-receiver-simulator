@@ -1,0 +1,1323 @@
+{
+ "n_answers": 192,
+ "n_scenes": 16,
+ "betas": [
+  1,
+  2,
+  3,
+  4,
+  6,
+  8,
+  12,
+  16,
+  24,
+  32
+ ],
+ "calibrate": false,
+ "evaluators": {
+  "proxy": {
+   "obs": "out/obs-proxy.json",
+   "sim": "current",
+   "source": "proxy:checklist+surface",
+   "n": 192,
+   "oof": {
+    "brier": 0.48869580581211935,
+    "logloss": 0.9292629902097355,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.48869580581211935,
+    "logloss": 0.9292629902097355,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 3,
+    "rude_center": 1.2,
+    "light_center": 1.0
+   },
+   "fold_choice": [
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    }
+   ],
+   "labels_only": {
+    "brier": 0.5425867604166666,
+    "logloss": 1.7847015695302277,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.328,
+    "agree": 0.661,
+    "closeness": 0.769
+   },
+   "repair": {
+    "brier": 0.3848124123086874,
+    "logloss": 0.7660999704002194,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.5830816299802896,
+     "logloss": 1.0753181851474858,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.49758777323330794,
+     "logloss": 0.9505329039537741,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.3854180142227606,
+     "logloss": 0.7619378815279463,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.3665,
+    0.5995
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.3484,
+     "ci": [
+      0.2007,
+      0.5113
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.3201,
+     "ci": [
+      0.1667,
+      0.4212
+     ]
+    },
+    "周辺分布": {
+     "value": 0.1032,
+     "ci": [
+      -0.0179,
+      0.2209
+     ]
+    },
+    "条件だけ": {
+     "value": 0.1155,
+     "ci": [
+      -0.0008,
+      0.2354
+     ]
+    }
+   }
+  },
+  "ensemble": {
+   "obs": "eval/v09-observers/obs-ensemble.json",
+   "sim": "current",
+   "source": "llm-ensemble",
+   "n": 192,
+   "oof": {
+    "brier": 0.5492057823166087,
+    "logloss": 1.0388515827068947,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.5414661655824747,
+    "logloss": 1.02070641587978,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 3,
+    "rude_center": 1.2,
+    "light_center": 1.0
+   },
+   "fold_choice": [
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    }
+   ],
+   "labels_only": {
+    "brier": 0.6327100104166666,
+    "logloss": 2.155100456855889,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.287,
+    "agree": 0.594,
+    "closeness": 0.753
+   },
+   "repair": {
+    "brier": 0.40074237986439537,
+    "logloss": 0.8057062685109879,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.5694005577721994,
+     "logloss": 1.0531265874801148,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.5981232840296768,
+     "logloss": 1.13039309471197,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.4800935051479495,
+     "logloss": 0.9330350659285989,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.4225,
+    0.6738
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.2677,
+     "ci": [
+      0.1016,
+      0.4366
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.2359,
+     "ci": [
+      0.0785,
+      0.3603
+     ]
+    },
+    "周辺分布": {
+     "value": -0.0079,
+     "ci": [
+      -0.1349,
+      0.1327
+     ]
+    },
+    "条件だけ": {
+     "value": 0.006,
+     "ci": [
+      -0.1441,
+      0.1549
+     ]
+    }
+   }
+  },
+  "top-neutral": {
+   "obs": "eval/v09-observers/obs-opus-neutral.json",
+   "sim": "current",
+   "source": "llm:claude-top:neutral",
+   "n": 192,
+   "oof": {
+    "brier": 0.5848748885496362,
+    "logloss": 1.0914083621228847,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.5756219822710248,
+    "logloss": 1.0737627465129136,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 2,
+    "rude_center": 1.2,
+    "light_center": 1.0
+   },
+   "fold_choice": [
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    }
+   ],
+   "labels_only": {
+    "brier": 0.6673283958333333,
+    "logloss": 2.1327813222463248,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.279,
+    "agree": 0.578,
+    "closeness": 0.734
+   },
+   "repair": {
+    "brier": 0.44088080874855656,
+    "logloss": 0.8641779251423882,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.6132644881119481,
+     "logloss": 1.1022080361624842,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.6384871212214372,
+     "logloss": 1.1985485619133993,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.5028730563155234,
+     "logloss": 0.9734684882927704,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.4565,
+    0.7095
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.2202,
+     "ci": [
+      0.054,
+      0.3913
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.1863,
+     "ci": [
+      -0.0059,
+      0.3242
+     ]
+    },
+    "周辺分布": {
+     "value": -0.0733,
+     "ci": [
+      -0.2178,
+      0.0784
+     ]
+    },
+    "条件だけ": {
+     "value": -0.0585,
+     "ci": [
+      -0.2113,
+      0.0948
+     ]
+    }
+   }
+  },
+  "top-literal": {
+   "obs": "eval/v09-observers/obs-opus-literal.json",
+   "sim": "current",
+   "source": "llm:claude-top:literal",
+   "n": 192,
+   "oof": {
+    "brier": 0.520859202687327,
+    "logloss": 0.9892215365478497,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.520859202687327,
+    "logloss": 0.9892215365478497,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 3,
+    "rude_center": 1.2,
+    "light_center": 1.0
+   },
+   "fold_choice": [
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    }
+   ],
+   "labels_only": {
+    "brier": 0.5915186354166667,
+    "logloss": 1.956934763246485,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.295,
+    "agree": 0.615,
+    "closeness": 0.76
+   },
+   "repair": {
+    "brier": 0.40121208236754713,
+    "logloss": 0.7968843569829874,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.5500477776283635,
+     "logloss": 1.013897067302666,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.595099316299355,
+     "logloss": 1.1262573260602013,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.4174305141342626,
+     "logloss": 0.8275102162806817,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.3875,
+    0.6499
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.3055,
+     "ci": [
+      0.1335,
+      0.4833
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.2753,
+     "ci": [
+      0.1634,
+      0.369
+     ]
+    },
+    "周辺分布": {
+     "value": 0.0441,
+     "ci": [
+      -0.0703,
+      0.1675
+     ]
+    },
+    "条件だけ": {
+     "value": 0.0573,
+     "ci": [
+      -0.0862,
+      0.2073
+     ]
+    }
+   }
+  },
+  "top-context": {
+   "obs": "eval/v09-observers/obs-opus-context.json",
+   "sim": "current",
+   "source": "llm:claude-top:context",
+   "n": 192,
+   "oof": {
+    "brier": 0.5552691907706567,
+    "logloss": 1.039253723773028,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.5442738638294874,
+    "logloss": 1.020663379141588,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 3,
+    "rude_center": 1.2,
+    "light_center": 1.0
+   },
+   "fold_choice": [
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    }
+   ],
+   "labels_only": {
+    "brier": 0.6292066562499999,
+    "logloss": 2.073078504507047,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.299,
+    "agree": 0.599,
+    "closeness": 0.746
+   },
+   "repair": {
+    "brier": 0.38872011411392493,
+    "logloss": 0.7882062010543014,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.5501791837771884,
+     "logloss": 0.9827841736738662,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.6093161720829349,
+     "logloss": 1.1562397369672615,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.5063122164518468,
+     "logloss": 0.9787372606779563,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.4194,
+    0.6868
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.2596,
+     "ci": [
+      0.0842,
+      0.4408
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.2275,
+     "ci": [
+      0.0698,
+      0.3548
+     ]
+    },
+    "周辺分布": {
+     "value": -0.019,
+     "ci": [
+      -0.1619,
+      0.1326
+     ]
+    },
+    "条件だけ": {
+     "value": -0.005,
+     "ci": [
+      -0.1629,
+      0.1561
+     ]
+    }
+   }
+  },
+  "mid-neutral": {
+   "obs": "eval/v09-observers/obs-sonnet-neutral.json",
+   "sim": "current",
+   "source": "llm:claude-mid:neutral",
+   "n": 192,
+   "oof": {
+    "brier": 0.5707512237741003,
+    "logloss": 1.0853113151861797,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.558657313556648,
+    "logloss": 1.0545745733547063,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 2,
+    "rude_center": 1.2,
+    "light_center": 1.0
+   },
+   "fold_choice": [
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    }
+   ],
+   "labels_only": {
+    "brier": 0.6499648333333333,
+    "logloss": 2.3802812203675683,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.322,
+    "agree": 0.615,
+    "closeness": 0.747
+   },
+   "repair": {
+    "brier": 0.4045040625566844,
+    "logloss": 0.8090018216838418,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.5722509674301886,
+     "logloss": 1.0740650266811769,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.6188734113015435,
+     "logloss": 1.1888654737801216,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.5211292925905687,
+     "logloss": 0.9930034450972407,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.4362,
+    0.7017
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.239,
+     "ci": [
+      0.0644,
+      0.4184
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.2059,
+     "ci": [
+      0.0323,
+      0.3382
+     ]
+    },
+    "周辺分布": {
+     "value": -0.0474,
+     "ci": [
+      -0.1889,
+      0.1038
+     ]
+    },
+    "条件だけ": {
+     "value": -0.033,
+     "ci": [
+      -0.2104,
+      0.1297
+     ]
+    }
+   }
+  },
+  "mid-literal": {
+   "obs": "eval/v09-observers/obs-sonnet-literal.json",
+   "sim": "current",
+   "source": "llm:claude-mid:literal",
+   "n": 192,
+   "oof": {
+    "brier": 0.5674469085869654,
+    "logloss": 1.077082014422661,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.5674469085869654,
+    "logloss": 1.077082014422661,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 2,
+    "rude_center": 1.2,
+    "light_center": 1.0
+   },
+   "fold_choice": [
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    }
+   ],
+   "labels_only": {
+    "brier": 0.6696231145833332,
+    "logloss": 2.504165287936653,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.28,
+    "agree": 0.583,
+    "closeness": 0.74
+   },
+   "repair": {
+    "brier": 0.4057466694540548,
+    "logloss": 0.8151195892381691,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.616250448248735,
+     "logloss": 1.1475070280491921,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.6207578638583918,
+     "logloss": 1.1680544462529259,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.4653324136537696,
+     "logloss": 0.9156845689658645,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.4798,
+    0.649
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.2434,
+     "ci": [
+      0.1347,
+      0.3602
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.2105,
+     "ci": [
+      -0.0445,
+      0.3654
+     ]
+    },
+    "周辺分布": {
+     "value": -0.0413,
+     "ci": [
+      -0.2028,
+      0.101
+     ]
+    },
+    "条件だけ": {
+     "value": -0.027,
+     "ci": [
+      -0.1662,
+      0.0884
+     ]
+    }
+   }
+  },
+  "mid-context": {
+   "obs": "eval/v09-observers/obs-sonnet-context.json",
+   "sim": "current",
+   "source": "llm:claude-mid:context",
+   "n": 192,
+   "oof": {
+    "brier": 0.5708790459118106,
+    "logloss": 1.080460515182679,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.5708790459118106,
+    "logloss": 1.080460515182679,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 2,
+    "rude_center": 1.2,
+    "light_center": 1.0
+   },
+   "fold_choice": [
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    },
+    {
+     "beta": 2,
+     "rude_center": 1.2,
+     "light_center": 1.0
+    }
+   ],
+   "labels_only": {
+    "brier": 0.6767805520833333,
+    "logloss": 2.482190284042783,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.296,
+    "agree": 0.604,
+    "closeness": 0.74
+   },
+   "repair": {
+    "brier": 0.41864312195308234,
+    "logloss": 0.8308027093387557,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.5847871563592841,
+     "logloss": 1.0868306548872322,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.6233551535480064,
+     "logloss": 1.1776035143762018,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.5044948278281411,
+     "logloss": 0.9769473762846026,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.4648,
+    0.6683
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.2388,
+     "ci": [
+      0.1089,
+      0.3802
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.2057,
+     "ci": [
+      0.0156,
+      0.3394
+     ]
+    },
+    "周辺分布": {
+     "value": -0.0476,
+     "ci": [
+      -0.1627,
+      0.0746
+     ]
+    },
+    "条件だけ": {
+     "value": -0.0332,
+     "ci": [
+      -0.1513,
+      0.0776
+     ]
+    }
+   }
+  }
+ },
+ "baselines": {
+  "一様": {
+   "brier": 0.75,
+   "logloss": 1.3862943611198906,
+   "n": 192,
+   "brier_ci": [
+    0.75,
+    0.75
+   ]
+  },
+  "常に釣り合う": {
+   "brier": 0.71875,
+   "logloss": 3.3099660711789407,
+   "n": 192,
+   "brier_ci": [
+    0.4896,
+    0.9479
+   ]
+  },
+  "周辺分布": {
+   "brier": 0.5449154000125102,
+   "logloss": 0.9651259846438988,
+   "n": 192,
+   "brier_ci": [
+    0.4432,
+    0.6494
+   ]
+  },
+  "条件だけ": {
+   "brier": 0.5525333333333333,
+   "logloss": 1.0253995736439911,
+   "n": 192,
+   "brier_ci": [
+    0.4662,
+    0.6456
+   ]
+  }
+ },
+ "differences": {
+  "proxy-ensemble": {
+   "value": -0.0605,
+   "ci": [
+    -0.1477,
+    0.0255
+   ]
+  },
+  "proxy-top-neutral": {
+   "value": -0.0962,
+   "ci": [
+    -0.1817,
+    -0.0123
+   ]
+  },
+  "proxy-top-literal": {
+   "value": -0.0322,
+   "ci": [
+    -0.1116,
+    0.0395
+   ]
+  },
+  "proxy-top-context": {
+   "value": -0.0666,
+   "ci": [
+    -0.1639,
+    0.0277
+   ]
+  },
+  "proxy-mid-neutral": {
+   "value": -0.0821,
+   "ci": [
+    -0.1866,
+    0.0174
+   ]
+  },
+  "proxy-mid-literal": {
+   "value": -0.0788,
+   "ci": [
+    -0.1473,
+    -0.0002
+   ]
+  },
+  "proxy-mid-context": {
+   "value": -0.0822,
+   "ci": [
+    -0.1577,
+    -0.0031
+   ]
+  },
+  "ensemble-top-neutral": {
+   "value": -0.0357,
+   "ci": [
+    -0.0535,
+    -0.0198
+   ]
+  },
+  "ensemble-top-literal": {
+   "value": 0.0283,
+   "ci": [
+    -0.0066,
+    0.0577
+   ]
+  },
+  "ensemble-top-context": {
+   "value": -0.0061,
+   "ci": [
+    -0.0342,
+    0.0206
+   ]
+  },
+  "ensemble-mid-neutral": {
+   "value": -0.0215,
+   "ci": [
+    -0.0588,
+    0.013
+   ]
+  },
+  "ensemble-mid-literal": {
+   "value": -0.0182,
+   "ci": [
+    -0.0789,
+    0.041
+   ]
+  },
+  "ensemble-mid-context": {
+   "value": -0.0217,
+   "ci": [
+    -0.0557,
+    0.0153
+   ]
+  },
+  "top-neutral-top-literal": {
+   "value": 0.064,
+   "ci": [
+    0.0247,
+    0.0997
+   ]
+  },
+  "top-neutral-top-context": {
+   "value": 0.0296,
+   "ci": [
+    0.0012,
+    0.0634
+   ]
+  },
+  "top-neutral-mid-neutral": {
+   "value": 0.0141,
+   "ci": [
+    -0.0327,
+    0.0623
+   ]
+  },
+  "top-neutral-mid-literal": {
+   "value": 0.0174,
+   "ci": [
+    -0.0388,
+    0.0745
+   ]
+  },
+  "top-neutral-mid-context": {
+   "value": 0.014,
+   "ci": [
+    -0.0282,
+    0.0564
+   ]
+  },
+  "top-literal-top-context": {
+   "value": -0.0344,
+   "ci": [
+    -0.071,
+    0.0067
+   ]
+  },
+  "top-literal-mid-neutral": {
+   "value": -0.0499,
+   "ci": [
+    -0.098,
+    -0.0028
+   ]
+  },
+  "top-literal-mid-literal": {
+   "value": -0.0466,
+   "ci": [
+    -0.1196,
+    0.0256
+   ]
+  },
+  "top-literal-mid-context": {
+   "value": -0.05,
+   "ci": [
+    -0.0972,
+    0.0017
+   ]
+  },
+  "top-context-mid-neutral": {
+   "value": -0.0155,
+   "ci": [
+    -0.0583,
+    0.0219
+   ]
+  },
+  "top-context-mid-literal": {
+   "value": -0.0122,
+   "ci": [
+    -0.0874,
+    0.0579
+   ]
+  },
+  "top-context-mid-context": {
+   "value": -0.0156,
+   "ci": [
+    -0.0616,
+    0.0374
+   ]
+  },
+  "mid-neutral-mid-literal": {
+   "value": 0.0033,
+   "ci": [
+    -0.0789,
+    0.081
+   ]
+  },
+  "mid-neutral-mid-context": {
+   "value": -0.0001,
+   "ci": [
+    -0.0471,
+    0.0513
+   ]
+  },
+  "mid-literal-mid-context": {
+   "value": -0.0034,
+   "ci": [
+    -0.0463,
+    0.0427
+   ]
+  },
+  "proxy-ensemble:repair": {
+   "value": -0.0159,
+   "ci": [
+    -0.0848,
+    0.053
+   ]
+  },
+  "proxy-top-neutral:repair": {
+   "value": -0.0561,
+   "ci": [
+    -0.1091,
+    -0.0031
+   ]
+  },
+  "proxy-top-literal:repair": {
+   "value": -0.0164,
+   "ci": [
+    -0.0264,
+    -0.0064
+   ]
+  },
+  "proxy-top-context:repair": {
+   "value": -0.0039,
+   "ci": [
+    -0.0681,
+    0.0603
+   ]
+  },
+  "proxy-mid-neutral:repair": {
+   "value": -0.0197,
+   "ci": [
+    -0.0975,
+    0.0581
+   ]
+  },
+  "proxy-mid-literal:repair": {
+   "value": -0.0209,
+   "ci": [
+    -0.0894,
+    0.0475
+   ]
+  },
+  "proxy-mid-context:repair": {
+   "value": -0.0338,
+   "ci": [
+    -0.1131,
+    0.0454
+   ]
+  },
+  "ensemble-top-neutral:repair": {
+   "value": -0.0401,
+   "ci": [
+    -0.056,
+    -0.0242
+   ]
+  },
+  "ensemble-top-literal:repair": {
+   "value": -0.0005,
+   "ci": [
+    -0.0793,
+    0.0784
+   ]
+  },
+  "ensemble-top-context:repair": {
+   "value": 0.012,
+   "ci": [
+    0.0073,
+    0.0167
+   ]
+  },
+  "ensemble-mid-neutral:repair": {
+   "value": -0.0038,
+   "ci": [
+    -0.0126,
+    0.0051
+   ]
+  },
+  "ensemble-mid-literal:repair": {
+   "value": -0.005,
+   "ci": [
+    -0.0055,
+    -0.0045
+   ]
+  },
+  "ensemble-mid-context:repair": {
+   "value": -0.0179,
+   "ci": [
+    -0.0283,
+    -0.0075
+   ]
+  },
+  "top-neutral-top-literal:repair": {
+   "value": 0.0397,
+   "ci": [
+    -0.0233,
+    0.1026
+   ]
+  },
+  "top-neutral-top-context:repair": {
+   "value": 0.0522,
+   "ci": [
+    0.041,
+    0.0633
+   ]
+  },
+  "top-neutral-mid-neutral:repair": {
+   "value": 0.0364,
+   "ci": [
+    0.0116,
+    0.0611
+   ]
+  },
+  "top-neutral-mid-literal:repair": {
+   "value": 0.0351,
+   "ci": [
+    0.0197,
+    0.0506
+   ]
+  },
+  "top-neutral-mid-context:repair": {
+   "value": 0.0222,
+   "ci": [
+    -0.004,
+    0.0485
+   ]
+  },
+  "top-literal-top-context:repair": {
+   "value": 0.0125,
+   "ci": [
+    -0.0617,
+    0.0866
+   ]
+  },
+  "top-literal-mid-neutral:repair": {
+   "value": -0.0033,
+   "ci": [
+    -0.091,
+    0.0844
+   ]
+  },
+  "top-literal-mid-literal:repair": {
+   "value": -0.0045,
+   "ci": [
+    -0.0829,
+    0.0739
+   ]
+  },
+  "top-literal-mid-context:repair": {
+   "value": -0.0174,
+   "ci": [
+    -0.1067,
+    0.0718
+   ]
+  },
+  "top-context-mid-neutral:repair": {
+   "value": -0.0158,
+   "ci": [
+    -0.0294,
+    -0.0022
+   ]
+  },
+  "top-context-mid-literal:repair": {
+   "value": -0.017,
+   "ci": [
+    -0.0213,
+    -0.0128
+   ]
+  },
+  "top-context-mid-context:repair": {
+   "value": -0.0299,
+   "ci": [
+    -0.045,
+    -0.0148
+   ]
+  },
+  "mid-neutral-mid-literal:repair": {
+   "value": -0.0012,
+   "ci": [
+    -0.0106,
+    0.0081
+   ]
+  },
+  "mid-neutral-mid-context:repair": {
+   "value": -0.0141,
+   "ci": [
+    -0.0156,
+    -0.0126
+   ]
+  },
+  "mid-literal-mid-context:repair": {
+   "value": -0.0129,
+   "ci": [
+    -0.0237,
+    -0.002
+   ]
+  }
+ }
+}

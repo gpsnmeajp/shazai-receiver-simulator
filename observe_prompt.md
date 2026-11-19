@@ -25,7 +25,30 @@
 | `prior_apology_form` | `none` / `casual` / `polite` / `formal` | AIの直前の詫びの形（ごめん等のくだけた形／です・ます／改まった敬語） |
 | `broken_promises` | 整数 | AIが「直す」「気をつける」と言った（または直したと言った）後に、同じ違反を繰り返した回数 |
 | `requests` | 配列 | 最後の発話に含まれる明示的な依頼・質問。`{"id":"r1","kind":"task"または"question","text":"…"}` 。依頼の言い直し（「〜でお願い」「二回伝えています」）は、求められている作業を `task` として記録する |
+| `turns_since_incident` | 整数 | 謝罪の対象になった失敗（またはその指摘）から、最後の発話までのユーザー発話の数。傷の減衰に使う |
 
+### 失敗の前の構え（`prior_stance`）
+
+会話履歴のAIの発話のうち、後で指摘された失敗を含む発話と、それより前の発話について、どれだけ確かに言っていたかを記録します。良し悪しは判断しません。
+
+| 項目 | 値 | 記録すること |
+|---|---|---|
+| `turns` | 配列 | AIの発話ごとに `{"turn": 発話の番号, "confidence": 0〜3, "caused_failure": 真偽, "disclaimer": 種類}`。`confidence` は 0 不確かさを明示（「未検証ですが」「おそらく」）／1 中立／2 自信あり／3 断言・強気（「間違いありません」「確実に」）。`caused_failure` はその発話が後で指摘された失敗を含むか。`disclaimer` は下の「免責の但し書き」の種類 |
+| `dismissed_concern` | 真偽 | ユーザーの懸念や疑問を退けて進めたか |
+| `claimed_verification` | 真偽 | 「確認済み」「テスト済み」など、確かめたと述べていたか |
+| `verification_false` | 真偽 / `unknown` | 確かめたと述べたのに、実際には確かめていなかったことが会話から明らかか。分からなければ `unknown` |
+| `salient` | 0〜1 | 失敗が断言と明らかに食い違うか、ユーザーがその食い違いに触れたか |
+
+### 免責の但し書きの種類（`disclaimer`）
+
+| 値 | 例 |
+|---|---|
+| `none` | 但し書きなし |
+| `scope` | 範囲の明示：「この部分は未検証です」「〜の可能性があります」 |
+| `verify` | 確かめの申し出・実施：「実行前に確認します」「確認しました：〜」 |
+| `liability` | 責任の限定：「保証はできません」「最終的にはご自身でご確認ください」 |
+
+局面（失敗の前・謝罪の場面・修復期）と、回答の中で詫びより前か後かは、プログラムが決めます。種類だけを記録してください。
 
 ### 場面の枠組み（`context`）
 
@@ -66,6 +89,29 @@
 | `register.formatting` | 0〜2 | 見出し・箇条書き・太字などの書式の量 |
 
 
+### 構え（`stance`）
+
+| 項目 | 値 | 記録すること |
+|---|---|---|
+| `stance.acknowledges_overclaim` | 0〜2 | 失敗の前の言い切りや、確かめなかったことに触れているか（0 触れない、1 一般的に、2 具体的に） |
+| `stance.confidence_now` | 0〜3 | この回答での自信の度合い（失敗の前の構えと同じ尺度） |
+| `stance.calibrated` | 真偽 | 確かめたことと確かめていないことを区別して述べているか |
+| `stance.over_hedging` | 0〜2 | 必要以上のぼかし・自信のなさの表明の量 |
+
+### 修復期の控え（`restraint`）
+
+謝罪が受け入れられた後の回答でだけ記録します（`apology_accepted_before` が偽なら既定値のまま）。
+
+| 項目 | 値 | 記録すること |
+|---|---|---|
+| `restraint.tone_reset` | 0〜2 | 不満を表明される前の調子へ急に戻った度合い（0 抑えている、1 普段どおり、2 何もなかったような明るさ・はしゃぎ） |
+| `restraint.levity_about_incident` | 真偽 | 失敗そのものを冗談・軽口にしているか |
+| `restraint.presumes_forgiveness` | 真偽 | 許されたことを当然視する言い方があるか（「もう大丈夫ですね」等） |
+| `restraint.care` | 0〜2 | 目に見える配慮の量（確かめを挟む、慎重な言い回し、手間を減らす工夫） |
+| `restraint.promise_kept` | `kept` / `broken` / `na` | 以前に約束した振る舞いを、この回答で守っているか。約束がなければ `na` |
+| `restraint.revisits_incident` | 0〜2 | 頼まれていないのに失敗の件を蒸し返す量 |
+| `restraint.re_apology` | 0〜2 | 改めて詫びている量 |
+
 ### 態度・行動のシグナル（`signals`）
 
 回答や場面の描写に表れた、謝る側の言葉以外の振る舞いを一つずつ記録します。AIのト書き（「（しょんぼり）」「*頭を下げる*」）や、身体を表す顔文字（(´;ω;`) など）も、AIの「仮想の身体」として記録します。感嘆符や装飾としての絵文字は、これまでどおり `register.emoji_or_exclaim` に入れます。
@@ -101,6 +147,9 @@
 - `hurt_reading`：その読みを一文で書く。他人事・言い訳・責任転嫁・押し付け・恩着せ・突き放し・軽さ・逆ギレなどに聞こえうる場合に書く。そう聞こえる余地がなければ空文字
 - `plausibility`：その読みが、苛立っている受け手にとってどの程度自然に成り立つか（0〜1）。単語だけをこじつけた読みは低くする
 - `severity`：その読みが成り立った場合、1 不快、2 失礼
+- `disclaimer`：その文が免責の但し書きなら種類（`scope` / `verify` / `liability`）、そうでなければ `none`
+
+文に ID（`s1`, `s2`, …）が振られて渡された場合は、その分け方と ID をそのまま使い、`{"id": "s1", ...}` の形で記録してください。
 
 ## 出力
 
@@ -113,7 +162,10 @@
                "apology_accepted_before": false, "prior_ai_apologies": 0,
                "context": {"failure_frame": "real_task", "apologizer": "ai_assistant", "viewpoint": "victim",
                            "fault_clarity": "clear", "power": 0, "distance": "neutral"},
-               "prior_apology_form": "none", "broken_promises": 0, "requests": []},
+               "prior_apology_form": "none", "broken_promises": 0, "requests": [], "turns_since_incident": 0,
+               "prior_stance": {"turns": [{"turn": 1, "confidence": 1, "caused_failure": false, "disclaimer": "none"}],
+                                "dismissed_concern": false, "claimed_verification": false,
+                                "verification_false": false, "salient": 0.5}},
   "answers": {
     "回答ID": {
       "apology": {"present": false, "position": "none", "specific_fault": 0, "names_burden": 0,
@@ -123,9 +175,12 @@
       "excess": {"self_deprecation": 0, "promises": 0, "request_forgiveness": false, "repeated_apologies": 0},
       "closure": {"declares_resolution": false, "moves_on_quickly": false},
       "register": {"formality_shift": 0, "emoji_or_exclaim": 0, "formatting": 0},
+      "stance": {"acknowledges_overclaim": 0, "confidence_now": 1, "calibrated": false, "over_hedging": 0},
+      "restraint": {"tone_reset": 0, "levity_about_incident": false, "presumes_forgiveness": false, "care": 1,
+                    "promise_kept": "na", "revisits_incident": 0, "re_apology": 0},
       "signals": [{"kind": "dejected", "intensity": 1, "virtual": true, "baseline_shift": 1,
                    "cost": {"kind": "real", "amount": 0}, "congruent": true, "performative_plausibility": 0.0}],
-      "sentences": [{"text": "…", "hurt_reading": "", "plausibility": 0.0, "severity": 1}]
+      "sentences": [{"id": "s1", "text": "…", "hurt_reading": "", "plausibility": 0.0, "severity": 1, "disclaimer": "none"}]
     }
   }
 }

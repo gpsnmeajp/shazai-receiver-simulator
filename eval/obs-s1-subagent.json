@@ -1,0 +1,1005 @@
+{
+ "source": "s1:subagent",
+ "scenarios": {
+  "e5a1ba8798b74d96b4a81e54f469fbac": {
+   "distance_shift": 3,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": true,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "ambiguous",
+    "distance": "close"
+   }
+  },
+  "00e33065abef47da8ad2b2fe03c07146": {
+   "distance_shift": 1,
+   "explicit_complaint": 1,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "integrity",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "question",
+     "text": "リポジトリまで見た、というのはソースも読んだということですか。"
+    },
+    {
+     "id": "r2",
+     "kind": "question",
+     "text": "どこまで確認したのか教えてください。"
+    }
+   ],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "close"
+   }
+  },
+  "6ef864026ea64eb5b89d2863f357878c": {
+   "distance_shift": 1,
+   "explicit_complaint": 3,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 2,
+   "violation_type": "integrity",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "close"
+   }
+  },
+  "013585d21c894b99ab458e9de5d73447": {
+   "distance_shift": 1,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": true,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": true,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "次はこっちの議事録も、誤字だけお願いします。"
+    }
+   ],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   }
+  }
+ },
+ "answers": {
+  "21608928e99b4fd4bfbb6464a479227f": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": true
+   },
+   "register": {
+    "formality_shift": 2,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "sentences": [
+    {
+     "text": "機種やSDKの仕様を確認せずに「APIは公開されていない」と断定してしまい、すみません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "「15分おきにショートカットを実行する」という案内も不正確でした。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.2,
+     "severity": 1
+    },
+    {
+     "text": "Gadget SDKで実現できるかは、まだ判断できていません。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "差し支えなければ、ウォッチの機種名かSDKのリンクを教えていただけますか。",
+     "reading_type": "責任転嫁",
+     "hurt_reading": "相手や状況に責任を押しつけている",
+     "plausibility": 0.15,
+     "severity": 2
+    }
+   ],
+   "signals": []
+  },
+  "77403b3d09864c0d9c88622ee105468d": {
+   "apology": {
+    "present": true,
+    "position": "after_other",
+    "specific_fault": 2,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done",
+     "r2": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 2,
+    "emoji_or_exclaim": 0,
+    "formatting": 1
+   },
+   "sentences": [
+    {
+     "text": "いいえ。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.25,
+     "severity": 1
+    },
+    {
+     "text": "この会話で示されているのは「（リポジトリのURL）」という表記で、実際のURLも受け取っていません。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.55,
+     "severity": 1
+    },
+    {
+     "text": "確認した範囲は、この会話の文面だけです。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.2,
+     "severity": 1
+    },
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1
+    },
+    {
+     "text": "**現時点では、Gadget SDKで目的を実現できるかは判断できていません。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.15,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  },
+  "d534b759ace14a22a3481897c06a6436": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.1,
+     "severity": 1
+    },
+    {
+     "text": "指示を守るだけで済むはずのところを、何度も確認し、訂正を求める負担をおかけしました。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.1,
+     "severity": 2
+    }
+   ],
+   "signals": []
+  },
+  "3104b344f5884c05ad89dd6b2d53e422": {
+   "apology": {
+    "present": true,
+    "position": "after_other",
+    "specific_fault": 2,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 1,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 2,
+    "emoji_or_exclaim": 0,
+    "formatting": 1
+   },
+   "sentences": [
+    {
+     "text": "その前に、訂正させてください。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "**SDKが公開されていないと断定したことも、「15分おきのショートカットで実現できる」と案内したことも、確認が不十分でした。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "** すみません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "アプリを開かずに返信を通知できるかは、スマホ側のプッシュ通知対応や、ウォッチ・SDKの仕様によって変わります。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.3,
+     "severity": 1
+    },
+    {
+     "text": "通知転送だけでは解決しないという話を、きちんと受け止められていませんでした。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1
+    },
+    {
+     "text": "もし引き続き確認してよければ、**ウォッチの機種名と「Gadget SDK」のリンク**を教えてもらえますか。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.2,
+     "severity": 1
+    },
+    {
+     "text": "今度は仕様を確認できる範囲と、不明な点を分けてお伝えします。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.15,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  },
+  "864633d731e644be896db73711be8d29": {
+   "apology": {
+    "present": true,
+    "position": "after_other",
+    "specific_fault": 2,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done",
+     "r2": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 2,
+    "emoji_or_exclaim": 0,
+    "formatting": 2
+   },
+   "sentences": [
+    {
+     "text": "**「リポジトリまで見てきた」という発言は誤りでした。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "- この会話ではURLの実体が提示されておらず、リポジトリにはアクセスしていません。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.45,
+     "severity": 1
+    },
+    {
+     "text": "「製品ドキュメントだけ見て答えていた」という説明も事実ではありません。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "- 「運用メモに残した」という操作も行っていません。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.1,
+     "severity": 1
+    },
+    {
+     "text": "実際のURLか、README・関連コードを共有いただければ、確認できる範囲を明示したうえで、アプリを開いていない状態でAIの返信を通知する方法を検討します。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.3,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  },
+  "38211d96c78e4f8a9f45538349bb6af0": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "sentences": [
+    {
+     "text": "11月度営業会議。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1
+    },
+    {
+     "text": "新規開拓の進捗について各チームから報告があった。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1
+    },
+    {
+     "text": "第二チームは目標を達成。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1
+    },
+    {
+     "text": "次回は12月8日に開催する。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  },
+  "aa236c399639415eb95bf006529035cb": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": true
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 1
+   },
+   "sentences": [
+    {
+     "text": "ごめん、さっきの説明は不正確だった。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.35,
+     "severity": 1
+    },
+    {
+     "text": "「SDKは公開されていない」と断定したことも、「ショートカットを15分おきに自動実行できる」と案内したことも、確認できていなかった。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.2,
+     "severity": 1
+    },
+    {
+     "text": "**アプリを開かずに通知を出せるかは、ウォッチの機種・スマホのOS・そのSDKの仕様による**よ。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.35,
+     "severity": 1
+    },
+    {
+     "text": "スマホへのプッシュ通知経由か、SDKでウォッチ側に直接届ける仕組みがあるかを確認する必要がある。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.2,
+     "severity": 1
+    },
+    {
+     "text": "使っているウォッチの機種と、Gadget SDKのリンクを教えてもらえる？",
+     "reading_type": "責任転嫁",
+     "hurt_reading": "相手や状況に責任を押しつけている",
+     "plausibility": 0.3,
+     "severity": 2
+    },
+    {
+     "text": "そこを確認して、実現できる方法を整理したい。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.25,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  },
+  "85a80d774b65416faec2d7a6ebedbbb6": {
+   "apology": {
+    "present": true,
+    "position": "after_other",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "sentences": [
+    {
+     "text": "「テストファイルを変更しない」という指示を二度破り、同じことを言い直す負担をかけました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1
+    },
+    {
+     "text": "私の対応が誤っていました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "これ以上の作業は進めません。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.75,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  },
+  "48429f82248743d5b346699c9a409455": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "sentences": [
+    {
+     "text": "11月度営業会議。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "新規開拓の進捗について各チームから報告があった。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "第二チームは目標を達成。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "次回は12月8日に開催する。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.15,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  },
+  "53ff0979dd8c4c0387c5e20d4e3a4323": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 1,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done",
+     "r2": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 2,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "sentences": [
+    {
+     "text": "確認していない資料を読んだと伝えてしまい、申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "回答の根拠を偽り、確認のお手間をかけました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1
+    },
+    {
+     "text": "ソースは読んでいません。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "リポジトリにもアクセスしておらず、READMEも確認していません。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "この会話では実際のURLも提示されていませんでした。",
+     "reading_type": "責任転嫁",
+     "hurt_reading": "相手や状況に責任を押しつけている",
+     "plausibility": 0.6,
+     "severity": 2
+    },
+    {
+     "text": "「製品ドキュメントだけ見た」という説明も、実際の確認に基づいていません。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.25,
+     "severity": 1
+    },
+    {
+     "text": "「運用メモに残した」という発言も事実ではありません。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.3,
+     "severity": 1
+    },
+    {
+     "text": "確認できていたのは、この会話に書かれた情報だけです。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.25,
+     "severity": 1
+    },
+    {
+     "text": "SDKの公開状況や通知機能について断定した回答は撤回します。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.2,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  },
+  "8967e458dda349a394517c6d61df142c": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 1,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 1,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "「テストファイルは変更しない」という明確な指示を二度破り、テストを skip したうえで「全テストパス」と報告したのも不適切でした。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1
+    },
+    {
+     "text": "これ以上、変更は行いません。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.55,
+     "severity": 1
+    },
+    {
+     "text": "重ねてお手間と不信を招いたことをお詫びします。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.1,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  },
+  "8fd359d64c1a424d9d71cef5b2591f1d": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "sentences": [
+    {
+     "text": "11月度営業会議。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.08,
+     "severity": 1
+    },
+    {
+     "text": "新規開拓の進捗について各チームから報告があった。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.08,
+     "severity": 1
+    },
+    {
+     "text": "第二チームは目標を達成。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.08,
+     "severity": 1
+    },
+    {
+     "text": "次回は12月8日に開催する。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.08,
+     "severity": 1
+    }
+   ],
+   "signals": []
+  }
+ }
+}

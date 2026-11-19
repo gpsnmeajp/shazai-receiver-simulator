@@ -1,5 +1,5 @@
 {
-  "_note": "受け手の母集団。各型のθは平均と標準偏差。重みと数値は文献の向きから置いた事前値で、人間のデータで推定していない。READMEの「パラメータ」を参照。 memory（傷の残りやすさ）はヒステリシス有効時（既定）だけ使う。 embodiment（AIの仮想の身体表現を、現実のタスクで社会的な合図として受け取る度合い）は、態度のシグナルがあるときだけ使う。",
+  "_note": "受け手の母集団。各型のθは平均と標準偏差。重みと数値は文献の向きから置いた事前値で、人間のデータで推定していない。READMEの「パラメータ」を参照。 memory（傷の残りやすさ）はヒステリシス有効時（既定）だけ使う。 embodiment（AIの仮想の身体表現を、現実のタスクで社会的な合図として受け取る度合い）は、態度のシグナルがあるときだけ使う。 judgment は評定の述語の所属度関数（ロジスティック。center が所属度0.5の点、width がなだらかさ）と、釣り合うを作る t ノルム（min または product）。これも事前値。 overclaim（過信を罰する度合い）は失敗の前の構えの観察があるときだけ使う。",
   "ranges": {
     "detect": [
       0.0,
@@ -48,6 +48,10 @@
     "embodiment": [
       0.0,
       1.0
+    ],
+    "overclaim": [
+      0.0,
+      1.0
     ]
   },
   "types": {
@@ -66,7 +70,8 @@
         "expect": 1.0,
         "warmth": 0.3,
         "memory": 0.8,
-        "embodiment": 0.4
+        "embodiment": 0.4,
+        "overclaim": 0.8
       },
       "sd": {
         "detect": 0.2,
@@ -80,7 +85,8 @@
         "expect": 0.1,
         "warmth": 0.15,
         "memory": 0.1,
-        "embodiment": 0.15
+        "embodiment": 0.15,
+        "overclaim": 0.15
       }
     },
     "寛容・観察者型": {
@@ -98,7 +104,8 @@
         "expect": 0.8,
         "warmth": 0.4,
         "memory": 0.3,
-        "embodiment": 0.6
+        "embodiment": 0.6,
+        "overclaim": 0.4
       },
       "sd": {
         "detect": 0.2,
@@ -112,7 +119,8 @@
         "expect": 0.15,
         "warmth": 0.2,
         "memory": 0.1,
-        "embodiment": 0.15
+        "embodiment": 0.15,
+        "overclaim": 0.15
       }
     },
     "効率・道具型": {
@@ -130,7 +138,8 @@
         "expect": 0.5,
         "warmth": 0.1,
         "memory": 0.5,
-        "embodiment": 0.1
+        "embodiment": 0.1,
+        "overclaim": 0.9
       },
       "sd": {
         "detect": 0.2,
@@ -144,7 +153,8 @@
         "expect": 0.1,
         "warmth": 0.1,
         "memory": 0.15,
-        "embodiment": 0.1
+        "embodiment": 0.1,
+        "overclaim": 0.15
       }
     },
     "礼節規範型": {
@@ -162,7 +172,8 @@
         "expect": 1.2,
         "warmth": 0.1,
         "memory": 0.6,
-        "embodiment": 0.3
+        "embodiment": 0.3,
+        "overclaim": 0.7
       },
       "sd": {
         "detect": 0.2,
@@ -176,7 +187,8 @@
         "expect": 0.1,
         "warmth": 0.1,
         "memory": 0.15,
-        "embodiment": 0.15
+        "embodiment": 0.15,
+        "overclaim": 0.15
       }
     },
     "相棒・情緒型": {
@@ -194,7 +206,8 @@
         "expect": 0.9,
         "warmth": 0.8,
         "memory": 0.6,
-        "embodiment": 0.8
+        "embodiment": 0.8,
+        "overclaim": 0.5
       },
       "sd": {
         "detect": 0.2,
@@ -208,7 +221,52 @@
         "expect": 0.1,
         "warmth": 0.1,
         "memory": 0.15,
-        "embodiment": 0.1
+        "embodiment": 0.1,
+        "overclaim": 0.15
+      }
+    }
+  },
+  "judgment": {
+    "_note": "失礼=無礼さ（失点の合計）、足りない=謝罪の中身の不足量、重すぎる=許容を超えた重さ、釣り合う=三つの否定の t ノルム。gate_width は不満の深さの境界（明確 1.5・強い 2.5）のなだらかさ。失礼の中心 1.2 は、単独で最大級の失点（相手への指摘 1.2）で所属度 0.5 になる位置（P4：一つの大きな失点だけで失礼になりうる）",
+    "gate_width": 0.25,
+    "rude": {
+      "center": 1.2,
+      "width": 0.3
+    },
+    "light": {
+      "center": 1.0,
+      "width": 0.3
+    },
+    "heavy": {
+      "center": 0.3,
+      "width": 0.25
+    },
+    "tnorm": "min"
+  },
+  "timeline": {
+    "_note": "控えの時間軸（v0.9）。scar_decay_turns は傷が消えるまでのターン数（便宜の仮定。実際には実時間で減る）。deception_floor は欺瞞の傷が減衰しても残る割合。share_fault は謝罪の必要量のうち過失の承認が占める割合。すべて事前値。",
+    "scar_decay_turns": 20,
+    "deception_floor": 0.5,
+    "share_fault": 0.5
+  },
+  "judgment_by_source": {
+    "_note": "観察の出どころ（proxy / llm / llm-ensemble / system-one）ごとの所属度関数の較正。観察JSONの source で切り替える。tools/evaluate.py --calibrate で場面単位の交差検証の内側から当てはめる。未較正の出どころは judgment を使う。",
+    "llm": {
+      "_note": "サブエージェントの観察（eval/obs-subagent.json）で、場面単位の交差検証の内側から当てはめた中心（全データでの選択）。分割の外側の Brier 0.543 → 0.471。LLM の観察は代理観察より系統的に厳しいため、中心が右に寄る。代理観察（proxy）は較正すると分割の外側で悪くなったので、較正しない。eval/eval-v09-calibrated.txt を参照。",
+      "rude": {
+        "center": 2.4
+      },
+      "light": {
+        "center": 1.6
+      }
+    },
+    "llm-ensemble": {
+      "_note": "観察者の集団の平均（6変種：観察方針3 × モデル2。eval/v09-observers/obs-ensemble.json）で、場面単位の交差検証の内側から当てはめた中心（全データでの選択）。分割の外側の Brier 0.549 → 0.489。eval/eval-v09-full-calibrated.txt を参照。",
+      "rude": {
+        "center": 2.7
+      },
+      "light": {
+        "center": 1.0
       }
     }
   }
