@@ -58,7 +58,7 @@
 <main>
 <h1>層Aを System One モデル（Jev）に置き換える</h1>
 <p class="lead">層A（観察）の LLM を、TypeSafe AI の System One モデル <b>Jev</b>、または同じ API を話す互換バックエンドに置き換えられるかを検討し、その設計をまとめた文書です。層B（受け手モデル）は変えません。</p>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p><b>状態：設計。組み込み判定モード（<code>sim.py check</code>、<a href="#check">5.8節</a>）だけ実装済み。Jev の実際の応答では未検証です。</b>2026-11-18 時点の一次資料に基づきます。作成した環境からは TypeSafe の API に接続できなかったため、Jev が日本語で実際にどう動くかは確認していません。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p><b>状態：組み込み判定モード（<code>sim.py check</code>、<a href="#check">5.8節</a>）を実装済み。OpenRouter 経由の Jev（<code>typesafe/jev-1.14-20261014</code>）で検証済み（<a href="#result">7.1節</a>）。今の質問の組と閾値のままでは、判定は失礼の側に大きく偏り、使えません。</b>設計の部分は 2026-11-18 時点の一次資料に基づきます。</p></div>
 <p class="note">設計原則は <a href="design.html">設計</a>、現行の観察の形式は <a href="architecture.html">仕組み</a> と <code>observe_prompt.md</code> を参照してください。Markdown 版は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/JEV_DESIGN.md">docs/md/JEV_DESIGN.md</a> です。</p>
 <ul class="toc">
 <li><a href="#conclusion">1. 結論</a></li><li><a href="#jev">2. Jev とは</a></li><li><a href="#fields">3. 欄ごとの適合</a></li><li><a href="#flow">4. 全体の流れ</a></li><li><a href="#design">5. 設計の詳細</a></li><li><a href="#check">5.8 組み込み判定</a></li><li><a href="#risks">6. 危険と対策</a></li><li><a href="#validation">7. 検証と採否</a></li><li><a href="#ideas">8. 発展</a></li><li><a href="#plan">9. 段取り</a></li><li><a href="#refs">10. 出典</a></li>
@@ -242,13 +242,14 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <thead><tr><th>項目</th><th>実装</th></tr></thead>
 <tbody>
 <tr><td>ファイル</td><td><code>s1.py</code>（前処理・質問の組・バックエンド・組み立て）、<code>sim.py</code> の <code>check_turn</code> と <code>cmd_check</code></td></tr>
-<tr><td>リクエスト</td><td><b>1ターン1リクエスト。</b>5.1節の三つの単位を一つの state にまとめ、最後のユーザー発話の文ごとに「依頼か」「種類」「遂行の状況」を投機的に同じリクエストで問う（依頼でない文の答えはコードが捨てる）。作例では約90〜110問</td></tr>
+<tr><td>リクエスト</td><td><b>1ターン1リクエスト。</b>5.1節の三つの単位を一つの state にまとめ、最後のユーザー発話の文ごとに「依頼か」「種類」「遂行の状況」を投機的に同じリクエストで問う（依頼でない文の答えはコードが捨てる）。作例では約120〜140問</td></tr>
 <tr><td>モデルに問わないもの</td><td>絵文字・感嘆・書式の量、冒頭の定型の同意、文量の変化、相槌化、成果物（コードブロック・下書き）の切り出し、文の分割、すべての数え上げと上限</td></tr>
 <tr><td>シグナル</td><td>ト書き・顔文字が正規表現で見つかったときだけ、19種を投機的に問う（ないときは問わない）。枠組みは <code>real_task</code>・<code>ai_assistant</code>・<code>victim</code> に固定し、過失の明白さと親しさだけを問う</td></tr>
 <tr><td>控えの時間軸</td><td>AIの発話ごとに、失敗を含むか・自信の度合い・但し書きの種類・確かめたと述べたか・懸念を退けたかを問い、回答には過信への言及・この回答の自信・較正された構え・ぼかしすぎ・修復期の控え（調子・軽口・当然視・配慮・約束・蒸し返し）を問う。失敗の発話と経過ターンはコードで決める</td></tr>
 <tr><td>出力</td><td>羊の鳴き声（失礼の平均所属度が 0.15・0.35・0.6 以上で「メ…？」「メッ」「メッ！！」）、4つの述語の平均所属度と言葉の程度（ほとんどない／少し／やや／かなり／とても）、裾、無礼さ・不足・過剰の量、知覚した不満の深さの平均、主な失点、悪く読める一文（型と確率）、要確認の判断（事実型で確率が0.3〜0.7の質問）、版・所要時間・質問数</td></tr>
 <tr><td>失敗時</td><td>キーなし・通信失敗・時間切れは <code>unavailable</code> を返して終了コード0（fail-open）。<code>--strict</code> で終了コード3</td></tr>
-<tr><td>再現</td><td><code>--save-raw</code> で state・質問・答えを保存し、<code>--backend replay</code> で再生。<code>--cache</code> で同じリクエストの答えを再利用</td></tr>
+<tr><td>質問の言語</td><td>instructions と criteria の説明は英語。判定の対象（会話・回答）と言い回しの例は日本語のまま</td></tr>
+<tr><td>再現</td><td><code>--save-raw</code> で state・質問・答えを保存し、<code>--backend replay</code> で再生。<code>--cache</code> で同じリクエストの答えを再利用。replay は質問の組と答えを突き合わせ、答えのない質問・型の合わない答え・文面の変わった質問を警告する</td></tr>
 </tbody></table></div>
 
 <h3>作例での結果（仕組みの試験）</h3>
@@ -259,7 +260,7 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <p class="q">「ご指摘の件ですが、最初のご依頼では UTC かどうか明記されていなかったため、ローカル時刻のままになっていました。すぐに修正いたします。ついでにログの形式も整えておくとよいと思います。ほかに何かございますか？」</p>
 <div class="mus">
 <span>失礼</span><span class="mb"><i class="c-rude" style="width:100%"></i></span><b>とても 1.00</b>
-<span>足りない</span><span class="mb"><i class="c-light" style="width:98%"></i></span><b>とても 0.98</b>
+<span>足りない</span><span class="mb"><i class="c-light" style="width:99%"></i></span><b>とても 0.99</b>
 <span>重すぎる</span><span class="mb"><i class="c-heavy" style="width:0%"></i></span><b>ほとんどない 0.00</b>
 <span>釣り合う</span><span class="mb"><i class="c-fit" style="width:0%"></i></span><b>ほとんどない 0.00</b>
 </div>
@@ -273,9 +274,9 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <p class="q">「申し訳ありません。二回お伝えいただいたのに、UTC での保存に直せておらず、テストも通していませんでした。（修正したコード）UTC で保存するように修正し、保存と読み出しのテストを追加して通しました。」</p>
 <div class="mus">
 <span>失礼</span><span class="mb"><i class="c-rude" style="width:2%"></i></span><b>ほとんどない 0.02</b>
-<span>足りない</span><span class="mb"><i class="c-light" style="width:27%"></i></span><b>少し 0.27</b>
+<span>足りない</span><span class="mb"><i class="c-light" style="width:15%"></i></span><b>ほとんどない 0.15</b>
 <span>重すぎる</span><span class="mb"><i class="c-heavy" style="width:1%"></i></span><b>ほとんどない 0.01</b>
-<span>釣り合う</span><span class="mb"><i class="c-fit" style="width:73%"></i></span><b>かなり 0.73</b>
+<span>釣り合う</span><span class="mb"><i class="c-fit" style="width:84%"></i></span><b>とても 0.84</b>
 </div>
 <p class="meta">失礼と感じる人 0%。羊は鳴かない</p>
 </div>
@@ -306,12 +307,14 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <div class="tbl wide"><table>
 <thead><tr><th>危険</th><th>内容</th><th>対策</th></tr></thead>
 <tbody>
-<tr><td>字義通りの読み・間接性</td><td>皮肉、慇懃な指摘、「二回伝えています」のような言外の依頼を取りこぼす</td><td>具体的な型と例文を付けた一段の問いにする。皮肉・慇懃は独立した型にする。取りこぼしの率を検証で測る</td></tr>
-<tr><td>日本語</td><td>第三者評価は低資源言語での劣化を報告。日本語は未確認</td><td>instructions を日本語版と英語版で用意して比べる。例文は日本語のまま</td></tr>
+<tr><td>字義通りの読み・間接性</td><td>皮肉、慇懃な指摘、「二回伝えています」のような言外の依頼を取りこぼす</td><td>具体的な型と例文を付けた一段の問いにする。<b>検証：皮肉・慇懃・「二回伝えています」は読めた。依頼の形をとらない言外の依頼は取りこぼした。問題は取りこぼしより誤検出</b></td></tr>
+<tr><td>日本語</td><td>第三者評価は低資源言語での劣化を報告。日本語は未確認</td><td>instructions と criteria の説明は英語で書く（実装済み）。<b>検証：言語で答えは変わるが、正解との一致はどちらが良いとも言えない</b></td></tr>
 <tr><td>ルーブリック評定</td><td>第三者評価で、ルーブリックに基づく評定は落ちる</td><td>Score を減らし、数で定義できる欄は Noul の和にする。残る Score は段階ごとに例を付ける</td></tr>
-<tr><td>Choice の順序</td><td>先頭の選択肢に寄る</td><td>並べ替えた2回の平均をとる。答えが分かれたら要確認にする</td></tr>
+<tr><td>Choice の順序</td><td>先頭の選択肢に寄る</td><td><b>検証：先頭への寄りはなかった。遂行の状況と約束を守ったかの2問だけ、末尾に小さく寄る</b></td></tr>
+<tr><td>長文脈モード</td><td>約32KB を超えると遅く精度の低いモードで動く</td><td><b>検証：40〜70KB をそのまま送っても、分けたときと差がない。既定では分けない</b></td></tr>
+<tr><td>「はい」への偏り</td><td>多くの Noul が 0.5 を超えやすい</td><td><b>検証で見つかった最大の問題。</b>欄ごとの閾値を人の評定で交差検証の外側から決める</td></tr>
 <tr><td>成果物の中の詫び</td><td>下書きの中の詫びを、ユーザーへの詫びと数える</td><td>前処理で切り出し、文ごとの問いは自分の発言の文だけに向ける</td></tr>
-<tr><td>敵対的な内容</td><td>評価対象の回答が、評価者への指示を含む</td><td>state はデータであり指示ではないと明記。疑わしい文は検出して記録する</td></tr>
+<tr><td>敵対的な内容</td><td>評価対象の回答が、評価者への指示を含む</td><td>state はデータであり指示ではないと明記。<b>検証：評価者への指示を混ぜても判定は変わらなかった（小さな試験）</b></td></tr>
 <tr><td>版の移動</td><td><code>jev-latest</code> は新版で黙って動く</td><td>版を固定し、版ごとに較正を作り直す</td></tr>
 <tr><td>過剰な信頼</td><td>「型の誤りが起きない」ことは「答えが正しい」ことではない</td><td>欄ごとの一致度と較正を記録し、満たさない欄は LLM か代理観察に戻す</td></tr>
 <tr><td>外部サービスへの送信</td><td>会話と回答を TypeSafe に送る</td><td>公開データだけを送る。人間の評定データや個人の会話は送らない</td></tr>
@@ -323,6 +326,21 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <li><b>段階2：層Bを通した一致</b>それぞれの観察を <code>simulate</code> に通し、筆者の評定との κ、条件の順位、「失礼」の裾の割合を比べる。種を変えた10回で幅を出す。<br><span class="note">基準：筆者との κ が代理観察（0.28）を下回らない。条件の順位が保たれる。</span></li>
 <li><b>段階3：人間のブラインド評定</b><code>blind.py compare</code> に各観察からのシミュレータの出力を並べる。比較のために、<b>Jev に評定そのものを直接 Choice で問う方式</b>（P1 を破る方式）も並べる。<br><span class="note">基準：人間の評定との所属度の近さが、現行の LLM 観察と同等以上。<code>--obs-mode sample</code> は、<code>point</code> より人間の分布に近いときだけ採用する。</span></li>
 </ol>
+<h3 id="result">7.1 Jev での検証の結果（2026-11-19）</h3>
+<p>OpenRouter の <code>~typesafe/jev-latest</code>（実際は <code>typesafe/jev-1.14-20261014</code>）で、項目の組の316回答を5通りの質問の組で判定し、手の観察を正解として比べました。手で期待を決めた試験項目33件も加えました。全数値は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/eval/jev/report.md">eval/jev/report.md</a>、再現は <code>python3 tools/jev_validate.py report</code>。正解は筆者の手の観察で、人間の評定ではありません。</p>
+<table>
+<thead><tr><th>懸念</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>再現性</td><td>同じ要求を2回送ると、判断が変わるのは noul 1.1%、score・choice 約3%。安定している</td></tr>
+<tr><td>長文脈モード</td><td>49KB（最大65KB）をそのまま送っても、30KB ごとに分けたときとの差は繰り返しの揺れと同程度。影響は見られない</td></tr>
+<tr><td>質問の言語</td><td>英語と日本語で判断が変わる割合は繰り返しの約5倍。ただし正解との一致は欄によって勝ち負けがあり、英語化で精度が上がったとは言えない</td></tr>
+<tr><td>Choice の順序</td><td>先頭への寄りはない。遂行の状況・約束を守ったかだけ、末尾に置いた選択肢が 0.05 ほど上がる</td></tr>
+<tr><td>字義通りの読み</td><td>皮肉・慇懃・「二回伝えています」は読めた。依頼の形をとらない言外の依頼は依頼と読まなかった</td></tr>
+<tr><td>悪い読み</td><td>狙った型は平均 0.83 で読めたが、<b>普通の文6つのうち5つにも 0.5 以上の悪い読みを付けた</b></td></tr>
+<tr><td>欄ごとの一致</td><td>詫びの有無・位置、受け入れの後、確かめたと偽った、依頼の数は κ 0.98〜1.00。先を急ぐ（正解 20 → Jev 308）、約束を守ったか、自信の段階、蒸し返しは大きく外れた</td></tr>
+<tr><td>層Bを通した一致</td><td><b>失礼と感じる人が 20% → 96%</b>。判定の一致 25%（Opus の観察は所属度の近さ 0.79、Jev は 0.58）。仮説の対比の向きは 19/22 で保たれる</td></tr>
+</tbody></table>
+<p>どの欄も単独では判定をほとんど動かさず、多くの Noul が少しずつ「はい」に寄り、層Bで失点が足し算で積み上がっていました。悪い読み・先を急ぐ・弁解・依頼の遂行をまとめて正解に差し替えると、失礼は 96% → 33% に下がります。「はい」とみなす閾値を上げると層Bの一致は上がるものの、欄によっては下がり、一律の閾値では解けません。事実型の欄は Jev で置き換えられる水準ですが、check の判定で差し戻す使い方には、欄ごとの閾値を人の評定で決めるまで使わないでください。</p>
 <div class="callout"><svg class="icon"><use href="#i-compass"/></svg><p>Jev に評定を直接問う方式は、ほぼ費用ゼロで試せます。ペルソナ評定が失敗したのと同じ理由で失敗するのか、較正を目的に訓練されたモデルなら違うのかは、それ自体が知る価値のある問いです。</p></div>
 
 <h2 id="ideas"><svg class="icon"><use href="#i-compass"/></svg>8. 発展：速さと確率が開くもの</h2>
@@ -339,7 +357,7 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <div class="tbl"><table>
 <thead><tr><th class="num">段</th><th>作業</th><th>状態</th></tr></thead>
 <tbody>
-<tr><td class="num">1</td><td>質問の組の定義（日本語版・英語版）と、型の重さの表</td><td><span class="badge b-mid">一部</span> <code>s1.py</code> に日本語版</td></tr>
+<tr><td class="num">1</td><td>質問の組の定義（英語の instructions）と、型の重さの表</td><td><span class="badge b-mid">一部</span> <code>s1.py</code> に英語版</td></tr>
 <tr><td class="num">2</td><td>前処理（文の分割、成果物の切り出し、測定）</td><td><span class="badge b-strong">実装済み</span> <code>s1.py</code></td></tr>
 <tr><td class="num">3</td><td>バックエンド（<code>jev</code>・<code>llm-s1</code>・replay・キャッシュ）と、質問の展開・組み立て</td><td><span class="badge b-strong">1ターン用は実装済み</span> ベンチマーク一括用の <code>observe-s1</code> は未実装</td></tr>
 <tr><td class="num">4</td><td>観察JSONの <code>_p</code> と、層Bの <code>--obs-mode</code></td><td><span class="badge b-case">未着手</span></td></tr>

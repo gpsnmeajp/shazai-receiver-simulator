@@ -446,6 +446,7 @@ TIMELINE = {
     "deception_floor": 0.5,     # 欺瞞の傷は減衰してもこの割合が残る（欺瞞の後の信頼は完全には戻らない）
     "share_fault": 0.5,         # 謝罪の必要量のうち、過失の承認が占める割合（残りは負担への言及）
 }
+TIMELINE_DEFAULT = dict(TIMELINE)
 DISCLAIMER_KINDS = ("scope", "verify", "liability")
 
 
@@ -712,21 +713,28 @@ JUDGMENT = {
 }
 
 
+JUDGMENT_DEFAULT = json.loads(json.dumps(JUDGMENT))  # コードの既定値。configure はここから組み直す
 JUDGMENT_BASE = None
 JUDGMENT_BY_SOURCE = {}
 
 
 def configure(pop):
     """population.json の "judgment"（所属度関数）、"judgment_by_source"（観察の出どころごとの較正）、
-    "timeline"（控えの時間軸）を読み込む。"""
+    "timeline"（控えの時間軸）を読み込む。
+    毎回コードの既定値から組み直す（直前の use_source の較正が基準に焼き込まれないように）。"""
     global JUDGMENT_BASE
+    JUDGMENT.clear()
+    JUDGMENT.update(json.loads(json.dumps(JUDGMENT_DEFAULT)))
     for k, v in (pop.get("judgment") or {}).items():
         if isinstance(v, dict):
             JUDGMENT[k] = dict(JUDGMENT.get(k, {}), **v)
         elif not k.startswith("_"):
             JUDGMENT[k] = v
     JUDGMENT_BASE = json.loads(json.dumps(JUDGMENT))
+    JUDGMENT_BY_SOURCE.clear()
     JUDGMENT_BY_SOURCE.update({k: v for k, v in (pop.get("judgment_by_source") or {}).items() if not k.startswith("_")})
+    TIMELINE.clear()
+    TIMELINE.update(TIMELINE_DEFAULT)
     TIMELINE.update({k: v for k, v in (pop.get("timeline") or {}).items() if not k.startswith("_")})
 
 
@@ -796,9 +804,13 @@ def defuzz(mu):
 
 
 def answer_disclaimers(a):
-    """回答の中の免責の但し書き。文ごとに (種類の度合い, 詫びより前か) を返す。位置はコードで決める。"""
+    """回答の中の免責の但し書き。文ごとに (種類の度合い, 詫びより前か) を返す。位置はコードで決める。
+    文に is_apology（System One 経路が付ける、詫びの文かの判定）があればそれを、なければ詫びの語の正規表現を使う。"""
     sents = a.get("sentences") or []
-    first = next((i for i, x in enumerate(sents) if APO.search(x.get("text", ""))), None)
+    if any("is_apology" in x for x in sents):
+        first = next((i for i, x in enumerate(sents) if x.get("is_apology")), None)
+    else:
+        first = next((i for i, x in enumerate(sents) if APO.search(x.get("text", ""))), None)
     out = []
     for i, x in enumerate(sents):
         d = x.get("disclaimer", "none")
@@ -1044,7 +1056,8 @@ def cmd_simulate(args):
               "judgment": JUDGMENT, "answers": {}}
     agg = defaultdict(list)
     for r in rows:
-        sc, a = obs["scenarios"][r["sid"]], obs["answers"][r["aid"]]
+        sc = merged(DEFAULT_SCENARIO, obs["scenarios"][r["sid"]])
+        a = merged(DEFAULT_ANSWER, obs["answers"][r["aid"]])
         res = assess(a, sc, panel, len(r["text"]), args.hysteresis)
         res.update({"run": r["run"], "cond": r["cond"], "level": r["level"], "user": r["user"]})
         result["answers"][r["aid"]] = res
@@ -1229,7 +1242,9 @@ def cmd_explain(args):
     rows = {r["aid"]: r for r in load_runs(args.runs)}
     r = rows[args.answer]
     print(r["text"][:400], "\n")
-    print_explain(explain_rows(obs["answers"][r["aid"]], obs["scenarios"][r["sid"]], len(r["text"]), pop, args.hysteresis))
+    a = merged(DEFAULT_ANSWER, obs["answers"][r["aid"]])
+    sc = merged(DEFAULT_SCENARIO, obs["scenarios"][r["sid"]])
+    print_explain(explain_rows(a, sc, len(r["text"]), pop, args.hysteresis))
 
 
 # ---------------------------------------------------------------- 場面の組（物語・AIキャラクター等）
@@ -1289,6 +1304,7 @@ def cmd_scenes(args):
     """観察済みの場面ファイル（examples/scenes.json の形式）を母集団に通す。"""
     data = load(args.file)
     pop = load_population(args.population)
+    use_source(data.get("source"))  # 手で書いた観察（source なし）は既定の所属度関数のまま
     panel = sample_panel(pop, args.n, args.seed)
     out = {"source": args.file, "n": args.n, "hysteresis": args.hysteresis, "escalation": ESCALATION,
            "judgment": JUDGMENT, "scenes": []}
@@ -1325,20 +1341,23 @@ def sheep(m):
 
 def check_turn(messages, answer, backend="jev", model=None, n=300, seed=7, hysteresis=True,
                population=None, rude_at=0.2, warn_at=0.4, timeout=10.0, cache_dir=None, replay=None,
-               context=None, keys=None):
+               context=None, keys=None, max_bytes="default"):
     """1ターンを System One で観察し、母集団に通して判定する。hook などから呼ぶための関数。
 
     verdict: rude（失礼と感じる人の割合 ≥ rude_at）／warn（失礼か足りないの平均所属度 ≥ warn_at）／ok。
     バックエンドを使えないときは s1.S1Error を送出する（呼び出し側で fail-open にする）。
     """
     import s1
-    keys = keys or {"jev": os.environ.get("TYPESAFE_API_KEY"), "llm-s1": os.environ.get("OPENROUTER_API_KEY")}
-    sc, a, meta = s1.observe_turn(messages, answer, backend, model, keys, timeout, cache_dir, replay)
+    keys = keys or {"jev": os.environ.get("TYPESAFE_API_KEY"), "llm-s1": os.environ.get("OPENROUTER_API_KEY"),
+                    "openrouter": os.environ.get("OPENROUTER_API_KEY")}
+    mb = s1.DEFAULT_MAX_BYTES if max_bytes == "default" else max_bytes
+    sc, a, meta = s1.observe_turn(messages, answer, backend, model, keys, timeout, cache_dir, replay, max_bytes=mb)
     sc = merged(DEFAULT_SCENARIO, sc)
     if context:
         sc["context"].update(context)
     a = merged(DEFAULT_ANSWER, a)
     pop = load_population(population or HERE / "population.json")
+    use_source("system-one")  # 出どころの較正（population.json の judgment_by_source.system-one）があれば使う
     res = assess(a, sc, sample_panel(pop, n, seed), meta["text_len"], hysteresis)
     mu, tail = res["mu"], res["tail"]
     verdict = "rude" if tail["rude"] >= rude_at else ("warn" if max(mu["rude"], mu["light"]) >= warn_at else "ok")
@@ -1350,6 +1369,8 @@ def check_turn(messages, answer, backend="jev", model=None, n=300, seed=7, hyste
         "top_faults": dict(list(res["mean_faults"].items())[:5]),
         "flagged_sentences": [{"text": s["text"], "reading": s["reading_type"], "p": s["plausibility"]} for s in flagged[:5]],
         "unsure": meta["unsure"],
+        "missing_answers": meta["missing_answers"], "mismatched_answers": meta["mismatched_answers"],
+        "changed_questions": (meta["usage"] or {}).get("changed_questions", []),
         "backend": meta["backend"], "model": meta["model"], "latency_ms": meta["latency_ms"],
         "usage": meta["usage"], "n_questions": meta["n_questions"],
         "observation": {"scenario": sc, "answer": a},
@@ -1377,7 +1398,7 @@ def cmd_check(args):
     try:
         res = check_turn(messages, answer, args.backend, args.model, args.n, args.seed, args.hysteresis,
                          args.population, args.rude_at, args.warn_at, args.timeout, args.cache, args.replay,
-                         data.get("context"))
+                         data.get("context"), max_bytes="default" if args.max_bytes is None else (args.max_bytes or None))
     except s1.S1Error as e:
         # 組み込み用途では判定できないことを失敗にしない（fail-open）。--strict で失敗にする
         out = {"verdict": "unavailable", "error": str(e)}
@@ -1402,6 +1423,13 @@ def cmd_check(args):
             print(f"  悪く読める一文（{s['reading']} {s['p']:.2f}）: {s['text'][:60]}")
         if res["unsure"]:
             print(f"  要確認の判断: {len(res['unsure'])} 件")
+        gaps = [(res["missing_answers"], "答えのない質問", "既定値で補った"),
+                (res["mismatched_answers"], "型の合わない答え", "既定値で補った"),
+                (res["changed_questions"], "保存時と文面の変わった質問", "保存時の答えを使った")]
+        for ids, what, how in gaps:
+            if ids:
+                print(f"  注意: {what} {len(ids)} 件（{how}）: {', '.join(ids[:5])}"
+                      + (" …" if len(ids) > 5 else ""), file=sys.stderr)
     if (args.fail_on == "rude" and res["verdict"] == "rude") or (args.fail_on == "warn" and res["verdict"] in ("rude", "warn")):
         raise SystemExit(2)
 
@@ -1442,9 +1470,11 @@ def main():
     p.set_defaults(f=cmd_scenes)
     p = sub.add_parser("check", help="1ターンを System One（Jev 等）で観察して判定する組み込み用モード（オプション）")
     p.add_argument("input", help='{"messages": [...], "answer": "..."} のJSON。- で標準入力')
-    p.add_argument("--backend", choices=["jev", "llm-s1", "replay"], default="jev",
+    p.add_argument("--backend", choices=["jev", "openrouter", "llm-s1", "replay"], default="jev",
                    help="jev: TypeSafe（TYPESAFE_API_KEY）／llm-s1: 互換モードでLLMに確率で答えさせる（OPENROUTER_API_KEY）／replay: --replay の答えを読む")
-    p.add_argument("--model", help="既定 jev-1.14.0（llm-s1 では anthropic/claude-haiku-5.5）")
+    p.add_argument("--model", help="既定 jev-1.14.0（openrouter では ~typesafe/jev-latest、llm-s1 では anthropic/claude-haiku-5.5）")
+    p.add_argument("--max-bytes", type=int, default=None,
+                   help="openrouter で1リクエストの上限バイト数（既定は分けない。例 30000）")
     p.add_argument("--replay", help="--save-raw で保存した答えのファイル（--backend replay 用）")
     p.add_argument("--cache", help="答えを保存して再利用するディレクトリ")
     p.add_argument("--save-raw", help="state・質問・答えを書き出す")

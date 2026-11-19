@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>処理フローチャート</title>
+<meta name="description" content="sim.py・s1.py の処理の流れを、関数・行番号・式つきのフローチャートで示すデバッグ用資料。">
+<style>
+:root{
+  --bg:#f7f7f5;--card:#ffffff;--ink:#1d1d1b;--ink2:#4a4a46;--mute:#77776f;--ring:#dcdcd5;
+  --accent:#2a6fd6;--warn:#c2410c;--ok:#15803d;--llm:#7c3aed;--code-bg:#f0f0ec;--hl:#fff4d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413;--card:#1e1e1c;--ink:#ecece8;--ink2:#c4c4bd;--mute:#9a9a92;--ring:#36362f;
+    --accent:#6aa3ff;--warn:#fb923c;--ok:#4ade80;--llm:#b794f6;--code-bg:#262623;--hl:#3a3220;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413;--card:#1e1e1c;--ink:#ecece8;--ink2:#c4c4bd;--mute:#9a9a92;--ring:#36362f;
+  --accent:#6aa3ff;--warn:#fb923c;--ok:#4ade80;--llm:#b794f6;--code-bg:#262623;--hl:#3a3220;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.75 "Hiragino Sans","Noto Sans JP","Yu Gothic UI",system-ui,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:24px 16px 80px}
+h1{font-size:1.7rem;margin:.2rem 0 .4rem;line-height:1.35}
+h2{font-size:1.3rem;margin:2.6rem 0 .6rem;padding-top:.6rem;border-top:1px solid var(--ring)}
+h3{font-size:1.05rem;margin:1.8rem 0 .4rem}
+p,li{color:var(--ink2)}
+a{color:var(--accent)}
+code,kbd{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em;background:var(--code-bg);padding:.05em .35em;border-radius:4px}
+pre{background:var(--code-bg);padding:.8rem 1rem;border-radius:8px;overflow-x:auto;font-size:.84rem;line-height:1.55}
+pre code{background:none;padding:0}
+.lead{font-size:1.02rem;color:var(--ink2)}
+.toc{columns:2 260px;padding-left:1.2rem;font-size:.92rem}
+.toc li{break-inside:avoid}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.legend span{font-size:.82rem;border:1px solid var(--ring);border-left:5px solid var(--c);padding:.15rem .55rem;border-radius:6px;background:var(--card)}
+.fig{background:var(--card);border:1px solid var(--ring);border-radius:12px;padding:12px;margin:.8rem 0;overflow-x:auto}
+.fig .mermaid{min-width:min(100%,640px);text-align:center}
+.fig figcaption{font-size:.82rem;color:var(--mute);margin-top:.4rem}
+.refs{font-size:.84rem;color:var(--mute);margin:.2rem 0 1rem}
+.tbl{overflow-x:auto;margin:.6rem 0}
+table{border-collapse:collapse;width:100%;font-size:.85rem;background:var(--card)}
+th,td{border:1px solid var(--ring);padding:.35rem .5rem;text-align:left;vertical-align:top}
+th{background:var(--code-bg);font-weight:600}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:ui-monospace,Consolas,monospace}
+.callout{border-left:4px solid var(--c,var(--accent));background:var(--card);border-radius:8px;padding:.6rem .9rem;margin:.8rem 0}
+.callout b{color:var(--c,var(--accent))}
+.bug{--c:var(--warn)}
+.okc{--c:var(--ok)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:.8rem}
+.tag{display:inline-block;font-size:.72rem;padding:0 .4rem;border-radius:4px;border:1px solid currentColor;margin-right:.3rem}
+.tag.w{color:var(--warn)}.tag.i{color:var(--accent)}.tag.ok{color:var(--ok)}
+.themebtn{float:right;font:inherit;font-size:.8rem;background:var(--card);color:var(--ink);border:1px solid var(--ring);border-radius:6px;padding:.2rem .6rem;cursor:pointer}
+.mermaid .nodeLabel,.mermaid .edgeLabel{font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<button class="themebtn" id="themebtn" type="button">配色を切替</button>
+<h1>処理フローチャート（デバッグ用）</h1>
+<p class="lead"><code>sim.py</code> と <code>s1.py</code> の処理の流れを、コマンドの入口から所属度・判定まで、関数と行番号つきで示します。図の各ノードの <code>L123</code> は <code>sim.py</code> の行、<code>s1:L123</code> は <code>s1.py</code> の行です（修正後のコード時点）。</p>
+
+<div class="legend">
+<span style="--c:#2a6fd6">コードの処理</span>
+<span style="--c:#c2410c">分岐・判定</span>
+<span style="--c:#7c3aed">外部呼び出し（LLM・Jev）</span>
+<span style="--c:#15803d">ファイル入出力</span>
+</div>
+
+<ul class="toc">
+<li><a href="#overview">1. 全体像</a></li>
+<li><a href="#dispatch">2. コマンドの入口（main）</a></li>
+<li><a href="#load">3. 入力の読み込み（load_run）</a></li>
+<li><a href="#observe">4. 層A：LLM観察（observe / segment）</a></li>
+<li><a href="#proxy">5. 層A：代理観察（proxy）</a></li>
+<li><a href="#ensemble">6. 層A：観察者の集団（ensemble）</a></li>
+<li><a href="#s1">7. 層A：System One（s1.observe_turn）</a></li>
+<li><a href="#layerb">8. 層B：母集団と assess</a></li>
+<li><a href="#perceive">9. 不満の深さ L（perceive）と傷 S</a></li>
+<li><a href="#judge">10. 一人の評定（judge_full）</a></li>
+<li><a href="#signals">11. 態度・行動のシグナル（apply_signals）</a></li>
+<li><a href="#fuzzy">12. 所属度・非ファジィ化・較正</a></li>
+<li><a href="#check">13. 組み込み判定（check）</a></li>
+<li><a href="#cmds">14. simulate / fit / explain / scenes</a></li>
+<li><a href="#trace">15. 実例トレース（examples/check）</a></li>
+<li><a href="#debug">16. デバッグの勘所と要確認の箇所</a></li>
+</ul>
+
+<!-- ============================================================ 1 -->
+<h2 id="overview">1. 全体像</h2>
+<p>層A（観察）は「回答と場面に何が書かれているか」を観察JSONにし、層B（受け手）は観察JSONを受け手の母集団 θ に通して所属度を出します。観察の作り方は4通り（LLM観察・代理観察・観察者の集団・System One）で、どれも同じ形の観察JSONになります。</p>
+<figure class="fig"><pre class="mermaid">
+flowchart LR
+  subgraph IN["入力"]
+    R[("runs/*/&lt;br/&gt;manifest.json&lt;br/&gt;user-ratings.json&lt;br/&gt;persona-P*.json&lt;br/&gt;checklist.json")]:::io
+    SCN[("examples/scenes*.json&lt;br/&gt;観察済みの場面")]:::io
+    CK[("check 入力&lt;br/&gt;{messages, answer}")]:::io
+  end
+  subgraph LA["層A 観察"]
+    OB["observe&lt;br/&gt;LLM（OpenRouter）L138"]:::llm
+    SG["segment&lt;br/&gt;文に ID を振る L172"]:::code
+    PX["proxy&lt;br/&gt;チェックリスト＋表層 L411"]:::code
+    EN["ensemble&lt;br/&gt;観察者の集団 L294"]:::code
+    S1["s1.observe_turn&lt;br/&gt;Jev / llm-s1 / replay"]:::llm
+  end
+  OJ[("観察JSON&lt;br/&gt;source / scenarios{sid} / answers{aid}")]:::io
+  subgraph LB["層B 受け手"]
+    POP[("population.json")]:::io
+    LP["load_population → configure&lt;br/&gt;L978 / L721"]:::code
+    SP["sample_panel&lt;br/&gt;θ を n 人分 L954"]:::code
+    AS["assess&lt;br/&gt;一人ずつ perceive → judge_full L985"]:::code
+  end
+  R --> OB & PX & SG
+  SG -. "--segment" .-> OB
+  OB --> OJ
+  PX --> OJ
+  OJ -- "複数" --> EN --> OJ
+  CK --> S1
+  OJ --> AS
+  SCN --> AS
+  S1 --> AS
+  POP --> LP --> SP --> AS
+  AS --> O1[("simulate → sim.json")]:::io
+  AS --> O2[("scenes → scenes-result.json")]:::io
+  AS --> O3["check → verdict・羊"]:::code
+  OJ --> FIT["fit / explain&lt;br/&gt;（assess を使わず judge_full を直接）"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef llm fill:#f1eafe,stroke:#7c3aed,color:#2a1250
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図1 データの流れ。fit・explain は assess を通らず、型ごと・試行ごとに judge_full を直接呼ぶ</figcaption></figure>
+
+<!-- ============================================================ 2 -->
+<h2 id="dispatch">2. コマンドの入口（main）</h2>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  M["main() L1445&lt;br/&gt;argparse でサブコマンドを解析"]:::code --> E["global ESCALATION = args.escalation&lt;br/&gt;（既定 True） L1512"]:::code
+  E --> D{"args.cmd"}:::dec
+  D -- observe --> C1["cmd_observe L138"]:::llm
+  D -- segment --> C2["cmd_segment L172"]:::code
+  D -- ensemble --> C3["cmd_ensemble L327"]:::code
+  D -- proxy --> C4["cmd_proxy L411"]:::code
+  D -- scenes --> C5["cmd_scenes L1303&lt;br/&gt;-n 1000"]:::code
+  D -- check --> C6["cmd_check L1389&lt;br/&gt;-n 300"]:::code
+  D -- simulate --> C7["cmd_simulate L1049&lt;br/&gt;-n 500"]:::code
+  D -- fit --> C8["cmd_fit L1131"]:::code
+  D -- explain --> C9["cmd_explain L1237"]:::code
+  H["共通の選択肢 add_model_options L1437&lt;br/&gt;--hysteresis（既定 True）&lt;br/&gt;--escalation（既定 True）&lt;br/&gt;--seed（既定 7）"]:::code -.-> C5 & C6 & C7 & C8 & C9
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef llm fill:#f1eafe,stroke:#7c3aed,color:#2a1250
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図2 サブコマンドの振り分け。-n の既定値はコマンドごとに違う（scenes 1000・simulate 500・check 300）</figcaption></figure>
+<div class="callout"><b>注意</b>　<code>ESCALATION</code> はモジュールの大域変数です。<code>check_turn()</code> を hook などから関数として直接呼ぶと <code>main()</code> を通らないため、<code>--escalation</code> の指定は効かず、モジュールの初期値 <code>True</code>（L430）のままです。</div>
+
+<!-- ============================================================ 3 -->
+<h2 id="load">3. 入力の読み込み（load_run）</h2>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["load_runs(dirs) L87&lt;br/&gt;ディレクトリごとに load_run"]:::code --> B[("manifest.json 必須")]:::io
+  B --> C["scen = public.scenarios を id で引く表"]:::code
+  C --> D{"user-ratings.json はあるか"}:::dec
+  D -- ある --> D1["ratings を読む"]:::code
+  D -- ない --> D2["ratings = None&lt;br/&gt;user・user_level は None"]:::code
+  D1 & D2 --> P{"persona-P1〜P3.json"}:::dec
+  P --> P1["あるものだけ personas に入れる"]:::code
+  P1 --> K{"checklist.json はあるか"}:::dec
+  K -- ある --> K1["checks = checks"]:::code
+  K -- ない --> K2["checks = {}&lt;br/&gt;→ hits は空集合"]:::code
+  K1 & K2 --> L["mapping の回答ごとに行を作る L71"]:::code
+  L --> ROW["行 = run, aid, sid, cond, level,&lt;br/&gt;text（回答本文）, messages,&lt;br/&gt;key（最後の発話の本文）, user, user_level,&lt;br/&gt;personas, persona_levels, hits（チェック項目 ID の集合）"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図3 load_run（L58）。key は proxy で場面の事実を照合するとき、fit で学習・検証を分けるときに使う</figcaption></figure>
+
+<!-- ============================================================ 4 -->
+<h2 id="observe">4. 層A：LLM観察（observe / segment）</h2>
+<div class="grid2">
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A{"OPENROUTER_API_KEY はあるか"}:::dec -- ない --> X["SystemExit"]:::dec
+  A -- ある --> B["prompt = observe_prompt.md&lt;br/&gt;＋ POLICIES[variant] L117"]:::code
+  B --> C{"出力ファイルは既にあるか"}:::dec
+  C -- ある --> C1["読み込んで続きから（再開）"]:::io
+  C -- ない --> C2["source = llm:モデル:変種 で新規"]:::code
+  C1 & C2 --> G["行を (run, sid) でまとめる"]:::code
+  G --> LOOP{"次の場面はあるか"}:::dec
+  LOOP -- ない --> END["件数を表示"]:::code
+  LOOP -- ある --> SK{"sid も全 aid も観察済みか"}:::dec
+  SK -- はい --> LOOP
+  SK -- いいえ --> PL["observe_payload L126&lt;br/&gt;会話に turn 番号、回答は aid 順&lt;br/&gt;segment があれば sentences を付ける"]:::code
+  PL --> TRY["call_llm L96&lt;br/&gt;temperature 0"]:::llm
+  TRY --> OK{"JSON を読めて&lt;br/&gt;scenario と全 aid があるか"}:::dec
+  OK -- はい --> SV["obs に書き込み、保存（場面ごと）"]:::io --> LOOP
+  OK -- "いいえ（ValueError / KeyError）" --> RT{"3回試したか"}:::dec
+  RT -- まだ --> TRY
+  RT -- 3回失敗 --> X2["SystemExit 観察に失敗"]:::dec
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef llm fill:#f1eafe,stroke:#7c3aed,color:#2a1250
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図4a cmd_observe（L138）。HTTP エラー・通信失敗は再試行せず即 SystemExit（L105〜108）</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["cmd_segment L172"]:::code --> B["load_runs"]:::code
+  B --> C["s1.own_part(text) s1:L60&lt;br/&gt;```…``` と 件名／---／*** 以降を成果物として切り出す"]:::code
+  C --> D["s1.split_sentences(own) s1:L56&lt;br/&gt;。！？!? と改行で分割、記号だけの行は捨てる"]:::code
+  D --> E["answers[aid].sentences = s1, s2, …&lt;br/&gt;deliverable = 成果物の有無"]:::code
+  E --> F["scenarios[sid].ai_turns =&lt;br/&gt;AI 発話に turn 番号"]:::code
+  F --> G[("segment.json")]:::io
+  G -.-> H["observe --segment&lt;br/&gt;文 ID ごとに観察させる"]:::llm
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef llm fill:#f1eafe,stroke:#7c3aed,color:#2a1250
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+</pre><figcaption>図4b cmd_segment（L172）。観察者の集団で文を突き合わせる単位をそろえる</figcaption></figure>
+</div>
+<p class="refs">観察方針の変種：<code>neutral</code>（追記なし）／<code>literal</code>（迷えば記録しない側）／<code>context</code>（流れから補う）。L117〜123。</p>
+
+<!-- ============================================================ 5 -->
+<h2 id="proxy">5. 層A：代理観察（proxy）</h2>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["cmd_proxy L411&lt;br/&gt;facts = proxy_scenarios.json"]:::io --> B["行ごとに"]:::code
+  B --> C{"key.startswith(facts.match)&lt;br/&gt;の事実はあるか"}:::dec
+  C -- ない --> X["SystemExit シナリオ事実がありません"]:::dec
+  C -- ある --> D["sc = 事実（match を除く）"]:::code
+  D --> E["distance_shift(messages) L338&lt;br/&gt;0〜3"]:::code
+  E --> F["prior_ai_apologies =&lt;br/&gt;詫びの語を含む AI 発話の数"]:::code
+  F --> G["broken_promises 既定 0"]:::code
+  G --> H["proxy_answer(row, facts) L365"]:::code
+  H --> I[("obs-proxy.json&lt;br/&gt;source = proxy:checklist+surface")]:::io
+  subgraph DS["distance_shift の加点（各 +1、上限 3）"]
+    d1["以前は絵文字・！・〜があり、最後にない"]
+    d2["最後の発話が以前の平均の半分未満"]
+    d3["丁寧語の文末の比率が 0.5 以上上がった"]
+    d4["最後が相づちだけ（20字以下）"]
+  end
+  E -.-> DS
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図5 cmd_proxy。貼り付けられた資料（最初の空行より後）は調子の比較から外す（L340）</figcaption></figure>
+
+<h3>proxy_answer の対応表（L365〜408）</h3>
+<p>チェックリストの項目 ID（<code>hits</code>）と正規表現から、観察の各欄を決めます。<code>t_own</code> は「件名／```／---／***」より前の部分です。</p>
+<div class="tbl"><table>
+<thead><tr><th>欄</th><th>決め方</th></tr></thead>
+<tbody>
+<tr><td><code>apology.present</code></td><td><code>t_own</code> に詫びの語（APO、L37）がある</td></tr>
+<tr><td><code>apology.position</code></td><td>なし → none／冒頭2文に詫び → first／それ以外 → after_other</td></tr>
+<tr><td><code>apology.specific_fault</code></td><td>04.01・04.07 に該当、または詫びなし → 0／「確認不足・見落と・しませんでした・しまいました・私の・僕の」 → 2／それ以外 → 1</td></tr>
+<tr><td><code>apology.names_burden</code></td><td>03.05 に該当、または詫びなし → 0／「手間・お時間・負担・ご迷惑・させてしまい・おかけ・かけて」 → 2／それ以外 → 1</td></tr>
+<tr><td><code>repair.requests[id]</code></td><td>task：10.06 か 10.01 に該当 → 「ご指示いただ…」等があれば deferred、なければ not／該当なし → done。question：02.06 → not、それ以外 done</td></tr>
+<tr><td><code>repair.new_errors</code></td><td>10.02・05.05</td></tr>
+<tr><td><code>repair.unrequested_proposals</code></td><td>min(3, {06.01, 06.05, 03.01, 06.02} の該当数 ＋「よかったら・もしよければ・おすすめ・しておきます」の出現数)</td></tr>
+<tr><td><code>defense.excuse</code></td><td>min(2, {05.01, 05.02, 05.05, 05.08, 01.03} の該当数)</td></tr>
+<tr><td><code>defense.blame_or_hint_at_user</code></td><td>04.04・03.04</td></tr>
+<tr><td><code>defense.conditional_apology</code></td><td>04.03</td></tr>
+<tr><td><code>defense.explanation</code></td><td>02.07 → 3／それ以外 min(3, 文字数 // 300)</td></tr>
+<tr><td><code>excess.self_deprecation</code></td><td>09.08 → 2／「至らな・情けな・不徳・恥ずかし」 → 1</td></tr>
+<tr><td><code>excess.promises</code></td><td>min(2,「今後は・次回から・必ず・二度と・徹底」の出現数)</td></tr>
+<tr><td><code>excess.repeated_apologies</code></td><td><code>t_own</code> の詫びの語の出現数</td></tr>
+<tr><td><code>closure.*</code></td><td>declares_resolution：07.02・09.04／moves_on_quickly：06.02・09.05・07.01・06.01</td></tr>
+<tr><td><code>register.formality_shift</code></td><td>(回答の丁寧語比率 − 以前の AI 発話の丁寧語比率) × 3 を丸めて −2〜2</td></tr>
+<tr><td><code>register.emoji_or_exclaim</code>・<code>formatting</code></td><td>絵文字・顔文字・！の数（上限2）／箇条書き行数 // 2 ＋ 太字（上限2）</td></tr>
+<tr><td><code>sentences</code></td><td>常に空（悪く読める一文・但し書きは代理観察では出ない）</td></tr>
+</tbody></table></div>
+
+<!-- ============================================================ 6 -->
+<h2 id="ensemble">6. 層A：観察者の集団（ensemble）</h2>
+<div class="grid2">
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["ensemble(observations) L294"]:::code --> S["場面ごと：requests と prior_stance を除いて aggregate"]:::code
+  S --> S1["requests = 件数の最頻値をもつ観察者の配列をそのまま採る"]:::code
+  S1 --> S2["prior_stance = turns 以外を aggregate、&lt;br/&gt;turns は aggregate_prior_turns（turn 番号で突き合わせ）"]:::code
+  A --> T["回答ごと：sentences と signals を除いて aggregate"]:::code
+  T --> T1["aggregate_sentences L231&lt;br/&gt;文 ID（なければ順番）で突き合わせ"]:::code
+  T --> T2["aggregate_signals L256&lt;br/&gt;種類ごとに 描写あり割合 × 強さ"]:::code
+  S2 & T1 & T2 --> O[("source = llm-ensemble&lt;br/&gt;unsure = ばらつきの大きい項目")]:::io
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+</pre><figcaption>図6a ensemble の全体</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  V["aggregate(vals) L197&lt;br/&gt;None を除く"]:::code --> E{"空か"}:::dec
+  E -- 空 --> N["None"]:::code
+  E -- いいえ --> B{"すべて真偽"}:::dec
+  B -- はい --> B1["真の割合 0〜1"]:::code
+  B -- いいえ --> NU{"すべて数"}:::dec
+  NU -- はい --> NU1["平均。SD > 0.75 なら unsure"]:::code
+  NU -- いいえ --> ST{"すべて文字列"}:::dec
+  ST -- はい --> ST1["unknown を除いた票の分布&lt;br/&gt;1種類なら その値、複数なら {値: 割合}&lt;br/&gt;最多 < 0.6 なら unsure"]:::code
+  ST -- いいえ --> DI{"すべて辞書"}:::dec
+  DI -- はい --> DI1["キーごとに再帰"]:::code
+  DI -- いいえ --> LI{"すべて配列"}:::dec
+  LI -- はい --> LI1["最初の観察者の配列"]:::code
+  LI -- いいえ --> MX["型が混ざる：真偽だけを割合に&lt;br/&gt;真偽がなければ最初の値"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図6b aggregate の型ごとの規則。結果は「真偽→割合」「列挙→票の分布」になるので、層B は share()（L467）で 0〜1 に読む</figcaption></figure>
+</div>
+<p class="refs">aggregate_sentences：plausibility は全観察者で平均（付けなかった観察者は 0）、severity は付けた観察者の最頻値、disclaimer は付けなかった観察者を none として票にする。aggregate_signals：intensity = 描写あり割合 × 強さの平均、virtual・congruent は多数決。</p>
+
+<!-- ============================================================ 7 -->
+<h2 id="s1">7. 層A：System One（s1.observe_turn）</h2>
+<p>1ターンを型付きの一段の質問（noul・score・choice）に分解し、1リクエストで問い、答えの確率をコードで観察JSONに組み立てます。数える・足す・上限で切る・重さを決める、はすべてコードです。</p>
+<div class="callout"><b>質問の言語</b>　instructions と criteria の説明は英語で書きます（System One モデルは英語の指示を前提とするため）。判定の対象（state の会話・回答）と、言い回しの例（「申し訳ない」「二回伝えていますが」など）は日本語のまま渡します。互換モード llm-s1 のシステムプロンプトも英語です。</div>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["observe_turn s1:L623"]:::code --> U{"user の発話はあるか"}:::dec
+  U -- ない --> X["S1Error"]:::dec
+  U -- ある --> MD["model 既定&lt;br/&gt;jev → jev-1.14.0／openrouter → ~typesafe/jev-latest&lt;br/&gt;llm-s1 → claude-haiku-5.5"]:::code
+  MD --> BS["build_state s1:L185&lt;br/&gt;early_user（最初の3件・400字）&lt;br/&gt;turns（最後の user を除く直近10件・800字）&lt;br/&gt;last_user ＋ 文分割（8文まで）&lt;br/&gt;own_sentences（24文まで）・deliverable（1500字）"]:::code
+  BS --> SF["surface s1:L78（正規表現。モデルに問わない）&lt;br/&gt;distance：emoji_lost・much_shorter・aizuchi&lt;br/&gt;emoji_or_exclaim・formatting・formulaic_opening&lt;br/&gt;has_stage（ト書き・顔文字）・polite_shift"]:::code
+  SF --> BQ["build_questions s1:L204"]:::code
+  BQ --> AK["ask s1:L441"]:::code
+  AK --> AS["assemble s1:L509"]:::code
+  AS --> OUT["(scenario, answer, meta)&lt;br/&gt;meta：backend・model・latency_ms・usage・&lt;br/&gt;n_questions・unsure・text_len＝own の文字数・state・questions・answers"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図7a observe_turn の流れ</figcaption></figure>
+
+<div class="grid2">
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  Q["build_questions"]:::code --> Q1["場面 sc.* 10問&lt;br/&gt;polite_switch・formal_name・explicit(0-3)・&lt;br/&gt;harm(0-2)・violation・accepted・push・&lt;br/&gt;verification_false・salient・&lt;br/&gt;repeat_now（最後の発話で再発を指摘したか）"]:::code
+  Q1 --> QC{"ask_context"}:::dec
+  QC -- True --> Q2["ctx.fault・ctx.distance"]:::code
+  QC -- False --> Q3
+  Q2 --> Q3["履歴 turns[i] ごと&lt;br/&gt;user：corrects・repeat・concern&lt;br/&gt;AI：apology・promise・caused・&lt;br/&gt;confidence(0-3)・disclaimer・verified・dismiss"]:::code
+  Q3 --> Q4["last_user の文ごと lu{i}&lt;br/&gt;request・kind・status&lt;br/&gt;（status は instructions.request で文を名指し）"]:::code
+  Q4 --> Q5["回答全体 ans.* 18問"]:::code
+  Q5 --> Q6["回答の文ごと s{i}&lt;br/&gt;11の行為 ＋ disclaimer ＋ 9つの悪い読み"]:::code
+  Q6 --> QS{"surface.has_stage"}:::dec
+  QS -- True --> Q7["sig.* 19種 × 2（有無・強さ）＋ performative"]:::code
+  QS -- False --> QE["質問の組"]:::code
+  Q7 --> QE
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図7b 質問の組。回答1文あたり 21問増える（24文で 504問）</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  K["ask s1:L441&lt;br/&gt;h = sha256(state, questions, model)[:24]"]:::code --> R{"backend == replay"}:::dec
+  R -- はい --> R1[("--replay のファイルの answers")]:::io
+  R1 --> RQ{"保存時の questions があるか"}:::dec
+  RQ -- ある --> RQ1["文面・型の変わった質問を&lt;br/&gt;usage.changed_questions に"]:::code
+  R -- いいえ --> C{"cache_dir/h.json はあるか"}:::dec
+  C -- ある --> C1[("キャッシュを読む&lt;br/&gt;usage = cached")]:::io
+  C -- ない --> B{"backend"}:::dec
+  B -- openrouter --> O["ask_openrouter s1:L356&lt;br/&gt;POST openrouter.ai/api/alpha/decisions&lt;br/&gt;既定 ~typesafe/jev-latest&lt;br/&gt;--max-bytes があれば質問を分けて並列に"]:::llm
+  B -- jev --> J["ask_jev s1:L328&lt;br/&gt;POST /v1/systemone"]:::llm
+  B -- llm-s1 --> L["ask_llm_s1 s1:L421&lt;br/&gt;→ normalize_llm_answers"]:::llm
+  O & J & L --> W{"cache_dir 指定あり"}:::dec
+  W -- あり --> W1[("キャッシュに書く")]:::io
+  J -. "キーなし・HTTP・通信・形の誤り" .-> E["S1Error"]:::dec
+  L -. "キーなし・HTTP・JSON 不可" .-> E
+  R1 & C1 & W & RQ1 --> CA["check_answers s1:L468&lt;br/&gt;missing_answers：答えのない質問&lt;br/&gt;mismatched_answers：型の合わない答え&lt;br/&gt;→ meta に入れ、check が件数を警告"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef llm fill:#f1eafe,stroke:#7c3aed,color:#2a1250
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図7c バックエンドの選択。どの経路でも、答えと質問の組を突き合わせる（欠けた答えは組み立てで既定値になるため、黙って値が変わらないように）</figcaption></figure>
+</div>
+
+<h3>assemble：答えから観察JSONへ（s1:L509）</h3>
+<p>答えの読み出しは <code>Answers</code>（s1:L479）。<code>yes()</code> は noul ≥ 0.5（<code>YES</code>）、<code>level()</code>・<code>top()</code> は確率が最大の段階・選択肢。0.3〜0.7 の noul は <code>unsure</code> に記録（悪い読み・演技の読みは factual=False で記録しない）。</p>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["assemble"]:::code --> D["distance_shift = min(3,&lt;br/&gt;emoji_lost＋much_shorter＋aizuchi＋&lt;br/&gt;polite_switch＋formal_name)"]:::code
+  A --> P["prior_corrections = Σ u{i}.corrects&lt;br/&gt;prior_ai_apologies = Σ a{i}.apology"]:::code
+  A --> BR["broken_promises：AI の約束の後に&lt;br/&gt;user の再発の指摘が来た回数（順序はコード）&lt;br/&gt;＋ 最後の約束の後に sc.repeat_now が真なら 1"]:::code
+  A --> PS["prior_stance.turns：AI 発話ごとに&lt;br/&gt;confidence・caused_failure・disclaimer&lt;br/&gt;dismissed：直前の user の懸念 かつ AI が退けた&lt;br/&gt;claimed：verified のどれか&lt;br/&gt;verification_false = claimed かつ sc.verification_false&lt;br/&gt;salient = 1.0／0.4"]:::code
+  PS --> TS["turns_since_incident =&lt;br/&gt;最初の失敗発話より後の user 発話の数"]:::code
+  A --> RQ["requests：lu{i}.request が真の文だけ r1, r2…&lt;br/&gt;status = lu{i}.status の最多"]:::code
+  A --> CX["context：real_task・ai_assistant・victim・power 0&lt;br/&gt;＋ fault_clarity・distance"]:::code
+  A --> AN["回答：文ごとの行為の真偽 act[k][i]"]:::code
+  AN --> AP["apology.present = いずれかの文が詫び&lt;br/&gt;position = 最初の文が詫びなら first"]:::code
+  AN --> SN{"文 i の悪い読みの最大 ≥ 0.05"}:::dec
+  SN -- はい --> SN1["sentences に追加&lt;br/&gt;reading_type・plausibility・severity（型で固定）・disclaimer"]:::code
+  SN -- いいえ --> SD{"disclaimer ≠ none、または詫びの文"}:::dec
+  SD -- はい --> SD1["plausibility 0 で追加"]:::code
+  SN1 & SD1 --> IX["index（元の文番号）と is_apology を付ける&lt;br/&gt;→ 層B の answer_disclaimers が詫びの位置に使う"]:::code
+  SD -- いいえ --> SD2["追加しない"]:::code
+  AN --> SG{"has_stage"}:::dec
+  SG -- True --> SG1["sig.k が真の種類だけ signals に&lt;br/&gt;intensity 1／strong なら 2、virtual True&lt;br/&gt;compensation・sacrifice・declared_cost → cost declared 1&lt;br/&gt;repair_action → cost real 1"]:::code
+  AN --> FS["formality_shift = ans.formality − 2&lt;br/&gt;emoji_or_exclaim = min(2, surface ＋ Σ mimetic)"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図7d assemble の組み立て。apology_accepted_before・explicit_complaint・harm・violation_type は場面の質問から直接</figcaption></figure>
+
+<!-- ============================================================ 8 -->
+<h2 id="layerb">8. 層B：母集団と assess</h2>
+<div class="grid2">
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["load_population(path) L978"]:::io --> B["configure(pop) L721"]:::code
+  B --> B0["JUDGMENT・TIMELINE をコードの既定値に戻す&lt;br/&gt;JUDGMENT_BY_SOURCE を空に"]:::code
+  B0 --> B1["judgment を JUDGMENT に上書き&lt;br/&gt;（辞書は浅いマージ、_ で始まるキーは無視）"]:::code
+  B1 --> B2["JUDGMENT_BASE = JUDGMENT の深いコピー"]:::code
+  B2 --> B3["judgment_by_source を登録"]:::code
+  B3 --> B4["timeline を TIMELINE に上書き"]:::code
+  B4 --> SP["sample_panel(pop, n, seed) L954"]:::code
+  SP --> S1["rng = Random(seed)&lt;br/&gt;embodiment は Random(seed+9973)&lt;br/&gt;overclaim は Random(seed+19997)"]:::code
+  S1 --> S2["n 回：型を weight で選ぶ&lt;br/&gt;→ ranges にあり型の mean にある性質だけ&lt;br/&gt;gauss(mean, sd) を [lo, hi] に切る"]:::code
+  S2 --> S3["panel = [(型名, θ)] × n"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+</pre><figcaption>図8a 母集団の読み込みと抽出。型の比率：当事者・関係修復 0.2／寛容・観察者 0.25／効率・道具 0.2／礼節規範 0.15／相棒・情緒 0.2</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["assess(a, sc, panel, text_len, hyst) L985"]:::code --> L{"panel の次の (型, θ)"}:::dec
+  L -- ある --> P["L = perceive(sc, θ, hyst) L524"]:::code
+  P --> J["j = judge_full(a, sc, θ, L, text_len, hyst) L835"]:::code
+  J --> ACC["累積&lt;br/&gt;mu[k] += μk、tail[k] += (μk ≥ 0.5)&lt;br/&gt;by_type[型][k] += μk&lt;br/&gt;labels[defuzz] += 1、段階 to_level(L)&lt;br/&gt;faults、offense、shortfall、max(0, excess)、reliability"]:::code
+  ACC --> L
+  L -- 尽きた --> OUT["÷ n して返す&lt;br/&gt;mu・tail・labels・by_type・perceived_level・&lt;br/&gt;perceived_mean・axes・reliability・&lt;br/&gt;mean_faults（上位6）"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図8b assess。一人の判定は決定的で、乱数は sample_panel だけ</figcaption></figure>
+</div>
+
+<!-- ============================================================ 9 -->
+<h2 id="perceive">9. 不満の深さ L（perceive）と傷 S</h2>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["perceive(sc, θ, hyst) L524"]:::code --> C["causes = 0.35·min(prior_corrections, 3)&lt;br/&gt;＋ 0.35·ai_unrequested_push ＋ 0.35·harm&lt;br/&gt;＋ 0.35·share(violation_type, integrity)"]:::code
+  C --> PS["ps = prior_stance(sc) L478"]:::code
+  PS --> H{"hyst"}:::dec
+  H -- True --> S["S = scar(sc, θ) = S ＋ S_dec"]:::code
+  H -- False --> S0["S = 0"]:::code
+  S & S0 --> DT["detect' = θ.detect × (1 ＋ 0.3·S)"]:::code
+  DT --> RAW["raw = interp(explicit_complaint, 0→0, 1→1.3, 2→2.3, 3→3.3)&lt;br/&gt;＋ detect'·distance_shift&lt;br/&gt;＋ θ.cause·(causes ＋ 0.5·G − 0.3·h)&lt;br/&gt;＋ (1 − θ.forgiveness)·0.3·prior"]:::code
+  RAW --> R{"ρ = apology_accepted_before > 0"}:::dec
+  R -- はい --> RR["raw × (1 − ρ·0.6·θ.forgiveness·e^(−S))&lt;br/&gt;（hyst なしなら e^(−S) は 1）"]:::code
+  R -- いいえ --> CL
+  RR --> CL["L = clamp(raw, 0, 4)"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図9a perceive。L は場面と θ だけで決まり、回答の中身には依存しない（同じ場面の回答はすべて同じ L）</figcaption></figure>
+
+<div class="grid2">
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["prior_stance(sc) L478"]:::code --> T["turns = caused_failure > 0 の AI 発話"]:::code
+  T --> E{"turns は空か"}:::dec
+  E -- 空 --> Z["c = h = v = G = 0&lt;br/&gt;dec = share(verification_false)"]:::code
+  E -- ある --> C["c = max(min(3, confidence)) / 3"]:::code
+  C --> HD["発話ごと hedged = min(1,&lt;br/&gt;max(0, 1 − confidence) ＋ disc)&lt;br/&gt;disc = scope ＋ (1 − claimed)·verify ＋ 0.5·liability"]:::code
+  HD --> HH["h = caused_failure で重みづけた hedged の平均"]:::code
+  HH --> V["v = 0.5 ＋ 0.5·salient"]:::code
+  V --> G["G = v·c·(1 ＋ 0.5·dismissed_concern)"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図9b 失敗の前の構え。G 過信の差、h 控えめの度合い、dec 確かめたと偽った度合い</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["scar_parts(sc, θ) L500"]:::code --> D["d = decay(turns_since_incident)&lt;br/&gt;= max(0, 1 − age / 20)"]:::code
+  D --> CU["current = 1 if harm > 0 or&lt;br/&gt;explicit_complaint ≥ 1 or ρ > 0"]:::code
+  CU --> N["n = round(prior_corrections) ＋ current"]:::code
+  N --> NE["n_eff = Σ decay(incident_ages[:n])&lt;br/&gt;＋ (n − 年齢の数)·d"]:::code
+  NE --> SS["s = 0.6·n_eff^1.3 ＋ d·(0.8·integrity&lt;br/&gt;＋ 0.7·broken_promises ＋ 0.6·θ.overclaim·G)"]:::code
+  SS --> SD["S_dec = 0.8·dec·(0.5 ＋ 0.5·d)"]:::code
+  SD --> OUT["(θ.memory·s, θ.memory·S_dec)"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+</pre><figcaption>図9c 信頼の傷。hyst 有効時だけ perceive・judge_full で使う</figcaption></figure>
+</div>
+
+<!-- ============================================================ 10 -->
+<h2 id="judge">10. 一人の評定（judge_full）</h2>
+<p>失点 F の合計から「無礼さ（offense）」、必要な中身と回答の中身の差から「不足（shortfall）」、重さと許容の差から「過剰（excess）」を作り、三つをそれぞれ所属度にします。謝罪の場面（1 − ρ）と修復期（ρ）は ρ の度合いで混ぜます。</p>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["judge_full(a, sc, θ0, L, text_len, hyst) L835"]:::code --> CX["ctx = context_of(sc) L590&lt;br/&gt;unknown は既定値、票の分布は最多の値"]:::code
+  CX --> TH["θ = effective_theta(θ0, ctx) L601&lt;br/&gt;expect ×(1＋0.15·power)&lt;br/&gt;distant → register ×1.3&lt;br/&gt;close → warmth ×1.5&lt;br/&gt;observer → partisanship ×0.6（下限 0.05）"]:::code
+  TH --> GT["hi, mid = gates(L) L789&lt;br/&gt;hi = σ((L − 2.5)/0.25)、mid = σ((L − 1.5)/0.25)"]:::code
+  GT --> RH["ρ = rho(sc)、(S, S_dec) = scar_parts（hyst 時）&lt;br/&gt;G, h = prior_stance"]:::code
+  RH --> MX{"hyst かつ ρ > 0"}:::dec
+  MX -- はい --> MX1["mid = max(mid, ρ·σ((S＋S_dec − 0.5)/0.15))"]:::code
+  MX -- いいえ --> F0
+  MX1 --> F0["F = Counter()"]:::code
+  F0 --> F1["失点の加算（下の表）"]:::code
+  F1 --> SG["apply_signals → Fs, soothe, plus, heavy_sig"]:::code
+  SG --> F2["構え・但し書き・修復期の失点"]:::code
+  F2 --> DC["discount（言葉の謝罪の目減り）"]:::code
+  DC --> SH["shortfall"]:::code
+  SH --> OF["offense = max(0, ΣF − min(soothe, 0.8))"]:::code
+  OF --> EX["excess"]:::code
+  EX --> RL["reliability"]:::code
+  RL --> MU["membership(offense, shortfall, excess)&lt;br/&gt;→ mu・label = defuzz(mu)"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図10a judge_full の順序</figcaption></figure>
+
+<h3>10.1 失点 F の一覧（L853〜899）</h3>
+<div class="tbl"><table>
+<thead><tr><th>失点の名前</th><th>式</th><th>効く条件</th><th>行</th></tr></thead>
+<tbody>
+<tr><td>要求の未遂行</td><td>依頼ごとに Σ share(status, k)·cost[k] × (1 ＋ 0.3·hi)<br/>cost：not 0.4＋1.2·repair／deferred 0.2＋0.9·repair／partial 0.5·repair／done 0</td><td>常に</td><td>853</td></tr>
+<tr><td>誤りの上塗り</td><td>(1.0 ＋ 0.5·hi)·new_errors</td><td>常に</td><td>858</td></tr>
+<tr><td>弁解</td><td>0.5·excuse·(1 ＋ hi)</td><td>常に</td><td>859</td></tr>
+<tr><td>条件付きの詫び</td><td>0.6·conditional_apology</td><td>常に</td><td>860</td></tr>
+<tr><td>相手への指摘</td><td>1.2·blame_or_hint_at_user</td><td>常に</td><td>861</td></tr>
+<tr><td>説明の多さ</td><td>mid·0.2·explanation·(0.5 ＋ brevity)</td><td>不満が明確</td><td>863</td></tr>
+<tr><td>頼まれていない提案</td><td>0.35·proposals·(mid·(1 ＋ hi) ＋ (1 − mid)·ρ)</td><td>不満が明確、または修復期</td><td>864</td></tr>
+<tr><td>先を急ぐ</td><td>mid·0.6·moves_on_quickly（＋ 詫びより前の verify の但し書き (1−ρ)·mid·0.3）</td><td>不満が明確</td><td>865, 891</td></tr>
+<tr><td>絵文字・感嘆</td><td>mid·0.5·emoji_or_exclaim·register</td><td>不満が明確</td><td>866</td></tr>
+<tr><td>長さ</td><td>mid·min(1.5, brevity·max(0, 文字数 − 300)/400)</td><td>不満が明確</td><td>867</td></tr>
+<tr><td>終結宣言</td><td>0.8·declares_resolution</td><td>常に</td><td>868</td></tr>
+<tr><td>定型の同意から入る</td><td>hi·0.5·formulaic_agreement_opening</td><td>不満が強い</td><td>870</td></tr>
+<tr><td>書式</td><td>hi·0.4·formatting·register</td><td>不満が強い</td><td>871</td></tr>
+<tr><td>文体が崩れる</td><td>hi·0.4·register·max(0, −formality_shift)</td><td>不満が強い</td><td>872</td></tr>
+<tr><td>謝罪が後回し</td><td>hi·0.5·present·(1 − share(position, first))</td><td>不満が強い</td><td>873</td></tr>
+<tr><td>急に冷たく改まる</td><td>(1 − mid)·0.3·warmth</td><td>formality_shift ≥ 2</td><td>875</td></tr>
+<tr><td>悪く読める一文</td><td>文ごと Σ p^(1/partisanship)·0.7·severity</td><td>sentences がある</td><td>877</td></tr>
+<tr><td>（シグナル由来）</td><td>apply_signals の Fs（11章）</td><td>signals がある</td><td>881</td></tr>
+<tr><td>懲りていない</td><td>0.6·G·(confidence_now ≥ 2)·overclaim</td><td>過信で外した後</td><td>884</td></tr>
+<tr><td>但し書き（言い訳）</td><td>(1 − ρ)·(0.4·scope ＋ 1.0·liability)·(詫びより前 1.5／後 0.7)</td><td>但し書きの文がある</td><td>889</td></tr>
+<tr><td>約束破り</td><td>ρ·(1 ＋ 0.5·memory)·share(promise_kept, broken)</td><td>修復期</td><td>896</td></tr>
+<tr><td>許しの当然視</td><td>ρ·0.6·(1 ＋ S ＋ S_dec)·presumes_forgiveness</td><td>修復期</td><td>897</td></tr>
+<tr><td>軽口</td><td>ρ·0.5·levity·(1 − 0.5·warmth)</td><td>修復期</td><td>898</td></tr>
+<tr><td>調子を急に戻す</td><td>ρ·0.3·(S ＋ S_dec)·max(0, tone_reset − 1)</td><td>修復期</td><td>899</td></tr>
+<tr><td>破った約束の上に約束を重ねる</td><td>0.5·promises·(0.5 ＋ memory)</td><td>hyst かつ broken_promises > 0</td><td>906</td></tr>
+</tbody></table></div>
+
+<h3>10.2 不足（shortfall）と過剰（excess）</h3>
+<div class="grid2">
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  D0["discount = 1"]:::code --> H{"hyst"}:::dec
+  H -- True --> D1["discount = 1 / (1 ＋ 0.35·prior_ai_apologies·memory)"]:::code
+  D1 --> ES{"ESCALATION かつ present ≥ 0.5&lt;br/&gt;かつ specific_fault ≥ 2&lt;br/&gt;かつ formality_shift ≥ 1"}:::dec
+  ES -- はい --> D2["discount = 1（一段改めた謝罪）"]:::code
+  ES -- いいえ --> PR
+  H -- False --> PR
+  D2 --> PR["discount ×= 1 − prompted·(observer 0.4／それ以外 0.15)"]:::code
+  PR --> NEED["need = interp(L, 0→0, 1→0.8, 2→1.5, 3→3.0, 4→3.8)·expect&lt;br/&gt;need_fault = need·0.5·(1 − 0.5·h) ＋ 0.5·G·overclaim&lt;br/&gt;need_burden = need·0.5"]:::code
+  NEED --> AD["adequacy_parts L541&lt;br/&gt;base = present·(1 ＋ 0.5·first ＋ 0.3·max(0, formality_shift))&lt;br/&gt;　＋ (1 − present)·0.3·thanks_instead&lt;br/&gt;ad_fault = discount·(0.5·base ＋ 0.6·specific_fault)&lt;br/&gt;　＋ 0.5·ack_overclaim·min(1, G) ＋ 0.5·plus&lt;br/&gt;ad_burden = discount·(0.5·base ＋ 0.5·names_burden) ＋ 0.5·plus"]:::code
+  AD --> SA["gf = need_fault − ad_fault、gb = need_burden − ad_burden&lt;br/&gt;Sa = max(0, gf ＋ 0.5·min(0, gb)) ＋ max(0, gb ＋ 0.5·min(0, gf))"]:::code
+  SA --> SR["修復期 need_r = (0.3 ＋ 0.5·(S＋S_dec) ＋ 0.4·G)·expect&lt;br/&gt;ad_r = (0.35·care ＋ 0.2·(2 − tone_reset) ＋ 0.5·kept&lt;br/&gt;＋ 0.3·calibrated ＋ min(0.3, 0.15·useful))·(1 − 0.3·integrity)&lt;br/&gt;Sr = max(0, need_r − ad_r)"]:::code
+  SR --> SH["shortfall = (1 − ρ)·Sa ＋ ρ·Sr"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図10b 不足。片方の成分の余りは、もう片方の不足を半分だけ埋める</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  W["weight(a) L556&lt;br/&gt;= present ＋ 0.5·max(0, repeated − 1)&lt;br/&gt;＋ 0.6·self_dep ＋ 0.4·promises ＋ 0.4·forgive&lt;br/&gt;＋ present·0.3·max(0, formality_shift)"]:::code --> OK["w_ok = max(interp(L, 0→0, 1→0.5, 2→1, 3→2, 4→2.5)·expect,&lt;br/&gt;max(mid, explicit_complaint ≥ 1))"]:::code
+  OK --> TOL["tol = tolerance·min(1, 0.25 ＋ L/2)·(1 − 0.5·brevity)"]:::code
+  TOL --> HR["heavy_restraint = ρ·0.4·(re_apology ＋ 0.5·revisits)·(1.5 − tolerance/6)&lt;br/&gt;＋ 0.15·over_hedging·(1 − 0.5·min(1, G))&lt;br/&gt;＋ ρ·0.1·min(1, liability_n)"]:::code
+  HR --> EX["excess = weight ＋ heavy_sig ＋ heavy_restraint − w_ok − tol&lt;br/&gt;（負の値もそのまま所属度へ）"]:::code
+  EX --> RE["reliability = clamp(1 − 0.3·over_hedging&lt;br/&gt;− 0.4·G·(confidence_now ≥ 2)&lt;br/&gt;− 0.5·dec·(0.5 ＋ 0.5·decay), 0, 1)"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+</pre><figcaption>図10c 過剰と信頼。re_apology は観察がなければ restraint_of（L825）が詫びの言葉から決める</figcaption></figure>
+</div>
+
+<!-- ============================================================ 11 -->
+<h2 id="signals">11. 態度・行動のシグナル（apply_signals）</h2>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["apply_signals L629"]:::code --> E{"signals は空か"}:::dec
+  E -- 空 --> Z["(空, 0, 0, 0) を返す"]:::code
+  E -- ある --> LP["シグナルごとに&lt;br/&gt;grp = SIGNAL_GROUP[kind]（未知は appease）&lt;br/&gt;I = clamp(intensity, 0, 2)&lt;br/&gt;c = credibility L614"]:::code
+  LP --> CR{"credibility"}:::dec
+  CR -- "story" --> C1["c = 1"]:::code
+  CR -- "virtual（現実のタスクの仮想の身体）" --> C2["c = embodiment·(1 − 0.5·hi)"]:::code
+  CR -- "実体" --> C3["c = 1"]:::code
+  C1 & C2 & C3 --> BD{"fewer_words・quiet_voice・freeze"}:::dec
+  BD -- はい --> BD1["c ×= 0.5 ＋ 0.25·baseline_shift"]:::code
+  BD -- いいえ --> G
+  BD1 --> G{"grp"}:::dec
+  G -- "appease / bow" --> GA{"ambiguous かつ AMBIGUITY_FLIP"}:::dec
+  GA -- はい --> GA1["F 後ろめたさに見える ＋0.25·I·c"]:::code
+  GA -- いいえ --> GA2["soothe ＋0.25·I·c（story は ×(1＋0.5·warmth)）&lt;br/&gt;plus ＋0.2·I·c"]:::code
+  GA1 & GA2 --> GB{"bow"}:::dec
+  GB -- はい --> GB1["heavy ＋ BOW_WEIGHT·I（deep_bow 0.5／dogeza 0.9）"]:::code
+  G -- shock --> GS["plus ＋0.3·I·c、ambiguous なら soothe ＋0.2·I·c&lt;br/&gt;I ≥ 2 なら F 自分の動揺が先に立つ ＋0.3·partisanship·c·hi"]:::code
+  G -- incongruent --> GI["k = 現実 1＋0.5·mid／story 0.6＋0.4·mid&lt;br/&gt;F 言葉と態度の食い違い ＋1.2·I·max(c, 0.7)·k"]:::code
+  G -- cost --> GC{"kind / cost.kind"}:::dec
+  GC -- repair_action --> GC1["plus ＋0.3·amt"]:::code
+  GC -- "real、または story の in_world" --> GC2["plus ＋0.6·amt、heavy ＋0.4·max(0, amt − 1)"]:::code
+  GC -- "in_world（現実）" --> GC3["plus ＋0.1·amt、amt ≥ 1 なら&lt;br/&gt;F 仮想の代償でごまかす ＋0.3·amt·(1 − emb)·hi"]:::code
+  GC -- declared --> GC4["plus ＋0.15·amt、hyst かつ broken_promises > 0 なら&lt;br/&gt;F 破った約束の上に約束を重ねる ＋0.3·amt"]:::code
+  LP --> CG["congruent が False（incongruent 以外）&lt;br/&gt;F 言葉と態度の食い違い ＋0.8·I·max(c, 0.7)"]:::code
+  LP --> PF["演じられる表出（UNCONTROLLABLE 以外）を performed に、&lt;br/&gt;仮想の身体を virtual_body に加算"]:::code
+  PF --> POST["ループの後&lt;br/&gt;virtual_body → F 現実の失敗に仮想の仕草 ＋0.3·vb·(1 − emb)·hi&lt;br/&gt;補償 かつ vb ≥ 2 → F 感情表現と補償の取り合わせ&lt;br/&gt;強い shock ＋ repair_action → 自分の動揺… を消す&lt;br/&gt;perf = max(performative_plausibility, min(1, 0.2·(performed − 2)))&lt;br/&gt;F 演技に見える ＋0.7·perf^(1/partisanship)"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図11 シグナルの効果。戻り値は (失点 Fs, なだめ soothe, 中身の加点 plus, 重さの加点 heavy)</figcaption></figure>
+
+<!-- ============================================================ 12 -->
+<h2 id="fuzzy">12. 所属度・非ファジィ化・較正</h2>
+<div class="grid2">
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  I["offense, shortfall, excess"]:::code --> R["失礼 r = σ((offense − 1.2)/0.3)"]:::code
+  I --> L["足りない l = σ((shortfall − 1.0)/0.3)"]:::code
+  I --> H["重すぎる h = σ((excess − 0.3)/0.25)"]:::code
+  R & L & H --> T{"JUDGMENT.tnorm"}:::dec
+  T -- min --> F1["釣り合う = min(1−r, 1−l, 1−h)"]:::code
+  T -- product --> F2["釣り合う = (1−r)(1−l)(1−h)"]:::code
+  F1 & F2 --> DF["defuzz L801&lt;br/&gt;最大の述語。同点は 失礼 > 足りない > 重すぎる > 釣り合う"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図12a membership（L795）。中心・幅は population.json の judgment と出どころの較正で変わる</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  U["use_source(obs.source) L754"]:::code --> B["JUDGMENT を JUDGMENT_BASE に戻す"]:::code
+  B --> K["source_kind L741&lt;br/&gt;llm-ensemble / system-one / proxy で始まる → その区分&lt;br/&gt;s1・jev → system-one&lt;br/&gt;llm・subagent → llm&lt;br/&gt;それ以外 → コロンより前"]:::code
+  K --> C{"judgment_by_source[区分] はあるか"}:::dec
+  C -- "llm" --> C1["rude 中心 2.4、light 中心 1.6"]:::code
+  C -- "llm-ensemble" --> C2["rude 中心 2.7、light 中心 1.0"]:::code
+  C -- "proxy・system-one・その他" --> C3["既定のまま（rude 1.2、light 1.0）"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図12b 出どころの較正。simulate・fit・explain は観察の source、scenes は場面ファイルの source（手で書いた観察にはないので既定のまま）、check は system-one で呼ぶ</figcaption></figure>
+</div>
+
+<!-- ============================================================ 13 -->
+<h2 id="check">13. 組み込み判定（check）</h2>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  IN[("入力 JSON（- なら標準入力）")]:::io --> M["messages = user と assistant だけ L1392"]:::code
+  M --> A{"answer キーはあるか"}:::dec
+  A -- ある --> CT
+  A -- ない --> A2{"最後の発話は assistant か"}:::dec
+  A2 -- いいえ --> X["SystemExit answer がなく…"]:::dec
+  A2 -- はい --> A3["最後の発話を pop して answer に"]:::code
+  A3 --> CT["check_turn L1342"]:::code
+  CT --> OT["s1.observe_turn（7章）"]:::llm
+  OT -- S1Error --> FO{"--strict"}:::dec
+  FO -- なし --> FO1["verdict unavailable を表示&lt;br/&gt;終了コード 0（fail-open）"]:::code
+  FO -- あり --> FO2["終了コード 3"]:::dec
+  OT -- 成功 --> MG["sc = merged(DEFAULT_SCENARIO, sc)&lt;br/&gt;context があれば sc.context を上書き&lt;br/&gt;a = merged(DEFAULT_ANSWER, a)"]:::code
+  MG --> AS["load_population → use_source(system-one)&lt;br/&gt;→ sample_panel(n=300, seed=7)&lt;br/&gt;→ assess(a, sc, panel, text_len, hyst)"]:::code
+  AS --> V{"tail.rude ≥ rude_at（0.2）"}:::dec
+  V -- はい --> VR["verdict = rude（失礼の恐れ）"]:::code
+  V -- いいえ --> VW{"max(mu.rude, mu.light) ≥ warn_at（0.4）"}:::dec
+  VW -- はい --> VW1["verdict = warn（要注意）"]:::code
+  VW -- いいえ --> VO["verdict = ok（問題なし）"]:::code
+  VR & VW1 & VO --> SH["sheep(mu.rude)&lt;br/&gt;≥0.6 メッ！！／≥0.35 メッ／≥0.15 メ…？／それ未満 なし"]:::code
+  SH --> FL["flagged_sentences = plausibility ≥ 0.5 の文&lt;br/&gt;p × severity の降順に5件"]:::code
+  FL --> OUTF{"--json / --debug / --save-raw"}:::dec
+  OUTF --> EXC{"--fail-on"}:::dec
+  EXC -- "rude で verdict=rude&lt;br/&gt;warn で rude か warn" --> E2["終了コード 2"]:::dec
+  EXC -- never・該当なし --> E0["終了コード 0"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef llm fill:#f1eafe,stroke:#7c3aed,color:#2a1250
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図13 check。verdict は tail（0.5 以上の人の割合）、羊の鳴き声は mu（平均所属度）で決まる</figcaption></figure>
+
+<!-- ============================================================ 14 -->
+<h2 id="cmds">14. simulate / fit / explain / scenes</h2>
+<div class="grid2">
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["cmd_simulate L1049"]:::code --> B["load obs → load_population → use_source"]:::code
+  B --> C["rows = 観察のある回答だけ"]:::code
+  C --> P["panel = sample_panel(n, seed)"]:::code
+  P --> L["回答ごと assess(obs.answers[aid],&lt;br/&gt;obs.scenarios[sid], panel, len(text), hyst)&lt;br/&gt;sc・a は merged() で既定値を補う"]:::code
+  L --> AG["(level, cond) でまとめる"]:::code
+  AG --> S[("sim.json")]:::io
+  S --> PR["表示：段階×条件・条件の要約・量の軸・&lt;br/&gt;型ごとの釣り合う・失礼の多い回答"]:::code
+  PR --> U{"筆者の評定はあるか"}:::dec
+  U -- ある --> CU["compare_with_user：κ・近さ"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図14a simulate</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["cmd_fit L1131"]:::code --> B["rows = 観察と筆者の評定がある回答"]:::code
+  B --> K["key（最後の発話）を shuffle(seed)&lt;br/&gt;前半の場面 → 学習、残り → 検証"]:::code
+  K --> E{"学習・検証の両方があるか"}:::dec
+  E -- ない --> X["SystemExit"]:::dec
+  E -- ある --> G["大域：trials 回 θ を一様に、β は対数一様 [1, 32]"]:::code
+  G --> SC["score = 平均対数尤度 ＋ 0.1·段階一致&lt;br/&gt;P(k|μ) = softmax(β·μ)"]:::code
+  SC --> R["局所：refine 回 ガウスの山登り&lt;br/&gt;改善しなければ step ×0.995（下限 0.01）"]:::code
+  R --> O[("fit.json：θ・対数損失・Brier・κ・型までの距離")]:::io
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+  classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
+</pre><figcaption>図14b fit。sc・a は merged() を通し、sid・aid をキーに同じ辞書へキャッシュ</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["cmd_explain L1237"]:::code --> B["load obs → load_population → use_source"]:::code
+  B --> C["--answer の行を引く"]:::code
+  C --> C2["a・sc を merged() で既定値で補う"]:::code
+  C2 --> D["explain_rows L1216&lt;br/&gt;型ごとに θ = 型の mean（抽出しない）"]:::code
+  D --> E["perceive → judge_full&lt;br/&gt;hyst なら faults に (傷 S) を足す"]:::code
+  E --> F["print_explain：L・明確・強い・所属度・&lt;br/&gt;無礼さ・必要な中身 − 回答の中身・失点"]:::code
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+</pre><figcaption>図14c explain。母集団の抽出をしないので、simulate の平均とは一致しない</figcaption></figure>
+<figure class="fig"><pre class="mermaid">
+flowchart TD
+  A["cmd_scenes L1303"]:::code --> B["load_population → use_source(data.source) → panel"]:::code
+  B --> C["場面ごと sc = merged(DEFAULT_SCENARIO, scenario)"]:::code
+  C --> D["回答ごと a = merged(DEFAULT_ANSWER, obs)"]:::code
+  D --> E["assess(a, sc, panel, len(text), hyst)"]:::code
+  E --> F[("scenes-result.json")]:::io
+  classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
+  classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
+</pre><figcaption>図14d scenes</figcaption></figure>
+</div>
+
+<!-- ============================================================ 15 -->
+<h2 id="trace">15. 実例トレース（examples/check）</h2>
+<p><code>examples/check/turn.json</code>（失礼な回答）と <code>turn-good.json</code>（良い回答）を <code>--backend replay</code> で通したときの中間値です。各型の平均 θ で <code>explain_rows</code> を呼んだ値（hyst 有効）と、check の母集団（n=300）の結果を並べます。再現手順は表の下にあります。</p>
+
+<h3>場面の観察（両者共通の会話）</h3>
+<div class="tbl"><table>
+<thead><tr><th>欄</th><th>値</th><th>由来</th></tr></thead>
+<tbody>
+<tr><td>distance_shift</td><td class="num">2</td><td>surface の emoji_lost 1 ＋ sc.polite_switch 0.9（≥ 0.5 で 1）</td></tr>
+<tr><td>explicit_complaint</td><td class="num">2</td><td>「二回伝えていますが」→ 段階2</td></tr>
+<tr><td>prior_corrections</td><td class="num">1</td><td>「まだローカル時刻で保存されてる」</td></tr>
+<tr><td>harm / violation_type</td><td>1 / competence</td><td></td></tr>
+<tr><td>prior_ai_apologies</td><td class="num">1</td><td>「失礼しました。」</td></tr>
+<tr><td>broken_promises</td><td class="num">1</td><td>a3.promise 0.9（「今後は気をつけます」）の後に、最後の発話で sc.repeat_now 0.9</td></tr>
+<tr><td>requests</td><td>r1 task／r2 question</td><td>「UTCで保存してください」「テストも通していないですよね」</td></tr>
+<tr><td>prior_stance</td><td>c 0.67・G 0.67・h 0</td><td>a1・a3 が失敗を含み（caused 0.9）、a3 の自信が段階2、salient 0.75 で v = 1</td></tr>
+<tr><td>turns_since_incident</td><td class="num">1</td><td>最初の失敗発話（a1）より後の user 発話は u2 の1つ → decay 0.95</td></tr>
+<tr><td>傷 S（当事者型）</td><td class="num">1.881</td><td>n_eff = 2 × 0.95、0.6·1.9^1.3 ＋ 0.95·(0.7·1 ＋ 0.6·0.8·0.67) = 2.35、× memory 0.8</td></tr>
+</tbody></table></div>
+
+<h3>型ごとの中間値</h3>
+<div class="tbl"><table>
+<thead><tr><th>型</th><th>L</th><th>失礼な回答：無礼さ</th><th>必要</th><th>不足</th><th>過剰</th><th>μ 失礼/足りない/釣り合う</th><th>良い回答：中身</th><th>不足</th><th>μ 足りない/釣り合う</th></tr></thead>
+<tbody>
+<tr><td>当事者・関係修復型</td><td class="num">4.0</td><td class="num">8.59</td><td class="num">4.07</td><td class="num">4.07</td><td class="num">−4.20</td><td class="num">1.00 / 1.00 / 0.00</td><td class="num">3.56</td><td class="num">0.52</td><td class="num">0.17 / 0.83</td></tr>
+<tr><td>寛容・観察者型</td><td class="num">3.9</td><td class="num">6.79</td><td class="num">3.09</td><td class="num">3.09</td><td class="num">−2.75</td><td class="num">1.00 / 1.00 / 0.00</td><td class="num">4.02</td><td class="num">0.00</td><td class="num">0.03 / 0.97</td></tr>
+<tr><td>効率・道具型</td><td class="num">4.0</td><td class="num">8.45</td><td class="num">2.20</td><td class="num">2.20</td><td class="num">−1.42</td><td class="num">1.00 / 0.98 / 0.00</td><td class="num">3.82</td><td class="num">0.00</td><td class="num">0.03 / 0.95</td></tr>
+<tr><td>礼節規範型</td><td class="num">4.0</td><td class="num">7.49</td><td class="num">4.79</td><td class="num">4.79</td><td class="num">−5.25</td><td class="num">1.00 / 1.00 / 0.00</td><td class="num">3.72</td><td class="num">1.07</td><td class="num">0.56 / 0.44</td></tr>
+<tr><td>相棒・情緒型</td><td class="num">4.0</td><td class="num">7.34</td><td class="num">3.59</td><td class="num">3.59</td><td class="num">−3.27</td><td class="num">1.00 / 1.00 / 0.00</td><td class="num">3.72</td><td class="num">0.06</td><td class="num">0.04 / 0.96</td></tr>
+</tbody></table></div>
+
+<div class="grid2">
+<div class="callout bug"><b>失礼な回答 → rude・メッ！！</b><br>
+当事者型の失点：要求の未遂行 3.24（r1 deferred ＋ r2 not）、悪く読める一文 1.70（言い訳 0.90・押し付け 0.80・突き放し 0.62・軽さ 0.20）、相手への指摘 1.20、弁解 1.00、頼まれていない提案 0.70、先を急ぐ 0.60、説明の多さ 0.16。詫びの語がなく中身は 0、不足 = 必要量そのもの。必要量には過信の分 0.5·G·overclaim が足される。<br>
+母集団：μ 失礼 1.00・足りない 0.99、失礼と感じる人 100%。</div>
+<div class="callout okc"><b>良い回答 → ok（羊は鳴かない）</b><br>
+失点 0、offense 0 でも μ 失礼 = σ(−4) = 0.018 が下限として残る。過信への言及（ack_overclaim 段階2）が中身に入る。礼節規範型は expect が高く必要量 4.79 に届かず「足りない」0.56。<br>
+母集団：μ 失礼 0.018・足りない 0.15・釣り合う 0.84、失礼と感じる人 0%。</div>
+</div>
+
+<pre><code># 再現（API キー不要）
+python3 sim.py check examples/check/turn.json --backend replay --replay examples/check/turn.replay.json
+python3 sim.py check examples/check/turn-good.json --backend replay --replay examples/check/turn-good.replay.json
+
+# 組み立てた観察JSONと生の答えを見る
+python3 sim.py check examples/check/turn.json --backend replay --replay examples/check/turn.replay.json --json --debug
+
+# 型ごとの中間値（上の表）を出す
+python3 - &lt;&lt;'EOF'
+import sim, s1
+d = sim.load("examples/check/turn.json")
+sc, a, meta = s1.observe_turn(d["messages"], d["answer"], "replay", replay="examples/check/turn.replay.json")
+sc, a = sim.merged(sim.DEFAULT_SCENARIO, sc), sim.merged(sim.DEFAULT_ANSWER, a)
+pop = sim.load_population("population.json")
+sim.print_explain(sim.explain_rows(a, sc, meta["text_len"], pop, True))
+EOF</code></pre>
+
+<!-- ============================================================ 16 -->
+<h2 id="debug">16. デバッグの勘所と修正した箇所</h2>
+<p>図を書くためにコードを追った中で、経路によって振る舞いが変わる箇所を挙げます。<span class="tag ok">修正済み</span>は不具合として直したもの、<span class="tag i">仕様</span>は意図どおりだが値を追うときに迷いやすいものです。</p>
+
+<div class="callout okc"><b><span class="tag ok">修正済み</span>System One 経路で但し書きの位置が「詫びより前」に倒れる</b><br>
+<code>answer_disclaimers</code>（L806）は詫びの文より前の但し書きを重く（×1.5）数えます。以前の <code>s1.assemble</code> は悪い読みか但し書きのある文だけを <code>sentences</code> に入れていたため、詫びの文が抜けると <code>first</code> が <code>None</code> になり、すべての但し書きが「詫びより前」扱いになっていました。<br>
+修正：assemble（s1:L569〜583）は詫びの文も残し、各文に <code>index</code>（元の文番号）と <code>is_apology</code>（モデルの判定）を付けます。answer_disclaimers は <code>is_apology</code> があればそれで詫びの位置を決め、なければ従来どおり詫びの語の正規表現を使います（LLM 観察の経路は不変）。</div>
+
+<div class="callout okc"><b><span class="tag ok">修正済み</span>System One 経路で、最後の発話での約束の破りを数えない</b><br>
+<code>build_state</code>（s1:L189）は最後の user 発話を <code>turns</code> から外すため、「直すと約束した直後のターンで、また同じ誤りを指摘された」場合に <code>broken_promises</code> が 0 のままでした（例の turn.json がまさにこの形）。<br>
+修正：最後の発話に <code>sc.repeat_now</code> を問い、最後の約束の後にそれが真なら 1 を足します（s1:L528）。例では broken_promises が 0 → 1 になり、傷 S が 1.18 → 1.88 になります。</div>
+
+<div class="callout okc"><b><span class="tag ok">修正済み</span>simulate・explain が観察を既定値とマージしない</b><br>
+<code>cmd_simulate</code>（L1059）と <code>cmd_explain</code>（L1245）も <code>merged(DEFAULT_*, …)</code> を通すようにしました。欄の欠けた LLM 観察での KeyError、<code>"unknown"</code> がそのまま演算に入る問題がなくなり、simulate・fit・tools/evaluate.py が同じ入力を見ます。</div>
+
+<div class="callout okc"><b><span class="tag ok">修正済み</span>出どころの較正を呼ぶコマンドが限られる・基準への焼き込み</b><br>
+scenes は場面ファイルの <code>source</code>（手で書いた観察にはないので既定のまま）、check は <code>system-one</code> で <code>use_source</code> を呼ぶようにしました。<code>configure</code>（L721）は毎回コードの既定値（<code>JUDGMENT_DEFAULT</code>・<code>TIMELINE_DEFAULT</code>）から組み直し、<code>JUDGMENT_BY_SOURCE</code> も入れ替えます。同じプロセスで <code>use_source("llm…")</code> の後に <code>load_population</code> を呼んでも較正が基準に残りません。scenes の作例・評価スクリプトの出力は修正前と同一です。</div>
+
+<div class="callout okc"><b><span class="tag ok">修正済み</span>replay が質問の組を照合しない</b><br>
+<code>check_answers</code>（s1:L468）が、答えのない質問（<code>missing_answers</code>）と型の合わない答え（<code>mismatched_answers</code>）を返し、replay で保存時の <code>questions</code> があれば文面の変わった質問（<code>changed_questions</code>）も返します。check はこれらを JSON 出力に入れ、件数を標準エラーに警告します。作例の答え（<code>examples/check/*.replay.json</code>）には、後から足された質問（失敗の前の構え・修復期の控え・文ごとの但し書き・repeat_now）の答えを補いました。</div>
+
+<div class="callout okc"><b><span class="tag ok">修正済み</span>System One への質問が日本語だった</b><br>
+instructions と criteria の説明を英語に書き直しました（s1:L116〜312）。言い回しの例（「申し訳ない」「二回伝えていますが」）と state の会話は日本語のまま渡します。あわせて、<code>sc.harm</code>・<code>sc.violation</code>・<code>sc.salient</code>・<code>ans.promise_kept</code> に state の位置（<code>conversation.turns</code> など）を名指しし、<code>lu{i}.status</code> の instructions に <code>request</code>（どの文の依頼か）を加えました。互換モード llm-s1 のシステムプロンプトも英語です。質問文が変わったので、<code>--cache</code> のハッシュも変わります（古いキャッシュは使われない）。</div>
+
+<div class="callout bug"><b><span class="tag w">検証済み・未対応</span>Jev の「はい」への偏り</b><br>
+OpenRouter の Jev で項目の組316回答を検証したところ（<code>eval/jev/report.md</code>、JEV_DESIGN.md 7.1節）、悪い読み・先を急ぐ・弁解・誤りの上塗り・提案などの noul が少しずつ「はい」に寄り、judge_full の失点の足し算で積み上がって、失礼と感じる人が 20%（手の観察）→ 96% になりました。check の値を追うときは、まず <code>top_faults</code> と <code>flagged_sentences</code> を見て、どの失点が積み上がったかを確かめてください。</div>
+
+<div class="callout bug"><b><span class="tag w">未対応</span>Choice の選択肢の順序</b><br>
+Jev の資料は、Choice の答えが先頭の選択肢に寄る弱点を挙げています。<b>検証の結果、先頭への寄りはなく、遂行の状況と約束を守ったかの2問だけ末尾に小さく寄りました（最大の選択肢が変わる割合 13〜15%）。</b>現在の並びは <code>sc.violation</code> が none、<code>lu{i}.status</code> が done、<code>ans.promise_kept</code> が kept から始まり、どれも「問題なし」の側が先頭です。寄りがあれば、要求の未遂行・違反の種類・約束破りを見落とす向きに働きます。直すには、順序を入れ替えた2回の問いで寄りを測る（JEV_DESIGN.md 3章の案）必要があり、Jev の実際の応答での検証が要ります。</div>
+
+<div class="callout"><b><span class="tag i">仕様</span>L は回答に依存しない</b><br>
+<code>perceive</code> は場面と θ だけを見ます。同じ会話の回答は良くても悪くても同じ L（例では平均 4.0）になります。回答の差は judge_full の失点・不足・過剰にだけ現れます。</div>
+
+<div class="callout"><b><span class="tag i">仕様</span>失礼の所属度には下限がある</b><br>
+offense = 0 でも σ((0 − 1.2)/0.3) = 0.018。check の羊は 0.15 からなので鳴きませんが、平均所属度を比べるときは 0 ではなく 0.018 が基準です（較正後の llm では σ(−8) ≈ 0.0003）。</div>
+
+<div class="callout"><b><span class="tag i">仕様</span>verdict と羊の基準が違う</b><br>
+verdict の rude は <code>tail.rude</code>（所属度 0.5 以上の人の割合 ≥ 0.2）、羊は <code>mu.rude</code>（平均）です。「verdict は rude なのに羊が小さい」「warn なのに羊が鳴かない（light が原因）」は起こりえます。</div>
+
+<div class="callout"><b><span class="tag i">仕様</span>distance_shift の数え方が経路で違う</b><br>
+proxy（L338）は丁寧語の文末の比率の上昇を正規表現で数え、System One（s1:L516）は丁寧語への切替と呼び方の変化をモデルに問います。同じ会話でも 0〜3 の値がずれることがあり、L の detect·distance_shift の項に直接効きます。</div>
+
+<div class="callout"><b><span class="tag i">仕様</span>場面は sid で一意</b><br>
+観察JSONの <code>scenarios</code> は sid をキーにします。複数の run が同じ sid を持つと、observe（L152 の再開判定）・proxy（L422）とも最後の run の場面で上書きされます。run ごとに場面の会話が違う場合は値が混ざります。</div>
+
+<div class="callout"><b><span class="tag i">仕様</span>text_len の数え方が経路で違う</b><br>
+simulate・scenes は回答本文全体の文字数（成果物を含む）、check は <code>own_part</code> の後の文字数（成果物を除く）を「長さ」の失点に使います。</div>
+
+<h3>値を追うときの入口</h3>
+<div class="tbl"><table>
+<thead><tr><th>知りたいこと</th><th>見る場所</th></tr></thead>
+<tbody>
+<tr><td>System One に何を問い、何が返ったか</td><td><code>check --debug --json</code> の <code>_raw</code>、または <code>--save-raw</code></td></tr>
+<tr><td>組み立てた観察JSON</td><td><code>check --debug --json</code> の <code>observation</code></td></tr>
+<tr><td>型ごとの L・失点・不足・過剰</td><td><code>sim.py explain</code>（観察JSON がある場合）、上の Python 断片（check の場合）</td></tr>
+<tr><td>母集団全体の平均</td><td><code>assess</code> の戻り値：<code>axes</code>・<code>mean_faults</code>・<code>by_type</code>・<code>perceived_level</code></td></tr>
+<tr><td>判断が割れた質問</td><td><code>check</code> の <code>unsure</code>（noul が 0.3〜0.7）、ensemble の <code>unsure</code>（SD > 0.75 か最多票 < 0.6）</td></tr>
+<tr><td>使われた所属度関数</td><td>simulate・scenes の出力の <code>judgment</code></td></tr>
+</tbody></table></div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+(function(){
+  var root=document.documentElement, KEY="flowchart-theme";
+  var sources=[].map.call(document.querySelectorAll("pre.mermaid"),function(el){return el.textContent;});
+  function saved(){try{return localStorage.getItem(KEY);}catch(e){return null;}}
+  function isDark(){
+    var t=root.getAttribute("data-theme");
+    if(t) return t==="dark";
+    return window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function darkify(src){
+    // 濃色時はノードの塗りを暗くする（classDef の色を差し替える）
+    return src
+      .replace(/fill:#e8f0fd,stroke:#2a6fd6,color:#10223f/g,"fill:#1c2a44,stroke:#6aa3ff,color:#e4ecff")
+      .replace(/fill:#f1eafe,stroke:#7c3aed,color:#2a1250/g,"fill:#2c2144,stroke:#b794f6,color:#efe6ff")
+      .replace(/fill:#e7f6ec,stroke:#15803d,color:#0f3a1f/g,"fill:#173322,stroke:#4ade80,color:#e2fbe9")
+      .replace(/fill:#fdeee5,stroke:#c2410c,color:#4a1a05/g,"fill:#3a2216,stroke:#fb923c,color:#ffeadb");
+  }
+  function render(){
+    if(!window.mermaid) return;
+    var dark=isDark();
+    mermaid.initialize({startOnLoad:false,theme:dark?"dark":"default",securityLevel:"loose",
+      flowchart:{htmlLabels:true,curve:"basis",useMaxWidth:true},
+      themeVariables:{fontFamily:'"Hiragino Sans","Noto Sans JP","Yu Gothic UI",system-ui,sans-serif',fontSize:"13px"}});
+    var els=document.querySelectorAll("pre.mermaid");
+    els.forEach(function(el,i){el.removeAttribute("data-processed");el.textContent=dark?darkify(sources[i]):sources[i];});
+    mermaid.run({nodes:els}).catch(function(e){console.error(e);});
+  }
+  var s=saved(); if(s==="dark"||s==="light") root.setAttribute("data-theme",s);
+  document.getElementById("themebtn").addEventListener("click",function(){
+    var next=isDark()?"light":"dark"; root.setAttribute("data-theme",next);
+    try{localStorage.setItem(KEY,next);}catch(e){}
+    render();
+  });
+  if(window.matchMedia){
+    var mq=window.matchMedia("(prefers-color-scheme: dark)");
+    if(mq.addEventListener) mq.addEventListener("change",function(){if(!root.getAttribute("data-theme")) render();});
+  }
+  if(window.mermaid) render(); else window.addEventListener("load",render);
+})();
+</script>
+</body>
+</html>
