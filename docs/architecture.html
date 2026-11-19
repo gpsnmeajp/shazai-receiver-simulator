@@ -42,7 +42,7 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html" aria-current="page">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html" aria-current="page">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
@@ -71,12 +71,15 @@
 <thead><tr><th>ファイル</th><th>役割</th></tr></thead>
 <tbody>
 <tr><td><code>sim.py</code></td><td>すべてのコマンド。標準ライブラリのみ</td></tr>
+<tr><td><code>s1.py</code></td><td>層Aの System One 版（前処理・質問の組・バックエンド・組み立て）。<code>check</code> が使う。<a href="jev.html">System One</a></td></tr>
 <tr><td><code>observe_prompt.md</code></td><td>層Aの観察者への指示と、出力JSONの形式</td></tr>
 <tr><td><code>population.json</code></td><td>受け手の型・性質の平均と幅・比率・性質の範囲</td></tr>
 <tr><td><code>proxy_scenarios.json</code></td><td>v0.4 ベンチマーク16場面の事実（代理観察用）</td></tr>
 <tr><td><code>examples/scenes.json</code></td><td>物語・AIキャラクター等の作例の組（観察済み）</td></tr>
 <tr><td><code>out/</code></td><td>検証の出力</td></tr>
 <tr><td><code>blind.py</code></td><td>人間のブラインド評定の問題束づくり、比較、既存評定の取り込み、合成評定者（試験用）</td></tr>
+<tr><td><code>examples/check/</code></td><td><code>check</code> の作例と、試験用の手で付けた答え（replay）</td></tr>
+<tr><td><code>examples/hooks/shazai_stop_hook.py</code></td><td>Claude Code の Stop hook から毎ターン判定する参考実装</td></tr>
 <tr><td><code>human/rate_template.html</code></td><td>評定ページの雛形（<code>pack</code> が問題束を埋め込んで <code>rate.html</code> を作る）</td></tr>
 <tr><td><code>human/session-example/</code></td><td>作例から作った問題束の例と、合成評定者による仕組みの試験結果</td></tr>
 <tr><td><code>docs/</code></td><td>本文書群（GitHub Pages）。<code>docs/report.html</code> は解説と結果のレポート、<code>docs/md/</code> は Markdown 版</td></tr>
@@ -261,6 +264,7 @@ L      = clip(raw + N(0, 0.3), 0, 4)</code></pre>
 <tr><td><code>simulate</code></td><td>観察JSON＋実行先</td><td>回答ごとの分布、段階×条件、知覚段階、量の軸、型ごとの内訳、筆者との比較</td></tr>
 <tr><td><code>fit</code></td><td>同上</td><td>1人の評定者を最もよく再現する θ（シナリオ単位の半分で学習、半分で検証）</td></tr>
 <tr><td><code>explain</code></td><td>同上＋回答ID</td><td>型の代表値ごとの判定理由</td></tr>
+<tr><td><code>check</code></td><td>1ターンの会話と応答（JSON、標準入力も可）</td><td>System One（<code>jev</code>／<code>llm-s1</code>／<code>replay</code>）で観察し、母集団に通した判定（rude/warn/ok）、分布、主な失点、悪く読める一文。組み込み用（オプション）。<a href="jev.html#check">詳細</a></td></tr>
 <tr><td><code>scenes</code></td><td><code>examples/scenes.json</code> 形式</td><td>作例の組の分布、量の軸、型ごとの「釣り合う」、平均失点</td></tr>
 </tbody></table></div>
 <p>共通の選択肢：<code>--population</code>、<code>--seed</code>、<code>--no-hysteresis</code>、<code>--no-escalation</code>、<code>-n</code>。ヒステリシスと escalation は既定で有効です。</p>

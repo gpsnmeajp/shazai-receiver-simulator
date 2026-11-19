@@ -809,6 +809,95 @@ def cmd_scenes(args):
     print(f"詳細 → {args.out}")
 
 
+# ---------------------------------------------------------------- 組み込み判定（System One・オプション）
+
+def check_turn(messages, answer, backend="jev", model=None, n=300, seed=7, hysteresis=True,
+               population=None, rude_at=0.2, warn_at=0.4, timeout=10.0, cache_dir=None, replay=None,
+               context=None, keys=None):
+    """1ターンを System One で観察し、母集団に通して判定する。hook などから呼ぶための関数。
+
+    返り値の verdict: rude（失礼と感じる人の割合 ≥ rude_at）／warn（失礼＋足りない ≥ warn_at）／ok。
+    バックエンドを使えないときは s1.S1Error を送出する（呼び出し側で fail-open にする）。
+    """
+    import s1
+    keys = keys or {"jev": os.environ.get("TYPESAFE_API_KEY"), "llm-s1": os.environ.get("OPENROUTER_API_KEY")}
+    sc, a, meta = s1.observe_turn(messages, answer, backend, model, keys, timeout, cache_dir, replay)
+    sc = merged(DEFAULT_SCENARIO, sc)
+    if context:
+        sc["context"].update(context)
+    a = merged(DEFAULT_ANSWER, a)
+    pop = load(population or HERE / "population.json")
+    panel = sample_panel(pop, n, seed)
+    rng = random.Random(seed + 1)
+    c, faults, under, over, Ls = Counter(), Counter(), 0.0, 0.0, []
+    for _t, th in panel:
+        L = perceive(sc, th, rng, hysteresis)
+        Ls.append(L)
+        j = judge_full(a, sc, th, L, meta["text_len"], rng, hyst=hysteresis)
+        c[j["rating"]] += 1
+        faults.update(j["faults"])
+        under += j["shortfall"]
+        over += max(0.0, j["excess"])
+    dist = {k: round(c[k] / n, 3) for k in CATS}
+    verdict = "rude" if dist["rude"] >= rude_at else ("warn" if dist["rude"] + dist["light"] >= warn_at else "ok")
+    flagged = sorted((s for s in a["sentences"] if s["plausibility"] >= 0.5),
+                     key=lambda s: -s["plausibility"] * s["severity"])
+    return {
+        "verdict": verdict, "dist": dist,
+        "axes": {"under": round(under / n, 3), "over": round(over / n, 3)},
+        "perceived_level": round(sum(Ls) / n, 2),
+        "top_faults": {k: round(v / n, 3) for k, v in faults.most_common(5)},
+        "flagged_sentences": [{"text": s["text"], "reading": s["reading_type"], "p": s["plausibility"]} for s in flagged[:5]],
+        "unsure": meta["unsure"],
+        "backend": meta["backend"], "model": meta["model"], "latency_ms": meta["latency_ms"],
+        "usage": meta["usage"], "n_questions": meta["n_questions"],
+        "observation": {"scenario": sc, "answer": a},
+        "_raw": {"state": meta["state"], "questions": meta["questions"], "answers": meta["answers"]},
+    }
+
+
+VERDICT_JA = {"rude": "失礼の恐れ", "warn": "要注意", "ok": "問題なし"}
+
+
+def cmd_check(args):
+    import s1
+    data = json.load(sys.stdin) if args.input == "-" else load(args.input)
+    messages = [m for m in data["messages"] if m.get("role") in ("user", "assistant")]
+    answer = data.get("answer")
+    if answer is None:
+        if not messages or messages[-1]["role"] != "assistant":
+            raise SystemExit("answer がなく、最後の発話もAIではありません")
+        answer = messages.pop()["content"]
+    try:
+        res = check_turn(messages, answer, args.backend, args.model, args.n, args.seed, args.hysteresis,
+                         args.population, args.rude_at, args.warn_at, args.timeout, args.cache, args.replay,
+                         data.get("context"))
+    except s1.S1Error as e:
+        # 組み込み用途では判定できないことを失敗にしない（fail-open）。--strict で失敗にする
+        out = {"verdict": "unavailable", "error": str(e)}
+        print(json.dumps(out, ensure_ascii=False) if args.json else f"判定できません: {e}", file=None if args.json else sys.stderr)
+        raise SystemExit(3 if args.strict else 0)
+    if args.save_raw:
+        save(args.save_raw, res["_raw"])
+    if not args.debug:
+        res.pop("_raw")
+        res.pop("observation")
+    if args.json:
+        print(json.dumps(res, ensure_ascii=False))
+    else:
+        d = res["dist"]
+        print(f"{VERDICT_JA[res['verdict']]}  失礼 {d['rude']:.0%} / 足りない {d['light']:.0%} / 釣り合う {d['fit']:.0%} / 重すぎる {d['heavy']:.0%}"
+              f"  （不満の深さ {res['perceived_level']:.1f}、{res['backend']}:{res['model']}、{res['latency_ms']}ms、{res['n_questions']}問）")
+        if res["top_faults"]:
+            print("  主な失点: " + "、".join(f"{k} {v:.2f}" for k, v in res["top_faults"].items()))
+        for s in res["flagged_sentences"]:
+            print(f"  悪く読める一文（{s['reading']} {s['p']:.2f}）: {s['text'][:60]}")
+        if res["unsure"]:
+            print(f"  要確認の判断: {len(res['unsure'])} 件")
+    if (args.fail_on == "rude" and res["verdict"] == "rude") or (args.fail_on == "warn" and res["verdict"] in ("rude", "warn")):
+        raise SystemExit(2)
+
+
 def add_model_options(p):
     """追加の改善（ヒステリシス・escalation）は既定で有効。--no-* で無効にする。"""
     p.add_argument("--hysteresis", action=argparse.BooleanOptionalAction, default=True,
@@ -835,6 +924,26 @@ def main():
     add_model_options(p)
     p.add_argument("-o", "--out", default="scenes-result.json")
     p.set_defaults(f=cmd_scenes)
+    p = sub.add_parser("check", help="1ターンを System One（Jev 等）で観察して判定する組み込み用モード（オプション）")
+    p.add_argument("input", help='{"messages": [...], "answer": "..."} のJSON。- で標準入力')
+    p.add_argument("--backend", choices=["jev", "llm-s1", "replay"], default="jev",
+                   help="jev: TypeSafe（TYPESAFE_API_KEY）／llm-s1: 互換モードでLLMに確率で答えさせる（OPENROUTER_API_KEY）／replay: --replay の答えを読む")
+    p.add_argument("--model", help="既定 jev-1.14.0（llm-s1 では anthropic/claude-haiku-5.5）")
+    p.add_argument("--replay", help="--save-raw で保存した答えのファイル（--backend replay 用）")
+    p.add_argument("--cache", help="答えを保存して再利用するディレクトリ")
+    p.add_argument("--save-raw", help="state・質問・答えを書き出す")
+    p.add_argument("-n", type=int, default=300)
+    p.add_argument("--population", default=str(HERE / "population.json"))
+    p.add_argument("--seed", type=int, default=7)
+    p.add_argument("--rude-at", type=float, default=0.2, help="失礼と感じる人の割合がこれ以上なら rude")
+    p.add_argument("--warn-at", type=float, default=0.4, help="失礼＋足りない の割合がこれ以上なら warn")
+    p.add_argument("--fail-on", choices=["never", "warn", "rude"], default="never", help="該当すれば終了コード2")
+    p.add_argument("--timeout", type=float, default=10.0)
+    p.add_argument("--strict", action="store_true", help="判定できないとき終了コード3（既定は0で fail-open）")
+    p.add_argument("--json", action="store_true")
+    p.add_argument("--debug", action="store_true", help="組み立てた観察JSONと生の答えも出す")
+    add_model_options(p)
+    p.set_defaults(f=cmd_check)
     for name, fn, h in (("simulate", cmd_simulate, "母集団で評定分布を出す"),
                         ("fit", cmd_fit, "1人の評定者を再現するθを探す"),
                         ("explain", cmd_explain, "1回答の評定理由を型ごとに示す")):

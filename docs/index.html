@@ -29,6 +29,11 @@
 .rates .card{margin:0;border-left:4px solid var(--c)}
 .rates .card h3{color:var(--c)}
 .chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0}
+.sheep{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:1.2rem;align-items:center;margin:1.6rem 0 0}
+@media (max-width:720px){.sheep{grid-template-columns:1fr}}
+.sheep img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--ring)}
+.sheep h2{margin:0 0 .5rem;border:0;padding:0;font-size:1.15rem}
+.sheep p{margin:.4rem 0}
 .chips span{font-size:.82rem;background:var(--card);border:1px solid var(--ring);border-radius:999px;padding:.1rem .6rem}
 </style>
 </head>
@@ -52,7 +57,7 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html" aria-current="page"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
@@ -67,6 +72,15 @@
 <div class="card sim"><div class="v">0.28</div><div class="s">シミュレータ</div></div>
 <div class="card per"><div class="v">0.06</div><div class="s">LLMペルソナ</div></div>
 <p class="cap">筆者の評定との一致度 κ（v0.4 ベンチマーク 192回答）</p>
+</div>
+</div>
+
+<div class="sheep">
+<img src="images/shoulder-sheep.jpg" alt="肩に乗った小さな羊が、慌てた青年を指さして「メッ！」と叱っている絵" width="1200" height="900">
+<div>
+<h2>肩に乗った羊として</h2>
+<p>システムに組み込むと、このシミュレータは<b>肩に乗った羊</b>のように働きます。AIが失礼な応答をしたとき、その場で「メッ！」と鳴いて知らせる、AIに欠けている「自覚」の代わりです（組み込み判定モード <code>sim.py check</code>。<a href="jev.html#check">詳細</a>）。</p>
+<p>謝り方そのものを整えるのが <a href="https://github.com/gpsnmeajp/shazai-rules">SHAZAI Rules</a>、その謝り方が相手に届いたかを確かめるのがこのシミュレータです。<b>併用を推奨します。</b></p>
 </div>
 </div>
 
@@ -127,6 +141,7 @@
 <a class="card" href="evidence.html"><h3><svg class="icon"><use href="#i-book"/></svg>根拠となる研究と事例</h3><p>規則ごとの根拠となる研究と事例、確度</p></a>
 <a class="card" href="validation.html"><h3><svg class="icon"><use href="#i-target"/></svg>検証結果と変更履歴</h3><p>検証結果、既知の限界、次の検証、変更履歴</p></a>
 <a class="card" href="human-eval.html"><h3><svg class="icon"><use href="#i-users"/></svg>人間のブラインド評定</h3><p>実施手順、盲検化の設計、比較の指標</p></a>
+<a class="card" href="jev.html"><h3><svg class="icon"><use href="#i-flask"/></svg>System One への置き換え</h3><p>層Aを Jev（または互換モデル）に置き換える検討と設計、組み込み判定モード。未検証</p></a>
 <a class="card" href="report.html"><h3><svg class="icon"><use href="#i-chart"/></svg>レポート</h3><p>図で見る解説と結果</p></a>
 </div>
 <p class="note">Markdown 版は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/tree/main/docs/md">docs/md/</a> にあります。</p>
@@ -152,6 +167,11 @@ python3 sim.py fit out/obs-llm.json runs/* --trials 4000 --seed 7 -o out/fit.jso
 
 # 1回答について、型ごとの評定とその理由を見る
 python3 sim.py explain out/obs-llm.json runs/* --answer 回答ID</code></pre></li>
+<li><b>（オプション）1ターンをその場で判定する</b>
+<pre><code># System One（Jev）で観察して母集団に通す組み込み用モード（環境変数 TYPESAFE_API_KEY が必要）
+# --backend llm-s1 で互換モード（OPENROUTER_API_KEY）
+python3 sim.py check examples/check/turn.json</code></pre>
+<p class="note">hook などでAIの応答を毎ターン判定する仕組みの参考として用意しました。1ターンにつき System One モデルを1回呼び、「失礼の恐れ／要注意／問題なし」を返します。Claude Code の Stop hook の例は <code>examples/hooks/shazai_stop_hook.py</code> にあります。Jev の実際の応答では未検証です。詳細は <a href="jev.html#check">System One への置き換え 5.8節</a>。</p></li>
 </ol>
 
 <h3>共通の選択肢</h3>

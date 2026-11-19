@@ -25,6 +25,9 @@
 | ファイル | 役割 |
 |---|---|
 | `sim.py` | すべてのコマンド。標準ライブラリのみ |
+| `s1.py` | 層Aの System One 版（前処理・質問の組・バックエンド・組み立て）。`check` が使う。[JEV_DESIGN.md](JEV_DESIGN.md) |
+| `examples/check/` | `check` の作例と、試験用の手で付けた答え（replay） |
+| `examples/hooks/shazai_stop_hook.py` | Claude Code の Stop hook から毎ターン判定する参考実装 |
 | `observe_prompt.md` | 層Aの観察者への指示と出力JSONの形式 |
 | `population.json` | 受け手の型・性質の平均と幅・比率・性質の範囲 |
 | `proxy_scenarios.json` | v0.4 ベンチマーク16場面の事実（代理観察用） |
@@ -185,6 +188,7 @@ I はシグナルの強さ（`intensity`）です。
 | `simulate` | 観察JSON＋実行先 | 回答ごとの分布、段階×条件、知覚段階、量の軸、型ごとの内訳、筆者との比較 |
 | `fit` | 同上 | 1人の評定者を最もよく再現する θ（シナリオ単位の半分で学習、半分で検証） |
 | `explain` | 同上＋回答ID | 型の代表値ごとの判定理由 |
+| `check` | 1ターンの会話と応答（JSON、標準入力も可） | System One（`jev`／`llm-s1`／`replay`）で観察し、母集団に通した判定（rude/warn/ok）、分布、主な失点、悪く読める一文。組み込み用（オプション） |
 | `scenes` | `examples/scenes.json` 形式 | 作例の組の分布、量の軸、型ごとの「釣り合う」、平均失点 |
 
 共通の選択肢：`--population`、`--seed`、`--no-hysteresis`、`--no-escalation`、`-n`（ヒステリシスとescalationは既定で有効）。

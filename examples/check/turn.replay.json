@@ -1,0 +1,507 @@
+{
+"_note": "examples/check/turn.json に対する答えの作例。Jev の実際の応答ではなく、仕組みの試験のために手で付けた確率。",
+"answers": {
+"sc.polite_switch": {
+"type": "noul",
+"noul": 0.9
+},
+"sc.formal_name": {
+"type": "noul",
+"noul": 0.03
+},
+"sc.explicit": {
+"type": "score",
+"probabilities": {
+"0": 0,
+"1": 0.05,
+"2": 0.85,
+"3": 0.1
+},
+"score": 2.05
+},
+"sc.harm": {
+"type": "score",
+"probabilities": {
+"0": 0.1,
+"1": 0.85,
+"2": 0.05
+},
+"score": 0.95
+},
+"sc.violation": {
+"type": "choice",
+"probabilities": {
+"none": 0.05,
+"competence": 0.85,
+"integrity": 0.1
+},
+"choice": "competence"
+},
+"sc.accepted": {
+"type": "noul",
+"noul": 0.03
+},
+"sc.push": {
+"type": "noul",
+"noul": 0.1
+},
+"ctx.fault": {
+"type": "choice",
+"probabilities": {
+"clear": 0.9,
+"ambiguous": 0.1
+},
+"choice": "clear"
+},
+"ctx.distance": {
+"type": "choice",
+"probabilities": {
+"close": 0.55,
+"neutral": 0.4,
+"distant": 0.05
+},
+"choice": "close"
+},
+"u0.corrects": {
+"type": "noul",
+"noul": 0.03
+},
+"u0.repeat": {
+"type": "noul",
+"noul": 0.03
+},
+"a1.apology": {
+"type": "noul",
+"noul": 0.03
+},
+"a1.promise": {
+"type": "noul",
+"noul": 0.03
+},
+"u2.corrects": {
+"type": "noul",
+"noul": 0.95
+},
+"u2.repeat": {
+"type": "noul",
+"noul": 0.03
+},
+"a3.apology": {
+"type": "noul",
+"noul": 0.97
+},
+"a3.promise": {
+"type": "noul",
+"noul": 0.9
+},
+"lu0.request": {
+"type": "noul",
+"noul": 0.96
+},
+"lu0.kind": {
+"type": "choice",
+"probabilities": {
+"task": 0.95,
+"question": 0.05
+},
+"choice": "task"
+},
+"lu0.status": {
+"type": "choice",
+"probabilities": {
+"done": 0.02,
+"partial": 0.03,
+"deferred": 0.9,
+"not": 0.05
+},
+"choice": "deferred"
+},
+"lu1.request": {
+"type": "noul",
+"noul": 0.55
+},
+"lu1.kind": {
+"type": "choice",
+"probabilities": {
+"task": 0.3,
+"question": 0.7
+},
+"choice": "question"
+},
+"lu1.status": {
+"type": "choice",
+"probabilities": {
+"done": 0.05,
+"partial": 0.05,
+"deferred": 0.1,
+"not": 0.8
+},
+"choice": "not"
+},
+"ans.specific_fault": {
+"type": "score",
+"probabilities": {
+"0": 0.8,
+"1": 0.15,
+"2": 0.05
+},
+"score": 0.25
+},
+"ans.burden": {
+"type": "score",
+"probabilities": {
+"0": 0.9,
+"1": 0.1,
+"2": 0
+},
+"score": 0.1
+},
+"ans.thanks": {
+"type": "noul",
+"noul": 0.03
+},
+"ans.prompted": {
+"type": "noul",
+"noul": 0.03
+},
+"ans.new_errors": {
+"type": "noul",
+"noul": 0.4
+},
+"ans.moves_on": {
+"type": "noul",
+"noul": 0.8
+},
+"ans.formality": {
+"type": "score",
+"probabilities": {
+"0": 0,
+"1": 0,
+"2": 0.6,
+"3": 0.35,
+"4": 0.05
+},
+"score": 2.4499999999999997
+},
+"s0.apology": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.excuse": {
+"type": "noul",
+"noul": 0.93
+},
+"s0.explain": {
+"type": "noul",
+"noul": 0.7
+},
+"s0.blame": {
+"type": "noul",
+"noul": 0.85
+},
+"s0.conditional": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.self_dep": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.promise": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.forgive": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.proposal": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.resolution": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.mimetic": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.read.他人事": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.read.言い訳": {
+"type": "noul",
+"noul": 0.9
+},
+"s0.read.責任転嫁": {
+"type": "noul",
+"noul": 0.88
+},
+"s0.read.押し付け": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.read.恩着せ": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.read.突き放し": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.read.軽さ": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.read.逆ギレ": {
+"type": "noul",
+"noul": 0.03
+},
+"s0.read.慇懃": {
+"type": "noul",
+"noul": 0.3
+},
+"s1.apology": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.excuse": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.explain": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.blame": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.conditional": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.self_dep": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.promise": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.forgive": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.proposal": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.resolution": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.mimetic": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.read.他人事": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.read.言い訳": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.read.責任転嫁": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.read.押し付け": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.read.恩着せ": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.read.突き放し": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.read.軽さ": {
+"type": "noul",
+"noul": 0.2
+},
+"s1.read.逆ギレ": {
+"type": "noul",
+"noul": 0.03
+},
+"s1.read.慇懃": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.apology": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.excuse": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.explain": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.blame": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.conditional": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.self_dep": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.promise": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.forgive": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.proposal": {
+"type": "noul",
+"noul": 0.94
+},
+"s2.resolution": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.mimetic": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.read.他人事": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.read.言い訳": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.read.責任転嫁": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.read.押し付け": {
+"type": "noul",
+"noul": 0.8
+},
+"s2.read.恩着せ": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.read.突き放し": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.read.軽さ": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.read.逆ギレ": {
+"type": "noul",
+"noul": 0.03
+},
+"s2.read.慇懃": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.apology": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.excuse": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.explain": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.blame": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.conditional": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.self_dep": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.promise": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.forgive": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.proposal": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.resolution": {
+"type": "noul",
+"noul": 0.35
+},
+"s3.mimetic": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.read.他人事": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.read.言い訳": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.read.責任転嫁": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.read.押し付け": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.read.恩着せ": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.read.突き放し": {
+"type": "noul",
+"noul": 0.62
+},
+"s3.read.軽さ": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.read.逆ギレ": {
+"type": "noul",
+"noul": 0.03
+},
+"s3.read.慇懃": {
+"type": "noul",
+"noul": 0.03
+}
+}
+}
