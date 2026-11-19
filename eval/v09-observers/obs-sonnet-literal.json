@@ -1,0 +1,9 @@
+{
+ "scenarios": {},
+ "answers": {},
+ "source": "llm:claude-mid:literal",
+ "variant": {
+  "policy": "literal",
+  "model": "claude-mid"
+ }
+}

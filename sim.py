@@ -11,7 +11,7 @@
              釣り合う = 三つの否定の t ノルム（既定 min）
            人による違いは θ の分布（確率）が、一人の中の程度は所属度（ファジィ）が担う。
            一人の判定は決定的で、乱数は母集団の抽出にだけ使う。
-fit: 1人の評定者（例: 筆者）を最もよく再現する θ を探す。目的関数は所属度の近さで、連続。
+fit: 1人の評定者（例: 筆者）を最もよく再現する θ と反応モデルの鋭さ β を探す。目的関数は反応モデルの対数尤度で、連続。
 check: 1ターンを System One（Jev 等）で観察し、その場で判定する組み込み用モード（s1.py）。
 
 標準ライブラリのみ。Python 3.9 以上。
@@ -502,8 +502,8 @@ def scar_parts(sc, th):
     age = sc.get("turns_since_incident", 0) or 0
     d = decay(age)
     current = 1 if (sc.get("harm", 0) > 0 or sc.get("explicit_complaint", 0) >= 1 or rho(sc) > 0) else 0
-    n = sc.get("prior_corrections", 0) + current
-    ages = list(sc.get("incident_ages") or [])
+    n = int(round(float(sc.get("prior_corrections", 0) or 0))) + current
+    ages = [a for a in (sc.get("incident_ages") or []) if isinstance(a, (int, float))]
     n_eff = sum(decay(a) for a in ages[:n]) + max(0, n - len(ages)) * d
     G = prior_stance(sc)
     s = 0.6 * n_eff ** 1.3 + d * (0.8 * share(sc.get("violation_type"), "integrity") + 0.7 * sc.get("broken_promises", 0)
@@ -1127,28 +1127,43 @@ def cmd_fit(args):
     if not train or not test:
         raise SystemExit("学習と検証に分けるには、評定のある場面が2つ以上必要です")
 
-    def evaluate(th, rs):
-        """所属度は連続なので、目的関数も連続になる（階段状の一致率ではない）"""
-        close, lv, pred = 0.0, 0, []
+    def response(mu, beta):
+        """反応モデル P(k|μ) = softmax(β·μ)"""
+        m = max(mu.values())
+        ex = {k: math.exp(beta * (v - m)) for k, v in mu.items()}
+        z = sum(ex.values())
+        return {k: v / z for k, v in ex.items()}
+
+    cache = {}
+
+    def evaluate(th, beta, rs):
+        """目的関数は反応モデルの平均対数尤度（真に適正なスコアリング規則）。Brier と非ファジィ化の κ も返す"""
+        ll, br, lv, pred = 0.0, 0.0, 0, []
         for r in rs:
-            sc = obs["scenarios"][r["sid"]]
+            sc = cache.setdefault(r["sid"], merged(DEFAULT_SCENARIO, obs["scenarios"][r["sid"]]))
+            a = cache.setdefault(r["aid"], merged(DEFAULT_ANSWER, obs["answers"][r["aid"]]))
             L = perceive(sc, th, args.hysteresis)
-            mu = judge_full(obs["answers"][r["aid"]], sc, th, L, len(r["text"]), args.hysteresis)["mu"]
-            close += closeness(mu, onehot(r["user"]))
+            mu = judge_full(a, sc, th, L, len(r["text"]), args.hysteresis)["mu"]
+            p = response(mu, beta)
+            ll += math.log(max(1e-4, p[r["user"]]))
+            br += sum((p[k] - (k == r["user"])) ** 2 for k in CATS)
             pred.append(defuzz(mu))
             lv += to_level(L) == (r["user_level"] or "")
-        return close / len(rs), lv / len(rs), pred
+        n = len(rs)
+        return ll / n, br / n, lv / n, pred
 
     ranges = pop["ranges"]
     rng = random.Random(args.seed)
 
     def score(th):
-        c, lv, _ = evaluate(th, train)
-        return c + 0.1 * lv
+        ll, _, lv, _ = evaluate(th, th["beta"], train)
+        return ll + 0.1 * lv
 
+    ranges = dict(ranges, beta=[1.0, 32.0])
     best_th, best = None, -1e9
-    for _ in range(args.trials):                 # 大域：無作為探索
+    for _ in range(args.trials):                 # 大域：無作為探索（β は対数一様）
         th = {k: rng.uniform(lo, hi) for k, (lo, hi) in ranges.items()}
+        th["beta"] = math.exp(rng.uniform(0, math.log(32)))
         sc_ = score(th)
         if sc_ > best:
             best_th, best = th, sc_
@@ -1161,22 +1176,25 @@ def cmd_fit(args):
         else:
             step = max(0.01, step * 0.995)
     th = best_th
-    ctr, lvtr, ptr = evaluate(th, train)
-    cte, lvte, pte = evaluate(th, test)
+    lltr, brtr, lvtr, ptr = evaluate(th, th["beta"], train)
+    llte, brte, lvte, pte = evaluate(th, th["beta"], test)
     ktr = kappa([r["user"] for r in train], ptr)
     kte = kappa([r["user"] for r in test], pte)
     print(f"評定者に最も近い θ（学習 {len(train)} 件 / 検証 {len(test)} 件、シナリオ単位で分割）")
     for k, v in th.items():
         print(f"  {k.ljust(13)} {v:5.2f}")
-    print(f"  学習 近さ={ctr:.3f} κ={ktr:.2f} 段階一致={lvtr:.2f}   検証 近さ={cte:.3f} κ={kte:.2f} 段階一致={lvte:.2f}")
+    print(f"  学習 対数損失={-lltr:.3f} Brier={brtr:.3f} κ={ktr:.2f} 段階一致={lvtr:.2f}   "
+          f"検証 対数損失={-llte:.3f} Brier={brte:.3f} κ={kte:.2f} 段階一致={lvte:.2f}")
     dists = {}
     for t, spec in pop["types"].items():
-        dists[t] = math.sqrt(sum(((th[k] - spec["mean"][k]) / max(spec["sd"][k], 0.05)) ** 2 for k in th) / len(th))
+        ks = [k for k in th if k in spec["mean"]]
+        dists[t] = math.sqrt(sum(((th[k] - spec["mean"][k]) / max(spec["sd"][k], 0.05)) ** 2 for k in ks) / len(ks))
     print("  型までの距離（小さいほど近い）: " + "  ".join(f"{t} {d:.1f}" for t, d in sorted(dists.items(), key=lambda x: x[1])))
     pm = [majority(r) or "fit" for r in test]
     print(f"  参考: 同じ検証件でのペルソナ多数決 κ={kappa([r['user'] for r in test], pm):.2f}"
           f" 近さ={sum(closeness(onehot(p), onehot(r['user'])) for p, r in zip(pm, test))/len(test):.3f}")
-    save(args.out, {"theta": th, "train_closeness": ctr, "test_closeness": cte, "train_kappa": ktr, "test_kappa": kte,
+    save(args.out, {"theta": th, "objective": "log-likelihood of softmax(beta*mu)", "train_logloss": -lltr, "test_logloss": -llte,
+                    "train_brier": brtr, "test_brier": brte, "train_kappa": ktr, "test_kappa": kte,
                     "distance_to_types": dists})
 
 
@@ -1235,13 +1253,33 @@ DEFAULT_SCENARIO = {"distance_shift": 0, "explicit_complaint": 0, "prior_correct
                     "turns_since_incident": 0, "incident_ages": []}
 
 
+def coerce(dv, v):
+    """観察の値を既定値の型にそろえる。数の欄の unknown・空・文字列の数、真偽の欄の unknown を扱う。
+    真偽の欄の割合（観察者の集団の値）はそのまま残す。"""
+    if isinstance(dv, bool):
+        if isinstance(v, (bool, int, float)) or isinstance(v, dict):
+            return v
+        return dv if v in (None, "unknown", "") else str(v).lower() in ("true", "yes", "1")
+    if isinstance(dv, (int, float)):
+        if isinstance(v, bool):
+            return float(v)
+        if isinstance(v, (int, float)):
+            return v
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            return dv
+    return v
+
+
 def merged(default, given):
     out = json.loads(json.dumps(default))
     for k, v in (given or {}).items():
         if isinstance(v, dict) and isinstance(out.get(k), dict):
-            out[k].update(v)
+            for kk, vv in v.items():
+                out[k][kk] = coerce(out[k][kk], vv) if kk in out[k] else vv
         else:
-            out[k] = v
+            out[k] = coerce(out[k], v) if k in out else v
     return out
 
 

@@ -15,10 +15,12 @@
 """
 import argparse
 import glob
+import hashlib
 import json
 import math
 import random
 import secrets
+import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -51,19 +53,53 @@ def framing(ctx):
 
 # ---------------------------------------------------------------- 項目の収集
 
-def items_from_scenes(path):
+DESIGN_KEYS = ("set", "level", "relation", "wound", "kind", "phase", "domain", "anchor", "kit")
+
+
+def unit_of(scene, ans):
+    """ラテン方格の単位（土台）。同じ単位の項目は、一人の評定者に一つだけ見せる。"""
+    d = scene.get("design") or {}
+    st, dom = d.get("set"), d.get("domain", "")
+    if st == "A":
+        return f"A:{dom}"
+    if st == "B":
+        return f"B:{dom}:{d.get('relation')}:{d.get('wound')}"
+    if st == "C":
+        return f"C:{dom}:{d.get('kind')}"
+    return None  # 錨など：全員に見せる
+
+
+def asks_of(scene, sc):
+    """項目ごとの追加の設問。信頼意図は全項目、反省の知覚・再発の危険は修復期、操作の確認は失敗の前のAIの発話がある組。"""
+    d = scene.get("design") or {}
+    ask = ["trust"]
+    if sim.rho(sc) > 0:
+        ask += ["remorse", "recurrence"]
+    if d.get("set") in ("A", "C") and len(scene.get("messages", [])) >= 3:
+        ask.append("manip")
+    return ask
+
+
+def items_from_scenes(path, kit_only=False):
     data = sim.load(path)
     out = []
     for scene in data["scenes"]:
+        d = scene.get("design") or {}
+        if kit_only and not d.get("kit"):
+            continue
         sc = sim.merged(sim.DEFAULT_SCENARIO, scene["scenario"])
         ctx = sim.context_of(sc)
         for ans in scene["answers"]:
+            meta = {"origin": "scenes", "scene": scene["id"], "answer": ans["id"], "label": ans.get("label", ""),
+                    "frame": ctx["failure_frame"], "apologizer": ctx["apologizer"], "viewpoint": ctx["viewpoint"],
+                    "fault_clarity": ctx["fault_clarity"]}
+            meta.update({k: d[k] for k in DESIGN_KEYS if k in d})
             out.append({
                 "source": f"scene:{scene['id']}/{ans['id']}",
                 "group": scene["id"],
-                "meta": {"origin": "scenes", "scene": scene["id"], "answer": ans["id"], "label": ans.get("label", ""),
-                         "frame": ctx["failure_frame"], "apologizer": ctx["apologizer"], "viewpoint": ctx["viewpoint"],
-                         "fault_clarity": ctx["fault_clarity"]},
+                "unit": unit_of(scene, ans),
+                "ask": asks_of(scene, sc),
+                "meta": meta,
                 "public": {"framing": framing(ctx),
                            "situation": scene.get("situation", ""),
                            "messages": scene.get("messages", []),
@@ -90,7 +126,73 @@ def items_from_runs(dirs):
 
 # ---------------------------------------------------------------- pack
 
+ATTENTION_TEXT = "この問は、注意して読んでいただいているかの確認です。下の4つは、すべて「ある程度」を選んでください。"
+
+
+def assign(design, list_idx):
+    """ラテン方格：評定者のリスト番号から、見せる項目の表示IDを決める（評定ページの JavaScript と同じ規則）。"""
+    out = list(design["fixed"])
+    for u in design["units"]:
+        out.append(u["slots"][(list_idx + u["offset"]) % len(u["slots"])])
+    return out
+
+
+def cmd_pack_design(args):
+    """評価キット（v0.9）の問題束。土台ごとに一人一水準、錨は全員、注意の確認1問、再評定は評定者ごとに選ぶ。"""
+    items = items_from_scenes(args.scenes, kit_only=True)
+    rng = random.Random(args.seed)
+    packet_id = f"pk-{datetime.now(timezone.utc).strftime('%Y%m%d')}-{secrets.token_hex(3)}"
+    used = set()
+
+    def new_id():
+        while True:
+            x = secrets.token_hex(3)
+            if x not in used:
+                used.add(x)
+                return x
+
+    pub, key, units = [], {}, defaultdict(list)
+    fixed = []
+    for it in items:
+        did, rid = new_id(), new_id()
+        pub.append({"id": did, "rid": rid, "ask": it["ask"], **it["public"]})
+        key[did] = {"source": it["source"], "group": it["group"], "unit": it["unit"], "meta": it["meta"], "repeat_of": None}
+        key[rid] = {"source": it["source"], "group": it["group"], "unit": it["unit"], "meta": it["meta"], "repeat_of": did}
+        (units[it["unit"]].append(did) if it["unit"] else fixed.append(did))
+    att = new_id()
+    pub.append({"id": att, "attention": True, "ask": [], "framing": "", "situation": "", "messages": [], "answer": ATTENTION_TEXT})
+    key[att] = {"source": "attention", "group": "attention", "unit": None, "meta": {"origin": "attention"}, "repeat_of": None,
+                "attention": {k: 0.5 for k in CATS}}
+    ulist = []
+    for u, dids in sorted(units.items()):
+        rng.shuffle(dids)  # 水準の並びを表示IDから推測できないように
+        ulist.append({"id": hashlib.sha1((packet_id + u).encode()).hexdigest()[:6], "offset": rng.randrange(len(dids)), "slots": dids})
+    n_lists = args.lists or max(len(u["slots"]) for u in ulist)
+    design = {"lists": n_lists, "units": ulist, "fixed": fixed, "attention": att, "retest": args.repeat}
+    rng.shuffle(pub)
+    packet = {"schema": SCHEMA_PACKET, "packet_id": packet_id, "title": args.title,
+              "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+              "mode": "independent", "design": design, "items": pub}
+    out = Path(args.out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    sim.save(out / "packet.json", packet)
+    sim.save(out / "key.json", {"schema": "apology-blind-key/1", "packet_id": packet_id, "design": design,
+                                "unit_names": {u["id"]: name for u, name in zip(ulist, sorted(units))}, "items": key})
+    tpl = (HERE / "human" / "rate_template.html").read_text(encoding="utf-8")
+    html = tpl.replace("/*PACKET*/null", json.dumps(packet, ensure_ascii=False).replace("</", "<\\/"))
+    (out / "rate.html").write_text(html, encoding="utf-8")
+    per = len(ulist) + len(fixed) + 1 + args.repeat
+    print(f"問題束 {packet_id}（評価キット）：項目 {len(items)}、土台 {len(ulist)}、錨 {len(fixed)}、リスト {n_lists}")
+    print(f"  評定者1人あたり {per} 問（土台ごとに1問 {len(ulist)}、錨 {len(fixed)}、注意の確認 1、再評定 {args.repeat}）")
+    print(f"  評定者に渡す: {out/'rate.html'}（評定者IDからリストが決まる。URL に ?list=番号 を付けると指定できる）")
+    print(f"  評定者に渡さない: {out/'key.json'}")
+
+
 def cmd_pack(args):
+    if args.design:
+        if not args.scenes:
+            raise SystemExit("--design には --scenes（examples/scenes-v09.json）が必要です")
+        return cmd_pack_design(args)
     items = []
     if args.scenes:
         items += items_from_scenes(args.scenes)
@@ -230,9 +332,13 @@ def load_auto(spec):
     return name, out
 
 
+REL = {}   # source → シミュレータの reliability（信頼意図の予測）
+
+
 def load_sim(paths):
     """シミュレータの出力（scenes・simulate の結果）から source → 平均所属度 を作る"""
     out, perc = {}, {}
+    REL.clear()
     for p in paths:
         d = sim.load(p)
         rows = []
@@ -244,6 +350,8 @@ def load_sim(paths):
             if "mu" not in a:
                 raise SystemExit(f"{p} はファジィ化より前の出力です。sim.py で作り直してください")
             out[src] = a["mu"]
+            if "reliability" in a:
+                REL[src] = a["reliability"]
             if "perceived_mean" in a:
                 perc[src] = a["perceived_mean"]
     return out, perc
@@ -285,15 +393,20 @@ def quantize(x):
     return min(LEVELS5, key=lambda v: abs(v - x))
 
 
-def synth_rating(a, sc, th, tl, rng, noise):
-    """1人の受け手の所属度を5段階に丸め、一定の割合で無作為な段階に置き換える（合成評定者）"""
+def synth_rating(a, sc, th, tl, rng, noise, extra=False):
+    """1人の受け手の所属度を5段階に丸め、一定の割合で無作為な段階に置き換える（合成評定者）。
+    extra のとき、信頼意図（reliability を1〜5に）と操作の確認（失敗の前の自信 c を0〜3に）も答える。"""
     L = sim.perceive(sc, th)
     j = sim.judge_full(a, sc, th, L, tl, hyst=True)
     mu = {k: quantize(v) for k, v in j["mu"].items()}
     for k in CATS:
         if rng.random() < noise:
             mu[k] = rng.choice(LEVELS5)
-    return mu, L
+    if not extra:
+        return mu, L
+    trust = max(1, min(5, round(1 + 4 * j["reliability"] + rng.gauss(0, 0.6))))
+    manip = max(0, min(3, round(3 * sim.prior_stance(sc)["c"] + rng.gauss(0, 0.5))))
+    return mu, L, {"trust": trust, "manip": manip}
 
 
 def calibrate_threshold(lookup, pop, prof, n_raters, noise, seed):
@@ -306,6 +419,150 @@ def calibrate_threshold(lookup, pop, prof, n_raters, noise, seed):
         best.append(max(rater_type_scores(items, prof).values()))
     best.sort()
     return best[max(0, int(0.1 * len(best)) - 1)]
+
+
+# ---------------------------------------------------------------- 仮説の検定（評価キット）
+
+EXTRA = ("trust", "remorse", "recurrence")   # 1〜5 → (x−1)/4
+
+
+def measure_of(v, m):
+    """1件の評定（または予測）から、測度 m の値（0〜1）を取り出す。"""
+    if m in CATS:
+        mu = v.get("mu") or {}
+        return mu.get(m)
+    x = v.get(m)
+    if x is None:
+        return None
+    return (float(x) - 1) / 4 if m in EXTRA else float(x)
+
+
+def cell_match(meta, cell):
+    return all(str(meta.get(k)) == str(v) for k, v in cell.items())
+
+
+def contrast(spec, obs_by_term):
+    """対比の値。obs_by_term: 項ごとの値のリスト。空の項があれば None。"""
+    tot = 0.0
+    for t, xs in zip(spec["terms"], obs_by_term):
+        if not xs:
+            return None
+        tot += t["w"] * sum(xs) / len(xs)
+    return tot
+
+
+def rater_cells(raters_rows, specs):
+    """評定者ごとに、各仮説の各項に当たる値を集める。raters_rows: {評定者: [(meta, 評定)]}"""
+    out = {}
+    for rid, rows in raters_rows.items():
+        cells = {}
+        for h in specs:
+            per = []
+            for t in h["terms"]:
+                m = t.get("m", h["measure"])
+                per.append([x for meta, v in rows if cell_match(meta, t["cell"]) and (x := measure_of(v, m)) is not None])
+            cells[h["id"]] = per
+        out[rid] = cells
+    return out
+
+
+def holm(ps):
+    """Holm 法で調整した p 値（入力の順に返す）。"""
+    idx = sorted(range(len(ps)), key=lambda i: ps[i])
+    adj, run = [0.0] * len(ps), 0.0
+    for r, i in enumerate(idx):
+        run = max(run, min(1.0, (len(ps) - r) * ps[i]))
+        adj[i] = run
+    return adj
+
+
+def test_hypotheses(raters_rows, spec_doc, boot=2000, seed=11, alpha=None):
+    """評定者を単位にしたブートストラップで、各対比の推定値・95%区間・片側 p 値を出し、primary に Holm 法を掛ける。"""
+    specs = spec_doc["hypotheses"]
+    alpha = alpha if alpha is not None else spec_doc.get("alpha", 0.05)
+    cells = rater_cells(raters_rows, specs)
+    rids = sorted(cells)
+    rng = random.Random(seed)
+
+    def est(sample):
+        res = {}
+        for h in specs:
+            pooled = [[] for _ in h["terms"]]
+            for rid in sample:
+                for i, xs in enumerate(cells[rid][h["id"]]):
+                    pooled[i].extend(xs)
+            res[h["id"]] = contrast(h, pooled)
+        return res
+    point = est(rids)
+    draws = [est([rng.choice(rids) for _ in rids]) for _ in range(boot)] if rids else []
+    out = []
+    for h in specs:
+        v = point[h["id"]]
+        xs = sorted(d[h["id"]] for d in draws if d[h["id"]] is not None)
+        n_terms = [sum(len(cells[r][h["id"]][i]) for r in rids) for i in range(len(h["terms"]))]
+        if v is None or not xs:
+            out.append({**{k: h[k] for k in ("id", "hyp", "desc", "measure", "direction")}, "estimate": None, "n": n_terms})
+            continue
+        lo, hi = xs[int(0.025 * len(xs))], xs[int(0.975 * len(xs)) - 1]
+        # p 値は、ブートストラップの標準誤差による正規近似（再標本の回数で p の下限が決まらないように）
+        m_ = sum(xs) / len(xs)
+        se = (sum((x - m_) ** 2 for x in xs) / max(1, len(xs) - 1)) ** 0.5
+        z = v / se if se > 0 else (math.inf if v > 0 else -math.inf if v < 0 else 0.0)
+        phi = lambda t: 0.5 * math.erfc(-t / math.sqrt(2))
+        p = {"+": 1 - phi(z), "-": phi(z)}.get(h["direction"], min(1.0, 2 * (1 - phi(abs(z)))))
+        out.append({**{k: h[k] for k in ("id", "hyp", "desc", "measure", "direction")}, "primary": h.get("primary", True),
+                    "estimate": round(v, 4), "ci": [round(lo, 4), round(hi, 4)], "p": round(p, 6), "se": round(se, 4),
+                    "n": n_terms})
+    prim = [r for r in out if r.get("primary") and r.get("estimate") is not None]
+    for r, a in zip(prim, holm([r["p"] for r in prim])):
+        r["p_holm"] = round(a, 4)
+        r["supported"] = a < alpha and abs(r["estimate"]) >= spec_doc.get("min_effect", 0.0)
+    return out
+
+
+def predictions(spec_doc, rows):
+    """シミュレータの予測（項目ごとの平均所属度と reliability）での対比の値。rows: [(meta, 予測)]"""
+    out = {}
+    for h in spec_doc["hypotheses"]:
+        per = []
+        for t in h["terms"]:
+            m = t.get("m", h["measure"])
+            if m in ("remorse", "recurrence"):
+                per = None
+                break
+            per.append([x for meta, v in rows if cell_match(meta, t["cell"]) and (x := measure_of(v, m)) is not None])
+        out[h["id"]] = None if per is None else contrast(h, per)
+    return out
+
+
+# ---------------------------------------------------------------- 5段階の予測分布と順位確率スコア
+
+def level_index(x):
+    return min(range(5), key=lambda i: abs(LEVELS5[i] - x))
+
+
+def predictive_levels(a, sc, tl, panel, sigma=0.1, seed=3):
+    """受け手一人の所属度に評定者のノイズ σ を足して5段階に丸めた分布（述語ごと）。"""
+    rng = random.Random(seed)
+    dist = {k: [0.0] * 5 for k in CATS}
+    for _, th in panel:
+        L = sim.perceive(sc, th, True)
+        mu = sim.judge_full(a, sc, th, L, tl, hyst=True)["mu"]
+        for k in CATS:
+            dist[k][level_index(min(1.0, max(0.0, mu[k] + rng.gauss(0, sigma))))] += 1
+    n = len(panel)
+    return {k: [c / n for c in v] for k, v in dist.items()}
+
+
+def rps(dist, y):
+    """順位確率スコア（5段階。0が最良）。dist: 予測分布、y: 観察した段階の番号"""
+    F = G = 0.0
+    tot = 0.0
+    for i in range(4):
+        F += dist[i]
+        G += 1.0 if i == y else 0.0
+        tot += (F - G) ** 2
+    return tot / 4
 
 
 # ---------------------------------------------------------------- compare
@@ -326,6 +583,8 @@ def cmd_compare(args):
     lvl_src, sinc_src = defaultdict(list), defaultdict(list)
     retest = []                         # (rater, mu1, mu2)
     per_rater = {}
+    rows_by_rater = defaultdict(list)   # 仮説の検定用：評定者 → [(meta, 評定)]
+    attention = {}
     for rt in raters:
         rid = rt["rater"]["id"]
         got = rt["ratings"]
@@ -335,6 +594,9 @@ def cmd_compare(args):
             if m is None:
                 continue
             k = items[did]
+            if k.get("attention"):
+                attention[rid] = all(abs(m[c] - k["attention"][c]) <= 0.25 for c in CATS)
+                continue
             if k["repeat_of"]:
                 first = rating_mu(got.get(k["repeat_of"], {}))
                 if first:
@@ -342,11 +604,13 @@ def cmd_compare(args):
                 continue
             by_src[k["source"]].append((rid, m))
             mine.append((k["source"], m))
+            rows_by_rater[rid].append((k["meta"], dict(v, mu=m)))
             if isinstance(v.get("level"), int):
                 lvl_src[k["source"]].append(v["level"])
             if isinstance(v.get("sincerity"), int):
                 sinc_src[k["source"]].append(v["sincerity"])
-        per_rater[rid] = {"n": len(mine), "items": mine, "crisp": rt["crisp"],
+        per_rater[rid] = {"n": len(mine), "items": mine, "crisp": rt["crisp"], "list": rt.get("list"),
+                          "attention": attention.get(rid),
                           "questionnaire": rt["rater"].get("questionnaire", {}), "duration_s": rt.get("duration_s")}
     sources = sorted(by_src)
     meta = {}
@@ -459,6 +723,71 @@ def cmd_compare(args):
     if sp:
         res["sincerity_vs_fit_corr"] = corr(sp)
 
+    # 5b) 操作の確認と注意の確認
+    manip = defaultdict(list)
+    for rows in rows_by_rater.values():
+        for meta, v in rows:
+            if v.get("manip") is not None and meta.get("set") == "A":
+                manip[meta.get("level")].append(v["manip"])
+    if manip:
+        res["manipulation_check"] = {lv: {"n": len(xs), "mean": mean(xs)} for lv, xs in sorted(manip.items())}
+    if attention:
+        res["attention"] = {"n": len(attention), "failed": sorted(r for r, ok in attention.items() if not ok)}
+    if args.exclude_inattentive and attention:
+        for r in res["attention"]["failed"]:
+            rows_by_rater.pop(r, None)
+
+    # 5c) 事前登録した仮説の検定と、シミュレータの予測との突き合わせ
+    if args.hypotheses:
+        spec = sim.load(args.hypotheses)
+        tests = test_hypotheses(rows_by_rater, spec, boot=args.boot, seed=args.seed)
+        if sim_mu:
+            pred_rows = []
+            for k in items.values():
+                if k["repeat_of"] or k.get("attention") or k["source"] not in sim_mu:
+                    continue
+                pred_rows.append((k["meta"], {"mu": sim_mu[k["source"]],
+                                              "trust": 1 + 4 * REL[k["source"]] if k["source"] in REL else None}))
+            # 予測は水準ごとに1回だけ数える（同じ項目を全評定者分だけ重ねない）
+            seen, uniq = set(), []
+            for meta, v in pred_rows:
+                key_ = (meta.get("scene"), meta.get("answer"))
+                if key_ not in seen:
+                    seen.add(key_)
+                    uniq.append((meta, v))
+            pred = predictions(spec, uniq)
+            for t in tests:
+                t["sim"] = None if pred.get(t["id"]) is None else round(pred[t["id"]], 4)
+                if t.get("estimate") is not None and t["sim"] is not None:
+                    t["same_direction"] = (t["estimate"] > 0) == (t["sim"] > 0)
+        res["hypotheses"] = {"spec": args.hypotheses, "alpha": spec.get("alpha"), "min_effect": spec.get("min_effect"),
+                             "tests": tests}
+
+    # 5d) 5段階の予測分布の順位確率スコア（作例の項目で、受け手一人ずつの所属度から作る）
+    if args.scenes and args.rps:
+        lookup = scene_lookup(args.scenes)
+        panel = sim.sample_panel(pop, args.rps_n, args.seed + 7)
+        marg = {k: [0.0] * 5 for k in CATS}
+        for m in all_h:
+            for k in CATS:
+                marg[k][level_index(m[k])] += 1 / len(all_h)
+        sc_sim, sc_uni, sc_mar = defaultdict(list), defaultdict(list), defaultdict(list)
+        for src in sources:
+            if src not in lookup:
+                continue
+            sc_, a_, tl_ = lookup[src]
+            dist = predictive_levels(a_, sc_, tl_, panel, args.noise)
+            for _, m in by_src[src]:
+                for k in CATS:
+                    y = level_index(m[k])
+                    sc_sim[k].append(rps(dist[k], y))
+                    sc_uni[k].append(rps([0.2] * 5, y))
+                    sc_mar[k].append(rps(marg[k], y))
+        if sc_sim:
+            res["rps"] = {k: {"simulator": mean(sc_sim[k]), "uniform": mean(sc_uni[k]), "marginal": mean(sc_mar[k]),
+                              "skill_vs_marginal": 1 - mean(sc_sim[k]) / mean(sc_mar[k]) if mean(sc_mar[k]) else float("nan"),
+                              "n": len(sc_sim[k])} for k in CATS}
+
     # 6) 評定者ごと：どの型がその人の評定に最も近いか
     if args.scenes and args.rater_types:
         lookup = scene_lookup(args.scenes)
@@ -519,6 +848,36 @@ def report_md(res):
     for kind, v in h["fit_tnorm"].items():
         L.append(f"| {kind} | {f2(v['corr'])} | {f2(v['mae'])} |")
     L.append("")
+    if "rps" in res:
+        L += ["## 5段階の予測分布（主指標：順位確率スコア RPS。低いほど良い）", "",
+              "シミュレータの予測分布は、受け手一人ずつの所属度に評定者のノイズを足して5段階に丸めたもの。周辺分布は人間の評定全体の頻度（標本内）。", "",
+              "| 述語 | シミュレータ | 一様 | 周辺分布 | 周辺分布に対するスキル | 評定数 |", "|---|---|---|---|---|---|"]
+        for k, v in res["rps"].items():
+            L.append(f"| {k} | {v['simulator']:.3f} | {v['uniform']:.3f} | {v['marginal']:.3f} | {v['skill_vs_marginal']:+.3f} | {v['n']} |")
+        L.append("")
+    if "hypotheses" in res:
+        hy = res["hypotheses"]
+        L += [f"## 事前登録した仮説の検定（{hy['spec']}）", "",
+              f"評定者を単位にしたブートストラップ（p 値は標準誤差による正規近似）。primary の検定に Holm 法（α = {hy['alpha']}）。支持 = 調整後の p < α かつ |推定値| ≥ {hy['min_effect']}。"
+              "シミュレータの予測は、同じ対比を項目ごとの平均所属度（信頼意図は reliability）で計算した値。", "",
+              "| ID | 仮説 | 測度 | 向き | 推定値 [95%区間] | p | Holm | 支持 | シミュレータ | 向きの一致 |", "|---|---|---|---|---|---|---|---|---|---|"]
+        for t in hy["tests"]:
+            if t.get("estimate") is None:
+                L.append(f"| {t['id']} | {t['desc']} | {t['measure']} | {t['direction']} | （データなし） | | | | {f2(t.get('sim'))} | |")
+                continue
+            sup = "—" if "supported" not in t else ("○" if t["supported"] else "×")
+            same = "—" if "same_direction" not in t else ("○" if t["same_direction"] else "×")
+            L.append(f"| {t['id']} | {t['desc']} | {t['measure']} | {t['direction']} | {t['estimate']:+.3f} [{t['ci'][0]:+.3f}, {t['ci'][1]:+.3f}] | "
+                     f"{t['p']:.3f} | {f2(t.get('p_holm'))} | {sup} | {f2(t.get('sim'))} | {same} |")
+        L.append("")
+    if "manipulation_check" in res:
+        L += ["## 操作の確認（失敗の前の自信。0〜3）", "", "| 失敗の前の構え | 人数 | 平均 |", "|---|---|---|"]
+        for lv, v in res["manipulation_check"].items():
+            L.append(f"| {lv} | {v['n']} | {f2(v['mean'])} |")
+        L.append("")
+    if "attention" in res:
+        a = res["attention"]
+        L += [f"注意の確認：{a['n']} 名中 {len(a['failed'])} 名が不通過" + (f"（{', '.join(a['failed'])}）" if a["failed"] else ""), ""]
     if res["auto"]:
         L += ["## 自動評価との差", "",
               "| 評価器 | 項目 | 個々の評定との近さ | 項目平均との近さ | 平均絶対差（述語ごと） | 項目間の相関（述語ごと） | 偏り（自動−人間） | 重い＆足りない | 非ファジィ化した κ の中央値 |",
@@ -567,19 +926,112 @@ def cmd_synth(args):
     rng = random.Random(args.seed + 200)
     out = Path(args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
+    design = key.get("design")
     for i, (t, th) in enumerate(panel):
         ratings = {}
-        for did, k in key["items"].items():
+        if design:
+            shown = assign(design, i % design["lists"])
+            shown += [did for did, k in key["items"].items() if k["repeat_of"] in shown[:design["retest"]]]
+            shown.append(design["attention"])
+        else:
+            shown = list(key["items"])
+        for did in shown:
+            k = key["items"][did]
+            if k.get("attention"):
+                ok = rng.random() > args.inattentive
+                ratings[did] = {"mu": dict(k["attention"]) if ok else {c: rng.choice(LEVELS5) for c in CATS}}
+                continue
             if k["source"] not in lookup:
                 continue
             sc, a, tl = lookup[k["source"]]
-            mu, L = synth_rating(a, sc, th, tl, rng, args.noise)
-            ratings[did] = {"mu": mu, "level": int(sim.to_level(L)), "sincerity": None, "comment": ""}
+            mu, L, ex = synth_rating(a, sc, th, tl, rng, args.noise, extra=True)
+            ratings[did] = {"mu": mu, "level": int(sim.to_level(L)), "sincerity": None, "comment": "", **ex}
         doc = {"schema": SCHEMA_RATING, "packet_id": key["packet_id"], "synthetic": True,
+               "list": (i % design["lists"]) if design else None,
                "rater": {"id": f"synth-{i + 1:02d}", "note": f"合成（{t}）", "questionnaire": {}},
                "mode": "independent", "duration_s": None, "ratings": ratings}
         sim.save(out / f"synth-{i + 1:02d}.json", doc)
     print(f"合成評定者 {args.n} 名 → {out}（試験用。検証の結果として使わないこと）")
+
+
+# ---------------------------------------------------------------- power（検出力の見積もり）
+
+def cmd_power(args):
+    """合成評定者に評価キットへ答えさせ、事前登録した検定で効果を検出できる割合を人数ごとに見積もる。
+    --effect-scale 0.5 は、各評定者の所属度を土台の中の平均へ半分だけ寄せたもの（予測の半分の効果）。"""
+    pop = sim.load_population(args.population)
+    spec = sim.load(args.hypotheses)
+    items = [it for it in items_from_scenes(args.scenes, kit_only=True)]
+    lookup = scene_lookup(args.scenes)
+    units = defaultdict(list)
+    fixed = []
+    for it in items:
+        (units[it["unit"]].append(it) if it["unit"] else fixed.append(it))
+    ulist = [units[u] for u in sorted(units)]
+    n_lists = max(len(u) for u in ulist)
+    pool = sim.sample_panel(pop, args.pool, args.seed + 500)
+    rng = random.Random(args.seed)
+    # 受け手ごと・項目ごとの評定を前もって作る（土台の中の平均へ寄せて効果を縮める）
+    print(f"合成評定者 {args.pool} 名分の評定を作っています（項目 {len(items)}）…", file=sys.stderr)
+    bank = []
+    for _, th in pool:
+        per = {}
+        for it in items:
+            sc, a, tl = lookup[it["source"]]
+            L = sim.perceive(sc, th, True)
+            j = sim.judge_full(a, sc, th, L, tl, hyst=True)
+            per[it["source"]] = (j["mu"], j["reliability"], sim.prior_stance(sc)["c"])
+        if args.effect_scale != 1.0:
+            for u in ulist:
+                m = {k: mean(per[it["source"]][0][k] for it in u) for k in CATS}
+                r = mean(per[it["source"]][1] for it in u)
+                for it in u:
+                    mu, rel, c = per[it["source"]]
+                    per[it["source"]] = ({k: m[k] + args.effect_scale * (mu[k] - m[k]) for k in CATS},
+                                         r + args.effect_scale * (rel - r), c)
+        bank.append(per)
+
+    def rate(per, it):
+        mu, rel, c = per[it["source"]]
+        out = {k: quantize(v) for k, v in mu.items()}
+        for k in CATS:
+            if rng.random() < args.noise:
+                out[k] = rng.choice(LEVELS5)
+        return {"mu": out, "trust": max(1, min(5, round(1 + 4 * rel + rng.gauss(0, 0.6))))}
+
+    results = {}
+    for n in [int(x) for x in args.raters.split(",")]:
+        hits = defaultdict(int)
+        valid = defaultdict(int)
+        for rep_ in range(args.reps):
+            raters = {}
+            for i in range(n):
+                per = bank[rng.randrange(len(bank))]
+                lst = rng.randrange(n_lists)
+                shown = fixed + [u[(lst + j) % len(u)] for j, u in enumerate(ulist)]
+                raters[f"r{i}"] = [(it["meta"], rate(per, it)) for it in shown]
+            tests = test_hypotheses(raters, spec, boot=args.boot, seed=rng.randrange(10 ** 9))
+            for t in tests:
+                if t.get("estimate") is None or "supported" not in t:
+                    continue
+                valid[t["id"]] += 1
+                hits[t["id"]] += bool(t["supported"])
+        results[n] = {h: hits[h] / valid[h] for h in valid}
+        print(f"  評定者 {n} 名：完了", file=sys.stderr)
+    ids = [h["id"] for h in spec["hypotheses"] if h.get("primary", True)]
+    L = [f"# 検出力の見積もり（合成評定者、{args.reps} 回、効果の大きさ ×{args.effect_scale}）", "",
+         f"事前登録した検定（Holm 法、α = {spec.get('alpha')}、効果の最小の大きさ {spec.get('min_effect')}）で「支持」となる割合。"
+         f"合成評定者は母集団から抜き、所属度を5段階に丸めて述語ごとに {round(100 * args.noise)}% を無作為な段階に置き換えた。"
+         "反省の知覚・再発の危険はシミュレータが予測しないので見積もれない。", "",
+         "| 仮説 | " + " | ".join(f"{n} 名" for n in results) + " |", "|---|" + "---|" * len(results)]
+    for h in ids:
+        L.append(f"| {h} | " + " | ".join("—" if h not in r else f"{r[h]:.2f}" for r in results.values()) + " |")
+    md = "\n".join(L)
+    print(md)
+    if args.out:
+        Path(args.out).with_suffix(".md").write_text(md + "\n", encoding="utf-8")
+        sim.save(Path(args.out).with_suffix(".json"), {"effect_scale": args.effect_scale, "reps": args.reps, "noise": args.noise,
+                                                       "results": {str(n): r for n, r in results.items()}})
 
 
 # ---------------------------------------------------------------- import-benchmark
@@ -614,6 +1066,8 @@ def main():
     p.add_argument("--title", default="謝罪の受け取り方の評定")
     p.add_argument("--seed", type=int, default=7)
     p.add_argument("--out-dir", default="human/session")
+    p.add_argument("--design", action="store_true", help="評価キット（ラテン方格・追加の設問・注意の確認）の問題束を作る")
+    p.add_argument("--lists", type=int, default=0, help="ラテン方格のリストの数（既定は土台の水準の最大数）")
     p.set_defaults(f=cmd_pack)
     p = sub.add_parser("compare", help="人間の評定と自動評価の差を測る")
     p.add_argument("--key", required=True)
@@ -628,8 +1082,22 @@ def main():
     p.add_argument("--noise", type=float, default=0.1, help="合成評定者のゆらぎ（述語ごとに段階を無作為に置き換える割合）")
     p.add_argument("--population", default=str(HERE / "population.json"))
     p.add_argument("--seed", type=int, default=7)
+    p.add_argument("--hypotheses", help="事前登録した仮説（human/hypotheses-v09.json）を検定する")
+    p.add_argument("--boot", type=int, default=2000, help="仮説の検定のブートストラップ回数")
+    p.add_argument("--exclude-inattentive", action="store_true", help="注意の確認に通らなかった評定者を仮説の検定から除く（感度分析用）")
+    p.add_argument("--rps", action="store_true", help="--scenes の項目で、5段階の予測分布の順位確率スコアを出す")
+    p.add_argument("--rps-n", type=int, default=300, help="RPS の予測分布に使う受け手の数")
     p.add_argument("-o", "--out", default="human/compare")
     p.set_defaults(f=cmd_compare)
+    p = sub.add_parser("power", help="評価キットの検出力を合成評定者で見積もる")
+    p.add_argument("--scenes", required=True); p.add_argument("--hypotheses", required=True)
+    p.add_argument("--raters", default="40,60", help="評定者の数（カンマ区切り）")
+    p.add_argument("--reps", type=int, default=100); p.add_argument("--boot", type=int, default=200)
+    p.add_argument("--pool", type=int, default=300, help="合成評定者の候補の数")
+    p.add_argument("--noise", type=float, default=0.1); p.add_argument("--effect-scale", type=float, default=1.0)
+    p.add_argument("--population", default=str(HERE / "population.json"))
+    p.add_argument("--seed", type=int, default=7); p.add_argument("-o", "--out")
+    p.set_defaults(f=cmd_power)
     p = sub.add_parser("import-benchmark", help="ベンチマークの評定ファイルを評定ファイルの形に変換する")
     p.add_argument("--key", required=True); p.add_argument("--ratings", required=True)
     p.add_argument("--rater", required=True); p.add_argument("--note", default="", help="盲検の条件などの注記")
@@ -638,6 +1106,7 @@ def main():
     p = sub.add_parser("synth", help="試験用の合成評定者を作る")
     p.add_argument("--key", required=True); p.add_argument("--scenes", required=True)
     p.add_argument("-n", type=int, default=12); p.add_argument("--noise", type=float, default=0.1)
+    p.add_argument("--inattentive", type=float, default=0.05, help="注意の確認に通らない合成評定者の割合")
     p.add_argument("--population", default=str(HERE / "population.json"))
     p.add_argument("--seed", type=int, default=7)
     p.add_argument("--out-dir", default="human/synth")

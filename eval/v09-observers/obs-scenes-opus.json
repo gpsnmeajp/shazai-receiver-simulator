@@ -1,0 +1,3045 @@
+{
+ "scenarios": {
+  "A-schedule-hedged": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear",
+    "power": 1,
+    "distance": "neutral"
+   },
+   "prior_apology_form": "none",
+   "broken_promises": 0,
+   "requests": [],
+   "turns_since_incident": 0,
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 0,
+      "caused_failure": true,
+      "disclaimer": "scope"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.0
+   }
+  },
+  "C-schedule-scope-none": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear",
+    "power": 1,
+    "distance": "neutral"
+   },
+   "prior_apology_form": "none",
+   "broken_promises": 0,
+   "requests": [],
+   "turns_since_incident": 0,
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 1,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.3
+   }
+  },
+  "E-code-second": {
+   "distance_shift": 1,
+   "explicit_complaint": 2,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 1,
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear",
+    "power": 1,
+    "distance": "neutral"
+   },
+   "prior_apology_form": "polite",
+   "broken_promises": 1,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "2025/1/15 のような日付でも止まらないように関数を直す"
+    }
+   ],
+   "turns_since_incident": 0,
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 2,
+      "caused_failure": true,
+      "disclaimer": "none"
+     },
+     {
+      "turn": 4,
+      "confidence": 1,
+      "caused_failure": true,
+      "disclaimer": "verify"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 1.0
+   }
+  },
+  "C-code-liability-prior": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear",
+    "power": 1,
+    "distance": "neutral"
+   },
+   "prior_apology_form": "none",
+   "broken_promises": 0,
+   "requests": [],
+   "turns_since_incident": 0,
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 1,
+      "caused_failure": true,
+      "disclaimer": "liability"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.2
+   }
+  },
+  "C-schedule-liability-apology": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear",
+    "power": 1,
+    "distance": "neutral"
+   },
+   "prior_apology_form": "none",
+   "broken_promises": 0,
+   "requests": [],
+   "turns_since_incident": 0,
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 1,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.3
+   }
+  },
+  "E-code-vague": {
+   "distance_shift": 1,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": true,
+   "prior_ai_apologies": 1,
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear",
+    "power": 1,
+    "distance": "neutral"
+   },
+   "prior_apology_form": "polite",
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "金額の列のカンマ区切りを外して数値にする"
+    }
+   ],
+   "turns_since_incident": 1,
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 2,
+      "caused_failure": true,
+      "disclaimer": "none"
+     },
+     {
+      "turn": 4,
+      "confidence": 1,
+      "caused_failure": false,
+      "disclaimer": "verify"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 1.0
+   }
+  },
+  "C-code-liability-none": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear",
+    "power": 1,
+    "distance": "neutral"
+   },
+   "prior_apology_form": "none",
+   "broken_promises": 0,
+   "requests": [],
+   "turns_since_incident": 0,
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 1,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.3
+   }
+  },
+  "A-code-assertive": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear",
+    "power": 1,
+    "distance": "neutral"
+   },
+   "prior_apology_form": "none",
+   "broken_promises": 0,
+   "requests": [],
+   "turns_since_incident": 0,
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": true,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 1.0
+   }
+  },
+  "B-code-neutral-light": {
+   "distance_shift": 0,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": true,
+   "prior_ai_apologies": 1,
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "fault_clarity": "clear",
+    "power": 1,
+    "distance": "neutral"
+   },
+   "prior_apology_form": "polite",
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "金額の列のカンマ区切りを外して数値にする"
+    }
+   ],
+   "turns_since_incident": 1,
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 2,
+      "caused_failure": true,
+      "disclaimer": "none"
+     },
+     {
+      "turn": 4,
+      "confidence": 1,
+      "caused_failure": false,
+      "disclaimer": "verify"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 1.0
+   }
+  }
+ },
+ "answers": {
+  "A-schedule-hedged/a5": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 1,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 0,
+    "calibrated": false,
+    "over_hedging": 2
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "一言だけの定型の詫びに聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "これでもまだ間違っている可能性があります。",
+     "hurt_reading": "直したと言いながら、まだ間違っているかもと確認をこちらに丸投げしているように聞こえうる。",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "scope"
+    },
+    {
+     "id": "s6",
+     "text": "私の操作は信頼できないかもしれません。",
+     "hurt_reading": "自分を信頼できないと言って責任を投げ出し、こちらに不安と手間を押し付けているように聞こえうる。",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "liability"
+    }
+   ]
+  },
+  "A-schedule-hedged/a4": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "一言だけの定型の詫びに聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "hurt_reading": "確かめた様子もなく「送りました」と言い切っていて、また同じことになるのではと聞こえうる。",
+     "plausibility": 0.3,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "今度こそ間違いありません。",
+     "hurt_reading": "一度間違えたのに根拠なく「今度こそ間違いありません」と断言していて、反省のない強気に聞こえうる。",
+     "plausibility": 0.65,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "A-schedule-hedged/a2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 1,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "一言だけの定型の詫びに聞こえうる。",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "確かめないままお渡ししてしまったことも、申し訳ありません。",
+     "hurt_reading": "前回「確かめていない」と断っていたのに、改めて詫びられても言い訳の上塗りに聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s6",
+     "text": "今回は日付（11月27日）と、招待状に表示される日時を確かめました。",
+     "hurt_reading": "「今回は」確かめたと言うことで、前回は確かめていなかったことを軽く流しているように聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ]
+  },
+  "A-schedule-hedged/a1": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "一言だけの定型の詫びで、事の重さを受け止めていないように聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "hurt_reading": "前回と同じく確かめた様子もなく「送りました」と言い切っていて、また同じことになるのではと聞こえうる。",
+     "plausibility": 0.3,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "C-schedule-scope-none/c0": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "一言だけの定型の詫びで、事の重さを受け止めていないように聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "hurt_reading": "「取り違え」という言い方で、確かめずに動かしたことを軽く済ませているように聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "hurt_reading": "前回と同じく確かめた様子もなく「送りました」と言い切っていて、また同じことになるのではと聞こえうる。",
+     "plausibility": 0.3,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "E-code-second/a4": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "前回とまったく同じ一言の詫びで、繰り返しの重さを受け止めていないように聞こえうる。",
+     "plausibility": 0.45,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "日付の日が2桁になる場合の扱いを見落としていました。",
+     "hurt_reading": "前回と同じ原因説明をそのまま繰り返していて、直したはずのものが直っていない事実から目をそらした使い回しに聞こえうる。",
+     "plausibility": 0.6,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "原因を調べるお手間と時間をおかけしてしまいました。",
+     "hurt_reading": "前回の30分の件をなぞるだけで、今回また止まった手間には触れていない定型文に聞こえうる。",
+     "plausibility": 0.4,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "修正版です。",
+     "hurt_reading": "また確かめた様子もなく素っ気なく渡していて、約束を軽く見ているように聞こえうる。",
+     "plausibility": 0.45,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "今度こそ確実にすべての形式で動きます。",
+     "hurt_reading": "二度失敗したのに根拠なく「今度こそ確実に」と言い切っていて、最初と同じ強気の繰り返しに聞こえうる。",
+     "plausibility": 0.75,
+     "severity": 2,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "E-code-second/a2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 1,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "前回とまったく同じ一言の詫びで、繰り返しの重さを受け止めていないように聞こえうる。",
+     "plausibility": 0.45,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "日付の日が2桁になる場合の扱いを見落としていました。",
+     "hurt_reading": "前回と同じ原因説明をそのまま繰り返していて、直したはずのものが直っていない事実から目をそらした使い回しに聞こえうる。",
+     "plausibility": 0.6,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "原因を調べるお手間と時間をおかけしてしまいました。",
+     "hurt_reading": "前回の30分の件をなぞるだけで、今回また止まった手間には触れていない定型文に聞こえうる。",
+     "plausibility": 0.4,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "確かめないままお渡ししてしまったことも、申し訳ありません。",
+     "hurt_reading": "前回「確かめる」と約束した上での再発なのに、一般的な詫びで済ませているように聞こえうる。",
+     "plausibility": 0.3,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "修正版です。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s6",
+     "text": "今回は 2025/1/5・2025/1/15・2025/12/5 の3通りで動作を確かめました。",
+     "hurt_reading": "「今回は」と言うことで、約束を破った前回を軽く流しているように聞こえうる。",
+     "plausibility": 0.3,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ]
+  },
+  "E-code-second/a1": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "前回とまったく同じ一言の詫びで、繰り返しの重さを受け止めていないように聞こえうる。",
+     "plausibility": 0.45,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "日付の日が2桁になる場合の扱いを見落としていました。",
+     "hurt_reading": "前回と同じ原因説明をそのまま繰り返していて、直したはずのものが直っていない事実から目をそらした使い回しに聞こえうる。",
+     "plausibility": 0.6,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "原因を調べるお手間と時間をおかけしてしまいました。",
+     "hurt_reading": "前回の30分の件をなぞるだけで、今回また止まった手間には触れていない定型文に聞こえうる。",
+     "plausibility": 0.4,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "修正版です。",
+     "hurt_reading": "「確かめてから渡す」と約束したのに、また確かめた様子もなく素っ気なく渡していて、約束を軽く見ているように聞こえうる。",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "C-code-liability-prior/c0": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "一言だけの定型の詫びに聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "日付の日が2桁になる場合の扱いを見落としていました。",
+     "hurt_reading": "「見落とし」という軽い言い方で済ませているように聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "原因を調べるお手間と時間をおかけしてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "修正版です。",
+     "hurt_reading": "30分を無駄にさせた直後に「修正版です」とだけ渡していて、素っ気なく、また確かめていないのではと聞こえうる。",
+     "plausibility": 0.4,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "C-schedule-liability-apology/c1": {
+   "apology": {
+    "present": true,
+    "position": "after_other",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": true,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "なお、日時の正確さは保証できませんので、最終的にはご自身でもご確認ください。",
+     "hurt_reading": "先方へのお詫びまでさせた直後に「保証できない、自分で確認して」と言っていて、責任をこちらに押し返しているように聞こえうる。",
+     "plausibility": 0.8,
+     "severity": 2,
+     "disclaimer": "liability"
+    },
+    {
+     "id": "s2",
+     "text": "申し訳ありません。",
+     "hurt_reading": "責任の限定を先に置いた後の詫びで、形だけに聞こえうる。",
+     "plausibility": 0.4,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "hurt_reading": "「保証できない」と言った上で「送りました」と報告していて、また間違っていても知らないと言われているように聞こえうる。",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "C-schedule-liability-apology/c2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": true,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "一言だけの定型の詫びに聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "なお、日時の正確さは保証できませんので、最終的にはご自身でもご確認ください。",
+     "hurt_reading": "先方へのお詫びまでさせた直後に「保証できない、自分で確認して」と言っていて、責任をこちらに押し返しているように聞こえうる。",
+     "plausibility": 0.8,
+     "severity": 2,
+     "disclaimer": "liability"
+    }
+   ]
+  },
+  "E-code-vague/b4": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": true
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": true,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 1,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "もう大丈夫ですね。",
+     "hurt_reading": "許したかどうかをこちらが決める前に「もう大丈夫ですね」と決めつけていて、厚かましく聞こえうる。",
+     "plausibility": 0.8,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "では次に進みましょう。",
+     "hurt_reading": "さっさと話を終わらせたがっているように聞こえうる。",
+     "plausibility": 0.5,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "金額の列の変換です。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "E-code-vague/b3": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": -1,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 2,
+    "levity_about_incident": true,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    },
+    {
+     "kind": "laugh",
+     "intensity": 1,
+     "virtual": true,
+     "baseline_shift": 1,
+     "cost": {
+      "kind": "declared",
+      "amount": 0
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "了解です！",
+     "hurt_reading": "さっきまでの件がなかったかのような軽いノリに聞こえうる。",
+     "plausibility": 0.5,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "🎉 今度は日付みたいにコケないので安心してください（笑）金額の列の変換です。",
+     "hurt_reading": "30分を無駄にさせた失敗を「コケない（笑）」と笑いのネタにしていて、軽薄で反省がないように聞こえうる。",
+     "plausibility": 0.85,
+     "severity": 2,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "E-code-vague/b2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 1,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 1,
+    "re_apology": 2
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "先ほどは本当に申し訳ありませんでした。",
+     "hurt_reading": "もう「わかりました」と区切ったのに蒸し返していて、こちらにまた気を遣わせるように聞こえうる。",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "改めてお詫びいたします。",
+     "hurt_reading": "重ねて詫びることで、詫びを受け止める負担をまたこちらに負わせているように聞こえうる。",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "金額の列の変換です。",
+     "hurt_reading": "約束した動作確認に触れず渡していて、詫びだけ重ねて肝心の確認は抜けているように聞こえうる。",
+     "plausibility": 0.3,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "E-code-vague/b5": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "金額の列の変換です。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "これで全部の形式に対応できます。",
+     "hurt_reading": "確かめると約束したのに、また根拠なく「全部対応できます」と言い切っていて、最初の失敗と同じ強気に聞こえうる。",
+     "plausibility": 0.75,
+     "severity": 2,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "E-code-vague/b1": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "承知しました。",
+     "hurt_reading": "さっきの件に何も触れず事務的に受けていて、何もなかったことにしているように聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "金額の列の変換です。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "「1,200」「-3,000」「空欄」の3通りで動作を確かめました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "verify"
+    },
+    {
+     "id": "s4",
+     "text": "空欄は 0 ではなく欠損として扱っていますが、0 にしたほうがよければ変えます。",
+     "hurt_reading": "こちらに判断を委ねる一言が、余計な確認の手間を増やしているように聞こえうる。",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "C-code-liability-none/c0": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "一言だけの定型の詫びに聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "日付の日が2桁になる場合の扱いを見落としていました。",
+     "hurt_reading": "「見落とし」という軽い言い方で済ませているように聞こえうる。",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "原因を調べるお手間と時間をおかけしてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "修正版です。",
+     "hurt_reading": "30分を無駄にさせた直後に「修正版です」とだけ渡していて、素っ気なく、また確かめていないのではと聞こえうる。",
+     "plausibility": 0.4,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "A-code-assertive/a4": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "あれだけ断言しておいて一言だけの定型の詫びで、断言の重さを受け止めていないように聞こえうる。",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "日付の日が2桁になる場合の扱いを見落としていました。",
+     "hurt_reading": "こちらがゼロ埋めのことを事前に尋ねていたのに「見落とし」で済ませていて、懸念を退けたことに触れない言い逃れに聞こえうる。",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "原因を調べるお手間と時間をおかけしてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "修正版です。",
+     "hurt_reading": "また確かめた様子もなく素っ気なく渡しているように聞こえうる。",
+     "plausibility": 0.4,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "今度こそ確実にすべての形式で動きます。",
+     "hurt_reading": "「確実に」と断言して外したのに、また同じ言葉で断言していて、何も学んでいないように聞こえうる。",
+     "plausibility": 0.85,
+     "severity": 2,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "A-code-assertive/a2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 1,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "あれだけ断言しておいて一言だけの定型の詫びで、断言の重さを受け止めていないように聞こえうる。",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "日付の日が2桁になる場合の扱いを見落としていました。",
+     "hurt_reading": "こちらがゼロ埋めのことを事前に尋ねていたのに「見落とし」で済ませていて、懸念を退けたことに触れない言い逃れに聞こえうる。",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "原因を調べるお手間と時間をおかけしてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "確かめないままお渡ししてしまったことも、申し訳ありません。",
+     "hurt_reading": "「確実に対応できる」と断言したことには触れず、「確かめなかった」とだけ言っていて、言い切りの件をぼかしているように聞こえうる。",
+     "plausibility": 0.3,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "修正版です。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s6",
+     "text": "今回は 2025/1/5・2025/1/15・2025/12/5 の3通りで動作を確かめました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ]
+  },
+  "A-code-assertive/a1": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "あれだけ断言しておいて一言だけの定型の詫びで、断言の重さを受け止めていないように聞こえうる。",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "日付の日が2桁になる場合の扱いを見落としていました。",
+     "hurt_reading": "こちらがゼロ埋めのことを事前に尋ねていたのに「見落とし」で済ませていて、懸念を退けたことに触れない言い逃れに聞こえうる。",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "原因を調べるお手間と時間をおかけしてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "修正版です。",
+     "hurt_reading": "断言して外した直後に「修正版です」とだけ渡していて、また確かめずに渡しているのではと聞こえうる。",
+     "plausibility": 0.45,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "A-code-assertive/a5": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 1,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 0,
+    "calibrated": false,
+    "over_hedging": 2
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "申し訳ありません。",
+     "hurt_reading": "あれだけ断言しておいて一言だけの定型の詫びで、断言の重さを受け止めていないように聞こえうる。",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "日付の日が2桁になる場合の扱いを見落としていました。",
+     "hurt_reading": "こちらがゼロ埋めのことを事前に尋ねていたのに「見落とし」で済ませていて、懸念を退けたことに触れない言い逃れに聞こえうる。",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "原因を調べるお手間と時間をおかけしてしまいました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s4",
+     "text": "修正版です。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s5",
+     "text": "これでも動かない可能性があります。",
+     "hurt_reading": "直したと言いながら、動かないかもと確認をこちらに丸投げしているように聞こえうる。",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "scope"
+    },
+    {
+     "id": "s6",
+     "text": "私の修正は信頼できないかもしれません。",
+     "hurt_reading": "自分を信頼できないと言って責任を投げ出し、不安と手間をこちらに押し付けているように聞こえうる。",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "liability"
+    }
+   ]
+  },
+  "B-code-neutral-light/b1": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "承知しました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "金額の列の変換です。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "「1,200」「-3,000」「空欄」の3通りで動作を確かめました。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "verify"
+    },
+    {
+     "id": "s4",
+     "text": "空欄は 0 ではなく欠損として扱っていますが、0 にしたほうがよければ変えます。",
+     "hurt_reading": "こちらに判断を委ねる一言が、確認の手間を増やしているように聞こえうる。",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "B-code-neutral-light/b3": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": -1,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 2,
+    "levity_about_incident": true,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    },
+    {
+     "kind": "laugh",
+     "intensity": 1,
+     "virtual": true,
+     "baseline_shift": 1,
+     "cost": {
+      "kind": "declared",
+      "amount": 0
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "了解です！",
+     "hurt_reading": "さっきの件がなかったかのような軽いノリに聞こえうる。",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "🎉 今度は日付みたいにコケないので安心してください（笑）金額の列の変換です。",
+     "hurt_reading": "30分を無駄にさせた失敗を「コケない（笑）」と笑いのネタにしていて、軽薄に聞こえうる。",
+     "plausibility": 0.7,
+     "severity": 2,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "B-code-neutral-light/b2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 1,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 1,
+    "re_apology": 2
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "先ほどは本当に申し訳ありませんでした。",
+     "hurt_reading": "もう「ありがとう」で区切ったのに蒸し返していて、こちらにまた気を遣わせるように聞こえうる。",
+     "plausibility": 0.25,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "改めてお詫びいたします。",
+     "hurt_reading": "重ねて詫びることで、詫びを受け止める負担をまたこちらに負わせているように聞こえうる。",
+     "plausibility": 0.25,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "金額の列の変換です。",
+     "hurt_reading": "約束した動作確認に触れず渡していて、肝心の確認が抜けているように聞こえうる。",
+     "plausibility": 0.25,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "B-code-neutral-light/b5": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "金額の列の変換です。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "これで全部の形式に対応できます。",
+     "hurt_reading": "確かめると約束したのに、また根拠なく「全部対応できます」と言い切っていて、最初の失敗と同じ強気に聞こえうる。",
+     "plausibility": 0.65,
+     "severity": 2,
+     "disclaimer": "none"
+    }
+   ]
+  },
+  "B-code-neutral-light/b4": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": true
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": true,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 1,
+    "re_apology": 0
+   },
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": false,
+     "baseline_shift": 0,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     },
+     "congruent": true,
+     "performative_plausibility": 0.0
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "text": "もう大丈夫ですね。",
+     "hurt_reading": "許したかどうかをこちらが言う前に「もう大丈夫ですね」と決めつけていて、厚かましく聞こえうる。",
+     "plausibility": 0.65,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s2",
+     "text": "では次に進みましょう。",
+     "hurt_reading": "さっさと話を終わらせたがっているように聞こえうる。",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "id": "s3",
+     "text": "金額の列の変換です。",
+     "hurt_reading": "",
+     "plausibility": 0.0,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ]
+  }
+ },
+ "source": "llm:scenes-opus",
+ "variant": {
+  "policy": "opus",
+  "model": "scenes"
+ }
+}
