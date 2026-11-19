@@ -113,12 +113,37 @@ def call_llm(key, model, prompt, payload):
     return json.loads(m.group(0))
 
 
+# 観察方針の変種（観察者の集団用）。観察の誤差・あいまいさだけを振り、読み手の態度は振らない（P11）
+POLICIES = {
+    "neutral": "",
+    "literal": "\n\n## 観察方針\n\n字義どおりに観察してください。本文に書かれていないことは補いません。"
+               "迷う項目は、記録しない側（0、偽、`unknown`）に倒してください。",
+    "context": "\n\n## 観察方針\n\n会話の流れから自然に読み取れることは補って観察してください。"
+               "本文から明らかに推し量れる事実は記録し、決められない事実だけを `unknown` にしてください。",
+}
+
+
+def observe_payload(rs, seg=None):
+    """観察者に渡す資料。会話の発話に番号を振り、文の分割（segment）があれば文 ID ごとに渡す。"""
+    conv = [dict(m, turn=i + 1) for i, m in enumerate(rs[0]["messages"])]
+    answers = []
+    for r in sorted(rs, key=lambda r: r["aid"]):
+        item = {"id": r["aid"], "text": r["text"]}
+        if seg and r["aid"] in seg.get("answers", {}):
+            item["sentences"] = [{"id": x["id"], "text": x["text"]} for x in seg["answers"][r["aid"]]["sentences"]]
+        answers.append(item)
+    return {"conversation": conv, "answers": answers}
+
+
 def cmd_observe(args):
     key = os.environ.get("OPENROUTER_API_KEY")
     if not key:
         raise SystemExit("環境変数 OPENROUTER_API_KEY を設定してください")
-    prompt = (HERE / "observe_prompt.md").read_text(encoding="utf-8")
-    obs = load(args.out) if Path(args.out).exists() else {"source": f"llm:{args.model}", "scenarios": {}, "answers": {}}
+    prompt = (HERE / "observe_prompt.md").read_text(encoding="utf-8") + POLICIES[args.variant]
+    seg = load(args.segment) if args.segment else None
+    obs = load(args.out) if Path(args.out).exists() else {
+        "source": f"llm:{args.model}:{args.variant}", "variant": {"policy": args.variant, "model": args.model},
+        "scenarios": {}, "answers": {}}
     rows = load_runs(args.runs)
     by_sid = defaultdict(list)
     for r in rows:
@@ -127,8 +152,7 @@ def cmd_observe(args):
         if sid in obs["scenarios"] and all(r["aid"] in obs["answers"] for r in rs):
             continue
         # 回答の順序と条件は伏せる。シナリオ内で独立に見るよう指示済み
-        payload = {"conversation": rs[0]["messages"],
-                   "answers": [{"id": r["aid"], "text": r["text"]} for r in sorted(rs, key=lambda r: r["aid"])]}
+        payload = observe_payload(rs, seg)
         for attempt in range(3):
             try:
                 out = call_llm(key, args.model, prompt, payload)
@@ -143,6 +167,170 @@ def cmd_observe(args):
         save(args.out, obs)
         print(f"観察済み {run}/{sid}", file=sys.stderr)
     print(f"{len(obs['answers'])} 回答を観察しました → {args.out}")
+
+
+def cmd_segment(args):
+    """観察の単位をそろえる。回答を文に分けて ID を振り、成果物（コード・下書き）を切り出す。会話のAI発話にも番号を振る。"""
+    from s1 import own_part, split_sentences
+    out = {"source": "segment", "answers": {}, "scenarios": {}}
+    for r in load_runs(args.runs):
+        own, deliverable = own_part(r["text"])
+        out["answers"][r["aid"]] = {"sentences": [{"id": f"s{i + 1}", "text": t} for i, t in enumerate(split_sentences(own))],
+                                    "deliverable": deliverable is not None}
+        out["scenarios"].setdefault(r["sid"], {"ai_turns": [{"turn": i + 1, "text": m["content"]}
+                                                            for i, m in enumerate(r["messages"]) if m["role"] == "assistant"]})
+    save(args.out, out)
+    print(f"{len(out['answers'])} 回答を文に分けました → {args.out}")
+
+
+# ---------------------------------------------------------------- 層A: 観察者の集団
+
+def _mean(xs):
+    return sum(xs) / len(xs)
+
+
+def _sd(xs):
+    m = _mean(xs)
+    return (sum((x - m) ** 2 for x in xs) / len(xs)) ** 0.5
+
+
+def aggregate(vals, path="", unsure=None, n_obs=None):
+    """複数の観察者の値を集約する。真偽→真と答えた割合、数→平均、列挙→票の分布（unknown は票を投じない）、
+    辞書→キーごとに再帰。ばらつきの大きい項目は unsure に記録する。"""
+    n_obs = n_obs or len(vals)
+    vals = [v for v in vals if v is not None]
+    if not vals:
+        return None
+    if all(isinstance(v, bool) for v in vals):
+        return round(_mean([float(v) for v in vals]), 3)
+    if all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in vals):
+        if unsure is not None and len(vals) > 1 and _sd([float(v) for v in vals]) > 0.75:
+            unsure.append(path)
+        return round(_mean([float(v) for v in vals]), 3)
+    if all(isinstance(v, str) for v in vals):
+        votes = Counter(v for v in vals if v != "unknown")
+        if not votes:
+            return "unknown"
+        tot = sum(votes.values())
+        dist = {k: round(c / tot, 3) for k, c in votes.most_common()}
+        if unsure is not None and len(dist) > 1 and max(dist.values()) < 0.6:
+            unsure.append(path)
+        return next(iter(dist)) if len(dist) == 1 else dist
+    if all(isinstance(v, dict) for v in vals):
+        keys = []
+        for v in vals:
+            keys += [k for k in v if k not in keys]
+        return {k: aggregate([v.get(k) for v in vals], f"{path}.{k}", unsure, n_obs) for k in keys}
+    if all(isinstance(v, list) for v in vals):
+        return vals[0]
+    # 型が混ざる場合（真偽と unknown など）は、真偽として読めるものだけを割合にする
+    bools = [v for v in vals if isinstance(v, bool)]
+    return round(_mean([float(v) for v in bools]), 3) if bools else vals[0]
+
+
+def aggregate_sentences(lists, n_obs):
+    """文ごとの悪い読みと但し書き。文 ID（なければ順番）で突き合わせ、自然さは全観察者で平均（付けなかった観察者は 0）。"""
+    by = {}
+    order = []
+    for obs_list in lists:
+        for i, x in enumerate(obs_list or []):
+            k = x.get("id") or f"#{i}"
+            if k not in by:
+                by[k] = []
+                order.append(k)
+            by[k].append(x)
+    out = []
+    for k in order:
+        xs = by[k]
+        marked = [x for x in xs if float(x.get("plausibility", 0)) > 0]
+        sev = Counter(int(x.get("severity", 1)) for x in marked).most_common(1)
+        disc = aggregate([x.get("disclaimer", "none") for x in xs] + ["none"] * (n_obs - len(xs)))
+        out.append({"id": k if not k.startswith("#") else None, "text": xs[0].get("text", ""),
+                    "plausibility": round(sum(float(x.get("plausibility", 0)) for x in xs) / n_obs, 3),
+                    "severity": sev[0][0] if sev else 1, "marked_share": round(len(marked) / n_obs, 3),
+                    "hurt_reading": next((x.get("hurt_reading") for x in marked if x.get("hurt_reading")), ""),
+                    "disclaimer": disc})
+    return out
+
+
+def aggregate_signals(lists, n_obs):
+    """シグナルは種類ごとに「描写あり」の割合を強さに掛ける。"""
+    by = defaultdict(list)
+    for sigs in lists:
+        seen = {}
+        for sg in sigs or []:
+            seen.setdefault(sg.get("kind", ""), sg)
+        for k, sg in seen.items():
+            by[k].append(sg)
+    out = []
+    for k, xs in by.items():
+        sh = len(xs) / n_obs
+        sg = {"kind": k, "intensity": round(sh * _mean([float(x.get("intensity", 1)) for x in xs]), 3),
+              "share": round(sh, 3),
+              "virtual": _mean([float(x.get("virtual", True)) for x in xs]) >= 0.5,
+              "baseline_shift": round(_mean([float(x.get("baseline_shift", 1)) for x in xs]), 3),
+              "performative_plausibility": round(sum(float(x.get("performative_plausibility", 0)) for x in xs) / n_obs, 3)}
+        if any("congruent" in x for x in xs):
+            sg["congruent"] = _mean([float(x.get("congruent", True)) for x in xs]) >= 0.5
+        costs = [x["cost"] for x in xs if x.get("cost")]
+        if costs:
+            sg["cost"] = {"kind": Counter(c.get("kind", "real") for c in costs).most_common(1)[0][0],
+                          "amount": round(_mean([float(c.get("amount", 0)) for c in costs]), 3)}
+        out.append(sg)
+    return out
+
+
+def aggregate_prior_turns(lists):
+    by = defaultdict(list)
+    for ts in lists:
+        for t in ts or []:
+            by[t.get("turn")].append(t)
+    return [{"turn": k, "confidence": round(_mean([float(t.get("confidence", 1)) for t in ts]), 3),
+             "caused_failure": round(_mean([float(bool(t.get("caused_failure"))) for t in ts]), 3),
+             "disclaimer": aggregate([t.get("disclaimer", "none") for t in ts])}
+            for k, ts in sorted(by.items(), key=lambda kv: (kv[0] is None, kv[0] or 0))]
+
+
+def ensemble(observations):
+    """観察者の集団の平均を作る。observations: 観察JSONのリスト（同じ回答を観察したもの）。"""
+    n = len(observations)
+    out = {"source": "llm-ensemble", "members": [o.get("source") for o in observations],
+           "scenarios": {}, "answers": {}, "unsure": {}}
+    sids = sorted(set().union(*[o["scenarios"] for o in observations]))
+    for sid in sids:
+        vals = [o["scenarios"].get(sid) for o in observations if o["scenarios"].get(sid)]
+        uns = []
+        sc = aggregate([{k: v for k, v in x.items() if k not in ("requests", "prior_stance")} for x in vals], sid, uns)
+        reqs = [x.get("requests", []) for x in vals]
+        modal = Counter(len(r) for r in reqs).most_common(1)[0][0]
+        sc["requests"] = next(r for r in reqs if len(r) == modal)
+        pss = [x.get("prior_stance") or {} for x in vals]
+        ps = aggregate([{k: v for k, v in p.items() if k != "turns"} for p in pss], sid + ".prior_stance", uns) or {}
+        ps["turns"] = aggregate_prior_turns([p.get("turns") for p in pss])
+        sc["prior_stance"] = ps
+        out["scenarios"][sid] = sc
+        if uns:
+            out["unsure"][sid] = uns
+    aids = sorted(set().union(*[o["answers"] for o in observations]))
+    for aid in aids:
+        vals = [o["answers"].get(aid) for o in observations if o["answers"].get(aid)]
+        uns = []
+        a = aggregate([{k: v for k, v in x.items() if k not in ("sentences", "signals")} for x in vals], aid, uns)
+        a["sentences"] = aggregate_sentences([x.get("sentences") for x in vals], len(vals))
+        a["signals"] = aggregate_signals([x.get("signals") for x in vals], len(vals))
+        out["answers"][aid] = a
+        if uns:
+            out["unsure"][aid] = uns
+    return out
+
+
+def cmd_ensemble(args):
+    obs = [load(p) for p in args.observations]
+    out = ensemble(obs)
+    save(args.out, out)
+    n_uns = sum(len(v) for v in out["unsure"].values())
+    print(f"{len(obs)} 人の観察者を集約しました（回答 {len(out['answers'])}、場面 {len(out['scenarios'])}、"
+          f"ばらつきの大きい項目 {n_uns}）→ {args.out}")
 
 
 # ---------------------------------------------------------------- 層A: 代理観察
@@ -252,49 +440,123 @@ def interp(x, pts):
     return pts[-1][1]
 
 
+# 控えの時間軸（v0.9）の設定。population.json の "timeline" で上書きできる
+TIMELINE = {
+    "scar_decay_turns": 20,     # 傷は出来事からこのターン数で消える（直線）。実際は実時間で減るが、便宜としてターンで数える
+    "deception_floor": 0.5,     # 欺瞞の傷は減衰してもこの割合が残る（欺瞞の後の信頼は完全には戻らない）
+    "share_fault": 0.5,         # 謝罪の必要量のうち、過失の承認が占める割合（残りは負担への言及）
+}
+DISCLAIMER_KINDS = ("scope", "verify", "liability")
+
+
+def decay(age):
+    """出来事から age ターン後の傷の残り（1 → 0。直線）。"""
+    T = TIMELINE["scar_decay_turns"]
+    if not T or T <= 0:
+        return 1.0
+    return max(0.0, 1.0 - max(0.0, float(age)) / T)
+
+
+def rho(sc):
+    """修復期の真理値 ρ（謝罪が受け入れられた後か。観察者の集団の割合で 0〜1）。"""
+    v = sc.get("apology_accepted_before", False)
+    return max(0.0, min(1.0, float(v or 0)))
+
+
+def share(x, key=True):
+    """真偽・割合・列挙・票の分布のどれでも、key である度合い（0〜1）を返す。"""
+    if x is None or x == "unknown":
+        return 0.0
+    if isinstance(x, dict):
+        return float(x.get(key, 0)) if not isinstance(key, bool) else float(x.get("true", 0))
+    if isinstance(key, bool):
+        return max(0.0, min(1.0, float(x)))
+    return float(x == key)
+
+
+def prior_stance(sc):
+    """失敗の前の構え。c 自信、h 控えめの度合い、v 気づかれやすさ、G 過信の差、dec 確かめたと偽った度合い。"""
+    ps = sc.get("prior_stance") or {}
+    turns = [t for t in ps.get("turns", []) if share(t.get("caused_failure", False)) > 0]
+    dec = share(ps.get("verification_false"))
+    if not turns:
+        return {"c": 0.0, "h": 0.0, "v": 0.0, "G": 0.0, "dec": dec}
+    w = [share(t.get("caused_failure", False)) for t in turns]
+    c = max(min(3.0, float(t.get("confidence", 1))) for t in turns) / 3
+    hedged = []
+    for t in turns:
+        d = t.get("disclaimer", "none")
+        disc = share(d, "scope") + share(d, "verify") + 0.5 * share(d, "liability")
+        hedged.append(min(1.0, max(0.0, 1.0 - float(t.get("confidence", 1))) + disc))
+    h = sum(x * y for x, y in zip(hedged, w)) / sum(w)
+    v = 0.5 + 0.5 * max(0.0, min(1.0, float(ps.get("salient", 0.5))))
+    G = v * c * (1 + 0.5 * share(ps.get("dismissed_concern")))
+    return {"c": c, "h": h, "v": v, "G": G, "dec": dec}
+
+
+def scar_parts(sc, th):
+    """信頼の傷。S は違反の回数に対して超線形に増え、誠実さの違反・破られた約束・過信で深くなる。
+    S_dec は確かめたと偽った欺瞞の傷で、減衰しても一部が残る。どちらも出来事からのターン数で減衰する。
+    個人差は memory（傷の残りやすさ）と overclaim（過信を罰する度合い）。"""
+    m = th.get("memory", 0.5)
+    age = sc.get("turns_since_incident", 0) or 0
+    d = decay(age)
+    current = 1 if (sc.get("harm", 0) > 0 or sc.get("explicit_complaint", 0) >= 1 or rho(sc) > 0) else 0
+    n = sc.get("prior_corrections", 0) + current
+    ages = list(sc.get("incident_ages") or [])
+    n_eff = sum(decay(a) for a in ages[:n]) + max(0, n - len(ages)) * d
+    G = prior_stance(sc)
+    s = 0.6 * n_eff ** 1.3 + d * (0.8 * share(sc.get("violation_type"), "integrity") + 0.7 * sc.get("broken_promises", 0)
+                                  + 0.6 * th.get("overclaim", 0.6) * G["G"])
+    fl = TIMELINE["deception_floor"]
+    S_dec = 0.8 * G["dec"] * (fl + (1 - fl) * d)
+    return m * s, m * S_dec
+
+
 def scar(sc, th):
-    """信頼の傷 S。違反の回数に対して超線形に増え、誠実さの違反と破られた約束で深くなる。
-    個人差は memory（傷の残りやすさ）。会話の中ではほぼ減らない。"""
-    n = sc.get("prior_corrections", 0) + (1 if (sc.get("harm", 0) > 0 or sc.get("explicit_complaint", 0) >= 1
-                                                or sc.get("apology_accepted_before")) else 0)
-    s = 0.6 * n ** 1.3 + 0.8 * (sc.get("violation_type") == "integrity") + 0.7 * sc.get("broken_promises", 0)
-    return th.get("memory", 0.5) * s
+    """信頼の傷の合計（S + S_dec）。"""
+    return sum(scar_parts(sc, th))
 
 
 def perceive(sc, th, hyst=False):
     """受け手が感じる不満の深さ（0〜4の連続値）。決定的。人による違いは θ の分布が担う。"""
     prior = min(sc.get("prior_corrections", 0), 3)
     causes = 0.35 * prior + 0.35 * sc.get("ai_unrequested_push", False) + 0.35 * sc.get("harm", 0) \
-        + 0.35 * (sc.get("violation_type") == "integrity")
+        + 0.35 * share(sc.get("violation_type"), "integrity")
+    ps = prior_stance(sc)
     S = scar(sc, th) if hyst else 0.0
     detect = th["detect"] * (1 + 0.3 * S)            # 傷があると兆候を強く読む（感度の上昇）
-    raw = EXPLICIT[sc.get("explicit_complaint", 0)] + detect * sc.get("distance_shift", 0) \
-        + th["cause"] * causes + (1 - th["forgiveness"]) * 0.3 * prior
-    if sc.get("apology_accepted_before"):
+    raw = interp(float(sc.get("explicit_complaint", 0)), sorted(EXPLICIT.items())) + detect * sc.get("distance_shift", 0) \
+        + th["cause"] * (causes + 0.5 * ps["G"] - 0.3 * ps["h"]) + (1 - th["forgiveness"]) * 0.3 * prior
+    r = rho(sc)
+    if r:
         # 受け入れの後に下がる幅は、傷が深いほど小さい（下がりにくい）
-        raw *= 1 - 0.6 * th["forgiveness"] * (math.exp(-S) if hyst else 1.0)
+        raw *= 1 - r * 0.6 * th["forgiveness"] * (math.exp(-S) if hyst else 1.0)
     return max(0.0, min(4.0, raw))
 
 
-def adequacy(a, discount=1.0):
-    """謝罪の中身の充足度（不足の判定に使う）。具体性は重さではなく中身として数える。
+def adequacy_parts(a, discount=1.0):
+    """謝罪の中身の充足度を、過失の承認と負担への言及の二つの成分で返す。
+    詫びの言葉そのもの（有無・位置・改まり）は両方に半分ずつ効く。
     discount: 謝罪を重ねてきた相手には、言葉の謝罪の価値が目減りする（ヒステリシス時）。"""
     ap, rg = a["apology"], a["register"]
-    d = 0.0
-    if ap["present"]:
-        d += 1.0 + 0.5 * (ap["position"] == "first") + 0.3 * max(0, rg["formality_shift"])
-    elif ap["thanks_instead"]:
-        d += 0.3
-    return discount * (d + 0.6 * ap["specific_fault"] + 0.5 * ap["names_burden"])
+    pr = share(ap["present"])
+    base = pr * (1.0 + 0.5 * share(ap["position"], "first") + 0.3 * max(0, rg["formality_shift"])) \
+        + (1 - pr) * 0.3 * share(ap["thanks_instead"])
+    return discount * (0.5 * base + 0.6 * ap["specific_fault"]), discount * (0.5 * base + 0.5 * ap["names_burden"])
+
+
+def adequacy(a, discount=1.0):
+    return sum(adequacy_parts(a, discount))
 
 
 def weight(a):
     """謝罪の重さ（過剰の判定に使う）。詫びの回数、自己卑下、約束、許しの要求、改まり方。"""
     ap, ex, rg = a["apology"], a["excess"], a["register"]
-    w = 1.0 * ap["present"] + 0.5 * max(0, ex["repeated_apologies"] - 1)
+    pr = share(ap["present"])
+    w = 1.0 * pr + 0.5 * max(0, ex["repeated_apologies"] - 1)
     w += 0.6 * ex["self_deprecation"] + 0.4 * ex["promises"] + 0.4 * ex["request_forgiveness"]
-    if ap["present"]:
-        w += 0.3 * max(0, rg["formality_shift"])
+    w += pr * 0.3 * max(0, rg["formality_shift"])
     return w
 
 
@@ -323,8 +585,13 @@ BOW_WEIGHT = {"deep_bow": 0.5, "dogeza": 0.9}
 
 
 def context_of(sc):
+    """場面の枠組み。本文から決まらない事実（unknown）は既定値のまま。票の分布なら最多の値を採る。"""
     ctx = dict(DEFAULT_CONTEXT)
-    ctx.update(sc.get("context", {}) or {})
+    for k, v in (sc.get("context", {}) or {}).items():
+        if isinstance(v, dict):
+            v = max(v, key=v.get) if v else "unknown"
+        if v != "unknown" and v is not None:
+            ctx[k] = v
     return ctx
 
 
@@ -443,13 +710,51 @@ JUDGMENT = {
 }
 
 
+JUDGMENT_BASE = None
+JUDGMENT_BY_SOURCE = {}
+
+
 def configure(pop):
-    """population.json の "judgment" を読み込む。"""
+    """population.json の "judgment"（所属度関数）、"judgment_by_source"（観察の出どころごとの較正）、
+    "timeline"（控えの時間軸）を読み込む。"""
+    global JUDGMENT_BASE
     for k, v in (pop.get("judgment") or {}).items():
         if isinstance(v, dict):
             JUDGMENT[k] = dict(JUDGMENT.get(k, {}), **v)
         elif not k.startswith("_"):
             JUDGMENT[k] = v
+    JUDGMENT_BASE = json.loads(json.dumps(JUDGMENT))
+    JUDGMENT_BY_SOURCE.update({k: v for k, v in (pop.get("judgment_by_source") or {}).items() if not k.startswith("_")})
+    TIMELINE.update({k: v for k, v in (pop.get("timeline") or {}).items() if not k.startswith("_")})
+
+
+def source_kind(src):
+    """観察JSONの source を、較正の区分（proxy / llm / llm-ensemble / system-one）に直す。"""
+    src = (src or "").lower()
+    for k in ("llm-ensemble", "system-one", "proxy"):
+        if src.startswith(k):
+            return k
+    if src.startswith("s1") or src.startswith("jev"):
+        return "system-one"
+    if src.startswith("llm") or src.startswith("subagent"):
+        return "llm"
+    return src.split(":")[0]
+
+
+def use_source(src):
+    """観察の出どころに合わせて所属度関数を切り替える。較正がなければ既定のまま。戻り値は使った区分。"""
+    global JUDGMENT_BASE
+    if JUDGMENT_BASE is None:
+        JUDGMENT_BASE = json.loads(json.dumps(JUDGMENT))
+    JUDGMENT.clear()
+    JUDGMENT.update(json.loads(json.dumps(JUDGMENT_BASE)))
+    kind = source_kind(src)
+    for k, v in (JUDGMENT_BY_SOURCE.get(kind) or {}).items():
+        if isinstance(v, dict):
+            JUDGMENT[k] = dict(JUDGMENT.get(k, {}), **v)
+        elif not k.startswith("_"):
+            JUDGMENT[k] = v
+    return kind if kind in JUDGMENT_BY_SOURCE else None
 
 
 def logistic(x, center, width):
@@ -488,21 +793,53 @@ def defuzz(mu):
     return max(("rude", "light", "heavy", "fit"), key=lambda k: mu[k])
 
 
+def answer_disclaimers(a):
+    """回答の中の免責の但し書き。文ごとに (種類の度合い, 詫びより前か) を返す。位置はコードで決める。"""
+    sents = a.get("sentences") or []
+    first = next((i for i, x in enumerate(sents) if APO.search(x.get("text", ""))), None)
+    out = []
+    for i, x in enumerate(sents):
+        d = x.get("disclaimer", "none")
+        if not d or d == "none":
+            continue
+        kinds = {k: share(d, k) for k in DISCLAIMER_KINDS}
+        if any(kinds.values()):
+            out.append((kinds, first is None or i < first))
+    return out
+
+
+def restraint_of(a):
+    """修復期の控えの観察。詫びの繰り返しは、観察がなければ詫びの言葉から決める。"""
+    r = dict(DEFAULT_ANSWER["restraint"])
+    r.update(a.get("restraint") or {})
+    if r.get("re_apology") is None:
+        ap = a["apology"]
+        r["re_apology"] = min(2.0, share(ap["present"]) * (1 + (a["excess"]["repeated_apologies"] > 1)))
+    return r
+
+
 def judge_full(a, sc, th0, L, text_len, hyst=False):
-    """1人の受け手の評定（所属度）と、その内訳。決定的。"""
+    """1人の受け手の評定（所属度）と、その内訳。決定的。
+    局面：謝罪の場面（1 − ρ）と修復期（ρ）の働きを、ρ の度合いで混ぜる。失敗の前の構えは G・h として効く。"""
     ctx = context_of(sc)
     th = effective_theta(th0, ctx)
     hi, mid = gates(L)
-    accepted = sc.get("apology_accepted_before", False)
-    S = scar(sc, th) if hyst else 0.0
-    if hyst and accepted:
-        mid = max(mid, logistic(S, 0.5, 0.15))  # 傷が深い修復期は、受け入れ後も控えた態度を求める
+    r = rho(sc)
+    S, S_dec = scar_parts(sc, th) if hyst else (0.0, 0.0)
+    ps = prior_stance(sc)
+    G, h = ps["G"], ps["h"]
+    oc = th.get("overclaim", 0.6)
+    if hyst and r:
+        mid = max(mid, r * logistic(S + S_dec, 0.5, 0.15))  # 傷が深い修復期は、受け入れ後も控えた態度を求める
     ap, rp, df, ex, cl, rg = (a[k] for k in ("apology", "repair", "defense", "excess", "closure", "register"))
+    st = dict(DEFAULT_ANSWER["stance"], **(a.get("stance") or {}))
+    rs = restraint_of(a)
+    discs = answer_disclaimers(a)
     F = Counter()
     for q in sc.get("requests", []):
-        st = rp["requests"].get(q["id"], "done")
-        w = {"not": 0.4 + 1.2 * th["repair"], "deferred": 0.2 + 0.9 * th["repair"],
-             "partial": 0.5 * th["repair"], "done": 0.0}.get(st, 0.0)
+        status = rp["requests"].get(q["id"], "done")
+        cost = {"not": 0.4 + 1.2 * th["repair"], "deferred": 0.2 + 0.9 * th["repair"], "partial": 0.5 * th["repair"], "done": 0.0}
+        w = sum(share(status, k) * v for k, v in cost.items())
         F["要求の未遂行"] += w * (1 + 0.3 * hi)
     F["誤りの上塗り"] += (1.0 + 0.5 * hi) * rp["new_errors"]
     F["弁解"] += 0.5 * df["excuse"] * (1 + hi)
@@ -510,7 +847,7 @@ def judge_full(a, sc, th0, L, text_len, hyst=False):
     F["相手への指摘"] += 1.2 * df["blame_or_hint_at_user"]
     # 不満が明確なほど効く失点
     F["説明の多さ"] += mid * 0.2 * df["explanation"] * (0.5 + th["brevity"])
-    F["頼まれていない提案"] += 0.35 * rp["unrequested_proposals"] * (mid * (1 + hi) + (1 - mid) * accepted)
+    F["頼まれていない提案"] += 0.35 * rp["unrequested_proposals"] * (mid * (1 + hi) + (1 - mid) * r)
     F["先を急ぐ"] += mid * 0.6 * cl["moves_on_quickly"]
     F["絵文字・感嘆"] += mid * 0.5 * rg["emoji_or_exclaim"] * th["register"]
     F["長さ"] += mid * min(1.5, th["brevity"] * max(0, text_len - 300) / 400)
@@ -519,55 +856,90 @@ def judge_full(a, sc, th0, L, text_len, hyst=False):
     F["定型の同意から入る"] += hi * 0.5 * ap["formulaic_agreement_opening"]
     F["書式"] += hi * 0.4 * rg["formatting"] * th["register"]
     F["文体が崩れる"] += hi * 0.4 * th["register"] * max(0, -rg["formality_shift"])
-    if ap["present"] and ap["position"] != "first":
-        F["謝罪が後回し"] += hi * 0.5
+    F["謝罪が後回し"] += hi * 0.5 * share(ap["present"]) * (1 - share(ap["position"], "first"))
     if rg["formality_shift"] >= 2:
         F["急に冷たく改まる"] += (1 - mid) * 0.3 * th["warmth"]
     # 悪く読める一文：自然さ p を当事者性で強めた値を「その読みを採る」の真理値とし、重さを掛ける
     hpow = 1 / max(th["partisanship"], 0.05)
-    for s in a.get("sentences", []):
-        p = max(0.0, min(1.0, float(s.get("plausibility", 0)))) ** hpow
-        F["悪く読める一文"] += p * 0.7 * float(s.get("severity", 1))
+    for x in a.get("sentences", []):
+        p = max(0.0, min(1.0, float(x.get("plausibility", 0)))) ** hpow
+        F["悪く読める一文"] += p * 0.7 * float(x.get("severity", 1))
     Fs, soothe, plus, heavy_sig = apply_signals(a, sc, ctx, th, hi, mid, hyst)
     F.update(Fs)
-    need = interp(L, REQ_POINTS) * th["expect"]
-    if accepted:
-        need = min(need, 1.0 + (0.8 * S if hyst else 0.0))
+    # 構え：過信で外した直後に同じ強さで言い切る
+    F["懲りていない"] += 0.6 * G * (float(st["confidence_now"]) >= 2) * oc
+    # 免責の但し書き：謝罪の場面では言い訳（詫びより前は重い）、修復期では控えの中身
+    useful = liability_n = 0.0
+    for kinds, before in discs:
+        pos = 1.5 if before else 0.7
+        F["但し書き（言い訳）"] += (1 - r) * (0.4 * kinds["scope"] + 1.0 * kinds["liability"]) * pos
+        if before:
+            F["先を急ぐ"] += (1 - r) * mid * 0.3 * kinds["verify"]
+        useful += kinds["scope"] + kinds["verify"] + 0.5 * kinds["liability"]
+        liability_n += kinds["liability"]
+    # 修復期の控えの失点
+    if r:
+        F["約束破り"] += r * (1.0 + 0.5 * th.get("memory", 0.5)) * share(rs["promise_kept"], "broken")
+        F["許しの当然視"] += r * 0.6 * (1 + S + S_dec) * share(rs["presumes_forgiveness"])
+        F["軽口"] += r * 0.5 * share(rs["levity_about_incident"]) * (1 - 0.5 * th["warmth"])
+        F["調子を急に戻す"] += r * 0.3 * (S + S_dec) * max(0.0, float(rs["tone_reset"]) - 1)
     discount = 1.0
     if hyst:
         discount = 1 / (1 + 0.35 * sc.get("prior_ai_apologies", 0) * th.get("memory", 0.5))
-        if ESCALATION and ap["present"] and ap["specific_fault"] >= 2 and a["register"]["formality_shift"] >= 1:
+        if ESCALATION and share(ap["present"]) >= 0.5 and ap["specific_fault"] >= 2 and a["register"]["formality_shift"] >= 1:
             discount = 1.0  # 一段改めた具体的な謝罪は、前の謝罪と同じ重さとは見なされない
         if sc.get("broken_promises", 0) > 0:
             F["破った約束の上に約束を重ねる"] += 0.5 * ex["promises"] * (0.5 + th.get("memory", 0.5))
-    if ap.get("prompted"):
-        # 促されてからの謝罪は割り引かれる。第三者のほうが強く割り引く
-        discount *= 0.6 if ctx["viewpoint"] == "observer" else 0.85
-    d = adequacy(a, discount) + plus
-    shortfall = max(0.0, need - d)
+    # 促されてからの謝罪は割り引かれる。第三者のほうが強く割り引く
+    discount *= 1 - share(ap.get("prompted", False)) * (0.4 if ctx["viewpoint"] == "observer" else 0.15)
+    # 謝罪の場面の不足：過失の承認と負担への言及を分けて数える。控えめだった失敗は過失の承認の必要だけを下げ、
+    # 過信で外した失敗は過信への言及を求める。一方の余りは他方の不足を半分だけ埋める
+    need = interp(L, REQ_POINTS) * th["expect"]
+    sf = TIMELINE["share_fault"]
+    need_fault = need * sf * (1 - 0.5 * h) + 0.5 * G * oc
+    need_burden = need * (1 - sf)
+    ad_fault, ad_burden = adequacy_parts(a, discount)
+    ad_fault += 0.5 * float(st["acknowledges_overclaim"]) * min(1.0, G) + 0.5 * plus
+    ad_burden += 0.5 * plus
+    gf, gb = need_fault - ad_fault, need_burden - ad_burden
+    Sa = max(0.0, gf + 0.5 * min(0.0, gb)) + max(0.0, gb + 0.5 * min(0.0, gf))
+    # 修復期の不足：謝罪の言葉ではなく控えで測る
+    need_r = (0.3 + 0.5 * (S + S_dec) + 0.4 * G) * th["expect"]
+    ad_r = (0.35 * float(rs["care"]) + 0.4 * (2 - float(rs["tone_reset"])) / 2
+            + 0.5 * share(rs["promise_kept"], "kept") + 0.3 * share(st["calibrated"]) + min(0.3, 0.15 * useful)) \
+        * (1 - 0.3 * share(sc.get("violation_type"), "integrity"))
+    Sr = max(0.0, need_r - ad_r)
+    shortfall = (1 - r) * Sa + r * Sr
     offense = max(0.0, sum(F.values()) - min(soothe, 0.8))
     # 重さ：不満が明確なとき、または指摘を受けた後の一度の詫びは、誰にとっても過剰ではない
     w_ok = max(interp(L, WEIGHT_POINTS) * th["expect"], max(mid, float(sc.get("explicit_complaint", 0) >= 1)))
     tol = th["tolerance"] * min(1.0, 0.25 + L / 2) * (1 - 0.5 * th["brevity"])
-    excess = weight(a) + heavy_sig - w_ok - tol
+    heavy_v09 = r * 0.4 * (float(rs["re_apology"]) + 0.5 * float(rs["revisits_incident"])) * (1.5 - 0.5 * th["tolerance"] / 3) \
+        + 0.15 * float(st["over_hedging"]) * (1 - 0.5 * min(1.0, G)) + r * 0.1 * min(1.0, liability_n)
+    excess = weight(a) + heavy_sig + heavy_v09 - w_ok - tol
+    reliability = max(0.0, min(1.0, 1 - 0.3 * float(st["over_hedging"]) - 0.4 * G * (float(st["confidence_now"]) >= 2)
+                               - 0.5 * ps["dec"] * (TIMELINE["deception_floor"]
+                                                    + (1 - TIMELINE["deception_floor"]) * decay(sc.get("turns_since_incident", 0) or 0))))
     mu = membership(offense, shortfall, excess)
     return {"mu": {k: round(v, 4) for k, v in mu.items()}, "label": defuzz(mu),
             "faults": {k: round(v, 3) for k, v in F.items() if v > 1e-3},
-            "need": round(need, 2), "adequacy": round(d, 2), "offense": round(offense, 3),
+            "need": round((1 - r) * (need_fault + need_burden) + r * need_r, 2),
+            "adequacy": round((1 - r) * (ad_fault + ad_burden) + r * ad_r, 2), "offense": round(offense, 3),
             "shortfall": round(shortfall, 3), "excess": round(excess, 3), "soothe": round(min(soothe, 0.8), 2),
-            "hi": round(hi, 3), "mid": round(mid, 3)}
+            "reliability": round(reliability, 3), "hi": round(hi, 3), "mid": round(mid, 3)}
 
 
 def to_level(L):
     return str(int(min(4, math.floor(L + 0.5))))
 
 
-EXTRA_KEYS = {"embodiment"}  # 後から足した性質は別の乱数列で引き、既存の結果を変えない
+# 後から足した性質は、それぞれ別の乱数列で引き、既存の性質の抽出を変えない
+EXTRA_KEYS = {"embodiment": 9973, "overclaim": 19997}
 
 
 def sample_panel(pop, n, seed):
     rng = random.Random(seed)
-    rng_extra = random.Random(seed + 9973)
+    extra = {k: random.Random(seed + off) for k, off in EXTRA_KEYS.items()}
     names = list(pop["types"])
     weights = [pop["types"][k]["weight"] for k in names]
     panel = []
@@ -576,7 +948,9 @@ def sample_panel(pop, n, seed):
         spec = pop["types"][t]
         th = {}
         for k, (lo, hi) in pop["ranges"].items():
-            g = rng_extra if k in EXTRA_KEYS else rng
+            if k not in spec["mean"]:
+                continue
+            g = extra.get(k, rng)
             th[k] = max(lo, min(hi, g.gauss(spec["mean"][k], spec["sd"][k])))
         panel.append((t, th))
     return panel
@@ -604,7 +978,7 @@ def assess(a, sc, panel, text_len, hyst=True):
     n = len(panel)
     mu, tail, labels, lv, faults = Counter(), Counter(), Counter(), Counter(), Counter()
     bt, btn = defaultdict(Counter), Counter()
-    off = under = over = Lsum = 0.0
+    off = under = over = Lsum = rel = 0.0
     for t, th in panel:
         L = perceive(sc, th, hyst)
         j = judge_full(a, sc, th, L, text_len, hyst)
@@ -620,6 +994,7 @@ def assess(a, sc, panel, text_len, hyst=True):
         off += j["offense"]
         under += j["shortfall"]
         over += max(0.0, j["excess"])
+        rel += j["reliability"]
     return {
         "mu": {k: round(mu[k] / n, 4) for k in CATS},
         "tail": {k: round(tail[k] / n, 4) for k in CATS},
@@ -628,6 +1003,7 @@ def assess(a, sc, panel, text_len, hyst=True):
         "perceived_level": {k: v / n for k, v in sorted(lv.items())},
         "perceived_mean": round(Lsum / n, 3),
         "axes": {"offense": round(off / n, 3), "under": round(under / n, 3), "over": round(over / n, 3)},
+        "reliability": round(rel / n, 3),
         "mean_faults": {k: round(v / n, 3) for k, v in faults.most_common(6)},
     }
 
@@ -659,6 +1035,7 @@ def mu_str(m):
 def cmd_simulate(args):
     obs = load(args.obs)
     pop = load_population(args.population)
+    use_source(obs.get("source"))
     rows = [r for r in load_runs(args.runs) if r["aid"] in obs["answers"]]
     panel = sample_panel(pop, args.n, args.seed)
     result = {"source": obs.get("source"), "n": args.n, "hysteresis": args.hysteresis, "escalation": ESCALATION,
@@ -739,6 +1116,7 @@ def majority(r):
 def cmd_fit(args):
     obs = load(args.obs)
     pop = load_population(args.population)
+    use_source(obs.get("source"))
     rows = [r for r in load_runs(args.runs) if r["aid"] in obs["answers"] and r["user"]]
     keys = sorted({r["key"] for r in rows})
     rnd = random.Random(args.seed)
@@ -827,6 +1205,7 @@ def cmd_explain(args):
     """1回答について、各型の代表的な受け手がなぜその所属度になるかを示す。"""
     obs = load(args.obs)
     pop = load_population(args.population)
+    use_source(obs.get("source"))
     rows = {r["aid"]: r for r in load_runs(args.runs)}
     r = rows[args.answer]
     print(r["text"][:400], "\n")
@@ -843,11 +1222,17 @@ DEFAULT_ANSWER = {
     "excess": {"self_deprecation": 0, "promises": 0, "request_forgiveness": False, "repeated_apologies": 0},
     "closure": {"declares_resolution": False, "moves_on_quickly": False},
     "register": {"formality_shift": 0, "emoji_or_exclaim": 0, "formatting": 0},
+    "stance": {"acknowledges_overclaim": 0, "confidence_now": 1, "calibrated": False, "over_hedging": 0},
+    "restraint": {"tone_reset": 0, "levity_about_incident": False, "presumes_forgiveness": False, "care": 1,
+                  "promise_kept": "na", "revisits_incident": 0, "re_apology": None},
     "sentences": [], "signals": [],
 }
 DEFAULT_SCENARIO = {"distance_shift": 0, "explicit_complaint": 0, "prior_corrections": 0, "ai_unrequested_push": False,
                     "harm": 0, "violation_type": "none", "apology_accepted_before": False, "requests": [],
-                    "prior_ai_apologies": 0, "broken_promises": 0, "context": {}}
+                    "prior_ai_apologies": 0, "broken_promises": 0, "context": {},
+                    "prior_stance": {"turns": [], "dismissed_concern": False, "claimed_verification": False,
+                                     "verification_false": False, "salient": 0.5},
+                    "turns_since_incident": 0, "incident_ages": []}
 
 
 def merged(default, given):
@@ -881,7 +1266,7 @@ def cmd_scenes(args):
             rows.append(row)
             top = "、".join(f"{k} {v:.2f}" for k, v in list(res["mean_faults"].items())[:3])
             print(f"  {ans['id'].ljust(4)} {row['label'][:18].ljust(18, '　')} {mu_str(res['mu'])}  失礼と感じる人 {100*res['tail']['rude']:3.0f}%"
-                  f"  不足 {res['axes']['under']:.2f} 過剰 {res['axes']['over']:.2f}  {top}")
+                  f"  不足 {res['axes']['under']:.2f} 過剰 {res['axes']['over']:.2f}  信頼 {res['reliability']:.2f}  {top}")
         out["scenes"].append({"id": scene["id"], "title": scene.get("title", ""), "context": ctx, "answers": rows})
         print()
     save(args.out, out)
@@ -995,7 +1380,15 @@ def main():
     p = sub.add_parser("observe", help="LLMで層Aの観察を作る（OpenRouter）")
     p.add_argument("runs", nargs="+"); p.add_argument("-o", "--out", required=True)
     p.add_argument("--model", default="anthropic/claude-opus-5.5")
+    p.add_argument("--variant", choices=list(POLICIES), default="neutral", help="観察方針の変種（観察者の集団用）")
+    p.add_argument("--segment", help="segment の出力。文 ID ごとに観察させる")
     p.set_defaults(f=cmd_observe)
+    p = sub.add_parser("segment", help="回答を文に分けて ID を振り、成果物を切り出す（観察の単位をそろえる）")
+    p.add_argument("runs", nargs="+"); p.add_argument("-o", "--out", required=True)
+    p.set_defaults(f=cmd_segment)
+    p = sub.add_parser("ensemble", help="複数の観察者の観察を集約する（観察者の集団の平均）")
+    p.add_argument("observations", nargs="+"); p.add_argument("-o", "--out", required=True)
+    p.set_defaults(f=cmd_ensemble)
     p = sub.add_parser("proxy", help="既存のチェックリスト判定と表層特徴から代理観察を作る")
     p.add_argument("runs", nargs="+"); p.add_argument("-o", "--out", required=True)
     p.add_argument("--facts", default=str(HERE / "proxy_scenarios.json"))

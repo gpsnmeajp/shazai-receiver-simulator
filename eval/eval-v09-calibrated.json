@@ -1,0 +1,291 @@
+{
+ "n_answers": 192,
+ "n_scenes": 16,
+ "betas": [
+  1,
+  2,
+  3,
+  4,
+  6,
+  8,
+  12,
+  16,
+  24,
+  32
+ ],
+ "calibrate": true,
+ "evaluators": {
+  "v09-proxy": {
+   "obs": "out/obs-proxy.json",
+   "sim": "current",
+   "source": "proxy:checklist+surface",
+   "n": 192,
+   "oof": {
+    "brier": 0.5228740170446403,
+    "logloss": 0.9979808752544614,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.48461149187489316,
+    "logloss": 0.919300232330949,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 3,
+    "rude_center": 1.5,
+    "light_center": 1.0
+   },
+   "fold_choice": [
+    {
+     "beta": 3,
+     "rude_center": 1.5,
+     "light_center": 1.0
+    },
+    {
+     "beta": 3,
+     "rude_center": 2.1,
+     "light_center": 0.7
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.2,
+     "light_center": 2.2
+    },
+    {
+     "beta": 3,
+     "rude_center": 1.5,
+     "light_center": 1.0
+    }
+   ],
+   "labels_only": {
+    "brier": 0.5801563333333334,
+    "logloss": 1.8303396760648043,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.318,
+    "agree": 0.656,
+    "closeness": 0.77
+   },
+   "repair": {
+    "brier": 0.3855890185814986,
+    "logloss": 0.7739239287557332,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.6450170793241884,
+     "logloss": 1.19034248525512,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.49950528091792745,
+     "logloss": 0.9721023873320019,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.4240996908918052,
+     "logloss": 0.8314977531762625,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.3877,
+    0.6437
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.3028,
+     "ci": [
+      0.1417,
+      0.4831
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.2725,
+     "ci": [
+      0.0974,
+      0.3947
+     ]
+    },
+    "周辺分布": {
+     "value": 0.0404,
+     "ci": [
+      -0.1048,
+      0.1866
+     ]
+    },
+    "条件だけ": {
+     "value": 0.0537,
+     "ci": [
+      -0.0708,
+      0.1885
+     ]
+    }
+   }
+  },
+  "v09-subagent": {
+   "obs": "eval/obs-subagent.json",
+   "sim": "current",
+   "source": "subagent:observe_prompt.md",
+   "n": 192,
+   "oof": {
+    "brier": 0.47105743943662154,
+    "logloss": 0.9043974022124432,
+    "n": 192
+   },
+   "insample": {
+    "brier": 0.44686599054507553,
+    "logloss": 0.8599610166413888,
+    "n": 192
+   },
+   "insample_choice": {
+    "beta": 3,
+    "rude_center": 2.4,
+    "light_center": 1.6
+   },
+   "fold_choice": [
+    {
+     "beta": 3,
+     "rude_center": 2.4,
+     "light_center": 1.6
+    },
+    {
+     "beta": 3,
+     "rude_center": 3.0,
+     "light_center": 1.6
+    },
+    {
+     "beta": 3,
+     "rude_center": 2.1,
+     "light_center": 1.9
+    },
+    {
+     "beta": 3,
+     "rude_center": 2.4,
+     "light_center": 1.6
+    }
+   ],
+   "labels_only": {
+    "brier": 0.7296157499999999,
+    "logloss": 2.6048735485583943,
+    "n": 192
+   },
+   "descriptive": {
+    "kappa": 0.311,
+    "agree": 0.583,
+    "closeness": 0.734
+   },
+   "repair": {
+    "brier": 0.3678683053278749,
+    "logloss": 0.7215289059816477,
+    "n": 24
+   },
+   "by_cond": {
+    "baseline": {
+     "brier": 0.5070781039421102,
+     "logloss": 0.9407941183423905,
+     "n": 64
+    },
+    "japanese_posture": {
+     "brier": 0.4517868022348902,
+     "logloss": 0.8779656687542228,
+     "n": 64
+    },
+    "shazai_full": {
+     "brier": 0.4543074121328642,
+     "logloss": 0.8944324195407165,
+     "n": 64
+    }
+   },
+   "brier_ci": [
+    0.341,
+    0.5971
+   ],
+   "skill": {
+    "一様": {
+     "value": 0.3719,
+     "ci": [
+      0.2039,
+      0.5453
+     ]
+    },
+    "常に釣り合う": {
+     "value": 0.3446,
+     "ci": [
+      0.2583,
+      0.4186
+     ]
+    },
+    "周辺分布": {
+     "value": 0.1355,
+     "ci": [
+      0.0287,
+      0.2519
+     ]
+    },
+    "条件だけ": {
+     "value": 0.1475,
+     "ci": [
+      0.0197,
+      0.283
+     ]
+    }
+   }
+  }
+ },
+ "baselines": {
+  "一様": {
+   "brier": 0.75,
+   "logloss": 1.3862943611198906,
+   "n": 192,
+   "brier_ci": [
+    0.75,
+    0.75
+   ]
+  },
+  "常に釣り合う": {
+   "brier": 0.71875,
+   "logloss": 3.3099660711789407,
+   "n": 192,
+   "brier_ci": [
+    0.5,
+    0.9479
+   ]
+  },
+  "周辺分布": {
+   "brier": 0.5449154000125102,
+   "logloss": 0.9651259846438988,
+   "n": 192,
+   "brier_ci": [
+    0.4432,
+    0.6514
+   ]
+  },
+  "条件だけ": {
+   "brier": 0.5525333333333333,
+   "logloss": 1.0253995736439911,
+   "n": 192,
+   "brier_ci": [
+    0.4666,
+    0.6452
+   ]
+  }
+ },
+ "differences": {
+  "v09-proxy-v09-subagent": {
+   "value": 0.0518,
+   "ci": [
+    -0.0191,
+    0.1266
+   ]
+  },
+  "v09-proxy-v09-subagent:repair": {
+   "value": 0.0177,
+   "ci": [
+    0.0028,
+    0.0326
+   ]
+  }
+ }
+}

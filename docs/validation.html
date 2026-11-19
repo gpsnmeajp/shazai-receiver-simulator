@@ -50,6 +50,7 @@
 <main>
 <h1>検証結果と変更履歴</h1>
 <p class="lead">検証の数値と、版ごとの変更を記録する文書です。</p>
+<div class="callout"><svg class="icon"><use href="#i-alert"/></svg><p><b>v0.9（実装中）の結果は <a href="improvement.html#impl">v0.9 設計 13章</a>にあります。</b>修復期を控えで測るように直し、評価を真に適正なスコアリング規則（Brier、場面単位の交差検証）に改めました。サブエージェントの観察で Brier 0.589 → 0.543（修復期 0.721 → 0.404）、出どころごとの較正で 0.471 となり、「条件だけ」の基準（0.553）を区間つきで上回りました。このページの数値は v0.8 のものです。</p></div>
 <p class="note">設計の理由は <a href="design.html">設計</a>、仕組みは <a href="architecture.html">アーキテクチャ</a> を参照してください。</p>
 <ul class="toc">
 <li><a href="#data">1. 使っているデータ</a></li><li><a href="#results">2. 現在の結果</a></li><li><a href="#limits">3. 既知の限界</a></li><li><a href="#next">4. 次の検証</a></li><li><a href="#history">5. 変更履歴</a></li>

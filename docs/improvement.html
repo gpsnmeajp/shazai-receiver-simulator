@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>v0.9 改善の設計</title>
-<meta name="description" content="控えの時間軸モデル（失敗の前・謝罪の場面・修復期、免責の但し書き）、統計的に正当な評価、観察者の集団、較正、人間の評価キット。設計・未実装。">
+<meta name="description" content="控えの時間軸モデル（失敗の前・謝罪の場面・修復期、免責の但し書き、傷の減衰）、統計的に正当な評価、観察者の集団、較正、人間の評価キット。実装中。">
 <link rel="stylesheet" href="style.css">
 <style>
 .phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:1rem 0;position:relative}
@@ -53,9 +53,9 @@
 <main>
 <h1>v0.9 改善の設計</h1>
 <p class="lead">v0.8（ファジィ前提）の総合評価で見つかった問題を解き、受け手モデルを「時間の中の控え」として組み直すための設計です。</p>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p><b>状態：設計（未実装）。2026-11-19。</b>この HTML は参考用です。正本は Markdown 版 <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/IMPROVEMENT_V09.md">IMPROVEMENT_V09.md</a> です。評価の詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">EVALUATION.md</a>、設計原則は <a href="design.html">設計</a>、現行の仕組みは <a href="architecture.html">仕組み</a> を参照してください。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p><b>状態：実装中。2026-11-19。</b>実装した範囲と最初の結果は <a href="#impl">13章</a>。この HTML は参考用です。正本は Markdown 版 <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/IMPROVEMENT_V09.md">IMPROVEMENT_V09.md</a> です。評価の詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">EVALUATION.md</a>、設計原則は <a href="design.html">設計</a>、現行の仕組みは <a href="architecture.html">仕組み</a> を参照してください。</p></div>
 <ul class="toc">
-<li><a href="#summary">1. 要約</a></li><li><a href="#background">2. 背景</a></li><li><a href="#timeline">3. 控えの時間軸</a></li><li><a href="#disclaimer">3.5 免責の但し書き</a></li><li><a href="#model">3.7 受け手モデル</a></li><li><a href="#evidence">4. 根拠</a></li><li><a href="#metrics">5. 評価指標</a></li><li><a href="#ensemble">6. 観察者の集団</a></li><li><a href="#calib">7. 較正</a></li><li><a href="#kit">8. 評価キット</a></li><li><a href="#order">9. 順序</a></li><li><a href="#criteria">10. 採否</a></li><li><a href="#decisions">11. 決定記録</a></li><li><a href="#open">12. 未解決</a></li>
+<li><a href="#summary">1. 要約</a></li><li><a href="#background">2. 背景</a></li><li><a href="#timeline">3. 控えの時間軸</a></li><li><a href="#disclaimer">3.5 免責の但し書き</a></li><li><a href="#model">3.7 受け手モデル</a></li><li><a href="#decay">3.9 傷の減衰</a></li><li><a href="#evidence">4. 根拠</a></li><li><a href="#metrics">5. 評価指標</a></li><li><a href="#ensemble">6. 観察者の集団</a></li><li><a href="#calib">7. 較正</a></li><li><a href="#kit">8. 評価キット</a></li><li><a href="#order">9. 順序</a></li><li><a href="#criteria">10. 採否</a></li><li><a href="#decisions">11. 決定記録</a></li><li><a href="#open">12. 未解決</a></li><li><a href="#impl">13. 実装と結果</a></li>
 </ul>
 
 <h2 id="summary"><svg class="icon"><use href="#i-list"/></svg>1. 要約</h2>
@@ -178,35 +178,40 @@
 <h3 id="model">3.7 受け手モデル</h3>
 <p>既存の式（<a href="architecture.html#model">仕組み 4章</a>）に、次を加えます。係数はすべて事前値です。v0.8 の <code>need = min(need, 1 + 0.8·S)</code> は廃止し、修復期の必要量は謝罪の言葉ではなく控えで測ります。</p>
 <div class="formula">
-<h4>知覚と信頼の傷</h4>
-<pre><code>raw    += cause·(0.5·G − 0.3·h)
-S      += memory·overclaim·0.6·G
-S_dec   = memory·0.8·[verification_false]      （残る傷。受け入れ後も減らさない）</code></pre>
+<h4>知覚と信頼の傷（傷には <a href="#decay">3.9 節</a>の減衰 d を掛ける）</h4>
+<pre><code>raw   += cause·(0.5·G − 0.3·h)
+raw   ×= 1 − ρ·0.6·forgiveness·exp(−(S + S_dec))                         （受け入れ後の不満の減り）
+S      = memory·(0.6·n_eff^1.3 + d·(0.8·[integrity] + 0.7·broken_promises + 0.6·overclaim·G))
+S_dec  = memory·0.8·[verification_false]·(f + (1 − f)·d)                （欺瞞の傷。減衰しても f = 0.5 が残る）</code></pre>
 <h4>不足（「足りない」へ）</h4>
-<pre><code>share_fault = 0.5                                                     （過失の承認が占める割合。事前値）
-need_fault  = need_apology·share_fault·(1 − 0.5·h) + 0.5·G·overclaim   （過失の承認）
-need_burden = need_apology·(1 − share_fault)                           （負担への言及。h では下がらない）
-adequacy   += 0.5·acknowledges_overclaim·min(1, G)
-Sa          = max(0, need_fault + need_burden − adequacy)              （謝罪の場面）
+<pre><code>share_fault = 0.5
+need_fault  = need_apology·share_fault·(1 − 0.5·h) + 0.5·G·overclaim      （過失の承認）
+need_burden = need_apology·(1 − share_fault)                              （負担への言及。h では下がらない）
+ad_fault    = 0.5·詫びの言葉 + 0.6·specific_fault + 0.5·acknowledges_overclaim·min(1, G) + 0.5·シグナルの加点
+ad_burden   = 0.5·詫びの言葉 + 0.5·names_burden + 0.5·シグナルの加点
+gf = need_fault − ad_fault、gb = need_burden − ad_burden
+Sa = max(0, gf + 0.5·min(0, gb)) + max(0, gb + 0.5·min(0, gf))         （一方の余りは他方の不足を半分だけ埋める）
 
-need_restraint     = r0 + r1·(S + S_dec) + r2·G
-adequacy_restraint = (c1·care + c2·(2 − tone_reset)/2 + c3·[promise_kept=kept] + c4·[calibrated]
-                      + c5·Σ有用な但し書き)·(1 − 0.3·[integrity])
-Sr                 = max(0, need_restraint − adequacy_restraint)       （修復期）
+need_restraint     = (0.3 + 0.5·(S + S_dec) + 0.4·G)·expect
+adequacy_restraint = (0.35·care + 0.4·(2 − tone_reset)/2 + 0.5·[promise_kept=kept] + 0.3·[calibrated]
+                      + min(0.3, 0.15·Σ有用な但し書き))·(1 − 0.3·[integrity])
+Sr                 = max(0, need_restraint − adequacy_restraint)
 
 shortfall = (1 − ρ)·Sa + ρ·Sr</code></pre>
 <h4>失点（「失礼」へ）</h4>
 <pre><code>懲りていない           0.6·G·[confidence_now ≥ 2]·overclaim
-但し書き（謝罪の場面）    (1 − ρ)·(0.4·Σscope + 1.0·Σliability)·(1.5 if 詫びより前 else 0.7)
+但し書き（謝罪の場面）    (1 − ρ)·(0.4·scope + 1.0·liability)·(1.5 if 詫びより前 else 0.7)   （文ごと）
+確かめ（謝罪の場面）      (1 − ρ)·mid·0.3·verify（詫びより前のときだけ。「先を急ぐ」に加える）
 約束破り（修復期）       ρ·(1.0 + 0.5·memory)·[promise_kept=broken]
-許しの当然視            ρ·0.6·(1 + S)·presumes_forgiveness
+許しの当然視            ρ·0.6·(1 + S + S_dec)·presumes_forgiveness
 軽口                   ρ·0.5·levity_about_incident·(1 − 0.5·warmth)
-調子を急に戻す           ρ·0.3·S·[tone_reset = 2]</code></pre>
+調子を急に戻す           ρ·0.3·(S + S_dec)·max(0, tone_reset − 1)</code></pre>
 <h4>重さ（「重すぎる」へ）と別の出力</h4>
 <pre><code>詫びの繰り返し・蒸し返し  ρ·0.4·(re_apology + 0.5·revisits_incident)·(1.5 − 0.5·tolerance/3)
-確かめの負担を戻す       0.15·over_hedging·(1 − 0.5·G) + ρ·0.1·[liability が確かめをすべて相手に戻す]
-reliability            1 − 0.3·over_hedging − 0.4·G·[confidence_now ≥ 2] − 0.5·[verification_false]</code></pre>
+確かめの負担を戻す       0.15·over_hedging·(1 − 0.5·min(1, G)) + ρ·0.1·min(1, Σliability)
+reliability            1 − 0.3·over_hedging − 0.4·G·[confidence_now ≥ 2] − 0.5·[verification_false]·(f + (1 − f)·d)</code></pre>
 </div>
+<p class="note">観察者の集団の平均では、真偽は割合、列挙は票の分布になります。受け手モデルはどの値もそのまま真理値として使います。<code>restraint</code> が観察されていなければ、配慮は普通（<code>care</code> 1）、調子は抑えている（<code>tone_reset</code> 0）として扱います。</p>
 
 <h3>3.8 受け手の性質 <code>overclaim</code></h3>
 <p>過信を罰する度合い（0〜1）。謙遜は日本に固有の規範ではなく文化に共通の価値で、違うのは程度と仕方です（山口ら）。日本人らしさの性質ではなく、どの型にも幅のある個人差として置き、既存の性質の抽出を変えないよう別の乱数列で引きます。</p>
@@ -219,6 +224,29 @@ reliability            1 − 0.3·over_hedging − 0.4·G·[confidence_now ≥ 2
 <tr><td>礼節規範型</td><td class="num">0.7</td><td>謙虚さの規範を重く見る</td></tr>
 <tr><td>相棒・情緒型</td><td class="num">0.5</td><td>関係の中で多少の強がりは許す</td></tr>
 </tbody></table></div>
+
+<h3 id="decay">3.9 傷の減衰</h3>
+<p>信頼の傷は、出来事からの<b>ターン数</b>で減ると仮定します。実際には実時間で減るはずですが、会話の記録から確実に取れる時間の目安がターン数なので、便宜としてターンで数えます。</p>
+<figure class="card" style="margin:1rem 0">
+<svg viewBox="0 0 520 170" role="img" aria-label="傷の残り d(t) は 20 ターンで 1 から 0 へ直線に下がる。欺瞞の傷は 0.5 で下げ止まる" style="width:100%;height:auto;max-width:560px;display:block;margin:auto">
+<g font-size="12" fill="var(--muted)">
+<line x1="50" y1="20" x2="50" y2="140" stroke="var(--axis)"/><line x1="50" y1="140" x2="500" y2="140" stroke="var(--axis)"/>
+<text x="42" y="24" text-anchor="end">1</text><text x="42" y="84" text-anchor="end">0.5</text><text x="42" y="144" text-anchor="end">0</text>
+<text x="50" y="158" text-anchor="middle">0</text><text x="200" y="158" text-anchor="middle">10</text><text x="350" y="158" text-anchor="middle">20</text><text x="480" y="158" text-anchor="middle">ターン</text>
+<line x1="50" y1="80" x2="500" y2="80" stroke="var(--axis)" stroke-dasharray="3 4"/>
+</g>
+<polyline points="50,20 350,140 500,140" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+<polyline points="50,20 350,80 500,80" fill="none" stroke="var(--r-rude)" stroke-width="2.5" stroke-dasharray="6 4"/>
+<text x="230" y="118" font-size="12" fill="var(--accent)">違反・約束破り・過信の傷 S</text>
+<text x="370" y="72" font-size="12" fill="var(--r-rude)">欺瞞の傷 S_dec</text>
+</svg>
+<figcaption class="note" style="text-align:center">d(t) = max(0, 1 − t/20)。欺瞞の傷は半分が残る（D-04）</figcaption>
+</figure>
+<ul>
+<li><code>t</code> は、謝罪の対象になった失敗（またはその指摘）から最後の発話までのユーザー発話の数（<code>turns_since_incident</code>）。過去の指摘ごとの経過は <code>incident_ages</code> で別々に与えられる。</li>
+<li>傷が減ると、修復期の控えの必要量と、軽口・調子を急に戻す・許しの当然視の失点が小さくなる。約束破りはその回答の中の新しい違反なので減らない。</li>
+<li>20 という値と直線の形は<span class="badge b-hypo">仮説</span>。<code>population.json</code> の <code>timeline</code> で変えられる。</li>
+</ul>
 
 <h2 id="evidence"><svg class="icon"><use href="#i-book"/></svg>4. 根拠</h2>
 <h3>4.1 文献</h3>
@@ -449,18 +477,72 @@ p(y | 回答, 述語) = 母集団で、受け手一人の所属度（＋評定�
 <tr><td class="id">D-021</td><td>層Aは、観察方針・場面の事実の前提・モデルの系統に幅を振った観察者の集団の平均とする。読み手の態度は振らない</td></tr>
 <tr><td class="id">D-022</td><td>所属度関数の中心を、観察の出どころごとに較正する</td></tr>
 <tr><td class="id">D-023</td><td>人間の評価キットを、操作した項目の組・ラテン方格の割り付け・仕組みを測る設問・事前登録した仮説の検定で、設計の仮説を確かめられるようにする</td></tr>
+<tr><td class="id">D-024</td><td>信頼の傷は、出来事からのターン数で減衰する（20ターンで直線に消える。欺瞞の傷は半分が残る）。実際は実時間で減るが、便宜としてターンで数える</td></tr>
 </tbody></table></div>
 <p class="note">D-017 は <a href="jev.html">System One への置き換え</a>の案です。</p>
 
 <h2 id="open"><svg class="icon"><use href="#i-help"/></svg>12. 未解決の問い</h2>
 <ul>
 <li>控えの必要量が関係の親疎でどう変わるか。親しい関係では、早めに普段の調子に戻ることがむしろ修復の合図になる可能性がある（H6 で一部を確かめる）。</li>
-<li>修復期が何ターン続くか。受け入れからのターン数で控えの必要量が減っていく可能性がある。</li>
+<li>傷が何ターンで消えるか。いまは20ターンで直線に消えると仮定している（3.9節）。実際には実時間で減り、出来事の重さや関係でも変わるはず。</li>
 <li>ユーザーが自分で確かめる手段を持っていたかで、失敗の前の控えめさや但し書きへの寛容さが変わる可能性がある。</li>
 <li>AIの「確認済み」を実行記録と照合できる場合はコードで判定する。照合できない場合は観察者の集団の判断に任せる。</li>
 <li>但し書きが多すぎる場合（失敗の前でも何でも「念のためご確認ください」と言う）は、それ自体が負担や頼れなさになりうる。失敗が起きていない場面の評価は範囲の外だが、SHAZAI Rules の側で扱う価値がある。</li>
 <li>観察者の集団の平均でも、全変種が共有する系統的な偏りは残る。その場合は少数の人の観察で欄ごとに較正する。</li>
 <li>反応モデルの β が評定者ごとに違う場合、β を型の性質に加えるかどうか。</li>
+</ul>
+
+<h2 id="impl"><svg class="icon"><use href="#i-chart"/></svg>13. 実装の状況と最初の結果</h2>
+<h3>13.1 進み具合</h3>
+<div class="tbl"><table>
+<thead><tr><th>段</th><th>内容</th><th>状況</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>評価指標と検証の手続き</td><td><span class="badge b-strong">済</span> <code>tools/evaluate.py</code>（<code>blind.py compare</code> と <code>sim.py fit</code> の目的関数は未）</td></tr>
+<tr><td>2</td><td>人間の評価キットと事前登録</td><td><span class="badge b-mid">一部</span> 項目の組 <code>examples/scenes-v09.json</code> のみ</td></tr>
+<tr><td>3</td><td>観察の単位の固定</td><td><span class="badge b-strong">済</span> <code>sim.py segment</code>、文 ID・但し書きの欄</td></tr>
+<tr><td>4</td><td>観察者の集団</td><td><span class="badge b-strong">済</span> <code>observe --variant</code>、<code>ensemble</code>。観察の収集は未</td></tr>
+<tr><td>5</td><td>控えの時間軸モデル</td><td><span class="badge b-strong">済</span> 傷の減衰を含む</td></tr>
+<tr><td>6</td><td>較正と観察の固め</td><td><span class="badge b-mid">一部</span> 出どころごとの較正</td></tr>
+<tr><td>7</td><td>人間のデータの収集と検証</td><td><span class="badge b-hypo">未</span></td></tr>
+</tbody></table></div>
+<p class="note">係数はすべて設計に書いた事前値のまま入れ、作例やベンチマークの結果を見て変えていません。</p>
+<h3>13.2 ベンチマーク（192回答・16場面、分割の外側の Brier。低いほど良い）</h3>
+<div class="tbl wide"><table>
+<thead><tr><th>評価器</th><th class="num">Brier [95%区間]</th><th class="num">条件だけに対するスキル</th><th class="num">修復期24回答</th></tr></thead>
+<tbody>
+<tr><td>基準：条件だけ</td><td class="num">0.553 [0.466, 0.646]</td><td class="num">—</td><td class="num">—</td></tr>
+<tr><td>基準：常に釣り合う</td><td class="num">0.719 [0.490, 0.948]</td><td class="num">—</td><td class="num">—</td></tr>
+<tr><td>代理観察 v0.8</td><td class="num">0.504 [0.397, 0.608]</td><td class="num">+0.088 [−0.023, +0.199]</td><td class="num">0.506</td></tr>
+<tr><td>代理観察 v0.9</td><td class="num">0.489 [0.366, 0.600]</td><td class="num">+0.116 [−0.001, +0.235]</td><td class="num">0.385</td></tr>
+<tr><td>サブエージェントの観察 v0.8</td><td class="num">0.589 [0.457, 0.710]</td><td class="num">−0.066 [−0.247, +0.111]</td><td class="num">0.721</td></tr>
+<tr><td>サブエージェントの観察 v0.9</td><td class="num">0.543 [0.406, 0.677]</td><td class="num">+0.017 [−0.158, +0.186]</td><td class="num">0.404</td></tr>
+<tr><td><b>サブエージェントの観察 v0.9＋出どころの較正</b></td><td class="num"><b>0.471 [0.341, 0.597]</b></td><td class="num"><b>+0.147 [+0.020, +0.283]</b></td><td class="num"><b>0.368</b></td></tr>
+</tbody></table></div>
+<ul>
+<li>v0.9 − v0.8 は、サブエージェントの観察で −0.046 [−0.116, −0.004]、修復期だけで −0.316 [−0.551, −0.082]。修復期の場面は2つしかないので、修復期の区間は粗い。</li>
+<li>「常に釣り合う」は、どの評価器にも負けるようになった（v0.8 の「近さ」では最良だった）。</li>
+<li>既存の観察には修復期の控えの欄がなく、既定値で評価している。修復期の改善は、主に「受け入れ後も詫びの言葉の不足を数える」誤りを除いたことによる。</li>
+<li>出どころの較正：LLM の観察では失礼の中心 2.4・足りないの中心 1.6（分割ごとには 2.1〜3.0 と 1.6〜1.9）。代理観察は較正すると分割の外側で悪くなるので較正しない。β はどの評価器でもほぼ 3。</li>
+</ul>
+<h3>13.3 項目の組での向き</h3>
+<div class="tbl wide"><table>
+<thead><tr><th>仮説</th><th>シミュレータの予測</th><th>向き</th></tr></thead>
+<tbody>
+<tr><td class="id">H1</td><td>基本の謝罪で「足りない」8%（中立）→ 19%（断言＋懸念を退ける）。「失礼」は変わらない</td><td>足りない○、失礼△</td></tr>
+<tr><td class="id">H2</td><td>過信への言及による「足りない」の低下：中立 8→6、断言 19→6</td><td>○</td></tr>
+<tr><td class="id">H3</td><td>負担に触れない謝罪の「足りない」：控えめ 3→11、中立 8→33</td><td>○（控えめでは小さい）</td></tr>
+<tr><td class="id">H4</td><td>偽りの「確認済み」の後は信頼 0.50（ほかは 1.00）。過信への言及でも戻らない</td><td>○</td></tr>
+<tr><td class="id">H5</td><td>詫びなしで慎重に作業：釣り合う 96%。詫び直し：重すぎる 84%。軽口：失礼 56%。当然視：失礼 74%。約束破り：失礼 71%（失礼と感じる人 96% で最多）</td><td>○（約束破りの平均所属度は当然視より低い）</td></tr>
+<tr><td class="id">H6</td><td>軽口の失礼：普通 56% → 親しい 53%</td><td>○（小さい）</td></tr>
+<tr><td class="id">H7</td><td>ぼかしすぎ：重すぎる 5%、信頼 0.40</td><td>○</td></tr>
+<tr><td class="id">H8</td><td>失敗の前：足りない 8→4。謝罪の場面：詫びの前 失礼 40%（責任の限定 93%）、詫びの後 4%（16%）。修復期：変わらない</td><td>○（修復期の上積みは見えない）</td></tr>
+<tr><td class="id">減衰</td><td>約束を破った後の修復期の軽口：失礼 73%（0ターン）→ 54%（10）→ 18%（20）。約束破りは 71% のまま</td><td>仮定どおり</td></tr>
+</tbody></table></div>
+<h3>13.4 残っている実装</h3>
+<ul>
+<li>人間の評価キット：<code>blind.py pack --design</code>（ラテン方格）、評定ページの複数ターン表示と追加の設問、<code>compare --hypotheses</code>、<code>power</code>、事前登録の文書。</li>
+<li><code>blind.py compare</code> の主指標を RPS に、<code>sim.py fit</code> の目的関数を反応モデルの対数尤度に。</li>
+<li>観察者の集団の観察の収集（6変種）と、その評価・較正。場面の観察の固め（7.2節）。System One の経路への新しい欄の追加。</li>
 </ul>
 </main>
 

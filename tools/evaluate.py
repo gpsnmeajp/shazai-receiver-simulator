@@ -1,149 +1,298 @@
 #!/usr/bin/env python3
-"""ベンチマークでの総合評価（v0.8）。観察JSONごとに、筆者の4値の評定と比べる。
+"""ベンチマークでの総合評価（v0.9）。シミュレータの予測分布を、真に適正なスコアリング規則で採点する。
 
-  python3 tools/evaluate.py --obs proxy=out/obs-proxy.json --obs subagent=out/obs-subagent.json runs/* -o out/eval.json
+  python3 tools/evaluate.py --obs proxy=out/obs-proxy.json --obs subagent=eval/obs-subagent.json runs/* -o out/eval.json
+  python3 tools/evaluate.py --obs v09=eval/obs-subagent.json --obs v08=eval/obs-subagent.json@/path/to/v08 runs/*
 
-出力：条件ごとの「釣り合う」、非ファジィ化した κ（場面単位のブートストラップ区間つき）、
-筆者の評定の述語への所属度、近さ、混同行列、段階ごとの一致、ペルソナとの比較、所属度関数の感度。
+予測分布：受け手一人の所属度 μ を、反応モデル P(k|μ) = softmax(β·μ) で選択に変え、母集団で平均する。
+主指標：多クラス Brier と対数損失。基準（一様、常に釣り合う、周辺分布、条件だけ）と同じ規則で採点し、
+スキルスコア（1 − 自分 ÷ 基準）で報告する。
+手続き：β（と --calibrate のときの所属度関数の中心）は、場面単位の4分割交差検証の学習側で当てはめ、
+分割の外側で採点する。区間は場面単位のブートストラップ。評価器どうしは同じ再標本での差の区間で比べる。
+κ・一致・近さは記述用の副指標で、順位づけには使わない。
+
+名前=観察JSON@シミュレータのディレクトリ と書くと、別の版の sim.py で同じ観察を評価する（版の比較用）。
 標準ライブラリのみ。
 """
 import argparse
+import importlib.util
 import json
+import math
 import random
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 import sim  # noqa: E402
 
-CONDS = sim.CONDS
 CATS = sim.CATS
+CONDS = sim.CONDS
+BETAS = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32]
+EPS = 1e-4
 
 
-def evaluate(obs, rows, pop, n, seed, hyst=True):
-    panel = sim.sample_panel(pop, n, seed)
+def load_sim(path):
+    spec = importlib.util.spec_from_file_location(f"sim_{abs(hash(path))}", str(Path(path) / "sim.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+# ---------------------------------------------------------------- 予測
+
+def person_axes(S, obs, rows, pop_path, n, seed, hyst=True):
+    """回答ごとに、受け手一人ずつの (失点, 不足, 過剰) を返す。所属度関数を変えても再計算せずに済むようにする。"""
+    pop = S.load_population(pop_path)
+    if hasattr(S, "use_source"):
+        S.use_source(obs.get("source"))
+    panel = S.sample_panel(pop, n, seed)
     out = {}
     for r in rows:
         if r["aid"] not in obs["answers"] or r["sid"] not in obs["scenarios"]:
             continue
-        sc = sim.merged(sim.DEFAULT_SCENARIO, obs["scenarios"][r["sid"]])
-        a = sim.merged(sim.DEFAULT_ANSWER, obs["answers"][r["aid"]])
-        out[r["aid"]] = sim.assess(a, sc, panel, len(r["text"]), hyst)
+        sc = S.merged(S.DEFAULT_SCENARIO, obs["scenarios"][r["sid"]])
+        a = S.merged(S.DEFAULT_ANSWER, obs["answers"][r["aid"]])
+        ax = []
+        for _, th in panel:
+            L = S.perceive(sc, th, hyst)
+            j = S.judge_full(a, sc, th, L, len(r["text"]), hyst)
+            ax.append((j["offense"], j["shortfall"], j["excess"]))
+        out[r["aid"]] = ax
     return out
 
 
-def summarize(res, rows, boot=1000, seed=1):
-    rows = [r for r in rows if r["aid"] in res and r["user"]]
-    u = [r["user"] for r in rows]
-    dz = [sim.defuzz(res[r["aid"]]["mu"]) for r in rows]
-    s = {"n": len(rows), "kappa": sim.kappa(u, dz), "agree": sum(a == b for a, b in zip(u, dz)) / len(u),
-         "author_membership": sum(res[r["aid"]]["mu"][r["user"]] for r in rows) / len(rows),
-         "closeness": sum(sim.closeness(res[r["aid"]]["mu"], sim.onehot(r["user"])) for r in rows) / len(rows),
-         "surprise": sum(1 for r in rows if res[r["aid"]]["mu"][r["user"]] < 0.1)}
-    # 条件ごと：筆者の「釣り合う」の割合と、シミュレータの平均所属度・非ファジィ化の割合
-    s["by_cond"] = {}
-    for c in CONDS:
-        rc = [r for r in rows if r["cond"] == c]
-        if rc:
-            s["by_cond"][c] = {"author_fit": sum(r["user"] == "fit" for r in rc) / len(rc),
-                               "sim_fit_mu": sum(res[r["aid"]]["mu"]["fit"] for r in rc) / len(rc),
-                               "sim_fit_label": sum(sim.defuzz(res[r["aid"]]["mu"]) == "fit" for r in rc) / len(rc),
-                               "sim_rude_tail": sum(res[r["aid"]]["tail"]["rude"] for r in rc) / len(rc),
-                               "persona_fit": sum((sim.majority(r) or "fit") == "fit" for r in rc) / len(rc)}
-    order = [s["by_cond"][c]["sim_fit_mu"] for c in CONDS if c in s["by_cond"]]
-    s["order_ok"] = all(x < y for x, y in zip(order, order[1:]))
-    s["confusion"] = {a: dict(Counter(d for x, d in zip(u, dz) if x == a)) for a in CATS}
-    s["by_level"] = {}
-    for lv in sim.LEVELS:
-        rl = [(x, d) for r, x, d in zip(rows, u, dz) if r["level"] == lv]
-        if rl:
-            s["by_level"][lv] = {"n": len(rl), "agree": sum(a == b for a, b in rl) / len(rl)}
-    # 場面単位のブートストラップ（同じ場面の回答は独立でないため）
+def lg(x, c, w):
+    z = max(-60.0, min(60.0, (x - c) / w))
+    return 1.0 / (1.0 + math.exp(-z))
+
+
+def person_mu(axes, J):
+    """所属度関数の設定 J で、受け手一人ずつの所属度を作る。"""
+    prod = J.get("tnorm") == "product"
+    out = []
+    for o, s, e in axes:
+        r, l, h = lg(o, J["rude"]["center"], J["rude"]["width"]), lg(s, J["light"]["center"], J["light"]["width"]), \
+            lg(e, J["heavy"]["center"], J["heavy"]["width"])
+        f = (1 - r) * (1 - l) * (1 - h) if prod else min(1 - r, 1 - l, 1 - h)
+        out.append((r, l, f, h))
+    return out
+
+
+def predict(mus, beta):
+    """反応モデルで予測分布を作る。beta=None は一人ずつ最大の所属度を選ぶ（非ファジィ化）。"""
+    acc = [0.0] * 4
+    for m in mus:
+        if beta is None:
+            k = max((0, 1, 3, 2), key=lambda i: m[i])
+            acc[k] += 1
+            continue
+        ex = [math.exp(beta * (v - max(m))) for v in m]
+        z = sum(ex)
+        for i in range(4):
+            acc[i] += ex[i] / z
+    n = len(mus)
+    return [x / n for x in acc]
+
+
+def brier(p, y):
+    return sum((p[i] - (CATS[i] == y)) ** 2 for i in range(4))
+
+
+def logloss(p, y):
+    return -math.log(max(EPS, p[CATS.index(y)]))
+
+
+def freq(labels, smooth=0.5):
+    c = Counter(labels)
+    tot = len(labels) + 4 * smooth
+    return [(c[k] + smooth) / tot for k in CATS]
+
+
+# ---------------------------------------------------------------- 交差検証
+
+def folds_by_key(rows, k=4, seed=11):
     keys = sorted({r["key"] for r in rows})
-    by_key = defaultdict(list)
-    for r, x, d in zip(rows, u, dz):
-        by_key[r["key"]].append((x, d))
-    rng = random.Random(seed)
-    ks = []
-    for _ in range(boot):
-        pairs = [p for k in rng.choices(keys, k=len(keys)) for p in by_key[k]]
-        ks.append(sim.kappa([a for a, _ in pairs], [b for _, b in pairs]))
-    ks.sort()
-    s["kappa_ci"] = [ks[int(0.025 * boot)], ks[int(0.975 * boot) - 1]]
-    return s
+    random.Random(seed).shuffle(keys)
+    return {key: i % k for i, key in enumerate(keys)}
 
 
-def persona_summary(rows):
-    rows = [r for r in rows if r["user"]]
-    u = [r["user"] for r in rows]
-    out = {}
-    pm = [sim.majority(r) or "fit" for r in rows]
-    out["majority"] = {"kappa": sim.kappa(u, pm), "agree": sum(a == b for a, b in zip(u, pm)) / len(u),
-                       "closeness": sum(sim.closeness(sim.onehot(p), sim.onehot(x)) for p, x in zip(pm, u)) / len(u)}
-    for p in ("P1", "P2", "P3"):
-        ps = [r["personas"].get(p) for r in rows]
-        if all(ps):
-            out[p] = {"kappa": sim.kappa(u, ps), "agree": sum(a == b for a, b in zip(u, ps)) / len(u)}
+def calib_grid(J0, calibrate):
+    if not calibrate:
+        return [J0]
+    grid = []
+    for rc in (0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3.0):
+        for lc in (0.7, 1.0, 1.3, 1.6, 1.9, 2.2):
+            J = json.loads(json.dumps(J0))
+            J["rude"]["center"], J["light"]["center"] = rc, lc
+            grid.append(J)
+    return grid
+
+
+def cross_validate(axes, rows, J0, calibrate, k=4):
+    """分割の外側の予測と、各分割で選んだ設定を返す。"""
+    fold = folds_by_key(rows, k)
+    grid = calib_grid(J0, calibrate)
+    mus = [{r["aid"]: person_mu(axes[r["aid"]], J) for r in rows} for J in grid]
+    preds = {(gi, b): {r["aid"]: predict(mus[gi][r["aid"]], b) for r in rows} for gi in range(len(grid)) for b in BETAS}
+    oof, chosen = {}, []
+    for f in range(k):
+        train = [r for r in rows if fold[r["key"]] != f]
+        test = [r for r in rows if fold[r["key"]] == f]
+        best = min(preds, key=lambda gb: sum(logloss(preds[gb][r["aid"]], r["user"]) for r in train))
+        chosen.append({"beta": best[1], "rude_center": grid[best[0]]["rude"]["center"],
+                       "light_center": grid[best[0]]["light"]["center"]})
+        for r in test:
+            oof[r["aid"]] = preds[best][r["aid"]]
+    best_all = min(preds, key=lambda gb: sum(logloss(preds[gb][r["aid"]], r["user"]) for r in rows))
+    insample = preds[best_all]
+    labels = {r["aid"]: predict(mus[0][r["aid"]], None) for r in rows}
+    return oof, chosen, insample, {"beta": best_all[1], "rude_center": grid[best_all[0]]["rude"]["center"],
+                                   "light_center": grid[best_all[0]]["light"]["center"]}, labels
+
+
+def baselines(rows, k=4):
+    fold = folds_by_key(rows, k)
+    out = {"一様": {}, "常に釣り合う": {}, "周辺分布": {}, "条件だけ": {}}
+    for f in range(k):
+        train = [r for r in rows if fold[r["key"]] != f]
+        marg = freq([r["user"] for r in train])
+        cond = {c: freq([r["user"] for r in train if r["cond"] == c]) for c in CONDS}
+        for r in rows:
+            if fold[r["key"]] != f:
+                continue
+            out["一様"][r["aid"]] = [0.25] * 4
+            out["常に釣り合う"][r["aid"]] = [0.0, 0.0, 1.0, 0.0]
+            out["周辺分布"][r["aid"]] = marg
+            out["条件だけ"][r["aid"]] = cond[r["cond"]]
     return out
 
 
-SENSITIVITY = {
-    "既定（失礼 1.2/0.3、足りない 1.0/0.3、重すぎる 0.3/0.25、min）": {},
-    "失礼の中心 1.5（最初に置いた値）": {"rude": {"center": 1.5, "width": 0.35}},
-    "失礼の中心 1.0": {"rude": {"center": 1.0}},
-    "足りないの中心 0.8": {"light": {"center": 0.8}},
-    "足りないの中心 1.25": {"light": {"center": 1.25}},
-    "なだらかさ ×0.5（4値に近い）": {"rude": {"width": 0.15}, "light": {"width": 0.15}, "heavy": {"width": 0.125}},
-    "なだらかさ ×2": {"rude": {"width": 0.6}, "light": {"width": 0.6}, "heavy": {"width": 0.5}},
-    "釣り合う = 積": {"tnorm": "product"},
-    "境界のなだらかさ 0.05（ほぼ段差）": {"gate_width": 0.05},
-}
+# ---------------------------------------------------------------- 採点
+
+def scores(pred, rows):
+    rs = [r for r in rows if r["aid"] in pred]
+    return {"brier": sum(brier(pred[r["aid"]], r["user"]) for r in rs) / len(rs),
+            "logloss": sum(logloss(pred[r["aid"]], r["user"]) for r in rs) / len(rs), "n": len(rs)}
+
+
+def boot_ci(rows, preds, boot, seed=1):
+    """場面単位のブートストラップ。preds: 名前→予測。各名前の Brier と、名前の組の差の 95% 区間を返す。"""
+    by_key = defaultdict(list)
+    for r in rows:
+        by_key[r["key"]].append(r)
+    keys = sorted(by_key)
+    rng = random.Random(seed)
+    names = list(preds)
+    samples = defaultdict(list)
+    for _ in range(boot):
+        rs = [r for k in rng.choices(keys, k=len(keys)) for r in by_key[k]]
+        b = {n: sum(brier(preds[n][r["aid"]], r["user"]) for r in rs) / len(rs) for n in names}
+        for n in names:
+            samples[n].append(b[n])
+        samples["_rs"].append(b)
+
+    def ci(xs):
+        xs = sorted(xs)
+        return [round(xs[int(0.025 * len(xs))], 4), round(xs[int(0.975 * len(xs)) - 1], 4)]
+    return {n: ci(samples[n]) for n in names}, samples["_rs"], ci
+
+
+def descriptive(pred_mu, rows):
+    u = [r["user"] for r in rows]
+    dz = [sim.defuzz(pred_mu[r["aid"]]) for r in rows]
+    return {"kappa": round(sim.kappa(u, dz), 3), "agree": round(sum(a == b for a, b in zip(u, dz)) / len(u), 3),
+            "closeness": round(sum(sim.closeness(pred_mu[r["aid"]], sim.onehot(r["user"])) for r in rows) / len(rows), 3)}
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("runs", nargs="+")
-    ap.add_argument("--obs", action="append", required=True, help="名前=観察JSON")
+    ap.add_argument("--obs", action="append", required=True, help="名前=観察JSON[@シミュレータのディレクトリ]")
     ap.add_argument("--population", default=str(sim.HERE / "population.json"))
     ap.add_argument("-n", type=int, default=1000)
     ap.add_argument("--seed", type=int, default=7)
-    ap.add_argument("--sensitivity", action="store_true")
+    ap.add_argument("--boot", type=int, default=2000)
+    ap.add_argument("--calibrate", action="store_true", help="所属度関数の中心も交差検証の内側で当てはめる（出どころごとの較正）")
+    ap.add_argument("--no-hysteresis", action="store_true")
     ap.add_argument("-o", "--out", default="out/eval.json")
     args = ap.parse_args()
-    rows = sim.load_runs(args.runs)
-    base = json.loads(json.dumps(sim.JUDGMENT))
-    pop = sim.load_population(args.population)
-    base = json.loads(json.dumps(sim.JUDGMENT))
-    report = {"personas": persona_summary(rows), "observers": {}}
+    rows = [r for r in sim.load_runs(args.runs) if r["user"]]
+    report = {"n_answers": len(rows), "n_scenes": len({r["key"] for r in rows}), "betas": BETAS,
+              "calibrate": args.calibrate, "evaluators": {}}
+    preds = {}
+    base = baselines(rows)
+    for name, p in base.items():
+        preds[name] = p
     for spec in args.obs:
-        name, path = spec.split("=", 1)
+        name, rest = spec.split("=", 1)
+        path, _, simdir = rest.partition("@")
+        S = load_sim(simdir) if simdir else sim
+        pop_path = str(Path(simdir) / "population.json") if simdir else args.population
         obs = sim.load(path)
-        res = evaluate(obs, rows, pop, args.n, args.seed)
-        entry = {"default": summarize(res, rows)}
-        entry["no_hysteresis"] = summarize(evaluate(obs, rows, pop, args.n, args.seed, hyst=False), rows)
-        if args.sensitivity:
-            entry["sensitivity"] = {}
-            for label, change in SENSITIVITY.items():
-                sim.JUDGMENT.clear()
-                sim.JUDGMENT.update(json.loads(json.dumps(base)))
-                sim.configure({"judgment": change})
-                entry["sensitivity"][label] = summarize(evaluate(obs, rows, pop, args.n, args.seed), rows, boot=0 or 200)
-            sim.JUDGMENT.clear()
-            sim.JUDGMENT.update(base)
-        report["observers"][name] = entry
-        d = entry["default"]
-        print(f"■ {name}: {d['n']} 件  κ={d['kappa']:.2f} [{d['kappa_ci'][0]:.2f}, {d['kappa_ci'][1]:.2f}]  一致 {d['agree']:.2f}"
-              f"  筆者の述語への所属度 {d['author_membership']:.2f}  近さ {d['closeness']:.2f}  想定外 {d['surprise']}  順位 {'○' if d['order_ok'] else '×'}")
-        for c, v in d["by_cond"].items():
-            print(f"    {c.ljust(17)} 筆者の釣り合う {v['author_fit']:.2f}  sim 平均所属度 {v['sim_fit_mu']:.2f}"
-                  f"  非ファジィ化 {v['sim_fit_label']:.2f}  失礼と感じる人 {v['sim_rude_tail']:.2f}  ペルソナ {v['persona_fit']:.2f}")
-        nh = entry["no_hysteresis"]
-        print(f"    ヒステリシスなし κ={nh['kappa']:.2f}  所属度 {nh['author_membership']:.2f}")
-        for label, v in entry.get("sensitivity", {}).items():
-            print(f"    [感度] {label}: κ={v['kappa']:.2f}  所属度 {v['author_membership']:.2f}  近さ {v['closeness']:.2f}  順位 {'○' if v['order_ok'] else '×'}")
-    p = report["personas"]
-    print(f"■ ペルソナ多数決 κ={p['majority']['kappa']:.2f}  一致 {p['majority']['agree']:.2f}  近さ {p['majority']['closeness']:.2f}")
+        axes = person_axes(S, obs, rows, pop_path, args.n, args.seed, not args.no_hysteresis)
+        rs = [r for r in rows if r["aid"] in axes]
+        # 出どころごとの較正（population.json の judgment_by_source）は同じデータで当てはめた値なので、ここでは使わない。
+        # 較正の効果は --calibrate で交差検証の内側から測る
+        J0 = json.loads(json.dumps(getattr(S, "JUDGMENT_BASE", None) or S.JUDGMENT))
+        oof, chosen, insample, best_all, labels = cross_validate(axes, rs, J0, args.calibrate)
+        mean_mu = {}
+        for r in rs:
+            m = person_mu(axes[r["aid"]], J0)
+            mean_mu[r["aid"]] = {k: sum(x[i] for x in m) / len(m) for i, k in enumerate(CATS)}
+        preds[name] = oof
+        e = {"obs": path, "sim": simdir or "current", "source": obs.get("source"), "n": len(rs),
+             "oof": scores(oof, rs), "insample": scores(insample, rs), "insample_choice": best_all,
+             "fold_choice": chosen, "labels_only": scores(labels, rs), "descriptive": descriptive(mean_mu, rs),
+             "repair": scores(oof, [r for r in rs if r["level"] == "repair"]),
+             "by_cond": {c: scores(oof, [r for r in rs if r["cond"] == c]) for c in CONDS}}
+        report["evaluators"][name] = e
+    ci, reps, cif = boot_ci(rows, preds, args.boot)
+    names = [s.split("=", 1)[0] for s in args.obs]
+    report["baselines"] = {n: {**scores(base[n], rows), "brier_ci": ci[n]} for n in base}
+    print(f"■ ベンチマーク {len(rows)} 回答・{report['n_scenes']} 場面。場面単位の4分割交差検証、分割の外側で採点。区間は場面単位のブートストラップ {args.boot} 回\n")
+    print("  基準               Brier [95%区間]         対数損失")
+    for n in base:
+        b = report["baselines"][n]
+        print(f"  {n.ljust(10, '　')}  {b['brier']:.3f} [{ci[n][0]:.3f}, {ci[n][1]:.3f}]   {b['logloss']:.3f}")
+    print()
+    for n in names:
+        e = report["evaluators"][n]
+        e["brier_ci"] = ci[n]
+        e["skill"] = {}
+        for bn in base:
+            d = [1 - x[n] / x[bn] for x in reps]
+            e["skill"][bn] = {"value": round(1 - e["oof"]["brier"] / report["baselines"][bn]["brier"], 4), "ci": cif(d)}
+        print(f"■ {n}（{e['source']}、{e['sim']}）  Brier {e['oof']['brier']:.3f} [{ci[n][0]:.3f}, {ci[n][1]:.3f}]  対数損失 {e['oof']['logloss']:.3f}"
+              f"  （標本内 {e['insample']['brier']:.3f}、非ファジィ化のみ {e['labels_only']['brier']:.3f}）")
+        print("    スキル（1 − 自分÷基準、Brier）: " + "  ".join(
+            f"{bn} {v['value']:+.3f} [{v['ci'][0]:+.3f}, {v['ci'][1]:+.3f}]" for bn, v in e["skill"].items()))
+        print(f"    修復期 {e['repair']['n']} 回答 Brier {e['repair']['brier']:.3f}   条件別 " + "  ".join(
+            f"{c} {v['brier']:.3f}" for c, v in e["by_cond"].items()))
+        print("    分割ごとの選択 " + ", ".join(f"β={c['beta']}" + (f" 失礼{c['rude_center']} 足りない{c['light_center']}" if args.calibrate else "")
+                                       for c in e["fold_choice"]))
+        d = e["descriptive"]
+        print(f"    記述用: κ {d['kappa']:.2f}  一致 {d['agree']:.2f}  近さ {d['closeness']:.2f}")
+    if len(names) > 1:
+        print("\n■ 評価器どうしの差（Brier、左 − 右。負なら左が良い）")
+        report["differences"] = {}
+        for i, a in enumerate(names):
+            for b in names[i + 1:]:
+                d = [x[a] - x[b] for x in reps]
+                v = report["evaluators"][a]["oof"]["brier"] - report["evaluators"][b]["oof"]["brier"]
+                report["differences"][f"{a}-{b}"] = {"value": round(v, 4), "ci": cif(d)}
+                print(f"  {a} − {b}: {v:+.3f} {cif(d)}")
+        # 修復期だけの差
+        rep_rows = [r for r in rows if r["level"] == "repair"]
+        if rep_rows:
+            _, reps_r, _ = boot_ci(rep_rows, {n: preds[n] for n in names}, args.boot)
+            for i, a in enumerate(names):
+                for b in names[i + 1:]:
+                    d = [x[a] - x[b] for x in reps_r]
+                    v = report["evaluators"][a]["repair"]["brier"] - report["evaluators"][b]["repair"]["brier"]
+                    report["differences"][f"{a}-{b}:repair"] = {"value": round(v, 4), "ci": cif(d)}
+                    print(f"  修復期 {a} − {b}: {v:+.3f} {cif(d)}")
     sim.save(args.out, report)
     print(f"→ {args.out}")
 
