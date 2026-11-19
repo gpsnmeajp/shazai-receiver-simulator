@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""観察者に渡した資料（eval/v09-observers/batches/*.json）を、System One 経路（s1.py）で一括観察する。
+"""観察者に渡した資料（eval/observers/batches/*.json）を、System One 経路（s1.py）で一括観察する。
 
 1回答1リクエスト（sim.py check と同じ質問の組）。場面の観察は、その場面の回答ごとに同じ質問を問うので、
 回答の数だけ繰り返し測ったことになる。観察JSONの scenarios には先頭の回答のものを入れ、
 回答ごとの場面の観察は `_scene_per_answer` に残す（場面の欄の揺れを測るため）。
 
-  python3 tools/observe_s1_batches.py eval/v09-observers/batches/bench-*.json --backend jev-or \\
+  python3 tools/observe_s1_batches.py eval/observers/batches/bench-*.json --backend jev-or \\
       --cache eval/jev/cache -o eval/jev/obs-bench-jev.json
   python3 tools/observe_s1_batches.py ... --backend replay-dir --replay-dir eval/s1-answers  # 保存した答えで組み立て直す
 

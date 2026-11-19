@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""ベンチマークの回答（観察者に渡した資料 eval/v09-observers/batches/bench-*.json）を、
+"""ベンチマークの回答（観察者に渡した資料 eval/observers/batches/bench-*.json）を、
 複数の観察の出どころで母集団に通し、平均所属度・非ファジィ化した評定の一致を比べる。
 筆者の評定を使わない（runs/ がなくても動く）ので、観察者どうしの比較にとどまる。
 
-  python3 tools/compare_bench_sources.py ref=eval/v09-observers/obs-ensemble.json jev=eval/jev/obs-bench-jev.json \\
+  python3 tools/compare_bench_sources.py ref=eval/observers/obs-ensemble.json jev=eval/jev/obs-bench-jev.json \\
       --direct eval/jev/direct-bench.json -o eval/jev/bench-compare.md
 最初の出どころを基準にする。
 """
@@ -32,7 +32,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("sources", nargs="+", help="名前=観察JSON")
     ap.add_argument("--direct", help="tools/jev_direct.py の出力")
-    ap.add_argument("--batches", default=str(ROOT / "eval/v09-observers/batches/bench-*.json"))
+    ap.add_argument("--batches", default=str(ROOT / "eval/observers/batches/bench-*.json"))
     ap.add_argument("-n", type=int, default=500)
     ap.add_argument("-o", "--out", required=True)
     args = ap.parse_args()

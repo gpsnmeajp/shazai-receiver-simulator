@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import jev_direct as J  # noqa: E402
 import s1  # noqa: E402
 
-BATCHES = {"bench": "eval/v09-observers/batches/bench-*.json", "scenes": "eval/v09-observers/batches/scenes-*.json"}
+BATCHES = {"bench": "eval/observers/batches/bench-*.json", "scenes": "eval/observers/batches/scenes-*.json"}
 
 
 def groups(name):

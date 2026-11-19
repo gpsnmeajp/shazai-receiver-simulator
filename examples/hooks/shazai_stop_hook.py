@@ -9,8 +9,9 @@
       "command": "python3 /path/to/shazai-receiver-simulator/examples/hooks/shazai_stop_hook.py"}]}]}}
 
 環境変数:
-  TYPESAFE_API_KEY      jev バックエンドのキー
-  SHAZAI_BACKEND        jev（既定）／llm-s1
+  TYPESAFE_API_KEY      jev バックエンドのキー（jev-or と llm-s1 は OPENROUTER_API_KEY）
+  SHAZAI_BACKEND        jev（既定）／jev-or（OpenRouter 経由の Jev）／llm-s1
+  SHAZAI_CALIBRATION    Noul の欄ごとの再較正の表（例 eval/jev/jev_calibration.json）。Jev では指定を勧める
   SHAZAI_MODE           notify（既定。判定をユーザーに表示するだけ）／block（失礼の恐れなら応答を差し戻す）
   SHAZAI_LOG            判定の記録を追記するJSONLのパス（任意）
   SHAZAI_REPLAY         保存した答えのファイル。指定すると API を呼ばずに replay で動く（試験用）
@@ -86,6 +87,7 @@ def main():
     answer = msgs.pop()["content"]
     try:
         replay = os.environ.get("SHAZAI_REPLAY")
+        s1.load_calibration(os.environ.get("SHAZAI_CALIBRATION"))
         res = sim.check_turn(msgs, answer, backend="replay" if replay else os.environ.get("SHAZAI_BACKEND", "jev"),
                              n=200, timeout=5.0, replay=replay)
     except (s1.S1Error, KeyError, ValueError):

@@ -2,7 +2,7 @@
 
 シミュレータの評定（や、LLMペルソナなど他の自動評価）が、実際の人の受け取り方とどれだけずれているかを測るための仕組みです。道具は `blind.py` と `human/rate_template.html` です。
 
-v0.8 から、人間の評定もファジィです。評定者は4つの述語（失礼だ／足りない／重すぎる／釣り合っている）それぞれが**どのくらい当てはまるか**を5段階で答え、シミュレータの平均所属度と同じ形で比べます（[DESIGN.md](DESIGN.md) D-015・D-016）。
+人間の評定はファジィです。評定者は4つの述語（失礼だ／足りない／重すぎる／釣り合っている）それぞれが**どのくらい当てはまるか**を5段階で答え、シミュレータの平均所属度と同じ形で比べます（[DESIGN.md](DESIGN.md) D-015・D-016）。
 
 ## 1. 流れ
 
@@ -93,7 +93,7 @@ v0.8 から、人間の評定もファジィです。評定者は4つの述語�
 
 ## 5. 比較の指標
 
-すべて所属度で比べます。**近さ**は、二つの所属度の組（4つの述語）の `1 − 平均絶対差` で、1 なら一致、0 なら正反対です。
+主指標は、述語ごとの5段階の順位確率スコア（RPS。`--rps`）と項目平均との二乗誤差です。予測分布は、受け手一人ずつの所属度に評定者のノイズを足して5段階に丸めたもので、一様分布と人間の評定の周辺分布を基準に並べます（[METHODS.md](METHODS.md) 5章）。以下の指標は所属度で比べる記述用の指標です。**近さ**は、二つの所属度の組（4つの述語）の `1 − 平均絶対差` で、1 なら一致、0 なら正反対です。
 
 **上限の目安（人間どうし）**
 
@@ -110,7 +110,7 @@ v0.8 から、人間の評定もファジィです。評定者は4つの述語�
 | 指標 | 意味 | 読み方 |
 |---|---|---|
 | 個々の評定との近さ | 自動評価の所属度と、各人の評定の近さの平均 | 1人抜きの値に近いほどよい |
-| 項目平均との近さ | 自動評価の所属度と、項目ごとの人間の平均所属度の近さ | 母集団としての近さを見る主指標 |
+| 項目平均との近さ | 自動評価の所属度と、項目ごとの人間の平均所属度の近さ | 母集団としての近さ。断定的な評価器を有利にするので、順位づけには RPS を使う |
 | 平均絶対差（述語ごと） | 述語ごとの項目平均の差 | どの述語で外れるか |
 | 項目間の相関（述語ごと） | 項目ごとの人間の平均と自動評価の相関 | 順位がそろっているか |
 | 偏り（述語ごと） | 自動 − 人間 | 正なら自動評価がその述語を強く当てはめている（LLMペルソナは「釣り合う」が大きく正になりやすい） |
@@ -130,9 +130,9 @@ v0.8 から、人間の評定もファジィです。評定者は4つの述語�
 
 **既存の評定を人間側に入れる**：`python3 blind.py import-benchmark --key ... --ratings user-ratings.json --rater author -o ...` で、既存の4値の評定を、一点集中の所属度の評定ファイルに変換できます。この評定ページで盲検化して集めたものではないことと、4値であることが、報告書に注記されます。再評定の項目には取り込みません。
 
-## 6. 仕組みの試験（2026-11-19、v0.8）
+## 6. 仕組みの試験（2026-11-19）
 
-人間の評定はまだないため、仕組みの動作だけを確かめました。結果は `human/session-example/` にあります。
+合成評定者で、仕組みの動作を確かめました。結果は `human/session-example/` にあります。
 
 | 試験 | 結果 |
 |---|---|
@@ -141,19 +141,19 @@ v0.8 から、人間の評定もファジィです。評定者は4つの述語�
 | t ノルムの検証 | 合成評定者は min で作った「釣り合う」を丸めているので、min・積とも相関 0.74 で、区別できない（試験として当然）。人間の評定で初めて意味を持つ |
 | 型の判定の回復 | 合成評定者の元の型を、23問で 6/12 名当てた（偶然なら約2.4名）。型どうしの重なりが大きく、項目が少ないと型の識別は粗い |
 | 外れの検出 | 無作為に押した回答（近さ 0.58）と、すべて「少し」を押した回答（0.72）は、どちらも「母集団の外の可能性」と判定された（目安 0.883） |
-| 旧形式の取り込み | 4値の評定ファイルの取り込み（一点集中の所属度）と、報告書の注記が動作 |
+| 4値形式の取り込み | 4値の評定ファイルの取り込み（一点集中の所属度）と、報告書の注記が動作 |
 
-## 6b. 評価キット（v0.9）
+## 7. 評価キット
 
-v0.9 の設計の仮説（失敗の前の構え、修復期の控え、免責の但し書きの局面）を、日本の受け手で確かめるための問題束です。事前登録は [PREREGISTRATION_V09.md](../../human/PREREGISTRATION_V09.md)、仮説の機械で読める定義は [hypotheses-v09.json](../../human/hypotheses-v09.json)、設計は [IMPROVEMENT_V09.md](IMPROVEMENT_V09.md) 8章です。
+控えの時間軸の仮説（失敗の前の構え、修復期の控え、免責の但し書きの局面）を、日本の受け手で確かめるための問題束です。事前登録は [PREREGISTRATION.md](../../human/PREREGISTRATION.md)、仮説の機械で読める定義は [hypotheses.json](../../human/hypotheses.json)、設計は [METHODS.md](METHODS.md) 8章です。
 
 ```text
-python3 tools/make_scenes_v09.py                                   # 項目の組（88場面・320回答）
-python3 blind.py pack --design --scenes examples/scenes-v09.json --repeat 2 --out-dir human/kit-v09
-python3 sim.py scenes examples/scenes-v09.json -o out/scenes-v09.json
-python3 blind.py compare --key human/kit-v09/key.json --ratings "human/kit-v09/ratings/*.json" \
-  --sim out/scenes-v09.json --scenes examples/scenes-v09.json --hypotheses human/hypotheses-v09.json --rps -o human/kit-v09/compare
-python3 blind.py power --scenes examples/scenes-v09.json --hypotheses human/hypotheses-v09.json --raters 20,40,60
+python3 tools/make_scenes_kit.py                                   # 項目の組（88場面・320回答）
+python3 blind.py pack --design --scenes examples/scenes-kit.json --repeat 2 --out-dir human/kit
+python3 sim.py scenes examples/scenes-kit.json -o out/scenes-kit.json
+python3 blind.py compare --key human/kit/key.json --ratings "human/kit/ratings/*.json" \
+  --sim out/scenes-kit.json --scenes examples/scenes-kit.json --hypotheses human/hypotheses.json --rps -o human/kit/compare
+python3 blind.py power --scenes examples/scenes-kit.json --hypotheses human/hypotheses.json --raters 20,40,60
 ```
 
 | 要素 | 内容 |
@@ -161,23 +161,23 @@ python3 blind.py power --scenes examples/scenes-v09.json --hypotheses human/hypo
 | 項目 | `design.kit` が真の場面。4領域 × 組 A（失敗の前の構え 5 × 謝罪 6）・組 B（修復期の回答 5 × 関係 2 × 傷の深さ 2）・組 C（但し書き 2 × 局面 4）＋錨 4 |
 | 割り付け | 土台（28）ごとに一人一水準のラテン方格。リスト（30）は評定者IDのハッシュで決まり、URL の `?list=` で指定もできる。錨は全員、注意の確認 1問、再評定 2問。1人 35問 |
 | 追加の設問 | 信頼意図（全項目）、反省の知覚・再発の危険（修復期）、操作の確認（失敗の前の自信。組 A・C）。不満の深さと誠実さは聞かない |
-| アンケート | 既存の8問に、過信への厳しさ、「確認済み」への頼り方、戻り方の好み、詫びの繰り返しの負担、謝罪中の「念のため」、AI の利用経験の6問を追加 |
+| アンケート | 3章の8問に加えて、過信への厳しさ、「確認済み」への頼り方、戻り方の好み、詫びの繰り返しの負担、謝罪中の「念のため」、AI の利用経験の6問 |
 | 検定 | `compare --hypotheses`：評定者を単位にしたブートストラップ（p は標準誤差の正規近似）、primary に Holm 法、支持は調整後 p < 0.05 かつ効果 ≥ 0.10。シミュレータの予測との向きの一致も出す |
 | 主指標 | `compare --rps`：述語ごとの5段階の順位確率スコア（予測分布は受け手一人ずつの所属度＋評定者のノイズを丸めたもの） |
 | 検出力 | `power`：合成評定者で、事前登録の検定が「支持」となる割合を人数ごとに出す（`--effect-scale 0.5` で予測の半分の効果） |
 
-合成評定者による試験と検出力の結果は `eval/v09-kit/` と [EVALUATION_V09.md](EVALUATION_V09.md) にあります。
+合成評定者による試験と検出力の結果は `eval/kit/` と [EVALUATION.md](EVALUATION.md) 5.2節にあります。
 
-## 7. 限界と注意
+## 8. 限界と注意
 
 - 立場の説明文（本人／第三者／物語の中）は評定に影響します。シミュレータの条件とそろえるために入れていますが、文言を変えたら比較をやり直してください。
 - 型の判定は「どの型が最も近いか」を示すだけで、23問程度では型を確実には識別できません。項目を増やすか、性質ごとに一点だけ変えた組を増やすと識別しやすくなります。
 - 合成評定者による試験の数値を、シミュレータの妥当性の証拠として使ってはいけません。
 - 5段階を等間隔の所属度（0／0.25／0.5／0.75／1）として読んでいますが、評定者がそう使っているかは確かめていません。
-- 4値の旧形式の評定は、一点集中の所属度として読みます。「どちらとも言えない」の情報がないので、ファジィの評定より近さが低く出ます。両者を混ぜて比べるときは注意してください。
+- 4値形式の評定は、一点集中の所属度として読みます。「どちらとも言えない」の情報がないので、ファジィの評定より近さが低く出ます。両者を混ぜて比べるときは注意してください。
 - アンケートは心理尺度として検証されていません。
 
-## 8. ファイル形式
+## 9. ファイル形式
 
 **問題束**（`packet.json`、`rate.html` に埋め込み）
 ```json
@@ -192,7 +192,7 @@ python3 blind.py power --scenes examples/scenes-v09.json --hypotheses human/hypo
                       "meta": {"origin": "scenes", "label": "仮想の代償だけ", "frame": "real_task", "...": "..."}}}}
 ```
 
-**評定ファイル**（評定ページが書き出す。旧形式 `apology-blind-rating/1` の `{"rating": "rude"}` も読める）
+**評定ファイル**（評定ページが書き出す。4値形式 `apology-blind-rating/1` の `{"rating": "rude"}` も読める）
 ```json
 {"schema": "apology-blind-rating/2", "packet_id": "...", "rater": {"id": "R07", "questionnaire": {"detect": 4}},
  "mode": "independent", "order": ["..."], "duration_s": 1520, "finished_at": "...",

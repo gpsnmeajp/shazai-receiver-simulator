@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """System One の答え（Noul の確率）を、欄ごとの閾値で再較正する表を作る（JEV_DESIGN.md 5.6節）。
 
-参照の観察（銀ラベル。既定は観察者の集団 eval/v09-observers/obs-ensemble.json）を正解とみなし、
+参照の観察（銀ラベル。既定は観察者の集団 eval/observers/obs-ensemble.json）を正解とみなし、
 回答単位で「その族の確率の最大（文ごとの問いは文の最大）」と参照の真偽を突き合わせ、
 一致率が最大になる閾値 t を族ごとに選ぶ。場面単位の一つ抜き交差検証で、選び方そのものの一致率も出す。
 
-  python3 tools/calibrate_s1.py eval/v09-observers/batches/bench-*.json --cache eval/jev/cache \\
+  python3 tools/calibrate_s1.py eval/observers/batches/bench-*.json --cache eval/jev/cache \\
       -o eval/jev/jev_calibration.json --report eval/jev/calibration.md
 
 正例が少ない族（既定 5 件未満）は、閾値を上限（0.95）に置く。標準ライブラリのみ。
@@ -103,7 +103,7 @@ def best_t(ps, min_pos):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("batches", nargs="+")
-    ap.add_argument("--ref", default=str(ROOT / "eval" / "v09-observers" / "obs-ensemble.json"))
+    ap.add_argument("--ref", default=str(ROOT / "eval" / "observers" / "obs-ensemble.json"))
     ap.add_argument("--backend", default="jev-or")
     ap.add_argument("--model")
     ap.add_argument("--cache", required=True, help="答えのキャッシュ（新たな問い合わせはしない前提）")

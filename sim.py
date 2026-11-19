@@ -440,7 +440,7 @@ def interp(x, pts):
     return pts[-1][1]
 
 
-# 控えの時間軸（v0.9）の設定。population.json の "timeline" で上書きできる
+# 控えの時間軸の設定。population.json の "timeline" で上書きできる
 TIMELINE = {
     "scar_decay_turns": 20,     # 傷は出来事からこのターン数で消える（直線）。実際は実時間で減るが、便宜としてターンで数える
     "deception_floor": 0.5,     # 欺瞞の傷は減衰してもこの割合が残る（欺瞞の後の信頼は完全には戻らない）
@@ -916,9 +916,9 @@ def judge_full(a, sc, th0, L, text_len, hyst=False):
     # 重さ：不満が明確なとき、または指摘を受けた後の一度の詫びは、誰にとっても過剰ではない
     w_ok = max(interp(L, WEIGHT_POINTS) * th["expect"], max(mid, float(sc.get("explicit_complaint", 0) >= 1)))
     tol = th["tolerance"] * min(1.0, 0.25 + L / 2) * (1 - 0.5 * th["brevity"])
-    heavy_v09 = r * 0.4 * (float(rs["re_apology"]) + 0.5 * float(rs["revisits_incident"])) * (1.5 - 0.5 * th["tolerance"] / 3) \
+    heavy_restraint = r * 0.4 * (float(rs["re_apology"]) + 0.5 * float(rs["revisits_incident"])) * (1.5 - 0.5 * th["tolerance"] / 3) \
         + 0.15 * float(st["over_hedging"]) * (1 - 0.5 * min(1.0, G)) + r * 0.1 * min(1.0, liability_n)
-    excess = weight(a) + heavy_sig + heavy_v09 - w_ok - tol
+    excess = weight(a) + heavy_sig + heavy_restraint - w_ok - tol
     reliability = max(0.0, min(1.0, 1 - 0.3 * float(st["over_hedging"]) - 0.4 * G * (float(st["confidence_now"]) >= 2)
                                - 0.5 * ps["dec"] * (TIMELINE["deception_floor"]
                                                     + (1 - TIMELINE["deception_floor"]) * decay(sc.get("turns_since_incident", 0) or 0))))
@@ -935,7 +935,7 @@ def to_level(L):
     return str(int(min(4, math.floor(L + 0.5))))
 
 
-# 後から足した性質は、それぞれ別の乱数列で引き、既存の性質の抽出を変えない
+# ここに挙げた性質は、それぞれ別の乱数列で引く（性質を足しても、ほかの性質の抽出が変わらないように）
 EXTRA_KEYS = {"embodiment": 9973, "overclaim": 19997}
 
 
@@ -975,7 +975,7 @@ def assess(a, sc, panel, text_len, hyst=True):
 
     mu      平均所属度（各述語のファジィな割合。σ-count ÷ 人数。和は1にならない）
     tail    所属度 0.5 以上の人の割合（α-cut。たとえば「失礼と感じる人の割合」）
-    labels  一人ずつ非ファジィ化したときの割合（従来の4値の評定との比較用）
+    labels  一人ずつ非ファジィ化したときの割合（4値の評定との比較用）
     """
     n = len(panel)
     mu, tail, labels, lv, faults = Counter(), Counter(), Counter(), Counter(), Counter()
@@ -1409,7 +1409,7 @@ def cmd_check(args):
 
 
 def add_model_options(p):
-    """追加の改善（ヒステリシス・escalation）は既定で有効。--no-* で無効にする。"""
+    """経緯の扱い（ヒステリシス・escalation）。既定で有効。--no-* で無効にする。"""
     p.add_argument("--hysteresis", action=argparse.BooleanOptionalAction, default=True,
                    help="信頼損傷ヒステリシス（既定で有効。--no-hysteresis で無効）")
     p.add_argument("--escalation", action=argparse.BooleanOptionalAction, default=True,

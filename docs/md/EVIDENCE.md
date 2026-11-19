@@ -16,7 +16,7 @@
 | A-01 | 属性を演じさせたLLMは、集団の姿を取り違え（外部の人の想像する姿になる）、集団を平板にする | 属性ペルソナを使わない（D-001, D-002） | 強 | [Wang, Morgenstern, Dickerson](https://arxiv.org/abs/2402.01908) |
 | A-02 | LLMは意見の分布を「知っていても」そこから抽出するのは苦手。ペルソナ指定より実例を示すほうが分布に近づく | 多様性を外から分布として与える（P2, P3） | 強 | [Meister, Guestrin, Hashimoto](https://arxiv.org/abs/2411.05403) |
 | A-03 | 評定するLLMには、長い回答を好む癖、自分と同じモデルの出力を好む癖などがある | 観察と評価を分ける（P1）。観察者は評価対象と別系統のモデルにする | 強 | [LLMs-as-Judges サーベイ](https://arxiv.org/abs/2412.05579) |
-| A-04 | 事例：v0.4 ベンチマークで、ペルソナ3名の評定は互いに一致（κ=0.72〜0.78）し、筆者とはほぼ一致しなかった（κ=0.04〜0.11）。ペルソナは「釣り合う」を約8割、筆者は約5割 | D-001 の直接の動機 | 事例 | 本リポジトリの v0.4 結果 |
+| A-04 | 事例：SHAZAI Rules v0.4 ベンチマークで、ペルソナ3名の評定は互いに一致（κ=0.72〜0.78）し、筆者とはほぼ一致しなかった（κ=0.04〜0.11）。ペルソナは「釣り合う」を約8割、筆者は約5割 | D-001 の直接の動機 | 事例 | 本リポジトリでの評価（[HISTORY.md](../../HISTORY.md) 2.2節） |
 
 ## B. 不満の知覚と受け手の違い
 
@@ -31,6 +31,8 @@
 | B-07 | 日本人は恩義を詫びの言葉で表し、米国では感謝の言葉が多用される | 感謝だけの返答は謝罪の中身として小さくしか数えない | 中 | [謝罪と感謝の日米比較（SAGE）](https://journals.sagepub.com/doi/10.1177/0261927X12446595) |
 | B-08 | 謝罪の頻度は人によって違い、閾値（何を謝るべきことと見るか）にも個人差がある | 受け手の `expect`、`tolerance` の幅 | 中 | [Schumann らの研究の紹介](https://www.psypost.org/2023/03/are-you-a-frequent-apologizer-new-research-indicates-you-might-actually-reap-downstream-benefits-74347) |
 | B-09 | 必要なポライトネスは、力関係（P）、社会的距離（D）、負担の大きさ（R）で決まる | `context.power`、`context.distance` で期待する深さと文体の規範を調整 | 強（理論） | Brown & Levinson (1987) *Politeness* |
+| B-10 | 謙遜は文化に共通した価値で、目的は謙虚な人物と見られること。程度と仕方に文化差があり、自己否定につながる強い謙遜はアジア文化圏で選ばれやすい（21か国） | `overclaim` を日本人らしさではなく、どの型にも幅のある個人差として置く | 中 | 山口・村上・森尾ほか（科研 25285177 研究成果報告書） |
+| B-11 | 普段得意な人が謙遜すると、大人からは能力が低く見られる。普段苦手なのに自己高揚すると、性格が低く見られる（日本） | 過信で外した直後の言い切り（懲りていない）、ぼかしすぎの頼れなさ | 中 | 林・松本・和田・Banerjee (2024) *J. Exp. Child Psychol.* |
 
 ## C. 謝罪の構成要素
 
@@ -39,19 +41,25 @@
 | C-01 | 謝罪の6要素のうち、最も重要なのは責任の承認、次が償いの申し出。許しの要求は最も効果が小さい | 中身（過失の具体性）と、依頼の未遂行の重い減点 | 強 | [Lewicki ほか (2016)](https://news.osu.edu/the-6-elements-of-an-effective-apology-according-to-science/) |
 | C-02 | 日本人は説明せずに直接謝ることを好み、相手のために何かをすることが謝罪の主要な形の一つ | 謝罪が冒頭にあることの加点、説明の多さの減点、`repair` | 強 | Barnlund & Yoshioka (1990)。[要約を含む資料](https://dwcla.repo.nii.ac.jp/record/1547/files/AA11551704-20170331-71.pdf) |
 | C-03 | 日本人は償い・補償・再発しない約束・許しの要求を多く使う | 代償と約束の扱い | 中 | [Sugimoto (1995)](https://www.ideals.illinois.edu/items/19646) |
+| C-04 | 日本人は米国人より謝る頻度が高く、自分が関与していないことにも謝る。米国人は謝罪を責任の承認と同一視しやすい。日本の謝罪は相手の負担を認め関係を保つ反省の表明。誠実さの違反の後の謝罪は、日本人の方が信頼を回復させた。日本では違反を改められるものと見る | 謝罪の中身を過失の承認と負担への言及に分ける。修復期の行動の重み、違反の種類の調整 | 中〜強 | Maddux, Kim, Okumura & Brett (2011) *International Negotiation* |
 
-## D. 信頼損傷ヒステリシス
+## D. 信頼損傷ヒステリシスと控えの時間軸
 
 | ID | 内容 | 使い方 | 確度 | 出典 |
 |---|---|---|---|---|
 | D-01 | 信頼は作るより壊す方がはるかに容易（非対称性原理） | 傷 S が違反回数に対して超線形に増える | 強 | Slovic (1993)。[整理](https://jps.ecnu.edu.cn/EN/Y2013/V36/I6/1333) |
 | D-02 | 信頼の低い人は、良い知らせも悪い知らせも否定的に受け取る | 傷があると兆候への感度を上げる（×(1+0.3S)） | 中 | [Cvetkovich et al. (2002)](https://peeref.com/works/73175127) |
 | D-03 | 日本でも、もともと高い信頼が大きな出来事の後も保たれやすい「二重の非対称効果」が報告されている | 状態依存の受け取り方の裏づけ | 中 | [中谷内ほか (2014)](https://www.jstage.jst.go.jp/article/jjpsy/85/2/85_85.13014/_article/-char/ja) |
-| D-04 | 行動を改める約束は信頼の回復を早めるが、事前の欺瞞があると効果が落ちる。ロボットが約束して破ると、一般的な謝罪より信頼が大きく下がる | `broken_promises` 後の新しい約束を減点 | 強 | [Schweitzer, Hershey, Bradlow (2006)](https://repository.upenn.edu/mgmt_papers/313)、[Nesset et al.](https://researchportal.hw.ac.uk/en/publications/robot-broken-promise-repair-strategies-for-mitigating-loss-of-tru/) |
+| D-04 | 行動を改める約束は信頼の回復を早めるが、事前の欺瞞があると効果が落ちる。信頼に足る行動が一貫して続けば信頼は回復するが、欺瞞を伴えば完全には戻らない。ロボットが約束して破ると、一般的な謝罪より信頼が大きく下がる | `broken_promises` 後の新しい約束を減点。修復期の一貫、欺瞞の残る傷 S_dec | 強 | [Schweitzer, Hershey, Bradlow (2006)](https://repository.upenn.edu/mgmt_papers/313)、[Nesset et al.](https://researchportal.hw.ac.uk/en/publications/robot-broken-promise-repair-strategies-for-mitigating-loss-of-tru/) |
 | D-05 | ロボットとの協働で、3回の違反と修復の後は、どの修復策でも信頼が完全には戻らない | 過去の謝罪回数に応じた謝罪の目減り | 中 | [Esterwood & Robert (2023)](https://www.sciencedaily.com/releases/2023/02/230202135744.htm) |
 | D-06 | 人は同じ間違いを見ても、人間よりアルゴリズムに早く信頼を失う | AIへの傷の残りやすさ `memory` | 強 | [Dietvorst, Simmons, Massey (2015)](https://faculty.wharton.upenn.edu/wp-content/uploads/2016/11/20-Dietvorst-Simmons-Massey-2015.pdf) |
 | D-07 | 自動化システムの失敗は、成功より信頼に大きく影響する | 非対称性の裏づけ | 中 | [Yang et al.](https://arxiv.org/abs/2107.07374) |
 | D-08 | 許しは時間をかけて少しずつ進む | 受け入れ後の不満の下がり幅を exp(−S) で縮める | 強 | [McCullough et al. (2003)](https://typeset.io/papers/forgiveness-forbearance-and-time-the-temporal-unfolding-of-4x70ov2733) |
+| D-09 | 誤りは、その誤りに自信を示していた証人の信用を、自信を示さなかった証人より大きく損なう。人は相手の較正を推し量る | 過信の差 G、控えめの度合い h | 中 | Tenney, MacCoun, Spellman & Hastie (2007) *Psychological Science* |
+| D-10 | 正確さが分かるとき、自信を持って外した助言者の信用は低い。正確さが分からなければ、自信のある助言者が影響力を持つ。正確な助言者の控えめさは罰せられない | G、気づかれやすさ v | 中 | Sah, Moore & MacCoun (2013) *OBHDP* |
+| D-11 | AIの自信のずれは適切な頼り方を損なうが、利用者には気づかれにくい | 気づかれやすさ v | 中 | [Li, Yang, Zhang, Liao ほか (2024)](https://arxiv.org/abs/2402.07632) |
+| D-12 | 償いや監視の受け入れといった実質的な応答は、謝罪と同じく「反省している」という知覚を通じて信頼を回復させる。反省の信号は、能力の違反の後で重く受け取られる | 修復期の控え、違反の種類の調整 | 強 | Dirks, Kim, Ferrin & Cooper (2011) *OBHDP* |
+| D-13 | 謝罪や補償などの和解のふるまいは、相手を「関係の価値がある」「また害する危険が低い」と知覚させ、許しを早める（縦断研究） | 修復期の控え、約束破りの失点 | 強 | McCullough ら (2014) *PNAS* |
 
 ## E. 態度・行動のシグナル
 
@@ -82,8 +90,9 @@
 | F-08 | 遊びや物語には「これは遊びである」という枠組みがあり、その中での行為は枠の外とは別の意味を持つ | 物語の中では、作中の身体と代償を本物として扱う | 強（理論） | Bateson (1955) "A Theory of Play and Fantasy"、Huizinga (1938) の「魔法の円」 |
 | F-09 | ロボットの言葉と非言語の食い違いは信頼を大きく下げる | 不一致群の減点をAIにも適用 | 中 | [Nesset et al.](https://researchportal.hw.ac.uk/en/publications/robot-broken-promise-repair-strategies-for-mitigating-loss-of-tru/) |
 | F-10 | 関連研究（結果は未確認）：謝罪中のロボットのお辞儀と信頼回復、オンラインの謝罪での絵文字の効果 | 今後の参照用 | — | [Maehigashi et al. (HRI 2025)](https://dblp.uni-trier.de/rec/conf/hri/MaehigashiKYY25.html)、[絵文字と謝罪 (2026)](https://pure.jbnu.ac.kr/en/publications/apologizing-for-online-service-failures-how-does-the-use-of-emoji/) |
+| F-11 | LLM の一人称の不確かさの表明は、過信を減らす一方、使い続けたい気持ちを下げ、作業時間を延ばす（事前登録の実験） | 失敗の前の但し書きの有用さ、ぼかしすぎの頼れなさ | 中 | Kim, Liao, Vorvoreanu, Ballard & Vaughan (2024) FAccT |
 
-## G. 事例（v0.4 ベンチマークの筆者評定）
+## G. 事例（SHAZAI Rules v0.4 ベンチマークの筆者評定）
 
 筆者の評定は母集団の一点として扱い、規則の向きの確認に使っています。正解として当てはめてはいません。
 

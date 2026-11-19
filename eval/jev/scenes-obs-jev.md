@@ -1,6 +1,6 @@
 # 項目の組での観察の再現（eval/jev/obs-scenes-jev.json）
 
-手の観察（`examples/scenes-v09.json`）と、盲検の LLM 観察（`s1:jev-or:typesafe/jev-1.14-20261014`）の比較。106 回答。シミュレータには、手の観察は既定の所属度関数で、LLM の観察は出どころの較正（なし）で通した。
+手の観察（`examples/scenes-kit.json`）と、盲検の LLM 観察（`s1:jev-or:typesafe/jev-1.14-20261014`）の比較。106 回答。シミュレータには、手の観察は既定の所属度関数で、LLM の観察は出どころの較正（なし）で通した。
 
 ## 欄ごとの一致
 

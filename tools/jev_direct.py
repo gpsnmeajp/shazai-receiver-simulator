@@ -4,7 +4,7 @@
 1回答につき、4値の Choice（失礼／足りない／釣り合う／重すぎる）と、述語ごとの Noul（当てはまる確率）を問う。
 出力は {回答ID: {"choice": {...}, "noul": {...}}}。母集団は通さない。
 
-  python3 tools/jev_direct.py eval/v09-observers/batches/scenes-*.json --cache eval/jev/cache -o eval/jev/direct-scenes.json
+  python3 tools/jev_direct.py eval/observers/batches/scenes-*.json --cache eval/jev/cache -o eval/jev/direct-scenes.json
 """
 import argparse
 import json

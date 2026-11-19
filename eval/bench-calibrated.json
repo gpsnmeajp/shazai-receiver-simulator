@@ -125,7 +125,7 @@
    }
   },
   "ensemble": {
-   "obs": "eval/v09-observers/obs-ensemble.json",
+   "obs": "eval/observers/obs-ensemble.json",
    "sim": "current",
    "source": "llm-ensemble",
    "n": 192,
@@ -234,7 +234,7 @@
    }
   },
   "top-literal": {
-   "obs": "eval/v09-observers/obs-opus-literal.json",
+   "obs": "eval/observers/obs-opus-literal.json",
    "sim": "current",
    "source": "llm:claude-top:literal",
    "n": 192,

@@ -3,7 +3,7 @@
 （仮説の対比、述語の平均所属度）をどれだけ再現するかを、層A→層Bの経路と並べて比べる。
 
   python3 tools/eval_jev_direct.py --direct eval/jev/direct-scenes.json \\
-      --obs jev-cal=eval/jev/obs-scenes-jev-cal.json --obs sub=eval/v09-observers/obs-scenes-opus.json -o eval/jev/direct-scenes.md
+      --obs jev-cal=eval/jev/obs-scenes-jev-cal.json --obs sub=eval/observers/obs-scenes-opus.json -o eval/jev/direct-scenes.md
 """
 import argparse
 import json
@@ -22,8 +22,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--direct", required=True)
     ap.add_argument("--obs", action="append", default=[], help="名前=観察JSON（層A→層Bの経路）")
-    ap.add_argument("--scenes", default=str(ROOT / "examples" / "scenes-v09.json"))
-    ap.add_argument("--hypotheses", default=str(ROOT / "human" / "hypotheses-v09.json"))
+    ap.add_argument("--scenes", default=str(ROOT / "examples" / "scenes-kit.json"))
+    ap.add_argument("--hypotheses", default=str(ROOT / "human" / "hypotheses.json"))
     ap.add_argument("-n", type=int, default=500)
     ap.add_argument("-o", "--out", required=True)
     args = ap.parse_args()
@@ -61,7 +61,7 @@ def main():
     L = [f"# 作例での Jev 直接評定と層A→層Bの比較（{len(base)} 回答）", "",
          "基準は「手の観察→母集団」。近さは 1 − 4述語の平均絶対差。Jev 直接は母集団を通さない。", "",
          "## 平均所属度と基準への近さ", "",
-         "近さは「常に釣り合う」でも高く出る（v0.8 の評価 6章）。非ファジィ化（最大の述語）した評定の一致と κ も並べる。", "",
+         "近さは「常に釣り合う」でも高く出る（HISTORY.md 3.4節）。非ファジィ化（最大の述語）した評定の一致と κ も並べる。", "",
          "| 方式 | 失礼 | 足りない | 釣り合う | 重すぎる | 基準への近さ（平均） | 非ファジィ化の一致 | κ |", "|---|---|---|---|---|---|---|---|"]
     label = lambda m: max(CATS, key=lambda k: m[k])
     blab = [label(b["mu"]) for _, b in base]

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""作例（examples/scenes-v09.json）の回答を、複数の観察の出どころ（手の観察・LLM・Jev など）で母集団に通し、
+"""作例（examples/scenes-kit.json）の回答を、複数の観察の出どころ（手の観察・LLM・Jev など）で母集団に通し、
 4つの述語の平均所属度、不満の深さ、無礼さ・不足・過剰の量、主な失点を出どころごとに並べる。
 
-  python3 tools/compare_scene_sources.py hand jev=eval/jev/obs-scenes-jev.json sub=eval/v09-observers/obs-scenes-opus.json
+  python3 tools/compare_scene_sources.py hand jev=eval/jev/obs-scenes-jev.json sub=eval/observers/obs-scenes-opus.json
   （hand は手の観察。名前=ファイル で観察JSONを足す。名前=ファイル@較正区分 で所属度関数の較正を指定）
 """
 import argparse
@@ -21,7 +21,7 @@ CATS = sim.CATS
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("sources", nargs="+")
-    ap.add_argument("--scenes", default=str(ROOT / "examples" / "scenes-v09.json"))
+    ap.add_argument("--scenes", default=str(ROOT / "examples" / "scenes-kit.json"))
     ap.add_argument("-n", type=int, default=300)
     ap.add_argument("--by", default="family", choices=["family", "scene", "answer"])
     ap.add_argument("--json", help="回答ごとの結果を書き出す")

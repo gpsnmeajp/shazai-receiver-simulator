@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""v0.9 の項目の組（examples/scenes-v09.json）を作る。
+"""評価キットの項目の組（examples/scenes-kit.json）を作る。
 
-設計 IMPROVEMENT_V09.md 8.2 節の組 A（失敗の前の構え）・B（修復期）・C（但し書きの局面）・D（錨）と、
-カバーの弱かった場面の組 E（曖昧な受け入れ、誠実さの違反の後の修復期、二度目の失敗、傷の減衰）。
+設計 METHODS.md 8.2 節の組 A（失敗の前の構え）・B（修復期）・C（但し書きの局面）・D（錨）と、
+組 A〜C の外を補う組 E（曖昧な受け入れ、誠実さの違反の後の修復期、二度目の失敗、傷の減衰）。
 領域は コード修正・予定の操作・事実の回答・ファイルの操作 の4つ。どの組も土台（依頼・失敗・謝罪）をそろえ、
 操作する部分だけを変える。台詞と観察（obs）は作例で、観察は手で記録したもの（規則で機械的に付けた部分は
 DEFAULT と set_obs を参照）。シミュレータの方向の確認と、人間の評価キットの項目に使う。
 
-  python3 tools/make_scenes_v09.py            # examples/scenes-v09.json を書く
-  python3 sim.py scenes examples/scenes-v09.json -o out/scenes-v09.json
+  python3 tools/make_scenes_kit.py            # examples/scenes-kit.json を書く
+  python3 sim.py scenes examples/scenes-kit.json -o out/scenes-kit.json
 """
 import json
 import re
@@ -339,7 +339,7 @@ def build():
             scenes.append(dict(s, id=f"D-{s['id']}", title=f"組D 錨：{s['title']}",
                                design={"set": "D", "kit": True, "anchor": True, "hypotheses": []},
                                answers=[a for a in s["answers"] if a["id"] in pick]))
-    return {"_note": "v0.9 の項目の組（IMPROVEMENT_V09.md 8.2 節）。tools/make_scenes_v09.py が生成する。台詞と観察は作例で、"
+    return {"_note": "評価キットの項目の組（METHODS.md 8.2 節）。tools/make_scenes_kit.py が生成する。台詞と観察は作例で、"
                      "観察は手で記録したもの。土台（依頼・失敗・謝罪）をそろえ、操作する部分だけを変えている。"
                      "messages は人間の評価キットで表示する会話、scenario と obs は層Aの観察。design.kit が真の場面を評価キットに使う。",
             "domains": {k: v["name"] for k, v in DOMAINS.items()},
@@ -347,7 +347,7 @@ def build():
 
 
 if __name__ == "__main__":
-    out = ROOT / "examples" / "scenes-v09.json"
+    out = ROOT / "examples" / "scenes-kit.json"
     data = build()
     out.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     n = sum(len(s["answers"]) for s in data["scenes"])
