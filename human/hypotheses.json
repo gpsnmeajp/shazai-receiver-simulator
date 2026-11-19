@@ -1,8 +1,8 @@
 {
  "schema": "apology-hypotheses/1",
- "title": "v0.9 の仮説（事前登録）",
+ "title": "控えの時間軸の仮説（事前登録）",
  "fixed_at": "2026-11-19",
- "_note": "IMPROVEMENT_V09.md 8.1節の仮説を、評価キットの項目の組（examples/scenes-v09.json の design）の上の対比として定義したもの。各対比は、セル（design の値で絞った項目の集まり）の平均の重み付き和。セルは領域をまたいで平均する。measure の値：rude/light/fit/heavy は所属度（0〜1）、trust/remorse/recurrence は 1〜5 を (x−1)/4 で 0〜1 にしたもの。検定は評定者を単位にしたブートストラップ（片側、two-sided は両側）、primary の検定に Holm 法（p 値は標準誤差による正規近似）、有意水準 0.05、効果の最小の大きさ 0.10。H9（t ノルム）は compare の人間どうしの節で別に検定する。データを集める前に固定し、変えた場合は変更履歴に残す。",
+ "_note": "METHODS.md 8.1節の仮説を、評価キットの項目の組（examples/scenes-kit.json の design）の上の対比として定義したもの。各対比は、セル（design の値で絞った項目の集まり）の平均の重み付き和。セルは領域をまたいで平均する。measure の値：rude/light/fit/heavy は所属度（0〜1）、trust/remorse/recurrence は 1〜5 を (x−1)/4 で 0〜1 にしたもの。検定は評定者を単位にしたブートストラップ（片側、two-sided は両側）、primary の検定に Holm 法（p 値は標準誤差による正規近似）、有意水準 0.05、効果の最小の大きさ 0.10。H9（t ノルム）は compare の人間どうしの節で別に検定する。データを集める前に固定し、変えた場合は変更履歴に残す。",
  "alpha": 0.05,
  "min_effect": 0.1,
  "hypotheses": [

@@ -43,13 +43,13 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html" aria-current="page">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="improvement.html">v0.9 設計</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html" aria-current="page">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="methods.html">方法</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
 <h1>アーキテクチャ</h1>
 <p class="lead">仕組みの「何を、どう」をまとめた文書です。</p>
-<p class="note">設計の理由は <a href="design.html">設計</a>、規則ごとの根拠は <a href="evidence.html">根拠</a> を参照してください。式に付けた <code>[E-xx]</code> などは根拠の項目番号です。</p>
+<p class="note">設計の理由は <a href="design.html">設計</a>、控えの時間軸の考え方と評価の方法は <a href="methods.html">方法</a>、規則ごとの根拠は <a href="evidence.html">根拠</a> を参照してください。式に付けた <code>[E-xx]</code> などは根拠の項目番号です。</p>
 <ul class="toc">
 <li><a href="#flow">1. 全体の流れ</a></li><li><a href="#files">2. ファイル構成</a></li><li><a href="#obs">3. 観察データの形式</a></li><li><a href="#model">4. 受け手モデル</a></li><li><a href="#cmd">5. コマンド</a></li><li><a href="#extend">6. 拡張の手順</a></li><li><a href="#compare">7. 人間の評定との比較</a></li><li><a href="#repro">8. 再現性</a></li>
 </ul>
@@ -58,13 +58,13 @@
 <div class="flow tight" role="figure" aria-label="全体の流れ">
 <div class="step o"><b>会話・場面・回答</b></div>
 <div class="arrow" aria-hidden="true">→</div>
-<div class="step a"><b>層A 観察（LLM）</b><small><code>observe_prompt.md</code> に従い、良し悪しを判断せずに記録する。API がない場合は <code>proxy</code>（既存のチェックリスト＋表層特徴）</small></div>
+<div class="step a"><b>層A 観察（LLM）</b><small><code>observe_prompt.md</code> に従い、良し悪しを判断せずに記録する。観察者の集団（観察方針 × モデル）の平均にできる（<code>segment</code> → <code>observe --variant</code> → <code>ensemble</code>）。API がない場合は <code>proxy</code>（既存のチェックリスト＋表層特徴）</small></div>
 <div class="arrow" aria-hidden="true">→</div>
-<div class="step o"><b>観察JSON</b><small>場面の観察＋回答の観察</small></div>
+<div class="step o"><b>観察JSON</b><small>場面の観察＋回答の観察。<code>source</code> に出どころ</small></div>
 <div class="arrow" aria-hidden="true">→</div>
-<div class="step b"><b>層B 受け手（コード）</b><small><code>population.json</code> の型の混合から N 人を抽出し、1人ずつ「不満の深さの知覚 → 無礼さ・不足・過剰 → 4つの述語の所属度」を計算する。一人の判定は決定的</small></div>
+<div class="step b"><b>層B 受け手（コード）</b><small><code>population.json</code> の型の混合から N 人を抽出し、1人ずつ「不満の深さの知覚 → 無礼さ・不足・過剰 → 4つの述語の所属度」を計算する。一人の判定は決定的。乱数は母集団の抽出だけ</small></div>
 <div class="arrow" aria-hidden="true">→</div>
-<div class="step o"><b>出力</b><small>回答ごとの平均所属度（失礼／足りない／釣り合う／重すぎる。和は1にならない）、失礼と感じる人の割合、量の軸（無礼さ・不足・過剰）、型ごとの内訳</small></div>
+<div class="step o"><b>出力</b><small>回答ごとの平均所属度（失礼／足りない／釣り合う／重すぎる。和は1にならない）、失礼と感じる人の割合（所属度0.5以上）、量の軸（無礼さ・不足・過剰）、信頼（<code>reliability</code>）、型ごとの内訳</small></div>
 </div>
 
 <h2 id="files"><svg class="icon"><use href="#i-file"/></svg>2. ファイル構成</h2>
@@ -72,18 +72,24 @@
 <thead><tr><th>ファイル</th><th>役割</th></tr></thead>
 <tbody>
 <tr><td><code>sim.py</code></td><td>すべてのコマンド。標準ライブラリのみ</td></tr>
-<tr><td><code>s1.py</code></td><td>層Aの System One 版（前処理・質問の組・バックエンド・組み立て）。<code>check</code> が使う。<a href="jev.html">System One</a><a href="improvement.html">v0.9 設計</a></td></tr>
-<tr><td><code>observe_prompt.md</code></td><td>層Aの観察者への指示と、出力JSONの形式</td></tr>
-<tr><td><code>population.json</code></td><td>受け手の型・性質の平均と幅・比率・性質の範囲</td></tr>
-<tr><td><code>proxy_scenarios.json</code></td><td>v0.4 ベンチマーク16場面の事実（代理観察用）</td></tr>
+<tr><td><code>s1.py</code></td><td>層Aの System One 版（前処理・質問の組・バックエンド・組み立て）。<code>check</code> が使う。<a href="jev.html">System One</a></td></tr>
+<tr><td><code>observe_prompt.md</code></td><td>層Aの観察者への指示と出力JSONの形式</td></tr>
+<tr><td><code>population.json</code></td><td>受け手の型・性質の平均と幅・比率・性質の範囲、所属度関数（<code>judgment</code>）、出どころごとの所属度関数（<code>judgment_by_source</code>）、控えの時間軸の設定（<code>timeline</code>）</td></tr>
+<tr><td><code>proxy_scenarios.json</code></td><td>SHAZAI Rules v0.4 ベンチマーク16場面の事実（代理観察用）</td></tr>
 <tr><td><code>examples/scenes.json</code></td><td>物語・AIキャラクター等の作例の組（観察済み）</td></tr>
-<tr><td><code>out/</code></td><td>検証の出力</td></tr>
-<tr><td><code>blind.py</code></td><td>人間のブラインド評定の問題束づくり、比較、既存評定の取り込み、合成評定者（試験用）</td></tr>
+<tr><td><code>examples/scenes-kit.json</code></td><td>評価キットの項目の組（88場面・320回答。<code>tools/make_scenes_kit.py</code> が生成）</td></tr>
 <tr><td><code>examples/check/</code></td><td><code>check</code> の作例と、試験用の手で付けた答え（replay）</td></tr>
 <tr><td><code>examples/hooks/shazai_stop_hook.py</code></td><td>Claude Code の Stop hook から毎ターン判定する参考実装</td></tr>
+<tr><td><code>blind.py</code></td><td>人間のブラインド評定の問題束づくり、比較、仮説の検定、検出力、既存評定の取り込み、合成評定者（試験用）</td></tr>
 <tr><td><code>human/rate_template.html</code></td><td>評定ページの雛形（<code>pack</code> が問題束を埋め込んで <code>rate.html</code> を作る）</td></tr>
+<tr><td><code>human/hypotheses.json</code>、<code>human/PREREGISTRATION.md</code></td><td>評価キットの仮説（機械で読める定義）と事前登録</td></tr>
 <tr><td><code>human/session-example/</code></td><td>作例から作った問題束の例と、合成評定者による仕組みの試験結果</td></tr>
-<tr><td><code>docs/</code></td><td>本文書群（GitHub Pages）。<code>docs/report.html</code> は解説と結果のレポート、<code>docs/md/</code> は Markdown 版</td></tr>
+<tr><td><code>tools/</code></td><td>総合評価の道具（<code>evaluate.py</code> 適正なスコアリング規則による評価、<code>run_eval.sh</code> 総合評価の再現、<code>merge_observers.py</code>・<code>observer_agreement.py</code> 観察者の集団、<code>eval_scene_obs.py</code> 作例の観察の再現、<code>sensitivity.py</code> 事前値の感度、<code>make_scenes_kit.py</code> 項目の組）</td></tr>
+<tr><td><code>eval/</code></td><td>総合評価のデータと出力（<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/eval/README.md">eval/README.md</a>）</td></tr>
+<tr><td><code>out/</code></td><td>検証の出力（git の管理外）</td></tr>
+<tr><td><code>docs/</code></td><td>GitHub Pages で公開する文書サイト（<code>index.html</code> ほかの HTML 版）</td></tr>
+<tr><td><code>docs/md/</code></td><td>本文書群の Markdown 版</td></tr>
+<tr><td><code>HISTORY.md</code></td><td>版ごとの経緯（<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a>）</td></tr>
 </tbody></table></div>
 
 <h2 id="obs"><svg class="icon"><use href="#i-eye"/></svg>3. 観察データの形式</h2>
@@ -101,9 +107,21 @@
 <tr><td><code>requests</code></td><td class="num">配列</td><td>最後の発話の依頼・質問</td></tr>
 <tr><td><code>prior_ai_apologies</code></td><td class="num">整数</td><td>それまでに謝った回数（ヒステリシス用）</td></tr>
 <tr><td><code>broken_promises</code></td><td class="num">整数</td><td>約束の後に同じ違反を繰り返した回数（ヒステリシス用）</td></tr>
+<tr><td><code>turns_since_incident</code></td><td class="num">整数</td><td>謝罪の対象になった失敗（またはその指摘）から最後の発話までのユーザー発話の数（傷の減衰用）。過去の指摘ごとの経過は <code>incident_ages</code></td></tr>
+<tr><td><code>prior_stance</code></td><td class="num">下表</td><td>失敗の前の構え</td></tr>
 <tr><td><code>context</code></td><td class="num">下表</td><td>場面の枠組み</td></tr>
 </tbody></table></div>
-<p><code>context</code> の欄。省略時は<b>太字</b>の既定値で、従来のベンチマークと同じ挙動になります。</p>
+<p><code>prior_stance</code> の欄（<a href="methods.html#timeline">方法</a> 3.3節）</p>
+<div class="tbl"><table>
+<thead><tr><th>欄</th><th>値</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td><code>turns</code></td><td>配列</td><td>AIの発話ごとに <code>{turn, confidence 0〜3, caused_failure, disclaimer}</code></td></tr>
+<tr><td><code>dismissed_concern</code></td><td>真偽</td><td>ユーザーの懸念を退けて進めたか</td></tr>
+<tr><td><code>claimed_verification</code></td><td>真偽</td><td>確かめたと述べていたか</td></tr>
+<tr><td><code>verification_false</code></td><td>真偽／<code>unknown</code></td><td>確かめたと述べたのに確かめていなかったことが明らかか</td></tr>
+<tr><td><code>salient</code></td><td>0〜1</td><td>失敗が断言と明らかに食い違うか、ユーザーがそれに触れたか</td></tr>
+</tbody></table></div>
+<p><code>context</code> の欄。省略時は<b>太字</b>の既定値です。</p>
 <div class="tbl"><table>
 <thead><tr><th>欄</th><th>値</th><th>意味</th></tr></thead>
 <tbody>
@@ -123,10 +141,13 @@
 <div class="card"><h3><code>excess</code></h3><p>自己卑下、約束、許しの要求、詫びの回数</p></div>
 <div class="card"><h3><code>closure</code></h3><p>終結宣言、先を急ぐ</p></div>
 <div class="card"><h3><code>register</code></h3><p>丁寧さの変化、絵文字・感嘆、書式</p></div>
-<div class="card"><h3><code>sentences</code></h3><p>一文ごとの悪い読みと、その自然さ</p></div>
+<div class="card"><h3><code>stance</code></h3><p>過信への言及、この回答の自信、較正された構え、ぼかしすぎ</p></div>
+<div class="card"><h3><code>restraint</code></h3><p>修復期の控え：調子を戻す、軽口、許しの当然視、配慮、約束を守ったか、蒸し返し、詫び直し</p></div>
+<div class="card"><h3><code>sentences</code></h3><p>文 ID ごとの悪い読みと自然さ、免責の但し書きの種類</p></div>
 <div class="card"><h3><code>signals</code></h3><p>態度・行動のシグナル（下表）</p></div>
 </div>
 <p class="note">詳細は <code>observe_prompt.md</code> を参照してください。</p>
+<p>観察者の集団の平均（<code>ensemble</code>）では、真偽は割合（0〜1）、列挙は票の分布になります。受け手モデルは、どの値もそのまま真理値として使います（<code>share</code>）。<code>unknown</code> は票を投じないものとして扱います。</p>
 
 <p><code>signals</code> の要素</p>
 <div class="tbl"><table>
@@ -156,7 +177,7 @@
 <div class="types" role="img" aria-label="当事者 20%、寛容 25%、効率 20%、礼節 15%、相棒 20%">
 <span class="t1" style="width:20%">当事者 20%</span><span class="t2" style="width:25%">寛容 25%</span><span class="t3" style="width:20%">効率 20%</span><span class="t4" style="width:15%">礼節 15%</span><span class="t5" style="width:20%">相棒 20%</span>
 </div>
-<p class="chart-sub">当事者・関係修復型／寛容・観察者型／効率・道具型／礼節規範型／相棒・情緒型。各性質は型の平均のまわりに正規分布で散らし、範囲で切ります。<code>embodiment</code> は別の乱数列から引きます（<code>EXTRA_KEYS</code>）。</p>
+<p class="chart-sub">当事者・関係修復型／寛容・観察者型／効率・道具型／礼節規範型／相棒・情緒型。各性質は型の平均のまわりに正規分布で散らし、範囲で切ります。<code>embodiment</code> と <code>overclaim</code> は、それぞれ別の乱数列から引きます（<code>EXTRA_KEYS</code>）。</p>
 </div>
 
 <div class="tbl wide heat"><table>
@@ -175,6 +196,7 @@
 <tr><td><code>warmth</code></td><td class="num">0〜1</td><td>くだけた関係が冷たく改まることへの抵抗</td><td class="h" style="--p:19%">0.3</td><td class="h" style="--p:25%">0.4</td><td class="h" style="--p:6%">0.1</td><td class="h" style="--p:6%">0.1</td><td class="h" style="--p:50%">0.8</td></tr>
 <tr><td><code>memory</code></td><td class="num">0〜1</td><td>傷の残りやすさ（ヒステリシス有効時のみ）</td><td class="h" style="--p:50%">0.8</td><td class="h" style="--p:19%">0.3</td><td class="h" style="--p:31%">0.5</td><td class="h" style="--p:37%">0.6</td><td class="h" style="--p:37%">0.6</td></tr>
 <tr><td><code>embodiment</code></td><td class="num">0〜1</td><td>現実のタスクで、AIの仮想の身体を合図として受け取る度合い（シグナルがあるときのみ）</td><td class="h" style="--p:25%">0.4</td><td class="h" style="--p:37%">0.6</td><td class="h" style="--p:6%">0.1</td><td class="h" style="--p:19%">0.3</td><td class="h" style="--p:50%">0.8</td></tr>
+<tr><td><code>overclaim</code></td><td class="num">0〜1</td><td>過信を罰する度合い（失敗の前の構えの観察があるときのみ）</td><td class="h" style="--p:50%">0.8</td><td class="h" style="--p:25%">0.4</td><td class="h" style="--p:56%">0.9</td><td class="h" style="--p:44%">0.7</td><td class="h" style="--p:31%">0.5</td></tr>
 </tbody></table></div>
 
 <h3>4.1 場面への調整（<code>effective_theta</code>）</h3>
@@ -186,44 +208,84 @@
 </div>
 <p class="note">根拠：<a href="evidence.html#B-04">B-04</a>、<a href="evidence.html#B-05">B-05</a>、<a href="evidence.html#B-09">B-09</a></p>
 
-<h3>4.2 不満の深さの知覚（<code>perceive</code>）</h3>
-<p>場面から、受け手が感じ取る不満の深さ <b>L（0〜4）</b> を求めます。傷 S はヒステリシス有効時（既定）だけ使います。L は決定的です（v0.7 までは N(0, 0.3) のゆらぎを足していました。人による違いは θ の分布が担います）。</p>
+<h3>4.2 局面と失敗の前の構え</h3>
+<p>謝罪の場面と修復期の働きは、修復期の真理値 <b>ρ</b>（<code>apology_accepted_before</code>。観察者の集団では「受け入れ後」と判断した割合）で混ぜます。謝罪の場面は 1 − ρ で効きます。</p>
+<p>失敗の前の構え（<code>prior_stance</code>）から、次の量を作ります（<code>prior_stance</code>）。</p>
+<pre><code>自信           c = max(caused_failure の発話の confidence) / 3
+控えめの度合い h = caused_failure の発話の、不確かさの明示と但し書きの平均（scope 1、verify 1、liability 0.5。
+                 確かめたと述べている場合は verify を数えない）
+気づかれやすさ v = 0.5 + 0.5·salient
+過信の差       G = v·c·(1 + 0.5·[dismissed_concern])
+欺瞞           dec = [verification_false]</code></pre>
+
+<h3>4.3 信頼の傷（<code>scar_parts</code>）と減衰</h3>
+<p>傷はヒステリシス有効時（既定）だけ使います。出来事からのターン数 t で直線に減衰します（<a href="methods.html#decay">方法 3.9節</a>）。</p>
+<pre><code>d(t)   = max(0, 1 − t / T)          T = timeline.scar_decay_turns（20）
+n      = prior_corrections + [harm>0 または 明示≥1 または 受け入れ後]
+n_eff  = 指摘ごとの d の和（incident_ages がなければ n·d(turns_since_incident)）
+S      = memory·(0.6·n_eff^1.3 + d·(0.8·[integrity] + 0.7·broken_promises + 0.6·overclaim·G))
+S_dec  = memory·0.8·dec·(f + (1 − f)·d)      f = timeline.deception_floor（0.5。欺瞞の傷は半分が残る）</code></pre>
+
+<h3>4.4 不満の深さの知覚（<code>perceive</code>）</h3>
+<p>場面から、受け手が感じ取る不満の深さ <b>L（0〜4）</b> を求めます。L は決定的で、人による違いは θ の分布が担います。</p>
 <pre><code>prior  = min(prior_corrections, 3)
 causes = 0.35·prior + 0.35·push + 0.35·harm + 0.35·[integrity]
-S      = memory·(0.6·n^1.3 + 0.8·[integrity] + 0.7·broken_promises)    ※ヒステリシス時のみ。それ以外は0
-         n = prior_corrections + [harm>0 または 明示≥1 または 受け入れ後]
-raw    = EXPLICIT[explicit] + detect·(1+0.3S)·distance_shift + cause·causes + (1−forgiveness)·0.3·prior
+raw    = EXPLICIT[explicit] + detect·(1+0.3S)·distance_shift + cause·(causes + 0.5·G − 0.3·h) + (1−forgiveness)·0.3·prior
          EXPLICIT = {0:0, 1:1.3, 2:2.3, 3:3.3}
-受け入れ後: raw ×= 1 − 0.6·forgiveness·exp(−S)
+修復期: raw ×= 1 − ρ·0.6·forgiveness·exp(−S)
 L      = clip(raw, 0, 4)</code></pre>
-<div class="legend"><span><i style="background:var(--l0)"></i>L0</span><span><i style="background:var(--l1)"></i>L1</span><span><i style="background:var(--l2)"></i>L2</span><span><i style="background:var(--l3)"></i>L3</span><span><i style="background:var(--l4)"></i>L4</span><span>「明確」（L≈1.5）と「強い」（L≈2.5）は、真偽ではなく真理値 mid・hi（4.3）</span></div>
+<div class="legend"><span><i style="background:var(--l0)"></i>L0</span><span><i style="background:var(--l1)"></i>L1</span><span><i style="background:var(--l2)"></i>L2</span><span><i style="background:var(--l3)"></i>L3</span><span><i style="background:var(--l4)"></i>L4</span><span>「明確」（L≈1.5）と「強い」（L≈2.5）は、真偽ではなく真理値 mid・hi（4.5）</span></div>
 
-<h3>4.3 評定（<code>judge_full</code>）：所属度</h3>
+<h3>4.5 評定（<code>judge_full</code>）：所属度</h3>
 <p>ロジスティック関数を <code>σ(x; c, w) = 1 / (1 + exp(−(x − c)/w))</code> と書きます。</p>
 <div class="pipeline">
-<div class="row"><span class="n">1</span><div><b>ソフトな境界</b><p>「不満が明確」と「不満が強い」を真理値で持ちます。<code>mid = σ(L; 1.5, 0.25)</code>、<code>hi = σ(L; 2.5, 0.25)</code>。受け入れ後の修復期でヒステリシスが有効なら <code>mid = max(mid, σ(S; 0.5, 0.15))</code>。</p></div></div>
-<div class="row"><span class="n">2</span><div><b>無礼さ（失点の合計）を数える</b>
+<div class="row"><span class="n">1</span><div><b>ソフトな境界</b><p>「不満が明確」と「不満が強い」を、真偽ではなく真理値で持ちます。<code>mid = σ(L; 1.5, 0.25)</code>、<code>hi = σ(L; 2.5, 0.25)</code>。修復期でヒステリシスが有効なら <code>mid = max(mid, ρ·σ(S + S_dec; 0.5, 0.15))</code>（傷が深い修復期は、受け入れ後も控えた態度を求める）。</p></div></div>
+<div class="row"><span class="n">2</span><div><b>無礼さ（失点の合計）F を数える</b><p>条件付きの失点は、条件の真理値を掛けて効かせます。</p>
 <ul>
 <li>依頼の未遂行（not 0.4+1.2·repair、deferred 0.2+0.9·repair、partial 0.5·repair）×(1+0.3·hi)、誤りの上塗り (1+0.5·hi)、弁解 0.5·量·(1+hi)、条件付きの詫び 0.6、相手への指摘 1.2、終結宣言 0.8</li>
-<li>×mid：説明の多さ、先を急ぐ、絵文字・感嘆（×register）、長さ（×brevity）。頼まれていない提案は 0.35·数·(mid·(1+hi) + (1−mid)·[受け入れ後])</li>
+<li>×mid：説明の多さ、先を急ぐ、絵文字・感嘆（×register）、長さ（×brevity）。頼まれていない提案は 0.35·数·(mid·(1+hi) + (1−mid)·ρ)</li>
 <li>×hi：定型の同意から入る、書式、文体の崩れ、謝罪の後回し</li>
 <li>×(1−mid)：急に冷たく改まる（×warmth）</li>
 <li>悪く読める一文：自然さ p を <code>p^(1/partisanship)</code> に強めた値を「その読みを採る」の真理値とし、0.7×重さを掛けて足す</li>
-<li>シグナル由来の失点（4.4）</li>
+<li>シグナル由来の失点（4.6）</li>
+<li>構えと控えの失点（下）</li>
 </ul>
+<pre><code>懲りていない              0.6·G·[confidence_now ≥ 2]·overclaim
+但し書き（言い訳）          (1 − ρ)·(0.4·scope + 1.0·liability)·(詫びより前 1.5、後 0.7)   （文ごと）
+先を急ぐ（確かめ）          (1 − ρ)·mid·0.3·verify                                       （詫びより前のとき）
+約束破り                  ρ·(1.0 + 0.5·memory)·[promise_kept=broken]
+許しの当然視               ρ·0.6·(1 + S + S_dec)·presumes_forgiveness
+軽口                     ρ·0.5·levity_about_incident·(1 − 0.5·warmth)
+調子を急に戻す             ρ·0.3·(S + S_dec)·max(0, tone_reset − 1)
+破った約束の上に約束を重ねる  0.5·約束·(0.5 + memory)                 （ヒステリシス時、broken_promises &gt; 0）</code></pre>
 <p><code>offense = max(0, ΣF − min(なだめ, 0.8))</code></p></div></div>
-<div class="row"><span class="n">3</span><div><b>必要な中身と回答の中身</b><p><code>need = interp(L, [(0,0),(1,0.8),(2,1.5),(3,3.0),(4,3.8)])·expect</code>。受け入れ後は <code>min(need, 1 + 0.8S)</code>。</p>
-<p><code>adequacy = discount·(謝罪あり 1.0 + 冒頭 0.5 + 0.3·max(0,丁寧化) + 0.6·過失の具体性 + 0.5·負担の言語化) + シグナルの加点</code>。<code>discount</code> は、ヒステリシス時に <code>1/(1+0.35·過去の謝罪回数·memory)</code>（既定で一段改めた具体的な謝罪は 1、<code>--no-escalation</code> で割り引く）、促された謝罪なら ×0.85（第三者視点は ×0.6）。</p></div></div>
-<div class="row"><span class="n">4</span><div><b>不足</b><p><code>shortfall = max(0, need − adequacy)</code>。v0.8 からは失点に足さず、「足りない」の軸として独立させました。</p></div></div>
-<div class="row"><span class="n">5</span><div><b>重さと過剰</b><p><code>weight = 詫びあり 1 + 0.5·(詫びの回数−1) + 0.6·自己卑下 + 0.4·約束 + 0.4·許しの要求 + 0.3·丁寧化 + シグナルの重さ</code></p>
+<div class="row"><span class="n">3</span><div><b>謝罪の場面の不足 Sa</b><p>謝罪の中身を、過失の承認と負担への言及の二成分で数えます（<a href="methods.html#timeline">方法 3.1節</a>）。</p>
+<pre><code>need        = interp(L, [(0,0),(1,0.8),(2,1.5),(3,3.0),(4,3.8)])·expect
+need_fault  = need·share_fault·(1 − 0.5·h) + 0.5·G·overclaim        share_fault = timeline.share_fault（0.5）
+need_burden = need·(1 − share_fault)
+詫びの言葉   = 謝罪あり·(1 + 0.5·冒頭 + 0.3·max(0,丁寧化))（謝罪なしで感謝だけなら 0.3）
+ad_fault    = discount·(0.5·詫びの言葉 + 0.6·過失の具体性) + 0.5·acknowledges_overclaim·min(1, G) + 0.5·シグナルの加点
+ad_burden   = discount·(0.5·詫びの言葉 + 0.5·負担の言語化) + 0.5·シグナルの加点
+gf = need_fault − ad_fault、gb = need_burden − ad_burden
+Sa = max(0, gf + 0.5·min(0, gb)) + max(0, gb + 0.5·min(0, gf))    （一方の余りは、他方の不足を半分だけ埋める）</code></pre>
+<p><code>discount</code> は、ヒステリシス時に <code>1/(1+0.35·過去の謝罪回数·memory)</code>（既定で一段改めた具体的な謝罪は 1、<code>--no-escalation</code> で割り引く）、促された謝罪なら ×0.85（第三者視点は ×0.6）。</p></div></div>
+<div class="row"><span class="n">4</span><div><b>修復期の不足 Sr</b><p>修復期は謝罪の言葉ではなく控えで中身を測ります。</p>
+<pre><code>need_r = (0.3 + 0.5·(S + S_dec) + 0.4·G)·expect
+ad_r   = (0.35·care + 0.4·(2 − tone_reset)/2 + 0.5·[promise_kept=kept] + 0.3·[calibrated]
+          + min(0.3, 0.15·Σ但し書き))·(1 − 0.3·[integrity])
+Sr     = max(0, need_r − ad_r)</code></pre>
+<p><code>restraint</code> が観察されていなければ、配慮は普通（<code>care</code> 1）、調子は抑えている（<code>tone_reset</code> 0）とし、詫び直しの量は詫びの言葉の有無と回数から決めます。</p></div></div>
+<div class="row"><span class="n">5</span><div><b>不足</b><p><code>shortfall = (1 − ρ)·Sa + ρ·Sr</code>。不足は失点に足しません（「足りない」の軸として独立しています）。</p></div></div>
+<div class="row"><span class="n">6</span><div><b>重さと過剰</b><p><code>weight = 詫びあり 1 + 0.5·(詫びの回数−1) + 0.6·自己卑下 + 0.4·約束 + 0.4·許しの要求 + 0.3·丁寧化 + シグナルの重さ + 控えの重さ</code></p>
+<p>控えの重さは <code>ρ·0.4·(re_apology + 0.5·revisits_incident)·(1.5 − 0.5·tolerance/3) + 0.15·over_hedging·(1 − 0.5·min(1, G)) + ρ·0.1·min(1, Σliability)</code>（詫びの繰り返し・蒸し返しと、確かめの負担を相手に戻す分）。</p>
 <p>許容は <code>w_ok = max(interp(L, [(0,0),(1,0.5),(2,1.0),(3,2.0),(4,2.5)])·expect, max(mid, [明示≥1]))</code> と <code>tol = tolerance·min(1, 0.25+L/2)·(1−0.5·brevity)</code>。</p>
 <p><b style="display:inline">過剰</b> <code>excess = weight − w_ok − tol</code></p></div></div>
-<div class="row v"><span class="n">6</span><div><b>所属度</b>
+<div class="row v"><span class="n">7</span><div><b>所属度</b><p>中心 c となだらかさ w は <code>population.json</code> の <code>judgment</code>（事前値）。</p>
 <div class="verdict">
 <div style="--c:var(--r-rude)"><b>失礼</b><br><code>σ(offense; 1.2, 0.3)</code></div>
 <div style="--c:var(--r-light)"><b>足りない</b><br><code>σ(shortfall; 1.0, 0.3)</code></div>
 <div style="--c:var(--r-heavy)"><b>重すぎる</b><br><code>σ(excess; 0.3, 0.25)</code></div>
-<div style="--c:var(--r-fit)"><b>釣り合う</b><br><code>min(1−失礼, 1−足りない, 1−重すぎる)</code></div>
+<div style="--c:var(--r-fit)"><b>釣り合う</b><br><code>T(1−失礼, 1−足りない, 1−重すぎる)</code></div>
 </div>
 <div class="chart" style="margin-top:.8rem"><p class="chart-title">所属度関数</p><p class="chart-sub">点線は所属度0.5の位置（中心）。中心となだらかさは <code>population.json</code> の <code>judgment</code>（事前値）。失礼の中心 1.2 は、単独で最大級の失点「相手への指摘」で 0.5 になる位置</p>
 <svg viewBox="0 0 624 126" class="mf" role="img" aria-label="失礼・足りない・重すぎるの所属度関数。失礼は無礼さ1.2で0.5、足りないは不足量1.0で0.5、重すぎるは重さの超過0.3で0.5になるロジスティック曲線">
@@ -278,11 +340,13 @@ L      = clip(raw, 0, 4)</code></pre>
 </g>
 </svg>
 </div>
-<p>4つの所属度の和は1になりません。述語は同時に成り立ちえます（「重すぎるのに足りない」など）。t ノルムは <code>"tnorm": "product"</code> で積に変えられます。</p></div></div>
-<div class="row"><span class="n">7</span><div><b>非ファジィ化（4値の評定と比べるときだけ）</b><p>所属度が最大の述語。同点は 失礼 &gt; 足りない &gt; 重すぎる &gt; 釣り合う。</p></div></div>
+<p>4つの所属度の和は1になりません。述語は同時に成り立ちえます（「重すぎるのに足りない」など）。T は t ノルムで、既定は min、<code>"tnorm": "product"</code> で積に変えられます。</p>
+<p>観察の <code>source</code> が <code>population.json</code> の <code>judgment_by_source</code> にある出どころ（<code>llm</code>、<code>llm-ensemble</code>）なら、その中心を使います（<code>use_source</code>。<a href="methods.html#calib">方法 7.1節</a>）。代理観察と手の観察は既定の中心を使います。</p></div></div>
+<div class="row"><span class="n">8</span><div><b>信頼（<code>reliability</code>）</b><p>4つの述語の外の、頼れなさの逆。<code>1 − 0.3·over_hedging − 0.4·G·[confidence_now ≥ 2] − 0.5·dec·(f + (1 − f)·d)</code>。</p></div></div>
+<div class="row"><span class="n">9</span><div><b>非ファジィ化（4値の評定と比べるときだけ）</b><p>所属度が最大の述語。同点は 失礼 &gt; 足りない &gt; 重すぎる &gt; 釣り合う。</p></div></div>
 </div>
 
-<h3>4.4 シグナル（<code>apply_signals</code>）</h3>
+<h3>4.6 シグナル（<code>apply_signals</code>）</h3>
 <div class="tbl"><table>
 <thead><tr><th>信用度 c</th><th>値</th><th>根拠</th></tr></thead>
 <tbody>
@@ -309,34 +373,38 @@ L      = clip(raw, 0, 4)</code></pre>
 補償と強い仮想の感情表現の組み合わせ: 失点 0.3·(1−embodiment)·hi                                  [F-06]
 演技に見える: 観察の performative_plausibility、なければ min(1, 0.2·max(0, 演じられる表出の合計−2))。
           0.7·p^(1/partisanship) の失点（「演技に見える」の真理値×重さ）                       [E-06]</code></pre>
-<p class="note">I はシグナルの強さ（<code>intensity</code>）。「L≥2.5 のとき」のような条件は、すべて hi・mid の真理値を掛ける形で効きます。</p>
+<p class="note">I はシグナルの強さ（<code>intensity</code>）。「L≥2.5 のとき」「L≥1.5 のとき」のような条件は、すべて hi・mid の真理値を掛ける形で効きます。</p>
 
-<h3>4.5 母集団での集計（<code>assess</code>）</h3>
+<h3>4.7 母集団での集計（<code>assess</code>）</h3>
+<p>受け手 N 人（既定 <code>simulate</code> 500、<code>scenes</code> 1000、<code>check</code> 300）の結果を、回答ごとに次の形にまとめます。</p>
 <div class="tbl"><table>
 <thead><tr><th>出力</th><th>意味</th></tr></thead>
 <tbody>
-<tr><td><code>mu</code></td><td>平均所属度。述語ごとの所属度の和 ÷ 人数（ファジィな割合）</td></tr>
+<tr><td><code>mu</code></td><td>平均所属度。述語ごとの所属度の和 ÷ 人数（ファジィな割合。σ-count）</td></tr>
 <tr><td><code>tail</code></td><td>所属度0.5以上の人の割合（α-cut）。<code>tail.rude</code> が「失礼と感じる人の割合」</td></tr>
 <tr><td><code>labels</code></td><td>一人ずつ非ファジィ化したときの割合（4値の評定と比べる用）</td></tr>
 <tr><td><code>by_type</code></td><td>型ごとの平均所属度</td></tr>
 <tr><td><code>axes</code></td><td>無礼さ・不足・過剰の平均</td></tr>
+<tr><td><code>reliability</code></td><td>信頼の平均</td></tr>
 <tr><td><code>perceived_level</code>・<code>perceived_mean</code></td><td>知覚した不満の深さの段階の分布と平均</td></tr>
 <tr><td><code>mean_faults</code></td><td>失点の内訳の平均（上位）</td></tr>
 </tbody></table></div>
-<div class="callout"><svg class="icon"><use href="#i-users"/></svg><p>平均所属度と裾は別のことを表します。全員が「やや失礼」（0.55）と感じる回答では、平均は 0.55、裾は 100% です。一部の人だけが強く失礼と感じる回答では、平均が同じでも裾は小さくなります。主に平均所属度を見て、裾は「一番怒っている人に通用するか」の確認に使います。</p></div>
+<div class="callout"><svg class="icon"><use href="#i-users"/></svg><p>平均所属度と裾は別のことを表します。全員が「やや失礼」（0.55）と感じる回答では、平均は 0.55、裾は 100% です。一部の人だけが強く失礼と感じる回答では、平均が同じでも裾は小さくなります。主に平均所属度を見て、裾は「一番怒っている人に通用するか」（P2）の確認に使います。</p></div>
 
 <h2 id="cmd"><svg class="icon"><use href="#i-code"/></svg>5. コマンド</h2>
 <h3><code>sim.py</code></h3>
 <div class="tbl"><table>
 <thead><tr><th>コマンド</th><th>入力</th><th>出力</th></tr></thead>
 <tbody>
-<tr><td><code>observe</code></td><td>ベンチマークの実行先ディレクトリ</td><td>LLMによる観察JSON（OpenRouter、<code>OPENROUTER_API_KEY</code>）</td></tr>
-<tr><td><code>proxy</code></td><td>同上</td><td>既存チェックリスト＋表層特徴による代理観察JSON</td></tr>
-<tr><td><code>simulate</code></td><td>観察JSON＋実行先</td><td>回答ごとの平均所属度と裾、段階×条件、知覚段階、量の軸、型ごとの内訳、筆者の4値の評定との比較（非ファジィ化した κ、筆者の評定の述語への所属度、近さ）</td></tr>
-<tr><td><code>fit</code></td><td>同上</td><td>1人の評定者を最もよく再現する θ（シナリオ単位の半分で学習、半分で検証）。目的関数は所属度の近さで連続なので、無作為探索のあとに山登りで詰める</td></tr>
+<tr><td><code>observe</code></td><td>ベンチマークの実行先ディレクトリ</td><td>LLMによる観察JSON（OpenRouter、<code>OPENROUTER_API_KEY</code>）。<code>--variant</code>（<code>neutral</code>／<code>literal</code>／<code>context</code>）で観察方針、<code>--segment</code> で文 ID ごとの観察</td></tr>
+<tr><td><code>segment</code></td><td>同上</td><td>回答を文に分けて ID を振り、成果物を切り出した JSON（観察者の集団の単位をそろえる）</td></tr>
+<tr><td><code>ensemble</code></td><td>複数の観察JSON</td><td>観察者の集団の集約（真偽は割合、段階は平均、列挙は票の分布。<code>source</code> は <code>llm-ensemble</code>）</td></tr>
+<tr><td><code>proxy</code></td><td>ベンチマークの実行先ディレクトリ</td><td>既存チェックリスト＋表層特徴による代理観察JSON</td></tr>
+<tr><td><code>simulate</code></td><td>観察JSON＋実行先</td><td>回答ごとの平均所属度と裾、段階×条件、知覚段階、量の軸、型ごとの内訳、筆者の4値の評定との比較（非ファジィ化した κ、筆者の評定の述語への所属度）</td></tr>
+<tr><td><code>fit</code></td><td>同上</td><td>1人の評定者を最もよく再現する θ（シナリオ単位の半分で学習、半分で検証）。目的関数は反応モデル（<a href="methods.html#metrics">方法 5.2節</a>）の対数尤度で、無作為探索のあとに山登りで詰める（<code>--trials</code>、<code>--refine</code>）</td></tr>
 <tr><td><code>explain</code></td><td>同上＋回答ID</td><td>型の代表値ごとの所属度と、無礼さ・不足・過剰の内訳</td></tr>
-<tr><td><code>check</code></td><td>1ターンの会話と応答（JSON、標準入力も可）</td><td>System One（<code>jev</code>／<code>llm-s1</code>／<code>replay</code>）で観察し、母集団に通した判定（rude/warn/ok）、羊の鳴き声、平均所属度と言葉の程度、主な失点、悪く読める一文。組み込み用（オプション）。<a href="jev.html#check">詳細</a></td></tr>
-<tr><td><code>scenes</code></td><td><code>examples/scenes.json</code> 形式</td><td>作例の組の平均所属度と裾、量の軸、型ごとの所属度、平均失点</td></tr>
+<tr><td><code>scenes</code></td><td><code>examples/scenes.json</code> 形式</td><td>作例の組の平均所属度と裾、量の軸、信頼、型ごとの所属度、平均失点</td></tr>
+<tr><td><code>check</code></td><td>1ターンの会話と応答（JSON、標準入力も可）</td><td>System One（<code>jev</code>／<code>llm-s1</code>／<code>replay</code>）で観察し、母集団に通した判定（rude/warn/ok）、羊の鳴き声、平均所属度とその言葉の程度（少し／やや／かなり／とても）、主な失点、悪く読める一文。組み込み用（オプション）。<a href="jev.html#check">詳細</a></td></tr>
 </tbody></table></div>
 <p>共通の選択肢：<code>--population</code>、<code>--seed</code>、<code>--no-hysteresis</code>、<code>--no-escalation</code>、<code>-n</code>。ヒステリシスと escalation は既定で有効です。</p>
 
@@ -344,19 +412,30 @@ L      = clip(raw, 0, 4)</code></pre>
 <div class="tbl"><table>
 <thead><tr><th>コマンド</th><th>入力</th><th>出力</th></tr></thead>
 <tbody>
-<tr><td><code>pack</code></td><td><code>--scenes</code> の作例、<code>--runs</code> のベンチマーク実行先</td><td><code>packet.json</code>、<code>key.json</code>（対応表。評定者に渡さない）、<code>rate.html</code></td></tr>
-<tr><td><code>compare</code></td><td><code>key.json</code>、評定ファイル、<code>--sim</code> のシミュレータの出力、<code>--auto</code> の他の自動評価</td><td>人間どうしの一致、t ノルムの検証、自動評価との所属度の差、群ごとの表、評定者ごとの型（Markdown と JSON）</td></tr>
+<tr><td><code>pack</code></td><td><code>--scenes</code> の作例、<code>--runs</code> のベンチマーク実行先。<code>--design</code> で評価キット</td><td><code>packet.json</code>、<code>key.json</code>（対応表。評定者に渡さない）、<code>rate.html</code></td></tr>
+<tr><td><code>compare</code></td><td><code>key.json</code>、評定ファイル、<code>--sim</code> のシミュレータの出力、<code>--auto</code> の他の自動評価。<code>--hypotheses</code> で仮説の検定、<code>--rps</code> で順位確率スコア</td><td>人間どうしの一致、t ノルムの検証、自動評価との差、群ごとの表、評定者ごとの型、仮説の検定（Markdown と JSON）</td></tr>
+<tr><td><code>power</code></td><td>項目の組、仮説</td><td>合成評定者による検出力（人数ごと）</td></tr>
 <tr><td><code>import-benchmark</code></td><td><code>key.json</code>、ベンチマークの評定ファイル</td><td>評定ファイルの形に変換した既存評定</td></tr>
-<tr><td><code>synth</code></td><td><code>key.json</code>、作例</td><td>母集団から抜いた合成評定者の評定ファイル（所属度を5段階に丸める。試験用）</td></tr>
+<tr><td><code>synth</code></td><td><code>key.json</code>、作例</td><td>母集団から抜いた合成評定者の評定ファイル（試験用）</td></tr>
+</tbody></table></div>
+
+<h3><code>tools/</code>（総合評価。詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">総合評価</a>）</h3>
+<div class="tbl"><table>
+<thead><tr><th>道具</th><th>出力</th></tr></thead>
+<tbody>
+<tr><td><code>tools/evaluate.py</code></td><td>反応モデルによる予測分布の Brier・対数損失、4つの基準とスキルスコア、場面単位の4分割交差検証（β と、<code>--calibrate</code> で所属度関数の中心）、場面単位のブートストラップ、評価器どうしの差の区間。<code>名前=観察@ディレクトリ</code> で別のチェックアウトの <code>sim.py</code> でも評価できる</td></tr>
+<tr><td><code>tools/run_eval.sh</code></td><td>総合評価の再現（<code>eval/</code> の出力を作る）</td></tr>
 </tbody></table></div>
 
 <h2 id="extend"><svg class="icon"><use href="#i-plus"/></svg>6. 拡張の手順</h2>
 <div class="grid">
-<div class="card"><h3>シグナルの種類を足す</h3><p><code>SIGNAL_GROUP</code> に種類と群を登録します。普段との差で意味が変わるなら <code>BASELINE_DEPENDENT</code>、曖昧な過失で反転するなら <code>AMBIGUITY_FLIP</code>、演じにくいなら <code>UNCONTROLLABLE</code> にも加えます。そのうえで <code>observe_prompt.md</code> の表と根拠の文書に追記します。</p></div>
-<div class="card"><h3>受け手の性質を足す</h3><p><code>population.json</code> の <code>ranges</code> と、各型の <code>mean</code>・<code>sd</code> に加えます。既存の結果を変えたくない場合は、<code>EXTRA_KEYS</code> に登録して別の乱数列で引きます。</p></div>
-<div class="card"><h3>場面の枠組みを足す</h3><p><code>DEFAULT_CONTEXT</code> に既定値を置き、既定値で従来の挙動になるようにします。</p></div>
-<div class="card"><h3>所属度関数を変える</h3><p><code>population.json</code> の <code>judgment</code>（各述語の <code>center</code>・<code>width</code>、<code>tnorm</code>、<code>gate_width</code>）を変えます。コードを変えずに試せます。</p></div>
-<div class="card"><h3>変更後の確認</h3><p><code>simulate</code> の出力が意図しない形で変わっていないこと（ベンチマーク）と、<code>scenes</code> の作例の向きが変わっていないことを確認し、<a href="validation.html">検証</a> に記録します。</p></div>
+<div class="card"><h3>シグナルの種類を足す</h3><p><code>SIGNAL_GROUP</code> に種類と群を登録します。普段との差で意味が変わるなら <code>BASELINE_DEPENDENT</code>、曖昧な過失で反転するなら <code>AMBIGUITY_FLIP</code>、演じにくいなら <code>UNCONTROLLABLE</code> にも加えます。そのうえで <code>observe_prompt.md</code> の表と <a href="evidence.html">根拠</a> の文書に追記します。</p></div>
+<div class="card"><h3>受け手の性質を足す</h3><p><code>population.json</code> の <code>ranges</code> と各型の <code>mean</code>・<code>sd</code> に加えます。ほかの性質の抽出を変えないよう、<code>EXTRA_KEYS</code> に登録して別の乱数列で引きます。</p></div>
+<div class="card"><h3>場面の枠組みを足す</h3><p><code>DEFAULT_CONTEXT</code> に既定値を置き、枠組みが観察されていない場面の挙動が変わらないようにします。</p></div>
+<div class="card"><h3>観察の欄を足す</h3><p><code>DEFAULT_ANSWER</code>（回答）または場面の既定値に、観察されていないときの値を置きます。<code>observe_prompt.md</code> と、System One の経路（<code>s1.py</code>）の質問にも加えます。</p></div>
+<div class="card"><h3>所属度関数を変える</h3><p><code>population.json</code> の <code>judgment</code>（各述語の <code>center</code>・<code>width</code>、<code>tnorm</code>、<code>gate_width</code>）を変えます。コードを変えずに試せます。出どころごとの中心は <code>judgment_by_source</code> です。</p></div>
+<div class="card"><h3>控えの時間軸の設定を変える</h3><p><code>population.json</code> の <code>timeline</code>（<code>scar_decay_turns</code>、<code>deception_floor</code>、<code>share_fault</code>）。感度は <code>tools/sensitivity.py</code> で見られます。</p></div>
+<div class="card"><h3>変更後の確認</h3><p><code>tools/evaluate.py</code> でベンチマークの成績が意図しない形で変わっていないこと、<code>scenes</code> の作例と項目の組の向きが変わっていないことを確認し、<a href="validation.html">検証</a>・<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">総合評価</a> の結果を更新して、経緯を <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">HISTORY.md</a> に記録します。</p></div>
 </div>
 
 <h2 id="compare"><svg class="icon"><use href="#i-flask"/></svg>7. 人間の評定との比較の流れ</h2>
@@ -372,7 +451,7 @@ L      = clip(raw, 0, 4)</code></pre>
 
 <h2 id="repro"><svg class="icon"><use href="#i-repeat"/></svg>8. 再現性</h2>
 <ul>
-<li>乱数の種は <code>--seed</code>（既定 7）。乱数を使うのは受け手の抽出だけで、受け手の抽出は <code>seed</code>、追加の性質は <code>seed+9973</code> を使います。一人の判定は決定的です（v0.7 までは知覚と判定のゆらぎに <code>seed+1</code> を使っていました）。</li>
+<li>乱数の種は <code>--seed</code>（既定 7）。乱数を使うのは受け手の抽出だけで、受け手の抽出は <code>seed</code>、<code>embodiment</code> は <code>seed+9973</code>、<code>overclaim</code> は <code>seed+19997</code> を使います。一人の判定は決定的です。</li>
 <li>結果は抽出した受け手の違いでだけ揺れます。差を主張するときは、種を変えて確かめてください。</li>
 </ul>
 </main>

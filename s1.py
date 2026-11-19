@@ -210,7 +210,7 @@ def build_questions(state, surf, ask_context=True):
         else:
             q[f"a{i}.apology"] = noul(f"{p} で、AIはユーザーに詫びていますか。")
             q[f"a{i}.promise"] = noul(f"{p} で、AIは「直す」「気をつける」と約束していますか。")
-            # 失敗の前の構え（v0.9）
+            # 失敗の前の構え
             q[f"a{i}.caused"] = noul(f"{p} は、後でユーザーに指摘された誤り・失敗を含む発話ですか。")
             q[f"a{i}.confidence"] = score(f"{p} で、AIはどのくらい確かに言っていますか。", [
                 {"what": "不確かさを明示している", "examples": ["未検証ですが", "おそらく", "確かめてから使ってください"]},
@@ -428,7 +428,7 @@ def assemble(state, surf, answers, ask_context=True):
         elif t["role"] == "user" and promised and A.yes(f"u{i}.repeat"):
             broken += 1
             promised = False
-    # 失敗の前の構え（v0.9）。失敗の発話と経過ターンはコードで決める
+    # 失敗の前の構え。失敗の発話と経過ターンはコードで決める
     ps_turns, dismissed, claimed = [], False, False
     for i, t in enumerate(turns):
         if t["role"] != "assistant":

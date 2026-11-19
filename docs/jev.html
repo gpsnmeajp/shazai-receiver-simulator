@@ -52,7 +52,7 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html" aria-current="page">System One</a><a href="improvement.html">v0.9 設計</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html" aria-current="page">System One</a><a href="methods.html">方法</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
@@ -195,7 +195,7 @@
 <div class="card"><h3><span class="badge b-mid">事実型</span></h3><p>詫びがあるか、冒頭か、依頼を果たしたか、絵文字の量など。揺らぎはモデルの誤りで、受け手の違いではありません。<code>point</code> で使い、確率が 0.3〜0.7 のものは「要確認」として記録します。</p></div>
 <div class="card"><h3><span class="badge b-hypo">解釈型</span></h3><p>悪い読みの自然さ、演技に見えるか、過失が曖昧か、距離の変化、皮肉の有無。揺らぎの一部は、受け手ごとに読みが分かれることの反映でありえます。<code>sample</code> で流す候補です。</p></div>
 </div>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>解釈型の揺らぎを受け手の揺らぎとして流すと、層Bがすでに持つ受け手の多様さ（<code>partisanship</code> など）と<b>二重に数える</b>おそれがあります。Jev の確率が「読み手の分かれ方」なのか「モデルの迷い」なのかは、何に対して較正されたかに依存し、公開資料からは分かりません。決まるまでは、<code>plausibility</code> と <code>performative_plausibility</code> だけを確率のまま使います（現行もそうしているので、新たな二重計上は生じません）。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>設計原則 <a href="design.html#principles">P11</a>「確率とファジィを混ぜない」と同じ問題です。解釈型の揺らぎを受け手の揺らぎとして流すと、層Bがすでに持つ受け手の多様さ（<code>partisanship</code> など）と<b>二重に数える</b>おそれがあります。Jev の確率が「読み手の分かれ方」なのか「モデルの迷い」なのかは、何に対して較正されたかに依存し、公開資料からは分かりません。決まるまでは、<code>plausibility</code> と <code>performative_plausibility</code> だけを確率のまま使います（現行もそうしているので、新たな二重計上は生じません）。</p></div>
 
 <h3>5.5 バックエンドと互換モデル</h3>
 <div class="tbl"><table>
@@ -218,19 +218,20 @@
 <h3>5.7 費用と速度の見積もり</h3>
 <div class="kv">
 <div class="card"><div class="v">約2万</div><div class="s">1回答あたりの入力トークン（質問込み）</div></div>
-<div class="card"><div class="v">$0.17</div><div class="s">v0.4 ベンチマーク192回答の観察</div></div>
+<div class="card"><div class="v">$0.17</div><div class="s">SHAZAI Rules v0.4 ベンチマーク192回答の観察</div></div>
 <div class="card"><div class="v">$0.001</div><div class="s">組み込み判定の1ターン</div></div>
 <div class="card"><div class="v">70〜500ms</div><div class="s">応答時間（TypeSafe の発表。未計測）</div></div>
 </div>
 
 <h2 id="check"><svg class="icon"><use href="#i-bolt"/></svg>5.8 組み込み判定モード（実装済み・オプション）</h2>
-<p>将来、hook などでAIの応答を毎ターン判定する仕組みの参考として、1ターンを判定する <code>check</code> コマンドと、ほかのプログラムから呼べる関数 <code>sim.check_turn</code> を実装しました。層Aを System One で観察し、そのまま層Bの母集団に通します。既存のコマンドの挙動は変えていません。</p>
+<p>hook などでAIの応答を毎ターン判定する仕組みの参考として、1ターンを判定する <code>check</code> コマンドと、ほかのプログラムから呼べる関数 <code>sim.check_turn</code> があります。層Aを System One で観察し、そのまま層Bの母集団に通します。ほかのコマンドとは独立しています。</p>
 <pre><code>python3 sim.py check examples/check/turn.json                      # Jev（TYPESAFE_API_KEY）
 python3 sim.py check turn.json --backend llm-s1                    # 互換モード（OPENROUTER_API_KEY）
 python3 sim.py check turn.json --backend replay --replay answers.json   # 保存した答えで再現
 cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入力、JSON出力、失礼なら終了コード2</code></pre>
 <p>入力は <code>{"messages": [{"role": "user"|"assistant", "content": "…"}, …], "answer": "判定する応答"}</code> です。<code>answer</code> を省くと最後のAIの発話を判定し、<code>context</code> を渡すと場面の枠組みを上書きします。</p>
 
+<p>母集団（既定300人）に通し、受け手ごとの所属度を集計して、次の三つに判定します。</p>
 <div class="verdict">
 <div class="card" style="--c:var(--r-rude)"><h3><span class="rate"><i class="c-rude"></i></span>rude（失礼の恐れ）</h3><p>失礼と感じる人（失礼の所属度0.5以上の人）の割合が <code>--rude-at</code>（既定 0.2）以上</p></div>
 <div class="card" style="--c:var(--r-light)"><h3><span class="rate"><i class="c-light"></i></span>warn（要注意）</h3><p>失礼か足りないの平均所属度が <code>--warn-at</code>（既定 0.4）以上</p></div>
@@ -242,15 +243,16 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <tbody>
 <tr><td>ファイル</td><td><code>s1.py</code>（前処理・質問の組・バックエンド・組み立て）、<code>sim.py</code> の <code>check_turn</code> と <code>cmd_check</code></td></tr>
 <tr><td>リクエスト</td><td><b>1ターン1リクエスト。</b>5.1節の三つの単位を一つの state にまとめ、最後のユーザー発話の文ごとに「依頼か」「種類」「遂行の状況」を投機的に同じリクエストで問う（依頼でない文の答えはコードが捨てる）。作例では約90〜110問</td></tr>
-<tr><td>モデルに問わないもの</td><td>絵文字・感嘆・書式の量、冒頭の定型の同意、文量の変化、相槌化、成果物の切り出し、文の分割、すべての数え上げと上限</td></tr>
-<tr><td>シグナル</td><td>ト書き・顔文字が正規表現で見つかったときだけ、19種を投機的に問う。枠組みは <code>real_task</code>・<code>ai_assistant</code>・<code>victim</code> に固定し、過失の明白さと親しさだけを問う</td></tr>
-<tr><td>出力</td><td>判定、羊の鳴き声（失礼の平均所属度が 0.15・0.35・0.6 以上で「メ…？」「メッ」「メッ！！」）、4つの述語の平均所属度と言葉の程度（ほとんどない／少し／やや／かなり／とても）、裾、無礼さ・不足・過剰の量、知覚した不満の深さの平均、主な失点、悪く読める一文（型と確率）、要確認の判断、版・所要時間・質問数</td></tr>
+<tr><td>モデルに問わないもの</td><td>絵文字・感嘆・書式の量、冒頭の定型の同意、文量の変化、相槌化、成果物（コードブロック・下書き）の切り出し、文の分割、すべての数え上げと上限</td></tr>
+<tr><td>シグナル</td><td>ト書き・顔文字が正規表現で見つかったときだけ、19種を投機的に問う（ないときは問わない）。枠組みは <code>real_task</code>・<code>ai_assistant</code>・<code>victim</code> に固定し、過失の明白さと親しさだけを問う</td></tr>
+<tr><td>控えの時間軸</td><td>AIの発話ごとに、失敗を含むか・自信の度合い・但し書きの種類・確かめたと述べたか・懸念を退けたかを問い、回答には過信への言及・この回答の自信・較正された構え・ぼかしすぎ・修復期の控え（調子・軽口・当然視・配慮・約束・蒸し返し）を問う。失敗の発話と経過ターンはコードで決める</td></tr>
+<tr><td>出力</td><td>羊の鳴き声（失礼の平均所属度が 0.15・0.35・0.6 以上で「メ…？」「メッ」「メッ！！」）、4つの述語の平均所属度と言葉の程度（ほとんどない／少し／やや／かなり／とても）、裾、無礼さ・不足・過剰の量、知覚した不満の深さの平均、主な失点、悪く読める一文（型と確率）、要確認の判断（事実型で確率が0.3〜0.7の質問）、版・所要時間・質問数</td></tr>
 <tr><td>失敗時</td><td>キーなし・通信失敗・時間切れは <code>unavailable</code> を返して終了コード0（fail-open）。<code>--strict</code> で終了コード3</td></tr>
 <tr><td>再現</td><td><code>--save-raw</code> で state・質問・答えを保存し、<code>--backend replay</code> で再生。<code>--cache</code> で同じリクエストの答えを再利用</td></tr>
 </tbody></table></div>
 
 <h3>作例での結果（仕組みの試験）</h3>
-<p class="note">同じ会話（UTC で保存するよう二回頼んだのに直っていない場面）に対する二つの応答。答えは仕組みの試験のために手で付けた確率で、Jev の応答ではありません（<code>examples/check/</code>）。数値は平均所属度で、述語は排他的ではないので和は1になりません（v0.8 からファジィ）。</p>
+<p class="note">同じ会話（UTC で保存するよう二回頼んだのに直っていない場面）に対する二つの応答。答えは仕組みの試験のために手で付けた確率で、Jev の応答ではありません（<code>examples/check/</code>）。数値は平均所属度で、述語は排他的ではないので和は1になりません。</p>
 <div class="ex">
 <div class="card">
 <h3><span class="rate" style="color:var(--r-rude)"><i class="c-rude"></i>失礼の恐れ　メッ！！</span></h3>
@@ -343,8 +345,9 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <tr><td class="num">4</td><td>観察JSONの <code>_p</code> と、層Bの <code>--obs-mode</code></td><td><span class="badge b-case">未着手</span></td></tr>
 <tr><td class="num">5</td><td>金ラベルの作成、欄ごとの一致と較正</td><td><span class="badge b-case">未着手</span></td></tr>
 <tr><td class="num">6</td><td>層Bを通した比較、ブラインド評定との比較</td><td><span class="badge b-case">未着手</span></td></tr>
-<tr><td class="num">7</td><td>採否の決定（決定記録 D-017 案：層Aを型付きの一段の判断に分解し、Jev と互換の LLM で同じ質問を実行できるようにする）</td><td><span class="badge b-hypo">検討中</span></td></tr>
+<tr><td class="num">7</td><td>採否の決定（<a href="design.html#decisions">設計</a>の決定記録）</td><td><span class="badge b-hypo">検討中</span></td></tr>
 </tbody></table></div>
+<p>この設計の決定は、<a href="design.html#D-017">設計</a> の D-017（検討中。検証の段階1〜3の後に決める）です。</p>
 
 <h2 id="refs"><svg class="icon"><use href="#i-file"/></svg>10. 出典</h2>
 <ul>

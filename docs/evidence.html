@@ -29,7 +29,7 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html" aria-current="page">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="improvement.html">v0.9 設計</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html" aria-current="page">根拠</a><a href="validation.html">検証</a><a href="human-eval.html">人間評定</a><a href="jev.html">System One</a><a href="methods.html">方法</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
@@ -37,7 +37,7 @@
 <p class="lead">規則ごとの根拠をまとめた文書です。各項目には、何を示した研究か、シミュレータのどこで使っているか、確度を記録しています。</p>
 <p class="note">項目番号は <a href="architecture.html">アーキテクチャ</a> の式や、<a href="design.html#decisions">設計</a> の決定記録から参照されます。</p>
 <ul class="toc">
-<li><a href="#A">A. 評価の方法</a></li><li><a href="#B">B. 不満の知覚</a></li><li><a href="#C">C. 謝罪の構成要素</a></li><li><a href="#D">D. ヒステリシス</a></li><li><a href="#E">E. シグナル</a></li><li><a href="#F">F. 仮想の身体と枠組み</a></li><li><a href="#G">G. 事例</a></li><li><a href="#H">H. 採用していないもの</a></li>
+<li><a href="#A">A. 評価の方法</a></li><li><a href="#B">B. 不満の知覚</a></li><li><a href="#C">C. 謝罪の構成要素</a></li><li><a href="#D">D. ヒステリシスと控え</a></li><li><a href="#E">E. シグナル</a></li><li><a href="#F">F. 仮想の身体と枠組み</a></li><li><a href="#G">G. 事例</a></li><li><a href="#H">H. 採用していないもの</a></li>
 </ul>
 
 <h2><svg class="icon"><use href="#i-chart"/></svg>確度の見方</h2>
@@ -52,11 +52,11 @@
 <div class="legend"><span><i class="s-strong"></i>強</span><span><i class="s-mid"></i>中</span><span><i class="s-hypo"></i>仮説</span><span><i class="s-case"></i>事例・未確認</span></div>
 <div class="stackrows">
 <div>A 評価の方法（4）</div><div class="stack"><span class="s-strong" style="width:75%"></span><span class="s-case" style="width:25%"></span></div>
-<div>B 不満の知覚（9）</div><div class="stack"><span class="s-strong" style="width:44.4%"></span><span class="s-mid" style="width:55.6%"></span></div>
-<div>C 謝罪の構成要素（3）</div><div class="stack"><span class="s-strong" style="width:66.7%"></span><span class="s-mid" style="width:33.3%"></span></div>
-<div>D ヒステリシス（8）</div><div class="stack"><span class="s-strong" style="width:50%"></span><span class="s-mid" style="width:50%"></span></div>
+<div>B 不満の知覚（11）</div><div class="stack"><span class="s-strong" style="width:36.4%"></span><span class="s-mid" style="width:63.6%"></span></div>
+<div>C 謝罪の構成要素（4）</div><div class="stack"><span class="s-strong" style="width:50%"></span><span class="s-mid" style="width:50%"></span></div>
+<div>D ヒステリシスと控え（13）</div><div class="stack"><span class="s-strong" style="width:46.2%"></span><span class="s-mid" style="width:53.8%"></span></div>
 <div>E シグナル（10）</div><div class="stack"><span class="s-strong" style="width:40%"></span><span class="s-mid" style="width:40%"></span><span class="s-hypo" style="width:20%"></span></div>
-<div>F 仮想の身体と枠組み（10）</div><div class="stack"><span class="s-strong" style="width:30%"></span><span class="s-mid" style="width:60%"></span><span class="s-case" style="width:10%"></span></div>
+<div>F 仮想の身体と枠組み（11）</div><div class="stack"><span class="s-strong" style="width:27.3%"></span><span class="s-mid" style="width:63.6%"></span><span class="s-case" style="width:9.1%"></span></div>
 </div>
 </div>
 <div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p><b>注意</b>：研究から借りているのは、ほとんどが効果の「向き」です。式の係数は事前値で、研究の効果量から推定したものではありません。</p></div>
@@ -68,7 +68,7 @@
 <tr id="A-01"><td class="id">A-01</td><td>属性を演じさせたLLMは、集団の姿を取り違え（外部の人の想像する姿になる）、集団を平板にする</td><td>属性ペルソナを使わない（<a href="design.html#D-001">D-001</a>, <a href="design.html#D-002">D-002</a>）</td><td><span class="badge b-strong">強</span></td><td><a href="https://arxiv.org/abs/2402.01908">Wang, Morgenstern, Dickerson</a></td></tr>
 <tr id="A-02"><td class="id">A-02</td><td>LLMは意見の分布を「知っていても」そこから抽出するのは苦手。ペルソナ指定より実例を示すほうが分布に近づく</td><td>多様性を外から分布として与える（P2, P3）</td><td><span class="badge b-strong">強</span></td><td><a href="https://arxiv.org/abs/2411.05403">Meister, Guestrin, Hashimoto</a></td></tr>
 <tr id="A-03"><td class="id">A-03</td><td>評定するLLMには、長い回答を好む癖、自分と同じモデルの出力を好む癖などがある</td><td>観察と評価を分ける（P1）。観察者は評価対象と別系統のモデルにする</td><td><span class="badge b-strong">強</span></td><td><a href="https://arxiv.org/abs/2412.05579">LLMs-as-Judges サーベイ</a></td></tr>
-<tr id="A-04"><td class="id">A-04</td><td>事例：v0.4 ベンチマークで、ペルソナ3名の評定は互いに一致（κ=0.72〜0.78）し、筆者とはほぼ一致しなかった（κ=0.04〜0.11）。ペルソナは「釣り合う」を約8割、筆者は約5割とした</td><td><a href="design.html#D-001">D-001</a> の直接の動機</td><td><span class="badge b-case">事例</span></td><td>本リポジトリの v0.4 結果</td></tr>
+<tr id="A-04"><td class="id">A-04</td><td>事例：SHAZAI Rules v0.4 ベンチマークで、ペルソナ3名の評定は互いに一致（κ=0.72〜0.78）し、筆者とはほぼ一致しなかった（κ=0.04〜0.11）。ペルソナは「釣り合う」を約8割、筆者は約5割</td><td><a href="design.html#D-001">D-001</a> の直接の動機</td><td><span class="badge b-case">事例</span></td><td>本リポジトリでの評価（<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">HISTORY.md</a> 2.2節）</td></tr>
 </tbody></table></div>
 
 <h2 id="B"><svg class="icon"><use href="#i-book"/></svg>B. 不満の知覚と受け手の違い</h2>
@@ -81,9 +81,11 @@
 <tr id="B-04"><td class="id">B-04</td><td>直接の被害者は、第三者の観察者より謝罪の中身を考慮しにくい（日本の参加者）</td><td><code>partisanship</code>、<code>viewpoint</code></td><td><span class="badge b-mid">中</span></td><td><a href="https://dialnet.unirioja.es/descarga/articulo/5763126.pdf">Hashimoto &amp; Karasawa</a></td></tr>
 <tr id="B-05"><td class="id">B-05</td><td>第三者は自発的な謝罪と強いられた謝罪を区別するが、謝られた本人は区別しない。第三者は不誠実な謝罪に厳しい</td><td><code>apology.prompted</code> の割引を第三者視点で大きくする。第三者視点では <code>partisanship</code> を下げる</td><td><span class="badge b-strong">強</span></td><td><a href="https://www.apa.org/monitor/jun07/insincere">Risen &amp; Gilovich (2007)</a></td></tr>
 <tr id="B-06"><td class="id">B-06</td><td>理不尽な責任の取らせ方を経験した人は、極端な謝罪表現を肯定的に評価する</td><td><code>tolerance</code> の個人差（礼節規範型が高い）</td><td><span class="badge b-mid">中</span></td><td><a href="https://www.jstage.jst.go.jp/article/jjcep/30/2/30_51/_article/-char/en">臨床教育心理学研究 30(2)</a></td></tr>
-<tr id="B-07"><td class="id">B-07</td><td>日本人は恩義を詫びの言葉で表し、米国では感謝の言葉が多用される</td><td>感謝だけの返答は、謝罪の中身として小さくしか数えない</td><td><span class="badge b-mid">中</span></td><td><a href="https://journals.sagepub.com/doi/10.1177/0261927X12446595">謝罪と感謝の日米比較（SAGE）</a></td></tr>
+<tr id="B-07"><td class="id">B-07</td><td>日本人は恩義を詫びの言葉で表し、米国では感謝の言葉が多用される</td><td>感謝だけの返答は謝罪の中身として小さくしか数えない</td><td><span class="badge b-mid">中</span></td><td><a href="https://journals.sagepub.com/doi/10.1177/0261927X12446595">謝罪と感謝の日米比較（SAGE）</a></td></tr>
 <tr id="B-08"><td class="id">B-08</td><td>謝罪の頻度は人によって違い、閾値（何を謝るべきことと見るか）にも個人差がある</td><td>受け手の <code>expect</code>、<code>tolerance</code> の幅</td><td><span class="badge b-mid">中</span></td><td><a href="https://www.psypost.org/2023/03/are-you-a-frequent-apologizer-new-research-indicates-you-might-actually-reap-downstream-benefits-74347">Schumann らの研究の紹介</a></td></tr>
-<tr id="B-09"><td class="id">B-09</td><td>必要なポライトネスは、力関係（P）、社会的距離（D）、負担の大きさ（R）で決まる</td><td><code>context.power</code>、<code>context.distance</code> で、期待する深さと文体の規範を調整</td><td><span class="badge b-strong">強（理論）</span></td><td>Brown &amp; Levinson (1987) <i>Politeness</i></td></tr>
+<tr id="B-09"><td class="id">B-09</td><td>必要なポライトネスは、力関係（P）、社会的距離（D）、負担の大きさ（R）で決まる</td><td><code>context.power</code>、<code>context.distance</code> で期待する深さと文体の規範を調整</td><td><span class="badge b-strong">強（理論）</span></td><td>Brown &amp; Levinson (1987) <i>Politeness</i></td></tr>
+<tr id="B-10"><td class="id">B-10</td><td>謙遜は文化に共通した価値で、目的は謙虚な人物と見られること。程度と仕方に文化差があり、自己否定につながる強い謙遜はアジア文化圏で選ばれやすい（21か国）</td><td><code>overclaim</code> を日本人らしさではなく、どの型にも幅のある個人差として置く</td><td><span class="badge b-mid">中</span></td><td>山口・村上・森尾ほか（科研 25285177 研究成果報告書）</td></tr>
+<tr id="B-11"><td class="id">B-11</td><td>普段得意な人が謙遜すると、大人からは能力が低く見られる。普段苦手なのに自己高揚すると、性格が低く見られる（日本）</td><td>過信で外した直後の言い切り（懲りていない）、ぼかしすぎの頼れなさ</td><td><span class="badge b-mid">中</span></td><td>林・松本・和田・Banerjee (2024) <i>J. Exp. Child Psychol.</i></td></tr>
 </tbody></table></div>
 
 <h2 id="C"><svg class="icon"><use href="#i-book"/></svg>C. 謝罪の構成要素</h2>
@@ -93,20 +95,26 @@
 <tr id="C-01"><td class="id">C-01</td><td>謝罪の6要素のうち、最も重要なのは責任の承認、次が償いの申し出。許しの要求は最も効果が小さい</td><td>中身（過失の具体性）と、依頼の未遂行の重い減点</td><td><span class="badge b-strong">強</span></td><td><a href="https://news.osu.edu/the-6-elements-of-an-effective-apology-according-to-science/">Lewicki ほか (2016)</a></td></tr>
 <tr id="C-02"><td class="id">C-02</td><td>日本人は説明せずに直接謝ることを好み、相手のために何かをすることが謝罪の主要な形の一つ</td><td>謝罪が冒頭にあることの加点、説明の多さの減点、<code>repair</code></td><td><span class="badge b-strong">強</span></td><td>Barnlund &amp; Yoshioka (1990)。<a href="https://dwcla.repo.nii.ac.jp/record/1547/files/AA11551704-20170331-71.pdf">要約を含む資料</a></td></tr>
 <tr id="C-03"><td class="id">C-03</td><td>日本人は償い・補償・再発しない約束・許しの要求を多く使う</td><td>代償と約束の扱い</td><td><span class="badge b-mid">中</span></td><td><a href="https://www.ideals.illinois.edu/items/19646">Sugimoto (1995)</a></td></tr>
+<tr id="C-04"><td class="id">C-04</td><td>日本人は米国人より謝る頻度が高く、自分が関与していないことにも謝る。米国人は謝罪を責任の承認と同一視しやすい。日本の謝罪は相手の負担を認め関係を保つ反省の表明。誠実さの違反の後の謝罪は、日本人の方が信頼を回復させた。日本では違反を改められるものと見る</td><td>謝罪の中身を過失の承認と負担への言及に分ける。修復期の行動の重み、違反の種類の調整</td><td><span class="badge b-mid">中〜強</span></td><td>Maddux, Kim, Okumura &amp; Brett (2011) <i>International Negotiation</i></td></tr>
 </tbody></table></div>
 
-<h2 id="D"><svg class="icon"><use href="#i-book"/></svg>D. 信頼損傷ヒステリシス</h2>
+<h2 id="D"><svg class="icon"><use href="#i-book"/></svg>D. 信頼損傷ヒステリシスと控えの時間軸</h2>
 <div class="tbl wide ev"><table>
 <thead><tr><th class="id">ID</th><th>内容</th><th>使い方</th><th>確度</th><th>出典</th></tr></thead>
 <tbody>
 <tr id="D-01"><td class="id">D-01</td><td>信頼は作るより壊す方がはるかに容易（非対称性原理）</td><td>傷 S が違反回数に対して超線形に増える</td><td><span class="badge b-strong">強</span></td><td>Slovic (1993)。<a href="https://jps.ecnu.edu.cn/EN/Y2013/V36/I6/1333">整理</a></td></tr>
 <tr id="D-02"><td class="id">D-02</td><td>信頼の低い人は、良い知らせも悪い知らせも否定的に受け取る</td><td>傷があると兆候への感度を上げる（×(1+0.3S)）</td><td><span class="badge b-mid">中</span></td><td><a href="https://peeref.com/works/73175127">Cvetkovich et al. (2002)</a></td></tr>
 <tr id="D-03"><td class="id">D-03</td><td>日本でも、もともと高い信頼が大きな出来事の後も保たれやすい「二重の非対称効果」が報告されている</td><td>状態依存の受け取り方の裏づけ</td><td><span class="badge b-mid">中</span></td><td><a href="https://www.jstage.jst.go.jp/article/jjpsy/85/2/85_85.13014/_article/-char/ja">中谷内ほか (2014)</a></td></tr>
-<tr id="D-04"><td class="id">D-04</td><td>行動を改める約束は信頼の回復を早めるが、事前の欺瞞があると効果が落ちる。ロボットが約束して破ると、一般的な謝罪より信頼が大きく下がる</td><td><code>broken_promises</code> 後の新しい約束を減点</td><td><span class="badge b-strong">強</span></td><td><a href="https://repository.upenn.edu/mgmt_papers/313">Schweitzer, Hershey, Bradlow (2006)</a>、<a href="https://researchportal.hw.ac.uk/en/publications/robot-broken-promise-repair-strategies-for-mitigating-loss-of-tru/">Nesset et al.</a></td></tr>
+<tr id="D-04"><td class="id">D-04</td><td>行動を改める約束は信頼の回復を早めるが、事前の欺瞞があると効果が落ちる。信頼に足る行動が一貫して続けば信頼は回復するが、欺瞞を伴えば完全には戻らない。ロボットが約束して破ると、一般的な謝罪より信頼が大きく下がる</td><td><code>broken_promises</code> 後の新しい約束を減点。修復期の一貫、欺瞞の残る傷 S_dec</td><td><span class="badge b-strong">強</span></td><td><a href="https://repository.upenn.edu/mgmt_papers/313">Schweitzer, Hershey, Bradlow (2006)</a>、<a href="https://researchportal.hw.ac.uk/en/publications/robot-broken-promise-repair-strategies-for-mitigating-loss-of-tru/">Nesset et al.</a></td></tr>
 <tr id="D-05"><td class="id">D-05</td><td>ロボットとの協働で、3回の違反と修復の後は、どの修復策でも信頼が完全には戻らない</td><td>過去の謝罪回数に応じた謝罪の目減り</td><td><span class="badge b-mid">中</span></td><td><a href="https://www.sciencedaily.com/releases/2023/02/230202135744.htm">Esterwood &amp; Robert (2023)</a></td></tr>
 <tr id="D-06"><td class="id">D-06</td><td>人は同じ間違いを見ても、人間よりアルゴリズムに早く信頼を失う</td><td>AIへの傷の残りやすさ <code>memory</code></td><td><span class="badge b-strong">強</span></td><td><a href="https://faculty.wharton.upenn.edu/wp-content/uploads/2016/11/20-Dietvorst-Simmons-Massey-2015.pdf">Dietvorst, Simmons, Massey (2015)</a></td></tr>
 <tr id="D-07"><td class="id">D-07</td><td>自動化システムの失敗は、成功より信頼に大きく影響する</td><td>非対称性の裏づけ</td><td><span class="badge b-mid">中</span></td><td><a href="https://arxiv.org/abs/2107.07374">Yang et al.</a></td></tr>
 <tr id="D-08"><td class="id">D-08</td><td>許しは時間をかけて少しずつ進む</td><td>受け入れ後の不満の下がり幅を exp(−S) で縮める</td><td><span class="badge b-strong">強</span></td><td><a href="https://typeset.io/papers/forgiveness-forbearance-and-time-the-temporal-unfolding-of-4x70ov2733">McCullough et al. (2003)</a></td></tr>
+<tr id="D-09"><td class="id">D-09</td><td>誤りは、その誤りに自信を示していた証人の信用を、自信を示さなかった証人より大きく損なう。人は相手の較正を推し量る</td><td>過信の差 G、控えめの度合い h</td><td><span class="badge b-mid">中</span></td><td>Tenney, MacCoun, Spellman &amp; Hastie (2007) <i>Psychological Science</i></td></tr>
+<tr id="D-10"><td class="id">D-10</td><td>正確さが分かるとき、自信を持って外した助言者の信用は低い。正確さが分からなければ、自信のある助言者が影響力を持つ。正確な助言者の控えめさは罰せられない</td><td>G、気づかれやすさ v</td><td><span class="badge b-mid">中</span></td><td>Sah, Moore &amp; MacCoun (2013) <i>OBHDP</i></td></tr>
+<tr id="D-11"><td class="id">D-11</td><td>AIの自信のずれは適切な頼り方を損なうが、利用者には気づかれにくい</td><td>気づかれやすさ v</td><td><span class="badge b-mid">中</span></td><td><a href="https://arxiv.org/abs/2402.07632">Li, Yang, Zhang, Liao ほか (2024)</a></td></tr>
+<tr id="D-12"><td class="id">D-12</td><td>償いや監視の受け入れといった実質的な応答は、謝罪と同じく「反省している」という知覚を通じて信頼を回復させる。反省の信号は、能力の違反の後で重く受け取られる</td><td>修復期の控え、違反の種類の調整</td><td><span class="badge b-strong">強</span></td><td>Dirks, Kim, Ferrin &amp; Cooper (2011) <i>OBHDP</i></td></tr>
+<tr id="D-13"><td class="id">D-13</td><td>謝罪や補償などの和解のふるまいは、相手を「関係の価値がある」「また害する危険が低い」と知覚させ、許しを早める（縦断研究）</td><td>修復期の控え、約束破りの失点</td><td><span class="badge b-strong">強</span></td><td>McCullough ら (2014) <i>PNAS</i></td></tr>
 </tbody></table></div>
 
 <h2 id="E"><svg class="icon"><use href="#i-book"/></svg>E. 態度・行動のシグナル</h2>
@@ -137,11 +145,12 @@
 <tr id="F-06"><td class="id">F-06</td><td>怒っている顧客に、チャットボットの共感の言葉と金銭補償を組み合わせると、補償の効果がむしろ逆転する</td><td>補償と強い仮想の感情表現の組み合わせを減点</td><td><span class="badge b-mid">中</span></td><td><a href="https://ideas.repec.org/a/spr/elmark/v35y2025i1d10.1007_s12525-025-00814-7.html">Lee (2025)</a></td></tr>
 <tr id="F-07"><td class="id">F-07</td><td>サービスロボットの失敗では金銭補償が評価を支配し、補償がないときだけ擬人的な声が効く</td><td>現実の代償を仮想の身体より重く数える</td><td><span class="badge b-mid">中</span></td><td><a href="https://opus.bibliothek.uni-augsburg.de/opus4/files/130296/130296.pdf">Bruder &amp; Paul (2026)</a></td></tr>
 <tr id="F-08"><td class="id">F-08</td><td>遊びや物語には「これは遊びである」という枠組みがあり、その中での行為は枠の外とは別の意味を持つ</td><td>物語の中では、作中の身体と代償を本物として扱う</td><td><span class="badge b-strong">強（理論）</span></td><td>Bateson (1955) "A Theory of Play and Fantasy"、Huizinga (1938) の「魔法の円」</td></tr>
-<tr id="F-09"><td class="id">F-09</td><td>ロボットの言葉と非言語の食い違いは、信頼を大きく下げる</td><td>不一致群の減点をAIにも適用</td><td><span class="badge b-mid">中</span></td><td><a href="https://researchportal.hw.ac.uk/en/publications/robot-broken-promise-repair-strategies-for-mitigating-loss-of-tru/">Nesset et al.</a></td></tr>
+<tr id="F-09"><td class="id">F-09</td><td>ロボットの言葉と非言語の食い違いは信頼を大きく下げる</td><td>不一致群の減点をAIにも適用</td><td><span class="badge b-mid">中</span></td><td><a href="https://researchportal.hw.ac.uk/en/publications/robot-broken-promise-repair-strategies-for-mitigating-loss-of-tru/">Nesset et al.</a></td></tr>
 <tr id="F-10"><td class="id">F-10</td><td>関連研究（結果は未確認）：謝罪中のロボットのお辞儀と信頼回復、オンラインの謝罪での絵文字の効果</td><td>今後の参照用</td><td><span class="badge b-case">—</span></td><td><a href="https://dblp.uni-trier.de/rec/conf/hri/MaehigashiKYY25.html">Maehigashi et al. (HRI 2025)</a>、<a href="https://pure.jbnu.ac.kr/en/publications/apologizing-for-online-service-failures-how-does-the-use-of-emoji/">絵文字と謝罪 (2026)</a></td></tr>
+<tr id="F-11"><td class="id">F-11</td><td>LLM の一人称の不確かさの表明は、過信を減らす一方、使い続けたい気持ちを下げ、作業時間を延ばす（事前登録の実験）</td><td>失敗の前の但し書きの有用さ、ぼかしすぎの頼れなさ</td><td><span class="badge b-mid">中</span></td><td>Kim, Liao, Vorvoreanu, Ballard &amp; Vaughan (2024) FAccT</td></tr>
 </tbody></table></div>
 
-<h2 id="G"><svg class="icon"><use href="#i-book"/></svg>G. 事例（v0.4 ベンチマークの筆者評定）</h2>
+<h2 id="G"><svg class="icon"><use href="#i-book"/></svg>G. 事例（SHAZAI Rules v0.4 ベンチマークの筆者評定）</h2>
 <p>筆者の評定は母集団の一点として扱い、規則の向きの確認に使っています。正解として当てはめてはいません。</p>
 <div class="tbl ev"><table>
 <thead><tr><th class="id">ID</th><th>事例</th><th>対応する規則</th></tr></thead>

@@ -1,6 +1,6 @@
-# 項目の組での観察の再現（eval/v09-observers/obs-scenes-opus.json）
+# 項目の組での観察の再現（eval/observers/obs-scenes-opus.json）
 
-手の観察（`examples/scenes-v09.json`）と、盲検の LLM 観察（`llm:scenes-opus`）の比較。106 回答。シミュレータには、手の観察は既定の所属度関数で、LLM の観察は出どころの較正（llm）で通した。
+手の観察（`examples/scenes-kit.json`）と、盲検の LLM 観察（`llm:scenes-opus`）の比較。106 回答。シミュレータには、手の観察は既定の所属度関数で、LLM の観察は出どころの較正（llm）で通した。
 
 ## 欄ごとの一致
 
