@@ -143,6 +143,31 @@ v0.8 から、人間の評定もファジィです。評定者は4つの述語�
 | 外れの検出 | 無作為に押した回答（近さ 0.58）と、すべて「少し」を押した回答（0.72）は、どちらも「母集団の外の可能性」と判定された（目安 0.883） |
 | 旧形式の取り込み | 4値の評定ファイルの取り込み（一点集中の所属度）と、報告書の注記が動作 |
 
+## 6b. 評価キット（v0.9）
+
+v0.9 の設計の仮説（失敗の前の構え、修復期の控え、免責の但し書きの局面）を、日本の受け手で確かめるための問題束です。事前登録は [PREREGISTRATION_V09.md](../../human/PREREGISTRATION_V09.md)、仮説の機械で読める定義は [hypotheses-v09.json](../../human/hypotheses-v09.json)、設計は [IMPROVEMENT_V09.md](IMPROVEMENT_V09.md) 8章です。
+
+```text
+python3 tools/make_scenes_v09.py                                   # 項目の組（88場面・320回答）
+python3 blind.py pack --design --scenes examples/scenes-v09.json --repeat 2 --out-dir human/kit-v09
+python3 sim.py scenes examples/scenes-v09.json -o out/scenes-v09.json
+python3 blind.py compare --key human/kit-v09/key.json --ratings "human/kit-v09/ratings/*.json" \
+  --sim out/scenes-v09.json --scenes examples/scenes-v09.json --hypotheses human/hypotheses-v09.json --rps -o human/kit-v09/compare
+python3 blind.py power --scenes examples/scenes-v09.json --hypotheses human/hypotheses-v09.json --raters 20,40,60
+```
+
+| 要素 | 内容 |
+|---|---|
+| 項目 | `design.kit` が真の場面。4領域 × 組 A（失敗の前の構え 5 × 謝罪 6）・組 B（修復期の回答 5 × 関係 2 × 傷の深さ 2）・組 C（但し書き 2 × 局面 4）＋錨 4 |
+| 割り付け | 土台（28）ごとに一人一水準のラテン方格。リスト（30）は評定者IDのハッシュで決まり、URL の `?list=` で指定もできる。錨は全員、注意の確認 1問、再評定 2問。1人 35問 |
+| 追加の設問 | 信頼意図（全項目）、反省の知覚・再発の危険（修復期）、操作の確認（失敗の前の自信。組 A・C）。不満の深さと誠実さは聞かない |
+| アンケート | 既存の8問に、過信への厳しさ、「確認済み」への頼り方、戻り方の好み、詫びの繰り返しの負担、謝罪中の「念のため」、AI の利用経験の6問を追加 |
+| 検定 | `compare --hypotheses`：評定者を単位にしたブートストラップ（p は標準誤差の正規近似）、primary に Holm 法、支持は調整後 p < 0.05 かつ効果 ≥ 0.10。シミュレータの予測との向きの一致も出す |
+| 主指標 | `compare --rps`：述語ごとの5段階の順位確率スコア（予測分布は受け手一人ずつの所属度＋評定者のノイズを丸めたもの） |
+| 検出力 | `power`：合成評定者で、事前登録の検定が「支持」となる割合を人数ごとに出す（`--effect-scale 0.5` で予測の半分の効果） |
+
+合成評定者による試験と検出力の結果は `eval/v09-kit/` と [EVALUATION_V09.md](EVALUATION_V09.md) にあります。
+
 ## 7. 限界と注意
 
 - 立場の説明文（本人／第三者／物語の中）は評定に影響します。シミュレータの条件とそろえるために入れていますが、文言を変えたら比較をやり直してください。

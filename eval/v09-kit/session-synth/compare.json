@@ -1,0 +1,6408 @@
+{
+ "packet_id": "pk-20261119-87378a",
+ "n_raters": 60,
+ "n_items": 252,
+ "humans": {
+  "alpha": {
+   "rude": 0.6901558401074658,
+   "light": 0.3450371643034309,
+   "fit": 0.6512589089700284,
+   "heavy": 0.5346862371165698
+  },
+  "retest_n": 120,
+  "retest_closeness": 0.9125,
+  "retest_mae": {
+   "rude": 0.08958333333333333,
+   "light": 0.09375,
+   "fit": 0.07083333333333333,
+   "heavy": 0.09583333333333334
+  },
+  "loo_closeness": 0.8458936669841066,
+  "mean_mu": {
+   "rude": 0.27825520833333334,
+   "light": 0.215234375,
+   "fit": 0.5890625,
+   "heavy": 0.14244791666666667
+  },
+  "fit_tnorm": {
+   "min": {
+    "corr": 0.745781247186325,
+    "mae": 0.12395833333333334
+   },
+   "product": {
+    "corr": 0.7499101564859308,
+    "mae": 0.14430338541666668
+   }
+  },
+  "heavy_and_light": 0.023958333333333335
+ },
+ "auto": {
+  "simulator": {
+   "items": 252,
+   "closeness_individual": 0.8643173177083334,
+   "closeness_item": 0.9207695436507937,
+   "mae": {
+    "rude": 0.0640079365079365,
+    "light": 0.08528664021164022,
+    "fit": 0.09212500000000001,
+    "heavy": 0.07550224867724868
+   },
+   "corr": {
+    "rude": 0.9184806838787518,
+    "light": 0.8079038606938203,
+    "fit": 0.9176274742290017,
+    "heavy": 0.8460345495948512
+   },
+   "bias": {
+    "rude": -0.015556349206349204,
+    "light": -0.01680357142857143,
+    "fit": 0.004709126984126984,
+    "heavy": -0.0414239417989418
+   },
+   "heavy_and_light": 0.0,
+   "kappa_by_rater": {
+    "synth-03": 0.677,
+    "synth-33": 0.57,
+    "synth-29": 0.502,
+    "synth-59": 0.567,
+    "synth-09": 0.629,
+    "synth-39": 0.748,
+    "synth-13": 0.695,
+    "synth-43": 0.742,
+    "synth-24": 0.702,
+    "synth-54": 0.69,
+    "synth-27": 0.753,
+    "synth-57": 0.511,
+    "synth-10": 0.645,
+    "synth-40": 0.554,
+    "synth-21": 0.65,
+    "synth-51": 0.694,
+    "synth-26": 0.477,
+    "synth-56": 0.679,
+    "synth-15": 0.698,
+    "synth-45": 0.702,
+    "synth-01": 0.617,
+    "synth-31": 0.434,
+    "synth-06": 0.399,
+    "synth-36": 0.348,
+    "synth-28": 0.441,
+    "synth-58": 0.667,
+    "synth-02": 0.712,
+    "synth-32": 0.634,
+    "synth-25": 0.759,
+    "synth-55": 0.8,
+    "synth-23": 1.0,
+    "synth-53": 0.837,
+    "synth-18": 0.731,
+    "synth-48": 0.782,
+    "synth-16": 0.835,
+    "synth-46": 0.676,
+    "synth-20": 0.569,
+    "synth-50": 0.611,
+    "synth-08": 0.644,
+    "synth-38": 0.749,
+    "synth-07": 0.632,
+    "synth-37": 0.852,
+    "synth-05": 0.709,
+    "synth-35": 0.814,
+    "synth-11": 0.478,
+    "synth-41": 0.584,
+    "synth-14": 0.947,
+    "synth-44": 0.708,
+    "synth-30": 0.468,
+    "synth-60": 0.697,
+    "synth-17": 0.797,
+    "synth-47": 0.755,
+    "synth-22": 0.552,
+    "synth-52": 0.546,
+    "synth-19": 0.317,
+    "synth-49": 0.325,
+    "synth-12": 0.85,
+    "synth-42": 0.553,
+    "synth-04": 0.671,
+    "synth-34": 0.569
+   },
+   "kappa_median": 0.676,
+   "human_mu": {
+    "rude": 0.19826388888888888,
+    "light": 0.19236111111111112,
+    "fit": 0.6746527777777778,
+    "heavy": 0.12240410052910053
+   },
+   "auto_mu": {
+    "rude": 0.18270753968253967,
+    "light": 0.17555753968253968,
+    "fit": 0.6793619047619047,
+    "heavy": 0.08098015873015874
+   }
+  }
+ },
+ "groups": {
+  "set": {
+   "A": {
+    "items": 120,
+    "human": {
+     "rude": 0.05625,
+     "light": 0.159375,
+     "fit": 0.8135416666666667,
+     "heavy": 0.09270833333333334
+    },
+    "simulator": {
+     "rude": 0.03306,
+     "light": 0.14033333333333334,
+     "fit": 0.8164666666666667,
+     "heavy": 0.04894916666666667
+    },
+    "closeness": 0.8905072916666666
+   },
+   "B": {
+    "items": 80,
+    "human": {
+     "rude": 0.4354166666666667,
+     "light": 0.30364583333333334,
+     "fit": 0.38932291666666663,
+     "heavy": 0.19973958333333333
+    },
+    "simulator": {
+     "rude": 0.43956999999999996,
+     "light": 0.29093,
+     "fit": 0.386495,
+     "heavy": 0.16023
+    },
+    "closeness": 0.9499458333333333
+   },
+   "C": {
+    "items": 48,
+    "human": {
+     "rude": 0.16666666666666666,
+     "light": 0.09166666666666667,
+     "fit": 0.796875,
+     "heavy": 0.06874999999999999
+    },
+    "simulator": {
+     "rude": 0.13944166666666666,
+     "light": 0.07277499999999999,
+     "fit": 0.8173499999999999,
+     "heavy": 0.030387499999999998
+    },
+    "closeness": 0.9439229166666667
+   },
+   "D": {
+    "items": 4,
+    "human": {
+     "rude": 0.09479166666666666,
+     "light": 0.16458333333333333,
+     "fit": 0.7479166666666667,
+     "heavy": 0.11041666666666666
+    },
+    "simulator": {
+     "rude": 0.054075,
+     "light": 0.158225,
+     "fit": 0.7677,
+     "heavy": 0.064025
+    },
+    "closeness": 0.9672708333333333
+   }
+  },
+  "domain": {
+   "code": {
+    "items": 62,
+    "human": {
+     "rude": 0.18676075268817202,
+     "light": 0.19791666666666669,
+     "fit": 0.6845430107526881,
+     "heavy": 0.128494623655914
+    },
+    "simulator": {
+     "rude": 0.18478225806451612,
+     "light": 0.17583709677419354,
+     "fit": 0.6853322580645161,
+     "heavy": 0.0728
+    },
+    "closeness": 0.9217118279569892
+   },
+   "fact": {
+    "items": 62,
+    "human": {
+     "rude": 0.2075940860215054,
+     "light": 0.19899193548387098,
+     "fit": 0.6637096774193548,
+     "heavy": 0.12237903225806453
+    },
+    "simulator": {
+     "rude": 0.18478225806451612,
+     "light": 0.17583709677419354,
+     "fit": 0.6853322580645161,
+     "heavy": 0.0728
+    },
+    "closeness": 0.9218654569892474
+   },
+   "file": {
+    "items": 62,
+    "human": {
+     "rude": 0.22170698924731183,
+     "light": 0.2049731182795699,
+     "fit": 0.6663978494623657,
+     "heavy": 0.1105510752688172
+    },
+    "simulator": {
+     "rude": 0.18478225806451612,
+     "light": 0.17583709677419354,
+     "fit": 0.6853322580645161,
+     "heavy": 0.0728
+    },
+    "closeness": 0.9156440860215054
+   },
+   "schedule": {
+    "items": 62,
+    "human": {
+     "rude": 0.18366935483870966,
+     "light": 0.1693548387096774,
+     "fit": 0.6792338709677419,
+     "heavy": 0.12896505376344086
+    },
+    "simulator": {
+     "rude": 0.18478225806451612,
+     "light": 0.17583709677419354,
+     "fit": 0.6557516129032258,
+     "heavy": 0.10661451612903226
+    },
+    "closeness": 0.9208567204301076
+   }
+  }
+ },
+ "synthetic_raters": 60,
+ "imported_raters": 0,
+ "crisp_raters": 0,
+ "items": [
+  {
+   "source": "scene:A-fact-neutral/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.875,
+    "light": 0.625,
+    "fit": 0.375,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.3319,
+    "fit": 0.654,
+    "heavy": 0.022
+   },
+   "closeness": 0.6372249999999999,
+   "human_level": 4.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-assertive/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 1.0,
+    "fit": 0.0,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.4705,
+    "fit": 0.5191,
+    "heavy": 0.0179
+   },
+   "closeness": 0.675325,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-file-assertive/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.875,
+    "fit": 0.125,
+    "heavy": 0.5
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.4705,
+    "fit": 0.5191,
+    "heavy": 0.0179
+   },
+   "closeness": 0.675325,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-fact-neutral/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.5,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.5
+   },
+   "simulator": {
+    "rude": 0.0248,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.679975,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-fact-confident/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.5,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.369,
+    "fit": 0.6178,
+    "heavy": 0.021
+   },
+   "closeness": 0.68645,
+   "human_level": 3.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-code-assertive/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.25,
+    "light": 0.125,
+    "fit": 0.75,
+    "heavy": 0.75
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1939,
+    "fit": 0.7955,
+    "heavy": 0.0179
+   },
+   "closeness": 0.730375,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-code-false_verified/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 1.0,
+    "fit": 0.125,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.4285,
+    "fit": 0.5602,
+    "heavy": 0.0187
+   },
+   "closeness": 0.73915,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-schedule-neutral/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.25,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.3319,
+    "fit": 0.654,
+    "heavy": 0.022
+   },
+   "closeness": 0.746775,
+   "human_level": 3.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-assertive/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 1.0,
+    "heavy": 0.5
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1939,
+    "fit": 0.7916,
+    "heavy": 0.0179
+   },
+   "closeness": 0.770975,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-file-false_verified/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.4285,
+    "fit": 0.5602,
+    "heavy": 0.0187
+   },
+   "closeness": 0.77375,
+   "human_level": 3.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-file-confident/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.625,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1026,
+    "fit": 0.8791,
+    "heavy": 0.021
+   },
+   "closeness": 0.79375,
+   "human_level": 3.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-file-false_verified/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 0.5,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0477,
+    "fit": 0.8797,
+    "heavy": 0.083
+   },
+   "closeness": 0.80825,
+   "human_level": 3.5,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-file-assertive/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.5,
+    "light": 0.25,
+    "fit": 0.625,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1939,
+    "fit": 0.781,
+    "heavy": 0.0298
+   },
+   "closeness": 0.8093,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-file-false_verified/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.375,
+    "light": 0.375,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0677,
+    "light": 0.1522,
+    "fit": 0.8251,
+    "heavy": 0.0187
+   },
+   "closeness": 0.812775,
+   "human_level": 3.5,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-fact-false_verified/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.5
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1522,
+    "fit": 0.832,
+    "heavy": 0.0187
+   },
+   "closeness": 0.8236,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-code-assertive/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.125,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.375
+   },
+   "simulator": {
+    "rude": 0.1302,
+    "light": 0.1939,
+    "fit": 0.7524,
+    "heavy": 0.0179
+   },
+   "closeness": 0.8303,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-code-confident/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.625,
+    "heavy": 0.375
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1026,
+    "fit": 0.8791,
+    "heavy": 0.021
+   },
+   "closeness": 0.83125,
+   "human_level": 3.5,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-schedule-neutral/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.5
+   },
+   "simulator": {
+    "rude": 0.0248,
+    "light": 0.0795,
+    "fit": 0.8371,
+    "heavy": 0.0943
+   },
+   "closeness": 0.8317749999999999,
+   "human_level": 4.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-fact-assertive/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.5,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0553,
+    "fit": 0.8748,
+    "heavy": 0.0801
+   },
+   "closeness": 0.833,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-schedule-assertive/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.5,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1939,
+    "fit": 0.7362,
+    "heavy": 0.0801
+   },
+   "closeness": 0.833,
+   "human_level": 3.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-file-hedged/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.5,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0347,
+    "fit": 0.9038,
+    "heavy": 0.0641
+   },
+   "closeness": 0.837375,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-fact-assertive/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.625,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1939,
+    "fit": 0.7955,
+    "heavy": 0.0179
+   },
+   "closeness": 0.840625,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-schedule-false_verified/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.5,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1522,
+    "fit": 0.7717,
+    "heavy": 0.083
+   },
+   "closeness": 0.84115,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-file-confident/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.5,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1026,
+    "fit": 0.8586,
+    "heavy": 0.0433
+   },
+   "closeness": 0.84195,
+   "human_level": 4.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-schedule-hedged/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.375,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.8726,
+    "heavy": 0.1044
+   },
+   "closeness": 0.844125,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-code-neutral/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.625,
+    "fit": 0.375,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.3319,
+    "fit": 0.654,
+    "heavy": 0.022
+   },
+   "closeness": 0.846975,
+   "human_level": 4.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-fact-assertive/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.625,
+    "heavy": 0.375
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1939,
+    "fit": 0.781,
+    "heavy": 0.0298
+   },
+   "closeness": 0.84955,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-file-hedged/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.5,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.9487,
+    "heavy": 0.025
+   },
+   "closeness": 0.85175,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-schedule-confident/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0361,
+    "light": 0.1026,
+    "fit": 0.8168,
+    "heavy": 0.0908
+   },
+   "closeness": 0.852225,
+   "human_level": 4.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-fact-neutral/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.625,
+    "heavy": 0.375
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0568,
+    "fit": 0.8598,
+    "heavy": 0.0943
+   },
+   "closeness": 0.852425,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-file-neutral/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.625,
+    "heavy": 0.375
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0568,
+    "fit": 0.8598,
+    "heavy": 0.0943
+   },
+   "closeness": 0.852425,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-schedule-neutral/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.625,
+    "heavy": 0.375
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0568,
+    "fit": 0.8598,
+    "heavy": 0.0943
+   },
+   "closeness": 0.852425,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-file-assertive/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.1302,
+    "light": 0.1939,
+    "fit": 0.7524,
+    "heavy": 0.0179
+   },
+   "closeness": 0.8526,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-fact-assertive/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.75,
+    "fit": 0.25,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.4705,
+    "fit": 0.5191,
+    "heavy": 0.0179
+   },
+   "closeness": 0.8538749999999999,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-schedule-false_verified/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1522,
+    "fit": 0.7426,
+    "heavy": 0.1134
+   },
+   "closeness": 0.858125,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-code-confident/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.5,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1026,
+    "fit": 0.8841,
+    "heavy": 0.021
+   },
+   "closeness": 0.866375,
+   "human_level": 3.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-file-false_verified/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.375,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1522,
+    "fit": 0.8365,
+    "heavy": 0.0187
+   },
+   "closeness": 0.86775,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-schedule-neutral/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.7775,
+    "heavy": 0.1519
+   },
+   "closeness": 0.8754,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-fact-hedged/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1123,
+    "fit": 0.8711,
+    "heavy": 0.025
+   },
+   "closeness": 0.87895,
+   "human_level": 3.0,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-code-false_verified/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.5,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1522,
+    "fit": 0.8209,
+    "heavy": 0.0312
+   },
+   "closeness": 0.8806,
+   "human_level": 3.5,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-code-hedged/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.8726,
+    "heavy": 0.1044
+   },
+   "closeness": 0.883725,
+   "human_level": 3.0,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-schedule-hedged/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.625,
+    "heavy": 0.375
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0347,
+    "fit": 0.7995,
+    "heavy": 0.1735
+   },
+   "closeness": 0.8862,
+   "human_level": 3.0,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-file-neutral/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.901,
+    "heavy": 0.022
+   },
+   "closeness": 0.88725,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-file-false_verified/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.625,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1522,
+    "fit": 0.8209,
+    "heavy": 0.0312
+   },
+   "closeness": 0.892,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-file-confident/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1026,
+    "fit": 0.8841,
+    "heavy": 0.021
+   },
+   "closeness": 0.893175,
+   "human_level": 3.5,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-schedule-confident/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1026,
+    "fit": 0.8132,
+    "heavy": 0.0908
+   },
+   "closeness": 0.893825,
+   "human_level": 3.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-fact-confident/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1026,
+    "fit": 0.8586,
+    "heavy": 0.0433
+   },
+   "closeness": 0.894,
+   "human_level": 3.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:C-code-liability-apology/c1",
+   "label": "詫びの前",
+   "n": 10,
+   "human": {
+    "rude": 0.825,
+    "light": 0.025,
+    "fit": 0.0,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.929,
+    "light": 0.1702,
+    "fit": 0.0709,
+    "heavy": 0.022
+   },
+   "closeness": 0.8942249999999999,
+   "human_level": 3.2,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-schedule-neutral/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.8371,
+    "heavy": 0.0943
+   },
+   "closeness": 0.895975,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-confident/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.375
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1026,
+    "fit": 0.8586,
+    "heavy": 0.0433
+   },
+   "closeness": 0.89625,
+   "human_level": 3.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-schedule-assertive/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1939,
+    "fit": 0.7334,
+    "heavy": 0.0801
+   },
+   "closeness": 0.896475,
+   "human_level": 3.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-code-false_verified/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0677,
+    "light": 0.1522,
+    "fit": 0.8251,
+    "heavy": 0.0187
+   },
+   "closeness": 0.896625,
+   "human_level": 3.5,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-fact-assertive/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1939,
+    "fit": 0.7916,
+    "heavy": 0.0179
+   },
+   "closeness": 0.897475,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-file-assertive/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1939,
+    "fit": 0.7916,
+    "heavy": 0.0179
+   },
+   "closeness": 0.897475,
+   "human_level": 3.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-schedule-false_verified/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0677,
+    "light": 0.1522,
+    "fit": 0.7694,
+    "heavy": 0.083
+   },
+   "closeness": 0.897875,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:C-schedule-liability-apology/c2",
+   "label": "詫びの後",
+   "n": 10,
+   "human": {
+    "rude": 0.275,
+    "light": 0.15,
+    "fit": 0.675,
+    "heavy": 0.225
+   },
+   "simulator": {
+    "rude": 0.1589,
+    "light": 0.0795,
+    "fit": 0.7637,
+    "heavy": 0.0943
+   },
+   "closeness": 0.8985,
+   "human_level": 3.9,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-file-neutral-light/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.5,
+    "light": 0.375,
+    "fit": 0.5416666666666666,
+    "heavy": 0.22916666666666666
+   },
+   "simulator": {
+    "rude": 0.5577,
+    "light": 0.3835,
+    "fit": 0.4298,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9003916666666667,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-schedule-assertive/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1939,
+    "fit": 0.7048,
+    "heavy": 0.1099
+   },
+   "closeness": 0.901625,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-file-neutral/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.8736,
+    "heavy": 0.0513
+   },
+   "closeness": 0.902525,
+   "human_level": 4.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-fact-neutral/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.901,
+    "heavy": 0.022
+   },
+   "closeness": 0.903,
+   "human_level": 4.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-false_verified/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1522,
+    "fit": 0.832,
+    "heavy": 0.0187
+   },
+   "closeness": 0.90415,
+   "human_level": 3.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:B-schedule-close-deep/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.8958333333333334,
+    "light": 0.3958333333333333,
+    "fit": 0.16666666666666666,
+    "heavy": 0.16666666666666666
+   },
+   "simulator": {
+    "rude": 0.9207,
+    "light": 0.4987,
+    "fit": 0.0793,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9051333333333333,
+   "human_level": 0.6666666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:A-fact-false_verified/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.0677,
+    "light": 0.1522,
+    "fit": 0.8251,
+    "heavy": 0.0187
+   },
+   "closeness": 0.905975,
+   "human_level": 3.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:C-schedule-scope-none/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.05,
+    "light": 0.25,
+    "fit": 0.85,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.8371,
+    "heavy": 0.0943
+   },
+   "closeness": 0.907225,
+   "human_level": 3.2,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-schedule-assertive/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0553,
+    "fit": 0.8748,
+    "heavy": 0.0801
+   },
+   "closeness": 0.908,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-fact-neutral/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.9082749999999999,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-false_verified/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0477,
+    "fit": 0.8797,
+    "heavy": 0.083
+   },
+   "closeness": 0.9094,
+   "human_level": 3.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-code-hedged/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0347,
+    "fit": 0.9038,
+    "heavy": 0.0641
+   },
+   "closeness": 0.909675,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:B-schedule-neutral-light/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.5416666666666666,
+    "light": 0.2708333333333333,
+    "fit": 0.4166666666666667,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7365,
+    "light": 0.2667,
+    "fit": 0.2635,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9097666666666666,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-fact-neutral-light/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0625,
+    "light": 0.0625,
+    "fit": 0.020833333333333332,
+    "heavy": 1.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0756,
+    "fit": 0.1609,
+    "heavy": 0.8374
+   },
+   "closeness": 0.9099333333333334,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-fact-liability-prior/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.025,
+    "light": 0.225,
+    "fit": 0.825,
+    "heavy": 0.075
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0421,
+    "fit": 0.943,
+    "heavy": 0.023
+   },
+   "closeness": 0.910025,
+   "human_level": 3.4,
+   "sim_level": 3.415
+  },
+  {
+   "source": "scene:B-code-close-light/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.1875,
+    "light": 0.14583333333333334,
+    "fit": 0.2708333333333333,
+    "heavy": 0.8333333333333334
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0756,
+    "fit": 0.1609,
+    "heavy": 0.8374
+   },
+   "closeness": 0.9115666666666666,
+   "human_level": 0.5,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-schedule-false_verified/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1522,
+    "fit": 0.7752,
+    "heavy": 0.083
+   },
+   "closeness": 0.9117500000000001,
+   "human_level": 3.5,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-code-assertive/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1939,
+    "fit": 0.781,
+    "heavy": 0.0298
+   },
+   "closeness": 0.91205,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:B-fact-neutral-deep/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.625,
+    "light": 0.4791666666666667,
+    "fit": 0.3125,
+    "heavy": 0.08333333333333333
+   },
+   "simulator": {
+    "rude": 0.7202,
+    "light": 0.5978,
+    "fit": 0.2612,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9134583333333334,
+   "human_level": 0.6666666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-file-scope-repair/c3",
+   "label": "慎重に作業（但し書きなし）",
+   "n": 10,
+   "human": {
+    "rude": 0.125,
+    "light": 0.225,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.91435,
+   "human_level": 0.6,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-fact-confident/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1026,
+    "fit": 0.8791,
+    "heavy": 0.021
+   },
+   "closeness": 0.9145,
+   "human_level": 3.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-fact-assertive/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.125,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.1302,
+    "light": 0.1939,
+    "fit": 0.7524,
+    "heavy": 0.0179
+   },
+   "closeness": 0.9151,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:B-file-close-light/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.08333333333333333,
+    "light": 0.10416666666666667,
+    "fit": 0.020833333333333332,
+    "heavy": 0.9375
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0756,
+    "fit": 0.1609,
+    "heavy": 0.8374
+   },
+   "closeness": 0.9164833333333333,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-file-close-light/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.6875,
+    "light": 0.375,
+    "fit": 0.3125,
+    "heavy": 0.041666666666666664
+   },
+   "simulator": {
+    "rude": 0.5311,
+    "light": 0.3835,
+    "fit": 0.4471,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9169083333333333,
+   "human_level": 0.5833333333333334,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-file-confident/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0361,
+    "light": 0.1026,
+    "fit": 0.8832,
+    "heavy": 0.021
+   },
+   "closeness": 0.919675,
+   "human_level": 3.5,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-file-hedged/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.8726,
+    "heavy": 0.1044
+   },
+   "closeness": 0.919775,
+   "human_level": 3.0,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-schedule-hedged/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.8726,
+    "heavy": 0.1044
+   },
+   "closeness": 0.919775,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-schedule-hedged/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.8726,
+    "heavy": 0.1044
+   },
+   "closeness": 0.919775,
+   "human_level": 3.0,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-schedule-hedged/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0347,
+    "fit": 0.8654,
+    "heavy": 0.1044
+   },
+   "closeness": 0.92045,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:C-schedule-liability-repair/c4",
+   "label": "慎重に作業＋但し書き",
+   "n": 10,
+   "human": {
+    "rude": 0.2,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9615,
+    "heavy": 0.0129
+   },
+   "closeness": 0.92105,
+   "human_level": 0.4,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-schedule-assertive/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.125,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.1302,
+    "light": 0.1939,
+    "fit": 0.716,
+    "heavy": 0.0801
+   },
+   "closeness": 0.9217,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:A-file-neutral/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0248,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.922275,
+   "human_level": 3.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-neutral/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0568,
+    "fit": 0.8598,
+    "heavy": 0.0943
+   },
+   "closeness": 0.922675,
+   "human_level": 3.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-file-liability-apology/c2",
+   "label": "詫びの後",
+   "n": 10,
+   "human": {
+    "rude": 0.25,
+    "light": 0.125,
+    "fit": 0.7,
+    "heavy": 0.075
+   },
+   "simulator": {
+    "rude": 0.1589,
+    "light": 0.0795,
+    "fit": 0.8175,
+    "heavy": 0.022
+   },
+   "closeness": 0.923225,
+   "human_level": 3.2,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-schedule-neutral-deep/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.6041666666666666,
+    "light": 0.5416666666666666,
+    "fit": 0.375,
+    "heavy": 0.020833333333333332
+   },
+   "simulator": {
+    "rude": 0.7202,
+    "light": 0.5978,
+    "fit": 0.2612,
+    "heavy": 0.0023
+   },
+   "closeness": 0.923875,
+   "human_level": 0.6666666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-fact-neutral-deep/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 1.0,
+    "light": 0.5625,
+    "fit": 0.0,
+    "heavy": 0.08333333333333333
+   },
+   "simulator": {
+    "rude": 0.9207,
+    "light": 0.4987,
+    "fit": 0.0793,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9241416666666666,
+   "human_level": 0.75,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-code-scope-apology/c1",
+   "label": "詫びの前",
+   "n": 10,
+   "human": {
+    "rude": 0.5,
+    "light": 0.225,
+    "fit": 0.475,
+    "heavy": 0.075
+   },
+   "simulator": {
+    "rude": 0.3969,
+    "light": 0.1702,
+    "fit": 0.567,
+    "heavy": 0.022
+   },
+   "closeness": 0.924275,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-neutral/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.125,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.9244749999999999,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-file-neutral/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.125,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.9244749999999999,
+   "human_level": 3.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-neutral/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.8736,
+    "heavy": 0.0513
+   },
+   "closeness": 0.924575,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-code-liability-apology/c2",
+   "label": "詫びの後",
+   "n": 10,
+   "human": {
+    "rude": 0.25,
+    "light": 0.125,
+    "fit": 0.675,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.1589,
+    "light": 0.0795,
+    "fit": 0.8175,
+    "heavy": 0.022
+   },
+   "closeness": 0.924725,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-code-liability-repair/c3",
+   "label": "慎重に作業（但し書きなし）",
+   "n": 10,
+   "human": {
+    "rude": 0.125,
+    "light": 0.1,
+    "fit": 0.975,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.925,
+   "human_level": 0.6,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-schedule-scope-apology/c2",
+   "label": "詫びの後",
+   "n": 10,
+   "human": {
+    "rude": 0.15,
+    "light": 0.075,
+    "fit": 0.925,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.8325,
+    "heavy": 0.0943
+   },
+   "closeness": 0.9258,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-file-liability-none/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.05,
+    "light": 0.05,
+    "fit": 0.825,
+    "heavy": 0.175
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.926025,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-confident/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0517,
+    "fit": 0.8682,
+    "heavy": 0.0908
+   },
+   "closeness": 0.926925,
+   "human_level": 4.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-fact-confident/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0517,
+    "fit": 0.8682,
+    "heavy": 0.0908
+   },
+   "closeness": 0.926925,
+   "human_level": 4.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-file-confident/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0517,
+    "fit": 0.8682,
+    "heavy": 0.0908
+   },
+   "closeness": 0.926925,
+   "human_level": 3.5,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-code-confident/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.369,
+    "fit": 0.6178,
+    "heavy": 0.021
+   },
+   "closeness": 0.92745,
+   "human_level": 3.5,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:C-code-scope-repair/c4",
+   "label": "慎重に作業＋但し書き",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.95,
+    "heavy": 0.175
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.92785,
+   "human_level": 0.4,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-file-confident/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.5,
+    "fit": 0.5,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.369,
+    "fit": 0.6178,
+    "heavy": 0.021
+   },
+   "closeness": 0.92805,
+   "human_level": 3.5,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-schedule-confident/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.25
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1026,
+    "fit": 0.768,
+    "heavy": 0.1381
+   },
+   "closeness": 0.92855,
+   "human_level": 4.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-file-hedged/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1123,
+    "fit": 0.8711,
+    "heavy": 0.025
+   },
+   "closeness": 0.9289499999999999,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-schedule-hedged/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1123,
+    "fit": 0.8711,
+    "heavy": 0.025
+   },
+   "closeness": 0.9289499999999999,
+   "human_level": 3.0,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-schedule-confident/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0517,
+    "fit": 0.8682,
+    "heavy": 0.0908
+   },
+   "closeness": 0.930325,
+   "human_level": 4.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-file-assertive/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0553,
+    "fit": 0.8748,
+    "heavy": 0.0801
+   },
+   "closeness": 0.93045,
+   "human_level": 4.0,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:B-file-neutral-deep/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.6458333333333334,
+    "light": 0.6041666666666666,
+    "fit": 0.375,
+    "heavy": 0.08333333333333333
+   },
+   "simulator": {
+    "rude": 0.7202,
+    "light": 0.5978,
+    "fit": 0.2612,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9311083333333333,
+   "human_level": 0.5833333333333334,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-code-scope-none/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.025,
+    "light": 0.025,
+    "fit": 0.825,
+    "heavy": 0.15
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.932275,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-fact-liability-none/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.025,
+    "light": 0.025,
+    "fit": 0.9,
+    "heavy": 0.225
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.932275,
+   "human_level": 3.2,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-schedule-false_verified/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0477,
+    "fit": 0.8797,
+    "heavy": 0.083
+   },
+   "closeness": 0.93275,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:B-code-neutral-deep/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.041666666666666664,
+    "light": 0.20833333333333334,
+    "fit": 0.125,
+    "heavy": 0.875
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.251,
+    "fit": 0.1724,
+    "heavy": 0.7205
+   },
+   "closeness": 0.9329416666666667,
+   "human_level": 0.6666666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-schedule-liability-none/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.1,
+    "light": 0.025,
+    "fit": 0.75,
+    "heavy": 0.05
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.8371,
+    "heavy": 0.0943
+   },
+   "closeness": 0.933025,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-code-close-light/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.6875,
+    "light": 0.375,
+    "fit": 0.3541666666666667,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.5311,
+    "light": 0.3835,
+    "fit": 0.4471,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9333416666666667,
+   "human_level": 0.5833333333333334,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-fact-neutral-light/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.8125,
+    "light": 0.2916666666666667,
+    "fit": 0.2916666666666667,
+    "heavy": 0.14583333333333334
+   },
+   "simulator": {
+    "rude": 0.7365,
+    "light": 0.2667,
+    "fit": 0.2635,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9334583333333333,
+   "human_level": 0.4166666666666667,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-fact-close-light/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.6458333333333334,
+    "light": 0.3125,
+    "fit": 0.3541666666666667,
+    "heavy": 0.10416666666666667
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.2667,
+    "fit": 0.2928,
+    "heavy": 0.0088
+   },
+   "closeness": 0.934025,
+   "human_level": 0.4166666666666667,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-fact-neutral-deep/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.08333333333333333,
+    "heavy": 0.875
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.251,
+    "fit": 0.1724,
+    "heavy": 0.7205
+   },
+   "closeness": 0.9343583333333334,
+   "human_level": 0.5833333333333334,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-fact-scope-none/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.075,
+    "light": 0.2,
+    "fit": 0.9,
+    "heavy": 0.1
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.934525,
+   "human_level": 3.2,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-schedule-scope-repair/c4",
+   "label": "慎重に作業＋但し書き",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.15,
+    "fit": 1.0,
+    "heavy": 0.1
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.93475,
+   "human_level": 0.6,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-file-scope-apology/c1",
+   "label": "詫びの前",
+   "n": 10,
+   "human": {
+    "rude": 0.425,
+    "light": 0.05,
+    "fit": 0.675,
+    "heavy": 0.025
+   },
+   "simulator": {
+    "rude": 0.3969,
+    "light": 0.1702,
+    "fit": 0.567,
+    "heavy": 0.022
+   },
+   "closeness": 0.935175,
+   "human_level": 3.2,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-fact-liability-apology/c2",
+   "label": "詫びの後",
+   "n": 10,
+   "human": {
+    "rude": 0.25,
+    "light": 0.125,
+    "fit": 0.725,
+    "heavy": 0.05
+   },
+   "simulator": {
+    "rude": 0.1589,
+    "light": 0.0795,
+    "fit": 0.8175,
+    "heavy": 0.022
+   },
+   "closeness": 0.935725,
+   "human_level": 3.9,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-schedule-neutral-deep/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0625,
+    "light": 0.3958333333333333,
+    "fit": 0.20833333333333334,
+    "heavy": 0.75
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.251,
+    "fit": 0.1724,
+    "heavy": 0.7205
+   },
+   "closeness": 0.9363083333333333,
+   "human_level": 0.5,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-file-close-deep/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.8958333333333334,
+    "light": 0.4375,
+    "fit": 0.14583333333333334,
+    "heavy": 0.10416666666666667
+   },
+   "simulator": {
+    "rude": 0.9207,
+    "light": 0.4987,
+    "fit": 0.0793,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9363833333333333,
+   "human_level": 0.6666666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-schedule-neutral-deep/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.5833333333333334,
+    "light": 0.4791666666666667,
+    "fit": 0.3125,
+    "heavy": 0.0625
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.4987,
+    "fit": 0.2628,
+    "heavy": 0.0023
+   },
+   "closeness": 0.936675,
+   "human_level": 0.5833333333333334,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-code-neutral-deep/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.8333333333333334,
+    "light": 0.6875,
+    "fit": 0.2708333333333333,
+    "heavy": 0.041666666666666664
+   },
+   "simulator": {
+    "rude": 0.7202,
+    "light": 0.5978,
+    "fit": 0.2612,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9370416666666667,
+   "human_level": 0.9166666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-fact-close-deep/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.625,
+    "light": 0.5208333333333334,
+    "fit": 0.375,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.6952,
+    "light": 0.5978,
+    "fit": 0.2736,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9372833333333334,
+   "human_level": 0.6666666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-schedule-neutral-deep/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 1.0,
+    "light": 0.6458333333333334,
+    "fit": 0.0625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.9207,
+    "light": 0.4987,
+    "fit": 0.0793,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9386166666666667,
+   "human_level": 0.75,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:A-code-neutral/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.901,
+    "heavy": 0.022
+   },
+   "closeness": 0.93875,
+   "human_level": 3.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-file-hedged/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0347,
+    "fit": 0.9407,
+    "heavy": 0.025
+   },
+   "closeness": 0.938775,
+   "human_level": 2.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-file-false_verified/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1522,
+    "fit": 0.832,
+    "heavy": 0.0187
+   },
+   "closeness": 0.93925,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:B-schedule-close-deep/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.041666666666666664,
+    "light": 0.0625,
+    "fit": 0.8958333333333334,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0362,
+    "fit": 0.9636,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9398916666666667,
+   "human_level": 0.9166666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-schedule-close-deep/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.6458333333333334,
+    "light": 0.5625,
+    "fit": 0.22916666666666666,
+    "heavy": 0.08333333333333333
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.4987,
+    "fit": 0.2628,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9400416666666667,
+   "human_level": 0.5,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-fact-close-deep/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.14583333333333334,
+    "light": 0.1875,
+    "fit": 0.1875,
+    "heavy": 0.6875
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.251,
+    "fit": 0.1724,
+    "heavy": 0.7205
+   },
+   "closeness": 0.9401416666666667,
+   "human_level": 0.75,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-file-close-light/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.08333333333333333,
+    "light": 0.0,
+    "fit": 0.8333333333333334,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.94025,
+   "human_level": 0.5,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-schedule-assertive/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.4705,
+    "fit": 0.5191,
+    "heavy": 0.0179
+   },
+   "closeness": 0.940675,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:C-schedule-liability-prior/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.025,
+    "fit": 0.975,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0421,
+    "fit": 0.8715,
+    "heavy": 0.0976
+   },
+   "closeness": 0.9409500000000001,
+   "human_level": 3.4,
+   "sim_level": 3.415
+  },
+  {
+   "source": "scene:C-code-liability-repair/c4",
+   "label": "慎重に作業＋但し書き",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.175,
+    "fit": 0.9,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9615,
+    "heavy": 0.0129
+   },
+   "closeness": 0.94175,
+   "human_level": 0.3,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-file-close-deep/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.020833333333333332,
+    "light": 0.10416666666666667,
+    "fit": 1.0,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0362,
+    "fit": 0.9636,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9425250000000001,
+   "human_level": 0.9166666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-file-close-deep/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.7083333333333334,
+    "light": 0.6666666666666666,
+    "fit": 0.16666666666666666,
+    "heavy": 0.041666666666666664
+   },
+   "simulator": {
+    "rude": 0.6952,
+    "light": 0.5978,
+    "fit": 0.2736,
+    "heavy": 0.0023
+   },
+   "closeness": 0.942925,
+   "human_level": 0.75,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:A-fact-false_verified/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1522,
+    "fit": 0.8365,
+    "heavy": 0.0187
+   },
+   "closeness": 0.94315,
+   "human_level": 3.5,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-schedule-neutral/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.8325,
+    "heavy": 0.0943
+   },
+   "closeness": 0.9433,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-schedule-close-light/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.75,
+    "light": 0.3125,
+    "fit": 0.3541666666666667,
+    "heavy": 0.08333333333333333
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.2667,
+    "fit": 0.2928,
+    "heavy": 0.0088
+   },
+   "closeness": 0.943875,
+   "human_level": 0.5833333333333334,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-code-close-deep/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.6458333333333334,
+    "light": 0.6041666666666666,
+    "fit": 0.4375,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.6952,
+    "light": 0.5978,
+    "fit": 0.2736,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9445166666666667,
+   "human_level": 0.6666666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:A-code-neutral/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0248,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.945025,
+   "human_level": 3.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-file-scope-prior/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.075,
+    "light": 0.075,
+    "fit": 0.85,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0352,
+    "fit": 0.949,
+    "heavy": 0.024
+   },
+   "closeness": 0.9450500000000001,
+   "human_level": 3.4,
+   "sim_level": 3.336
+  },
+  {
+   "source": "scene:C-fact-scope-prior/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.075,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.1
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0352,
+    "fit": 0.949,
+    "heavy": 0.024
+   },
+   "closeness": 0.9452,
+   "human_level": 3.4,
+   "sim_level": 3.336
+  },
+  {
+   "source": "scene:B-file-close-light/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.625,
+    "light": 0.375,
+    "fit": 0.3125,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.2667,
+    "fit": 0.2928,
+    "heavy": 0.0088
+   },
+   "closeness": 0.94525,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-schedule-close-deep/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.2916666666666667,
+    "fit": 0.08333333333333333,
+    "heavy": 0.7916666666666666
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.251,
+    "fit": 0.1724,
+    "heavy": 0.7205
+   },
+   "closeness": 0.945275,
+   "human_level": 0.5833333333333334,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-fact-scope-apology/c1",
+   "label": "詫びの前",
+   "n": 10,
+   "human": {
+    "rude": 0.475,
+    "light": 0.15,
+    "fit": 0.525,
+    "heavy": 0.1
+   },
+   "simulator": {
+    "rude": 0.3969,
+    "light": 0.1702,
+    "fit": 0.567,
+    "heavy": 0.022
+   },
+   "closeness": 0.945425,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-fact-neutral-deep/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.7083333333333334,
+    "light": 0.5625,
+    "fit": 0.3125,
+    "heavy": 0.10416666666666667
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.4987,
+    "fit": 0.2628,
+    "heavy": 0.0023
+   },
+   "closeness": 0.945875,
+   "human_level": 0.5,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-code-neutral-deep/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.5833333333333334,
+    "light": 0.4791666666666667,
+    "fit": 0.3333333333333333,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.4987,
+    "fit": 0.2628,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9459416666666667,
+   "human_level": 0.5833333333333334,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-code-close-light/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.9166666666666666,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9460666666666666,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-file-neutral-light/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.7916666666666666,
+    "light": 0.3333333333333333,
+    "fit": 0.22916666666666666,
+    "heavy": 0.0625
+   },
+   "simulator": {
+    "rude": 0.7365,
+    "light": 0.2667,
+    "fit": 0.2635,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9475416666666667,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-file-close-deep/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.10416666666666667,
+    "light": 0.22916666666666666,
+    "fit": 0.16666666666666666,
+    "heavy": 0.8125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.251,
+    "fit": 0.1724,
+    "heavy": 0.7205
+   },
+   "closeness": 0.9485666666666667,
+   "human_level": 0.5833333333333334,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-schedule-close-light/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.6875,
+    "light": 0.3333333333333333,
+    "fit": 0.25,
+    "heavy": 0.08333333333333333
+   },
+   "simulator": {
+    "rude": 0.7365,
+    "light": 0.2667,
+    "fit": 0.2635,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9490833333333333,
+   "human_level": 0.5,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-schedule-scope-apology/c1",
+   "label": "詫びの前",
+   "n": 10,
+   "human": {
+    "rude": 0.5,
+    "light": 0.1,
+    "fit": 0.525,
+    "heavy": 0.1
+   },
+   "simulator": {
+    "rude": 0.3969,
+    "light": 0.1702,
+    "fit": 0.5496,
+    "heavy": 0.0943
+   },
+   "closeness": 0.9491,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-schedule-scope-prior/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.9,
+    "heavy": 0.225
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0352,
+    "fit": 0.8752,
+    "heavy": 0.101
+   },
+   "closeness": 0.9495,
+   "human_level": 3.4,
+   "sim_level": 3.336
+  },
+  {
+   "source": "scene:C-schedule-liability-apology/c1",
+   "label": "詫びの前",
+   "n": 10,
+   "human": {
+    "rude": 0.875,
+    "light": 0.125,
+    "fit": 0.025,
+    "heavy": 0.15
+   },
+   "simulator": {
+    "rude": 0.929,
+    "light": 0.1702,
+    "fit": 0.0709,
+    "heavy": 0.0943
+   },
+   "closeness": 0.9498,
+   "human_level": 3.2,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-code-neutral-light/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.6875,
+    "light": 0.3125,
+    "fit": 0.16666666666666666,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7365,
+    "light": 0.2667,
+    "fit": 0.2635,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9498916666666667,
+   "human_level": 0.5,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-fact-neutral/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.8736,
+    "heavy": 0.0513
+   },
+   "closeness": 0.950225,
+   "human_level": 3.0,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-file-liability-prior/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.05,
+    "light": 0.15,
+    "fit": 1.0,
+    "heavy": 0.025
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0421,
+    "fit": 0.943,
+    "heavy": 0.023
+   },
+   "closeness": 0.950275,
+   "human_level": 3.4,
+   "sim_level": 3.415
+  },
+  {
+   "source": "scene:B-fact-close-deep/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.125,
+    "light": 0.0,
+    "fit": 0.9791666666666666,
+    "heavy": 0.041666666666666664
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0362,
+    "fit": 0.9636,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9504666666666667,
+   "human_level": 0.5833333333333334,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-schedule-neutral-light/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.5,
+    "light": 0.4375,
+    "fit": 0.3541666666666667,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.5577,
+    "light": 0.3835,
+    "fit": 0.4298,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9509666666666666,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-fact-confident/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1026,
+    "fit": 0.8841,
+    "heavy": 0.021
+   },
+   "closeness": 0.951125,
+   "human_level": 4.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:C-file-scope-none/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.025,
+    "fit": 0.975,
+    "heavy": 0.075
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.951475,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-schedule-confident/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1026,
+    "fit": 0.8173,
+    "heavy": 0.0908
+   },
+   "closeness": 0.952775,
+   "human_level": 4.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:C-file-scope-apology/c2",
+   "label": "詫びの後",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.175,
+    "fit": 0.925,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.901,
+    "heavy": 0.022
+   },
+   "closeness": 0.9535,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-schedule-close-deep/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.75,
+    "light": 0.6458333333333334,
+    "fit": 0.3541666666666667,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.6952,
+    "light": 0.5978,
+    "fit": 0.2736,
+    "heavy": 0.0023
+   },
+   "closeness": 0.953575,
+   "human_level": 0.75,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-fact-liability-repair/c4",
+   "label": "慎重に作業＋但し書き",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.15,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9615,
+    "heavy": 0.0129
+   },
+   "closeness": 0.95375,
+   "human_level": 0.4,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-file-hedged/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.9487,
+    "heavy": 0.025
+   },
+   "closeness": 0.95385,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:B-schedule-close-light/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0625,
+    "light": 0.041666666666666664,
+    "fit": 1.0,
+    "heavy": 0.10416666666666667
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9541666666666666,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-code-neutral-light/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.75,
+    "light": 0.2708333333333333,
+    "fit": 0.375,
+    "heavy": 0.0625
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.2667,
+    "fit": 0.2928,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9542916666666666,
+   "human_level": 0.5833333333333334,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-code-neutral-light/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.22916666666666666,
+    "fit": 0.16666666666666666,
+    "heavy": 0.8333333333333334
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0756,
+    "fit": 0.1609,
+    "heavy": 0.8374
+   },
+   "closeness": 0.95465,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-code-close-deep/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.6041666666666666,
+    "light": 0.5416666666666666,
+    "fit": 0.2916666666666667,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.4987,
+    "fit": 0.2628,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9557083333333333,
+   "human_level": 0.5,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-code-neutral-light/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.5416666666666666,
+    "light": 0.3125,
+    "fit": 0.3958333333333333,
+    "heavy": 0.0625
+   },
+   "simulator": {
+    "rude": 0.5577,
+    "light": 0.3835,
+    "fit": 0.4298,
+    "heavy": 0.0088
+   },
+   "closeness": 0.956325,
+   "human_level": 0.4166666666666667,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-fact-close-deep/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.6041666666666666,
+    "light": 0.5416666666666666,
+    "fit": 0.2708333333333333,
+    "heavy": 0.020833333333333332
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.4987,
+    "fit": 0.2628,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9568583333333334,
+   "human_level": 0.5,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-code-liability-prior/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.1,
+    "fit": 0.875,
+    "heavy": 0.05
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0421,
+    "fit": 0.943,
+    "heavy": 0.023
+   },
+   "closeness": 0.957275,
+   "human_level": 3.4,
+   "sim_level": 3.415
+  },
+  {
+   "source": "scene:A-fact-hedged/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0347,
+    "fit": 0.9038,
+    "heavy": 0.0641
+   },
+   "closeness": 0.957775,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-fact-false_verified/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.5,
+    "fit": 0.5,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.4285,
+    "fit": 0.5602,
+    "heavy": 0.0187
+   },
+   "closeness": 0.9579,
+   "human_level": 3.5,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-schedule-false_verified/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.5,
+    "fit": 0.5,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.4285,
+    "fit": 0.5602,
+    "heavy": 0.0187
+   },
+   "closeness": 0.9579,
+   "human_level": 3.5,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-code-assertive/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0553,
+    "fit": 0.8748,
+    "heavy": 0.0801
+   },
+   "closeness": 0.958,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:C-file-scope-repair/c4",
+   "label": "慎重に作業＋但し書き",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.1,
+    "fit": 0.925,
+    "heavy": 0.05
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9591000000000001,
+   "human_level": 0.4,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-code-hedged/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0347,
+    "fit": 0.9407,
+    "heavy": 0.025
+   },
+   "closeness": 0.959125,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-fact-hedged/a6",
+   "label": "較正された構え",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0347,
+    "fit": 0.9407,
+    "heavy": 0.025
+   },
+   "closeness": 0.959125,
+   "human_level": 3.0,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:B-fact-close-light/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0625,
+    "light": 0.041666666666666664,
+    "fit": 1.0,
+    "heavy": 0.08333333333333333
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.959375,
+   "human_level": 0.5833333333333334,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-file-neutral-light/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.6458333333333334,
+    "light": 0.2708333333333333,
+    "fit": 0.375,
+    "heavy": 0.020833333333333332
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.2667,
+    "fit": 0.2928,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9600666666666666,
+   "human_level": 0.4166666666666667,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-code-liability-none/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.025,
+    "light": 0.025,
+    "fit": 0.95,
+    "heavy": 0.075
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0795,
+    "fit": 0.9064,
+    "heavy": 0.022
+   },
+   "closeness": 0.960475,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:C-fact-liability-repair/c3",
+   "label": "慎重に作業（但し書きなし）",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.95,
+    "heavy": 0.1
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.96065,
+   "human_level": 0.4,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-fact-false_verified/a5",
+   "label": "ぼかしすぎ",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.1522,
+    "fit": 0.8209,
+    "heavy": 0.0312
+   },
+   "closeness": 0.96075,
+   "human_level": 3.5,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:B-fact-neutral-deep/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.041666666666666664,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0625
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0362,
+    "fit": 0.9636,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9608833333333333,
+   "human_level": 0.9166666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-schedule-liability-repair/c3",
+   "label": "慎重に作業（但し書きなし）",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.1,
+    "fit": 0.9,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.96095,
+   "human_level": 0.4,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-file-neutral-deep/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.125,
+    "light": 0.22916666666666666,
+    "fit": 0.1875,
+    "heavy": 0.7083333333333334
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.251,
+    "fit": 0.1724,
+    "heavy": 0.7205
+   },
+   "closeness": 0.960975,
+   "human_level": 0.75,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-file-neutral-deep/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.8541666666666666,
+    "light": 0.4166666666666667,
+    "fit": 0.08333333333333333,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.9207,
+    "light": 0.4987,
+    "fit": 0.0793,
+    "heavy": 0.0023
+   },
+   "closeness": 0.961275,
+   "human_level": 0.6666666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-code-neutral-light/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.9166666666666666,
+    "heavy": 0.0625
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9616916666666666,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-file-close-light/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.6875,
+    "light": 0.22916666666666666,
+    "fit": 0.20833333333333334,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7365,
+    "light": 0.2667,
+    "fit": 0.2635,
+    "heavy": 0.0088
+   },
+   "closeness": 0.962375,
+   "human_level": 0.4166666666666667,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-code-close-light/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.6666666666666666,
+    "light": 0.22916666666666666,
+    "fit": 0.3541666666666667,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.2667,
+    "fit": 0.2928,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9629416666666666,
+   "human_level": 0.4166666666666667,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-fact-close-light/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0625,
+    "light": 0.10416666666666667,
+    "fit": 0.16666666666666666,
+    "heavy": 0.7708333333333334
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0756,
+    "fit": 0.1609,
+    "heavy": 0.8374
+   },
+   "closeness": 0.96365,
+   "human_level": 0.5,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:D-S5/E1",
+   "label": "短い詫び＋修正",
+   "n": 60,
+   "human": {
+    "rude": 0.058333333333333334,
+    "light": 0.008333333333333333,
+    "fit": 0.875,
+    "heavy": 0.05
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9413,
+    "heavy": 0.0374
+   },
+   "closeness": 0.963675,
+   "human_level": 1.5,
+   "sim_level": 1.515
+  },
+  {
+   "source": "scene:B-schedule-neutral-deep/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0362,
+    "fit": 0.9636,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9637249999999999,
+   "human_level": 0.9166666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-code-scope-prior/c0",
+   "label": "基本の謝罪",
+   "n": 10,
+   "human": {
+    "rude": 0.1,
+    "light": 0.0,
+    "fit": 0.975,
+    "heavy": 0.025
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0352,
+    "fit": 0.949,
+    "heavy": 0.024
+   },
+   "closeness": 0.96395,
+   "human_level": 3.1,
+   "sim_level": 3.336
+  },
+  {
+   "source": "scene:D-S3/C3",
+   "label": "＋深々と礼・涙の顔文字",
+   "n": 60,
+   "human": {
+    "rude": 0.2125,
+    "light": 0.07916666666666666,
+    "fit": 0.6833333333333333,
+    "heavy": 0.24583333333333332
+   },
+   "simulator": {
+    "rude": 0.1623,
+    "light": 0.0471,
+    "fit": 0.6939,
+    "heavy": 0.1972
+   },
+   "closeness": 0.9646333333333333,
+   "human_level": 3.5166666666666666,
+   "sim_level": 3.57
+  },
+  {
+   "source": "scene:B-file-neutral-deep/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.08333333333333333,
+    "fit": 0.9791666666666666,
+    "heavy": 0.0625
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0362,
+    "fit": 0.9636,
+    "heavy": 0.0023
+   },
+   "closeness": 0.964775,
+   "human_level": 0.9166666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-fact-scope-repair/c3",
+   "label": "慎重に作業（但し書きなし）",
+   "n": 10,
+   "human": {
+    "rude": 0.1,
+    "light": 0.0,
+    "fit": 0.95,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9652499999999999,
+   "human_level": 0.6,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-schedule-scope-repair/c3",
+   "label": "慎重に作業（但し書きなし）",
+   "n": 10,
+   "human": {
+    "rude": 0.05,
+    "light": 0.0,
+    "fit": 0.9,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.96525,
+   "human_level": 0.4,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-file-assertive/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.25,
+    "fit": 0.75,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1939,
+    "fit": 0.7955,
+    "heavy": 0.0179
+   },
+   "closeness": 0.965625,
+   "human_level": 3.5,
+   "sim_level": 3.721
+  },
+  {
+   "source": "scene:B-fact-neutral-light/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.5416666666666666,
+    "light": 0.4375,
+    "fit": 0.3958333333333333,
+    "heavy": 0.041666666666666664
+   },
+   "simulator": {
+    "rude": 0.5577,
+    "light": 0.3835,
+    "fit": 0.4298,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9657833333333333,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-code-close-deep/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.7916666666666666,
+    "light": 0.5,
+    "fit": 0.08333333333333333,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.9207,
+    "light": 0.4987,
+    "fit": 0.0793,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9658333333333333,
+   "human_level": 0.5833333333333334,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-file-liability-repair/c3",
+   "label": "慎重に作業（但し書きなし）",
+   "n": 10,
+   "human": {
+    "rude": 0.075,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9659,
+   "human_level": 0.4,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-schedule-neutral-light/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.10416666666666667,
+    "fit": 0.9791666666666666,
+    "heavy": 0.041666666666666664
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.966,
+   "human_level": 0.5,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:D-S5/E3",
+   "label": "修正だけ",
+   "n": 60,
+   "human": {
+    "rude": 0.058333333333333334,
+    "light": 0.5208333333333334,
+    "fit": 0.49166666666666664,
+    "heavy": 0.0625
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.4991,
+    "fit": 0.5009,
+    "heavy": 0.0008
+   },
+   "closeness": 0.96675,
+   "human_level": 1.5,
+   "sim_level": 1.515
+  },
+  {
+   "source": "scene:C-code-scope-repair/c3",
+   "label": "慎重に作業（但し書きなし）",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.95,
+    "heavy": 0.075
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9669,
+   "human_level": 0.6,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-fact-scope-repair/c4",
+   "label": "慎重に作業＋但し書き",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.1,
+    "fit": 0.925,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9672000000000001,
+   "human_level": 0.3,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-schedule-close-light/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0625,
+    "light": 0.041666666666666664,
+    "fit": 0.125,
+    "heavy": 0.8541666666666666
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0756,
+    "fit": 0.1609,
+    "heavy": 0.8374
+   },
+   "closeness": 0.967225,
+   "human_level": 0.4166666666666667,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-code-close-deep/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.041666666666666664,
+    "light": 0.2916666666666667,
+    "fit": 0.20833333333333334,
+    "heavy": 0.75
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.251,
+    "fit": 0.1724,
+    "heavy": 0.7205
+   },
+   "closeness": 0.9675583333333333,
+   "human_level": 0.75,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:A-code-hedged/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.9487,
+    "heavy": 0.025
+   },
+   "closeness": 0.96775,
+   "human_level": 3.0,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-code-hedged/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.9487,
+    "heavy": 0.025
+   },
+   "closeness": 0.96775,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-fact-hedged/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.9487,
+    "heavy": 0.025
+   },
+   "closeness": 0.96775,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-fact-hedged/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.9487,
+    "heavy": 0.025
+   },
+   "closeness": 0.96775,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:C-code-scope-apology/c2",
+   "label": "詫びの後",
+   "n": 10,
+   "human": {
+    "rude": 0.0,
+    "light": 0.075,
+    "fit": 0.85,
+    "heavy": 0.05
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.901,
+    "heavy": 0.022
+   },
+   "closeness": 0.968,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-fact-close-light/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.6666666666666666,
+    "light": 0.22916666666666666,
+    "fit": 0.2708333333333333,
+    "heavy": 0.020833333333333332
+   },
+   "simulator": {
+    "rude": 0.7365,
+    "light": 0.2667,
+    "fit": 0.2635,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9683166666666666,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-code-neutral-deep/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.8958333333333334,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0362,
+    "fit": 0.9636,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9689333333333333,
+   "human_level": 0.75,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-fact-neutral-light/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.75,
+    "light": 0.3125,
+    "fit": 0.2708333333333333,
+    "heavy": 0.020833333333333332
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.2667,
+    "fit": 0.2928,
+    "heavy": 0.0088
+   },
+   "closeness": 0.96935,
+   "human_level": 0.5833333333333334,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-file-close-deep/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.6458333333333334,
+    "light": 0.5416666666666666,
+    "fit": 0.25,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.4987,
+    "fit": 0.2628,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9701416666666667,
+   "human_level": 0.5,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-schedule-neutral-light/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.7291666666666666,
+    "light": 0.3333333333333333,
+    "fit": 0.2708333333333333,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.2667,
+    "fit": 0.2928,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9701583333333333,
+   "human_level": 0.5833333333333334,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-file-liability-apology/c1",
+   "label": "詫びの前",
+   "n": 10,
+   "human": {
+    "rude": 0.9,
+    "light": 0.2,
+    "fit": 0.075,
+    "heavy": 0.075
+   },
+   "simulator": {
+    "rude": 0.929,
+    "light": 0.1702,
+    "fit": 0.0709,
+    "heavy": 0.022
+   },
+   "closeness": 0.971025,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-fact-false_verified/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0477,
+    "fit": 0.8797,
+    "heavy": 0.083
+   },
+   "closeness": 0.9719,
+   "human_level": 3.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:A-file-neutral/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.3319,
+    "fit": 0.654,
+    "heavy": 0.022
+   },
+   "closeness": 0.971975,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:B-code-close-deep/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.020833333333333332
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0362,
+    "fit": 0.9636,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9727166666666667,
+   "human_level": 0.9166666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-schedule-close-light/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.5208333333333334,
+    "light": 0.4375,
+    "fit": 0.4583333333333333,
+    "heavy": 0.041666666666666664
+   },
+   "simulator": {
+    "rude": 0.5311,
+    "light": 0.3835,
+    "fit": 0.4471,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9729083333333334,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-code-neutral-deep/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.9375,
+    "light": 0.5416666666666666,
+    "fit": 0.125,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.9207,
+    "light": 0.4987,
+    "fit": 0.0793,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9730583333333334,
+   "human_level": 0.5,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:B-file-neutral-light/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0625,
+    "fit": 0.9166666666666666,
+    "heavy": 0.020833333333333332
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9736833333333333,
+   "human_level": 0.5,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:D-S3/C1",
+   "label": "謝罪＋復旧",
+   "n": 60,
+   "human": {
+    "rude": 0.05,
+    "light": 0.05,
+    "fit": 0.9416666666666667,
+    "heavy": 0.08333333333333333
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0523,
+    "fit": 0.9347,
+    "heavy": 0.0207
+   },
+   "closeness": 0.974025,
+   "human_level": 3.5166666666666666,
+   "sim_level": 3.57
+  },
+  {
+   "source": "scene:B-fact-close-deep/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.8958333333333334,
+    "light": 0.5208333333333334,
+    "fit": 0.041666666666666664,
+    "heavy": 0.020833333333333332
+   },
+   "simulator": {
+    "rude": 0.9207,
+    "light": 0.4987,
+    "fit": 0.0793,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9742083333333333,
+   "human_level": 0.9166666666666666,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:A-code-false_verified/a1",
+   "label": "基本の謝罪",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1522,
+    "fit": 0.8365,
+    "heavy": 0.0187
+   },
+   "closeness": 0.9744,
+   "human_level": 4.0,
+   "sim_level": 3.686
+  },
+  {
+   "source": "scene:B-file-neutral-light/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.14583333333333334,
+    "heavy": 0.8541666666666666
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0756,
+    "fit": 0.1609,
+    "heavy": 0.8374
+   },
+   "closeness": 0.9751916666666667,
+   "human_level": 0.5833333333333334,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-file-neutral-deep/b5",
+   "label": "前の約束を破る",
+   "n": 12,
+   "human": {
+    "rude": 0.6666666666666666,
+    "light": 0.5208333333333334,
+    "fit": 0.2916666666666667,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7072,
+    "light": 0.4987,
+    "fit": 0.2628,
+    "heavy": 0.0023
+   },
+   "closeness": 0.9765416666666666,
+   "human_level": 0.5,
+   "sim_level": 1.006
+  },
+  {
+   "source": "scene:C-fact-scope-apology/c2",
+   "label": "詫びの後",
+   "n": 10,
+   "human": {
+    "rude": 0.05,
+    "light": 0.0,
+    "fit": 0.9,
+    "heavy": 0.025
+   },
+   "simulator": {
+    "rude": 0.0445,
+    "light": 0.0795,
+    "fit": 0.901,
+    "heavy": 0.022
+   },
+   "closeness": 0.97775,
+   "human_level": 3.4,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-code-confident/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0361,
+    "light": 0.1026,
+    "fit": 0.8832,
+    "heavy": 0.021
+   },
+   "closeness": 0.978075,
+   "human_level": 4.0,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:A-fact-confident/a4",
+   "label": "また言い切る",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.0361,
+    "light": 0.1026,
+    "fit": 0.8832,
+    "heavy": 0.021
+   },
+   "closeness": 0.978075,
+   "human_level": 3.5,
+   "sim_level": 3.555
+  },
+  {
+   "source": "scene:B-fact-close-light/b3",
+   "label": "はしゃぐ・軽口",
+   "n": 12,
+   "human": {
+    "rude": 0.5,
+    "light": 0.3958333333333333,
+    "fit": 0.4166666666666667,
+    "heavy": 0.020833333333333332
+   },
+   "simulator": {
+    "rude": 0.5311,
+    "light": 0.3835,
+    "fit": 0.4471,
+    "heavy": 0.0088
+   },
+   "closeness": 0.978525,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-schedule-neutral-light/b2",
+   "label": "また詫びてから作業",
+   "n": 12,
+   "human": {
+    "rude": 0.0,
+    "light": 0.041666666666666664,
+    "fit": 0.16666666666666666,
+    "heavy": 0.8125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0756,
+    "fit": 0.1609,
+    "heavy": 0.8374
+   },
+   "closeness": 0.9793499999999999,
+   "human_level": 0.4166666666666667,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:B-fact-neutral-light/b1",
+   "label": "詫びなしで慎重に作業",
+   "n": 12,
+   "human": {
+    "rude": 0.020833333333333332,
+    "light": 0.0,
+    "fit": 1.0,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9638,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9794416666666667,
+   "human_level": 0.5,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-fact-liability-apology/c1",
+   "label": "詫びの前",
+   "n": 10,
+   "human": {
+    "rude": 0.9,
+    "light": 0.175,
+    "fit": 0.05,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.929,
+    "light": 0.1702,
+    "fit": 0.0709,
+    "heavy": 0.022
+   },
+   "closeness": 0.980825,
+   "human_level": 3.5,
+   "sim_level": 3.487
+  },
+  {
+   "source": "scene:A-fact-hedged/a2",
+   "label": "＋過信への言及",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.0,
+    "fit": 0.875,
+    "heavy": 0.125
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0347,
+    "fit": 0.8726,
+    "heavy": 0.1044
+   },
+   "closeness": 0.981075,
+   "human_level": 3.0,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:B-code-close-light/b4",
+   "label": "許しを当然視",
+   "n": 12,
+   "human": {
+    "rude": 0.7291666666666666,
+    "light": 0.2916666666666667,
+    "fit": 0.22916666666666666,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.7365,
+    "light": 0.2667,
+    "fit": 0.2635,
+    "heavy": 0.0088
+   },
+   "closeness": 0.9811416666666666,
+   "human_level": 0.3333333333333333,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:C-file-liability-repair/c4",
+   "label": "慎重に作業＋但し書き",
+   "n": 10,
+   "human": {
+    "rude": 0.025,
+    "light": 0.075,
+    "fit": 0.95,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.0344,
+    "fit": 0.9615,
+    "heavy": 0.0129
+   },
+   "closeness": 0.982,
+   "human_level": 0.6,
+   "sim_level": 0.631
+  },
+  {
+   "source": "scene:A-code-hedged/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.125,
+    "fit": 0.875,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.1123,
+    "fit": 0.8711,
+    "heavy": 0.025
+   },
+   "closeness": 0.9851,
+   "human_level": 3.5,
+   "sim_level": 3.25
+  },
+  {
+   "source": "scene:A-schedule-confident/a3",
+   "label": "負担に触れない",
+   "n": 2,
+   "human": {
+    "rude": 0.0,
+    "light": 0.375,
+    "fit": 0.625,
+    "heavy": 0.0
+   },
+   "simulator": {
+    "rude": 0.018,
+    "light": 0.369,
+    "fit": 0.6178,
+    "heavy": 0.021
+   },
+   "closeness": 0.98695,
+   "human_level": 3.5,
+   "sim_level": 3.555
+  }
+ ],
+ "level": {
+  "items": 252,
+  "human_mean": 2.3476190476190477,
+  "sim_mean": 2.4651349206349207,
+  "corr": 0.9825423125958445
+ },
+ "manipulation_check": {
+  "assertive": {
+   "n": 48,
+   "mean": 2.8958333333333335
+  },
+  "confident": {
+   "n": 48,
+   "mean": 1.9583333333333333
+  },
+  "false_verified": {
+   "n": 48,
+   "mean": 2.8541666666666665
+  },
+  "hedged": {
+   "n": 48,
+   "mean": 0.1875
+  },
+  "neutral": {
+   "n": 48,
+   "mean": 0.9583333333333334
+  }
+ },
+ "attention": {
+  "n": 60,
+  "failed": [
+   "synth-09",
+   "synth-51",
+   "synth-60"
+  ]
+ },
+ "hypotheses": {
+  "spec": "human/hypotheses-v09.json",
+  "alpha": 0.05,
+  "min_effect": 0.1,
+  "tests": [
+   {
+    "id": "H1a",
+    "hyp": "H1",
+    "desc": "断言して外すと、同じ謝罪でも「足りない」が高い",
+    "measure": "light",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.3438,
+    "ci": [
+     0.0808,
+     0.6354
+    ],
+    "p": 0.007239,
+    "se": 0.1406,
+    "n": [
+     8,
+     8
+    ],
+    "p_holm": 0.0724,
+    "supported": false,
+    "sim": 0.1144,
+    "same_direction": true
+   },
+   {
+    "id": "H1b",
+    "hyp": "H1",
+    "desc": "断言して外すと、同じ謝罪でも「失礼」が高い",
+    "measure": "rude",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.0,
+    "ci": [
+     -0.125,
+     0.1538
+    ],
+    "p": 0.5,
+    "se": 0.0736,
+    "n": [
+     8,
+     8
+    ],
+    "p_holm": 1.0,
+    "supported": false,
+    "sim": 0.0,
+    "same_direction": true
+   },
+   {
+    "id": "H2",
+    "hyp": "H2",
+    "desc": "過信への言及は、断言して外した後ほど「足りない」を下げる（交互作用）",
+    "measure": "light",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.1875,
+    "ci": [
+     -0.1513,
+     0.5455
+    ],
+    "p": 0.142148,
+    "se": 0.1751,
+    "n": [
+     8,
+     8,
+     8,
+     8
+    ],
+    "p_holm": 0.995,
+    "supported": false,
+    "sim": 0.1159,
+    "same_direction": true
+   },
+   {
+    "id": "H3a",
+    "hyp": "H3",
+    "desc": "控えめに外すと「失礼」が下がる",
+    "measure": "rude",
+    "direction": "-",
+    "primary": true,
+    "estimate": 0.0312,
+    "ci": [
+     -0.125,
+     0.2583
+    ],
+    "p": 0.62094,
+    "se": 0.1015,
+    "n": [
+     8,
+     8
+    ],
+    "p_holm": 1.0,
+    "supported": false,
+    "sim": 0.0,
+    "same_direction": false
+   },
+   {
+    "id": "H3b",
+    "hyp": "H3",
+    "desc": "控えめに外しても、負担に触れない謝罪は「足りない」",
+    "measure": "light",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.0,
+    "ci": [
+     -0.0893,
+     0.0833
+    ],
+    "p": 0.5,
+    "se": 0.0447,
+    "n": [
+     8,
+     8
+    ],
+    "p_holm": 1.0,
+    "supported": false,
+    "sim": 0.0776,
+    "same_direction": false
+   },
+   {
+    "id": "H3c",
+    "hyp": "H3",
+    "desc": "控えめに外した後の謝罪の「重すぎる」（向きは問わない）",
+    "measure": "heavy",
+    "direction": "two-sided",
+    "primary": false,
+    "estimate": -0.0625,
+    "ci": [
+     -0.2143,
+     0.0
+    ],
+    "p": 0.327423,
+    "se": 0.0638,
+    "n": [
+     8,
+     8
+    ],
+    "sim": 0.0048,
+    "same_direction": false
+   },
+   {
+    "id": "H4a",
+    "hyp": "H4",
+    "desc": "「確認済み」と偽った後は、過信への言及つきの謝罪でも信頼意図が低い",
+    "measure": "trust",
+    "direction": "-",
+    "primary": true,
+    "estimate": -0.4688,
+    "ci": [
+     -0.5821,
+     -0.3512
+    ],
+    "p": 0.0,
+    "se": 0.0576,
+    "n": [
+     8,
+     8
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": -0.5,
+    "same_direction": true
+   },
+   {
+    "id": "H4b",
+    "hyp": "H4",
+    "desc": "同じく「釣り合う」が低い",
+    "measure": "fit",
+    "direction": "-",
+    "primary": true,
+    "estimate": -0.1562,
+    "ci": [
+     -0.3889,
+     0.0714
+    ],
+    "p": 0.091319,
+    "se": 0.1172,
+    "n": [
+     8,
+     8
+    ],
+    "p_holm": 0.7306,
+    "supported": false,
+    "sim": 0.0115,
+    "same_direction": false
+   },
+   {
+    "id": "H5a",
+    "hyp": "H5",
+    "desc": "修復期：詫びなしで慎重に作業は、詫び直しより釣り合う",
+    "measure": "fit",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.8034,
+    "ci": [
+     0.744,
+     0.8618
+    ],
+    "p": 0.0,
+    "se": 0.0303,
+    "n": [
+     192,
+     192
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.7971,
+    "same_direction": true
+   },
+   {
+    "id": "H5b",
+    "hyp": "H5",
+    "desc": "修復期：慎重な作業は、はしゃぐ・軽口より釣り合う",
+    "measure": "fit",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.5807,
+    "ci": [
+     0.502,
+     0.6604
+    ],
+    "p": 0.0,
+    "se": 0.0401,
+    "n": [
+     192,
+     192
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.6108,
+    "same_direction": true
+   },
+   {
+    "id": "H5c",
+    "hyp": "H5",
+    "desc": "修復期：慎重な作業は、許しの当然視より釣り合う",
+    "measure": "fit",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.776,
+    "ci": [
+     0.7257,
+     0.823
+    ],
+    "p": 0.0,
+    "se": 0.0249,
+    "n": [
+     192,
+     192
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.7923,
+    "same_direction": true
+   },
+   {
+    "id": "H5d",
+    "hyp": "H5",
+    "desc": "修復期：慎重な作業は、約束破りより釣り合う",
+    "measure": "fit",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.6393,
+    "ci": [
+     0.5801,
+     0.6875
+    ],
+    "p": 0.0,
+    "se": 0.027,
+    "n": [
+     192,
+     192
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.6859,
+    "same_direction": true
+   },
+   {
+    "id": "H5e",
+    "hyp": "H5",
+    "desc": "修復期：詫び直しは重すぎる",
+    "measure": "heavy",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.7669,
+    "ci": [
+     0.6901,
+     0.8373
+    ],
+    "p": 0.0,
+    "se": 0.0386,
+    "n": [
+     192,
+     192
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.7734,
+    "same_direction": true
+   },
+   {
+    "id": "H5f",
+    "hyp": "H5",
+    "desc": "修復期：軽口は失礼",
+    "measure": "rude",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.5911,
+    "ci": [
+     0.5024,
+     0.6746
+    ],
+    "p": 0.0,
+    "se": 0.0439,
+    "n": [
+     192,
+     192
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.608,
+    "same_direction": true
+   },
+   {
+    "id": "H5g",
+    "hyp": "H5",
+    "desc": "修復期：許しの当然視は失礼",
+    "measure": "rude",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.776,
+    "ci": [
+     0.7235,
+     0.8269
+    ],
+    "p": 0.0,
+    "se": 0.0266,
+    "n": [
+     192,
+     192
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.8106,
+    "same_direction": true
+   },
+   {
+    "id": "H5h",
+    "hyp": "H5",
+    "desc": "修復期：約束破りは許しの当然視より失礼（最も失礼）",
+    "measure": "rude",
+    "direction": "+",
+    "primary": true,
+    "estimate": -0.1419,
+    "ci": [
+     -0.191,
+     -0.0892
+    ],
+    "p": 1.0,
+    "se": 0.0261,
+    "n": [
+     192,
+     192
+    ],
+    "p_holm": 1.0,
+    "supported": false,
+    "sim": -0.1214,
+    "same_direction": true
+   },
+   {
+    "id": "H5i",
+    "hyp": "H5",
+    "desc": "修復期：約束破りは再発の危険を高く感じさせる",
+    "measure": "recurrence",
+    "direction": "+",
+    "estimate": null,
+    "n": [
+     0,
+     0
+    ],
+    "sim": null
+   },
+   {
+    "id": "H5j",
+    "hyp": "H5",
+    "desc": "修復期：慎重な作業は軽口より反省が続いていると感じさせる",
+    "measure": "remorse",
+    "direction": "+",
+    "estimate": null,
+    "n": [
+     0,
+     0
+    ],
+    "sim": null
+   },
+   {
+    "id": "H6",
+    "hyp": "H6",
+    "desc": "親しい関係では、修復期の軽口の「失礼」が弱まる",
+    "measure": "rude",
+    "direction": "+",
+    "primary": true,
+    "estimate": -0.0417,
+    "ci": [
+     -0.1056,
+     0.0243
+    ],
+    "p": 0.892704,
+    "se": 0.0336,
+    "n": [
+     96,
+     96
+    ],
+    "p_holm": 1.0,
+    "supported": false,
+    "sim": 0.0258,
+    "same_direction": false
+   },
+   {
+    "id": "H7",
+    "hyp": "H7",
+    "desc": "過度なぼかしは「重すぎる」より信頼意図を下げる（信頼意図の差 − 重すぎるの差）",
+    "measure": "trust",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.5,
+    "ci": [
+     0.3056,
+     0.7197
+    ],
+    "p": 2e-06,
+    "se": 0.1075,
+    "n": [
+     8,
+     8,
+     8,
+     8
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.5636,
+    "same_direction": true
+   },
+   {
+    "id": "H8a",
+    "hyp": "H8",
+    "desc": "失敗の前の但し書きは「釣り合う」を上げる",
+    "measure": "fit",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.0531,
+    "ci": [
+     -0.0198,
+     0.1238
+    ],
+    "p": 0.075038,
+    "se": 0.0369,
+    "n": [
+     80,
+     80
+    ],
+    "p_holm": 0.6753,
+    "supported": false,
+    "sim": 0.0388,
+    "same_direction": true
+   },
+   {
+    "id": "H8b",
+    "hyp": "H8",
+    "desc": "謝罪の場面の、詫びより前の但し書きは「失礼」を上げる",
+    "measure": "rude",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.6313,
+    "ci": [
+     0.5568,
+     0.7041
+    ],
+    "p": 0.0,
+    "se": 0.0377,
+    "n": [
+     80,
+     80
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.645,
+    "same_direction": true
+   },
+   {
+    "id": "H8c",
+    "hyp": "H8",
+    "desc": "謝罪の場面では、詫びより前の但し書きは後より失礼",
+    "measure": "rude",
+    "direction": "+",
+    "primary": true,
+    "estimate": 0.5219,
+    "ci": [
+     0.4382,
+     0.6002
+    ],
+    "p": 0.0,
+    "se": 0.0416,
+    "n": [
+     80,
+     80
+    ],
+    "p_holm": 0.0,
+    "supported": true,
+    "sim": 0.5613,
+    "same_direction": true
+   },
+   {
+    "id": "H8d",
+    "hyp": "H8",
+    "desc": "修復期の但し書きは「釣り合う」を上げる",
+    "measure": "fit",
+    "direction": "+",
+    "primary": true,
+    "estimate": -0.0125,
+    "ci": [
+     -0.0916,
+     0.0528
+    ],
+    "p": 0.633161,
+    "se": 0.0367,
+    "n": [
+     80,
+     80
+    ],
+    "p_holm": 1.0,
+    "supported": false,
+    "sim": -0.0011,
+    "same_direction": true
+   }
+  ]
+ },
+ "rps": {
+  "rude": {
+   "simulator": 0.0745698900462963,
+   "uniform": 0.2507552083333333,
+   "marginal": 0.18853685167100695,
+   "skill_vs_marginal": 0.6044810901137817,
+   "n": 1920
+  },
+  "light": {
+   "simulator": 0.10613641203703703,
+   "uniform": 0.241796875,
+   "marginal": 0.15155931260850694,
+   "skill_vs_marginal": 0.29970379114084444,
+   "n": 1920
+  },
+  "fit": {
+   "simulator": 0.10210771701388889,
+   "uniform": 0.23505208333333333,
+   "marginal": 0.22092651367187502,
+   "skill_vs_marginal": 0.5378204484521873,
+   "n": 1920
+  },
+  "heavy": {
+   "simulator": 0.06864877314814816,
+   "uniform": 0.2802604166666667,
+   "marginal": 0.12020263671875,
+   "skill_vs_marginal": 0.4288912870624254,
+   "n": 1920
+  }
+ },
+ "raters": {
+  "synth-01": {
+   "n": 32,
+   "crisp": false,
+   "list": 0,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-02": {
+   "n": 32,
+   "crisp": false,
+   "list": 1,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-03": {
+   "n": 32,
+   "crisp": false,
+   "list": 2,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-04": {
+   "n": 32,
+   "crisp": false,
+   "list": 3,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-05": {
+   "n": 32,
+   "crisp": false,
+   "list": 4,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-06": {
+   "n": 32,
+   "crisp": false,
+   "list": 5,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-07": {
+   "n": 32,
+   "crisp": false,
+   "list": 6,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-08": {
+   "n": 32,
+   "crisp": false,
+   "list": 7,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-09": {
+   "n": 32,
+   "crisp": false,
+   "list": 8,
+   "attention": false,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-10": {
+   "n": 32,
+   "crisp": false,
+   "list": 9,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-11": {
+   "n": 32,
+   "crisp": false,
+   "list": 10,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-12": {
+   "n": 32,
+   "crisp": false,
+   "list": 11,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-13": {
+   "n": 32,
+   "crisp": false,
+   "list": 12,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-14": {
+   "n": 32,
+   "crisp": false,
+   "list": 13,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-15": {
+   "n": 32,
+   "crisp": false,
+   "list": 14,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-16": {
+   "n": 32,
+   "crisp": false,
+   "list": 15,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-17": {
+   "n": 32,
+   "crisp": false,
+   "list": 16,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-18": {
+   "n": 32,
+   "crisp": false,
+   "list": 17,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-19": {
+   "n": 32,
+   "crisp": false,
+   "list": 18,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-20": {
+   "n": 32,
+   "crisp": false,
+   "list": 19,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-21": {
+   "n": 32,
+   "crisp": false,
+   "list": 20,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-22": {
+   "n": 32,
+   "crisp": false,
+   "list": 21,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-23": {
+   "n": 32,
+   "crisp": false,
+   "list": 22,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-24": {
+   "n": 32,
+   "crisp": false,
+   "list": 23,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-25": {
+   "n": 32,
+   "crisp": false,
+   "list": 24,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-26": {
+   "n": 32,
+   "crisp": false,
+   "list": 25,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-27": {
+   "n": 32,
+   "crisp": false,
+   "list": 26,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-28": {
+   "n": 32,
+   "crisp": false,
+   "list": 27,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-29": {
+   "n": 32,
+   "crisp": false,
+   "list": 28,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-30": {
+   "n": 32,
+   "crisp": false,
+   "list": 29,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-31": {
+   "n": 32,
+   "crisp": false,
+   "list": 0,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-32": {
+   "n": 32,
+   "crisp": false,
+   "list": 1,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-33": {
+   "n": 32,
+   "crisp": false,
+   "list": 2,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-34": {
+   "n": 32,
+   "crisp": false,
+   "list": 3,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-35": {
+   "n": 32,
+   "crisp": false,
+   "list": 4,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-36": {
+   "n": 32,
+   "crisp": false,
+   "list": 5,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-37": {
+   "n": 32,
+   "crisp": false,
+   "list": 6,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-38": {
+   "n": 32,
+   "crisp": false,
+   "list": 7,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-39": {
+   "n": 32,
+   "crisp": false,
+   "list": 8,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-40": {
+   "n": 32,
+   "crisp": false,
+   "list": 9,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-41": {
+   "n": 32,
+   "crisp": false,
+   "list": 10,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-42": {
+   "n": 32,
+   "crisp": false,
+   "list": 11,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-43": {
+   "n": 32,
+   "crisp": false,
+   "list": 12,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-44": {
+   "n": 32,
+   "crisp": false,
+   "list": 13,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-45": {
+   "n": 32,
+   "crisp": false,
+   "list": 14,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-46": {
+   "n": 32,
+   "crisp": false,
+   "list": 15,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-47": {
+   "n": 32,
+   "crisp": false,
+   "list": 16,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-48": {
+   "n": 32,
+   "crisp": false,
+   "list": 17,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-49": {
+   "n": 32,
+   "crisp": false,
+   "list": 18,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-50": {
+   "n": 32,
+   "crisp": false,
+   "list": 19,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-51": {
+   "n": 32,
+   "crisp": false,
+   "list": 20,
+   "attention": false,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-52": {
+   "n": 32,
+   "crisp": false,
+   "list": 21,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-53": {
+   "n": 32,
+   "crisp": false,
+   "list": 22,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-54": {
+   "n": 32,
+   "crisp": false,
+   "list": 23,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-55": {
+   "n": 32,
+   "crisp": false,
+   "list": 24,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-56": {
+   "n": 32,
+   "crisp": false,
+   "list": 25,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-57": {
+   "n": 32,
+   "crisp": false,
+   "list": 26,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-58": {
+   "n": 32,
+   "crisp": false,
+   "list": 27,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-59": {
+   "n": 32,
+   "crisp": false,
+   "list": 28,
+   "attention": true,
+   "questionnaire": {},
+   "duration_s": null
+  },
+  "synth-60": {
+   "n": 32,
+   "crisp": false,
+   "list": 29,
+   "attention": false,
+   "questionnaire": {},
+   "duration_s": null
+  }
+ }
+}

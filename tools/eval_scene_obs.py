@@ -61,8 +61,8 @@ def main():
     obs = sim.load(args.obs)
     data = sim.load(args.scenes)
     pop = sim.load_population(str(ROOT / "population.json"))
-    sim.use_source(obs.get("source"))
     panel = sim.sample_panel(pop, args.n, 7)
+    todo = []
     pairs = defaultdict(list)
     sent_pairs = []
     rows_hand, rows_obs, close = [], [], []
@@ -91,15 +91,20 @@ def main():
                 y = by_id.get(x["id"])
                 if y is not None:
                     sent_pairs.append((x.get("disclaimer", "none"), y.get("disclaimer", "none")))
-            tl = len(ans.get("text", ""))
-            r_h = sim.assess(a_h, sc_h, panel, tl)
-            r_o = sim.assess(a_o, sc_o, panel, tl)
-            meta = dict(meta_base, answer=ans["id"], scene=scene["id"])
-            rows_hand.append((meta, {"mu": r_h["mu"], "trust": 1 + 4 * r_h["reliability"]}))
-            rows_obs.append((meta, {"mu": r_o["mu"], "trust": 1 + 4 * r_o["reliability"]}))
-            close.append(sim.closeness(r_h["mu"], r_o["mu"]))
+            todo.append((dict(meta_base, answer=ans["id"], scene=scene["id"]), a_h, sc_h, a_o, sc_o, len(ans.get("text", ""))))
+    # 手の観察は既定の所属度関数、LLM の観察はその出どころの較正で通す
+    for src, rows, pick in ((None, rows_hand, 0), (obs.get("source"), rows_obs, 1)):
+        kind = sim.use_source(src)
+        for meta, a_h, sc_h, a_o, sc_o, tl in todo:
+            a, sc = (a_h, sc_h) if pick == 0 else (a_o, sc_o)
+            r = sim.assess(a, sc, panel, tl)
+            rows.append((meta, {"mu": r["mu"], "trust": 1 + 4 * r["reliability"]}))
+        calib = kind
+    for (_, x), (_, y) in zip(rows_hand, rows_obs):
+        close.append(sim.closeness(x["mu"], y["mu"]))
     L = [f"# 項目の組での観察の再現（{args.obs}）", "",
-         f"手の観察（`examples/scenes-v09.json`）と、盲検の LLM 観察（`{obs.get('source')}`）の比較。{len(close)} 回答。", "",
+         f"手の観察（`examples/scenes-v09.json`）と、盲検の LLM 観察（`{obs.get('source')}`）の比較。{len(close)} 回答。"
+         f"シミュレータには、手の観察は既定の所属度関数で、LLM の観察は出どころの較正（{calib or 'なし'}）で通した。", "",
          "## 欄ごとの一致", "", "| 欄 | 件数 | 一致率 / 平均絶対差 | 相関 |", "|---|---|---|---|"]
     for name in NUM:
         ps = [(float(a), float(b)) for a, b in pairs[name] if a is not None and b is not None]
