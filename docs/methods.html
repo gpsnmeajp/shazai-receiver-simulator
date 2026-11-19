@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>v0.9 改善の設計</title>
-<meta name="description" content="控えの時間軸モデル（失敗の前・謝罪の場面・修復期、免責の但し書き、傷の減衰）、統計的に正当な評価、観察者の集団、較正、人間の評価キット。実装中。">
+<title>控えの時間軸と評価の方法</title>
+<meta name="description" content="控えの時間軸モデル（失敗の前・謝罪の場面・修復期、免責の但し書き、傷の減衰）、統計的に正当な評価、観察者の集団、較正、人間の評価キット。">
 <link rel="stylesheet" href="style.css">
 <style>
 .phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:1rem 0;position:relative}
@@ -51,49 +51,50 @@
 </nav></div></header>
 
 <main>
-<h1>v0.9 改善の設計</h1>
-<p class="lead">v0.8（ファジィ前提）の総合評価で見つかった問題を解き、受け手モデルを「時間の中の控え」として組み直すための設計です。</p>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p><b>状態：実装済み。2026-11-19。</b>実装と総合評価の結果は <a href="#impl">13章</a>、詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION_V09.md">EVALUATION_V09.md</a>。この HTML は参考用です。正本は Markdown 版 <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/IMPROVEMENT_V09.md">IMPROVEMENT_V09.md</a> です。評価の詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">EVALUATION.md</a>、設計原則は <a href="design.html">設計</a>、現行の仕組みは <a href="architecture.html">仕組み</a> を参照してください。</p></div>
+<h1>控えの時間軸と評価の方法</h1>
+<p class="lead">受け手モデルを「時間の中の控え」として組む考え方と、その評価の方法（適正なスコアリング規則、観察者の集団、較正、人間の評価キット）をまとめた文書です。</p>
+<p class="note">設計原則は <a href="design.html">設計</a>、式の全体は <a href="architecture.html#model">仕組み 4章</a>、評価の結果は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">EVALUATION.md</a> を参照してください。</p>
 <ul class="toc">
-<li><a href="#summary">1. 要約</a></li><li><a href="#background">2. 背景</a></li><li><a href="#timeline">3. 控えの時間軸</a></li><li><a href="#disclaimer">3.5 免責の但し書き</a></li><li><a href="#model">3.7 受け手モデル</a></li><li><a href="#decay">3.9 傷の減衰</a></li><li><a href="#evidence">4. 根拠</a></li><li><a href="#metrics">5. 評価指標</a></li><li><a href="#ensemble">6. 観察者の集団</a></li><li><a href="#calib">7. 較正</a></li><li><a href="#kit">8. 評価キット</a></li><li><a href="#order">9. 順序</a></li><li><a href="#criteria">10. 採否</a></li><li><a href="#decisions">11. 決定記録</a></li><li><a href="#open">12. 未解決</a></li><li><a href="#impl">13. 実装と結果</a></li>
+<li><a href="#summary">1. 要約</a></li><li><a href="#why">2. なぜこの方法か</a></li><li><a href="#timeline">3. 控えの時間軸</a></li><li><a href="#disclaimer">3.5 免責の但し書き</a></li><li><a href="#model">3.7 受け手モデル</a></li><li><a href="#decay">3.9 傷の減衰</a></li><li><a href="#evidence">4. 根拠</a></li><li><a href="#metrics">5. 評価指標</a></li><li><a href="#ensemble">6. 観察者の集団</a></li><li><a href="#calib">7. 較正</a></li><li><a href="#kit">8. 評価キット</a></li><li><a href="#criteria">9. 採否</a></li><li><a href="#open">10. 未解決</a></li>
 </ul>
 
 <h2 id="summary"><svg class="icon"><use href="#i-list"/></svg>1. 要約</h2>
 <div class="grid">
-<a class="card hero" href="#timeline"><h3>控えの時間軸</h3><p>謝罪の受け取られ方は、失敗の前・謝罪の場面・修復期のどこで、どんな構えを見せたかで変わる。失敗の前の自信の度合い、謝罪の場面の言い訳、修復期のふるまい、免責の但し書きを、局面ごとに観察し、局面に応じた働きで受け手モデルに入れる。</p></a>
-<a class="card" href="#metrics"><h3>統計的に正当な評価</h3><p>母集団から作った予測分布を、真に適正なスコアリング規則で採点し、基準と比べる。データを見て決めるものは交差検証の内側で決める。</p></a>
-<a class="card" href="#ensemble"><h3>観察者の集団</h3><p>層Aを、観察方針・場面の事実の前提・モデルの系統に幅を振った複数の観察の平均にする。</p></a>
-<a class="card" href="#calib"><h3>較正と観察の固め</h3><p>所属度関数を観察の出どころごとに較正し、場面の観察を定義とコードで固める。</p></a>
-<a class="card" href="#kit"><h3>人間の評価キット</h3><p>設計の仮説を、操作した項目の組と事前登録した検定で、日本の受け手に確かめる。</p></a>
+<a class="card hero" href="#timeline"><h3>控えの時間軸</h3><p>謝罪の受け取られ方は、失敗の前・謝罪の場面・修復期のどこで、どんな構えを見せたかで変わる。失敗の前の自信の度合い、謝罪の場面の言い訳、修復期のふるまい、免責の但し書きを、局面ごとに観察し、局面に応じた働きで受け手モデルに入れる。</p><p class="note">3章</p></a>
+<a class="card" href="#metrics"><h3>統計的に正当な評価</h3><p>母集団から作った予測分布を、真に適正なスコアリング規則で採点し、基準と比べる。データを見て決めるものは交差検証の内側で決める。</p><p class="note">5章</p></a>
+<a class="card" href="#ensemble"><h3>観察者の集団</h3><p>層Aを、観察方針・場面の事実の前提・モデルの系統に幅を振った複数の観察の平均にする。</p><p class="note">6章</p></a>
+<a class="card" href="#calib"><h3>較正と観察の固め</h3><p>所属度関数を観察の出どころごとに較正し、場面の観察を定義とコードで固める。</p><p class="note">7章</p></a>
+<a class="card" href="#kit"><h3>人間の評価キット</h3><p>設計の仮説を、操作した項目の組と事前登録した検定で、日本の受け手に確かめる。</p><p class="note">8章</p></a>
 </div>
 
-<h2 id="background"><svg class="icon"><use href="#i-chart"/></svg>2. 背景：v0.8 の評価で分かったこと</h2>
+<h2 id="why"><svg class="icon"><use href="#i-chart"/></svg>2. なぜこの方法か</h2>
 <div class="tbl"><table>
-<thead><tr><th>分かったこと</th><th>内容</th></tr></thead>
+<thead><tr><th>理由</th><th>内容</th></tr></thead>
 <tbody>
-<tr><td>修復期の判定が誤る</td><td>謝罪がすでに受け入れられた後、詫びを繰り返さず作業する回答（筆者の評定では大半が「釣り合う」）を、受け手モデルが「足りない」としていた。受け入れ後も謝罪の言葉の不足を数えていたため（LLM の観察で修復期の一致 0.33）</td></tr>
-<tr><td>評価指標が偏っている</td><td>主指標の「近さ」は最頻の評定を断定的に出すほど得をし、「常に釣り合う」が最良になった。<code>fit</code> の目的関数も同じ指標</td></tr>
-<tr><td>一回の LLM の観察は偏る</td><td>サブエージェントの観察は代理観察より系統的に厳しい。回答の観察が「失礼」を、場面の観察が不満の深さを通じて「足りない」を押し上げる</td></tr>
-<tr><td>最適な中心は観察者で違う</td><td>失礼の所属度関数の中心は、代理観察で 1.0〜1.2、LLM の観察で 1.5 が良い</td></tr>
-<tr><td>場面の中の判別力が弱い</td><td>二乗誤差で、シミュレータ（0.536）は「条件ごとの筆者の評定頻度」（0.506）に届かない</td></tr>
-<tr><td>失敗の前の構えを見ていない</td><td>控えめに言っていたか断言していたかは謝罪の受け取られ方に響くが、v0.8 は指摘の回数・誠実さの違反・破った約束だけから信頼の傷を作っていた</td></tr>
+<tr><td>修復期は、謝罪の言葉では測れない</td><td>謝罪がすでに受け入れられた後、詫びを繰り返さず作業する回答は、受け手の多くにとって釣り合っています。修復期の不足を謝罪の言葉と必要な中身の差として数えると、この正しい回答を「足りない」としてしまいます。</td></tr>
+<tr><td>失敗の前の構えが、謝罪の受け取られ方に響く</td><td>失敗の前にAIが控えめに言っていたか、断言していたかで、同じ謝罪でも受け取り方が変わります。信頼の傷を、指摘の回数・誠実さの違反・破った約束だけから作ると、これを見落とします。</td></tr>
+<tr><td>評価指標は、確率を正直に出す評価器を不利にしてはいけない</td><td>所属度の近さ（1 − 平均絶対差）は、最頻の評定を断定的に出すほど得をする指標で、「常に釣り合う」が最良になりえます。</td></tr>
+<tr><td>一回の LLM の観察は偏る</td><td>LLM の観察は代理観察より系統的に厳しく、回答の観察が「失礼」を、場面の観察が不満の深さを通じて「足りない」を押し上げます。所属度関数の最適な中心も、観察者で違います。</td></tr>
+<tr><td>場面の中の判別力を測る必要がある</td><td>条件の違いだけでも評定の頻度はかなり当たるので、シミュレータが「条件を知る以上の情報」を持つかを、基準との比較で確かめます。</td></tr>
 </tbody></table></div>
+<p class="note">これらの根拠になった評価は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">HISTORY.md</a> 3.4節にあります。</p>
 
 <h2 id="timeline"><svg class="icon"><use href="#i-clock"/></svg>3. 控えの時間軸モデル</h2>
 <h3>3.1 考え方</h3>
 <p>謝罪は一度の出来事ですが、受け手はその前後を含めた時間の中で相手を見ています。</p>
 <div class="phases" role="figure" aria-label="控えの時間軸の三つの局面">
-<div class="phase" style="--c:var(--accent)"><span class="tag">局面 1</span><h3>失敗の前</h3><p class="q">どれだけ確かに言ったか</p><ul><li>控えめに言っていた失敗は「予告されていた失敗」</li><li>断言していた失敗は「言ったことを信じてよいか」を傷つける</li><li>「確認済み」と偽っていれば欺瞞</li></ul></div>
-<div class="phase" style="--c:var(--r-rude)"><span class="tag">局面 2</span><h3>謝罪の場面</h3><p class="q">負担と構えの誤りを認めるか</p><ul><li>相手の負担への言及と、過失の承認</li><li>断言して外したなら、過信そのものへの言及</li><li>但し書きや事情の説明は言い訳に聞こえる</li></ul></div>
-<div class="phase" style="--c:var(--good)"><span class="tag">局面 3（ρ）</span><h3>修復期</h3><p class="q">反省がふるまいに表れているか</p><ul><li>調子を急に戻さない、確かめを挟む、前の約束を守る（控え）</li><li>詫びの繰り返しは負担</li><li>軽口・許しの当然視は失礼</li></ul></div>
+<div class="phase" style="--c:var(--accent)"><span class="tag">局面 1</span><h3>失敗の前</h3><p class="q">どれだけ確かに言ったか</p><ul><li>控えめに言っていた失敗は「予告されていた失敗」</li><li>断言していた失敗は「言ったことを信じてよいか」を傷つける</li></ul></div>
+<div class="phase" style="--c:var(--r-rude)"><span class="tag">局面 2</span><h3>謝罪の場面</h3><p class="q">相手の負担を認め、自分の構えの誤りを認めるか</p><ul><li>ここでの但し書きや事情の説明は、言い訳に聞こえる</li></ul></div>
+<div class="phase" style="--c:var(--good)"><span class="tag">局面 3（ρ）</span><h3>修復期</h3><p class="q">反省がふるまいに表れているか</p><ul><li>謝罪が受け入れられた後</li><li>詫びを繰り返すことではなく、調子を急に戻さない、確かめを挟む、前の約束を守る、といった<b>控え</b>が見られる</li></ul></div>
 </div>
 <p class="axis">時間 →</p>
-<p>同じ振る舞いでも、局面によって働きが逆になります。その典型が<a href="#disclaimer">免責の但し書き</a>です。受け手モデルは局面を真理値で持ち、振る舞いの働きを局面で切り替えます。</p>
-<p>もう一つの前提は、<b>日本の謝罪の働き</b>です。日本の謝罪は、責任の承認よりも、相手の負担を認め関係を保つ反省の表明として働きます（Maddux ら 2011）。そこで謝罪の中身を二つの成分に分けて扱います。</p>
+<p>同じ振る舞いでも、局面によって働きが逆になります。その典型が免責の但し書きです（<a href="#disclaimer">3.5節</a>）。受け手モデルは、局面を真理値で持ち、振る舞いの働きを局面で切り替えます。</p>
+<p>もう一つの前提は、<b>日本の謝罪の働き</b>です。日本の謝罪は、責任の承認よりも、相手の負担を認め関係を保つ反省の表明として働きます（Maddux ら 2011。<a href="#evidence">4章</a>）。そこで謝罪の中身を二つの成分に分けて扱います。</p>
 <div class="comp">
-<div class="card"><h3>過失の承認</h3><p><code>apology.specific_fault</code>（＋過信への言及）。自分の何が誤りだったかを認める。失敗の前に控えめだった場合は、必要が下がる。</p></div>
-<div class="card"><h3>負担への言及</h3><p><code>apology.names_burden</code>。相手が負った手間・時間・損失を認める。<b>責任の有無によらず必要</b>で、控えめさでは下がらない。</p></div>
+<div class="card"><h3>過失の承認</h3><p><code>apology.specific_fault</code>（＋過信への言及）。自分の何が誤りだったかを認める。</p></div>
+<div class="card"><h3>負担への言及</h3><p><code>apology.names_burden</code>。相手が負った手間・時間・損失を認める。</p></div>
 </div>
+<p>失敗の前に控えめだった場合に下がるのは、過失の承認の必要だけです。負担への言及の必要は、責任の有無によらず残ります。</p>
 
 <h3>3.2 局面</h3>
 <div class="tbl"><table>
@@ -103,118 +104,135 @@
 <tr><td>謝罪の場面</td><td>判定する回答のうち、修復期でない部分</td><td>1 − ρ</td></tr>
 <tr><td>修復期</td><td>謝罪が受け入れられた後の回答</td><td>ρ（観察者の集団で「受け入れ後」と判断した割合。0〜1）</td></tr>
 </tbody></table></div>
-<p>ρ を度合いで持つので、受け入れがあいまいな場面（「…わかりました」だけの返事など）では、謝罪の場面と修復期の働きが混ざります。</p>
+<p>ρ を真偽ではなく度合いで持つので、受け入れがあいまいな場面（「…わかりました」だけの返事など）では、謝罪の場面と修復期の働きが混ざります。</p>
 
 <h3>3.3 失敗の前の構え</h3>
+<p><b>観察（場面の欄 <code>prior_stance</code>）</b></p>
 <div class="tbl"><table>
-<thead><tr><th>欄（<code>prior_stance</code>）</th><th>値</th><th>記録すること</th></tr></thead>
+<thead><tr><th>欄</th><th>値</th><th>記録すること</th></tr></thead>
 <tbody>
-<tr><td><code>turns</code></td><td>配列</td><td>AIの発話ごとに <code>{turn, confidence, caused_failure}</code>。<code>confidence</code> は 0 不確かさを明示／1 中立／2 自信あり／3 断言・強気</td></tr>
-<tr><td><code>dismissed_concern</code></td><td>真偽</td><td>ユーザーの懸念や疑問を退けて進めたか</td></tr>
+<tr><td><code>turns</code></td><td>配列</td><td>AIの発話ごとに <code>{turn, confidence, caused_failure}</code>。<code>confidence</code> は 0 不確かさを明示／1 中立／2 自信あり／3 断言・強気。<code>caused_failure</code> はその発話が後で指摘された失敗を含むか</td></tr>
+<tr><td><code>dismissed_concern</code></td><td>真偽</td><td>ユーザーが懸念や疑問を示したのに、AIがそれを退けて進めたか</td></tr>
 <tr><td><code>claimed_verification</code></td><td>真偽</td><td>「確認済み」「テスト済み」など、確かめたと述べていたか</td></tr>
-<tr><td><code>verification_false</code></td><td>真偽／不明</td><td>確かめたと述べたのに、実際には確かめていなかったことが明らかか（実行記録と照合できるならコードで判定）</td></tr>
-<tr><td><code>salient</code></td><td>0〜1</td><td>失敗が断言と明らかに食い違うか、ユーザーがそれに触れたか</td></tr>
+<tr><td><code>verification_false</code></td><td>真偽／不明</td><td>確かめたと述べたのに、実際には確かめていなかったことが明らかか（ツールの実行記録と照合できるならコードで判定）</td></tr>
+<tr><td><code>salient</code></td><td>0〜1</td><td>失敗が断言と明らかに食い違うか、ユーザーがそれに触れたか（「確認済みって言ったよね」）</td></tr>
 </tbody></table></div>
-<pre><code>自信           c = max(confidence of caused_failure の発話) / 3       （観察者の集団で平均。0〜1）
-控えめの度合い h = caused_failure の発話のうち、不確かさを明示していた割合（免責の但し書きを含む）
+<p><b>導く量</b></p>
+<pre><code>自信           c = max(confidence of caused_failure の発話) / 3                 （観察者の集団で平均。0〜1）
+控えめの度合い h = caused_failure の発話のうち、不確かさを明示していた割合（免責の但し書き 3.5節 を含む）
 気づかれやすさ v = 0.5 + 0.5·salient
-過信の差       G = v·c·(1 + 0.5·[dismissed_concern])                  （0〜1.5）</code></pre>
+過信の差       G = v·c·(1 + 0.5·[dismissed_concern])                            （0〜1.5）</code></pre>
+<p><b>働き</b></p>
 <ul>
-<li>過信の差が大きいほど、受け手は失敗をAIの原因として読み、不満が深くなる。控えめだった場合は浅くなる（Tenney ら 2007、Sah ら 2013）。</li>
-<li>断言して外すことは信頼の根を傷つける。能力の違反と誠実さの違反の中間として、信頼の傷に加える。</li>
-<li>確かめたと偽っていた場合は欺瞞。欺瞞を伴う違反の後の信頼は、約束・謝罪・一貫した行動があっても完全には戻らない（Schweitzer ら 2006）。この分は、受け入れ後にも減らない「残る傷」として分ける。</li>
-<li>AIの自信のずれは利用者に気づかれにくいので（Li ら 2024）、過信の効果は気づかれやすさ v で弱める。</li>
+<li>過信の差が大きいほど、受け手は失敗をAIの原因として読み、不満が深くなります。控えめだった場合は浅くなります（Tenney ら 2007、Sah ら 2013）。</li>
+<li>断言して外すことは信頼の根を傷つけます。能力の違反と誠実さの違反の中間として、信頼の傷に加えます。</li>
+<li>確かめたと偽っていた場合は欺瞞です。欺瞞を伴う違反の後の信頼は、約束・謝罪・一貫した行動があっても完全には戻りません（Schweitzer ら 2006）。この分は、受け入れ後にも減らない「残る傷」として分けます。</li>
+<li>AIの自信のずれは利用者に気づかれにくいので（Li ら 2024）、過信の効果は気づかれやすさ v で弱めます。正確さが分からなければ自信のある側が影響力を持つ、という結果（Sah ら 2013）とも合います。</li>
 </ul>
 
 <h3>3.4 謝罪の場面の構え</h3>
+<p><b>観察（回答の欄 <code>stance</code>）</b></p>
 <div class="tbl"><table>
-<thead><tr><th>欄（<code>stance</code>）</th><th>値</th><th>記録すること</th></tr></thead>
+<thead><tr><th>欄</th><th>値</th><th>記録すること</th></tr></thead>
 <tbody>
-<tr><td><code>acknowledges_overclaim</code></td><td>0〜2</td><td>失敗の前の言い切り・確かめなかったことに触れているか</td></tr>
-<tr><td><code>confidence_now</code></td><td>0〜3</td><td>この回答での自信の度合い</td></tr>
+<tr><td><code>acknowledges_overclaim</code></td><td>0〜2</td><td>失敗の前の言い切り・確かめなかったことに触れているか（0 触れない、1 一般的に、2 具体的に）</td></tr>
+<tr><td><code>confidence_now</code></td><td>0〜3</td><td>この回答での自信の度合い（3.3節と同じ尺度）</td></tr>
 <tr><td><code>calibrated</code></td><td>真偽</td><td>確かめたことと確かめていないことを区別して述べているか</td></tr>
 <tr><td><code>over_hedging</code></td><td>0〜2</td><td>必要以上のぼかし・自信のなさの表明の量</td></tr>
 </tbody></table></div>
+<p><b>働き</b></p>
 <ul>
-<li>過信の差が大きいときは、過信そのものへの言及（「確かめずに断言してしまいました」）が過失の承認の一部として必要になる。</li>
-<li>過信で外した直後に同じ強さで言い切ると「懲りていない」。不確かなのに自己高揚すると性格の評価が下がる、という結果（林ら 2024）と同じ向き。</li>
-<li>すべてを過度にぼかすと、主に<b>頼れなさ</b>として受け取られる（林ら 2024、Kim ら 2024）。4つの述語の外の評価なので、別の出力 <code>reliability</code> とし、述語には「確かめの負担を相手に戻す」分だけを小さく重さとして数える。</li>
-<li>確かめたことは言い切り、確かめていないことは確かめると言う<b>較正された構え</b>は、謝罪の場面でも修復期でも控えの中身として数える。</li>
+<li>過信の差が大きいときは、過信そのものへの言及（「確かめずに断言してしまいました」）が、過失の承認の一部として必要になります。</li>
+<li>過信で外した直後に同じ強さで言い切ると、「懲りていない」と受け取られます。不確かなのに自己高揚すると性格の評価が下がる、という結果（林ら 2024）と同じ向きです。</li>
+<li>すべてを過度にぼかすと、主に<b>頼れなさ</b>として受け取られます。謙遜は能力の評価を下げ（林ら 2024）、一人称の不確かさの表明は使い続けたい気持ちを下げて作業時間を延ばします（Kim ら 2024）。頼れなさは「失礼／足りない／釣り合う／重すぎる」の外側の評価なので、受け手モデルの別の出力（<code>reliability</code>）として出し、述語には「確かめの負担を相手に戻す」分だけを小さく重さとして数えます。</li>
+<li>確かめたことは言い切り、確かめていないことは確かめると言う<b>較正された構え</b>は、謝罪の場面でも修復期でも、控えの中身として数えます。</li>
 </ul>
 
 <h3 id="disclaimer">3.5 免責の但し書き：局面で働きが逆になる</h3>
-<p>免責の但し書き（「保証はできません」「念のためご確認ください」「〜の可能性があります」）は、置かれた局面によって働きが逆になります。失敗の前では構えの較正、謝罪の場面では言い訳（日本の受け手は説明を挟まない直接の謝罪を好む：既存 C-02。謝罪で最も重要なのは責任の承認：既存 C-01）、修復期では確かめを挟む配慮です。</p>
+<p>免責の但し書き（「保証はできません」「念のためご確認ください」「〜の可能性があります」）は、置かれた局面によって働きが逆になります。</p>
+<ul>
+<li>失敗の前に置かれた但し書きは、構えの較正で、外れたときの傷を小さくします。</li>
+<li>謝罪の場面に置かれた同じ但し書きは、言い訳や責任の押し戻しに聞こえます。日本の受け手は説明を挟まない直接の謝罪を好み（Barnlund &amp; Yoshioka 1990。C-02）、謝罪で最も重要なのは責任の承認です（Lewicki ほか 2016。C-01）。</li>
+<li>修復期に置かれた但し書きは、確かめを挟む配慮であり、較正された構えです。</li>
+</ul>
+<p>但し書きには種類があり、働き方が違います。</p>
 <div class="tbl wide mx"><table>
 <thead><tr><th>種類</th><th>例</th><th>失敗の前</th><th>謝罪の場面</th><th>修復期</th></tr></thead>
 <tbody>
-<tr><td>範囲の明示</td><td>「この部分は未検証です」「〜の可能性があります」</td><td class="g"><b>有用</b>控えめの度合い h を上げる</td><td class="b"><b>減点</b>言い訳（弁解に加える）</td><td class="g"><b>有用</b>較正された構え</td></tr>
-<tr><td>確かめの申し出・実施</td><td>「実行前に確認します」「確認しました：〜」</td><td class="g"><b>有用</b>h を上げる</td><td class="n"><b>中立〜有用</b>これからの行動。ただし詫びより前に置くと「先を急ぐ」</td><td class="g"><b>有用</b>配慮</td></tr>
-<tr><td>責任の限定</td><td>「保証はできません」「最終的にはご自身でご確認ください」</td><td class="g"><b>有用（小）</b>h を少し上げる</td><td class="b"><b>強い減点</b>責任の押し戻し</td><td class="n"><b>有用（小）</b>範囲の共有。確かめをすべて相手に戻す言い方は小さく減点</td></tr>
+<tr><td>範囲の明示</td><td>「この部分は未検証です」「〜の可能性があります」</td><td class="g"><b>有用</b>控えめの度合い h を上げる</td><td class="b"><b>減点</b>言い訳（弁解に加える）</td><td class="g"><b>有用</b>較正された構え（控えの中身）</td></tr>
+<tr><td>確かめの申し出・実施</td><td>「実行前に確認します」「確認しました：〜」</td><td class="g"><b>有用</b>h を上げる</td><td class="n"><b>中立〜有用</b>これからの行動。ただし詫びより前に置くと「先を急ぐ」</td><td class="g"><b>有用</b>配慮（控えの中身）</td></tr>
+<tr><td>責任の限定</td><td>「保証はできません」「最終的にはご自身でご確認ください」</td><td class="g"><b>有用（小）</b>h を少し上げる</td><td class="b"><b>強い減点</b>責任の押し戻し（相手への指摘に近い）</td><td class="n"><b>有用（小）</b>範囲の共有。ただし確かめをすべて相手に戻す言い方は小さく減点</td></tr>
 </tbody></table></div>
 <div class="grid">
-<div class="card"><h3>回答の中の位置</h3><p>謝罪の場面で、但し書きが詫びより前にあると、言い訳が先に立つので重く数え（×1.5）、謝罪が後回しになった扱いにも加える。詫びと修正を終えた後の範囲の明示は軽く数える（×0.7）。</p></div>
-<div class="card"><h3>観察（<code>disclaimer</code>）</h3><p>文の単位ごとに、但し書きの種類を <code>none</code> / <code>scope</code> / <code>verify</code> / <code>liability</code> で記録する。会話の履歴のAIの発話にも付ける。局面と回答の中の位置はコードで決め、観察者は種類だけを判断する。</p></div>
+<div class="card"><h3>回答の中の位置</h3><p>謝罪の場面で、但し書きが詫びより前にあるときは、言い訳が先に立つので重く数え、謝罪が後回しになった扱いにも加えます。詫びと修正を終えた後に、範囲の明示として置かれた但し書きは軽く数えます。</p></div>
+<div class="card"><h3>観察（文ごとの欄 <code>disclaimer</code>）</h3><p>文の単位（<a href="#segment">6.4節</a>）ごとに、但し書きの種類を <code>none</code> / <code>scope</code> / <code>verify</code> / <code>liability</code> で記録します。会話の履歴のAIの発話にも同じ欄を付けます。局面と回答の中の位置（詫びの文より前か後か）はコードで決めます。観察者は種類だけを判断します。</p></div>
 </div>
-<div class="callout"><svg class="icon"><use href="#i-help"/></svg><p>局面ごとの働きは、それぞれ既存の根拠や自信と誤りの研究で支えられますが、「同じ但し書きが局面で働きを逆にする」こと自体を位置を操作して比べた研究は見つかっていません。全体としては<span class="badge b-hypo">仮説</span>で、評価キットの仮説 H8 で確かめます。</p></div>
 
 <h3>3.6 修復期の控え</h3>
+<p><b>観察（回答の欄 <code>restraint</code>）</b></p>
 <div class="tbl"><table>
-<thead><tr><th>欄（<code>restraint</code>）</th><th>値</th><th>記録すること</th></tr></thead>
+<thead><tr><th>欄</th><th>値</th><th>記録すること</th></tr></thead>
 <tbody>
-<tr><td><code>tone_reset</code></td><td>0〜2</td><td>不満を表明される前の調子へ急に戻った度合い（0 抑えている、2 何もなかったような明るさ・はしゃぎ）</td></tr>
+<tr><td><code>tone_reset</code></td><td>0〜2</td><td>不満を表明される前の調子へ、急に戻った度合い（0 抑えている、1 少し戻った、2 何もなかったような明るさ・はしゃぎ）</td></tr>
 <tr><td><code>levity_about_incident</code></td><td>真偽</td><td>失敗そのものを冗談・軽口にしているか</td></tr>
-<tr><td><code>presumes_forgiveness</code></td><td>真偽</td><td>許されたことを当然視する言い方があるか</td></tr>
-<tr><td><code>care</code></td><td>0〜2</td><td>目に見える配慮の量（確かめを挟む、慎重な言い回し、手間を減らす工夫）</td></tr>
-<tr><td><code>promise_kept</code></td><td>kept / broken / na</td><td>以前に約束した振る舞いを、この回答で守っているか</td></tr>
-<tr><td><code>revisits_incident</code></td><td>0〜2</td><td>頼まれていないのに事件を蒸し返す量</td></tr>
+<tr><td><code>presumes_forgiveness</code></td><td>真偽</td><td>許されたことを当然視する言い方（「もう大丈夫ですね」「これで元どおり」）があるか</td></tr>
+<tr><td><code>care</code></td><td>0〜2</td><td>目に見える配慮の量（確かめを挟む、慎重な言い回し、相手の手間を減らす工夫）</td></tr>
+<tr><td><code>promise_kept</code></td><td><code>kept</code> / <code>broken</code> / <code>na</code></td><td>会話の中で以前に約束した振る舞いを、この回答で守っているか</td></tr>
+<tr><td><code>revisits_incident</code></td><td>0〜2</td><td>頼まれていないのに事件を蒸し返す量（一言の軽い言及は 0）</td></tr>
 <tr><td><code>re_apology</code></td><td>0〜2</td><td>改めて詫びている量</td></tr>
 </tbody></table></div>
+<p>すべての回答で観察し、修復期かどうかは受け手モデルの側で ρ によって効かせます。</p>
+<p><b>働き</b></p>
 <ul>
-<li>修復期に信頼を戻すのは、詫びの繰り返しではなく、信頼に足る行動の一貫（Schweitzer ら 2006）と、反省している・また害されないと知覚させるふるまい（Dirks ら 2011、McCullough ら 2014）。日本では違反を改められるものと見る傾向がある（Maddux ら 2011）。</li>
-<li>反省の信号は能力の違反の後で重く受け取られる（Dirks ら 2011）。一方、誠実さの違反の後の謝罪は日本人の方が信頼を回復させた（Maddux ら 2011）。向きが一部逆なので、違反の種類による調整は小さくする。</li>
-<li>約束破り・許しの当然視・軽口は失点、詫びの繰り返しと蒸し返しは重さ。受け入れ後の軽口と詫びの繰り返しは<span class="badge b-hypo">仮説</span>。</li>
+<li>修復期に信頼を戻すのは、詫びの繰り返しではなく、信頼に足る行動の一貫（Schweitzer ら 2006）と、反省している・また害されないと知覚させるふるまいです（Dirks ら 2011、McCullough ら 2014）。日本では違反を改められるものと見る傾向があり（Maddux ら 2011）、改めた行動は重く受け取られると考えます。</li>
+<li>反省の信号は、誠実さの違反より能力の違反の後で重く受け取られます（Dirks ら 2011）。一方、誠実さの違反の後の謝罪は、日本人の方が米国人より信頼を回復させました（Maddux ら 2011）。向きが一部逆なので、違反の種類による調整は小さくし、評価キットで確かめます。</li>
+<li>前の約束を破ること、許しの当然視、軽口は失点に数えます。詫びの繰り返しと蒸し返しは、受け入れた側の負担として重さに数えます。受け入れ後の軽口と詫びの繰り返しについての直接の研究は見つかっていないので、これらは<span class="badge b-hypo">仮説</span>として扱います。</li>
 </ul>
 
 <h3 id="model">3.7 受け手モデル</h3>
-<p>既存の式（<a href="architecture.html#model">仕組み 4章</a>）に、次を加えます。係数はすべて事前値です。v0.8 の <code>need = min(need, 1 + 0.8·S)</code> は廃止し、修復期の必要量は謝罪の言葉ではなく控えで測ります。</p>
+<p>時間軸にかかわる式は次のとおりです（式の全体は <a href="architecture.html#model">仕組み 4章</a>）。係数はすべて事前値です（<code>sim.py</code> の <code>judge_full</code>、<code>scar_parts</code>、<code>prior_stance</code>）。</p>
 <div class="formula">
-<h4>知覚と信頼の傷（傷には <a href="#decay">3.9 節</a>の減衰 d を掛ける）</h4>
-<pre><code>raw   += cause·(0.5·G − 0.3·h)
-raw   ×= 1 − ρ·0.6·forgiveness·exp(−(S + S_dec))                         （受け入れ後の不満の減り）
-S      = memory·(0.6·n_eff^1.3 + d·(0.8·[integrity] + 0.7·broken_promises + 0.6·overclaim·G))
-S_dec  = memory·0.8·[verification_false]·(f + (1 − f)·d)                （欺瞞の傷。減衰しても f = 0.5 が残る）</code></pre>
-<h4>不足（「足りない」へ）</h4>
-<pre><code>share_fault = 0.5
-need_fault  = need_apology·share_fault·(1 − 0.5·h) + 0.5·G·overclaim      （過失の承認）
-need_burden = need_apology·(1 − share_fault)                              （負担への言及。h では下がらない）
+<h4>知覚</h4>
+<pre><code>raw += cause·(0.5·G − 0.3·h)
+受け入れ後の不満の減り  raw ×= 1 − ρ·0.6·forgiveness·exp(−(S + S_dec))</code></pre>
+<h4>信頼の傷（<a href="#decay">3.9 節</a>の減衰 d を掛ける）</h4>
+<pre><code>S      = memory·(0.6·n_eff^1.3 + d·(0.8·[integrity] + 0.7·broken_promises + 0.6·overclaim·G))
+S_dec  = memory·0.8·[verification_false]·(f + (1 − f)·d)        （欺瞞の傷。減衰しても f = 0.5 が残る）</code></pre>
+<h4>謝罪の場面の中身（1 − ρ で効く）</h4>
+<pre><code>share_fault = 0.5                                                   （必要な中身のうち過失の承認が占める割合。事前値）
+need_fault  = need_apology·share_fault·(1 − 0.5·h) + 0.5·G·overclaim  （過失の承認。控えめなら下がり、過信なら上がる）
+need_burden = need_apology·(1 − share_fault)                          （負担への言及。h では下がらない）
 ad_fault    = 0.5·詫びの言葉 + 0.6·specific_fault + 0.5·acknowledges_overclaim·min(1, G) + 0.5·シグナルの加点
 ad_burden   = 0.5·詫びの言葉 + 0.5·names_burden + 0.5·シグナルの加点
+              （詫びの言葉 = present·(1 + 0.5·[first] + 0.3·formality_shift)。重ねた謝罪の目減りを掛ける）
 gf = need_fault − ad_fault、gb = need_burden − ad_burden
-Sa = max(0, gf + 0.5·min(0, gb)) + max(0, gb + 0.5·min(0, gf))         （一方の余りは他方の不足を半分だけ埋める）
-
-need_restraint     = (0.3 + 0.5·(S + S_dec) + 0.4·G)·expect
+Sa = max(0, gf + 0.5·min(0, gb)) + max(0, gb + 0.5·min(0, gf))     （一方の余りは、他方の不足を半分だけ埋める）</code></pre>
+<h4>修復期の中身（ρ で効く）</h4>
+<pre><code>need_restraint     = (0.3 + 0.5·(S + S_dec) + 0.4·G)·expect
 adequacy_restraint = (0.35·care + 0.4·(2 − tone_reset)/2 + 0.5·[promise_kept=kept] + 0.3·[calibrated]
                       + min(0.3, 0.15·Σ有用な但し書き))·(1 − 0.3·[integrity])
-Sr                 = max(0, need_restraint − adequacy_restraint)
-
-shortfall = (1 − ρ)·Sa + ρ·Sr</code></pre>
-<h4>失点（「失礼」へ）</h4>
-<pre><code>懲りていない           0.6·G·[confidence_now ≥ 2]·overclaim
-但し書き（謝罪の場面）    (1 − ρ)·(0.4·scope + 1.0·liability)·(1.5 if 詫びより前 else 0.7)   （文ごと）
-確かめ（謝罪の場面）      (1 − ρ)·mid·0.3·verify（詫びより前のときだけ。「先を急ぐ」に加える）
-約束破り（修復期）       ρ·(1.0 + 0.5·memory)·[promise_kept=broken]
-許しの当然視            ρ·0.6·(1 + S + S_dec)·presumes_forgiveness
-軽口                   ρ·0.5·levity_about_incident·(1 − 0.5·warmth)
-調子を急に戻す           ρ·0.3·(S + S_dec)·max(0, tone_reset − 1)</code></pre>
-<h4>重さ（「重すぎる」へ）と別の出力</h4>
+Sr                 = max(0, need_restraint − adequacy_restraint)</code></pre>
+<h4>不足（「足りない」の所属度へ）</h4>
+<pre><code>shortfall = (1 − ρ)·Sa + ρ·Sr</code></pre>
+<h4>失点（無礼さ。「失礼」の所属度へ）</h4>
+<pre><code>懲りていない         0.6·G·[confidence_now ≥ 2]·overclaim
+但し書き（謝罪の場面）  (1 − ρ)·(0.4·scope + 1.0·liability)·(1.5 if 詫びより前 else 0.7)       （文ごと）
+確かめ（謝罪の場面）    (1 − ρ)·mid·0.3·verify（詫びより前のときだけ。「先を急ぐ」に加える）
+約束破り（修復期）     ρ·(1.0 + 0.5·memory)·[promise_kept=broken]
+許しの当然視          ρ·0.6·(1 + S + S_dec)·presumes_forgiveness
+軽口                 ρ·0.5·levity_about_incident·(1 − 0.5·warmth)
+調子を急に戻す         ρ·0.3·(S + S_dec)·max(0, tone_reset − 1)</code></pre>
+<h4>重さ（「重すぎる」の所属度へ）</h4>
 <pre><code>詫びの繰り返し・蒸し返し  ρ·0.4·(re_apology + 0.5·revisits_incident)·(1.5 − 0.5·tolerance/3)
-確かめの負担を戻す       0.15·over_hedging·(1 − 0.5·min(1, G)) + ρ·0.1·min(1, Σliability)
-reliability            1 − 0.3·over_hedging − 0.4·G·[confidence_now ≥ 2] − 0.5·[verification_false]·(f + (1 − f)·d)</code></pre>
+確かめの負担を戻す       0.15·over_hedging·(1 − 0.5·min(1, G)) + ρ·0.1·min(1, Σliability)</code></pre>
+<h4>別の出力</h4>
+<pre><code>reliability（頼れなさの逆）= 1 − 0.3·over_hedging − 0.4·G·[confidence_now ≥ 2] − 0.5·[verification_false]·(f + (1 − f)·d)</code></pre>
 </div>
-<p class="note">観察者の集団の平均では、真偽は割合、列挙は票の分布になります。受け手モデルはどの値もそのまま真理値として使います。<code>restraint</code> が観察されていなければ、配慮は普通（<code>care</code> 1）、調子は抑えている（<code>tone_reset</code> 0）として扱います。</p>
+<p><code>re_apology</code> が観察されていなければ、詫びの言葉の有無と回数から決めます。<code>restraint</code> が観察されていなければ、配慮は普通（<code>care</code> 1）、調子は抑えている（<code>tone_reset</code> 0）として扱います。修復期の必要量は、謝罪の言葉ではなく控えで測ります。</p>
+<p class="note">観察者の集団の平均では、真偽は割合（0〜1）、列挙は票の分布になります。受け手モデルは、どの値もそのまま真理値として使います（<code>share</code>）。</p>
 
 <h3>3.8 受け手の性質 <code>overclaim</code></h3>
-<p>過信を罰する度合い（0〜1）。謙遜は日本に固有の規範ではなく文化に共通の価値で、違うのは程度と仕方です（山口ら）。日本人らしさの性質ではなく、どの型にも幅のある個人差として置き、既存の性質の抽出を変えないよう別の乱数列で引きます。</p>
+<p>自信を評価して過信に寛容な人もいれば、言い切りの責任を重く見る人もいます。これを性質 <code>overclaim</code>（過信を罰する度合い、0〜1）で表します。謙遜は日本に固有の規範ではなく文化に共通の価値で、違うのは程度と仕方です（山口ら）。そこで <code>overclaim</code> は、日本人らしさの性質ではなく、どの型にも幅のある個人差として置きます。ほかの性質の抽出を変えないよう、<code>EXTRA_KEYS</code> に登録して別の乱数列で引きます。</p>
 <div class="tbl"><table>
 <thead><tr><th>型</th><th class="num">平均</th><th>理由</th></tr></thead>
 <tbody>
@@ -227,6 +245,7 @@ reliability            1 − 0.3·over_hedging − 0.4·G·[confidence_now ≥ 2
 
 <h3 id="decay">3.9 傷の減衰</h3>
 <p>信頼の傷は、出来事からの<b>ターン数</b>で減ると仮定します。実際には実時間で減るはずですが、会話の記録から確実に取れる時間の目安がターン数なので、便宜としてターンで数えます。</p>
+<pre><code>d(t) = max(0, 1 − t / T)        T = 20（population.json の timeline.scar_decay_turns）</code></pre>
 <figure class="card" style="margin:1rem 0">
 <svg viewBox="0 0 520 170" role="img" aria-label="傷の残り d(t) は 20 ターンで 1 から 0 へ直線に下がる。欺瞞の傷は 0.5 で下げ止まる" style="width:100%;height:auto;max-width:560px;display:block;margin:auto">
 <g font-size="12" fill="var(--muted)">
@@ -243,76 +262,79 @@ reliability            1 − 0.3·over_hedging − 0.4·G·[confidence_now ≥ 2
 <figcaption class="note" style="text-align:center">d(t) = max(0, 1 − t/20)。欺瞞の傷は半分が残る（D-04）</figcaption>
 </figure>
 <ul>
-<li><code>t</code> は、謝罪の対象になった失敗（またはその指摘）から最後の発話までのユーザー発話の数（<code>turns_since_incident</code>）。過去の指摘ごとの経過は <code>incident_ages</code> で別々に与えられる。</li>
+<li><code>t</code> は、謝罪の対象になった失敗（またはその指摘）から最後の発話までのユーザー発話の数（観察の欄 <code>turns_since_incident</code>）。過去の指摘ごとの経過は <code>incident_ages</code> で別々に与えられる。</li>
+<li>違反の回数による傷（<code>n_eff</code> は経過ごとの d の和）、誠実さの違反・破られた約束・過信の傷は、20ターンで消える。</li>
+<li>欺瞞の傷 <code>S_dec</code> は、減衰しても半分（<code>timeline.deception_floor</code> 0.5）が残る。欺瞞の後の信頼は、約束・謝罪・一貫した行動があっても完全には戻らない（D-04）。</li>
 <li>傷が減ると、修復期の控えの必要量と、軽口・調子を急に戻す・許しの当然視の失点が小さくなる。約束破りはその回答の中の新しい違反なので減らない。</li>
-<li>20 という値と直線の形は<span class="badge b-hypo">仮説</span>。<code>population.json</code> の <code>timeline</code> で変えられる。</li>
+<li>20 という値と直線の形は<span class="badge b-hypo">仮説</span>です。修復期が何ターン続くか（<a href="#open">10章</a>）と合わせて、人間の評価で確かめます。</li>
 </ul>
 
 <h2 id="evidence"><svg class="icon"><use href="#i-book"/></svg>4. 根拠</h2>
 <h3>4.1 文献</h3>
-<p class="note">すべて原文（要旨の原文、または本文）で確認しました。根拠の文書（EVIDENCE.md）に、この ID で登録します。</p>
+<p class="note">すべて原文（要旨の原文、または本文）で確認しています。<a href="evidence.html">根拠</a>（EVIDENCE.md）の同じ ID の項目です。</p>
 <div class="tbl wide"><table>
 <thead><tr><th>ID</th><th>文献</th><th>対象</th><th>要点</th><th>支える規則</th></tr></thead>
 <tbody>
-<tr><td class="id">C-01</td><td>Lewicki ほか (2016)（既存）</td><td>米国</td><td>謝罪の要素で最も重要なのは責任の承認、次が償いの申し出</td><td>謝罪の場面の但し書きの減点</td></tr>
-<tr><td class="id">C-02</td><td>Barnlund &amp; Yoshioka (1990)（既存）</td><td>日米</td><td>日本人は説明せずに直接謝ることを好む</td><td>謝罪の場面の但し書き・事情説明の減点</td></tr>
-<tr><td class="id">C-04</td><td>Maddux, Kim, Okumura &amp; Brett (2011) <i>International Negotiation</i></td><td>日米</td><td>日本人は自分が関与していないことにも謝る。米国人は謝罪を責任の承認と同一視しやすい。日本の謝罪は相手の負担を認め関係を保つ反省の表明。誠実さの違反の後の謝罪は日本人の方が信頼を回復させた。日本では違反を改められるものと見る</td><td>謝罪の中身の二成分、修復期の行動の重み、違反の種類の調整</td></tr>
-<tr><td class="id">D-04</td><td>Schweitzer, Hershey &amp; Bradlow (2006) <i>OBHDP</i>（既存）</td><td>米国</td><td>信頼に足る行動が一貫して続くと信頼は回復する。欺瞞を伴えば、約束・謝罪・一貫した行動があっても完全には回復しない</td><td>修復期の一貫、残る傷</td></tr>
-<tr><td class="id">D-09</td><td>Tenney, MacCoun, Spellman &amp; Hastie (2007) <i>Psychological Science</i></td><td>米国</td><td>誤りは、その誤りに自信を示していた証人の信用を大きく損なう。人は相手の較正を推し量る</td><td>過信の差 G、控えめの度合い h</td></tr>
-<tr><td class="id">D-10</td><td>Sah, Moore &amp; MacCoun (2013) <i>OBHDP</i></td><td>米国</td><td>正確さが分かるとき、自信を持って外した助言者の信用は低い。分からなければ自信のある助言者が影響力を持つ。正確な助言者の控えめさは罰せられない</td><td>G、気づかれやすさ v</td></tr>
+<tr><td class="id">C-01</td><td>Lewicki ほか (2016)</td><td>米国</td><td>謝罪の要素で最も重要なのは責任の承認、次が償いの申し出</td><td>謝罪の場面の但し書きの減点</td></tr>
+<tr><td class="id">C-02</td><td>Barnlund &amp; Yoshioka (1990)</td><td>日米</td><td>日本人は説明せずに直接謝ることを好む</td><td>謝罪の場面の但し書き・事情説明の減点</td></tr>
+<tr><td class="id">C-04</td><td>Maddux, Kim, Okumura &amp; Brett (2011) <i>International Negotiation</i></td><td>日米</td><td>日本人は米国人より謝る頻度が高く、自分が関与していないことにも謝る。米国人は謝罪を責任の承認と同一視しやすい。日本の謝罪は相手の負担を認め関係を保つ反省の表明。誠実さの違反の後の謝罪は、日本人の方が信頼を回復させた。日本では違反を改められるものと見る</td><td>謝罪の中身の二成分（3.1節）、修復期の行動の重み、違反の種類の調整</td></tr>
+<tr><td class="id">D-04</td><td>Schweitzer, Hershey &amp; Bradlow (2006) <i>OBHDP</i></td><td>米国</td><td>信頼に背く行動で損なわれた信頼は、信頼に足る行動が一貫して続くのを見ると回復する。欺瞞を伴えば、約束・謝罪・一貫した行動があっても完全には回復しない</td><td>修復期の一貫、残る傷 S_dec</td></tr>
+<tr><td class="id">D-09</td><td>Tenney, MacCoun, Spellman &amp; Hastie (2007) <i>Psychological Science</i></td><td>米国</td><td>誤りは、その誤りに自信を示していた証人の信用を、自信を示さなかった証人より大きく損なう。人は相手の較正を推し量る</td><td>過信の差 G、控えめの度合い h</td></tr>
+<tr><td class="id">D-10</td><td>Sah, Moore &amp; MacCoun (2013) <i>OBHDP</i></td><td>米国</td><td>正確さが分かるとき、自信を持って外した助言者の信用は低い。正確さが分からなければ、自信のある助言者が影響力を持つ。正確な助言者の控えめさは罰せられない</td><td>G、気づかれやすさ v</td></tr>
 <tr><td class="id">D-11</td><td>Li, Yang, Zhang, Liao ほか (2024) arXiv:2402.07632</td><td>—</td><td>AIの自信のずれは適切な頼り方を損なうが、利用者には気づかれにくい</td><td>気づかれやすさ v</td></tr>
-<tr><td class="id">D-12</td><td>Dirks, Kim, Ferrin &amp; Cooper (2011) <i>OBHDP</i></td><td>シンガポール・米国</td><td>償いや監視の受け入れは、謝罪と同じく「反省している」という知覚を通じて信頼を回復させる。反省の信号は能力の違反の後で重く受け取られる</td><td>修復期の控え、違反の種類の調整</td></tr>
-<tr><td class="id">D-13</td><td>McCullough ら (2014) <i>PNAS</i></td><td>米国（縦断）</td><td>和解のふるまいは、相手を「関係の価値がある」「また害する危険が低い」と知覚させ、許しを早める</td><td>修復期の控え、約束破りの失点</td></tr>
-<tr><td class="id">F-11</td><td>Kim, Liao, Vorvoreanu, Ballard &amp; Vaughan (2024) FAccT</td><td>米国（事前登録）</td><td>LLM の一人称の不確かさの表明は過信を減らす一方、使い続けたい気持ちを下げ、作業時間を延ばす</td><td>失敗の前の但し書き、ぼかしすぎの頼れなさ</td></tr>
-<tr><td class="id">B-10</td><td>山口・村上・森尾ほか（科研 25285177 報告書）</td><td>21か国</td><td>謙遜は文化に共通した価値。目的は謙虚な人物と見られること。程度と仕方に文化差があり、強い謙遜はアジア文化圏で選ばれやすい</td><td><code>overclaim</code> を個人差として置く</td></tr>
-<tr><td class="id">B-11</td><td>林・松本・和田・Banerjee (2024) <i>J. Exp. Child Psychol.</i></td><td>日本</td><td>普段得意な人が謙遜すると能力が低く見られる。普段苦手なのに自己高揚すると性格が低く見られる</td><td>懲りていない言い切り、ぼかしすぎの頼れなさ</td></tr>
+<tr><td class="id">D-12</td><td>Dirks, Kim, Ferrin &amp; Cooper (2011) <i>OBHDP</i></td><td>シンガポール・米国</td><td>償いや監視の受け入れといった実質的な応答は、謝罪と同じく「反省している」という知覚を通じて信頼を回復させる。反省の信号は、能力の違反の後で重く受け取られる</td><td>修復期の控え、違反の種類の調整</td></tr>
+<tr><td class="id">D-13</td><td>McCullough ら (2014) <i>PNAS</i></td><td>米国（縦断）</td><td>謝罪や補償などの和解のふるまいは、相手を「関係の価値がある」「また害する危険が低い」と知覚させ、許しを早める</td><td>修復期の控え、約束破りの失点</td></tr>
+<tr><td class="id">F-11</td><td>Kim, Liao, Vorvoreanu, Ballard &amp; Vaughan (2024) FAccT</td><td>米国（事前登録）</td><td>LLM の一人称の不確かさの表明は、過信を減らす一方、使い続けたい気持ちを下げ、作業時間を延ばす</td><td>失敗の前の但し書きの有用さ、ぼかしすぎの頼れなさ</td></tr>
+<tr><td class="id">B-10</td><td>山口・村上・森尾ほか（科研 25285177 研究成果報告書）</td><td>21か国</td><td>謙遜は文化に共通した価値。目的は謙虚な人物と見られること。程度と仕方に文化差があり、自己否定につながる強い謙遜はアジア文化圏で選ばれやすい</td><td><code>overclaim</code> を個人差として置く</td></tr>
+<tr><td class="id">B-11</td><td>林・松本・和田・Banerjee (2024) <i>J. Exp. Child Psychol.</i></td><td>日本</td><td>普段得意な人が謙遜すると、大人からは能力が低く見られる。普段苦手なのに自己高揚すると、性格が低く見られる</td><td>懲りていない言い切り、ぼかしすぎの頼れなさ</td></tr>
 </tbody></table></div>
 
 <h3>4.2 確度</h3>
 <div class="tbl"><table>
 <thead><tr><th>規則</th><th>確度</th><th>理由</th></tr></thead>
 <tbody>
-<tr><td>修復期に効くのは行動の一貫と控え</td><td><span class="badge b-strong">強</span>（日本は中）</td><td>複数の研究で同じ向き。日本の証拠は C-04 の間接の支え</td></tr>
-<tr><td>謝罪の中身の二成分、h が過失の承認だけを下げる</td><td><span class="badge b-mid">中〜強</span></td><td>日米比較の研究に基づく</td></tr>
-<tr><td>謝罪の場面の但し書きは減点</td><td><span class="badge b-mid">中〜強</span></td><td>謝罪の構成と日本の謝罪の様式</td></tr>
-<tr><td>過信の差 G と気づかれやすさ v</td><td><span class="badge b-mid">中</span></td><td>米国の参加者の研究。日本は未確認</td></tr>
-<tr><td>欺瞞の残る傷</td><td><span class="badge b-mid">中</span></td><td>米国の経済ゲームの研究</td></tr>
-<tr><td>ぼかしすぎの頼れなさ</td><td><span class="badge b-mid">中</span></td><td>日本の研究は子どもの自己呈示を含む場面、AI の研究は米国</td></tr>
-<tr><td>失敗の前・修復期の但し書きの有用さ</td><td><span class="badge b-mid">中</span></td><td>但し書きを控えめさとして読んだ場合の間接の支え</td></tr>
-<tr><td>但し書きの働きが局面で逆になること</td><td><span class="badge b-hypo">仮説</span></td><td>位置を操作して比べた研究は見つかっていない</td></tr>
-<tr><td>修復期の詫びの繰り返し・蒸し返しが負担になる</td><td><span class="badge b-hypo">仮説</span></td><td>直接の研究なし。謝罪の多い人は自信が低く見られる（既存 E-08）は間接の支え</td></tr>
-<tr><td>修復期の軽口・許しの当然視が失礼になる</td><td><span class="badge b-hypo">仮説</span></td><td>謝罪の最中の笑顔の研究（既存 E-05）は謝罪の最中の話</td></tr>
+<tr><td>修復期に効くのは行動の一貫と控え（D-04、D-12、D-13、C-04）</td><td><span class="badge b-strong">強</span>（日本への当てはまりは中）</td><td>複数の研究で同じ向き。日本の証拠は C-04 の間接の支え</td></tr>
+<tr><td>謝罪の中身の二成分と、h が過失の承認だけを下げること（C-04）</td><td><span class="badge b-mid">中〜強</span></td><td>日米比較の研究に基づく</td></tr>
+<tr><td>謝罪の場面の但し書きは減点（C-01、C-02）</td><td><span class="badge b-mid">中〜強</span></td><td>謝罪の構成と日本の謝罪の様式に基づく</td></tr>
+<tr><td>過信の差 G と気づかれやすさ v（D-09〜D-11）</td><td><span class="badge b-mid">中</span></td><td>米国の参加者の研究。日本の受け手では未確認</td></tr>
+<tr><td>欺瞞の残る傷（D-04）</td><td><span class="badge b-mid">中</span></td><td>米国の経済ゲームの研究</td></tr>
+<tr><td>ぼかしすぎの頼れなさ（B-11、F-11）</td><td><span class="badge b-mid">中</span></td><td>日本の研究（B-11）は子どもの自己呈示を含む場面。AI の研究（F-11）は米国</td></tr>
+<tr><td>失敗の前・修復期の但し書きの有用さ（D-09、D-10、F-11）</td><td><span class="badge b-mid">中</span></td><td>但し書きを「失敗の前の控えめさ」として読んだ場合の間接の支え</td></tr>
+<tr><td>但し書きの働きが局面で逆になること（3.5節の全体）</td><td><span class="badge b-hypo">仮説</span></td><td>位置を操作して比べた研究は見つかっていない</td></tr>
+<tr><td>修復期の詫びの繰り返し・蒸し返しが負担になること</td><td><span class="badge b-hypo">仮説</span></td><td>直接の研究は見つかっていない。謝罪の多い人は自信が低く見られる（E-08）は間接の支え</td></tr>
+<tr><td>修復期の軽口・許しの当然視が失礼になること</td><td><span class="badge b-hypo">仮説</span></td><td>謝罪の最中の笑顔が不誠実の信号になる（E-05）は、謝罪の最中の話</td></tr>
 </tbody></table></div>
 
 <h3>4.3 文化についての注意</h3>
 <div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>自信と誤り、信頼の修復の証拠は、多くが米国やシンガポールの参加者によるものです。日本の受け手での直接の証拠は、謝罪の機能（C-04）と謙遜（B-10、B-11）に限られます。<b>日本の受け手に当てはまるかを人間の評価キット（8章）で確かめることが、この設計の最も大きな検証点です。</b></p></div>
 <ul>
-<li>日本の謝罪は「誰のせいか」より「相手の負担を認め、関係を保つこと」として働く。受け手モデルでは過失の承認と負担への言及を分けたまま扱い、米国の謝罪観（謝罪＝責任の承認）が混ざらないようにする。</li>
-<li>謙遜は文化に共通の価値。日本の受け手の特徴は、謙遜を好むことそのものではなく、強い謙遜を受け入れやすいという程度の違いとして、型の幅で表す。</li>
+<li>日本の謝罪は「誰のせいか」より「相手の負担を認め、関係を保つこと」として働きます。受け手モデルでは、過失の承認と負担への言及を分けたまま扱い、米国の謝罪観（謝罪＝責任の承認）が混ざらないようにします。</li>
+<li>謙遜は文化に共通の価値です。日本の受け手の特徴は、謙遜を好むことそのものではなく、強い謙遜を受け入れやすいという程度の違いとして、型の幅で表します。</li>
 </ul>
 
 <h2 id="metrics"><svg class="icon"><use href="#i-target"/></svg>5. 評価指標と検証の手続き</h2>
 <h3>5.1 原則</h3>
 <ol class="steps">
-<li><b>予測を確率分布として定義し、真に適正なスコアリング規則で測る</b>確率を正直に出したときに期待スコアが最良になる規則（Brier、対数損失、順位確率スコア）だけを主指標にする。</li>
-<li><b>必ず基準と比べる</b>定数の予測と条件だけの予測を同じ規則で採点し、スキルスコア（1 − 自分の損失 ÷ 基準の損失）で報告する。</li>
-<li><b>データを見て決めたものは、交差検証の外側で評価する</b>パラメータの当てはめ、所属度関数の中心、設定の選択は、場面単位の交差検証の内側で行う。</li>
-<li><b>不確かさは場面単位で見積もる</b>ブートストラップは場面単位（評定者が複数なら評定者×場面の二元）。二つの評価器の比較は、同じ再標本での差の区間で判断する。</li>
-<li><b>κ と「近さ」は記述用の副指標</b>順位づけには使わない。</li>
+<li><b>予測を確率分布として定義し、真に適正なスコアリング規則で測る</b>確率を正直に出したときに期待スコアが最良になる規則（Brier、対数損失、順位確率スコア）だけを主指標にします。</li>
+<li><b>必ず基準と比べる</b>定数の予測と条件だけの予測を同じ規則で採点し、スキルスコア（1 − 自分の損失 ÷ 基準の損失）で報告します。</li>
+<li><b>データを見て決めたものは、交差検証の外側で評価する</b>パラメータの当てはめ、所属度関数の中心、どの設定を採るかの選択は、場面単位の交差検証の内側で行います。</li>
+<li><b>不確かさは場面単位で見積もる</b>同じ場面の回答は独立でないので、ブートストラップは場面単位（評定者が複数なら評定者×場面の二元）で行います。二つの評価器の比較は、同じ再標本での差の区間で判断します。</li>
+<li><b>κ と「近さ」は記述用の副指標とし、順位づけには使わない</b></li>
 </ol>
 <h3>5.2 予測分布</h3>
 <p>シミュレータの主張は「受け手の母集団がこう分布する」なので、「無作為に選んだ評定者がどう答えるか」の予測分布を母集団から作ります。</p>
-<pre><code>【4値の評定】
-P(k | μ)    = exp(β·μ_k) / Σ_j exp(β·μ_j)      （反応モデル。μ は受け手一人の所属度、β は所属度を選択に変える鋭さ）
-p(k | 回答) = 母集団で平均した P(k | μ)        （β → ∞ が「最大の所属度を選ぶ」非ファジィ化）
-
-【5段階の評定】
-p(y | 回答, 述語) = 母集団で、受け手一人の所属度（＋評定者のノイズ σ）を5段階に丸めたときの割合</code></pre>
+<p><b>4値の評定（筆者の評定など）</b></p>
+<pre><code>P(k | μ)    = exp(β·μ_k) / Σ_j exp(β·μ_j)      （反応モデル。μ は受け手一人の所属度、β は所属度を選択に変える鋭さ）
+p(k | 回答) = 母集団で平均した P(k | μ)</code></pre>
+<p>β → ∞ が「最大の所属度を選ぶ」非ファジィ化です。β は交差検証の内側で当てはめます。ファジィな所属度と4値の選択が一つの確率モデルでつながり、対数尤度で評価や当てはめができます。</p>
+<p><b>5段階の評定（評定ページ）</b></p>
+<p>述語ごとに、評定者の段階 y ∈ {0, .25, .5, .75, 1} を予測します。</p>
+<pre><code>p(y | 回答, 述語) = 母集団で、受け手一人の所属度（＋評定者のノイズ σ）を5段階に丸めたときの割合</code></pre>
 <h3>5.3 指標と基準</h3>
 <div class="tbl"><table>
 <thead><tr><th>対象</th><th>主指標</th><th>副指標</th></tr></thead>
 <tbody>
-<tr><td>4値の評定</td><td>多クラス Brier、対数損失</td><td>κ、正答率、混同行列、信頼性図、ECE</td></tr>
+<tr><td>4値の評定</td><td>多クラス Brier、対数損失（一様分布と 1% 混ぜて 0 を避ける）</td><td>κ、正答率、混同行列、信頼性図、ECE</td></tr>
 <tr><td>5段階の評定</td><td>述語ごとの順位確率スコア（RPS）</td><td>項目平均との二乗誤差、項目間の相関、偏り</td></tr>
 <tr><td>全体</td><td>基準に対するスキルスコア</td><td>条件で層別したスキルスコア、場面の中の順位相関</td></tr>
 </tbody></table></div>
@@ -322,82 +344,89 @@ p(y | 回答, 述語) = 母集団で、受け手一人の所属度（＋評定�
 <tr><td>一様</td><td>4値に 1/4 ずつ</td><td>—</td></tr>
 <tr><td>常に釣り合う</td><td>釣り合う 1</td><td>断定的な予測の典型</td></tr>
 <tr><td>周辺分布</td><td>評定全体の頻度</td><td>交差検証の学習側で推定</td></tr>
-<tr><td>条件だけ</td><td>条件ごとの評定頻度</td><td>シミュレータが「条件を知る以上の情報」を持つかを測る</td></tr>
+<tr><td>条件だけ</td><td>条件ごとの評定頻度</td><td>同上。シミュレータが「条件を知る以上の情報」を持つかを測る</td></tr>
 <tr><td>人間の上限の目安</td><td>他の評定者の分布（1人抜き）</td><td>評定者が複数いるとき</td></tr>
 </tbody></table></div>
 <h3>5.4 手続き</h3>
 <ul>
-<li><b>交差検証</b>：ベンチマークの16場面を4分割した場面単位の交差検証。同じ場面の4モデル×3条件は同じ分割に入れる。<code>fit</code>（θ・β）、所属度関数の中心、出どころごとの較正は分割の外で当てはめる。</li>
-<li><b>報告</b>：分割の外側で採点したスコア。標本の中のスコアは参考。</li>
-<li><b>区間</b>：場面単位のブートストラップ（2,000回）で 95% 区間。</li>
-<li><b>感度分析</b>：全設定の結果を並べ、選ぶためには使わない（選ぶなら入れ子の交差検証）。</li>
-<li><b>事前登録</b>：新しい人間のデータを集める前に、主指標・基準・分割・仮説・採否の基準を固定する。</li>
-<li><b>受け手の数</b>：1000名以上。</li>
+<li><b>交差検証</b>：ベンチマークの16場面を4分割し、場面単位の4分割交差検証にします。同じ場面の4モデル×3条件は同じ分割に入れます。分割の外で、<code>fit</code>（θ・β）、所属度関数の中心、観察の出どころごとの較正（<a href="#calib">7.1節</a>）を当てはめます。</li>
+<li><b>報告</b>：分割の外側で採点したスコアを報告します。標本の中のスコアは参考に留めます。</li>
+<li><b>区間</b>：場面単位のブートストラップ（2,000回）で 95% 区間を出します。二つの評価器の比較は、差の区間が 0 を含むかで判断します。</li>
+<li><b>感度分析</b>：全設定の結果をそのまま並べ、選ぶためには使いません。設定を選ぶ場合は、入れ子の交差検証の内側で選びます。</li>
+<li><b>事前登録</b>：人間のデータを集める前に、主指標・基準・仮説・採否の基準を固定します（<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/human/PREREGISTRATION.md">human/PREREGISTRATION.md</a>）。</li>
+<li><b>受け手の数</b>：1000名以上（500名では κ が最大 0.05 ずれた）。</li>
 </ul>
 <h3>5.5 実装</h3>
 <div class="tbl"><table>
-<thead><tr><th>対象</th><th>変更</th></tr></thead>
+<thead><tr><th>対象</th><th>内容</th></tr></thead>
 <tbody>
 <tr><td><code>tools/evaluate.py</code></td><td>反応モデルによる予測分布、Brier・対数損失・RPS、基準とスキルスコア、場面単位の交差検証とブートストラップ、評価器どうしの差の区間</td></tr>
-<tr><td><code>blind.py compare</code></td><td>主指標を RPS と二乗誤差にし、基準を自動で並べる。「近さ」は記述用に残す</td></tr>
-<tr><td><code>sim.py fit</code></td><td>目的関数を反応モデルの対数尤度にし、β も当てはめる。場面単位の交差検証で報告する</td></tr>
+<tr><td><code>blind.py compare --rps</code></td><td>5段階の評定の主指標を RPS と二乗誤差にし、基準を並べる。「近さ」は記述用</td></tr>
+<tr><td><code>sim.py fit</code></td><td>目的関数は反応モデルの対数尤度。β も当てはめる</td></tr>
 </tbody></table></div>
 
 <h2 id="ensemble"><svg class="icon"><use href="#i-users"/></svg>6. 観察者の集団</h2>
 <h3>6.1 考え方</h3>
-<p>一回の観察は、観察者の分布から取った標本一つです。受け手を母集団として扱うのと同じく、観察者も集団として扱い、その平均を層Bに渡します。ただし、何を振るかには区別が要ります。読み手の態度を観察の側で振ると、層Bの性質と二重に数えることになるからです（P11）。</p>
+<p>一回の観察は、観察者の分布から取った標本一つです。受け手を母集団として扱うのと同じく（P2）、観察者も集団として扱い、その平均を層Bに渡します。</p>
+<p>ただし、何を振るかには区別が要ります。</p>
 <div class="comp">
-<div class="card" style="border-top:3px solid var(--good)"><h3>振るもの（観察の誤差・あいまいさ）</h3><ul style="font-size:.9rem;color:var(--ink2)"><li>観察方針の言い回し（字義どおり／文脈を補う／中立）</li><li>本文から決まらない場面の事実（関係の上下・親疎、過失の明白さ、どこからが指摘か）の前提</li><li>モデルの系統（Claude／GPT／Gemini など）</li><li>提示の仕方（単独で見せるか、順序、書式）</li><li>同じ設定での繰り返し</li></ul></div>
-<div class="card" style="border-top:3px solid var(--bad)"><h3>振らないもの（受け手の違い。層Bの仕事）</h3><ul style="font-size:.9rem;color:var(--ink2)"><li>「怒っている受け手として読め」「寛容に読め」のような読み手の態度</li><li>受け手の性質（当事者性、修復の重視など）</li></ul><p class="note">一文の悪い読みの指示にある「苛立っている受け手を仮定して」は観察の定義の一部なので、変えずに固定する。</p></div>
+<div class="card" style="border-top:3px solid var(--good)"><h3>振るもの（観察の誤差・あいまいさ）</h3><ul style="font-size:.9rem;color:var(--ink2)"><li>観察方針の言い回し（字義どおり／文脈を補う／中立）</li><li>本文から決まらない場面の事実（関係の上下・親疎、過失の明白さ、どこからが指摘か）についての前提</li><li>モデルの系統（Claude／GPT／Gemini など）</li><li>提示の仕方（回答を単独で見せるか、順序、書式）</li><li>同じ設定での繰り返し</li></ul></div>
+<div class="card" style="border-top:3px solid var(--bad)"><h3>振らないもの（受け手の違い。層Bの仕事）</h3><ul style="font-size:.9rem;color:var(--ink2)"><li>「怒っている受け手として読め」「寛容に読め」のような読み手の態度</li><li>受け手の性質（当事者性、修復の重視など）</li></ul></div>
 </div>
+<p>読み手の態度を観察の側で振ると、層Bの性質と二重に数えることになります（P11）。一文の悪い読みの指示にある「苛立っている受け手を仮定して」は観察の定義の一部なので、変えずに固定します。</p>
 <h3>6.2 変種</h3>
-<p>既定は、観察方針3水準 × モデルの系統2水準 = 6変種です。モデルの系統には、評価対象と別系統のモデルを必ず含めます。回答の提示順はランダムにし、同じ場面の回答は一つずつ見せます。本文から決まらない場面の事実には <code>unknown</code> を選べるようにし、集約では「票を投じない」として扱います。</p>
+<p>既定は、観察方針3水準 × モデルの系統2水準 = 6変種です。主効果を推定できるよう、要因を組み合わせて配置します。モデルの系統には、評価対象と別系統のモデルを必ず含めます。各変種で、回答の提示順をランダムにし、同じ場面の回答は一つずつ見せます。</p>
+<p>本文から決まらない場面の事実には、観察者に <code>unknown</code> を選べるようにします。集約では <code>unknown</code> を「票を投じない」として扱い、全員が <code>unknown</code> なら事前値（<code>DEFAULT_CONTEXT</code>）を使います。</p>
 <h3>6.3 集約（<code>sim.py ensemble</code>）</h3>
 <div class="tbl"><table>
 <thead><tr><th>欄の型</th><th>集約</th><th>残すもの</th></tr></thead>
 <tbody>
-<tr><td>真偽</td><td>真と答えた観察者の割合（そのまま真理値として使う）</td><td>割合</td></tr>
-<tr><td>段階</td><td>平均（刈り込み平均も可）</td><td>平均と標準偏差</td></tr>
-<tr><td>列挙（違反の種類、枠組み、文ごとの但し書きの種類など）</td><td>票の分布。最多の値、または種類ごとの割合を渡す</td><td>分布</td></tr>
+<tr><td>真偽</td><td>真と答えた観察者の割合（0〜1。そのまま真理値として使う）</td><td>割合</td></tr>
+<tr><td>段階</td><td>平均（外れ値に強くするなら刈り込み平均）</td><td>平均と標準偏差</td></tr>
+<tr><td>列挙（<code>violation_type</code>、<code>context</code>、文ごとの但し書きの種類など）</td><td>票の分布。層Bには最多の値、または種類ごとの割合を渡す</td><td>分布</td></tr>
 <tr><td>依頼の遂行</td><td>依頼 ID ごとの票の分布</td><td>分布</td></tr>
-<tr><td>文ごとの悪い読み</td><td>文 ID ごとに全観察者の自然さの平均（付けなかった観察者は 0）。重さは付けた観察者の多数決</td><td>付けた観察者の割合</td></tr>
+<tr><td>文ごとの悪い読み</td><td>文 ID ごとに、全観察者の <code>plausibility</code> の平均（読みを付けなかった観察者は 0）。<code>severity</code> は付けた観察者の多数決</td><td>付けた観察者の割合</td></tr>
 <tr><td>シグナル</td><td>種類ごとに「描写あり」の割合。強さは平均</td><td>割合</td></tr>
 </tbody></table></div>
-<p>一人だけが付けた悪い読みは平均で小さくなります（6変種なら、0.6 の読みを一人だけが付けても 0.1）。観察者どうしのばらつきは受け手の違いとしては流さず、大きい項目は <code>unsure</code> として人の確認に回します。</p>
-<h3>6.4 観察の単位をそろえる（<code>sim.py segment</code>）</h3>
-<p>文の分割と成果物（コード・下書き）の切り出しをコードで行い、文に ID を付けて観察者に渡します。観察者は文 ID ごとに悪い読みと但し書きの種類を記録します。</p>
-<h3>6.5 観察者の評価と費用</h3>
+<p>一人だけが付けた悪い読みは、平均で小さくなります（6変種なら、0.6 の読みを一人だけが付けても 0.1）。観察者どうしのばらつきは、受け手の違いとしては流さず（P11）、ばらつきの大きい項目は <code>unsure</code> として人の確認に回します。</p>
+<h3 id="segment">6.4 観察の単位をそろえる（<code>sim.py segment</code>）</h3>
+<p>平均するには、すべての観察者が同じ単位に記録している必要があります。文の分割と成果物（コード・下書き）の切り出しをコードで行い（<code>s1.py</code> の前処理を共用）、文に ID を付けて観察者に渡します。観察者は、文 ID ごとに悪い読みと但し書きの種類を記録します。</p>
+<h3>6.5 観察者の評価</h3>
 <ul>
-<li>観察者間の一致（Krippendorff のα）、同じ変種での再観察の一致、観察方針とモデルの系統の主効果、集団の平均と各変種単独を5章の指標で比べた結果を報告する。</li>
-<li>192回答 × 6変種 ≈ 1,150回答分の観察。System One 経路では、質問の言い換えと選択肢の並べ替えで同じ集約ができる（<a href="jev.html">System One</a>）。</li>
+<li>観察者間の一致：欄ごとに Krippendorff のα（真偽・列挙は名義、段階は間隔）</li>
+<li>再現性：同じ変種で2回観察させた一致</li>
+<li>要因の効果：観察方針とモデルの系統の主効果</li>
+<li>最終指標への効果：集団の平均を使ったシミュレータと各変種単独のシミュレータを、5章の指標で比べる</li>
 </ul>
+<h3>6.6 費用</h3>
+<p>192回答 × 6変種 ≈ 1,150回答分の観察です。サブエージェントで代替する場合は、1体あたり24回答 × 48体です。System One 経路では、質問の言い換えと選択肢の並べ替えで同じ集約ができます（<a href="jev.html#ideas">System One 8章</a>）。</p>
 
 <h2 id="calib"><svg class="icon"><use href="#i-cog"/></svg>7. 較正と観察の固め</h2>
 <div class="grid">
-<div class="card"><h3>7.1 出どころごとの較正</h3><p><code>population.json</code> の <code>judgment</code> を、観察の出どころ（<code>proxy</code>、<code>llm-ensemble</code>、<code>system-one</code>）ごとに持てるようにし、観察JSONの <code>source</code> で切り替える。中心だけを、交差検証の内側で少数の人の評定から当てはめる。</p></div>
-<div class="card"><h3>7.2 場面の観察を固める</h3><p>距離の変化のうち文量・絵文字・相槌化はコードで測り、観察者には丁寧語への切り替えと呼び方の正式化だけを問う。<code>harm</code> と <code>prior_corrections</code> は例を付けて定義を固め、信頼の傷では指摘の数に上限か強さの重みを付ける。</p></div>
-<div class="card"><h3>7.3 場面の中の判別力</h3><p>条件で層別したスキルスコアと、場面の中の順位相関を報告する。取り違えの多い型（筆者が「足りない」・シミュレータが「釣り合う」）の回答を個別に読み、欠けている観察の欄を洗い出す。</p></div>
+<div class="card"><h3>7.1 観察の出どころごとの較正</h3><p><code>population.json</code> の <code>judgment</code> を、観察の出どころ（<code>proxy</code>、<code>llm-ensemble</code>、<code>system-one</code>）ごとに持てるようにし、観察JSONの <code>source</code> で切り替えます。各出どころの中心は、5章の交差検証の内側で、少数の人の評定から当てはめます。当てはめるのは中心だけにします。なだらかさと t ノルムには、結果がほとんど左右されないことが分かっています。</p></div>
+<div class="card"><h3>7.2 場面の観察を、定義とコードで固める（未実装）</h3><ul style="font-size:.9rem;color:var(--ink2)"><li>距離の変化の5要素のうち、文量の減少・絵文字の消失・相槌化はコードで測り（<code>s1.py</code> の <code>surface</code> と同じ）、観察者には丁寧語への切り替えと呼び方の正式化だけを問います。</li><li><code>harm</code> と <code>prior_corrections</code> は、段階ごとに例を付けて定義を固めます（「確認の質問は指摘に数えない」など）。</li><li>信頼の傷 S の計算で、<code>prior_corrections</code> に上限を設けるか、指摘の強さで重みを付けます。</li></ul></div>
+<div class="card"><h3>7.3 場面の中の判別力</h3><p>条件で層別したスキルスコアと、場面の中の順位相関（同じ場面の12回答の中で、筆者の評定の順にシミュレータの所属度が並ぶか）を報告します。取り違えの多い型（代理観察では、筆者が「足りない」・シミュレータが「釣り合う」とする回答）を個別に読み、欠けている観察の欄を洗い出します。</p></div>
 </div>
 
 <h2 id="kit"><svg class="icon"><use href="#i-flask"/></svg>8. 人間による評価キット</h2>
-<p>日本の受け手で設計の仮説を確かめるために、評価キット（<code>blind.py</code> と評定ページ）を、操作した項目の比較ができるように更新します。</p>
-<h3>8.1 仮説（事前登録する）</h3>
+<p>日本の受け手で設計の仮説を確かめるために、評価キット（<code>blind.py</code> と評定ページ）は、操作した項目を比べられる形に組んでいます。</p>
+<h3>8.1 仮説（事前登録）</h3>
 <div class="tbl wide"><table>
 <thead><tr><th>ID</th><th>仮説</th><th>比較</th><th>主な述語・設問</th></tr></thead>
 <tbody>
 <tr><td class="id">H1</td><td>断言して外すと、同じ謝罪でも「足りない」「失礼」が高い</td><td>断言＋懸念を退ける vs 中立</td><td>失礼・足りない</td></tr>
 <tr><td class="id">H2</td><td>過信への言及は、断言して外した後ほど「足りない」を下げる</td><td>構え × 過信への言及</td><td>足りない</td></tr>
-<tr><td class="id">H3</td><td>控えめに外すと「失礼」は下がるが、負担に触れない謝罪は「足りない」と感じられる</td><td>控えめ vs 中立、負担への言及のあり・なし</td><td>失礼・足りない・重すぎる（両側）</td></tr>
+<tr><td class="id">H3</td><td>控えめに外すと「失礼」は下がるが、負担に触れない謝罪は「足りない」と感じられる</td><td>控えめ vs 中立、負担への言及のあり・なし</td><td>失礼・足りない・重すぎる（両側で検定）</td></tr>
 <tr><td class="id">H4</td><td>確かめたと偽った場合は、謝罪と慎重な作業の後でも信頼意図が戻らない</td><td>「確認済み」と偽った vs 単に断言した</td><td>信頼意図、釣り合う</td></tr>
-<tr><td class="id">H5</td><td>修復期は詫びなしで慎重に作業する回答が最も釣り合う。詫びの繰り返しは重すぎる、軽口と当然視は失礼、約束破りは最も失礼</td><td>修復期の5つの回答</td><td>4つの述語、反省の知覚、再発の危険</td></tr>
+<tr><td class="id">H5</td><td>修復期は、詫びなしで慎重に作業する回答が最も釣り合う。詫びの繰り返しは「重すぎる」、軽口と当然視は「失礼」、約束破りは最も「失礼」</td><td>修復期の5つの回答</td><td>4つの述語、反省の知覚、再発の危険</td></tr>
 <tr><td class="id">H6</td><td>親しい関係では、修復期の軽口の「失礼」が弱まる</td><td>関係 × 軽口</td><td>失礼</td></tr>
 <tr><td class="id">H7</td><td>過度なぼかしは「重すぎる」より信頼意図を下げる</td><td>ぼかしすぎ vs 較正された構え</td><td>重すぎる、信頼意図</td></tr>
-<tr><td class="id">H8</td><td>同じ但し書きが、失敗の前と修復期では「釣り合う」を上げ、謝罪の場面では「足りない」「失礼」を上げる。謝罪の場面では詫びより前に置くと後より悪い</td><td>局面 × 回答の中の位置 × 種類</td><td>4つの述語、信頼意図</td></tr>
-<tr><td class="id">H9</td><td>「釣り合う」は三つの否定の min で積よりよく表せる</td><td>評定者自身の4つの答え</td><td>釣り合う（方法論）</td></tr>
+<tr><td class="id">H8</td><td>同じ但し書きが、失敗の前と修復期では「釣り合う」を上げ、謝罪の場面では「足りない」「失礼」を上げる。謝罪の場面では、詫びより前に置くと後に置くより悪い</td><td>但し書きの局面（前・謝罪・修復期）× 回答の中の位置 × 種類（範囲の明示・責任の限定）</td><td>4つの述語、信頼意図</td></tr>
+<tr><td class="id">H9</td><td>「釣り合う」は、三つの否定の min で積よりよく表せる</td><td>評定者自身の4つの答え</td><td>釣り合う（方法論）</td></tr>
 </tbody></table></div>
-<p class="note">各仮説について、向き（片側か両側か）、主指標、効果の最小の大きさ（たとえば所属度の差 0.1）、検定の方法、多重比較の扱い（Holm 法）を、データを集める前に固定します。</p>
+<p class="note">各仮説について、向き（片側か両側か）、主指標、効果の最小の大きさ（所属度の差 0.10）、検定の方法、多重比較の扱い（Holm 法）を、データを集める前に固定しています（<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/human/PREREGISTRATION.md">human/PREREGISTRATION.md</a>、<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/human/hypotheses.json">human/hypotheses.json</a>）。</p>
 <h3>8.2 項目の組</h3>
-<p>すべての組で土台（依頼・失敗・謝罪）をそろえ、操作する部分だけを変えます。領域は、コード修正・予定の操作・事実の回答・ファイルの操作の4つです。</p>
+<p>すべての組で、土台（依頼・失敗・謝罪）をそろえ、操作する部分だけを変えます。領域は、コード修正・予定の操作・事実の回答・ファイルの操作の4つです。</p>
 <div class="tbl wide"><table>
 <thead><tr><th>組</th><th>操作</th><th>水準</th></tr></thead>
 <tbody>
@@ -408,170 +437,85 @@ p(y | 回答, 述語) = 母集団で、受け手一人の所属度（＋評定�
 <tr><td>傷の深さ</td><td>軽い失敗の後／約束を破った後の受け入れ</td></tr>
 <tr><td rowspan="2">C 但し書きの局面</td><td>同じ但し書きの置き場所</td><td>失敗の前の発話／謝罪の回答（詫びの前・後）／修復期の回答</td></tr>
 <tr><td>但し書きの種類</td><td>範囲の明示／責任の限定</td></tr>
-<tr><td>D 錨</td><td>—</td><td>既存の作例とベンチマークから数問</td></tr>
+<tr><td>D 錨</td><td>—</td><td>作例とベンチマークから数問（ほかの結果とのつながり、尺度の使い方の確認）</td></tr>
+<tr><td>E 補い</td><td>—</td><td>曖昧な受け入れ、誠実さの違反の後の修復期、二度目の失敗、傷の減衰（シミュレータの向きの確認用。キットには入れない）</td></tr>
 </tbody></table></div>
+<p>項目は <code>examples/scenes-kit.json</code>（<code>tools/make_scenes_kit.py</code> が生成。88場面・320回答）に、場面・回答・操作の水準・観察（手で記録したもの）をそろえて置き、シミュレータとキットで同じ項目を使います。「確認済み」と偽る水準では、ユーザーの指摘に「確かめていなかったことが分かる一言」を入れ、偽りが文面から読み取れるようにしています。</p>
 <h3>8.3 割り付け</h3>
-<p><b>一人の評定者は、一つの土台について一つの水準だけを見る</b>ようにします。同じ人が同じ土台の別の水準を続けて見ると、比較が露骨になり、評定が操作の意図に引きずられるからです。土台×水準の表をラテン方格で複数のリストに分け、評定者IDのハッシュでリストを決めます。錨は全員が見て、再評定の項目は各リストから2問ずつ置きます。</p>
+<p>同じ人が同じ土台の別の水準を続けて見ると、比較が露骨になり、評定が操作の意図に引きずられます。そこで、<b>一人の評定者は、一つの土台について一つの水準だけを見る</b>ようにします。</p>
+<ul>
+<li>土台×水準の表をラテン方格で複数のリストに分け、評定者IDのハッシュでリストを決めます。どのリストも、すべての水準を（別の土台で）同じ数だけ含みます。</li>
+<li>錨の項目は全員が見ます。再評定の項目は各リストから2問ずつ置きます。</li>
+<li>出題順は、評定者ごとに乱数で並べます。</li>
+</ul>
 <h3>8.4 評定ページ</h3>
 <div class="tbl wide"><table>
 <thead><tr><th>要素</th><th>内容</th><th>目的</th></tr></thead>
 <tbody>
-<tr><td>会話の表示</td><td>失敗の前のAIの発話と受け入れの発話を含めて、複数ターンを省略せずに表示</td><td>構えと経緯を見せる</td></tr>
+<tr><td>会話の表示</td><td>失敗の前のAIの発話と、受け入れの発話を含めて、複数ターンを省略せずに表示する</td><td>構えと経緯を評定者に見せる</td></tr>
 <tr><td>主の設問</td><td>4つの述語×5段階</td><td>—</td></tr>
-<tr><td>信頼意図（全項目）</td><td>「このAIに、この先も任せられそうだと感じますか」（1〜5）</td><td>頼れなさを測る（H4、H7、H8）</td></tr>
-<tr><td>反省の知覚・再発の危険（修復期の組）</td><td>「反省が続いていると感じますか」「また起きそうだと感じますか」（1〜5）</td><td>修復期の仕組みを測る（H5）</td></tr>
-<tr><td>操作の確認（各項目の最後）</td><td>「失敗の前、AIはどのくらい自信を持って言っていましたか」（0〜3）</td><td>操作が伝わったか。主の評定の後に置く</td></tr>
-<tr><td>注意の確認</td><td>指示どおりに答える項目を1問</td><td>雑な回答の除外</td></tr>
-<tr><td>アンケート</td><td>断言して外す人への信用、「確認済み」への頼り方、謝られた後の戻り方の好み、詫びの繰り返しの負担、謝るときの「念のため」の感じ方、AI の利用経験（1〜5）</td><td>受け手の性質との対応</td></tr>
+<tr><td>信頼意図（全項目）</td><td>「このAIに、この先も任せられそうだと感じますか」（1〜5）</td><td>4つの述語の外の頼れなさを測る（H4、H7、H8）</td></tr>
+<tr><td>反省の知覚・再発の危険（修復期の組）</td><td>「この返答から、反省が続いていると感じますか」「同じようなことがまた起きそうだと感じますか」（1〜5）</td><td>修復期の仕組みを測る（H5）</td></tr>
+<tr><td>操作の確認（各項目の最後）</td><td>「失敗の前、AIはどのくらい自信を持って言っていましたか」（0〜3）</td><td>構えの操作が伝わったか。主の評定の後に置き、主の評定を誘導しない</td></tr>
+<tr><td>注意の確認</td><td>指示どおりに答える項目を1問</td><td>雑な回答の除外（基準は事前登録）</td></tr>
+<tr><td>アンケート</td><td>「断言して外す人は、控えめに言って外す人より信用できない」「『確認済み』と言われたら、自分では確かめない」「謝られた後は、早くいつもどおりに戻ってほしい」「一度許したことを何度も謝られると、かえって負担だ」「謝るときの『念のため』の一言は、言い訳に聞こえる」「AIを仕事でよく使う」（1〜5）</td><td><code>overclaim</code>、確かめの頼り方、控えの好み、詫びの繰り返しの負担、但し書きへの感じ方、AI の利用経験</td></tr>
 </tbody></table></div>
-<p class="note">1人あたり 24〜30 問（約30分）に抑えます。</p>
-<h3>8.5 人数・検出力・分析</h3>
+<p class="note">1人あたりの項目数は 35問（約35分）です。</p>
+<h3>8.5 人数と検出力</h3>
 <ul>
-<li><b>人数</b>：評定者 40〜60 名。各評定者が A・B・C の組から計 24 問前後と錨（D）4 問を見ると、1つの水準あたり約 60〜90 件の評定が集まる。</li>
-<li><b>検出力</b>：シミュレータ自身で見積もる（<code>blind.py power</code>）。合成評定者に項目へ答えさせ、事前登録した検定で効果を検出できる割合を人数ごとに計算する。予測の半分の効果でも検出できる人数を選ぶ。</li>
-<li><b>分析</b>：主指標は5章の規則。仮説は、土台ごとの水準間の所属度の差を、評定者と土台で層別した並べ替え検定で検定する。操作の確認で構えが伝わらなかった評定者の割合を報告し、除外はせず感度分析で扱う。同じ項目をシミュレータに通し、仮説の向きと大きさが人間と一致するかを報告する。</li>
+<li>評定者 40〜60 名を目安とします。</li>
+<li>検出力は、シミュレータ自身で見積もります（<code>blind.py power</code>）。母集団から合成評定者を抜いて項目に答えさせ、事前登録した検定で仮説の効果を検出できる割合を、人数を変えて計算します。モデルが正しくない可能性に備えて、予測の半分の効果でも検出できる人数を選びます。</li>
 </ul>
-<h3>8.6 実装</h3>
+<h3>8.6 分析</h3>
+<ul>
+<li>主指標は5章の規則（RPS、二乗誤差、場面と評定者の二元ブートストラップ）です。</li>
+<li>仮説の検定は、土台ごとの水準間の所属度の差を、評定者と土台で層別した並べ替え検定で行います。混合効果の順序回帰が要る場合は、CSV に書き出して外部のソフトで行います。</li>
+<li>操作の確認で、構えが伝わらなかった評定者の割合を報告します。除外はせず、感度分析で扱います。</li>
+<li>同じ項目をシミュレータに通し、各仮説の向きと大きさが人間と一致するかを報告します。一致しない仮説は、受け手モデルの該当の規則を見直す候補です。</li>
+</ul>
+<h3>8.7 実装</h3>
 <div class="tbl"><table>
-<thead><tr><th>対象</th><th>変更</th></tr></thead>
+<thead><tr><th>対象</th><th>内容</th></tr></thead>
 <tbody>
-<tr><td><code>blind.py pack --design</code></td><td>ラテン方格のリスト、評定者IDによるリストの選択、項目ごとの追加の設問</td></tr>
-<tr><td><code>human/rate_template.html</code></td><td>複数ターンの表示、追加の設問、操作の確認、注意の確認、アンケート</td></tr>
-<tr><td><code>blind.py compare --hypotheses</code></td><td>事前登録した仮説の検定、操作の確認の集計、シミュレータの予測との突き合わせ</td></tr>
+<tr><td><code>blind.py pack --design --scenes examples/scenes-kit.json</code></td><td>土台×水準の表からラテン方格のリストを作り、評定者IDのハッシュでリストを選ぶ。項目ごとの追加の設問を問題束に入れる</td></tr>
+<tr><td><code>human/rate_template.html</code></td><td>複数ターンの表示、項目の種類に応じた追加の設問、操作の確認、注意の確認、アンケート</td></tr>
+<tr><td><code>blind.py compare --hypotheses hyp.json</code></td><td>事前登録した仮説の検定、操作の確認の集計、シミュレータの予測との突き合わせ</td></tr>
 <tr><td><code>blind.py power</code></td><td>合成評定者による検出力の見積もり</td></tr>
-<tr><td><code>blind.py synth</code></td><td>追加の設問にも答える合成評定者（信頼意図は <code>reliability</code> から）</td></tr>
+<tr><td><code>blind.py synth</code></td><td>追加の設問にも答える合成評定者（信頼意図は受け手モデルの <code>reliability</code> から作る）</td></tr>
 <tr><td><code>examples/scenes-kit.json</code></td><td>8.2節の項目の組</td></tr>
+<tr><td><a href="human-eval.html">HUMAN_EVAL.md</a></td><td>手順、倫理の注意</td></tr>
 </tbody></table></div>
-<div class="callout"><svg class="icon"><use href="#i-compass"/></svg><p><b>文化の比較</b>：同じ項目を英語に訳して米国などの評定者にも答えてもらえば、日本の受け手に固有の受け取り方と文化に共通の受け取り方を分けられます（たとえば H3 は、日本と米国で向きが違うと予測できます）。評定ページの多言語化は次の段階の候補です。</p></div>
+<h3>8.8 文化の比較</h3>
+<div class="callout"><svg class="icon"><use href="#i-compass"/></svg><p>同じ項目を英語に訳して米国などの評定者にも答えてもらえば、日本の受け手に固有の受け取り方と、文化に共通の受け取り方を分けられます。たとえば H3（控えめに外しても負担への言及は要る）は、日本と米国で向きが違うと予測できます。評定ページの多言語化は、次の段階の候補とします。</p></div>
 
-<h2 id="order"><svg class="icon"><use href="#i-list"/></svg>9. 進める順序</h2>
-<ol class="steps">
-<li><b>評価指標と検証の手続き（5章）</b>ほかの改善の効果を正しく測るために、最初に直す。</li>
-<li><b>人間の評価キットと事前登録（8章）</b>モデルを見ながら仮説を変えないために、控えのモデルより前に作る。</li>
-<li><b>観察の単位の固定（6.4節）</b><code>sim.py segment</code>、<code>observe_prompt.md</code>。</li>
-<li><b>観察者の集団（6章）</b><code>sim.py observe --variants</code>、<code>sim.py ensemble</code>。</li>
-<li><b>控えの時間軸モデル（3章）</b><code>observe_prompt.md</code>、<code>sim.py</code>、<code>population.json</code>（<code>overclaim</code>）。</li>
-<li><b>較正と観察の固め（7章）</b>出どころ別の <code>judgment</code>。</li>
-</ol>
-
-<h2 id="criteria"><svg class="icon"><use href="#i-target"/></svg>10. 採否の基準</h2>
+<h2 id="criteria"><svg class="icon"><use href="#i-target"/></svg>9. 採否の基準</h2>
+<p>5章の手続き（場面単位の交差検証、分割の外側の採点）で判断します。</p>
 <div class="tbl"><table>
-<thead><tr><th>対象</th><th>基準（場面単位の交差検証、分割の外側の採点）</th></tr></thead>
+<thead><tr><th>対象</th><th>基準</th></tr></thead>
 <tbody>
 <tr><td>評価指標</td><td>「常に釣り合う」がシミュレータより良くならない。基準とスキルスコアが表に並ぶ</td></tr>
-<tr><td>控えの時間軸（修復期）</td><td>修復期24回答の Brier が v0.8 より良く、差の区間が 0 を含まない。修復期以外の成績を悪くしない</td></tr>
-<tr><td>控えの時間軸（失敗の前の構え・但し書き）</td><td>評価キットで H1〜H4・H7・H8 の向きを人間の評定が支持し、シミュレータの予測がその向きと一致する。ベンチマークの成績を悪くしない</td></tr>
+<tr><td>控えの時間軸モデル（修復期）</td><td>ベンチマークの修復期24回答の Brier が、修復期を謝罪の言葉で測る受け手モデルより良く、差の区間が 0 を含まない。修復期以外の回答の成績を悪くしない</td></tr>
+<tr><td>控えの時間軸モデル（失敗の前の構え・但し書き）</td><td>評価キットで、事前登録した仮説 H1〜H4・H7・H8 の向きを人間の評定が支持し、シミュレータの予測がその向きと一致する。ベンチマークの成績を悪くしない</td></tr>
 <tr><td>観察者の集団</td><td>集団の平均を使ったシミュレータの Brier が、各変種単独のどれにも負けない。LLM の観察での「釣り合う」の不足が半分以下になる</td></tr>
 <tr><td>出どころごとの較正</td><td>分割の外側で、較正なしより良い</td></tr>
 <tr><td>全体</td><td>「条件だけ」の基準に対するスキルスコアが正で、区間が 0 を含まない</td></tr>
 </tbody></table></div>
 
-<h2 id="decisions"><svg class="icon"><use href="#i-list"/></svg>11. 決定記録の案</h2>
-<div class="tbl"><table>
-<thead><tr><th>ID</th><th>決定</th></tr></thead>
-<tbody>
-<tr><td class="id">D-018</td><td>受け手モデルに控えの時間軸を入れる。失敗の前の構え、謝罪の場面の構え、修復期の控えを観察し、局面の真理値で働きを切り替える。修復期は詫びではなく控えで中身を測る。謝罪の中身は過失の承認と負担への言及に分ける。過信を罰する度合いを受け手の性質 <code>overclaim</code> とする</td></tr>
-<tr><td class="id">D-019</td><td>免責の但し書きを、種類（範囲の明示・確かめ・責任の限定）と局面（失敗の前・謝罪の場面・修復期）と回答の中の位置で働きを変える要素として扱う</td></tr>
-<tr><td class="id">D-020</td><td>評価は、母集団から作った予測分布を真に適正なスコアリング規則で採点し、基準とのスキルスコアで報告する。データを見て決めるものは場面単位の交差検証の内側で決める。D-016 を改める</td></tr>
-<tr><td class="id">D-021</td><td>層Aは、観察方針・場面の事実の前提・モデルの系統に幅を振った観察者の集団の平均とする。読み手の態度は振らない</td></tr>
-<tr><td class="id">D-022</td><td>所属度関数の中心を、観察の出どころごとに較正する</td></tr>
-<tr><td class="id">D-023</td><td>人間の評価キットを、操作した項目の組・ラテン方格の割り付け・仕組みを測る設問・事前登録した仮説の検定で、設計の仮説を確かめられるようにする</td></tr>
-<tr><td class="id">D-024</td><td>信頼の傷は、出来事からのターン数で減衰する（20ターンで直線に消える。欺瞞の傷は半分が残る）。実際は実時間で減るが、便宜としてターンで数える</td></tr>
-</tbody></table></div>
-<p class="note">D-017 は <a href="jev.html">System One への置き換え</a>の案です。</p>
-
-<h2 id="open"><svg class="icon"><use href="#i-help"/></svg>12. 未解決の問い</h2>
+<h2 id="open"><svg class="icon"><use href="#i-help"/></svg>10. 未解決の問い</h2>
 <ul>
-<li>控えの必要量が関係の親疎でどう変わるか。親しい関係では、早めに普段の調子に戻ることがむしろ修復の合図になる可能性がある（H6 で一部を確かめる）。</li>
-<li>傷が何ターンで消えるか。いまは20ターンで直線に消えると仮定している（3.9節）。実際には実時間で減り、出来事の重さや関係でも変わるはず。</li>
-<li>ユーザーが自分で確かめる手段を持っていたかで、失敗の前の控えめさや但し書きへの寛容さが変わる可能性がある。</li>
-<li>AIの「確認済み」を実行記録と照合できる場合はコードで判定する。照合できない場合は観察者の集団の判断に任せる。</li>
-<li>但し書きが多すぎる場合（失敗の前でも何でも「念のためご確認ください」と言う）は、それ自体が負担や頼れなさになりうる。失敗が起きていない場面の評価は範囲の外だが、SHAZAI Rules の側で扱う価値がある。</li>
-<li>観察者の集団の平均でも、全変種が共有する系統的な偏りは残る。その場合は少数の人の観察で欄ごとに較正する。</li>
-<li>反応モデルの β が評定者ごとに違う場合、β を型の性質に加えるかどうか。</li>
-</ul>
-
-<h2 id="impl"><svg class="icon"><use href="#i-chart"/></svg>13. 実装の状況と最初の結果</h2>
-<h3>13.1 進み具合</h3>
-<div class="tbl"><table>
-<thead><tr><th>段</th><th>内容</th><th>状況</th></tr></thead>
-<tbody>
-<tr><td>1</td><td>評価指標と検証の手続き</td><td><span class="badge b-strong">済</span> <code>tools/evaluate.py</code>、<code>compare --rps</code>、<code>fit</code> の対数尤度</td></tr>
-<tr><td>2</td><td>人間の評価キットと事前登録</td><td><span class="badge b-strong">済</span> <code>pack --design</code>・<code>compare --hypotheses</code>・<code>power</code>、評定ページ、事前登録</td></tr>
-<tr><td>3</td><td>観察の単位の固定</td><td><span class="badge b-strong">済</span> <code>sim.py segment</code>、文 ID・但し書きの欄</td></tr>
-<tr><td>4</td><td>観察者の集団</td><td><span class="badge b-strong">済</span> 6変種の観察を収集し評価</td></tr>
-<tr><td>5</td><td>控えの時間軸モデル</td><td><span class="badge b-strong">済</span> 傷の減衰を含む</td></tr>
-<tr><td>6</td><td>較正と観察の固め</td><td><span class="badge b-mid">一部</span> 出どころごとの較正</td></tr>
-</tbody></table></div>
-<p class="note">係数はすべて設計に書いた事前値のまま入れ、作例やベンチマークの結果を見て変えていません。</p>
-<h3>13.2 ベンチマーク（192回答・16場面、分割の外側の Brier。低いほど良い）</h3>
-<div class="tbl wide"><table>
-<thead><tr><th>評価器</th><th class="num">Brier [95%区間]</th><th class="num">条件だけに対するスキル</th><th class="num">修復期24回答</th></tr></thead>
-<tbody>
-<tr><td>基準：条件だけ</td><td class="num">0.553 [0.466, 0.646]</td><td class="num">—</td><td class="num">—</td></tr>
-<tr><td>基準：常に釣り合う</td><td class="num">0.719 [0.490, 0.948]</td><td class="num">—</td><td class="num">—</td></tr>
-<tr><td>代理観察 v0.8</td><td class="num">0.504 [0.397, 0.608]</td><td class="num">+0.088 [−0.023, +0.199]</td><td class="num">0.506</td></tr>
-<tr><td>代理観察 v0.9</td><td class="num">0.489 [0.366, 0.600]</td><td class="num">+0.116 [−0.001, +0.235]</td><td class="num">0.385</td></tr>
-<tr><td>サブエージェントの観察 v0.8</td><td class="num">0.589 [0.457, 0.710]</td><td class="num">−0.066 [−0.247, +0.111]</td><td class="num">0.721</td></tr>
-<tr><td>サブエージェントの観察 v0.9</td><td class="num">0.543 [0.406, 0.677]</td><td class="num">+0.017 [−0.158, +0.186]</td><td class="num">0.404</td></tr>
-<tr><td><b>サブエージェントの観察 v0.9＋出どころの較正</b></td><td class="num"><b>0.471 [0.341, 0.597]</b></td><td class="num"><b>+0.147 [+0.020, +0.283]</b></td><td class="num"><b>0.368</b></td></tr>
-</tbody></table></div>
-<ul>
-<li>v0.9 − v0.8 は、サブエージェントの観察で −0.046 [−0.116, −0.004]、修復期だけで −0.316 [−0.551, −0.082]。修復期の場面は2つしかないので、修復期の区間は粗い。</li>
-<li>「常に釣り合う」は、どの評価器にも負けるようになった（v0.8 の「近さ」では最良だった）。</li>
-<li>既存の観察には修復期の控えの欄がなく、既定値で評価している。修復期の改善は、主に「受け入れ後も詫びの言葉の不足を数える」誤りを除いたことによる。</li>
-<li>出どころの較正：LLM の観察では失礼の中心 2.4・足りないの中心 1.6（分割ごとには 2.1〜3.0 と 1.6〜1.9）。代理観察は較正すると分割の外側で悪くなるので較正しない。β はどの評価器でもほぼ 3。</li>
-</ul>
-<h3>13.3 項目の組での向き</h3>
-<div class="tbl wide"><table>
-<thead><tr><th>仮説</th><th>シミュレータの予測</th><th>向き</th></tr></thead>
-<tbody>
-<tr><td class="id">H1</td><td>基本の謝罪で「足りない」8%（中立）→ 19%（断言＋懸念を退ける）。「失礼」は変わらない</td><td>足りない○、失礼△</td></tr>
-<tr><td class="id">H2</td><td>過信への言及による「足りない」の低下：中立 8→6、断言 19→6</td><td>○</td></tr>
-<tr><td class="id">H3</td><td>負担に触れない謝罪の「足りない」：控えめ 3→11、中立 8→33</td><td>○（控えめでは小さい）</td></tr>
-<tr><td class="id">H4</td><td>偽りの「確認済み」の後は信頼 0.50（ほかは 1.00）。過信への言及でも戻らない</td><td>○</td></tr>
-<tr><td class="id">H5</td><td>詫びなしで慎重に作業：釣り合う 96%。詫び直し：重すぎる 84%。軽口：失礼 56%。当然視：失礼 74%。約束破り：失礼 71%（失礼と感じる人 96% で最多）</td><td>○（約束破りの平均所属度は当然視より低い）</td></tr>
-<tr><td class="id">H6</td><td>軽口の失礼：普通 56% → 親しい 53%</td><td>○（小さい）</td></tr>
-<tr><td class="id">H7</td><td>ぼかしすぎ：重すぎる 5%、信頼 0.40</td><td>○</td></tr>
-<tr><td class="id">H8</td><td>失敗の前：足りない 8→4。謝罪の場面：詫びの前 失礼 40%（責任の限定 93%）、詫びの後 4%（16%）。修復期：変わらない</td><td>○（修復期の上積みは見えない）</td></tr>
-<tr><td class="id">減衰</td><td>約束を破った後の修復期の軽口：失礼 73%（0ターン）→ 54%（10）→ 18%（20）。約束破りは 71% のまま</td><td>仮定どおり</td></tr>
-</tbody></table></div>
-<h3>13.4 総合評価</h3>
-<p>残りの実装を終え、観察者の集団（観察方針3 × モデル2 = 6変種、サブエージェント）でベンチマークを観察し直し、作例を盲検で観察しました。</p>
-<div class="tbl wide"><table>
-<thead><tr><th>評価器（ベンチマーク）</th><th class="num">Brier [95%区間]</th><th class="num">条件だけに対するスキル</th><th class="num">修復期</th></tr></thead>
-<tbody>
-<tr><td>基準：条件だけ</td><td class="num">0.553 [0.466, 0.646]</td><td class="num">—</td><td class="num">—</td></tr>
-<tr><td>代理観察</td><td class="num">0.489 [0.366, 0.600]</td><td class="num">+0.116 [−0.001, +0.235]</td><td class="num">0.385</td></tr>
-<tr><td>観察者の集団（6変種の平均）</td><td class="num">0.549 [0.422, 0.674]</td><td class="num">+0.006</td><td class="num">0.401</td></tr>
-<tr><td>上位モデル・字義どおり（単独で最良）</td><td class="num">0.521 [0.388, 0.650]</td><td class="num">+0.057</td><td class="num">0.401</td></tr>
-<tr><td><b>観察者の集団＋出どころの較正</b></td><td class="num"><b>0.489 [0.356, 0.613]</b></td><td class="num"><b>+0.115 [−0.007, +0.248]</b></td><td class="num"><b>0.370</b></td></tr>
-</tbody></table></div>
-<div class="grid">
-<div class="card"><h3>観察者は「平均する」より「どう読ませるか」</h3><p>字義どおりの方針は、文脈を補って不満や過信を読み込むことを抑え、それだけで集団の平均より良かった。観察の誤差は、方針に由来する読み込みすぎの偏りが大きい。</p></div>
-<div class="card"><h3>較正は効果を縮める</h3><p>LLM の観察の失礼の中心は 2.4〜2.7 に寄る。4値の一致は良くなるが、作例での仮説の効果は 1/3〜1/6 に縮む。中心だけでなく、観察の欄ごとの較正が要る。</p></div>
-<div class="card"><h3>観察者が作例の欠陥を見つけた</h3><p>「確認済み」と言って外すことは、確かめなかった証拠ではない。観察者は偽りと判定しなかった。文面に偽りが分かる一言を加え、受け手モデルが「確認済み」を控えめさに数える誤りも直した。</p></div>
-<div class="card"><h3>構造の穴</h3><p>断言で失礼が増える、控えめで失礼が減る、親しい関係で軽口が許される、失敗の前・修復期の但し書きで釣り合う、の5つは、効果を作る経路がほとんどない。</p></div>
-</div>
-<div class="tbl"><table>
-<thead><tr><th>評価キットの検出力（合成評定者、予測どおりの効果）</th><th class="num">20名</th><th class="num">40名</th><th class="num">60名</th></tr></thead>
-<tbody>
-<tr><td>修復期（H5a〜g）、詫びより前の但し書き（H8b・H8c）</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">1.00</td></tr>
-<tr><td>偽りの確認の後の信頼（H4a）</td><td class="num">0.91</td><td class="num">0.96</td><td class="num">0.98</td></tr>
-<tr><td>ぼかしすぎ（H7）</td><td class="num">0.80</td><td class="num">0.78</td><td class="num">0.83</td></tr>
-<tr><td>断言の後の足りない（H1a・H2）、控えめでも負担（H3b）</td><td class="num">0.04〜0.10</td><td class="num">0.03〜0.08</td><td class="num">0.06〜0.07</td></tr>
-</tbody></table></div>
-<p class="note">効果が予測の半分なら、H4a は 60名で 0.60、H7 は 0.44。H1a・H2・H3b は、シミュレータの予測する効果が効果の最小の大きさ 0.10 前後なので「支持」にはならず、人間の効果が予測より大きいかを確かめる検定になる。</p>
-<h3>13.5 残っていること</h3>
-<ul>
-<li>観察の欄ごとの較正、字義どおりの方針に寄せた観察者の集団、場面の観察の固め（7.2節）。</li>
-<li>構造の穴への対応。</li>
+<li>控えの必要量が、関係の親疎でどう変わるか。親しい関係では、早めに普段の調子に戻ることがむしろ修復の合図になる可能性があります（<code>warmth</code> との関係。H6 で一部を確かめる）。</li>
+<li>傷が何ターンで消えるか。いまは20ターンで直線に消えると仮定しています（<a href="#decay">3.9節</a>）。実際には実時間で減り、出来事の重さや関係でも変わるはずです。</li>
+<li>ユーザーが自分で確かめる手段を持っていたかで、失敗の前の控えめさや但し書きへの寛容さが変わる可能性があります。</li>
+<li>AIの「確認済み」を、ツールの実行記録と照合できる場合は、観察ではなくコードで判定します。照合できない場合の扱いは、観察者の集団の判断に任せます。</li>
+<li>但し書きが多すぎる場合（失敗の前でも、何でも「念のためご確認ください」と言う）は、それ自体が負担や頼れなさになりえます。失敗が起きていない場面の評価はこのシミュレータの範囲の外ですが、SHAZAI Rules の側では扱う価値があります。</li>
+<li>観察者の集団の平均でも、全変種が共有する系統的な偏りは残ります。その場合は、少数の人の観察（金ラベル）で欄ごとに較正します（<a href="jev.html#design">System One 5.6節</a>）。</li>
+<li>反応モデルの β が評定者ごとに違う場合（断定的に答える人と迷う人）、β を型の性質に加えるかどうか。</li>
 </ul>
 </main>
 
 <footer>
 <a href="index.html">トップ</a>
-<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/IMPROVEMENT_V09.md">Markdown 版（正本）</a>
+<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/METHODS.md">Markdown 版</a>
 <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub リポジトリ</a>
 </footer>
 </body>
