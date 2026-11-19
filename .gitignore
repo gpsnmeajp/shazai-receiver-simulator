@@ -22,6 +22,8 @@ env/
 # Benchmark inputs and generated simulation output
 runs/
 out/
+# Jev の生の答え（実行直後のディレクトリ。まとめた eval/jev/raw/*.json.gz を置く）
+eval/jev/raw/*/
 
 # Generated human-evaluation sessions
 human/*

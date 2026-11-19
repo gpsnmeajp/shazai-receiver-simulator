@@ -23,6 +23,7 @@
 | `scenes-obs.md` | 項目の組での、LLM の観察と手の観察の一致、仮説の対比の向き |
 | `sensitivity.md` | 控えの時間軸の事前値の感度 |
 | `kit/` | 評価キットの合成評定者による試験（`session-synth/`）と検出力（`power-x1`、`power-x05`） |
+| `jev/` | OpenRouter の Jev（`typesafe/jev-1.14-20261014`）による System One 経路の検証。`report.md` が結果、`raw/*.json.gz` が生の答え、`s1_ja.py` が比較用の日本語の質問の組（凍結コピー）。再現は `python3 tools/jev_validate.py report`（[JEV_DESIGN.md](../docs/md/JEV_DESIGN.md) 7.1節） |
 
 `single-calibrated` の再現：
 

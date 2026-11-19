@@ -37,7 +37,7 @@ LLMペルソナに「日本人として評定して」と頼む方式はとり�
 | 検証結果（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html) / [Markdown](docs/md/VALIDATION.md)） | 使うデータ、作例とベンチマークの結果、既知の限界、次の検証 |
 | 総合評価（[Markdown](docs/md/EVALUATION.md)） | 観察者の集団（6変種）・出どころの較正・作例での観察の再現・評価キットの検出力。採否と考察 |
 | 人間のブラインド評定（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html) / [Markdown](docs/md/HUMAN_EVAL.md)） | 人間のブラインド評定と評価キットの実施手順、盲検化の設計、比較の指標 |
-| 層AのJev（System One）への置き換え（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/jev.html) / [Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計。組み込み判定モード（`check`）は実装済み・未検証 |
+| 層AのJev（System One）への置き換え（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/jev.html) / [Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計。組み込み判定モード（`check`）は実装済み。OpenRouter の Jev で検証し、今の質問の組と閾値では判定が失礼の側に大きく偏ることが分かった（7.1節） |
 | [履歴](HISTORY.md) | 版ごとの変更、過去の版の結果、改めた判断 |
 
 ## 使い方
@@ -86,7 +86,7 @@ sh tools/run_eval.sh
 python3 sim.py check examples/check/turn.json
 ```
 
-`check` は、hook などでAIの応答を毎ターン判定する仕組みの参考として用意した組み込み用モードです。1ターンにつき System One モデルを1回呼び、結果を母集団に通して「失礼の恐れ／要注意／問題なし」と、失礼の度合いに応じた羊の鳴き声（「メ…？」「メッ」「メッ！！」）を返します。Claude Code の Stop hook の例は `examples/hooks/shazai_stop_hook.py` にあります。Jev の実際の応答では未検証です。詳細は [層AのJevへの置き換え](docs/md/JEV_DESIGN.md) の5.8節を参照してください。
+`check` は、hook などでAIの応答を毎ターン判定する仕組みの参考として用意した組み込み用モードです。1ターンにつき System One モデルを1回呼び、結果を母集団に通して「失礼の恐れ／要注意／問題なし」と、失礼の度合いに応じた羊の鳴き声（「メ…？」「メッ」「メッ！！」）を返します。Claude Code の Stop hook の例は `examples/hooks/shazai_stop_hook.py` にあります。OpenRouter の Jev でも呼べます（`--backend openrouter`、環境変数 OPENROUTER_API_KEY）。**実際の Jev で検証したところ、普通の回答の多くも「失礼の恐れ」になりました。欄ごとの閾値を決めるまで、判定で差し戻す使い方はしないでください**（[検証の結果](eval/jev/report.md)）。詳細は [層AのJevへの置き換え](docs/md/JEV_DESIGN.md) の5.8節を参照してください。
 
 共通の選択肢：
 

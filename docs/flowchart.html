@@ -137,18 +137,18 @@ flowchart LR
 <h2 id="dispatch">2. コマンドの入口（main）</h2>
 <figure class="fig"><pre class="mermaid">
 flowchart TD
-  M["main() L1443&lt;br/&gt;argparse でサブコマンドを解析"]:::code --> E["global ESCALATION = args.escalation&lt;br/&gt;（既定 True） L1508"]:::code
+  M["main() L1445&lt;br/&gt;argparse でサブコマンドを解析"]:::code --> E["global ESCALATION = args.escalation&lt;br/&gt;（既定 True） L1512"]:::code
   E --> D{"args.cmd"}:::dec
   D -- observe --> C1["cmd_observe L138"]:::llm
   D -- segment --> C2["cmd_segment L172"]:::code
   D -- ensemble --> C3["cmd_ensemble L327"]:::code
   D -- proxy --> C4["cmd_proxy L411"]:::code
   D -- scenes --> C5["cmd_scenes L1303&lt;br/&gt;-n 1000"]:::code
-  D -- check --> C6["cmd_check L1387&lt;br/&gt;-n 300"]:::code
+  D -- check --> C6["cmd_check L1389&lt;br/&gt;-n 300"]:::code
   D -- simulate --> C7["cmd_simulate L1049&lt;br/&gt;-n 500"]:::code
   D -- fit --> C8["cmd_fit L1131"]:::code
   D -- explain --> C9["cmd_explain L1237"]:::code
-  H["共通の選択肢 add_model_options L1435&lt;br/&gt;--hysteresis（既定 True）&lt;br/&gt;--escalation（既定 True）&lt;br/&gt;--seed（既定 7）"]:::code -.-> C5 & C6 & C7 & C8 & C9
+  H["共通の選択肢 add_model_options L1437&lt;br/&gt;--hysteresis（既定 True）&lt;br/&gt;--escalation（既定 True）&lt;br/&gt;--seed（既定 7）"]:::code -.-> C5 & C6 & C7 & C8 & C9
   classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
   classDef llm fill:#f1eafe,stroke:#7c3aed,color:#2a1250
   classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
@@ -206,8 +206,8 @@ flowchart TD
 <figure class="fig"><pre class="mermaid">
 flowchart TD
   A["cmd_segment L172"]:::code --> B["load_runs"]:::code
-  B --> C["s1.own_part(text) s1:L51&lt;br/&gt;```…``` と 件名／---／*** 以降を成果物として切り出す"]:::code
-  C --> D["s1.split_sentences(own) s1:L47&lt;br/&gt;。！？!? と改行で分割、記号だけの行は捨てる"]:::code
+  B --> C["s1.own_part(text) s1:L60&lt;br/&gt;```…``` と 件名／---／*** 以降を成果物として切り出す"]:::code
+  C --> D["s1.split_sentences(own) s1:L56&lt;br/&gt;。！？!? と改行で分割、記号だけの行は捨てる"]:::code
   D --> E["answers[aid].sentences = s1, s2, …&lt;br/&gt;deliverable = 成果物の有無"]:::code
   E --> F["scenarios[sid].ai_turns =&lt;br/&gt;AI 発話に turn 番号"]:::code
   F --> G[("segment.json")]:::io
@@ -311,14 +311,14 @@ flowchart TD
 <div class="callout"><b>質問の言語</b>　instructions と criteria の説明は英語で書きます（System One モデルは英語の指示を前提とするため）。判定の対象（state の会話・回答）と、言い回しの例（「申し訳ない」「二回伝えていますが」など）は日本語のまま渡します。互換モード llm-s1 のシステムプロンプトも英語です。</div>
 <figure class="fig"><pre class="mermaid">
 flowchart TD
-  A["observe_turn s1:L569"]:::code --> U{"user の発話はあるか"}:::dec
+  A["observe_turn s1:L623"]:::code --> U{"user の発話はあるか"}:::dec
   U -- ない --> X["S1Error"]:::dec
-  U -- ある --> MD["model 既定&lt;br/&gt;jev → jev-1.14.0／llm-s1 → claude-haiku-5.5"]:::code
-  MD --> BS["build_state s1:L176&lt;br/&gt;early_user（最初の3件・400字）&lt;br/&gt;turns（最後の user を除く直近10件・800字）&lt;br/&gt;last_user ＋ 文分割（8文まで）&lt;br/&gt;own_sentences（24文まで）・deliverable（1500字）"]:::code
-  BS --> SF["surface s1:L69（正規表現。モデルに問わない）&lt;br/&gt;distance：emoji_lost・much_shorter・aizuchi&lt;br/&gt;emoji_or_exclaim・formatting・formulaic_opening&lt;br/&gt;has_stage（ト書き・顔文字）・polite_shift"]:::code
-  SF --> BQ["build_questions s1:L195"]:::code
-  BQ --> AK["ask s1:L390"]:::code
-  AK --> AS["assemble s1:L455"]:::code
+  U -- ある --> MD["model 既定&lt;br/&gt;jev → jev-1.14.0／openrouter → ~typesafe/jev-latest&lt;br/&gt;llm-s1 → claude-haiku-5.5"]:::code
+  MD --> BS["build_state s1:L185&lt;br/&gt;early_user（最初の3件・400字）&lt;br/&gt;turns（最後の user を除く直近10件・800字）&lt;br/&gt;last_user ＋ 文分割（8文まで）&lt;br/&gt;own_sentences（24文まで）・deliverable（1500字）"]:::code
+  BS --> SF["surface s1:L78（正規表現。モデルに問わない）&lt;br/&gt;distance：emoji_lost・much_shorter・aizuchi&lt;br/&gt;emoji_or_exclaim・formatting・formulaic_opening&lt;br/&gt;has_stage（ト書き・顔文字）・polite_shift"]:::code
+  SF --> BQ["build_questions s1:L204"]:::code
+  BQ --> AK["ask s1:L441"]:::code
+  AK --> AS["assemble s1:L509"]:::code
   AS --> OUT["(scenario, answer, meta)&lt;br/&gt;meta：backend・model・latency_ms・usage・&lt;br/&gt;n_questions・unsure・text_len＝own の文字数・state・questions・answers"]:::code
   classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
   classDef dec fill:#fdeee5,stroke:#c2410c,color:#4a1a05
@@ -344,20 +344,21 @@ flowchart TD
 </pre><figcaption>図7b 質問の組。回答1文あたり 21問増える（24文で 504問）</figcaption></figure>
 <figure class="fig"><pre class="mermaid">
 flowchart TD
-  K["ask s1:L390&lt;br/&gt;h = sha256(state, questions, model)[:24]"]:::code --> R{"backend == replay"}:::dec
+  K["ask s1:L441&lt;br/&gt;h = sha256(state, questions, model)[:24]"]:::code --> R{"backend == replay"}:::dec
   R -- はい --> R1[("--replay のファイルの answers")]:::io
   R1 --> RQ{"保存時の questions があるか"}:::dec
   RQ -- ある --> RQ1["文面・型の変わった質問を&lt;br/&gt;usage.changed_questions に"]:::code
   R -- いいえ --> C{"cache_dir/h.json はあるか"}:::dec
   C -- ある --> C1[("キャッシュを読む&lt;br/&gt;usage = cached")]:::io
   C -- ない --> B{"backend"}:::dec
-  B -- jev --> J["ask_jev s1:L319&lt;br/&gt;POST /v1/systemone"]:::llm
-  B -- llm-s1 --> L["ask_llm_s1 s1:L370&lt;br/&gt;→ normalize_llm_answers"]:::llm
-  J & L --> W{"cache_dir 指定あり"}:::dec
+  B -- openrouter --> O["ask_openrouter s1:L356&lt;br/&gt;POST openrouter.ai/api/alpha/decisions&lt;br/&gt;既定 ~typesafe/jev-latest&lt;br/&gt;--max-bytes があれば質問を分けて並列に"]:::llm
+  B -- jev --> J["ask_jev s1:L328&lt;br/&gt;POST /v1/systemone"]:::llm
+  B -- llm-s1 --> L["ask_llm_s1 s1:L421&lt;br/&gt;→ normalize_llm_answers"]:::llm
+  O & J & L --> W{"cache_dir 指定あり"}:::dec
   W -- あり --> W1[("キャッシュに書く")]:::io
   J -. "キーなし・HTTP・通信・形の誤り" .-> E["S1Error"]:::dec
   L -. "キーなし・HTTP・JSON 不可" .-> E
-  R1 & C1 & W & RQ1 --> CA["check_answers s1:L414&lt;br/&gt;missing_answers：答えのない質問&lt;br/&gt;mismatched_answers：型の合わない答え&lt;br/&gt;→ meta に入れ、check が件数を警告"]:::code
+  R1 & C1 & W & RQ1 --> CA["check_answers s1:L468&lt;br/&gt;missing_answers：答えのない質問&lt;br/&gt;mismatched_answers：型の合わない答え&lt;br/&gt;→ meta に入れ、check が件数を警告"]:::code
   classDef code fill:#e8f0fd,stroke:#2a6fd6,color:#10223f
   classDef llm fill:#f1eafe,stroke:#7c3aed,color:#2a1250
   classDef io fill:#e7f6ec,stroke:#15803d,color:#0f3a1f
@@ -365,8 +366,8 @@ flowchart TD
 </pre><figcaption>図7c バックエンドの選択。どの経路でも、答えと質問の組を突き合わせる（欠けた答えは組み立てで既定値になるため、黙って値が変わらないように）</figcaption></figure>
 </div>
 
-<h3>assemble：答えから観察JSONへ（s1:L455）</h3>
-<p>答えの読み出しは <code>Answers</code>（s1:L425）。<code>yes()</code> は noul ≥ 0.5（<code>YES</code>）、<code>level()</code>・<code>top()</code> は確率が最大の段階・選択肢。0.3〜0.7 の noul は <code>unsure</code> に記録（悪い読み・演技の読みは factual=False で記録しない）。</p>
+<h3>assemble：答えから観察JSONへ（s1:L509）</h3>
+<p>答えの読み出しは <code>Answers</code>（s1:L479）。<code>yes()</code> は noul ≥ 0.5（<code>YES</code>）、<code>level()</code>・<code>top()</code> は確率が最大の段階・選択肢。0.3〜0.7 の noul は <code>unsure</code> に記録（悪い読み・演技の読みは factual=False で記録しない）。</p>
 <figure class="fig"><pre class="mermaid">
 flowchart TD
   A["assemble"]:::code --> D["distance_shift = min(3,&lt;br/&gt;emoji_lost＋much_shorter＋aizuchi＋&lt;br/&gt;polite_switch＋formal_name)"]:::code
@@ -621,7 +622,7 @@ flowchart TD
 <h2 id="check">13. 組み込み判定（check）</h2>
 <figure class="fig"><pre class="mermaid">
 flowchart TD
-  IN[("入力 JSON（- なら標準入力）")]:::io --> M["messages = user と assistant だけ L1390"]:::code
+  IN[("入力 JSON（- なら標準入力）")]:::io --> M["messages = user と assistant だけ L1392"]:::code
   M --> A{"answer キーはあるか"}:::dec
   A -- ある --> CT
   A -- ない --> A2{"最後の発話は assistant か"}:::dec
@@ -768,11 +769,11 @@ EOF</code></pre>
 
 <div class="callout okc"><b><span class="tag ok">修正済み</span>System One 経路で但し書きの位置が「詫びより前」に倒れる</b><br>
 <code>answer_disclaimers</code>（L806）は詫びの文より前の但し書きを重く（×1.5）数えます。以前の <code>s1.assemble</code> は悪い読みか但し書きのある文だけを <code>sentences</code> に入れていたため、詫びの文が抜けると <code>first</code> が <code>None</code> になり、すべての但し書きが「詫びより前」扱いになっていました。<br>
-修正：assemble（s1:L515〜529）は詫びの文も残し、各文に <code>index</code>（元の文番号）と <code>is_apology</code>（モデルの判定）を付けます。answer_disclaimers は <code>is_apology</code> があればそれで詫びの位置を決め、なければ従来どおり詫びの語の正規表現を使います（LLM 観察の経路は不変）。</div>
+修正：assemble（s1:L569〜583）は詫びの文も残し、各文に <code>index</code>（元の文番号）と <code>is_apology</code>（モデルの判定）を付けます。answer_disclaimers は <code>is_apology</code> があればそれで詫びの位置を決め、なければ従来どおり詫びの語の正規表現を使います（LLM 観察の経路は不変）。</div>
 
 <div class="callout okc"><b><span class="tag ok">修正済み</span>System One 経路で、最後の発話での約束の破りを数えない</b><br>
-<code>build_state</code>（s1:L180）は最後の user 発話を <code>turns</code> から外すため、「直すと約束した直後のターンで、また同じ誤りを指摘された」場合に <code>broken_promises</code> が 0 のままでした（例の turn.json がまさにこの形）。<br>
-修正：最後の発話に <code>sc.repeat_now</code> を問い、最後の約束の後にそれが真なら 1 を足します（s1:L474）。例では broken_promises が 0 → 1 になり、傷 S が 1.18 → 1.88 になります。</div>
+<code>build_state</code>（s1:L189）は最後の user 発話を <code>turns</code> から外すため、「直すと約束した直後のターンで、また同じ誤りを指摘された」場合に <code>broken_promises</code> が 0 のままでした（例の turn.json がまさにこの形）。<br>
+修正：最後の発話に <code>sc.repeat_now</code> を問い、最後の約束の後にそれが真なら 1 を足します（s1:L528）。例では broken_promises が 0 → 1 になり、傷 S が 1.18 → 1.88 になります。</div>
 
 <div class="callout okc"><b><span class="tag ok">修正済み</span>simulate・explain が観察を既定値とマージしない</b><br>
 <code>cmd_simulate</code>（L1059）と <code>cmd_explain</code>（L1245）も <code>merged(DEFAULT_*, …)</code> を通すようにしました。欄の欠けた LLM 観察での KeyError、<code>"unknown"</code> がそのまま演算に入る問題がなくなり、simulate・fit・tools/evaluate.py が同じ入力を見ます。</div>
@@ -781,13 +782,16 @@ EOF</code></pre>
 scenes は場面ファイルの <code>source</code>（手で書いた観察にはないので既定のまま）、check は <code>system-one</code> で <code>use_source</code> を呼ぶようにしました。<code>configure</code>（L721）は毎回コードの既定値（<code>JUDGMENT_DEFAULT</code>・<code>TIMELINE_DEFAULT</code>）から組み直し、<code>JUDGMENT_BY_SOURCE</code> も入れ替えます。同じプロセスで <code>use_source("llm…")</code> の後に <code>load_population</code> を呼んでも較正が基準に残りません。scenes の作例・評価スクリプトの出力は修正前と同一です。</div>
 
 <div class="callout okc"><b><span class="tag ok">修正済み</span>replay が質問の組を照合しない</b><br>
-<code>check_answers</code>（s1:L414）が、答えのない質問（<code>missing_answers</code>）と型の合わない答え（<code>mismatched_answers</code>）を返し、replay で保存時の <code>questions</code> があれば文面の変わった質問（<code>changed_questions</code>）も返します。check はこれらを JSON 出力に入れ、件数を標準エラーに警告します。作例の答え（<code>examples/check/*.replay.json</code>）には、後から足された質問（失敗の前の構え・修復期の控え・文ごとの但し書き・repeat_now）の答えを補いました。</div>
+<code>check_answers</code>（s1:L468）が、答えのない質問（<code>missing_answers</code>）と型の合わない答え（<code>mismatched_answers</code>）を返し、replay で保存時の <code>questions</code> があれば文面の変わった質問（<code>changed_questions</code>）も返します。check はこれらを JSON 出力に入れ、件数を標準エラーに警告します。作例の答え（<code>examples/check/*.replay.json</code>）には、後から足された質問（失敗の前の構え・修復期の控え・文ごとの但し書き・repeat_now）の答えを補いました。</div>
 
 <div class="callout okc"><b><span class="tag ok">修正済み</span>System One への質問が日本語だった</b><br>
-instructions と criteria の説明を英語に書き直しました（s1:L107〜303）。言い回しの例（「申し訳ない」「二回伝えていますが」）と state の会話は日本語のまま渡します。あわせて、<code>sc.harm</code>・<code>sc.violation</code>・<code>sc.salient</code>・<code>ans.promise_kept</code> に state の位置（<code>conversation.turns</code> など）を名指しし、<code>lu{i}.status</code> の instructions に <code>request</code>（どの文の依頼か）を加えました。互換モード llm-s1 のシステムプロンプトも英語です。質問文が変わったので、<code>--cache</code> のハッシュも変わります（古いキャッシュは使われない）。</div>
+instructions と criteria の説明を英語に書き直しました（s1:L116〜312）。言い回しの例（「申し訳ない」「二回伝えていますが」）と state の会話は日本語のまま渡します。あわせて、<code>sc.harm</code>・<code>sc.violation</code>・<code>sc.salient</code>・<code>ans.promise_kept</code> に state の位置（<code>conversation.turns</code> など）を名指しし、<code>lu{i}.status</code> の instructions に <code>request</code>（どの文の依頼か）を加えました。互換モード llm-s1 のシステムプロンプトも英語です。質問文が変わったので、<code>--cache</code> のハッシュも変わります（古いキャッシュは使われない）。</div>
+
+<div class="callout bug"><b><span class="tag w">検証済み・未対応</span>Jev の「はい」への偏り</b><br>
+OpenRouter の Jev で項目の組316回答を検証したところ（<code>eval/jev/report.md</code>、JEV_DESIGN.md 7.1節）、悪い読み・先を急ぐ・弁解・誤りの上塗り・提案などの noul が少しずつ「はい」に寄り、judge_full の失点の足し算で積み上がって、失礼と感じる人が 20%（手の観察）→ 96% になりました。check の値を追うときは、まず <code>top_faults</code> と <code>flagged_sentences</code> を見て、どの失点が積み上がったかを確かめてください。</div>
 
 <div class="callout bug"><b><span class="tag w">未対応</span>Choice の選択肢の順序</b><br>
-Jev の資料は、Choice の答えが先頭の選択肢に寄る弱点を挙げています。現在の並びは <code>sc.violation</code> が none、<code>lu{i}.status</code> が done、<code>ans.promise_kept</code> が kept から始まり、どれも「問題なし」の側が先頭です。寄りがあれば、要求の未遂行・違反の種類・約束破りを見落とす向きに働きます。直すには、順序を入れ替えた2回の問いで寄りを測る（JEV_DESIGN.md 3章の案）必要があり、Jev の実際の応答での検証が要ります。</div>
+Jev の資料は、Choice の答えが先頭の選択肢に寄る弱点を挙げています。<b>検証の結果、先頭への寄りはなく、遂行の状況と約束を守ったかの2問だけ末尾に小さく寄りました（最大の選択肢が変わる割合 13〜15%）。</b>現在の並びは <code>sc.violation</code> が none、<code>lu{i}.status</code> が done、<code>ans.promise_kept</code> が kept から始まり、どれも「問題なし」の側が先頭です。寄りがあれば、要求の未遂行・違反の種類・約束破りを見落とす向きに働きます。直すには、順序を入れ替えた2回の問いで寄りを測る（JEV_DESIGN.md 3章の案）必要があり、Jev の実際の応答での検証が要ります。</div>
 
 <div class="callout"><b><span class="tag i">仕様</span>L は回答に依存しない</b><br>
 <code>perceive</code> は場面と θ だけを見ます。同じ会話の回答は良くても悪くても同じ L（例では平均 4.0）になります。回答の差は judge_full の失点・不足・過剰にだけ現れます。</div>
@@ -799,7 +803,7 @@ offense = 0 でも σ((0 − 1.2)/0.3) = 0.018。check の羊は 0.15 からな�
 verdict の rude は <code>tail.rude</code>（所属度 0.5 以上の人の割合 ≥ 0.2）、羊は <code>mu.rude</code>（平均）です。「verdict は rude なのに羊が小さい」「warn なのに羊が鳴かない（light が原因）」は起こりえます。</div>
 
 <div class="callout"><b><span class="tag i">仕様</span>distance_shift の数え方が経路で違う</b><br>
-proxy（L338）は丁寧語の文末の比率の上昇を正規表現で数え、System One（s1:L462）は丁寧語への切替と呼び方の変化をモデルに問います。同じ会話でも 0〜3 の値がずれることがあり、L の detect·distance_shift の項に直接効きます。</div>
+proxy（L338）は丁寧語の文末の比率の上昇を正規表現で数え、System One（s1:L516）は丁寧語への切替と呼び方の変化をモデルに問います。同じ会話でも 0〜3 の値がずれることがあり、L の detect·distance_shift の項に直接効きます。</div>
 
 <div class="callout"><b><span class="tag i">仕様</span>場面は sid で一意</b><br>
 観察JSONの <code>scenarios</code> は sid をキーにします。複数の run が同じ sid を持つと、observe（L152 の再開判定）・proxy（L422）とも最後の run の場面で上書きされます。run ごとに場面の会話が違う場合は値が混ざります。</div>

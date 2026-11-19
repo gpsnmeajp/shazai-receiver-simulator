@@ -1341,15 +1341,17 @@ def sheep(m):
 
 def check_turn(messages, answer, backend="jev", model=None, n=300, seed=7, hysteresis=True,
                population=None, rude_at=0.2, warn_at=0.4, timeout=10.0, cache_dir=None, replay=None,
-               context=None, keys=None):
+               context=None, keys=None, max_bytes="default"):
     """1ターンを System One で観察し、母集団に通して判定する。hook などから呼ぶための関数。
 
     verdict: rude（失礼と感じる人の割合 ≥ rude_at）／warn（失礼か足りないの平均所属度 ≥ warn_at）／ok。
     バックエンドを使えないときは s1.S1Error を送出する（呼び出し側で fail-open にする）。
     """
     import s1
-    keys = keys or {"jev": os.environ.get("TYPESAFE_API_KEY"), "llm-s1": os.environ.get("OPENROUTER_API_KEY")}
-    sc, a, meta = s1.observe_turn(messages, answer, backend, model, keys, timeout, cache_dir, replay)
+    keys = keys or {"jev": os.environ.get("TYPESAFE_API_KEY"), "llm-s1": os.environ.get("OPENROUTER_API_KEY"),
+                    "openrouter": os.environ.get("OPENROUTER_API_KEY")}
+    mb = s1.DEFAULT_MAX_BYTES if max_bytes == "default" else max_bytes
+    sc, a, meta = s1.observe_turn(messages, answer, backend, model, keys, timeout, cache_dir, replay, max_bytes=mb)
     sc = merged(DEFAULT_SCENARIO, sc)
     if context:
         sc["context"].update(context)
@@ -1396,7 +1398,7 @@ def cmd_check(args):
     try:
         res = check_turn(messages, answer, args.backend, args.model, args.n, args.seed, args.hysteresis,
                          args.population, args.rude_at, args.warn_at, args.timeout, args.cache, args.replay,
-                         data.get("context"))
+                         data.get("context"), max_bytes="default" if args.max_bytes is None else (args.max_bytes or None))
     except s1.S1Error as e:
         # 組み込み用途では判定できないことを失敗にしない（fail-open）。--strict で失敗にする
         out = {"verdict": "unavailable", "error": str(e)}
@@ -1468,9 +1470,11 @@ def main():
     p.set_defaults(f=cmd_scenes)
     p = sub.add_parser("check", help="1ターンを System One（Jev 等）で観察して判定する組み込み用モード（オプション）")
     p.add_argument("input", help='{"messages": [...], "answer": "..."} のJSON。- で標準入力')
-    p.add_argument("--backend", choices=["jev", "llm-s1", "replay"], default="jev",
+    p.add_argument("--backend", choices=["jev", "openrouter", "llm-s1", "replay"], default="jev",
                    help="jev: TypeSafe（TYPESAFE_API_KEY）／llm-s1: 互換モードでLLMに確率で答えさせる（OPENROUTER_API_KEY）／replay: --replay の答えを読む")
-    p.add_argument("--model", help="既定 jev-1.14.0（llm-s1 では anthropic/claude-haiku-5.5）")
+    p.add_argument("--model", help="既定 jev-1.14.0（openrouter では ~typesafe/jev-latest、llm-s1 では anthropic/claude-haiku-5.5）")
+    p.add_argument("--max-bytes", type=int, default=None,
+                   help="openrouter で1リクエストの上限バイト数（既定は分けない。例 30000）")
     p.add_argument("--replay", help="--save-raw で保存した答えのファイル（--backend replay 用）")
     p.add_argument("--cache", help="答えを保存して再利用するディレクトリ")
     p.add_argument("--save-raw", help="state・質問・答えを書き出す")
