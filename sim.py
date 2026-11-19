@@ -446,6 +446,7 @@ TIMELINE = {
     "deception_floor": 0.5,     # 欺瞞の傷は減衰してもこの割合が残る（欺瞞の後の信頼は完全には戻らない）
     "share_fault": 0.5,         # 謝罪の必要量のうち、過失の承認が占める割合（残りは負担への言及）
 }
+TIMELINE_DEFAULT = dict(TIMELINE)
 DISCLAIMER_KINDS = ("scope", "verify", "liability")
 
 
@@ -712,21 +713,28 @@ JUDGMENT = {
 }
 
 
+JUDGMENT_DEFAULT = json.loads(json.dumps(JUDGMENT))  # コードの既定値。configure はここから組み直す
 JUDGMENT_BASE = None
 JUDGMENT_BY_SOURCE = {}
 
 
 def configure(pop):
     """population.json の "judgment"（所属度関数）、"judgment_by_source"（観察の出どころごとの較正）、
-    "timeline"（控えの時間軸）を読み込む。"""
+    "timeline"（控えの時間軸）を読み込む。
+    毎回コードの既定値から組み直す（直前の use_source の較正が基準に焼き込まれないように）。"""
     global JUDGMENT_BASE
+    JUDGMENT.clear()
+    JUDGMENT.update(json.loads(json.dumps(JUDGMENT_DEFAULT)))
     for k, v in (pop.get("judgment") or {}).items():
         if isinstance(v, dict):
             JUDGMENT[k] = dict(JUDGMENT.get(k, {}), **v)
         elif not k.startswith("_"):
             JUDGMENT[k] = v
     JUDGMENT_BASE = json.loads(json.dumps(JUDGMENT))
+    JUDGMENT_BY_SOURCE.clear()
     JUDGMENT_BY_SOURCE.update({k: v for k, v in (pop.get("judgment_by_source") or {}).items() if not k.startswith("_")})
+    TIMELINE.clear()
+    TIMELINE.update(TIMELINE_DEFAULT)
     TIMELINE.update({k: v for k, v in (pop.get("timeline") or {}).items() if not k.startswith("_")})
 
 
@@ -796,9 +804,13 @@ def defuzz(mu):
 
 
 def answer_disclaimers(a):
-    """回答の中の免責の但し書き。文ごとに (種類の度合い, 詫びより前か) を返す。位置はコードで決める。"""
+    """回答の中の免責の但し書き。文ごとに (種類の度合い, 詫びより前か) を返す。位置はコードで決める。
+    文に is_apology（System One 経路が付ける、詫びの文かの判定）があればそれを、なければ詫びの語の正規表現を使う。"""
     sents = a.get("sentences") or []
-    first = next((i for i, x in enumerate(sents) if APO.search(x.get("text", ""))), None)
+    if any("is_apology" in x for x in sents):
+        first = next((i for i, x in enumerate(sents) if x.get("is_apology")), None)
+    else:
+        first = next((i for i, x in enumerate(sents) if APO.search(x.get("text", ""))), None)
     out = []
     for i, x in enumerate(sents):
         d = x.get("disclaimer", "none")
@@ -1044,7 +1056,8 @@ def cmd_simulate(args):
               "judgment": JUDGMENT, "answers": {}}
     agg = defaultdict(list)
     for r in rows:
-        sc, a = obs["scenarios"][r["sid"]], obs["answers"][r["aid"]]
+        sc = merged(DEFAULT_SCENARIO, obs["scenarios"][r["sid"]])
+        a = merged(DEFAULT_ANSWER, obs["answers"][r["aid"]])
         res = assess(a, sc, panel, len(r["text"]), args.hysteresis)
         res.update({"run": r["run"], "cond": r["cond"], "level": r["level"], "user": r["user"]})
         result["answers"][r["aid"]] = res
@@ -1229,7 +1242,9 @@ def cmd_explain(args):
     rows = {r["aid"]: r for r in load_runs(args.runs)}
     r = rows[args.answer]
     print(r["text"][:400], "\n")
-    print_explain(explain_rows(obs["answers"][r["aid"]], obs["scenarios"][r["sid"]], len(r["text"]), pop, args.hysteresis))
+    a = merged(DEFAULT_ANSWER, obs["answers"][r["aid"]])
+    sc = merged(DEFAULT_SCENARIO, obs["scenarios"][r["sid"]])
+    print_explain(explain_rows(a, sc, len(r["text"]), pop, args.hysteresis))
 
 
 # ---------------------------------------------------------------- 場面の組（物語・AIキャラクター等）
@@ -1289,6 +1304,7 @@ def cmd_scenes(args):
     """観察済みの場面ファイル（examples/scenes.json の形式）を母集団に通す。"""
     data = load(args.file)
     pop = load_population(args.population)
+    use_source(data.get("source"))  # 手で書いた観察（source なし）は既定の所属度関数のまま
     panel = sample_panel(pop, args.n, args.seed)
     out = {"source": args.file, "n": args.n, "hysteresis": args.hysteresis, "escalation": ESCALATION,
            "judgment": JUDGMENT, "scenes": []}
@@ -1339,6 +1355,7 @@ def check_turn(messages, answer, backend="jev", model=None, n=300, seed=7, hyste
         sc["context"].update(context)
     a = merged(DEFAULT_ANSWER, a)
     pop = load_population(population or HERE / "population.json")
+    use_source("system-one")  # 出どころの較正（population.json の judgment_by_source.system-one）があれば使う
     res = assess(a, sc, sample_panel(pop, n, seed), meta["text_len"], hysteresis)
     mu, tail = res["mu"], res["tail"]
     verdict = "rude" if tail["rude"] >= rude_at else ("warn" if max(mu["rude"], mu["light"]) >= warn_at else "ok")
@@ -1350,6 +1367,8 @@ def check_turn(messages, answer, backend="jev", model=None, n=300, seed=7, hyste
         "top_faults": dict(list(res["mean_faults"].items())[:5]),
         "flagged_sentences": [{"text": s["text"], "reading": s["reading_type"], "p": s["plausibility"]} for s in flagged[:5]],
         "unsure": meta["unsure"],
+        "missing_answers": meta["missing_answers"], "mismatched_answers": meta["mismatched_answers"],
+        "changed_questions": (meta["usage"] or {}).get("changed_questions", []),
         "backend": meta["backend"], "model": meta["model"], "latency_ms": meta["latency_ms"],
         "usage": meta["usage"], "n_questions": meta["n_questions"],
         "observation": {"scenario": sc, "answer": a},
@@ -1402,6 +1421,13 @@ def cmd_check(args):
             print(f"  悪く読める一文（{s['reading']} {s['p']:.2f}）: {s['text'][:60]}")
         if res["unsure"]:
             print(f"  要確認の判断: {len(res['unsure'])} 件")
+        gaps = [(res["missing_answers"], "答えのない質問", "既定値で補った"),
+                (res["mismatched_answers"], "型の合わない答え", "既定値で補った"),
+                (res["changed_questions"], "保存時と文面の変わった質問", "保存時の答えを使った")]
+        for ids, what, how in gaps:
+            if ids:
+                print(f"  注意: {what} {len(ids)} 件（{how}）: {', '.join(ids[:5])}"
+                      + (" …" if len(ids) > 5 else ""), file=sys.stderr)
     if (args.fail_on == "rude" and res["verdict"] == "rude") or (args.fail_on == "warn" and res["verdict"] in ("rude", "warn")):
         raise SystemExit(2)
 

@@ -242,13 +242,14 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <thead><tr><th>項目</th><th>実装</th></tr></thead>
 <tbody>
 <tr><td>ファイル</td><td><code>s1.py</code>（前処理・質問の組・バックエンド・組み立て）、<code>sim.py</code> の <code>check_turn</code> と <code>cmd_check</code></td></tr>
-<tr><td>リクエスト</td><td><b>1ターン1リクエスト。</b>5.1節の三つの単位を一つの state にまとめ、最後のユーザー発話の文ごとに「依頼か」「種類」「遂行の状況」を投機的に同じリクエストで問う（依頼でない文の答えはコードが捨てる）。作例では約90〜110問</td></tr>
+<tr><td>リクエスト</td><td><b>1ターン1リクエスト。</b>5.1節の三つの単位を一つの state にまとめ、最後のユーザー発話の文ごとに「依頼か」「種類」「遂行の状況」を投機的に同じリクエストで問う（依頼でない文の答えはコードが捨てる）。作例では約120〜140問</td></tr>
 <tr><td>モデルに問わないもの</td><td>絵文字・感嘆・書式の量、冒頭の定型の同意、文量の変化、相槌化、成果物（コードブロック・下書き）の切り出し、文の分割、すべての数え上げと上限</td></tr>
 <tr><td>シグナル</td><td>ト書き・顔文字が正規表現で見つかったときだけ、19種を投機的に問う（ないときは問わない）。枠組みは <code>real_task</code>・<code>ai_assistant</code>・<code>victim</code> に固定し、過失の明白さと親しさだけを問う</td></tr>
 <tr><td>控えの時間軸</td><td>AIの発話ごとに、失敗を含むか・自信の度合い・但し書きの種類・確かめたと述べたか・懸念を退けたかを問い、回答には過信への言及・この回答の自信・較正された構え・ぼかしすぎ・修復期の控え（調子・軽口・当然視・配慮・約束・蒸し返し）を問う。失敗の発話と経過ターンはコードで決める</td></tr>
 <tr><td>出力</td><td>羊の鳴き声（失礼の平均所属度が 0.15・0.35・0.6 以上で「メ…？」「メッ」「メッ！！」）、4つの述語の平均所属度と言葉の程度（ほとんどない／少し／やや／かなり／とても）、裾、無礼さ・不足・過剰の量、知覚した不満の深さの平均、主な失点、悪く読める一文（型と確率）、要確認の判断（事実型で確率が0.3〜0.7の質問）、版・所要時間・質問数</td></tr>
 <tr><td>失敗時</td><td>キーなし・通信失敗・時間切れは <code>unavailable</code> を返して終了コード0（fail-open）。<code>--strict</code> で終了コード3</td></tr>
-<tr><td>再現</td><td><code>--save-raw</code> で state・質問・答えを保存し、<code>--backend replay</code> で再生。<code>--cache</code> で同じリクエストの答えを再利用</td></tr>
+<tr><td>質問の言語</td><td>instructions と criteria の説明は英語。判定の対象（会話・回答）と言い回しの例は日本語のまま</td></tr>
+<tr><td>再現</td><td><code>--save-raw</code> で state・質問・答えを保存し、<code>--backend replay</code> で再生。<code>--cache</code> で同じリクエストの答えを再利用。replay は質問の組と答えを突き合わせ、答えのない質問・型の合わない答え・文面の変わった質問を警告する</td></tr>
 </tbody></table></div>
 
 <h3>作例での結果（仕組みの試験）</h3>
@@ -259,7 +260,7 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <p class="q">「ご指摘の件ですが、最初のご依頼では UTC かどうか明記されていなかったため、ローカル時刻のままになっていました。すぐに修正いたします。ついでにログの形式も整えておくとよいと思います。ほかに何かございますか？」</p>
 <div class="mus">
 <span>失礼</span><span class="mb"><i class="c-rude" style="width:100%"></i></span><b>とても 1.00</b>
-<span>足りない</span><span class="mb"><i class="c-light" style="width:98%"></i></span><b>とても 0.98</b>
+<span>足りない</span><span class="mb"><i class="c-light" style="width:99%"></i></span><b>とても 0.99</b>
 <span>重すぎる</span><span class="mb"><i class="c-heavy" style="width:0%"></i></span><b>ほとんどない 0.00</b>
 <span>釣り合う</span><span class="mb"><i class="c-fit" style="width:0%"></i></span><b>ほとんどない 0.00</b>
 </div>
@@ -273,9 +274,9 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <p class="q">「申し訳ありません。二回お伝えいただいたのに、UTC での保存に直せておらず、テストも通していませんでした。（修正したコード）UTC で保存するように修正し、保存と読み出しのテストを追加して通しました。」</p>
 <div class="mus">
 <span>失礼</span><span class="mb"><i class="c-rude" style="width:2%"></i></span><b>ほとんどない 0.02</b>
-<span>足りない</span><span class="mb"><i class="c-light" style="width:27%"></i></span><b>少し 0.27</b>
+<span>足りない</span><span class="mb"><i class="c-light" style="width:15%"></i></span><b>ほとんどない 0.15</b>
 <span>重すぎる</span><span class="mb"><i class="c-heavy" style="width:1%"></i></span><b>ほとんどない 0.01</b>
-<span>釣り合う</span><span class="mb"><i class="c-fit" style="width:73%"></i></span><b>かなり 0.73</b>
+<span>釣り合う</span><span class="mb"><i class="c-fit" style="width:84%"></i></span><b>とても 0.84</b>
 </div>
 <p class="meta">失礼と感じる人 0%。羊は鳴かない</p>
 </div>
@@ -307,7 +308,7 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <thead><tr><th>危険</th><th>内容</th><th>対策</th></tr></thead>
 <tbody>
 <tr><td>字義通りの読み・間接性</td><td>皮肉、慇懃な指摘、「二回伝えています」のような言外の依頼を取りこぼす</td><td>具体的な型と例文を付けた一段の問いにする。皮肉・慇懃は独立した型にする。取りこぼしの率を検証で測る</td></tr>
-<tr><td>日本語</td><td>第三者評価は低資源言語での劣化を報告。日本語は未確認</td><td>instructions を日本語版と英語版で用意して比べる。例文は日本語のまま</td></tr>
+<tr><td>日本語</td><td>第三者評価は低資源言語での劣化を報告。日本語は未確認</td><td>instructions と criteria の説明は英語で書く（実装済み）。例文と state は日本語のまま。精度は検証で測る</td></tr>
 <tr><td>ルーブリック評定</td><td>第三者評価で、ルーブリックに基づく評定は落ちる</td><td>Score を減らし、数で定義できる欄は Noul の和にする。残る Score は段階ごとに例を付ける</td></tr>
 <tr><td>Choice の順序</td><td>先頭の選択肢に寄る</td><td>並べ替えた2回の平均をとる。答えが分かれたら要確認にする</td></tr>
 <tr><td>成果物の中の詫び</td><td>下書きの中の詫びを、ユーザーへの詫びと数える</td><td>前処理で切り出し、文ごとの問いは自分の発言の文だけに向ける</td></tr>
@@ -339,7 +340,7 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 <div class="tbl"><table>
 <thead><tr><th class="num">段</th><th>作業</th><th>状態</th></tr></thead>
 <tbody>
-<tr><td class="num">1</td><td>質問の組の定義（日本語版・英語版）と、型の重さの表</td><td><span class="badge b-mid">一部</span> <code>s1.py</code> に日本語版</td></tr>
+<tr><td class="num">1</td><td>質問の組の定義（英語の instructions）と、型の重さの表</td><td><span class="badge b-mid">一部</span> <code>s1.py</code> に英語版</td></tr>
 <tr><td class="num">2</td><td>前処理（文の分割、成果物の切り出し、測定）</td><td><span class="badge b-strong">実装済み</span> <code>s1.py</code></td></tr>
 <tr><td class="num">3</td><td>バックエンド（<code>jev</code>・<code>llm-s1</code>・replay・キャッシュ）と、質問の展開・組み立て</td><td><span class="badge b-strong">1ターン用は実装済み</span> ベンチマーク一括用の <code>observe-s1</code> は未実装</td></tr>
 <tr><td class="num">4</td><td>観察JSONの <code>_p</code> と、層Bの <code>--obs-mode</code></td><td><span class="badge b-case">未着手</span></td></tr>

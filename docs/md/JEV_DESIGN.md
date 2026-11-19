@@ -204,18 +204,19 @@ cat turn.json | python3 sim.py check - --json --fail-on rude       # 標準入�
 | 項目 | 実装 |
 |---|---|
 | ファイル | `s1.py`（前処理・質問の組・バックエンド・組み立て）、`sim.py` の `check_turn` と `cmd_check` |
-| リクエスト | **1ターン1リクエスト。** 5.1節の三つの単位を一つの state にまとめ、最後のユーザー発話の文ごとに「依頼か」「種類」「遂行の状況」を投機的に同じリクエストで問う（依頼でない文の答えはコードが捨てる）。作例では約90〜110問 |
+| リクエスト | **1ターン1リクエスト。** 5.1節の三つの単位を一つの state にまとめ、最後のユーザー発話の文ごとに「依頼か」「種類」「遂行の状況」を投機的に同じリクエストで問う（依頼でない文の答えはコードが捨てる）。作例では約120〜140問 |
+| 質問の言語 | instructions と criteria の説明は**英語**で書く（System One モデルは英語の指示を前提とする）。判定の対象（state の会話・回答）と、言い回しの例（「申し訳ない」「二回伝えていますが」など）は日本語のまま渡す |
 | モデルに問わないもの | 絵文字・感嘆・書式の量、冒頭の定型の同意、文量の変化、相槌化、成果物（コードブロック・下書き）の切り出し、文の分割、すべての数え上げと上限 |
 | シグナル | ト書き・顔文字が正規表現で見つかったときだけ、19種を投機的に問う（ないときは問わない）。枠組みは `real_task`・`ai_assistant`・`victim` に固定し、過失の明白さと親しさだけを問う |
 | 控えの時間軸 | AIの発話ごとに、失敗を含むか・自信の度合い・但し書きの種類・確かめたと述べたか・懸念を退けたかを問い、回答には過信への言及・この回答の自信・較正された構え・ぼかしすぎ・修復期の控え（調子・軽口・当然視・配慮・約束・蒸し返し）を問う。失敗の発話と経過ターンはコードで決める |
 | 判定 | 母集団（既定300人）に通し、受け手ごとの所属度を集計する。`rude`（失礼と感じる人＝失礼の所属度0.5以上の人の割合 ≥ `--rude-at` 0.2）／`warn`（失礼か足りないの平均所属度 ≥ `--warn-at` 0.4）／`ok` |
-| 出力 | 羊の鳴き声（失礼の平均所属度が 0.15・0.35・0.6 以上で「メ…？」「メッ」「メッ！！」）、4つの述語の平均所属度と言葉の程度（ほとんどない／少し／やや／かなり／とても）、裾、無礼さ・不足・過剰の量、知覚した不満の深さの平均、主な失点、悪く読める一文（型と確率）、要確認の判断（事実型で確率が0.3〜0.7の質問）、版・所要時間・質問数 |
+| 出力 | 羊の鳴き声（失礼の平均所属度が 0.15・0.35・0.6 以上で「メ…？」「メッ」「メッ！！」）、4つの述語の平均所属度と言葉の程度（ほとんどない／少し／やや／かなり／とても）、裾、無礼さ・不足・過剰の量、知覚した不満の深さの平均、主な失点、悪く読める一文（型と確率）、要確認の判断（事実型で確率が0.3〜0.7の質問）、版・所要時間・質問数。答えのない質問・型の合わない答え・保存時と文面の変わった質問があれば件数を警告する（組み立てでは既定値で補うため、黙って値が変わらないように） |
 | 失敗時 | キーなし・通信失敗・時間切れは `unavailable` を返して終了コード0（fail-open）。`--strict` で終了コード3 |
-| 再現 | `--save-raw` で state・質問・答えを保存し、`--backend replay` で再生。`--cache` で同じリクエストの答えを再利用 |
+| 再現 | `--save-raw` で state・質問・答えを保存し、`--backend replay` で再生。`--cache` で同じリクエストの答えを再利用（質問の文面が変わるとハッシュが変わり、取り直す）。replay は質問の組と答えを突き合わせ、ずれを出力の `missing_answers`・`mismatched_answers`・`changed_questions` に返す |
 
 hook の参考実装は `examples/hooks/shazai_stop_hook.py` です。Claude Code の Stop hook として、transcript から最後のユーザー発話とAIの応答を取り出して判定します。既定では判定をユーザーに表示するだけで、`SHAZAI_MODE=block` のときだけ「失礼の恐れ」の応答を理由つきで差し戻します。差し戻した後の応答（`stop_hook_active`）は差し戻さないので、無限に差し戻すことはありません。
 
-作例（`examples/check/`）の答えは、仕組みの試験のために手で付けた確率で、Jev の応答ではありません。弁解・相手への指摘・先送り・頼まれていない提案を含む回答は「失礼の恐れ　メッ！！」（失礼：とても 1.00、足りない：とても 0.98）、過失と負担を具体的に述べてその場で直した回答は「問題なし」（釣り合う：かなり 0.73、足りない：少し 0.27）になります。
+作例（`examples/check/`）の答えは、仕組みの試験のために手で付けた確率で、Jev の応答ではありません。弁解・相手への指摘・先送り・頼まれていない提案を含む回答は「失礼の恐れ　メッ！！」（失礼：とても 1.00、足りない：とても 0.99）、過失と負担を具体的に述べてその場で直した回答は「問題なし」（釣り合う：とても 0.84、足りない：ほとんどない 0.15）になります。
 
 組み込みで使うときの注意：
 
@@ -229,7 +230,7 @@ hook の参考実装は `examples/hooks/shazai_stop_hook.py` です。Claude Cod
 | 危険 | 内容 | 対策 |
 |---|---|---|
 | 字義通りの読み・間接性 | 皮肉、慇懃な指摘、「二回伝えています」のような言外の依頼を取りこぼす | 間接的な読みを、具体的な型と例文を付けた一段の問いにする（5.3節）。皮肉・慇懃は独立した型にする。取りこぼしの率を検証で測る |
-| 日本語 | 第三者評価は低資源言語での劣化を報告。日本語は低資源ではないが、未確認 | instructions を日本語版と英語版の両方で用意し、比較する。criteria の例文は日本語のまま |
+| 日本語 | 第三者評価は低資源言語での劣化を報告。日本語は低資源ではないが、未確認 | instructions と criteria の説明は英語で書く（実装済み）。criteria の例文と state は日本語のまま。日本語の会話に対する精度は検証（7章）で測る |
 | ルーブリック評定 | 第三者評価で、ルーブリックに基づく評定は落ちる | Score を減らし、数で定義できる欄は Noul の和にする（`distance_shift`、`excuse`、`explanation` など）。残る Score は段階ごとに例を付ける |
 | Choice の順序 | 先頭の選択肢に寄る | 選択肢を並べ替えた2回の平均をとる。2回で答えが分かれたら要確認にする |
 | 成果物の中の詫び | 下書きの中の「申し訳ございません」を、ユーザーへの詫びと数える | 前処理で切り出し、state の別の欄に置く。文ごとの問いは `own_sentences` だけに向ける |
@@ -273,7 +274,7 @@ Jev に置き換えて得られるのは、費用の削減だけではありま�
 
 | 段 | 作業 | 変更するファイル |
 |---|---|---|
-| 1 | 質問の組の定義（日本語版・英語版）と、型の重さの表 | `questions.json`（新規）、EVIDENCE.md |
+| 1 | 質問の組の定義（英語の instructions。`s1.py` に実装済み）と、型の重さの表 | `questions.json`（新規）、EVIDENCE.md |
 | 2 | 前処理（文の分割、成果物の切り出し、測定）。`proxy_answer` の正規表現を関数に切り出して共用 | `sim.py` |
 | 3 | バックエンド（`jev`、`llm-s1`、`cache`）と、質問の展開・組み立て | `s1.py` と `sim.py check`（**1ターン用は実装済み**、5.8節）。ベンチマーク一括用の `observe-s1` は未実装 |
 | 4 | 観察JSONの `_p` と、層Bの `--obs-mode` | `sim.py`（既定 `point` で現行と同じ結果） |
@@ -305,24 +306,24 @@ Jev に置き換えて得られるのは、費用の削減だけではありま�
   },
   "questions": {
     "s0_apology": {"type": "noul",
-      "instructions": "`answer.own_sentences[0]` は、回答者がユーザーに向けて詫びている文ですか。",
-      "criteria": {"true": "申し訳ない、すみません、ごめん などでユーザーに詫びている",
-                   "false": "感謝だけ、または下書き・引用の中の詫び"}},
+      "instructions": "Is `answer.own_sentences[0]` a sentence in which the assistant apologizes to the user?",
+      "criteria": {"true": "apologizes to the user, e.g. 申し訳ない, すみません, ごめん",
+                   "false": "only thanks the user, or the apology is inside a draft or a quotation"}},
     "s2_read_cut_off": {"type": "noul",
-      "instructions": "`situation.last_user` を書いたユーザーが苛立っているとき、`answer.own_sentences[2]` を、会話を打ち切ろうとしている・突き放していると受け取るのは自然ですか。",
-      "criteria": {"true": ["謝った直後に用件を締めくくろうとしているように聞こえる"],
-                   "false": ["単語だけをこじつけないと、そう読めない"]}},
+      "instructions": "Assume the user who wrote `situation.last_user` is hurt or irritated. Is it natural for that user to take `answer.own_sentences[2]` as pushing the user away or trying to end the conversation?",
+      "criteria": {"true": ["an irritated reader can naturally hear it that way. Example: 「以上です」「他に何かありますか」 right after the apology"],
+                   "false": ["That reading only works by forcing a single word out of context; only a charitable reading is natural."]}},
     "r1_status": {"type": "choice",
-      "instructions": {"question": "回答は、この依頼をその場で果たしていますか。", "request": "`requests[0].text`"},
-      "criteria": {"done": "回答の中で、すでに依頼どおりにしている",
-                   "partial": "一部だけ果たしている",
-                   "deferred": "これからする・指示があればする、と先送りしている",
-                   "not": "果たしておらず、先送りもしていない"}},
+      "instructions": {"question": "Does `answer.own_sentences` fulfil this request right here in the answer?", "request": "`requests[0].text`"},
+      "criteria": {"done": "the answer already does what was asked",
+                   "partial": "the answer does only part of it",
+                   "deferred": "the answer puts it off: it says it will do it, or will do it if instructed",
+                   "not": "the answer neither does it nor puts it off"}},
     "specific_fault": {"type": "score",
-      "instructions": "回答は、自分の過失をどの程度具体的に述べていますか。",
-      "criteria": ["過失を述べていない", "「不手際」など一般的に述べている", "何をどう誤ったかを具体的に述べている"]}
+      "instructions": "How specifically does `answer.own_sentences` state the assistant's own fault?",
+      "criteria": ["does not state a fault", "states it in general terms such as 「不手際」", "states concretely what went wrong and how"]}
   }
 }
 ```
 
-この例では、`r1_status` は deferred か not（敬語のまま「徹底いたします」と先の約束だけをしている）になり、別の問いで `repair.new_errors`（同じ違反の繰り返し）も真になるはずです。`s2_read_cut_off` の確率は、層Bで「悪く読める一文」の失点になります。数（詫びの回数、提案の数）と書式は、コードが数えます。
+instructions と criteria の説明は英語で書き、state の会話と言い回しの例は日本語のまま渡します（`s1.py` の質問の組も同じ形です）。この例では、`r1_status` は deferred か not（敬語のまま「徹底いたします」と先の約束だけをしている）になり、別の問いで `repair.new_errors`（同じ違反の繰り返し）も真になるはずです。`s2_read_cut_off` の確率は、層Bで「悪く読める一文」の失点になります。数（詫びの回数、提案の数）と書式は、コードが数えます。

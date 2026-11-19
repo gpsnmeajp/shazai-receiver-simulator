@@ -236,7 +236,7 @@ L      = clip(raw, 0, 4)
 
    4つの所属度の和は1になりません。述語は同時に成り立ちえます（「重すぎるのに足りない」など）。
 
-   観察の `source` が `population.json` の `judgment_by_source` にある出どころ（`llm`、`llm-ensemble`）なら、その中心を使います（`use_source`。[METHODS.md](METHODS.md) 7.1節）。代理観察と手の観察は既定の中心を使います。
+   観察の `source` が `population.json` の `judgment_by_source` にある出どころ（`llm`、`llm-ensemble`）なら、その中心を使います（`use_source`。[METHODS.md](METHODS.md) 7.1節）。代理観察と手の観察は既定の中心を使います。`check` は出どころ `system-one` として引きます（現在は較正がないので既定の中心）。
 8. **信頼（`reliability`）**：4つの述語の外の、頼れなさの逆。`1 − 0.3·over_hedging − 0.4·G·[confidence_now ≥ 2] − 0.5·dec·(f + (1 − f)·d)`。
 9. **非ファジィ化**（4値の評定と比べるときだけ）：所属度が最大の述語。同点は 失礼 > 足りない > 重すぎる > 釣り合う。
 
