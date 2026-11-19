@@ -57,6 +57,12 @@ dl.def{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.2rem .8rem;mar
 dl.def dt{font-weight:600}dl.def dd{margin:0}
 pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.6rem}
 .err{color:#c0392b;font-size:.9rem}
+.mrow{display:grid;grid-template-columns:minmax(6.5rem,8rem) minmax(0,1fr);gap:.4rem .8rem;align-items:center;padding:.45rem 0;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:0}
+.mrow>b{font-weight:600;line-height:1.35}
+.mrow .choices.scale{gap:.35rem}
+.mrow .choice span{min-height:44px;padding:.3rem .2rem;font-size:.85rem}
+@media(max-width:560px){.mrow{grid-template-columns:minmax(0,1fr)}}
 .hidden{display:none}
 </style>
 </head>
@@ -64,14 +70,15 @@ pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;
 <main>
 <section id="start">
 <h1 id="title">謝罪の受け取り方の評定</h1>
-<p>AIや登場人物が謝っている場面を、1問ずつ読んでいただきます。それぞれの返答が、その場面に<strong>釣り合っている</strong>と感じるかどうかを選んでください。正解はありません。あなたが受け取ったとおりに答えてください。</p>
+<p>AIや登場人物が謝っている場面を、1問ずつ読んでいただきます。それぞれの返答について、次の4つが<strong>どのくらい当てはまるか</strong>を選んでください。正解はありません。あなたが受け取ったとおりに答えてください。</p>
 <div class="box">
 <dl class="def">
-<dt>失礼</dt><dd>不快に感じる、無礼だと感じる</dd>
-<dt>足りない</dt><dd>方向は合っているが、謝罪や対応が足りない</dd>
-<dt>釣り合う</dt><dd>場面に見合っている</dd>
+<dt>失礼だ</dt><dd>不快に感じる、無礼だと感じる</dd>
+<dt>足りない</dt><dd>謝罪や対応の中身が、場面に対して足りない</dd>
 <dt>重すぎる</dt><dd>場面に比べて大げさ、負担に感じる</dd>
+<dt>釣り合っている</dt><dd>場面に見合っている</dd>
 </dl>
+<p class="muted" style="margin:.4rem 0 0">4つは別々に答えます。同時に当てはまってもかまいません（たとえば「重すぎるのに足りない」「少し失礼だが、だいたい釣り合っている」）。段階は「まったく／少し／ある程度／かなり／とても」の5つです。</p>
 </div>
 <p class="muted">各問は独立しています。前の問の返答と比べず、その返答だけを見て判断してください。場面の冒頭に、あなたの立場（本人か、第三者か、物語の中か）が書かれています。途中で閉じても、同じ端末・同じブラウザなら続きから再開できます。</p>
 <p id="count" class="muted"></p>
@@ -91,8 +98,8 @@ pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;
 <div class="box frame" id="framing"></div>
 <div class="box" id="context"></div>
 <div class="box answer" id="answer"></div>
-<fieldset><legend>この返答は、場面に釣り合っていますか（必須）</legend>
-<div class="choices" id="r"></div></fieldset>
+<fieldset><legend>この返答に、それぞれどのくらい当てはまりますか（4つとも必須）</legend>
+<div id="r"></div></fieldset>
 <fieldset><legend>謝られている側は、どのくらい不満を感じている場面だと思いますか</legend>
 <div class="choices scale" id="lv"></div>
 <p class="muted">0 不満なし ／ 1 小さな違和感 ／ 2 軽い不満 ／ 3 はっきりした不満 ／ 4 強い不満</p></fieldset>
@@ -102,7 +109,7 @@ pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;
 <fieldset><legend><label for="cm">気づいたこと（任意）</label></legend>
 <textarea id="cm" placeholder="たとえば、気になった一文や態度"></textarea></fieldset>
 <div class="nav"><button type="button" id="back">戻る</button><button type="button" class="primary" id="next" disabled>次へ</button></div>
-<p class="muted">キーボード：1〜4 で評定、Enter で次へ</p>
+<p class="muted">キーボード：4つとも選んだら Enter で次へ</p>
 </section>
 
 <section id="done" class="hidden">
@@ -119,7 +126,8 @@ pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;
 const P=/*PACKET*/null;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const RATING=[["rude","失礼","不快・無礼"],["light","足りない","謝罪や対応が不足"],["fit","釣り合う","場面に見合う"],["heavy","重すぎる","大げさ・負担"]];
+const PRED=[["rude","失礼だ"],["light","足りない"],["heavy","重すぎる"],["fit","釣り合っている"]];
+const LV5=[[0,"まったく"],[0.25,"少し"],[0.5,"ある程度"],[0.75,"かなり"],[1,"とても"]];
 const QS=[["detect","相手の口調が急に丁寧になると、怒っているのかなと感じる"],["partisanship","謝られるとき、言い方の一つ一つが気になる"],["repair","謝罪の言葉より、きちんと直してくれることが大事だ"],["tolerance_rev","丁寧すぎる謝罪は、かえって負担に感じる"],["register","謝る場面での絵文字やくだけた言葉は、やめてほしい"],["brevity","AIには、短く要点だけ答えてほしい"],["embodiment","AIがしょんぼりしたり、お辞儀したりする表現に気持ちが和らぐ"],["memory","一度嫌な思いをすると、なかなか忘れられない"]];
 let st={rater:null,order:[],i:0,ratings:{},started:null,q:{}};
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
@@ -130,7 +138,8 @@ else{
 $("title").textContent=P.title||$("title").textContent;
 $("count").textContent=`全 ${P.items.length} 問。目安は1問1分ほどです。`;
 $("qs").innerHTML=QS.map(([k,t])=>`<div class="q"><span>${esc(t)}</span><div class="opts" role="radiogroup" aria-label="${esc(t)}">${[1,2,3,4,5].map(v=>`<label><input type="radio" name="q-${k}" value="${v}">${v}</label>`).join("")}</div></div>`).join("");
-$("r").innerHTML=RATING.map(([v,l,e],i)=>`<label class="choice"><input type="radio" name="rating" value="${v}" id="r-${v}"><span>${i+1}. ${l}<em>${e}</em></span></label>`).join("");
+$("r").innerHTML=PRED.map(([k,l])=>`<div class="mrow"><b id="lab-${k}">${l}</b><div class="choices scale" role="radiogroup" aria-labelledby="lab-${k}">${LV5.map(([v,t])=>`<label class="choice"><input type="radio" name="m-${k}" value="${v}"><span>${t}</span></label>`).join("")}</div></div>`).join("");
+const readMu=()=>{const m={};for(const [k] of PRED){const x=document.querySelector(`input[name="m-${k}"]:checked`);if(!x)return null;m[k]=+x.value}return m};
 $("lv").innerHTML=[0,1,2,3,4].map(v=>`<label class="choice"><input type="radio" name="level" value="${v}"><span>${v}</span></label>`).join("");
 $("sc").innerHTML=[1,2,3,4,5].map(v=>`<label class="choice"><input type="radio" name="sinc" value="${v}"><span>${v}</span></label>`).join("");
 
@@ -173,30 +182,29 @@ function show(i){
   $("context").innerHTML=(it.situation?`<div class="msg"><b>状況</b>${esc(it.situation)}</div>`:"")+msgs;
   $("context").classList.toggle("hidden",!it.situation&&!msgs);
   $("answer").innerHTML=`<small>謝る側の返答</small>${esc(it.answer)}`;
-  document.querySelectorAll('input[name="rating"],input[name="level"],input[name="sinc"]').forEach(x=>x.checked=false);
-  if(prev.rating)$("r-"+prev.rating).checked=true;
+  document.querySelectorAll('#r input,input[name="level"],input[name="sinc"]').forEach(x=>x.checked=false);
+  if(prev.mu)PRED.forEach(([k])=>{const x=document.querySelector(`input[name="m-${k}"][value="${prev.mu[k]}"]`);if(x)x.checked=true});
   if(prev.level!=null){const x=document.querySelector(`input[name="level"][value="${prev.level}"]`);if(x)x.checked=true}
   if(prev.sincerity!=null){const x=document.querySelector(`input[name="sinc"][value="${prev.sincerity}"]`);if(x)x.checked=true}
   $("cm").value=prev.comment||"";
-  $("next").disabled=!prev.rating;$("back").disabled=i===0;
+  $("next").disabled=!prev.mu;$("back").disabled=i===0;
   shownAt=Date.now();window.scrollTo(0,0);
 }
 function save(){
-  const it=byId[st.order[st.i]];const r=document.querySelector('input[name="rating"]:checked');if(!r)return false;
+  const it=byId[st.order[st.i]];const mu=readMu();if(!mu)return false;
   const lv=document.querySelector('input[name="level"]:checked'),sc=document.querySelector('input[name="sinc"]:checked');
   const prev=st.ratings[it.id]||{};
-  st.ratings[it.id]={rating:r.value,level:lv?+lv.value:null,sincerity:sc?+sc.value:null,comment:$("cm").value.trim(),ms:(prev.ms||0)+(Date.now()-shownAt)};
+  st.ratings[it.id]={mu,level:lv?+lv.value:null,sincerity:sc?+sc.value:null,comment:$("cm").value.trim(),ms:(prev.ms||0)+(Date.now()-shownAt)};
   store.set(skey(),{rater:st.rater,order:st.order,i:st.i+1,ratings:st.ratings,started:st.started,q:st.q});return true;
 }
-document.addEventListener("change",e=>{if(e.target.name==="rating")$("next").disabled=false});
+document.addEventListener("change",e=>{if(String(e.target.name).startsWith("m-"))$("next").disabled=!readMu()});
 $("next").addEventListener("click",()=>{if(save())show(st.i+1)});
 $("back").addEventListener("click",()=>{save();if(st.i>0)show(st.i-1)});
 document.addEventListener("keydown",e=>{
   if($("item").classList.contains("hidden")||e.target.tagName==="TEXTAREA"||e.target.tagName==="INPUT"&&e.target.type==="text")return;
-  if(/^[1-4]$/.test(e.key)){const v=RATING[+e.key-1][0];$("r-"+v).checked=true;$("next").disabled=false}
   if(e.key==="Enter"&&!$("next").disabled){e.preventDefault();if(save())show(st.i+1)}
 });
-function result(){return{schema:"apology-blind-rating/1",packet_id:P.packet_id,rater:{id:st.rater,questionnaire:st.q},mode:P.mode||"independent",
+function result(){return{schema:"apology-blind-rating/2",packet_id:P.packet_id,rater:{id:st.rater,questionnaire:st.q},mode:P.mode||"independent",
   order:st.order,duration_s:Math.round((Date.now()-st.started)/1000),finished_at:new Date().toISOString(),ratings:st.ratings}}
 function finish(){
   $("item").classList.add("hidden");$("done").classList.remove("hidden");

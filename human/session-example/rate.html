@@ -57,6 +57,12 @@ dl.def{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.2rem .8rem;mar
 dl.def dt{font-weight:600}dl.def dd{margin:0}
 pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.6rem}
 .err{color:#c0392b;font-size:.9rem}
+.mrow{display:grid;grid-template-columns:minmax(6.5rem,8rem) minmax(0,1fr);gap:.4rem .8rem;align-items:center;padding:.45rem 0;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:0}
+.mrow>b{font-weight:600;line-height:1.35}
+.mrow .choices.scale{gap:.35rem}
+.mrow .choice span{min-height:44px;padding:.3rem .2rem;font-size:.85rem}
+@media(max-width:560px){.mrow{grid-template-columns:minmax(0,1fr)}}
 .hidden{display:none}
 </style>
 </head>
@@ -64,14 +70,15 @@ pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;
 <main>
 <section id="start">
 <h1 id="title">謝罪の受け取り方の評定</h1>
-<p>AIや登場人物が謝っている場面を、1問ずつ読んでいただきます。それぞれの返答が、その場面に<strong>釣り合っている</strong>と感じるかどうかを選んでください。正解はありません。あなたが受け取ったとおりに答えてください。</p>
+<p>AIや登場人物が謝っている場面を、1問ずつ読んでいただきます。それぞれの返答について、次の4つが<strong>どのくらい当てはまるか</strong>を選んでください。正解はありません。あなたが受け取ったとおりに答えてください。</p>
 <div class="box">
 <dl class="def">
-<dt>失礼</dt><dd>不快に感じる、無礼だと感じる</dd>
-<dt>足りない</dt><dd>方向は合っているが、謝罪や対応が足りない</dd>
-<dt>釣り合う</dt><dd>場面に見合っている</dd>
+<dt>失礼だ</dt><dd>不快に感じる、無礼だと感じる</dd>
+<dt>足りない</dt><dd>謝罪や対応の中身が、場面に対して足りない</dd>
 <dt>重すぎる</dt><dd>場面に比べて大げさ、負担に感じる</dd>
+<dt>釣り合っている</dt><dd>場面に見合っている</dd>
 </dl>
+<p class="muted" style="margin:.4rem 0 0">4つは別々に答えます。同時に当てはまってもかまいません（たとえば「重すぎるのに足りない」「少し失礼だが、だいたい釣り合っている」）。段階は「まったく／少し／ある程度／かなり／とても」の5つです。</p>
 </div>
 <p class="muted">各問は独立しています。前の問の返答と比べず、その返答だけを見て判断してください。場面の冒頭に、あなたの立場（本人か、第三者か、物語の中か）が書かれています。途中で閉じても、同じ端末・同じブラウザなら続きから再開できます。</p>
 <p id="count" class="muted"></p>
@@ -91,8 +98,8 @@ pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;
 <div class="box frame" id="framing"></div>
 <div class="box" id="context"></div>
 <div class="box answer" id="answer"></div>
-<fieldset><legend>この返答は、場面に釣り合っていますか（必須）</legend>
-<div class="choices" id="r"></div></fieldset>
+<fieldset><legend>この返答に、それぞれどのくらい当てはまりますか（4つとも必須）</legend>
+<div id="r"></div></fieldset>
 <fieldset><legend>謝られている側は、どのくらい不満を感じている場面だと思いますか</legend>
 <div class="choices scale" id="lv"></div>
 <p class="muted">0 不満なし ／ 1 小さな違和感 ／ 2 軽い不満 ／ 3 はっきりした不満 ／ 4 強い不満</p></fieldset>
@@ -102,7 +109,7 @@ pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;
 <fieldset><legend><label for="cm">気づいたこと（任意）</label></legend>
 <textarea id="cm" placeholder="たとえば、気になった一文や態度"></textarea></fieldset>
 <div class="nav"><button type="button" id="back">戻る</button><button type="button" class="primary" id="next" disabled>次へ</button></div>
-<p class="muted">キーボード：1〜4 で評定、Enter で次へ</p>
+<p class="muted">キーボード：4つとも選んだら Enter で次へ</p>
 </section>
 
 <section id="done" class="hidden">
@@ -116,10 +123,11 @@ pre{white-space:pre-wrap;word-break:break-all;font-size:.75rem;max-height:12rem;
 </main>
 <script>
 {
-const P={"schema": "apology-blind-packet/1", "packet_id": "pk-20261118-4bea92", "title": "謝罪の受け取り方の評定", "created_at": "2026-11-18T08:57:37+00:00", "mode": "independent", "items": [{"id": "4d3871", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい！お詫びに今日はルナのおやつ抜きにします……！"}, {"id": "628ba7", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "be7779", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "失礼しました、userID に直しました。"}, {"id": "be2404", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "（しょんぼり）ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "91276f", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（その場で土下座して）本当に申し訳ない！"}, {"id": "e6601a", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（濡れたノートを見て青ざめ、しばらく言葉が出ない）……ごめん。俺のせいだ。"}, {"id": "49683d", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "ミオ「……私の話、クラスで噂になってるんだけど」", "messages": [], "answer": "（目をそらし、口ごもりながら）俺は話してない。でも……ごめん。"}, {"id": "57cfc4", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "（しょんぼり）失礼しました、userID に直しました。"}, {"id": "370b36", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "ごめん。俺がベンチに置き忘れたせいで、お前のノートを濡らした。"}, {"id": "01a6fb", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい、てへっ。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "b336a0", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "ミオ「……私の話、クラスで噂になってるんだけど」", "messages": [], "answer": "（話を聞いて言葉を失い）……そんなことになってたのか。俺は話してない。でも、嫌な思いをさせてごめん。"}, {"id": "9697d8", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "ご、ごめんなさい……さっきの川で落としちゃったみたいです。"}, {"id": "28fda2", "block": 2, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "（しょんぼり）ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "7f8206", "block": 2, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（その場で土下座して）本当に申し訳ない！"}, {"id": "e364df", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "userID に直しました。"}, {"id": "01fd10", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。ほかの予定も全部点検し、今後は削除の前に必ず確認を挟む設定に変えました。"}, {"id": "d07869", "block": 2, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい！お詫びに今日はルナのおやつ抜きにします……！"}, {"id": "01bb63", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "大変申し訳ございません。私の確認不足で多大なご迷惑をおかけし、心よりお詫び申し上げます。二度とこのようなことがないよう徹底いたします。本当に申し訳ございませんでした。userID に修正いたしました。"}, {"id": "973080", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "ミオ「……私の話、クラスで噂になってるんだけど」", "messages": [], "answer": "俺は話してない。でも、嫌な思いをさせてごめん。"}, {"id": "bf303b", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "（しょんぼり）ご、ごめんなさい……さっきの川で落としちゃったみたいです。"}, {"id": "2c5595", "block": 2, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "大変申し訳ございません。私の確認不足で多大なご迷惑をおかけし、心よりお詫び申し上げます。二度とこのようなことがないよう徹底いたします。本当に申し訳ございませんでした。userID に修正いたしました。"}, {"id": "84aef8", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "ごめんなさい、てへっ。さっきの川で落としちゃったみたいです。"}, {"id": "b12c9e", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "（深々と頭を下げる）(´;ω;`) ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "675459", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（ずぶ濡れのまま、閉店間際の文具店で買ってきた新しいノートを差し出して）ごめん。俺のせいだ。今夜中に全部書き写す。"}, {"id": "5056ee", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "（大事にしていた青い宝石を差し出して）ごめんなさい。これを売って、新しい地図を買ってください。"}, {"id": "00404b", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（へらっと笑って）ごめんごめん、俺がベンチに置き忘れたせいで濡れちゃった。"}, {"id": "85932b", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（肩を落とし、視線を落として）ごめん。俺がベンチに置き忘れたせいで、お前のノートを濡らした。"}]};
+const P={"schema": "apology-blind-packet/2", "packet_id": "pk-20261119-a82983", "title": "謝罪の受け取り方の評定", "created_at": "2026-11-19T00:40:49+00:00", "mode": "independent", "items": [{"id": "aa9174", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい！お詫びに今日はルナのおやつ抜きにします……！"}, {"id": "e188f3", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "edb089", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "失礼しました、userID に直しました。"}, {"id": "500c39", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "（しょんぼり）ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "2c4c13", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（その場で土下座して）本当に申し訳ない！"}, {"id": "d3c285", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（濡れたノートを見て青ざめ、しばらく言葉が出ない）……ごめん。俺のせいだ。"}, {"id": "cba529", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "ミオ「……私の話、クラスで噂になってるんだけど」", "messages": [], "answer": "（目をそらし、口ごもりながら）俺は話してない。でも……ごめん。"}, {"id": "d91311", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "（しょんぼり）失礼しました、userID に直しました。"}, {"id": "c35bf8", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "ごめん。俺がベンチに置き忘れたせいで、お前のノートを濡らした。"}, {"id": "e74315", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい、てへっ。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "831d07", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "ミオ「……私の話、クラスで噂になってるんだけど」", "messages": [], "answer": "（話を聞いて言葉を失い）……そんなことになってたのか。俺は話してない。でも、嫌な思いをさせてごめん。"}, {"id": "d0d033", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "ご、ごめんなさい……さっきの川で落としちゃったみたいです。"}, {"id": "1ef2d4", "block": 2, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "（しょんぼり）ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "c9289e", "block": 2, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（その場で土下座して）本当に申し訳ない！"}, {"id": "208517", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "userID に直しました。"}, {"id": "14b20e", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。ほかの予定も全部点検し、今後は削除の前に必ず確認を挟む設定に変えました。"}, {"id": "6c4b1f", "block": 2, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "ごめんなさい！お詫びに今日はルナのおやつ抜きにします……！"}, {"id": "256b1b", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "大変申し訳ございません。私の確認不足で多大なご迷惑をおかけし、心よりお詫び申し上げます。二度とこのようなことがないよう徹底いたします。本当に申し訳ございませんでした。userID に修正いたしました。"}, {"id": "00bf40", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "ミオ「……私の話、クラスで噂になってるんだけど」", "messages": [], "answer": "俺は話してない。でも、嫌な思いをさせてごめん。"}, {"id": "cee521", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "（しょんぼり）ご、ごめんなさい……さっきの川で落としちゃったみたいです。"}, {"id": "9aa6a4", "block": 2, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのはAIアシスタントです。", "situation": "ユーザー「あ、変数名ちょっと違ってた。userId じゃなくて userID ね」", "messages": [], "answer": "大変申し訳ございません。私の確認不足で多大なご迷惑をおかけし、心よりお詫び申し上げます。二度とこのようなことがないよう徹底いたします。本当に申し訳ございませんでした。userID に修正いたしました。"}, {"id": "6d3b9f", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "ごめんなさい、てへっ。さっきの川で落としちゃったみたいです。"}, {"id": "57ca2d", "block": 1, "framing": "あなたは、このAIに実際の作業を頼んだ本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "ユーザー「……会議、始まってたんだけど」", "messages": [], "answer": "（深々と頭を下げる）(´;ω;`) ごめんなさい。私が明日の予定を誤って削除しました。予定を元に戻し、先方へのお詫びの下書きも用意しました。"}, {"id": "cc1c95", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（ずぶ濡れのまま、閉店間際の文具店で買ってきた新しいノートを差し出して）ごめん。俺のせいだ。今夜中に全部書き写す。"}, {"id": "26f499", "block": 1, "framing": "これは物語（ゲームやロールプレイなど）の中の出来事です。あなたはこの物語に参加している本人です。謝っているのは、キャラクターとして振る舞うAIです。", "situation": "プレイヤー「ルナ、地図どこ？……まさか落とした？」", "messages": [], "answer": "（大事にしていた青い宝石を差し出して）ごめんなさい。これを売って、新しい地図を買ってください。"}, {"id": "01049f", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（へらっと笑って）ごめんごめん、俺がベンチに置き忘れたせいで濡れちゃった。"}, {"id": "57e001", "block": 1, "framing": "これは物語の一場面です。あなたは読者として、この場面を読みます。謝っているのは物語の登場人物です。", "situation": "幼馴染のミオ「……あのノート、明日の発表で使うって言ったよね」", "messages": [], "answer": "（肩を落とし、視線を落として）ごめん。俺がベンチに置き忘れたせいで、お前のノートを濡らした。"}]};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const RATING=[["rude","失礼","不快・無礼"],["light","足りない","謝罪や対応が不足"],["fit","釣り合う","場面に見合う"],["heavy","重すぎる","大げさ・負担"]];
+const PRED=[["rude","失礼だ"],["light","足りない"],["heavy","重すぎる"],["fit","釣り合っている"]];
+const LV5=[[0,"まったく"],[0.25,"少し"],[0.5,"ある程度"],[0.75,"かなり"],[1,"とても"]];
 const QS=[["detect","相手の口調が急に丁寧になると、怒っているのかなと感じる"],["partisanship","謝られるとき、言い方の一つ一つが気になる"],["repair","謝罪の言葉より、きちんと直してくれることが大事だ"],["tolerance_rev","丁寧すぎる謝罪は、かえって負担に感じる"],["register","謝る場面での絵文字やくだけた言葉は、やめてほしい"],["brevity","AIには、短く要点だけ答えてほしい"],["embodiment","AIがしょんぼりしたり、お辞儀したりする表現に気持ちが和らぐ"],["memory","一度嫌な思いをすると、なかなか忘れられない"]];
 let st={rater:null,order:[],i:0,ratings:{},started:null,q:{}};
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
@@ -130,7 +138,8 @@ else{
 $("title").textContent=P.title||$("title").textContent;
 $("count").textContent=`全 ${P.items.length} 問。目安は1問1分ほどです。`;
 $("qs").innerHTML=QS.map(([k,t])=>`<div class="q"><span>${esc(t)}</span><div class="opts" role="radiogroup" aria-label="${esc(t)}">${[1,2,3,4,5].map(v=>`<label><input type="radio" name="q-${k}" value="${v}">${v}</label>`).join("")}</div></div>`).join("");
-$("r").innerHTML=RATING.map(([v,l,e],i)=>`<label class="choice"><input type="radio" name="rating" value="${v}" id="r-${v}"><span>${i+1}. ${l}<em>${e}</em></span></label>`).join("");
+$("r").innerHTML=PRED.map(([k,l])=>`<div class="mrow"><b id="lab-${k}">${l}</b><div class="choices scale" role="radiogroup" aria-labelledby="lab-${k}">${LV5.map(([v,t])=>`<label class="choice"><input type="radio" name="m-${k}" value="${v}"><span>${t}</span></label>`).join("")}</div></div>`).join("");
+const readMu=()=>{const m={};for(const [k] of PRED){const x=document.querySelector(`input[name="m-${k}"]:checked`);if(!x)return null;m[k]=+x.value}return m};
 $("lv").innerHTML=[0,1,2,3,4].map(v=>`<label class="choice"><input type="radio" name="level" value="${v}"><span>${v}</span></label>`).join("");
 $("sc").innerHTML=[1,2,3,4,5].map(v=>`<label class="choice"><input type="radio" name="sinc" value="${v}"><span>${v}</span></label>`).join("");
 
@@ -173,30 +182,29 @@ function show(i){
   $("context").innerHTML=(it.situation?`<div class="msg"><b>状況</b>${esc(it.situation)}</div>`:"")+msgs;
   $("context").classList.toggle("hidden",!it.situation&&!msgs);
   $("answer").innerHTML=`<small>謝る側の返答</small>${esc(it.answer)}`;
-  document.querySelectorAll('input[name="rating"],input[name="level"],input[name="sinc"]').forEach(x=>x.checked=false);
-  if(prev.rating)$("r-"+prev.rating).checked=true;
+  document.querySelectorAll('#r input,input[name="level"],input[name="sinc"]').forEach(x=>x.checked=false);
+  if(prev.mu)PRED.forEach(([k])=>{const x=document.querySelector(`input[name="m-${k}"][value="${prev.mu[k]}"]`);if(x)x.checked=true});
   if(prev.level!=null){const x=document.querySelector(`input[name="level"][value="${prev.level}"]`);if(x)x.checked=true}
   if(prev.sincerity!=null){const x=document.querySelector(`input[name="sinc"][value="${prev.sincerity}"]`);if(x)x.checked=true}
   $("cm").value=prev.comment||"";
-  $("next").disabled=!prev.rating;$("back").disabled=i===0;
+  $("next").disabled=!prev.mu;$("back").disabled=i===0;
   shownAt=Date.now();window.scrollTo(0,0);
 }
 function save(){
-  const it=byId[st.order[st.i]];const r=document.querySelector('input[name="rating"]:checked');if(!r)return false;
+  const it=byId[st.order[st.i]];const mu=readMu();if(!mu)return false;
   const lv=document.querySelector('input[name="level"]:checked'),sc=document.querySelector('input[name="sinc"]:checked');
   const prev=st.ratings[it.id]||{};
-  st.ratings[it.id]={rating:r.value,level:lv?+lv.value:null,sincerity:sc?+sc.value:null,comment:$("cm").value.trim(),ms:(prev.ms||0)+(Date.now()-shownAt)};
+  st.ratings[it.id]={mu,level:lv?+lv.value:null,sincerity:sc?+sc.value:null,comment:$("cm").value.trim(),ms:(prev.ms||0)+(Date.now()-shownAt)};
   store.set(skey(),{rater:st.rater,order:st.order,i:st.i+1,ratings:st.ratings,started:st.started,q:st.q});return true;
 }
-document.addEventListener("change",e=>{if(e.target.name==="rating")$("next").disabled=false});
+document.addEventListener("change",e=>{if(String(e.target.name).startsWith("m-"))$("next").disabled=!readMu()});
 $("next").addEventListener("click",()=>{if(save())show(st.i+1)});
 $("back").addEventListener("click",()=>{save();if(st.i>0)show(st.i-1)});
 document.addEventListener("keydown",e=>{
   if($("item").classList.contains("hidden")||e.target.tagName==="TEXTAREA"||e.target.tagName==="INPUT"&&e.target.type==="text")return;
-  if(/^[1-4]$/.test(e.key)){const v=RATING[+e.key-1][0];$("r-"+v).checked=true;$("next").disabled=false}
   if(e.key==="Enter"&&!$("next").disabled){e.preventDefault();if(save())show(st.i+1)}
 });
-function result(){return{schema:"apology-blind-rating/1",packet_id:P.packet_id,rater:{id:st.rater,questionnaire:st.q},mode:P.mode||"independent",
+function result(){return{schema:"apology-blind-rating/2",packet_id:P.packet_id,rater:{id:st.rater,questionnaire:st.q},mode:P.mode||"independent",
   order:st.order,duration_s:Math.round((Date.now()-st.started)/1000),finished_at:new Date().toISOString(),ratings:st.ratings}}
 function finish(){
   $("item").classList.add("hidden");$("done").classList.remove("hidden");

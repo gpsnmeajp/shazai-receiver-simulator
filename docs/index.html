@@ -71,7 +71,7 @@
 <div class="kappa" aria-label="筆者との一致度">
 <div class="card sim"><div class="v">0.28</div><div class="s">シミュレータ</div></div>
 <div class="card per"><div class="v">0.06</div><div class="s">LLMペルソナ</div></div>
-<p class="cap">筆者の評定との一致度 κ（v0.4 ベンチマーク 192回答）</p>
+<p class="cap">筆者の評定との一致度 κ（4値モデル v0.4、ベンチマーク 192回答）</p>
 </div>
 </div>
 
@@ -93,20 +93,21 @@
 <div class="arrow" aria-hidden="true">→</div>
 <div class="step b"><b><svg class="icon" style="vertical-align:-.2em"><use href="#i-users"/></svg> 層B 受け手（コード）</b><small>研究で効く向きが示された性質をもつ受け手の母集団に、観察を通す（<code>sim.py</code>・<code>population.json</code>）</small></div>
 <div class="arrow" aria-hidden="true">→</div>
-<div class="step o"><b>評定の分布</b><small>回答ごとの4分類の割合と、不足・過剰の量</small></div>
+<div class="step o"><b>評定の所属度</b><small>回答ごとの4つの述語の平均所属度、失礼と感じる人の割合、無礼さ・不足・過剰の量</small></div>
 </div>
 
+<p>評定はファジィです。受け手一人ひとりが、4つの述語それぞれに<b>どの程度当てはまると感じるか</b>（所属度 0〜1）を持ちます。述語は排他的ではなく、「重すぎるのに足りない」「少し失礼だが、だいたい釣り合う」も表せます。人による違いは母集団（確率）が、一人の中の程度は所属度（ファジィ）が担います。</p>
 <div class="rates">
-<div class="card" style="--c:var(--r-rude)"><h3><span class="rate"><i class="c-rude"></i></span>失礼</h3><p>失点の合計が大きい。一文や一つの振る舞いだけでも崩れる</p></div>
-<div class="card" style="--c:var(--r-light)"><h3><span class="rate"><i class="c-light"></i></span>足りない</h3><p>謝罪の中身が、受け手が必要とする深さに届かない</p></div>
-<div class="card" style="--c:var(--r-fit)"><h3><span class="rate"><i class="c-fit"></i></span>釣り合う</h3><p>不足も過剰もなく、場面に見合っている</p></div>
-<div class="card" style="--c:var(--r-heavy)"><h3><span class="rate"><i class="c-heavy"></i></span>重すぎる</h3><p>重さが、受け手の許容を超えている</p></div>
+<div class="card" style="--c:var(--r-rude)"><h3><span class="rate"><i class="c-rude"></i></span>失礼</h3><p>無礼さ（失点の合計）から。一文や一つの振る舞いだけでも高くなる</p></div>
+<div class="card" style="--c:var(--r-light)"><h3><span class="rate"><i class="c-light"></i></span>足りない</h3><p>謝罪の中身の不足量（受け手が必要とする深さとの差）から</p></div>
+<div class="card" style="--c:var(--r-fit)"><h3><span class="rate"><i class="c-fit"></i></span>釣り合う</h3><p>失礼でなく、足りなくなく、重すぎない（三つの否定の論理積）</p></div>
+<div class="card" style="--c:var(--r-heavy)"><h3><span class="rate"><i class="c-heavy"></i></span>重すぎる</h3><p>重さが受け手の許容を超えた量から</p></div>
 </div>
 
 <h2><svg class="icon"><use href="#i-chart"/></svg>現在の到達点</h2>
 <div class="chart">
 <p class="chart-title">「釣り合う」と評定された割合（条件別）</p>
-<p class="chart-sub">v0.4 ベンチマーク 192回答・代理観察。シミュレータは条件の順位が筆者と一致し、ペルソナは逆の順位になった</p>
+<p class="chart-sub">4値モデル（v0.4）、ベンチマーク 192回答・代理観察。シミュレータは条件の順位が筆者と一致し、ペルソナは逆の順位になった</p>
 <div class="legend"><span><i class="dot" style="background:var(--s-user)"></i>筆者</span><span><i class="dot" style="background:var(--s-sim)"></i>シミュレータ</span><span><i class="dot" style="background:var(--s-persona)"></i>ペルソナ多数決</span></div>
 <!-- 軸は 40%〜100%。left = (v-40)/60 -->
 <div class="dots">
@@ -132,7 +133,7 @@
 <div class="daxis"><span style="left:0">40%</span><span style="left:33.3%">60%</span><span style="left:66.7%">80%</span><span style="left:100%">100%</span></div>
 </div>
 </div>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>型の比率と性質の強さは事前値で、人間のデータから推定したものではありません。詳細と限界は <a href="validation.html">検証結果</a> にあります。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>v0.8 で評定をファジィに組み直しました。作例の組では規則の向きが4値のときと同じに保たれ、「重すぎるのに足りない」などの同時成立が表れるようになりました。上の図はファジィ化する前の4値モデルの結果で、ベンチマークはまだ v0.8 で再計算していません。型の比率、性質の強さ、所属度関数はいずれも事前値で、人間のデータから推定したものではありません。詳細と限界は <a href="validation.html">検証結果</a> にあります。</p></div>
 
 <h2><svg class="icon"><use href="#i-book"/></svg>文書</h2>
 <div class="grid">
@@ -156,7 +157,7 @@ python3 sim.py observe runs/* -o out/obs-llm.json --model anthropic/claude-opus-
 # API を使えない場合：既存のチェックリスト判定と表層特徴から代理観察を作る
 python3 sim.py proxy runs/* -o out/obs-proxy.json</code></pre></li>
 <li><b>層B：母集団に通す</b>
-<pre><code># 母集団で評定分布を出す
+<pre><code># 母集団で評定の所属度を出す
 python3 sim.py simulate out/obs-llm.json runs/* -n 1000 -o out/sim.json
 
 # 観察済みの場面の組（物語・AIキャラクター等）を母集団に通す
@@ -171,7 +172,7 @@ python3 sim.py explain out/obs-llm.json runs/* --answer 回答ID</code></pre></l
 <pre><code># System One（Jev）で観察して母集団に通す組み込み用モード（環境変数 TYPESAFE_API_KEY が必要）
 # --backend llm-s1 で互換モード（OPENROUTER_API_KEY）
 python3 sim.py check examples/check/turn.json</code></pre>
-<p class="note">hook などでAIの応答を毎ターン判定する仕組みの参考として用意しました。1ターンにつき System One モデルを1回呼び、「失礼の恐れ／要注意／問題なし」を返します。Claude Code の Stop hook の例は <code>examples/hooks/shazai_stop_hook.py</code> にあります。Jev の実際の応答では未検証です。詳細は <a href="jev.html#check">System One への置き換え 5.8節</a>。</p></li>
+<p class="note">hook などでAIの応答を毎ターン判定する仕組みの参考として用意しました。1ターンにつき System One モデルを1回呼び、「失礼の恐れ／要注意／問題なし」と、失礼の度合いに応じた羊の鳴き声（「メ…？」「メッ」「メッ！！」）を返します。Claude Code の Stop hook の例は <code>examples/hooks/shazai_stop_hook.py</code> にあります。Jev の実際の応答では未検証です。詳細は <a href="jev.html#check">System One への置き換え 5.8節</a>。</p></li>
 </ol>
 
 <h3>共通の選択肢</h3>

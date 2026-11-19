@@ -92,14 +92,14 @@ def main():
         return
     if os.environ.get("SHAZAI_LOG"):
         with open(os.environ["SHAZAI_LOG"], "a", encoding="utf-8") as f:
-            rec = {k: res[k] for k in ("verdict", "dist", "top_faults", "flagged_sentences", "model", "latency_ms")}
+            rec = {k: res[k] for k in ("verdict", "sheep", "mu", "tail", "top_faults", "flagged_sentences", "model", "latency_ms")}
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
     if res["verdict"] == "ok":
         return
-    d = res["dist"]
-    summary = (f"謝罪の受け手シミュレータ: {sim.VERDICT_JA[res['verdict']]}"
-               f"（失礼 {d['rude']:.0%}、足りない {d['light']:.0%}）。主な失点: "
-               + "、".join(res["top_faults"]))
+    m = res["mu"]
+    degrees = "、".join(f"{sim.CAT_JA[k]}：{sim.hedge(m[k])}（{m[k]:.2f}）" for k in ("rude", "light", "heavy"))
+    summary = (f"{res['sheep'] or 'メ…'}　謝罪の受け手シミュレータ: {sim.VERDICT_JA[res['verdict']]}"
+               f"（{degrees}。失礼と感じる人 {res['tail']['rude']:.0%}）。主な失点: " + "、".join(res["top_faults"]))
     lines = [f"- 「{s['text'][:50]}」が{s['reading']}に読める（{s['p']:.2f}）" for s in res["flagged_sentences"]]
     if os.environ.get("SHAZAI_MODE") == "block" and res["verdict"] == "rude" and not hook.get("stop_hook_active"):
         print(json.dumps({"decision": "block",
