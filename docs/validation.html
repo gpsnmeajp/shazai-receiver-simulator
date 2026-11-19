@@ -304,12 +304,10 @@
 
 <h2 id="next"><svg class="icon"><use href="#i-target"/></svg>4. 次に行う検証</h2>
 <ol class="steps">
-<li><b>人間のブラインド評定を集める</b>：<code>blind.py</code> で、4つの述語×5段階の評定を集め、シミュレータとの差を測る（手順は <a href="human-eval.html">人間評定</a>）。作例の組（23問）と、ベンチマークから抜いた40問程度から始める。あわせて、「釣り合う」の t ノルム（min か積か）と、所属度関数の中心・なだらかさを推定する。</li>
-<li><b>修復期の論理と評価指標を直し、所属度関数を観察者ごとに較正する</b>（<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">総合評価 12章</a>）。</li>
-<li><b>層Aを独立に観察する</b>：<code>observe</code> で観察し、同じ検証をやり直す。</li>
-<li><b>型の比率と幅を推定する</b>：20〜30人程度の評定で推定する。筆者を含む各評定者が母集団に収まるかを見て、収まらなければ軸を足す。</li>
+<li><b>観察の欄ごとに較正する</b>：所属度関数の中心の較正の代わりに、金ラベルとの差を欄ごとに補正する（<a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION_V09.md">総合評価 v0.9</a> 8章）。</li>
+<li><b>観察者の集団を組み直す</b>：字義どおりの方針に寄せ、言い回しとモデルだけを振る。</li>
 <li><b>ヒステリシスを識別する</b>：経緯だけを変えた場面の組（初回／3回目／虚偽を含む／約束を破った後、悪化の途中か回復の途中か）を作る。</li>
-<li><b>シグナルの規則を確かめる</b>：作例の組に人間の評定を付け、向きと大きさを確かめる。</li>
+<li><b>構造の穴への対応を検討する</b>：断言・控えめさ・関係・但し書きの局面の一部に、効果を作る経路がない（総合評価 v0.9 5.1節）。</li>
 </ol>
 
 <h2 id="history"><svg class="icon"><use href="#i-layers"/></svg>5. 変更履歴</h2>

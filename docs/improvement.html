@@ -53,7 +53,7 @@
 <main>
 <h1>v0.9 改善の設計</h1>
 <p class="lead">v0.8（ファジィ前提）の総合評価で見つかった問題を解き、受け手モデルを「時間の中の控え」として組み直すための設計です。</p>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p><b>状態：実装済み（人間のデータの収集を除く）。2026-11-19。</b>実装と総合評価の結果は <a href="#impl">13章</a>、詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION_V09.md">EVALUATION_V09.md</a>。この HTML は参考用です。正本は Markdown 版 <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/IMPROVEMENT_V09.md">IMPROVEMENT_V09.md</a> です。評価の詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">EVALUATION.md</a>、設計原則は <a href="design.html">設計</a>、現行の仕組みは <a href="architecture.html">仕組み</a> を参照してください。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p><b>状態：実装済み。2026-11-19。</b>実装と総合評価の結果は <a href="#impl">13章</a>、詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION_V09.md">EVALUATION_V09.md</a>。この HTML は参考用です。正本は Markdown 版 <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/IMPROVEMENT_V09.md">IMPROVEMENT_V09.md</a> です。評価の詳細は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">EVALUATION.md</a>、設計原則は <a href="design.html">設計</a>、現行の仕組みは <a href="architecture.html">仕組み</a> を参照してください。</p></div>
 <ul class="toc">
 <li><a href="#summary">1. 要約</a></li><li><a href="#background">2. 背景</a></li><li><a href="#timeline">3. 控えの時間軸</a></li><li><a href="#disclaimer">3.5 免責の但し書き</a></li><li><a href="#model">3.7 受け手モデル</a></li><li><a href="#decay">3.9 傷の減衰</a></li><li><a href="#evidence">4. 根拠</a></li><li><a href="#metrics">5. 評価指標</a></li><li><a href="#ensemble">6. 観察者の集団</a></li><li><a href="#calib">7. 較正</a></li><li><a href="#kit">8. 評価キット</a></li><li><a href="#order">9. 順序</a></li><li><a href="#criteria">10. 採否</a></li><li><a href="#decisions">11. 決定記録</a></li><li><a href="#open">12. 未解決</a></li><li><a href="#impl">13. 実装と結果</a></li>
 </ul>
@@ -452,7 +452,6 @@ p(y | 回答, 述語) = 母集団で、受け手一人の所属度（＋評定�
 <li><b>観察者の集団（6章）</b><code>sim.py observe --variants</code>、<code>sim.py ensemble</code>。</li>
 <li><b>控えの時間軸モデル（3章）</b><code>observe_prompt.md</code>、<code>sim.py</code>、<code>population.json</code>（<code>overclaim</code>）。</li>
 <li><b>較正と観察の固め（7章）</b>出どころ別の <code>judgment</code>。</li>
-<li><b>人間のデータの収集と検証（8章）</b>各段のあと、5章の手続きで評価し、検証の文書に記録する。</li>
 </ol>
 
 <h2 id="criteria"><svg class="icon"><use href="#i-target"/></svg>10. 採否の基準</h2>
@@ -503,7 +502,6 @@ p(y | 回答, 述語) = 母集団で、受け手一人の所属度（＋評定�
 <tr><td>4</td><td>観察者の集団</td><td><span class="badge b-strong">済</span> 6変種の観察を収集し評価</td></tr>
 <tr><td>5</td><td>控えの時間軸モデル</td><td><span class="badge b-strong">済</span> 傷の減衰を含む</td></tr>
 <tr><td>6</td><td>較正と観察の固め</td><td><span class="badge b-mid">一部</span> 出どころごとの較正</td></tr>
-<tr><td>7</td><td>人間のデータの収集と検証</td><td><span class="badge b-hypo">未</span></td></tr>
 </tbody></table></div>
 <p class="note">係数はすべて設計に書いた事前値のまま入れ、作例やベンチマークの結果を見て変えていません。</p>
 <h3>13.2 ベンチマーク（192回答・16場面、分割の外側の Brier。低いほど良い）</h3>
@@ -553,7 +551,7 @@ p(y | 回答, 述語) = 母集団で、受け手一人の所属度（＋評定�
 <div class="card"><h3>観察者は「平均する」より「どう読ませるか」</h3><p>字義どおりの方針は、文脈を補って不満や過信を読み込むことを抑え、それだけで集団の平均より良かった。観察の誤差は、方針に由来する読み込みすぎの偏りが大きい。</p></div>
 <div class="card"><h3>較正は効果を縮める</h3><p>LLM の観察の失礼の中心は 2.4〜2.7 に寄る。4値の一致は良くなるが、作例での仮説の効果は 1/3〜1/6 に縮む。中心だけでなく、観察の欄ごとの較正が要る。</p></div>
 <div class="card"><h3>観察者が作例の欠陥を見つけた</h3><p>「確認済み」と言って外すことは、確かめなかった証拠ではない。観察者は偽りと判定しなかった。文面に偽りが分かる一言を加え、受け手モデルが「確認済み」を控えめさに数える誤りも直した。</p></div>
-<div class="card"><h3>構造の穴</h3><p>断言で失礼が増える、控えめで失礼が減る、親しい関係で軽口が許される、失敗の前・修復期の但し書きで釣り合う、の5つは、効果を作る経路がほとんどない。人間の評定を見てから直す。</p></div>
+<div class="card"><h3>構造の穴</h3><p>断言で失礼が増える、控えめで失礼が減る、親しい関係で軽口が許される、失敗の前・修復期の但し書きで釣り合う、の5つは、効果を作る経路がほとんどない。</p></div>
 </div>
 <div class="tbl"><table>
 <thead><tr><th>評価キットの検出力（合成評定者、予測どおりの効果）</th><th class="num">20名</th><th class="num">40名</th><th class="num">60名</th></tr></thead>
@@ -566,9 +564,8 @@ p(y | 回答, 述語) = 母集団で、受け手一人の所属度（＋評定�
 <p class="note">効果が予測の半分なら、H4a は 60名で 0.60、H7 は 0.44。H1a・H2・H3b は、シミュレータの予測する効果が効果の最小の大きさ 0.10 前後なので「支持」にはならず、人間の効果が予測より大きいかを確かめる検定になる。</p>
 <h3>13.5 残っていること</h3>
 <ul>
-<li>評価キットで人間の評定を集める（事前登録どおり 40〜60名）。</li>
 <li>観察の欄ごとの較正、字義どおりの方針に寄せた観察者の集団、場面の観察の固め（7.2節）。</li>
-<li>構造の穴の修正は、人間の評定を見てから行う。</li>
+<li>構造の穴への対応。</li>
 </ul>
 </main>
 
