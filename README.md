@@ -35,7 +35,7 @@ LLMペルソナに「日本人として評定して」と頼む方式はとり�
 | 根拠となる研究と事例（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/evidence.html) / [Markdown](docs/md/EVIDENCE.md)） | 規則ごとの根拠となる研究と事例、確度 |
 | 検証結果と変更履歴（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html) / [Markdown](docs/md/VALIDATION.md)） | 検証結果、既知の限界、次の検証、変更履歴 |
 | 総合評価 v0.8（[Markdown](docs/md/EVALUATION.md)） | ベンチマークと作例での総合評価。LLM の役割をサブエージェントで代替。判明した欠陥と修正の提案 |
-| v0.9 改善の設計（[Markdown](docs/md/IMPROVEMENT_V09.md)） | 控えの観察（失敗の前の構えと修復期）、統計的に正当な評価指標、観察者の集団（観察の幅と平均）、観察の出どころごとの較正（設計・未実装） |
+| v0.9 改善の設計（[Markdown](docs/md/IMPROVEMENT_V09.md)） | 控えの観察（失敗の前の構えと修復期）、統計的に正当な評価指標、観察者の集団（観察の幅と平均）、観察の出どころごとの較正、文化研究に照らした検証、人間の評価キットの更新（設計・未実装） |
 | 人間のブラインド評定（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html) / [Markdown](docs/md/HUMAN_EVAL.md)） | 人間のブラインド評定の実施手順、盲検化の設計、比較の指標 |
 | 層AのJev（System One）への置き換え（[Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計。組み込み判定モード（`check`）は実装済み・未検証 |
 | [レポート](https://gpsnmeajp.github.io/shazai-receiver-simulator/report.html)（`docs/report.html`） | 図で見る解説と結果 |
