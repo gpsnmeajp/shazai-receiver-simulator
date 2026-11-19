@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""ベンチマークでの総合評価（v0.9）。シミュレータの予測分布を、真に適正なスコアリング規則で採点する。
+"""ベンチマークでの総合評価。シミュレータの予測分布を、真に適正なスコアリング規則で採点する。
 
   python3 tools/evaluate.py --obs proxy=out/obs-proxy.json --obs subagent=eval/obs-subagent.json runs/* -o out/eval.json
-  python3 tools/evaluate.py --obs v09=eval/obs-subagent.json --obs v08=eval/obs-subagent.json@/path/to/v08 runs/*
+  python3 tools/evaluate.py --obs here=eval/obs-subagent.json --obs other=eval/obs-subagent.json@/path/to/other-checkout runs/*
 
 予測分布：受け手一人の所属度 μ を、反応モデル P(k|μ) = softmax(β·μ) で選択に変え、母集団で平均する。
 主指標：多クラス Brier と対数損失。基準（一様、常に釣り合う、周辺分布、条件だけ）と同じ規則で採点し、

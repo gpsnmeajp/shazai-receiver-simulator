@@ -5353,7 +5353,7 @@
   ]
  },
  "hypotheses": {
-  "spec": "human/hypotheses-v09.json",
+  "spec": "human/hypotheses.json",
   "alpha": 0.05,
   "min_effect": 0.1,
   "tests": [

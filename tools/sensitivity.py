@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""v0.9 の新しい事前値の感度分析。項目の組（手の観察）で、仮説の対比のシミュレータの予測が、
+"""控えの時間軸の事前値の感度分析。項目の組（手の観察）で、仮説の対比のシミュレータの予測が、
 傷の減衰のターン数・過失の承認の割合・欺瞞の傷の残り・所属度関数の中心でどう変わるかを見る。
 
-  python3 tools/sensitivity_v09.py -o eval/v09-sensitivity.md
+  python3 tools/sensitivity.py -o eval/sensitivity.md
 """
 import argparse
 import json
@@ -30,10 +30,10 @@ VARIANTS = [
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--scenes", default=str(ROOT / "examples" / "scenes-v09.json"))
-    ap.add_argument("--hypotheses", default=str(ROOT / "human" / "hypotheses-v09.json"))
+    ap.add_argument("--scenes", default=str(ROOT / "examples" / "scenes-kit.json"))
+    ap.add_argument("--hypotheses", default=str(ROOT / "human" / "hypotheses.json"))
     ap.add_argument("-n", type=int, default=300)
-    ap.add_argument("-o", "--out", default="eval/v09-sensitivity.md")
+    ap.add_argument("-o", "--out", default="eval/sensitivity.md")
     args = ap.parse_args()
     pop = sim.load_population(str(ROOT / "population.json"))
     base_tl, base_j = json.loads(json.dumps(sim.TIMELINE)), json.loads(json.dumps(sim.JUDGMENT))
@@ -61,7 +61,7 @@ def main():
                 decay_rows.append((label, meta["turns_since_incident"], r["mu"]["rude"]))
         cols.append((label, blind.predictions(spec, rows)))
     ids = [h["id"] for h in spec["hypotheses"] if h["measure"] not in ("remorse", "recurrence")]
-    L = ["# v0.9 の事前値の感度分析（項目の組・手の観察）", "",
+    L = ["# 事前値の感度分析（項目の組・手の観察）", "",
          "各仮説の対比について、シミュレータの予測値（所属度の差、信頼意図は reliability の差）。"
          "事前登録の効果の最小の大きさは 0.10。符号が既定と変わる値に ※ を付けた。", "",
          "| 仮説 | " + " | ".join(c[0] for c in cols) + " |", "|---|" + "---|" * len(cols)]

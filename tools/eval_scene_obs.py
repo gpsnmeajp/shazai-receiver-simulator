@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""項目の組（examples/scenes-v09.json）で、LLM の観察が手の観察をどれだけ再現するか、
+"""項目の組（examples/scenes-kit.json）で、LLM の観察が手の観察をどれだけ再現するか、
 またその観察を通したシミュレータの予測（仮説の対比）が手の観察のときと同じ向きになるかを調べる。
 
-  python3 tools/eval_scene_obs.py eval/v09-observers/obs-scenes-opus.json -o eval/v09-scenes-obs.md
+  python3 tools/eval_scene_obs.py eval/observers/obs-scenes-opus.json -o eval/scenes-obs.md
 """
 import argparse
 import json
@@ -53,10 +53,10 @@ def corr(pairs):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("obs")
-    ap.add_argument("--scenes", default=str(ROOT / "examples" / "scenes-v09.json"))
-    ap.add_argument("--hypotheses", default=str(ROOT / "human" / "hypotheses-v09.json"))
+    ap.add_argument("--scenes", default=str(ROOT / "examples" / "scenes-kit.json"))
+    ap.add_argument("--hypotheses", default=str(ROOT / "human" / "hypotheses.json"))
     ap.add_argument("-n", type=int, default=500)
-    ap.add_argument("-o", "--out", default="eval/v09-scenes-obs.md")
+    ap.add_argument("-o", "--out", default="eval/scenes-obs.md")
     args = ap.parse_args()
     obs = sim.load(args.obs)
     data = sim.load(args.scenes)
@@ -103,7 +103,7 @@ def main():
     for (_, x), (_, y) in zip(rows_hand, rows_obs):
         close.append(sim.closeness(x["mu"], y["mu"]))
     L = [f"# 項目の組での観察の再現（{args.obs}）", "",
-         f"手の観察（`examples/scenes-v09.json`）と、盲検の LLM 観察（`{obs.get('source')}`）の比較。{len(close)} 回答。"
+         f"手の観察（`examples/scenes-kit.json`）と、盲検の LLM 観察（`{obs.get('source')}`）の比較。{len(close)} 回答。"
          f"シミュレータには、手の観察は既定の所属度関数で、LLM の観察は出どころの較正（{calib or 'なし'}）で通した。", "",
          "## 欄ごとの一致", "", "| 欄 | 件数 | 一致率 / 平均絶対差 | 相関 |", "|---|---|---|---|"]
     for name in NUM:

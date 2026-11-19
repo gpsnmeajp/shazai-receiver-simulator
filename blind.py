@@ -31,7 +31,7 @@ HERE = Path(__file__).resolve().parent
 CATS = sim.CATS                     # rude, light, fit, heavy
 SCHEMA_PACKET = "apology-blind-packet/2"
 SCHEMA_RATING = "apology-blind-rating/2"
-SCHEMA_RATING_CRISP = "apology-blind-rating/1"   # 旧形式（4値から1つを選ぶ）。一点集中の所属度として読む
+SCHEMA_RATING_CRISP = "apology-blind-rating/1"   # 4値形式（4値から1つを選ぶ）。一点集中の所属度として読む
 LEVELS5 = [0.0, 0.25, 0.5, 0.75, 1.0]             # 評定ページの5段階
 
 FRAME_TEXT = {
@@ -138,7 +138,7 @@ def assign(design, list_idx):
 
 
 def cmd_pack_design(args):
-    """評価キット（v0.9）の問題束。土台ごとに一人一水準、錨は全員、注意の確認1問、再評定は評定者ごとに選ぶ。"""
+    """評価キットの問題束。土台ごとに一人一水準、錨は全員、注意の確認1問、再評定は評定者ごとに選ぶ。"""
     items = items_from_scenes(args.scenes, kit_only=True)
     rng = random.Random(args.seed)
     packet_id = f"pk-{datetime.now(timezone.utc).strftime('%Y%m%d')}-{secrets.token_hex(3)}"
@@ -191,7 +191,7 @@ def cmd_pack_design(args):
 def cmd_pack(args):
     if args.design:
         if not args.scenes:
-            raise SystemExit("--design には --scenes（examples/scenes-v09.json）が必要です")
+            raise SystemExit("--design には --scenes（examples/scenes-kit.json）が必要です")
         return cmd_pack_design(args)
     items = []
     if args.scenes:
@@ -298,7 +298,7 @@ def tnorm_fit(m, kind):
 # ---------------------------------------------------------------- 読み込み
 
 def rating_mu(v):
-    """評定ファイルの1項目から所属度を取り出す。旧形式（rating の1つだけ）は一点集中の所属度にする"""
+    """評定ファイルの1項目から所属度を取り出す。4値形式（rating の1つだけ）は一点集中の所属度にする"""
     if isinstance(v.get("mu"), dict) and all(isinstance(v["mu"].get(k), (int, float)) for k in CATS):
         return {k: float(v["mu"][k]) for k in CATS}
     if v.get("rating") in CATS:
@@ -833,7 +833,7 @@ def report_md(res):
     if res.get("imported_raters"):
         L += [f"> **注意**：既存の評定ファイルから取り込んだ評定者が {res['imported_raters']} 名います。この評定ページで盲検化して集めたものではありません。", ""]
     if res.get("crisp_raters"):
-        L += [f"> **注意**：4値から1つを選ぶ旧形式の評定者が {res['crisp_raters']} 名います。選んだ述語だけが1の所属度として扱っています。", ""]
+        L += [f"> **注意**：4値から1つを選ぶ形式の評定者が {res['crisp_raters']} 名います。選んだ述語だけが1の所属度として扱っています。", ""]
     L += ["## 人間どうしの一致（自動評価の上限の目安）", "",
           "| 指標 | 値 |", "|---|---|",
           f"| Krippendorff のα（間隔。述語ごと） | {per_cat(h['alpha'])} |",
@@ -1082,7 +1082,7 @@ def main():
     p.add_argument("--noise", type=float, default=0.1, help="合成評定者のゆらぎ（述語ごとに段階を無作為に置き換える割合）")
     p.add_argument("--population", default=str(HERE / "population.json"))
     p.add_argument("--seed", type=int, default=7)
-    p.add_argument("--hypotheses", help="事前登録した仮説（human/hypotheses-v09.json）を検定する")
+    p.add_argument("--hypotheses", help="事前登録した仮説（human/hypotheses.json）を検定する")
     p.add_argument("--boot", type=int, default=2000, help="仮説の検定のブートストラップ回数")
     p.add_argument("--exclude-inattentive", action="store_true", help="注意の確認に通らなかった評定者を仮説の検定から除く（感度分析用）")
     p.add_argument("--rps", action="store_true", help="--scenes の項目で、5段階の予測分布の順位確率スコアを出す")

@@ -32,14 +32,13 @@ LLMペルソナに「日本人として評定して」と頼む方式はとり�
 |---|---|
 | 設計思想と目的（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/design.html) / [Markdown](docs/md/DESIGN.md)） | 目的、範囲、設計原則、決定記録、未解決の問い |
 | アーキテクチャ（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/architecture.html) / [Markdown](docs/md/ARCHITECTURE.md)） | データの流れ、観察の形式、受け手モデルの式、コマンド、拡張の手順 |
+| 控えの時間軸と評価の方法（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/methods.html) / [Markdown](docs/md/METHODS.md)） | 控えの時間軸（失敗の前の構え・謝罪の場面・修復期、免責の但し書きの局面）、統計的に正当な評価指標、観察者の集団、観察の出どころごとの較正、文化研究に基づく根拠、人間の評価キット |
 | 根拠となる研究と事例（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/evidence.html) / [Markdown](docs/md/EVIDENCE.md)） | 規則ごとの根拠となる研究と事例、確度 |
-| 検証結果と変更履歴（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html) / [Markdown](docs/md/VALIDATION.md)） | 検証結果、既知の限界、次の検証、変更履歴 |
-| 総合評価 v0.8（[Markdown](docs/md/EVALUATION.md)） | ベンチマークと作例での総合評価。LLM の役割をサブエージェントで代替。判明した欠陥と修正の提案 |
-| 総合評価 v0.9（[Markdown](docs/md/EVALUATION_V09.md)） | 観察者の集団（6変種）・出どころの較正・作例での観察の再現・評価キットの検出力。採否と考察 |
-| v0.9 改善の設計（[Markdown](docs/md/IMPROVEMENT_V09.md)） | 控えの時間軸モデル（失敗の前の構え・謝罪の場面・修復期、免責の但し書きの局面）、統計的に正当な評価指標、観察者の集団、観察の出どころごとの較正、文化研究に基づく根拠、人間の評価キット。実装済み |
-| 人間のブラインド評定（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html) / [Markdown](docs/md/HUMAN_EVAL.md)） | 人間のブラインド評定の実施手順、盲検化の設計、比較の指標 |
-| 層AのJev（System One）への置き換え（[Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計。組み込み判定モード（`check`）は実装済み・未検証 |
-| [レポート](https://gpsnmeajp.github.io/shazai-receiver-simulator/report.html)（`docs/report.html`） | 図で見る解説と結果 |
+| 検証結果（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html) / [Markdown](docs/md/VALIDATION.md)） | 使うデータ、作例とベンチマークの結果、既知の限界、次の検証 |
+| 総合評価（[Markdown](docs/md/EVALUATION.md)） | 観察者の集団（6変種）・出どころの較正・作例での観察の再現・評価キットの検出力。採否と考察 |
+| 人間のブラインド評定（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html) / [Markdown](docs/md/HUMAN_EVAL.md)） | 人間のブラインド評定と評価キットの実施手順、盲検化の設計、比較の指標 |
+| 層AのJev（System One）への置き換え（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/jev.html) / [Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計。組み込み判定モード（`check`）は実装済み・未検証 |
+| [履歴](HISTORY.md) | 版ごとの変更、過去の版の結果、改めた判断 |
 
 ## 使い方
 
@@ -64,23 +63,23 @@ python3 sim.py explain out/obs-llm.json runs/* --answer 回答ID
 # 観察済みの場面の組（物語・AIキャラクター等）を母集団に通す
 python3 sim.py scenes examples/scenes.json -n 1000 -o out/scenes-result.json
 
-# v0.9：控えの時間軸の項目の組（失敗の前の構え・修復期・但し書きの局面）
-python3 sim.py scenes examples/scenes-v09.json -o out/scenes-v09.json
+# 控えの時間軸の項目の組（失敗の前の構え・修復期・但し書きの局面）
+python3 sim.py scenes examples/scenes-kit.json -o out/scenes-kit.json
 
-# v0.9：観察者の集団。文に ID を振り、観察方針を変えて観察し、平均する
+# 観察者の集団。文に ID を振り、観察方針を変えて観察し、平均する
 python3 sim.py segment runs/* -o out/segment.json
 python3 sim.py observe runs/* --segment out/segment.json --variant literal -o out/obs-literal.json
 python3 sim.py ensemble out/obs-literal.json out/obs-context.json out/obs-neutral.json -o out/obs-ensemble.json
 
-# v0.9：真に適正なスコアリング規則による評価（場面単位の交差検証、基準とスキルスコア）
+# 真に適正なスコアリング規則による評価（場面単位の交差検証、基準とスキルスコア）
 python3 tools/evaluate.py runs/* --obs proxy=out/obs-proxy.json --obs llm=out/obs-llm.json -o out/eval.json
 
-# v0.9：人間の評価キット（ラテン方格の問題束、事前登録した仮説の検定、検出力）
-python3 blind.py pack --design --scenes examples/scenes-v09.json --repeat 2 --out-dir human/kit-v09
-python3 blind.py power --scenes examples/scenes-v09.json --hypotheses human/hypotheses-v09.json --raters 20,40,60
+# 人間の評価キット（ラテン方格の問題束、事前登録した仮説の検定、検出力）
+python3 blind.py pack --design --scenes examples/scenes-kit.json --repeat 2 --out-dir human/kit
+python3 blind.py power --scenes examples/scenes-kit.json --hypotheses human/hypotheses.json --raters 20,40,60
 
-# v0.9 の総合評価の再現
-sh tools/run_eval_v09.sh
+# 総合評価の再現
+sh tools/run_eval.sh
 
 # （オプション）1ターンを System One（Jev）で観察して即座に判定する組み込み用モード
 # 環境変数 TYPESAFE_API_KEY が必要。--backend llm-s1 で互換モード（OPENROUTER_API_KEY）
@@ -132,8 +131,8 @@ AIのト書きや顔文字は「仮想の身体」として扱います。現実
 
 ## 現在の到達点
 
-v0.8 で評定をファジィに組み直しました。ベンチマーク（192回答）では、代理観察で筆者との一致度 κ 0.33（v0.7 は 0.31〜0.32）、条件の順位も筆者と一致しました。一方、層Aを LLM の観察（評価ではサブエージェントで代替）にすると κ 0.28 で、判定が厳しすぎます。修復期の論理と評価指標にも欠陥が見つかりました。詳細は [総合評価](docs/md/EVALUATION.md) にあります。
+ベンチマーク（SHAZAI Rules v0.4、192回答・16場面）で、シミュレータの予測分布を真に適正なスコアリング規則（Brier）で、場面単位の交差検証の外側で採点しています。代理観察で Brier 0.489、観察者の集団（6変種）の平均に出どころの較正を加えた LLM の観察で 0.489 で、「条件だけ」の基準（0.553）に対するスキルは +0.115〜+0.116 です。区間はわずかに 0 をまたぎます。「常に釣り合う」の基準（0.719）は、どの評価器にも負けます。条件の順位は筆者と一致し、LLM ペルソナの評定では逆になります（筆者との一致度 κ は、代理観察 0.33、ペルソナ 0.06）。
 
-v0.9 では、修復期を詫びではなく控えで測り、失敗の前の構えと免責の但し書きの局面を受け手モデルに入れ、評価を真に適正なスコアリング規則（Brier）に改めました。信頼の傷は20ターンで減衰すると仮定しています。ベンチマークの修復期の Brier は 0.72 から 0.37〜0.44 に下がりました。観察者の集団（6変種）の平均に出どころの較正を加えると Brier 0.489 で、「条件だけ」の基準（0.553）に対するスキルは +0.115 [−0.007, +0.248] です。人間の評価キット（ラテン方格、事前登録した仮説の検定、検出力）も用意しました。詳細は [総合評価 v0.9](docs/md/EVALUATION_V09.md) にあります。
+受け手モデルは、謝罪を失敗の前・謝罪の場面・修復期の時間の中で見ます。修復期は詫びではなく控えで測り、失敗の前の構えと免責の但し書きの局面も受け手モデルに入れています。信頼の傷は20ターンで減衰すると仮定しています。人間の評価キット（ラテン方格、事前登録した仮説の検定、検出力）もあります。
 
-参考として、ファジィ化する前の4値モデル（v0.4）では、ベンチマーク（192回答、代理観察）の条件の順位が筆者と一致しました（「釣り合う」：シミュレータ 51% / 65% / 72%、筆者 48% / 69% / 75%）。ペルソナ評定では順位が逆でした。筆者との一致度はκ=0.28で、ペルソナは0.06です。型の比率、性質の強さ、所属度関数はいずれも事前値で、人間のデータで推定していません。詳細と限界は [検証結果](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html)（[Markdown](docs/md/VALIDATION.md)）にあります。
+型の比率、性質の強さ、所属度関数、控えの時間軸の係数はいずれも事前値で、人間のデータで推定していません。詳細は [検証結果](docs/md/VALIDATION.md) と [総合評価](docs/md/EVALUATION.md)、経緯は [履歴](HISTORY.md) にあります。

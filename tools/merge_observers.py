@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""観察者の集団の生の出力（eval/v09-observers/raw/<変種>/*.jsonl）を確かめて、観察JSONにまとめる。
+"""観察者の集団の生の出力（eval/observers/raw/<変種>/*.jsonl）を確かめて、観察JSONにまとめる。
 
 - 各行の group が、対応するバッチ（batches/<名前>.json）の group か、回答IDがその group の回答と一致するかを確かめる
 - 同じ group が二度あれば後の行を採る（再開時の重複）
@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import sim  # noqa: E402
 
-BASE = ROOT / "eval" / "v09-observers"
+BASE = ROOT / "eval" / "observers"
 MODEL = {"opus": "claude-top", "sonnet": "claude-mid"}
 
 

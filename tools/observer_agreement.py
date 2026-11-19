@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""観察者の集団の評価（IMPROVEMENT_V09.md 6.5節）。欄ごとの観察者間の一致（Krippendorff のα、間隔）と、
+"""観察者の集団の評価（METHODS.md 6.5節）。欄ごとの観察者間の一致（Krippendorff のα、間隔）と、
 観察方針・モデルの系統ごとの平均（主効果）を出す。
 
-  python3 tools/observer_agreement.py eval/v09-observers/obs-*.json -o eval/v09-observer-agreement.md
+  python3 tools/observer_agreement.py eval/observers/obs-*.json -o eval/observer-agreement.md
 """
 import argparse
 import sys
@@ -61,7 +61,7 @@ ANS = {
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("observations", nargs="+")
-    ap.add_argument("-o", "--out", default="eval/v09-observer-agreement.md")
+    ap.add_argument("-o", "--out", default="eval/observer-agreement.md")
     args = ap.parse_args()
     obs = {Path(p).stem.replace("obs-", ""): sim.load(p) for p in args.observations}
     obs = {k: v for k, v in obs.items() if v.get("variant") and len(v["answers"]) == 192}

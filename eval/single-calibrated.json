@@ -15,7 +15,7 @@
  ],
  "calibrate": true,
  "evaluators": {
-  "v09-proxy": {
+  "proxy": {
    "obs": "out/obs-proxy.json",
    "sim": "current",
    "source": "proxy:checklist+surface",
@@ -124,7 +124,7 @@
     }
    }
   },
-  "v09-subagent": {
+  "subagent": {
    "obs": "eval/obs-subagent.json",
    "sim": "current",
    "source": "subagent:observe_prompt.md",
@@ -273,14 +273,14 @@
   }
  },
  "differences": {
-  "v09-proxy-v09-subagent": {
+  "proxy-subagent": {
    "value": 0.0518,
    "ci": [
     -0.0191,
     0.1266
    ]
   },
-  "v09-proxy-v09-subagent:repair": {
+  "proxy-subagent:repair": {
    "value": 0.0177,
    "ci": [
     0.0028,

@@ -125,7 +125,7 @@
    }
   },
   "ensemble": {
-   "obs": "eval/v09-observers/obs-ensemble.json",
+   "obs": "eval/observers/obs-ensemble.json",
    "sim": "current",
    "source": "llm-ensemble",
    "n": 192,
@@ -234,7 +234,7 @@
    }
   },
   "top-neutral": {
-   "obs": "eval/v09-observers/obs-opus-neutral.json",
+   "obs": "eval/observers/obs-opus-neutral.json",
    "sim": "current",
    "source": "llm:claude-top:neutral",
    "n": 192,
@@ -343,7 +343,7 @@
    }
   },
   "top-literal": {
-   "obs": "eval/v09-observers/obs-opus-literal.json",
+   "obs": "eval/observers/obs-opus-literal.json",
    "sim": "current",
    "source": "llm:claude-top:literal",
    "n": 192,
@@ -452,7 +452,7 @@
    }
   },
   "top-context": {
-   "obs": "eval/v09-observers/obs-opus-context.json",
+   "obs": "eval/observers/obs-opus-context.json",
    "sim": "current",
    "source": "llm:claude-top:context",
    "n": 192,
@@ -561,7 +561,7 @@
    }
   },
   "mid-neutral": {
-   "obs": "eval/v09-observers/obs-sonnet-neutral.json",
+   "obs": "eval/observers/obs-sonnet-neutral.json",
    "sim": "current",
    "source": "llm:claude-mid:neutral",
    "n": 192,
@@ -670,7 +670,7 @@
    }
   },
   "mid-literal": {
-   "obs": "eval/v09-observers/obs-sonnet-literal.json",
+   "obs": "eval/observers/obs-sonnet-literal.json",
    "sim": "current",
    "source": "llm:claude-mid:literal",
    "n": 192,
@@ -779,7 +779,7 @@
    }
   },
   "mid-context": {
-   "obs": "eval/v09-observers/obs-sonnet-context.json",
+   "obs": "eval/observers/obs-sonnet-context.json",
    "sim": "current",
    "source": "llm:claude-mid:context",
    "n": 192,
