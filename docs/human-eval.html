@@ -37,16 +37,16 @@
 <header class="top"><div class="top-in">
 <a class="brand" href="index.html"><svg class="icon"><use href="#i-scale"/></svg>受け手シミュレータ</a>
 <nav class="nav" aria-label="文書">
-<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html" aria-current="page">人間評定</a><a href="jev.html">System One</a><a href="improvement.html">v0.9 設計</a><a href="report.html">レポート</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
+<a href="design.html">設計</a><a href="architecture.html">仕組み</a><a href="evidence.html">根拠</a><a href="validation.html">検証</a><a href="human-eval.html" aria-current="page">人間評定</a><a href="jev.html">System One</a><a href="methods.html">方法</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/HISTORY.md">履歴</a><a href="https://github.com/gpsnmeajp/shazai-receiver-simulator">GitHub</a>
 </nav></div></header>
 
 <main>
 <h1>人間によるブラインド評定と、自動評価との差の測定</h1>
 <p class="lead">シミュレータの評定（や、LLMペルソナなど他の自動評価）が、実際の人の受け取り方とどれだけずれているかを測るための仕組みです。</p>
 <p class="note">道具は <code>blind.py</code> と <code>human/rate_template.html</code> です。</p>
-<div class="callout"><svg class="icon"><use href="#i-form"/></svg><p>v0.8 から、人間の評定もファジィです。評定者は4つの述語（失礼だ／足りない／重すぎる／釣り合っている）それぞれが<b>どのくらい当てはまるか</b>を5段階で答え、シミュレータの平均所属度と同じ形で比べます（<a href="design.html#D-015">D-015</a>・<a href="design.html#D-016">D-016</a>）。</p></div>
+<div class="callout"><svg class="icon"><use href="#i-form"/></svg><p>人間の評定はファジィです。評定者は4つの述語（失礼だ／足りない／重すぎる／釣り合っている）それぞれが<b>どのくらい当てはまるか</b>を5段階で答え、シミュレータの平均所属度と同じ形で比べます（<a href="design.html#D-015">D-015</a>・<a href="design.html#D-016">D-016</a>）。</p></div>
 <ul class="toc">
-<li><a href="#flow">1. 流れ</a></li><li><a href="#blind">2. 盲検化の設計</a></li><li><a href="#page">3. 評定ページ</a></li><li><a href="#procedure">4. 実施の手順</a></li><li><a href="#metrics">5. 比較の指標</a></li><li><a href="#test">6. 仕組みの試験</a></li><li><a href="#caveats">7. 限界と注意</a></li><li><a href="#formats">8. ファイル形式</a></li>
+<li><a href="#flow">1. 流れ</a></li><li><a href="#blind">2. 盲検化の設計</a></li><li><a href="#page">3. 評定ページ</a></li><li><a href="#procedure">4. 実施の手順</a></li><li><a href="#metrics">5. 比較の指標</a></li><li><a href="#test">6. 仕組みの試験</a></li><li><a href="#kit">7. 評価キット</a></li><li><a href="#caveats">8. 限界と注意</a></li><li><a href="#formats">9. ファイル形式</a></li>
 </ul>
 
 <h2 id="flow"><svg class="icon"><use href="#i-layers"/></svg>1. 流れ</h2>
@@ -140,7 +140,7 @@ python3 blind.py compare --key human/s01/key.json --ratings "human/s01/ratings/*
 <blockquote>AIや登場人物が謝っている短い場面を読み、その返答が「失礼だ」「足りない」「重すぎる」「釣り合っている」にそれぞれどのくらい当てはまるかを選んでいただく調査です。正解はなく、あなたの受け取り方を知りたいものです。所要は30分ほどで、途中でやめても構いません。中には失礼に感じる返答も含まれます。添付の rate.html をブラウザで開き、評定者ID「R07」を入力して始めてください。最後に保存されるファイルを返送してください。</blockquote>
 
 <h2 id="metrics"><svg class="icon"><use href="#i-chart"/></svg>5. 比較の指標</h2>
-<p>すべて所属度で比べます。<b>近さ</b>は、二つの所属度の組（4つの述語）の <code>1 − 平均絶対差</code> で、1 なら一致、0 なら正反対です。</p>
+<p><b>主指標</b>は、述語ごとの5段階の順位確率スコア（RPS。<code>--rps</code>）と項目平均との二乗誤差です。予測分布は、受け手一人ずつの所属度に評定者のノイズを足して5段階に丸めたもので、一様分布と人間の評定の周辺分布を基準に並べます（<a href="methods.html#metrics">方法 5章</a>）。以下の指標は所属度で比べる記述用の指標です。<b>近さ</b>は、二つの所属度の組（4つの述語）の <code>1 − 平均絶対差</code> で、1 なら一致、0 なら正反対です。</p>
 <h3>上限の目安（人間どうし）</h3>
 <div class="tbl metric-up"><table>
 <thead><tr><th>指標</th><th>意味</th><th>読み方</th></tr></thead>
@@ -156,11 +156,11 @@ python3 blind.py compare --key human/s01/key.json --ratings "human/s01/ratings/*
 <thead><tr><th>指標</th><th>意味</th><th>読み方</th></tr></thead>
 <tbody>
 <tr><td>個々の評定との近さ</td><td>自動評価の所属度と、各人の評定の近さの平均</td><td>1人抜きの値に近いほどよい</td></tr>
-<tr><td>項目平均との近さ</td><td>自動評価の所属度と、項目ごとの人間の平均所属度の近さ</td><td>母集団としての近さを見る<b>主指標</b></td></tr>
+<tr><td>項目平均との近さ</td><td>自動評価の所属度と、項目ごとの人間の平均所属度の近さ</td><td>母集団としての近さ。断定的な評価器を有利にするので、順位づけには RPS を使う</td></tr>
 <tr><td>平均絶対差（述語ごと）</td><td>述語ごとの項目平均の差</td><td>どの述語で外れるか</td></tr>
 <tr><td>項目間の相関（述語ごと）</td><td>項目ごとの人間の平均と自動評価の相関</td><td>順位がそろっているか</td></tr>
 <tr><td>偏り（述語ごと）</td><td>自動 − 人間</td><td>正なら自動評価がその述語を強く当てはめている（LLMペルソナは「釣り合う」が大きく正になりやすい）</td></tr>
-<tr><td>非ファジィ化した κ</td><td>各人の評定と自動評価を、所属度が最大の述語に落としたときの一致（評定者ごとの中央値）</td><td>4値の評定との比較のための参考</td></tr>
+<tr><td>非ファジィ化した κ</td><td>各人の評定と自動評価を、それぞれ所属度が最大の述語に落としたときの一致（評定者ごとの中央値）</td><td>4値の評定との比較のための参考</td></tr>
 <tr><td>群ごとの表</td><td>枠組み・場面・条件・段階ごとの平均所属度と近さ</td><td>どの種類の場面で外れるか</td></tr>
 <tr><td>不満の深さ</td><td>人間の評定とシミュレータの知覚した深さの平均・相関</td><td>知覚の段階で外れているか、評価の段階で外れているか</td></tr>
 <tr><td>誠実さと「釣り合う」の相関</td><td>人間の誠実さの評定と、人間・シミュレータそれぞれの「釣り合う」の所属度</td><td>低ければ、誠実さと釣り合いが分かれる場面がある</td></tr>
@@ -170,16 +170,16 @@ python3 blind.py compare --key human/s01/key.json --ratings "human/s01/ratings/*
 <thead><tr><th>指標</th><th>意味</th><th>読み方</th></tr></thead>
 <tbody>
 <tr><td>最も近い型</td><td>型ごとに受け手を抜いて項目ごとの平均所属度を作り、その人の評定に最も近い型</td><td>評定者がどの型に近いか</td></tr>
-<tr><td>母集団の外の可能性</td><td>最も近い型でも近さが低い評定者。目安は、母集団から抜いた合成評定者の下側10%点</td><td>多ければ、型か軸が足りない</td></tr>
+<tr><td>母集団の外の可能性</td><td>最も近い型でも近さが低い評定者。目安は、母集団から抜いた合成評定者の下側10%点</td><td>多ければ型か軸が足りない</td></tr>
 </tbody></table></div>
 
 <div class="grid">
-<div class="card"><h3>他の自動評価との比較</h3><p><code>--auto 名前=ファイル</code> で、<code>{"ratings": {元の項目ID: {"mu": {...}}}}</code> 形式の評定を比べられます。4値の <code>{"rating": ...}</code> 形式（ベンチマークのペルソナや筆者の評定ファイル <code>persona-P1.json</code>、<code>user-ratings.json</code>）もそのまま使え、選んだ述語だけが1の所属度として扱います。</p></div>
-<div class="card"><h3>既存の評定を人間側に入れる</h3><p><code>python3 blind.py import-benchmark --key ... --ratings user-ratings.json --rater author -o ...</code> で、既存の4値の評定を、一点集中の所属度の評定ファイルに変換できます。盲検化して集めたものではないことと、4値であることが報告書に注記されます。再評定の項目には取り込みません。</p></div>
+<div class="card"><h3>他の自動評価との比較</h3><p><code>--auto 名前=ファイル</code> で、<code>{"ratings": {元の項目ID: {"mu": {"rude": …, "light": …, "fit": …, "heavy": …}}}}</code> 形式の評定を比べられます。4値の <code>{"rating": ...}</code> 形式（ベンチマークのペルソナや筆者の評定ファイル <code>persona-P1.json</code>、<code>user-ratings.json</code>）もそのまま使え、選んだ述語だけが1の所属度として扱います。</p></div>
+<div class="card"><h3>既存の評定を人間側に入れる</h3><p><code>python3 blind.py import-benchmark --key ... --ratings user-ratings.json --rater author -o ...</code> で、既存の4値の評定を、一点集中の所属度の評定ファイルに変換できます。この評定ページで盲検化して集めたものではないことと、4値であることが、報告書に注記されます。再評定の項目には取り込みません。</p></div>
 </div>
 
-<h2 id="test"><svg class="icon"><use href="#i-flask"/></svg>6. 仕組みの試験（2026-11-19、v0.8）</h2>
-<p>人間の評定はまだないため、仕組みの動作だけを確かめました。結果は <code>human/session-example/</code> にあります。</p>
+<h2 id="test"><svg class="icon"><use href="#i-flask"/></svg>6. 仕組みの試験（2026-11-19）</h2>
+<p>合成評定者で、仕組みの動作を確かめました。結果は <code>human/session-example/</code> にあります。</p>
 <div class="chart">
 <p class="chart-title">合成評定者12名との比較</p>
 <p class="chart-sub">母集団から抽出し、所属度を5段階に丸め、述語ごとに10%を無作為な段階に置き換えた評定者。母集団から作った評定者なので、シミュレータが近いのは当然で、仕組みの確認にすぎない</p>
@@ -197,21 +197,42 @@ python3 blind.py compare --key human/s01/key.json --ratings "human/s01/ratings/*
 <thead><tr><th>試験</th><th>結果</th></tr></thead>
 <tbody>
 <tr><td>評定ページ（ヘッドレスブラウザ、幅390px）</td><td>評定者IDの検証、アンケート、27問の回答（4つの述語×5段階。4つそろうまで「次へ」が押せない）、途中での再読み込みと再開（7問目から）、「戻る」での回答の復元、評定ファイル（<code>apology-blind-rating/2</code>）の書き出しが動作。スクリプトのエラーなし</td></tr>
-<tr><td>t ノルムの検証</td><td>合成評定者は min で作った「釣り合う」を丸めているので、min・積とも相関 0.74 で区別できない（試験として当然）。人間の評定で初めて意味を持つ</td></tr>
+<tr><td>t ノルムの検証</td><td>合成評定者は min で作った「釣り合う」を丸めているので、min・積とも相関 0.74 で、区別できない（試験として当然）。人間の評定で初めて意味を持つ</td></tr>
 <tr><td>型の判定の回復</td><td>合成評定者の元の型を、23問で 6/12 名当てた（偶然なら約2.4名）。型どうしの重なりが大きく、項目が少ないと型の識別は粗い</td></tr>
 <tr><td>外れの検出</td><td>無作為に押した回答（近さ 0.58）と、すべて「少し」を押した回答（0.72）は、どちらも「母集団の外の可能性」と判定された（目安 0.883）</td></tr>
-<tr><td>旧形式の取り込み</td><td>4値の評定ファイルの取り込み（一点集中の所属度）と、報告書の注記が動作</td></tr>
+<tr><td>4値形式の取り込み</td><td>4値の評定ファイルの取り込み（一点集中の所属度）と、報告書の注記が動作</td></tr>
 </tbody></table></div>
 
-<h2 id="caveats"><svg class="icon"><use href="#i-alert"/></svg>7. 限界と注意</h2>
+<h2 id="kit"><svg class="icon"><use href="#i-flask"/></svg>7. 評価キット</h2>
+<p>控えの時間軸の仮説（失敗の前の構え、修復期の控え、免責の但し書きの局面）を、日本の受け手で確かめるための問題束です。事前登録は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/human/PREREGISTRATION.md">PREREGISTRATION.md</a>、仮説の機械で読める定義は <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/human/hypotheses.json">hypotheses.json</a>、設計は <a href="methods.html#kit">方法 8章</a>です。</p>
+<pre><code>python3 tools/make_scenes_kit.py                                   # 項目の組（88場面・320回答）
+python3 blind.py pack --design --scenes examples/scenes-kit.json --repeat 2 --out-dir human/kit
+python3 sim.py scenes examples/scenes-kit.json -o out/scenes-kit.json
+python3 blind.py compare --key human/kit/key.json --ratings "human/kit/ratings/*.json" \
+  --sim out/scenes-kit.json --scenes examples/scenes-kit.json --hypotheses human/hypotheses.json --rps -o human/kit/compare
+python3 blind.py power --scenes examples/scenes-kit.json --hypotheses human/hypotheses.json --raters 20,40,60</code></pre>
+<div class="tbl metric-up"><table>
+<thead><tr><th>要素</th><th>内容</th></tr></thead>
+<tbody>
+<tr><td>項目</td><td><code>design.kit</code> が真の場面。4領域 × 組 A（失敗の前の構え 5 × 謝罪 6）・組 B（修復期の回答 5 × 関係 2 × 傷の深さ 2）・組 C（但し書き 2 × 局面 4）＋錨 4</td></tr>
+<tr><td>割り付け</td><td>土台（28）ごとに一人一水準のラテン方格。リスト（30）は評定者IDのハッシュで決まり、URL の <code>?list=</code> で指定もできる。錨は全員、注意の確認 1問、再評定 2問。1人 35問</td></tr>
+<tr><td>追加の設問</td><td>信頼意図（全項目）、反省の知覚・再発の危険（修復期）、操作の確認（失敗の前の自信。組 A・C）。不満の深さと誠実さは聞かない</td></tr>
+<tr><td>アンケート</td><td>3章の8問に加えて、過信への厳しさ、「確認済み」への頼り方、戻り方の好み、詫びの繰り返しの負担、謝罪中の「念のため」、AI の利用経験の6問</td></tr>
+<tr><td>検定</td><td><code>compare --hypotheses</code>：評定者を単位にしたブートストラップ（p は標準誤差の正規近似）、primary に Holm 法、支持は調整後 p &lt; 0.05 かつ効果 ≥ 0.10。シミュレータの予測との向きの一致も出す</td></tr>
+<tr><td>主指標</td><td><code>compare --rps</code>：述語ごとの5段階の順位確率スコア（予測分布は受け手一人ずつの所属度＋評定者のノイズを丸めたもの）</td></tr>
+<tr><td>検出力</td><td><code>power</code>：合成評定者で、事前登録の検定が「支持」となる割合を人数ごとに出す（<code>--effect-scale 0.5</code> で予測の半分の効果）</td></tr>
+</tbody></table></div>
+<p class="note">合成評定者による試験と検出力の結果は <code>eval/kit/</code> と <a href="https://github.com/gpsnmeajp/shazai-receiver-simulator/blob/main/docs/md/EVALUATION.md">EVALUATION.md</a> 5.2節にあります。</p>
+
+<h2 id="caveats"><svg class="icon"><use href="#i-alert"/></svg>8. 限界と注意</h2>
 <div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>立場の説明文（本人／第三者／物語の中）は評定に影響します。シミュレータの条件とそろえるために入れていますが、文言を変えたら比較をやり直してください。</p></div>
 <div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>型の判定は「どの型が最も近いか」を示すだけで、23問程度では型を確実には識別できません。項目を増やすか、性質ごとに一点だけ変えた組を増やすと識別しやすくなります。</p></div>
 <div class="callout bad"><svg class="icon"><use href="#i-alert"/></svg><p>合成評定者による試験の数値を、シミュレータの妥当性の証拠として使ってはいけません。</p></div>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>アンケートは、心理尺度として検証されていません。</p></div>
 <div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>5段階を等間隔の所属度（0／0.25／0.5／0.75／1）として読んでいますが、評定者がそう使っているかは確かめていません。</p></div>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>4値の旧形式の評定は、一点集中の所属度として読みます。「どちらとも言えない」の情報がないので、ファジィの評定より近さが低く出ます。両者を混ぜて比べるときは注意してください。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>4値形式の評定は、一点集中の所属度として読みます。「どちらとも言えない」の情報がないので、ファジィの評定より近さが低く出ます。両者を混ぜて比べるときは注意してください。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>アンケートは心理尺度として検証されていません。</p></div>
 
-<h2 id="formats"><svg class="icon"><use href="#i-file"/></svg>8. ファイル形式</h2>
+<h2 id="formats"><svg class="icon"><use href="#i-file"/></svg>9. ファイル形式</h2>
 <h3>問題束（<code>packet.json</code>、<code>rate.html</code> に埋め込み）</h3>
 <pre><code>{"schema": "apology-blind-packet/2", "packet_id": "pk-20261118-xxxxxx", "title": "...", "mode": "independent",
  "items": [{"id": "4d3871", "block": 1, "framing": "あなたは…", "situation": "…", "messages": [], "answer": "…"}]}</code></pre>
@@ -219,7 +240,7 @@ python3 blind.py compare --key human/s01/key.json --ratings "human/s01/ratings/*
 <pre><code>{"schema": "apology-blind-key/1", "packet_id": "...",
  "items": {"4d3871": {"source": "scene:S3/C4", "group": "S3", "repeat_of": null,
                       "meta": {"origin": "scenes", "label": "仮想の代償だけ", "frame": "real_task", "...": "..."}}}}</code></pre>
-<h3>評定ファイル（評定ページが書き出す。旧形式 <code>apology-blind-rating/1</code> の <code>{"rating": "rude"}</code> も読める）</h3>
+<h3>評定ファイル（評定ページが書き出す。4値形式 <code>apology-blind-rating/1</code> の <code>{"rating": "rude"}</code> も読める）</h3>
 <pre><code>{"schema": "apology-blind-rating/2", "packet_id": "...", "rater": {"id": "R07", "questionnaire": {"detect": 4}},
  "mode": "independent", "order": ["..."], "duration_s": 1520, "finished_at": "...",
  "ratings": {"4d3871": {"mu": {"rude": 0.75, "light": 0.5, "heavy": 0, "fit": 0.25},
