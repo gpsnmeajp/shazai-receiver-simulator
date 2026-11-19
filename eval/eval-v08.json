@@ -1,0 +1,1840 @@
+{
+ "personas": {
+  "majority": {
+   "kappa": 0.06139789326660069,
+   "agree": 0.5625,
+   "closeness": 0.78125
+  },
+  "P1": {
+   "kappa": 0.03955841766329342,
+   "agree": 0.546875
+  },
+  "P2": {
+   "kappa": 0.0749641525666762,
+   "agree": 0.5625
+  },
+  "P3": {
+   "kappa": 0.10846136207291904,
+   "agree": 0.578125
+  }
+ },
+ "observers": {
+  "proxy": {
+   "default": {
+    "n": 192,
+    "kappa": 0.3339837398373983,
+    "agree": 0.6666666666666666,
+    "author_membership": 0.58891875,
+    "closeness": 0.7580278645833333,
+    "surprise": 19,
+    "by_cond": {
+     "baseline": {
+      "author_fit": 0.484375,
+      "sim_fit_mu": 0.4835171875,
+      "sim_fit_label": 0.515625,
+      "sim_rude_tail": 0.299546875,
+      "persona_fit": 0.90625
+     },
+     "japanese_posture": {
+      "author_fit": 0.6875,
+      "sim_fit_mu": 0.63390625,
+      "sim_fit_label": 0.765625,
+      "sim_rude_tail": 0.207375,
+      "persona_fit": 0.78125
+     },
+     "shazai_full": {
+      "author_fit": 0.75,
+      "sim_fit_mu": 0.6797671875,
+      "sim_fit_label": 0.8125,
+      "sim_rude_tail": 0.091015625,
+      "persona_fit": 0.734375
+     }
+    },
+    "order_ok": true,
+    "confusion": {
+     "rude": {
+      "rude": 18,
+      "fit": 8,
+      "light": 6
+     },
+     "light": {
+      "light": 7,
+      "fit": 22,
+      "rude": 7
+     },
+     "fit": {
+      "fit": 103,
+      "rude": 14,
+      "light": 6
+     },
+     "heavy": {
+      "fit": 1
+     }
+    },
+    "by_level": {
+     "0": {
+      "n": 24,
+      "agree": 1.0
+     },
+     "1": {
+      "n": 36,
+      "agree": 0.4722222222222222
+     },
+     "2": {
+      "n": 36,
+      "agree": 0.6666666666666666
+     },
+     "3": {
+      "n": 48,
+      "agree": 0.6458333333333334
+     },
+     "4": {
+      "n": 24,
+      "agree": 0.5416666666666666
+     },
+     "repair": {
+      "n": 24,
+      "agree": 0.7916666666666666
+     }
+    },
+    "kappa_ci": [
+     0.19794930219310733,
+     0.4689754689754689
+    ]
+   },
+   "no_hysteresis": {
+    "n": 192,
+    "kappa": 0.32587228439763,
+    "agree": 0.6666666666666666,
+    "author_membership": 0.6054265625,
+    "closeness": 0.7686095052083334,
+    "surprise": 19,
+    "by_cond": {
+     "baseline": {
+      "author_fit": 0.484375,
+      "sim_fit_mu": 0.521959375,
+      "sim_fit_label": 0.5625,
+      "sim_rude_tail": 0.296765625,
+      "persona_fit": 0.90625
+     },
+     "japanese_posture": {
+      "author_fit": 0.6875,
+      "sim_fit_mu": 0.6619046875,
+      "sim_fit_label": 0.765625,
+      "sim_rude_tail": 0.203265625,
+      "persona_fit": 0.78125
+     },
+     "shazai_full": {
+      "author_fit": 0.75,
+      "sim_fit_mu": 0.7094234375,
+      "sim_fit_label": 0.8125,
+      "sim_rude_tail": 0.08985937499999999,
+      "persona_fit": 0.734375
+     }
+    },
+    "order_ok": true,
+    "confusion": {
+     "rude": {
+      "rude": 18,
+      "fit": 8,
+      "light": 6
+     },
+     "light": {
+      "light": 5,
+      "fit": 23,
+      "rude": 8
+     },
+     "fit": {
+      "fit": 105,
+      "rude": 14,
+      "light": 3,
+      "heavy": 1
+     },
+     "heavy": {
+      "fit": 1
+     }
+    },
+    "by_level": {
+     "0": {
+      "n": 24,
+      "agree": 1.0
+     },
+     "1": {
+      "n": 36,
+      "agree": 0.4722222222222222
+     },
+     "2": {
+      "n": 36,
+      "agree": 0.6666666666666666
+     },
+     "3": {
+      "n": 48,
+      "agree": 0.6458333333333334
+     },
+     "4": {
+      "n": 24,
+      "agree": 0.5833333333333334
+     },
+     "repair": {
+      "n": 24,
+      "agree": 0.75
+     }
+    },
+    "kappa_ci": [
+     0.2006508111212136,
+     0.44238975817923176
+    ]
+   },
+   "sensitivity": {
+    "既定（失礼 1.2/0.3、足りない 1.0/0.3、重すぎる 0.3/0.25、min）": {
+     "n": 192,
+     "kappa": 0.3339837398373983,
+     "agree": 0.6666666666666666,
+     "author_membership": 0.58891875,
+     "closeness": 0.7580278645833333,
+     "surprise": 19,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.4835171875,
+       "sim_fit_label": 0.515625,
+       "sim_rude_tail": 0.299546875,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.63390625,
+       "sim_fit_label": 0.765625,
+       "sim_rude_tail": 0.207375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.6797671875,
+       "sim_fit_label": 0.8125,
+       "sim_rude_tail": 0.091015625,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 18,
+       "fit": 8,
+       "light": 6
+      },
+      "light": {
+       "light": 7,
+       "fit": 22,
+       "rude": 7
+      },
+      "fit": {
+       "fit": 103,
+       "rude": 14,
+       "light": 6
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.4722222222222222
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6666666666666666
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.6458333333333334
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5416666666666666
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.7916666666666666
+      }
+     },
+     "kappa_ci": [
+      0.20992233684942618,
+      0.47566452239349444
+     ]
+    },
+    "失礼の中心 1.5（最初に置いた値）": {
+     "n": 192,
+     "kappa": 0.30630268968285823,
+     "agree": 0.671875,
+     "author_membership": 0.5907791666666666,
+     "closeness": 0.7639403645833333,
+     "surprise": 22,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.51313125,
+       "sim_fit_label": 0.59375,
+       "sim_rude_tail": 0.244,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.6757,
+       "sim_fit_label": 0.84375,
+       "sim_rude_tail": 0.134578125,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.705678125,
+       "sim_fit_label": 0.828125,
+       "sim_rude_tail": 0.044562500000000005,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "fit": 10,
+       "light": 8,
+       "rude": 14
+      },
+      "light": {
+       "light": 7,
+       "fit": 26,
+       "rude": 3
+      },
+      "fit": {
+       "fit": 108,
+       "light": 7,
+       "rude": 8
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.5
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6944444444444444
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.6041666666666666
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5833333333333334
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.7916666666666666
+      }
+     },
+     "kappa_ci": [
+      0.18733692816141936,
+      0.43894553593633423
+     ]
+    },
+    "失礼の中心 1.0": {
+     "n": 192,
+     "kappa": 0.32937128558023143,
+     "agree": 0.6510416666666666,
+     "author_membership": 0.582559375,
+     "closeness": 0.7492315104166667,
+     "surprise": 20,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.4562984375,
+       "sim_fit_label": 0.5,
+       "sim_rude_tail": 0.342453125,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.595859375,
+       "sim_fit_label": 0.6875,
+       "sim_rude_tail": 0.263796875,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.6505515625,
+       "sim_fit_label": 0.78125,
+       "sim_rude_tail": 0.115828125,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 20,
+       "fit": 6,
+       "light": 6
+      },
+      "light": {
+       "light": 6,
+       "fit": 20,
+       "rude": 10
+      },
+      "fit": {
+       "fit": 99,
+       "rude": 18,
+       "light": 6
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.4722222222222222
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6111111111111112
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.625
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5416666666666666
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.7916666666666666
+      }
+     },
+     "kappa_ci": [
+      0.1998823356375937,
+      0.4635648306534381
+     ]
+    },
+    "足りないの中心 0.8": {
+     "n": 192,
+     "kappa": 0.26120196445749577,
+     "agree": 0.6041666666666666,
+     "author_membership": 0.5801984375,
+     "closeness": 0.7479338541666666,
+     "surprise": 17,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.4534484375,
+       "sim_fit_label": 0.40625,
+       "sim_rude_tail": 0.299546875,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.6076015625,
+       "sim_fit_label": 0.6875,
+       "sim_rude_tail": 0.207375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.647634375,
+       "sim_fit_label": 0.765625,
+       "sim_rude_tail": 0.091015625,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 17,
+       "fit": 8,
+       "light": 7
+      },
+      "light": {
+       "light": 9,
+       "fit": 20,
+       "rude": 7
+      },
+      "fit": {
+       "fit": 90,
+       "rude": 14,
+       "light": 19
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.4722222222222222
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6666666666666666
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.5833333333333334
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5416666666666666
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.4166666666666667
+      }
+     },
+     "kappa_ci": [
+      0.11626976185711436,
+      0.3878432582536255
+     ]
+    },
+    "足りないの中心 1.25": {
+     "n": 192,
+     "kappa": 0.32764281024294145,
+     "agree": 0.6666666666666666,
+     "author_membership": 0.5961145833333333,
+     "closeness": 0.7672690104166667,
+     "surprise": 22,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.5147046875,
+       "sim_fit_label": 0.546875,
+       "sim_rude_tail": 0.299546875,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.6569890625,
+       "sim_fit_label": 0.765625,
+       "sim_rude_tail": 0.207375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.7096109375,
+       "sim_fit_label": 0.8125,
+       "sim_rude_tail": 0.091015625,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 18,
+       "fit": 8,
+       "light": 6
+      },
+      "light": {
+       "light": 6,
+       "fit": 23,
+       "rude": 7
+      },
+      "fit": {
+       "fit": 104,
+       "rude": 14,
+       "light": 5
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.4722222222222222
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6666666666666666
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.625
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5833333333333334
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.7916666666666666
+      }
+     },
+     "kappa_ci": [
+      0.2087912087912088,
+      0.45679012345679004
+     ]
+    },
+    "なだらかさ ×0.5（4値に近い）": {
+     "n": 192,
+     "kappa": 0.3234305540496586,
+     "agree": 0.6614583333333334,
+     "author_membership": 0.6092786458333334,
+     "closeness": 0.7799735677083333,
+     "surprise": 28,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.5065609375,
+       "sim_fit_label": 0.515625,
+       "sim_rude_tail": 0.299546875,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.6631109375,
+       "sim_fit_label": 0.765625,
+       "sim_rude_tail": 0.207375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.7214484375,
+       "sim_fit_label": 0.8125,
+       "sim_rude_tail": 0.091015625,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 17,
+       "fit": 8,
+       "light": 7
+      },
+      "light": {
+       "light": 7,
+       "fit": 22,
+       "rude": 7
+      },
+      "fit": {
+       "fit": 103,
+       "rude": 14,
+       "light": 6
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.4722222222222222
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6666666666666666
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.625
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5416666666666666
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.7916666666666666
+      }
+     },
+     "kappa_ci": [
+      0.20019319005071234,
+      0.4527592480291086
+     ]
+    },
+    "なだらかさ ×2": {
+     "n": 192,
+     "kappa": 0.3267519016022011,
+     "agree": 0.6614583333333334,
+     "author_membership": 0.558978125,
+     "closeness": 0.7036742187499999,
+     "surprise": 2,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.45625781249999997,
+       "sim_fit_label": 0.515625,
+       "sim_rude_tail": 0.299546875,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.5830046875,
+       "sim_fit_label": 0.75,
+       "sim_rude_tail": 0.207390625,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.60985,
+       "sim_fit_label": 0.8125,
+       "sim_rude_tail": 0.091015625,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 18,
+       "fit": 8,
+       "light": 6
+      },
+      "light": {
+       "light": 7,
+       "fit": 22,
+       "rude": 7
+      },
+      "fit": {
+       "fit": 102,
+       "rude": 14,
+       "light": 7
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.4722222222222222
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6666666666666666
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.625
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5416666666666666
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.7916666666666666
+      }
+     },
+     "kappa_ci": [
+      0.2011251758087202,
+      0.467631103074141
+     ]
+    },
+    "釣り合う = 積": {
+     "n": 192,
+     "kappa": 0.31987977672820955,
+     "agree": 0.65625,
+     "author_membership": 0.5635901041666667,
+     "closeness": 0.7553222656249999,
+     "surprise": 20,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.44598125,
+       "sim_fit_label": 0.515625,
+       "sim_rude_tail": 0.299546875,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.590196875,
+       "sim_fit_label": 0.75,
+       "sim_rude_tail": 0.207375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.6415078125,
+       "sim_fit_label": 0.796875,
+       "sim_rude_tail": 0.091015625,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 18,
+       "fit": 8,
+       "light": 6
+      },
+      "light": {
+       "light": 7,
+       "fit": 22,
+       "rude": 7
+      },
+      "fit": {
+       "fit": 101,
+       "rude": 16,
+       "light": 6
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.4444444444444444
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6666666666666666
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.625
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5416666666666666
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.7916666666666666
+      }
+     },
+     "kappa_ci": [
+      0.1936161276774465,
+      0.4593169562612343
+     ]
+    },
+    "境界のなだらかさ 0.05（ほぼ段差）": {
+     "n": 192,
+     "kappa": 0.32689714686370747,
+     "agree": 0.6614583333333334,
+     "author_membership": 0.5867557291666666,
+     "closeness": 0.7568700520833334,
+     "surprise": 20,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.4760890625,
+       "sim_fit_label": 0.515625,
+       "sim_rude_tail": 0.31134375,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.6296125,
+       "sim_fit_label": 0.75,
+       "sim_rude_tail": 0.21409375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.6749953125,
+       "sim_fit_label": 0.8125,
+       "sim_rude_tail": 0.097265625,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 18,
+       "fit": 8,
+       "light": 6
+      },
+      "light": {
+       "light": 7,
+       "fit": 22,
+       "rude": 7
+      },
+      "fit": {
+       "fit": 102,
+       "rude": 15,
+       "light": 6
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.4722222222222222
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6666666666666666
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.625
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5416666666666666
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.7916666666666666
+      }
+     },
+     "kappa_ci": [
+      0.20098778982027707,
+      0.4674384949348769
+     ]
+    }
+   }
+  },
+  "subagent": {
+   "default": {
+    "n": 192,
+    "kappa": 0.28276347015909287,
+    "agree": 0.5572916666666666,
+    "author_membership": 0.5637083333333334,
+    "closeness": 0.7198421875,
+    "surprise": 22,
+    "by_cond": {
+     "baseline": {
+      "author_fit": 0.484375,
+      "sim_fit_mu": 0.34226875,
+      "sim_fit_label": 0.265625,
+      "sim_rude_tail": 0.5140625,
+      "persona_fit": 0.90625
+     },
+     "japanese_posture": {
+      "author_fit": 0.6875,
+      "sim_fit_mu": 0.437625,
+      "sim_fit_label": 0.5,
+      "sim_rude_tail": 0.410234375,
+      "persona_fit": 0.78125
+     },
+     "shazai_full": {
+      "author_fit": 0.75,
+      "sim_fit_mu": 0.5063890625,
+      "sim_fit_label": 0.578125,
+      "sim_rude_tail": 0.24306250000000001,
+      "persona_fit": 0.734375
+     }
+    },
+    "order_ok": true,
+    "confusion": {
+     "rude": {
+      "rude": 25,
+      "fit": 2,
+      "light": 5
+     },
+     "light": {
+      "light": 8,
+      "fit": 9,
+      "rude": 19
+     },
+     "fit": {
+      "fit": 74,
+      "light": 22,
+      "rude": 27
+     },
+     "heavy": {
+      "fit": 1
+     }
+    },
+    "by_level": {
+     "0": {
+      "n": 24,
+      "agree": 1.0
+     },
+     "1": {
+      "n": 36,
+      "agree": 0.5833333333333334
+     },
+     "2": {
+      "n": 36,
+      "agree": 0.6944444444444444
+     },
+     "3": {
+      "n": 48,
+      "agree": 0.375
+     },
+     "4": {
+      "n": 24,
+      "agree": 0.4583333333333333
+     },
+     "repair": {
+      "n": 24,
+      "agree": 0.3333333333333333
+     }
+    },
+    "kappa_ci": [
+     0.17852096090438063,
+     0.3766233766233767
+    ]
+   },
+   "no_hysteresis": {
+    "n": 192,
+    "kappa": 0.3195671691159098,
+    "agree": 0.609375,
+    "author_membership": 0.5882979166666666,
+    "closeness": 0.7368845052083333,
+    "surprise": 23,
+    "by_cond": {
+     "baseline": {
+      "author_fit": 0.484375,
+      "sim_fit_mu": 0.39095625,
+      "sim_fit_label": 0.390625,
+      "sim_rude_tail": 0.485703125,
+      "persona_fit": 0.90625
+     },
+     "japanese_posture": {
+      "author_fit": 0.6875,
+      "sim_fit_mu": 0.4813046875,
+      "sim_fit_label": 0.578125,
+      "sim_rude_tail": 0.38925,
+      "persona_fit": 0.78125
+     },
+     "shazai_full": {
+      "author_fit": 0.75,
+      "sim_fit_mu": 0.5504765625,
+      "sim_fit_label": 0.671875,
+      "sim_rude_tail": 0.2344375,
+      "persona_fit": 0.734375
+     }
+    },
+    "order_ok": true,
+    "confusion": {
+     "rude": {
+      "rude": 25,
+      "fit": 3,
+      "light": 4
+     },
+     "light": {
+      "light": 5,
+      "fit": 14,
+      "rude": 17
+     },
+     "fit": {
+      "fit": 87,
+      "light": 7,
+      "rude": 27,
+      "heavy": 2
+     },
+     "heavy": {
+      "fit": 1
+     }
+    },
+    "by_level": {
+     "0": {
+      "n": 24,
+      "agree": 1.0
+     },
+     "1": {
+      "n": 36,
+      "agree": 0.5555555555555556
+     },
+     "2": {
+      "n": 36,
+      "agree": 0.6944444444444444
+     },
+     "3": {
+      "n": 48,
+      "agree": 0.3958333333333333
+     },
+     "4": {
+      "n": 24,
+      "agree": 0.4583333333333333
+     },
+     "repair": {
+      "n": 24,
+      "agree": 0.75
+     }
+    },
+    "kappa_ci": [
+     0.21765704584040743,
+     0.41284403669724773
+    ]
+   },
+   "sensitivity": {
+    "既定（失礼 1.2/0.3、足りない 1.0/0.3、重すぎる 0.3/0.25、min）": {
+     "n": 192,
+     "kappa": 0.28276347015909287,
+     "agree": 0.5572916666666666,
+     "author_membership": 0.5637083333333334,
+     "closeness": 0.7198421875,
+     "surprise": 22,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.34226875,
+       "sim_fit_label": 0.265625,
+       "sim_rude_tail": 0.5140625,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.437625,
+       "sim_fit_label": 0.5,
+       "sim_rude_tail": 0.410234375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.5063890625,
+       "sim_fit_label": 0.578125,
+       "sim_rude_tail": 0.24306250000000001,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 25,
+       "fit": 2,
+       "light": 5
+      },
+      "light": {
+       "light": 8,
+       "fit": 9,
+       "rude": 19
+      },
+      "fit": {
+       "fit": 74,
+       "light": 22,
+       "rude": 27
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.5833333333333334
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6944444444444444
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.375
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.4583333333333333
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.3333333333333333
+      }
+     },
+     "kappa_ci": [
+      0.19485812823326534,
+      0.37276002882536635
+     ]
+    },
+    "失礼の中心 1.5（最初に置いた値）": {
+     "n": 192,
+     "kappa": 0.31357197809657417,
+     "agree": 0.5885416666666666,
+     "author_membership": 0.5803973958333334,
+     "closeness": 0.7352345052083334,
+     "surprise": 16,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.3797921875,
+       "sim_fit_label": 0.359375,
+       "sim_rude_tail": 0.422140625,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.4838546875,
+       "sim_fit_label": 0.5,
+       "sim_rude_tail": 0.336546875,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.534153125,
+       "sim_fit_label": 0.59375,
+       "sim_rude_tail": 0.204203125,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 24,
+       "light": 6,
+       "fit": 2
+      },
+      "light": {
+       "light": 10,
+       "fit": 11,
+       "rude": 15
+      },
+      "fit": {
+       "fit": 79,
+       "light": 24,
+       "rude": 20
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.6111111111111112
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.75
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.3958333333333333
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.5416666666666666
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.3333333333333333
+      }
+     },
+     "kappa_ci": [
+      0.21472392638036814,
+      0.40396469909973826
+     ]
+    },
+    "失礼の中心 1.0": {
+     "n": 192,
+     "kappa": 0.23616048755713553,
+     "agree": 0.5104166666666666,
+     "author_membership": 0.5447182291666667,
+     "closeness": 0.7041583333333333,
+     "surprise": 24,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.3103328125,
+       "sim_fit_label": 0.25,
+       "sim_rude_tail": 0.5764375,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.3985484375,
+       "sim_fit_label": 0.421875,
+       "sim_rude_tail": 0.4955,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.4785453125,
+       "sim_fit_label": 0.53125,
+       "sim_rude_tail": 0.285453125,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 25,
+       "fit": 2,
+       "light": 5
+      },
+      "light": {
+       "rude": 23,
+       "fit": 7,
+       "light": 6
+      },
+      "fit": {
+       "fit": 67,
+       "rude": 37,
+       "light": 18,
+       "heavy": 1
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 0.9166666666666666
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.5
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6666666666666666
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.3333333333333333
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.4166666666666667
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.3333333333333333
+      }
+     },
+     "kappa_ci": [
+      0.15725629464107568,
+      0.3023441308104754
+     ]
+    },
+    "足りないの中心 0.8": {
+     "n": 192,
+     "kappa": 0.27519196945647967,
+     "agree": 0.5416666666666666,
+     "author_membership": 0.5576375,
+     "closeness": 0.7088944010416666,
+     "surprise": 20,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.3252,
+       "sim_fit_label": 0.265625,
+       "sim_rude_tail": 0.5140625,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.4190328125,
+       "sim_fit_label": 0.453125,
+       "sim_rude_tail": 0.410234375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.47902500000000003,
+       "sim_fit_label": 0.53125,
+       "sim_rude_tail": 0.24306250000000001,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 25,
+       "fit": 2,
+       "light": 5
+      },
+      "light": {
+       "light": 10,
+       "fit": 8,
+       "rude": 18
+      },
+      "fit": {
+       "fit": 69,
+       "light": 25,
+       "rude": 28,
+       "heavy": 1
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.6111111111111112
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6944444444444444
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.3333333333333333
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.375
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.3333333333333333
+      }
+     },
+     "kappa_ci": [
+      0.17392146982441176,
+      0.3669335845501649
+     ]
+    },
+    "足りないの中心 1.25": {
+     "n": 192,
+     "kappa": 0.26357113848653035,
+     "agree": 0.5572916666666666,
+     "author_membership": 0.5695708333333334,
+     "closeness": 0.7312177083333333,
+     "surprise": 22,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.361271875,
+       "sim_fit_label": 0.3125,
+       "sim_rude_tail": 0.5140625,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.4570234375,
+       "sim_fit_label": 0.53125,
+       "sim_rude_tail": 0.410234375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.5355046875,
+       "sim_fit_label": 0.609375,
+       "sim_rude_tail": 0.24306250000000001,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 25,
+       "fit": 2,
+       "light": 5
+      },
+      "light": {
+       "rude": 20,
+       "fit": 12,
+       "light": 4
+      },
+      "fit": {
+       "fit": 78,
+       "rude": 30,
+       "light": 15
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.5555555555555556
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6944444444444444
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.375
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.4583333333333333
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.375
+      }
+     },
+     "kappa_ci": [
+      0.17567084078711984,
+      0.35292163098685153
+     ]
+    },
+    "なだらかさ ×0.5（4値に近い）": {
+     "n": 192,
+     "kappa": 0.28276347015909287,
+     "agree": 0.5572916666666666,
+     "author_membership": 0.5795020833333333,
+     "closeness": 0.73832734375,
+     "surprise": 25,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.3519296875,
+       "sim_fit_label": 0.265625,
+       "sim_rude_tail": 0.514046875,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.4518875,
+       "sim_fit_label": 0.5,
+       "sim_rude_tail": 0.410234375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.5319796875,
+       "sim_fit_label": 0.578125,
+       "sim_rude_tail": 0.24306250000000001,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 25,
+       "fit": 2,
+       "light": 5
+      },
+      "light": {
+       "light": 8,
+       "fit": 9,
+       "rude": 19
+      },
+      "fit": {
+       "fit": 74,
+       "light": 22,
+       "rude": 27
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.5833333333333334
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6944444444444444
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.375
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.4583333333333333
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.3333333333333333
+      }
+     },
+     "kappa_ci": [
+      0.19485812823326534,
+      0.37276002882536635
+     ]
+    },
+    "なだらかさ ×2": {
+     "n": 192,
+     "kappa": 0.28860658991663357,
+     "agree": 0.5625,
+     "author_membership": 0.5470791666666667,
+     "closeness": 0.6788032552083334,
+     "surprise": 4,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.335221875,
+       "sim_fit_label": 0.28125,
+       "sim_rude_tail": 0.514109375,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.4276,
+       "sim_fit_label": 0.5,
+       "sim_rude_tail": 0.410265625,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.476109375,
+       "sim_fit_label": 0.578125,
+       "sim_rude_tail": 0.24306250000000001,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 25,
+       "fit": 2,
+       "light": 5
+      },
+      "light": {
+       "light": 8,
+       "fit": 9,
+       "rude": 19
+      },
+      "fit": {
+       "fit": 75,
+       "light": 20,
+       "rude": 28
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.6111111111111112
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6944444444444444
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.3541666666666667
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.4583333333333333
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.375
+      }
+     },
+     "kappa_ci": [
+      0.1951857231790828,
+      0.37889557135046475
+     ]
+    },
+    "釣り合う = 積": {
+     "n": 192,
+     "kappa": 0.2781642971349553,
+     "agree": 0.546875,
+     "author_membership": 0.535740625,
+     "closeness": 0.7148821614583333,
+     "surprise": 24,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.308896875,
+       "sim_fit_label": 0.265625,
+       "sim_rude_tail": 0.5140625,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.3992875,
+       "sim_fit_label": 0.46875,
+       "sim_rude_tail": 0.410234375,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.4698125,
+       "sim_fit_label": 0.546875,
+       "sim_rude_tail": 0.24306250000000001,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 25,
+       "fit": 2,
+       "light": 5
+      },
+      "light": {
+       "light": 9,
+       "fit": 8,
+       "rude": 19
+      },
+      "fit": {
+       "fit": 71,
+       "light": 23,
+       "rude": 28,
+       "heavy": 1
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.5833333333333334
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6944444444444444
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.3333333333333333
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.4583333333333333
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.3333333333333333
+      }
+     },
+     "kappa_ci": [
+      0.17874475610759233,
+      0.3677943166441136
+     ]
+    },
+    "境界のなだらかさ 0.05（ほぼ段差）": {
+     "n": 192,
+     "kappa": 0.2772160210111622,
+     "agree": 0.5520833333333334,
+     "author_membership": 0.5614604166666667,
+     "closeness": 0.7186563802083333,
+     "surprise": 22,
+     "by_cond": {
+      "baseline": {
+       "author_fit": 0.484375,
+       "sim_fit_mu": 0.3386765625,
+       "sim_fit_label": 0.265625,
+       "sim_rude_tail": 0.5209843749999999,
+       "persona_fit": 0.90625
+      },
+      "japanese_posture": {
+       "author_fit": 0.6875,
+       "sim_fit_mu": 0.432859375,
+       "sim_fit_label": 0.484375,
+       "sim_rude_tail": 0.4205625,
+       "persona_fit": 0.78125
+      },
+      "shazai_full": {
+       "author_fit": 0.75,
+       "sim_fit_mu": 0.5023859375,
+       "sim_fit_label": 0.578125,
+       "sim_rude_tail": 0.2468125,
+       "persona_fit": 0.734375
+      }
+     },
+     "order_ok": true,
+     "confusion": {
+      "rude": {
+       "rude": 25,
+       "fit": 2,
+       "light": 5
+      },
+      "light": {
+       "light": 8,
+       "fit": 9,
+       "rude": 19
+      },
+      "fit": {
+       "fit": 73,
+       "light": 22,
+       "rude": 28
+      },
+      "heavy": {
+       "fit": 1
+      }
+     },
+     "by_level": {
+      "0": {
+       "n": 24,
+       "agree": 1.0
+      },
+      "1": {
+       "n": 36,
+       "agree": 0.5833333333333334
+      },
+      "2": {
+       "n": 36,
+       "agree": 0.6944444444444444
+      },
+      "3": {
+       "n": 48,
+       "agree": 0.3541666666666667
+      },
+      "4": {
+       "n": 24,
+       "agree": 0.4583333333333333
+      },
+      "repair": {
+       "n": 24,
+       "agree": 0.3333333333333333
+      }
+     },
+     "kappa_ci": [
+      0.1907514450867052,
+      0.3603553581343698
+     ]
+    }
+   }
+  }
+ }
+}

@@ -34,6 +34,7 @@ LLMペルソナに「日本人として評定して」と頼む方式はとり�
 | アーキテクチャ（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/architecture.html) / [Markdown](docs/md/ARCHITECTURE.md)） | データの流れ、観察の形式、受け手モデルの式、コマンド、拡張の手順 |
 | 根拠となる研究と事例（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/evidence.html) / [Markdown](docs/md/EVIDENCE.md)） | 規則ごとの根拠となる研究と事例、確度 |
 | 検証結果と変更履歴（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html) / [Markdown](docs/md/VALIDATION.md)） | 検証結果、既知の限界、次の検証、変更履歴 |
+| 総合評価 v0.8（[Markdown](docs/md/EVALUATION.md)） | ベンチマークと作例での総合評価。LLM の役割をサブエージェントで代替。判明した欠陥と修正の提案 |
 | 人間のブラインド評定（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html) / [Markdown](docs/md/HUMAN_EVAL.md)） | 人間のブラインド評定の実施手順、盲検化の設計、比較の指標 |
 | 層AのJev（System One）への置き換え（[Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計。組み込み判定モード（`check`）は実装済み・未検証 |
 | [レポート](https://gpsnmeajp.github.io/shazai-receiver-simulator/report.html)（`docs/report.html`） | 図で見る解説と結果 |
@@ -111,6 +112,6 @@ AIのト書きや顔文字は「仮想の身体」として扱います。現実
 
 ## 現在の到達点
 
-v0.8 で評定をファジィに組み直しました。作例の組では、規則の向きが4値のときと同じに保たれ、加えて「重すぎるのに足りない」などの同時成立が表れるようになりました。ベンチマークの数値はまだ v0.8 で再計算していません。
+v0.8 で評定をファジィに組み直しました。ベンチマーク（192回答）では、代理観察で筆者との一致度 κ 0.33（v0.7 は 0.31〜0.32）、条件の順位も筆者と一致しました。一方、層Aを LLM の観察（評価ではサブエージェントで代替）にすると κ 0.28 で、判定が厳しすぎます。修復期の論理と評価指標にも欠陥が見つかりました。詳細は [総合評価](docs/md/EVALUATION.md) にあります。
 
 参考として、ファジィ化する前の4値モデル（v0.4）では、ベンチマーク（192回答、代理観察）の条件の順位が筆者と一致しました（「釣り合う」：シミュレータ 51% / 65% / 72%、筆者 48% / 69% / 75%）。ペルソナ評定では順位が逆でした。筆者との一致度はκ=0.28で、ペルソナは0.06です。型の比率、性質の強さ、所属度関数はいずれも事前値で、人間のデータで推定していません。詳細と限界は [検証結果](https://gpsnmeajp.github.io/shazai-receiver-simulator/validation.html)（[Markdown](docs/md/VALIDATION.md)）にあります。

@@ -138,7 +138,7 @@ code{font-size:.88em;overflow-wrap:anywhere}
 </svg>
 <div id="tip" role="tooltip"></div>
 <main>
-<div role="note" style="border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem;font-size:.92rem;background:color-mix(in srgb,var(--r-light) 14%,transparent);border-left:4px solid var(--r-light)"><b>このレポートは、ファジィ化する前の4値モデル（v0.4〜v0.7）の結果です。</b>v0.8 から評定はファジィになり、受け手一人ひとりが「失礼／足りない／釣り合う／重すぎる」の4つの述語に所属度を持ちます（「足りない」は不足量だけから出します）。新しいモデルの作例の結果は <a href="validation.html#fuzzy-scenes">検証 2.1</a>、仕組みは <a href="architecture.html#model">仕組み 4章</a> を見てください。ベンチマークは v0.8 でまだ再計算していません。</div>
+<div role="note" style="border-radius:10px;padding:.8rem 1rem;margin:0 0 1.2rem;font-size:.92rem;background:color-mix(in srgb,var(--r-light) 14%,transparent);border-left:4px solid var(--r-light)"><b>このレポートは、ファジィ化する前の4値モデル（v0.4〜v0.7）の結果です。</b>v0.8 から評定はファジィになり、受け手一人ひとりが「失礼／足りない／釣り合う／重すぎる」の4つの述語に所属度を持ちます（「足りない」は不足量だけから出します）。新しいモデルの作例の結果は <a href="validation.html#fuzzy-scenes">検証 2.1</a>、仕組みは <a href="architecture.html#model">仕組み 4章</a> を見てください。v0.8 のベンチマークの結果と判明した欠陥は <a href="validation.html#bench-v08">検証 2.2</a> にあります。</div>
 <h1>受け手の分布で評価すると、条件の順位が筆者と一致した</h1>
 <p class="lead">LLMには回答に書かれていることを記録させるだけにし、良し悪しは、既存研究をもとに組んだ5つの受け手の型・1000人のシミュレーションで出す仕組みを作りました。SHAZAI Rules v0.4 ベンチマークの192回答で予備検証すると、条件の順位は筆者と一致し、筆者との一致度はLLMペルソナを上回りました。第6節では、信頼が損なわれやすく戻りにくい性質（信頼損傷ヒステリシス）を試作として組み込み、その効果と、今のベンチマークでは測りきれない理由を検討しています。第7節では、謝る側の態度・代償・場面の枠組み（現実のタスクか物語の中か）への拡張を作例で示しています。</p>
 <div class="meta">

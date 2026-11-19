@@ -133,7 +133,7 @@
 <div class="daxis"><span style="left:0">40%</span><span style="left:33.3%">60%</span><span style="left:66.7%">80%</span><span style="left:100%">100%</span></div>
 </div>
 </div>
-<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>v0.8 で評定をファジィに組み直しました。作例の組では規則の向きが4値のときと同じに保たれ、「重すぎるのに足りない」などの同時成立が表れるようになりました。上の図はファジィ化する前の4値モデルの結果で、ベンチマークはまだ v0.8 で再計算していません。型の比率、性質の強さ、所属度関数はいずれも事前値で、人間のデータから推定したものではありません。詳細と限界は <a href="validation.html">検証結果</a> にあります。</p></div>
+<div class="callout warn"><svg class="icon"><use href="#i-alert"/></svg><p>v0.8 で評定をファジィに組み直しました。作例の組では規則の向きが4値のときと同じに保たれ、「重すぎるのに足りない」などの同時成立が表れるようになりました。上の図はファジィ化する前の4値モデルの結果です。v0.8 のベンチマークでは、代理観察で κ 0.33 と同等以上でしたが、層Aを LLM の観察にすると判定が厳しすぎ、修復期の論理と評価指標にも欠陥が見つかりました（<a href="validation.html#bench-v08">検証 2.2</a>）。型の比率、性質の強さ、所属度関数はいずれも事前値で、人間のデータから推定したものではありません。詳細と限界は <a href="validation.html">検証結果</a> にあります。</p></div>
 
 <h2><svg class="icon"><use href="#i-book"/></svg>文書</h2>
 <div class="grid">
