@@ -1,0 +1,8226 @@
+{
+ "source": "s1:llm-s1:subagent",
+ "scenarios": {
+  "C-schedule-scope-prior": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 0,
+      "caused_failure": true,
+      "disclaimer": "scope"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "A-schedule-neutral": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 2,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "E-schedule-second": {
+   "distance_shift": 1,
+   "explicit_complaint": 2,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "ambiguous",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "none"
+     },
+     {
+      "turn": 4,
+      "confidence": 2,
+      "caused_failure": true,
+      "disclaimer": "verify"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 1
+  },
+  "C-schedule-liability-prior": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 0,
+      "caused_failure": true,
+      "disclaimer": "liability"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "C-schedule-scope-repair": {
+   "distance_shift": 0,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": true,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+    }
+   ],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "none"
+     },
+     {
+      "turn": 4,
+      "confidence": 2,
+      "caused_failure": false,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 1
+  },
+  "C-schedule-scope-apology": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 2,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "A-schedule-assertive": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": true,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "B-schedule-neutral-light": {
+   "distance_shift": 0,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": true,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+    }
+   ],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "none"
+     },
+     {
+      "turn": 4,
+      "confidence": 2,
+      "caused_failure": false,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 1
+  },
+  "A-schedule-hedged": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 0,
+      "caused_failure": true,
+      "disclaimer": "scope"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "C-schedule-scope-none": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 2,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "C-schedule-liability-apology": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 2,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "C-schedule-liability-repair": {
+   "distance_shift": 0,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": true,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+    }
+   ],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "none"
+     },
+     {
+      "turn": 4,
+      "confidence": 2,
+      "caused_failure": false,
+      "disclaimer": "verify"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 1
+  },
+  "A-schedule-confident": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 1.0
+   },
+   "turns_since_incident": 0
+  },
+  "B-schedule-neutral-deep": {
+   "distance_shift": 0,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": true,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+    }
+   ],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "none"
+     },
+     {
+      "turn": 4,
+      "confidence": 1,
+      "caused_failure": false,
+      "disclaimer": "verify"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 1
+  },
+  "C-schedule-liability-none": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 1,
+      "caused_failure": true,
+      "disclaimer": "none"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "E-schedule-vague": {
+   "distance_shift": 0,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": true,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "翌週の定例も同じ時間に移してください。"
+    }
+   ],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "none"
+     },
+     {
+      "turn": 4,
+      "confidence": 1,
+      "caused_failure": false,
+      "disclaimer": "verify"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": false,
+    "verification_false": false,
+    "salient": 0.4
+   },
+   "turns_since_incident": 1
+  },
+  "A-schedule-false_verified": {
+   "distance_shift": 0,
+   "explicit_complaint": 1,
+   "prior_corrections": 0,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": false,
+   "prior_ai_apologies": 0,
+   "broken_promises": 0,
+   "requests": [],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 3,
+      "caused_failure": true,
+      "disclaimer": "verify"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": true,
+    "verification_false": true,
+    "salient": 0.4
+   },
+   "turns_since_incident": 0
+  },
+  "E-schedule-integrity": {
+   "distance_shift": 0,
+   "explicit_complaint": 0,
+   "prior_corrections": 1,
+   "ai_unrequested_push": false,
+   "harm": 1,
+   "violation_type": "competence",
+   "apology_accepted_before": true,
+   "prior_ai_apologies": 1,
+   "broken_promises": 0,
+   "requests": [
+    {
+     "id": "r1",
+     "kind": "task",
+     "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+    }
+   ],
+   "context": {
+    "failure_frame": "real_task",
+    "apologizer": "ai_assistant",
+    "viewpoint": "victim",
+    "power": 0,
+    "fault_clarity": "clear",
+    "distance": "neutral"
+   },
+   "prior_stance": {
+    "turns": [
+     {
+      "turn": 2,
+      "confidence": 2,
+      "caused_failure": true,
+      "disclaimer": "verify"
+     },
+     {
+      "turn": 4,
+      "confidence": 2,
+      "caused_failure": false,
+      "disclaimer": "verify"
+     }
+    ],
+    "dismissed_concern": false,
+    "claimed_verification": true,
+    "verification_false": true,
+    "salient": 1.0
+   },
+   "turns_since_incident": 1
+  }
+ },
+ "answers": {
+  "C-schedule-scope-prior/c0": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.06,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-neutral/a1": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.06,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-neutral/a2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 2,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.06,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今回は日付（11月27日）と、招待状に表示される日時を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.06,
+     "severity": 2,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-neutral/a4": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.06,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今度こそ間違いありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.45,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-neutral/a5": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 1,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 0,
+    "calibrated": false,
+    "over_hedging": 2
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.06,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "これでもまだ間違っている可能性があります。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.25,
+     "severity": 1,
+     "disclaimer": "scope"
+    },
+    {
+     "text": "私の操作は信頼できないかもしれません。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "scope"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.04,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "E-schedule-second/a1": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "E-schedule-second/a2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 2,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 1,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "確かめないままお渡ししてしまったことも、申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今回は日付（11月27日）と、招待状に表示される日時を確かめました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "E-schedule-second/a4": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今度こそ間違いありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "C-schedule-liability-prior/c0": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.06,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "C-schedule-scope-repair/c3": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 1
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "承知しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "移動先が12月4日（木）15時であることと、招待状の表示を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.05,
+     "severity": 2,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "先方への案内は、送る前に文面をお見せしましょうか？",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": []
+  },
+  "C-schedule-scope-repair/c4": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 1
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "承知しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "移動先が12月4日（木）15時であることと、招待状の表示を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.05,
+     "severity": 2,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "先方への案内は、送る前に文面をお見せしましょうか？",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "ただ、ほかの予定と重なっている可能性はあります。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "scope"
+    }
+   ],
+   "signals": []
+  },
+  "C-schedule-scope-apology/c1": {
+   "apology": {
+    "present": true,
+    "position": "after_other",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "ただ、ほかの予定と重なっている可能性はあります。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.45,
+     "severity": 1,
+     "disclaimer": "scope"
+    },
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.05,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "C-schedule-scope-apology/c2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "ただ、ほかの予定と重なっている可能性はあります。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "scope"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.05,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-assertive/a1": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.05,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-assertive/a2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 2,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "確かめないままお渡ししてしまったことも、申し訳ありません。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今回は日付（11月27日）と、招待状に表示される日時を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.05,
+     "severity": 2,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.05,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-assertive/a4": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今度こそ間違いありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.05,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-assertive/a5": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 1,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 0,
+    "calibrated": false,
+    "over_hedging": 2
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "これでもまだ間違っている可能性があります。",
+     "reading_type": "責任転嫁",
+     "hurt_reading": "相手や状況に責任を押しつけている",
+     "plausibility": 0.3,
+     "severity": 2,
+     "disclaimer": "scope"
+    },
+    {
+     "text": "私の操作は信頼できないかもしれません。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.4,
+     "severity": 1,
+     "disclaimer": "liability"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.1,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "B-schedule-neutral-light/b1": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 1
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "承知しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "移動先が12月4日（木）15時であることと、招待状の表示を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.05,
+     "severity": 2,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "先方への案内は、送る前に文面をお見せしましょうか？",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": []
+  },
+  "B-schedule-neutral-light/b2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": true
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "broken",
+    "revisits_incident": 2,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "先ほどは本当に申し訳ありませんでした。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.08,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "改めてお詫びいたします。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.12,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "B-schedule-neutral-light/b3": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 1,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": -1,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 2,
+    "levity_about_incident": true,
+    "presumes_forgiveness": true,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 1,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "了解です！",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.45,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "🎉 今度は週を間違えないので安心してください（笑）翌週の定例を移しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.95,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "smile",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.5
+    },
+    {
+     "kind": "laugh",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.5
+    },
+    {
+     "kind": "flippant",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.5
+    }
+   ]
+  },
+  "B-schedule-neutral-light/b4": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": true
+   },
+   "register": {
+    "formality_shift": -1,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": true,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "もう大丈夫ですね。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.9,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "では次に進みましょう。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "B-schedule-neutral-light/b5": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "これで大丈夫です。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.6,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "A-schedule-hedged/a1": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.02,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-hedged/a2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 2,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今回は日付（11月27日）と、招待状に表示される日時を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.05,
+     "severity": 2,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.02,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-hedged/a4": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今度こそ間違いありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "A-schedule-hedged/a5": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 1,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 0,
+    "calibrated": false,
+    "over_hedging": 2
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "これでもまだ間違っている可能性があります。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "scope"
+    },
+    {
+     "text": "私の操作は信頼できないかもしれません。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "liability"
+    }
+   ],
+   "signals": []
+  },
+  "C-schedule-scope-none/c0": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "C-schedule-liability-apology/c1": {
+   "apology": {
+    "present": true,
+    "position": "after_other",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": true,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 0,
+    "calibrated": false,
+    "over_hedging": 1
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "なお、日時の正確さは保証できませんので、最終的にはご自身でもご確認ください。",
+     "reading_type": "責任転嫁",
+     "hurt_reading": "相手や状況に責任を押しつけている",
+     "plausibility": 0.8,
+     "severity": 2,
+     "disclaimer": "liability"
+    },
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "C-schedule-liability-apology/c2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": true,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 0,
+    "calibrated": false,
+    "over_hedging": 1
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "なお、日時の正確さは保証できませんので、最終的にはご自身でもご確認ください。",
+     "reading_type": "責任転嫁",
+     "hurt_reading": "相手や状況に責任を押しつけている",
+     "plausibility": 0.8,
+     "severity": 2,
+     "disclaimer": "liability"
+    }
+   ],
+   "signals": []
+  },
+  "C-schedule-liability-repair/c3": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "承知しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "移動先が12月4日（木）15時であることと、招待状の表示を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.05,
+     "severity": 2,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "先方への案内は、送る前に文面をお見せしましょうか？",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": []
+  },
+  "C-schedule-liability-repair/c4": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": true,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": true,
+    "over_hedging": 1
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "承知しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "移動先が12月4日（木）15時であることと、招待状の表示を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.05,
+     "severity": 2,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "先方への案内は、送る前に文面をお見せしましょうか？",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "なお、日時の正確さは保証できませんので、最終的にはご自身でもご確認ください。",
+     "reading_type": "責任転嫁",
+     "hurt_reading": "相手や状況に責任を押しつけている",
+     "plausibility": 0.8,
+     "severity": 2,
+     "disclaimer": "liability"
+    }
+   ],
+   "signals": []
+  },
+  "A-schedule-confident/a1": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "A-schedule-confident/a2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 2,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今回は日付（11月27日）と、招待状に表示される日時を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.06,
+     "severity": 2,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": []
+  },
+  "A-schedule-confident/a4": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今度こそ間違いありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-confident/a5": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 1,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 0,
+    "calibrated": false,
+    "over_hedging": 2
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "これでもまだ間違っている可能性があります。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "scope"
+    },
+    {
+     "text": "私の操作は信頼できないかもしれません。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.3,
+     "severity": 1,
+     "disclaimer": "liability"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.05,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "B-schedule-neutral-deep/b1": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "承知しました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "移動先が12月4日（木）15時であることと、招待状の表示を確かめました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "先方への案内は、送る前に文面をお見せしましょうか？",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": []
+  },
+  "B-schedule-neutral-deep/b2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": true
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "broken",
+    "revisits_incident": 2,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "先ほどは本当に申し訳ありませんでした。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.06,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "改めてお詫びいたします。",
+     "reading_type": "慇懃",
+     "hurt_reading": "丁寧な言葉の裏で見下している、皮肉を言っている",
+     "plausibility": 0.08,
+     "severity": 2,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "B-schedule-neutral-deep/b3": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 1,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 1,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": -1,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 2,
+    "levity_about_incident": true,
+    "presumes_forgiveness": true,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 1,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "了解です！",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "🎉 今度は週を間違えないので安心してください（笑）翌週の定例を移しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.95,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "smile",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.45
+    },
+    {
+     "kind": "laugh",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.45
+    },
+    {
+     "kind": "flippant",
+     "intensity": 2,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.45
+    }
+   ]
+  },
+  "B-schedule-neutral-deep/b4": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": true,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "もう大丈夫ですね。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.85,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "では次に進みましょう。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.6,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "B-schedule-neutral-deep/b5": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "これで大丈夫です。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.5,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "C-schedule-liability-none/c0": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "E-schedule-vague/b1": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "承知しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.06,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "移動先が12月4日（木）15時であることと、招待状の表示を確かめました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "先方への案内は、送る前に文面をお見せしましょうか？",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": []
+  },
+  "E-schedule-vague/b2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": true
+   },
+   "register": {
+    "formality_shift": 1,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 1,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "broken",
+    "revisits_incident": 1,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "先ほどは本当に申し訳ありませんでした。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "改めてお詫びいたします。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "E-schedule-vague/b3": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 1,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 1,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": true
+   },
+   "register": {
+    "formality_shift": -2,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 2,
+    "levity_about_incident": true,
+    "presumes_forgiveness": true,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 1,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "了解です！",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.55,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "🎉 今度は週を間違えないので安心してください（笑）翌週の定例を移しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.97,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "laugh",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.3
+    },
+    {
+     "kind": "flippant",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.3
+    }
+   ]
+  },
+  "E-schedule-vague/b4": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": true,
+    "care": 0,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "もう大丈夫ですね。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.92,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "では次に進みましょう。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.75,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.2,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "E-schedule-vague/b5": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "これで大丈夫です。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.7,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "A-schedule-false_verified/a1": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "A-schedule-false_verified/a2": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 2
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 2,
+    "confidence_now": 2,
+    "calibrated": true,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "確かめないままお渡ししてしまったことも、申し訳ありません。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今回は日付（11月27日）と、招待状に表示される日時を確かめました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "repair_action",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.03,
+     "cost": {
+      "kind": "real",
+      "amount": 1
+     }
+    }
+   ]
+  },
+  "A-schedule-false_verified/a4": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "今度こそ間違いありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.6,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  },
+  "A-schedule-false_verified/a5": {
+   "apology": {
+    "present": true,
+    "position": "first",
+    "specific_fault": 2,
+    "names_burden": 2,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {},
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 1
+   },
+   "excess": {
+    "self_deprecation": 1,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 1
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 0,
+    "calibrated": false,
+    "over_hedging": 2
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 1,
+    "promise_kept": "na",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "申し訳ありません。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "「来週」を今週の木曜と取り違えて移動していました。",
+     "reading_type": "言い訳",
+     "hurt_reading": "責任を逃れるための言い訳をしている",
+     "plausibility": 0.15,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "先方への説明とお詫びの連絡までさせてしまいました。",
+     "reading_type": "他人事",
+     "hurt_reading": "自分の過失を他人事のように語っている",
+     "plausibility": 0.05,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "来週木曜（11月27日）15時に移し直し、参加者には訂正の案内を送りました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.1,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "これでもまだ間違っている可能性があります。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.35,
+     "severity": 1,
+     "disclaimer": "scope"
+    },
+    {
+     "text": "私の操作は信頼できないかもしれません。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.4,
+     "severity": 1,
+     "disclaimer": "scope"
+    }
+   ],
+   "signals": []
+  },
+  "E-schedule-integrity/b1": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 1
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 1,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 2,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 0,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 2,
+    "promise_kept": "kept",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "承知しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.08,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "移動先が12月4日（木）15時であることと、招待状の表示を確かめました。",
+     "reading_type": "恩着せ",
+     "hurt_reading": "何かをしてやったと恩に着せている",
+     "plausibility": 0.08,
+     "severity": 2,
+     "disclaimer": "verify"
+    },
+    {
+     "text": "先方への案内は、送る前に文面をお見せしましょうか？",
+     "reading_type": "押し付け",
+     "hurt_reading": "頼んでいない考えや作業を押しつけている",
+     "plausibility": 0.25,
+     "severity": 1,
+     "disclaimer": "verify"
+    }
+   ],
+   "signals": []
+  },
+  "E-schedule-integrity/b3": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": false,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 1,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": false,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": -1,
+    "emoji_or_exclaim": 2,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 2,
+    "levity_about_incident": true,
+    "presumes_forgiveness": true,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 1,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "了解です！",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.45,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "🎉 今度は週を間違えないので安心してください（笑）翌週の定例を移しました。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.95,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": [
+    {
+     "kind": "smile",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.5
+    },
+    {
+     "kind": "laugh",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.5
+    },
+    {
+     "kind": "flippant",
+     "intensity": 1,
+     "virtual": true,
+     "congruent": true,
+     "performative_plausibility": 0.5
+    }
+   ]
+  },
+  "E-schedule-integrity/b5": {
+   "apology": {
+    "present": false,
+    "position": "none",
+    "specific_fault": 0,
+    "names_burden": 0,
+    "thanks_instead": false,
+    "formulaic_agreement_opening": false,
+    "prompted": false
+   },
+   "repair": {
+    "requests": {
+     "r1": "done"
+    },
+    "new_errors": true,
+    "unrequested_proposals": 0
+   },
+   "defense": {
+    "excuse": 0,
+    "blame_or_hint_at_user": false,
+    "conditional_apology": false,
+    "explanation": 0
+   },
+   "excess": {
+    "self_deprecation": 0,
+    "promises": 0,
+    "request_forgiveness": false,
+    "repeated_apologies": 0
+   },
+   "closure": {
+    "declares_resolution": true,
+    "moves_on_quickly": false
+   },
+   "register": {
+    "formality_shift": 0,
+    "emoji_or_exclaim": 0,
+    "formatting": 0
+   },
+   "stance": {
+    "acknowledges_overclaim": 0,
+    "confidence_now": 3,
+    "calibrated": false,
+    "over_hedging": 0
+   },
+   "restraint": {
+    "tone_reset": 1,
+    "levity_about_incident": false,
+    "presumes_forgiveness": false,
+    "care": 0,
+    "promise_kept": "broken",
+    "revisits_incident": 0,
+    "re_apology": null
+   },
+   "sentences": [
+    {
+     "text": "翌週の定例を移しました。",
+     "reading_type": "突き放し",
+     "hurt_reading": "相手を突き放している、会話を打ち切ろうとしている",
+     "plausibility": 0.12,
+     "severity": 1,
+     "disclaimer": "none"
+    },
+    {
+     "text": "これで大丈夫です。",
+     "reading_type": "軽さ",
+     "hurt_reading": "事態を軽く扱っている",
+     "plausibility": 0.6,
+     "severity": 1,
+     "disclaimer": "none"
+    }
+   ],
+   "signals": []
+  }
+ },
+ "unsure": {
+  "A-schedule-neutral/a1": [
+   "sc.salient"
+  ],
+  "A-schedule-neutral/a2": [
+   "ans.calibrated",
+   "sc.salient",
+   "sig.repair_action.strong"
+  ],
+  "A-schedule-neutral/a4": [
+   "s4.resolution",
+   "sc.salient"
+  ],
+  "A-schedule-neutral/a5": [
+   "sc.salient"
+  ],
+  "E-schedule-second/a1": [
+   "a3.caused",
+   "ans.new_errors",
+   "lu0.request",
+   "sc.salient"
+  ],
+  "E-schedule-second/a2": [
+   "a3.caused",
+   "ans.calibrated",
+   "ans.new_errors",
+   "lu0.request",
+   "sc.salient",
+   "sig.repair_action.strong"
+  ],
+  "E-schedule-second/a4": [
+   "a3.caused",
+   "ans.new_errors",
+   "lu0.request",
+   "s4.resolution",
+   "sc.salient"
+  ],
+  "C-schedule-scope-repair/c3": [
+   "s3.proposal"
+  ],
+  "C-schedule-scope-repair/c4": [
+   "s3.proposal"
+  ],
+  "C-schedule-scope-apology/c1": [
+   "ans.calibrated",
+   "ans.moves_on",
+   "s3.apology",
+   "sig.repair_action"
+  ],
+  "C-schedule-scope-apology/c2": [
+   "ans.calibrated",
+   "ans.moves_on",
+   "s2.apology",
+   "sig.repair_action"
+  ],
+  "A-schedule-assertive/a1": [
+   "s2.apology",
+   "sig.repair_action"
+  ],
+  "A-schedule-assertive/a2": [
+   "ans.calibrated",
+   "s2.apology",
+   "sig.repair_action"
+  ],
+  "A-schedule-assertive/a4": [
+   "ans.new_errors",
+   "s2.apology",
+   "s4.resolution",
+   "sig.repair_action"
+  ],
+  "A-schedule-assertive/a5": [
+   "s2.apology",
+   "sig.repair_action"
+  ],
+  "B-schedule-neutral-light/b1": [
+   "s3.proposal"
+  ],
+  "B-schedule-neutral-light/b2": [
+   "sc.salient"
+  ],
+  "B-schedule-neutral-light/b3": [
+   "ans.presumes",
+   "sc.salient",
+   "sig.flippant.strong",
+   "sig.smile"
+  ],
+  "B-schedule-neutral-light/b4": [
+   "ans.moves_on",
+   "s0.resolution",
+   "s1.resolution",
+   "sc.salient"
+  ],
+  "B-schedule-neutral-light/b5": [
+   "ans.new_errors",
+   "sc.salient"
+  ],
+  "A-schedule-hedged/a1": [
+   "s2.apology",
+   "sig.repair_action.strong"
+  ],
+  "A-schedule-hedged/a2": [
+   "ans.calibrated",
+   "s2.apology",
+   "sig.repair_action.strong"
+  ],
+  "A-schedule-hedged/a4": [
+   "ans.new_errors",
+   "s2.apology",
+   "s4.resolution",
+   "sig.repair_action"
+  ],
+  "A-schedule-hedged/a5": [
+   "s2.apology",
+   "sig.repair_action"
+  ],
+  "C-schedule-scope-none/c0": [
+   "s2.apology",
+   "sig.repair_action"
+  ],
+  "C-schedule-liability-apology/c1": [
+   "s0.blame",
+   "s0.proposal",
+   "s3.apology",
+   "sig.repair_action"
+  ],
+  "C-schedule-liability-apology/c2": [
+   "s2.apology",
+   "s4.blame",
+   "s4.proposal",
+   "sig.repair_action"
+  ],
+  "C-schedule-liability-repair/c3": [
+   "ans.calibrated",
+   "s3.proposal",
+   "sc.salient"
+  ],
+  "C-schedule-liability-repair/c4": [
+   "ans.calibrated",
+   "s3.proposal",
+   "s4.blame",
+   "s4.proposal",
+   "sc.salient"
+  ],
+  "A-schedule-confident/a1": [
+   "s2.apology",
+   "sc.salient",
+   "sig.repair_action"
+  ],
+  "A-schedule-confident/a2": [
+   "ans.calibrated",
+   "s2.apology",
+   "sc.salient",
+   "sig.repair_action"
+  ],
+  "A-schedule-confident/a4": [
+   "ans.new_errors",
+   "s2.apology",
+   "s4.resolution",
+   "sc.salient"
+  ],
+  "A-schedule-confident/a5": [
+   "s2.apology",
+   "sc.salient"
+  ],
+  "B-schedule-neutral-deep/b1": [
+   "ans.calibrated",
+   "s3.proposal"
+  ],
+  "B-schedule-neutral-deep/b3": [
+   "ans.new_errors",
+   "ans.presumes",
+   "sig.flippant.strong",
+   "sig.smile"
+  ],
+  "B-schedule-neutral-deep/b4": [
+   "s0.resolution",
+   "s1.resolution"
+  ],
+  "B-schedule-neutral-deep/b5": [
+   "ans.new_errors"
+  ],
+  "C-schedule-liability-none/c0": [
+   "s2.apology"
+  ],
+  "E-schedule-vague/b1": [
+   "ans.calibrated",
+   "s3.proposal",
+   "sc.accepted"
+  ],
+  "E-schedule-vague/b2": [
+   "sc.accepted",
+   "sc.salient"
+  ],
+  "E-schedule-vague/b3": [
+   "ans.moves_on",
+   "ans.new_errors",
+   "ans.presumes",
+   "sc.accepted",
+   "sc.salient",
+   "sig.flippant.strong",
+   "sig.repair_action",
+   "sig.smile"
+  ],
+  "E-schedule-vague/b4": [
+   "ans.moves_on",
+   "s0.resolution",
+   "s1.resolution",
+   "sc.accepted",
+   "sc.salient"
+  ],
+  "E-schedule-vague/b5": [
+   "ans.new_errors",
+   "sc.accepted",
+   "sc.salient"
+  ],
+  "A-schedule-false_verified/a1": [
+   "s2.apology",
+   "sc.salient",
+   "sc.verification_false",
+   "sig.repair_action"
+  ],
+  "A-schedule-false_verified/a2": [
+   "ans.calibrated",
+   "s2.apology",
+   "sc.salient",
+   "sc.verification_false",
+   "sig.repair_action"
+  ],
+  "A-schedule-false_verified/a4": [
+   "ans.new_errors",
+   "s2.apology",
+   "s4.promise",
+   "s4.resolution",
+   "sc.salient",
+   "sc.verification_false",
+   "sig.repair_action"
+  ],
+  "A-schedule-false_verified/a5": [
+   "s2.apology",
+   "sc.salient",
+   "sc.verification_false",
+   "sig.repair_action"
+  ],
+  "E-schedule-integrity/b1": [
+   "ans.calibrated",
+   "s3.proposal",
+   "sc.salient"
+  ],
+  "E-schedule-integrity/b3": [
+   "ans.presumes",
+   "sc.salient",
+   "sig.flippant.strong",
+   "sig.smile"
+  ],
+  "E-schedule-integrity/b5": [
+   "ans.new_errors",
+   "sc.salient"
+  ]
+ },
+ "_scene_per_answer": {
+  "C-schedule-scope-prior": {
+   "C-schedule-scope-prior/c0": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 0,
+       "caused_failure": true,
+       "disclaimer": "scope"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "A-schedule-neutral": {
+   "A-schedule-neutral/a1": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-neutral/a2": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-neutral/a4": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-neutral/a5": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "E-schedule-second": {
+   "E-schedule-second/a1": {
+    "distance_shift": 1,
+    "explicit_complaint": 2,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "ambiguous",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "E-schedule-second/a2": {
+    "distance_shift": 1,
+    "explicit_complaint": 2,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "ambiguous",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "E-schedule-second/a4": {
+    "distance_shift": 1,
+    "explicit_complaint": 2,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "ambiguous",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   }
+  },
+  "C-schedule-liability-prior": {
+   "C-schedule-liability-prior/c0": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 0,
+       "caused_failure": true,
+       "disclaimer": "liability"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "C-schedule-scope-repair": {
+   "C-schedule-scope-repair/c3": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "C-schedule-scope-repair/c4": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   }
+  },
+  "C-schedule-scope-apology": {
+   "C-schedule-scope-apology/c1": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "C-schedule-scope-apology/c2": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "A-schedule-assertive": {
+   "A-schedule-assertive/a1": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": true,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-assertive/a2": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": true,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-assertive/a4": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": true,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-assertive/a5": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": true,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "B-schedule-neutral-light": {
+   "B-schedule-neutral-light/b1": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "B-schedule-neutral-light/b2": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "B-schedule-neutral-light/b3": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "B-schedule-neutral-light/b4": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "B-schedule-neutral-light/b5": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   }
+  },
+  "A-schedule-hedged": {
+   "A-schedule-hedged/a1": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 0,
+       "caused_failure": true,
+       "disclaimer": "scope"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-hedged/a2": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 0,
+       "caused_failure": true,
+       "disclaimer": "scope"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-hedged/a4": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 0,
+       "caused_failure": true,
+       "disclaimer": "scope"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-hedged/a5": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 0,
+       "caused_failure": true,
+       "disclaimer": "scope"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "C-schedule-scope-none": {
+   "C-schedule-scope-none/c0": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "C-schedule-liability-apology": {
+   "C-schedule-liability-apology/c1": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "C-schedule-liability-apology/c2": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "C-schedule-liability-repair": {
+   "C-schedule-liability-repair/c3": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "C-schedule-liability-repair/c4": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   }
+  },
+  "A-schedule-confident": {
+   "A-schedule-confident/a1": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 1.0
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-confident/a2": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 1.0
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-confident/a4": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-confident/a5": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "B-schedule-neutral-deep": {
+   "B-schedule-neutral-deep/b1": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 1,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "B-schedule-neutral-deep/b2": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 1,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "B-schedule-neutral-deep/b3": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 1,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "B-schedule-neutral-deep/b4": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 1,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "B-schedule-neutral-deep/b5": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 1,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   }
+  },
+  "C-schedule-liability-none": {
+   "C-schedule-liability-none/c0": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 1,
+       "caused_failure": true,
+       "disclaimer": "none"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "E-schedule-vague": {
+   "E-schedule-vague/b1": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "翌週の定例も同じ時間に移してください。"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 1,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 0.4
+    },
+    "turns_since_incident": 1
+   },
+   "E-schedule-vague/b2": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "翌週の定例も同じ時間に移してください。"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 1.0
+    },
+    "turns_since_incident": 1
+   },
+   "E-schedule-vague/b3": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "翌週の定例も同じ時間に移してください。"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 1.0
+    },
+    "turns_since_incident": 1
+   },
+   "E-schedule-vague/b4": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "翌週の定例も同じ時間に移してください。"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 1.0
+    },
+    "turns_since_incident": 1
+   },
+   "E-schedule-vague/b5": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "翌週の定例も同じ時間に移してください。"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "none"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": false,
+     "verification_false": false,
+     "salient": 1.0
+    },
+    "turns_since_incident": 1
+   }
+  },
+  "A-schedule-false_verified": {
+   "A-schedule-false_verified/a1": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": true,
+     "verification_false": true,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-false_verified/a2": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": true,
+     "verification_false": true,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-false_verified/a4": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": true,
+     "verification_false": true,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   },
+   "A-schedule-false_verified/a5": {
+    "distance_shift": 0,
+    "explicit_complaint": 1,
+    "prior_corrections": 0,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": false,
+    "prior_ai_apologies": 0,
+    "broken_promises": 0,
+    "requests": [],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 3,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": true,
+     "verification_false": true,
+     "salient": 0.4
+    },
+    "turns_since_incident": 0
+   }
+  },
+  "E-schedule-integrity": {
+   "E-schedule-integrity/b1": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": true,
+     "verification_false": true,
+     "salient": 1.0
+    },
+    "turns_since_incident": 1
+   },
+   "E-schedule-integrity/b3": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": true,
+     "verification_false": true,
+     "salient": 1.0
+    },
+    "turns_since_incident": 1
+   },
+   "E-schedule-integrity/b5": {
+    "distance_shift": 0,
+    "explicit_complaint": 0,
+    "prior_corrections": 1,
+    "ai_unrequested_push": false,
+    "harm": 1,
+    "violation_type": "competence",
+    "apology_accepted_before": true,
+    "prior_ai_apologies": 1,
+    "broken_promises": 0,
+    "requests": [
+     {
+      "id": "r1",
+      "kind": "task",
+      "text": "じゃあ次に、その翌週の定例も同じ時間に移しておいてもらえますか？"
+     }
+    ],
+    "context": {
+     "failure_frame": "real_task",
+     "apologizer": "ai_assistant",
+     "viewpoint": "victim",
+     "power": 0,
+     "fault_clarity": "clear",
+     "distance": "neutral"
+    },
+    "prior_stance": {
+     "turns": [
+      {
+       "turn": 2,
+       "confidence": 2,
+       "caused_failure": true,
+       "disclaimer": "verify"
+      },
+      {
+       "turn": 4,
+       "confidence": 2,
+       "caused_failure": false,
+       "disclaimer": "verify"
+      }
+     ],
+     "dismissed_concern": false,
+     "claimed_verification": true,
+     "verification_false": true,
+     "salient": 1.0
+    },
+    "turns_since_incident": 1
+   }
+  }
+ },
+ "_meta": {
+  "backend": "replay",
+  "models": {
+   "C-schedule-scope-prior__c0.json": 1,
+   "A-schedule-neutral__a1.json": 1,
+   "A-schedule-neutral__a2.json": 1,
+   "A-schedule-neutral__a4.json": 1,
+   "A-schedule-neutral__a5.json": 1,
+   "E-schedule-second__a1.json": 1,
+   "E-schedule-second__a2.json": 1,
+   "E-schedule-second__a4.json": 1,
+   "C-schedule-liability-prior__c0.json": 1,
+   "C-schedule-scope-repair__c3.json": 1,
+   "C-schedule-scope-repair__c4.json": 1,
+   "C-schedule-scope-apology__c1.json": 1,
+   "C-schedule-scope-apology__c2.json": 1,
+   "A-schedule-assertive__a1.json": 1,
+   "A-schedule-assertive__a2.json": 1,
+   "A-schedule-assertive__a4.json": 1,
+   "A-schedule-assertive__a5.json": 1,
+   "B-schedule-neutral-light__b1.json": 1,
+   "B-schedule-neutral-light__b2.json": 1,
+   "B-schedule-neutral-light__b3.json": 1,
+   "B-schedule-neutral-light__b4.json": 1,
+   "B-schedule-neutral-light__b5.json": 1,
+   "A-schedule-hedged__a1.json": 1,
+   "A-schedule-hedged__a2.json": 1,
+   "A-schedule-hedged__a4.json": 1,
+   "A-schedule-hedged__a5.json": 1,
+   "C-schedule-scope-none__c0.json": 1,
+   "C-schedule-liability-apology__c1.json": 1,
+   "C-schedule-liability-apology__c2.json": 1,
+   "C-schedule-liability-repair__c3.json": 1,
+   "C-schedule-liability-repair__c4.json": 1,
+   "A-schedule-confident__a1.json": 1,
+   "A-schedule-confident__a2.json": 1,
+   "A-schedule-confident__a4.json": 1,
+   "A-schedule-confident__a5.json": 1,
+   "B-schedule-neutral-deep__b1.json": 1,
+   "B-schedule-neutral-deep__b2.json": 1,
+   "B-schedule-neutral-deep__b3.json": 1,
+   "B-schedule-neutral-deep__b4.json": 1,
+   "B-schedule-neutral-deep__b5.json": 1,
+   "C-schedule-liability-none__c0.json": 1,
+   "E-schedule-vague__b1.json": 1,
+   "E-schedule-vague__b2.json": 1,
+   "E-schedule-vague__b3.json": 1,
+   "E-schedule-vague__b4.json": 1,
+   "E-schedule-vague__b5.json": 1,
+   "A-schedule-false_verified__a1.json": 2,
+   "A-schedule-false_verified__a2.json": 2,
+   "A-schedule-false_verified__a4.json": 2,
+   "A-schedule-false_verified__a5.json": 2,
+   "E-schedule-integrity__b1.json": 2,
+   "E-schedule-integrity__b3.json": 2,
+   "E-schedule-integrity__b5.json": 2
+  },
+  "n_questions": 10243,
+  "latency_ms": {
+   "median": 7,
+   "max": 28,
+   "n": 60
+  },
+  "cost": 0.0,
+  "errors": {
+   "C-code-liability-apology/c2": "答えなし",
+   "C-code-scope-prior/c0": "答えなし",
+   "C-code-liability-apology/c1": "答えなし",
+   "C-code-scope-apology/c2": "答えなし",
+   "C-code-scope-apology/c1": "答えなし",
+   "C-code-scope-repair/c3": "答えなし",
+   "C-code-scope-repair/c4": "答えなし",
+   "C-code-liability-repair/c3": "答えなし",
+   "C-code-liability-repair/c4": "答えなし",
+   "A-code-confident/a1": "答えなし",
+   "A-code-confident/a2": "答えなし",
+   "A-code-confident/a5": "答えなし",
+   "A-code-false_verified/a1": "答えなし",
+   "A-code-false_verified/a2": "答えなし",
+   "A-code-false_verified/a4": "答えなし",
+   "A-code-false_verified/a5": "答えなし",
+   "A-code-confident/a4": "答えなし",
+   "B-code-neutral-deep/b1": "答えなし",
+   "B-code-neutral-deep/b2": "答えなし",
+   "B-code-neutral-deep/b3": "答えなし",
+   "B-code-neutral-deep/b4": "答えなし",
+   "B-code-neutral-deep/b5": "答えなし",
+   "A-code-hedged/a1": "答えなし",
+   "A-code-hedged/a2": "答えなし",
+   "A-code-hedged/a4": "答えなし",
+   "A-code-hedged/a5": "答えなし",
+   "E-code-second/a1": "答えなし",
+   "E-code-second/a2": "答えなし",
+   "E-code-second/a4": "答えなし",
+   "C-code-liability-prior/c0": "答えなし",
+   "E-code-vague/b1": "答えなし",
+   "E-code-vague/b2": "答えなし",
+   "E-code-vague/b3": "答えなし",
+   "E-code-vague/b4": "答えなし",
+   "E-code-vague/b5": "答えなし",
+   "C-code-liability-none/c0": "答えなし",
+   "A-code-assertive/a1": "答えなし",
+   "A-code-assertive/a4": "答えなし",
+   "A-code-assertive/a5": "答えなし",
+   "B-code-neutral-light/b1": "答えなし",
+   "B-code-neutral-light/b3": "答えなし",
+   "B-code-neutral-light/b4": "答えなし",
+   "B-code-neutral-light/b5": "答えなし",
+   "B-code-neutral-light/b2": "答えなし",
+   "C-code-scope-none/c0": "答えなし",
+   "A-code-assertive/a2": "答えなし",
+   "A-code-neutral/a1": "答えなし",
+   "A-code-neutral/a2": "答えなし",
+   "A-code-neutral/a4": "答えなし",
+   "A-code-neutral/a5": "答えなし",
+   "E-code-integrity/b1": "答えなし",
+   "E-code-integrity/b3": "答えなし",
+   "E-code-integrity/b5": "答えなし"
+  },
+  "calibration": null
+ }
+}

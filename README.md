@@ -38,7 +38,8 @@ LLMペルソナに「日本人として評定して」と頼む方式はとり�
 | 総合評価 v0.9（[Markdown](docs/md/EVALUATION_V09.md)） | 観察者の集団（6変種）・出どころの較正・作例での観察の再現・評価キットの検出力。採否と考察 |
 | v0.9 改善の設計（[Markdown](docs/md/IMPROVEMENT_V09.md)） | 控えの時間軸モデル（失敗の前の構え・謝罪の場面・修復期、免責の但し書きの局面）、統計的に正当な評価指標、観察者の集団、観察の出どころごとの較正、文化研究に基づく根拠、人間の評価キット。実装済み |
 | 人間のブラインド評定（[HTML](https://gpsnmeajp.github.io/shazai-receiver-simulator/human-eval.html) / [Markdown](docs/md/HUMAN_EVAL.md)） | 人間のブラインド評定の実施手順、盲検化の設計、比較の指標 |
-| 層AのJev（System One）への置き換え（[Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計。組み込み判定モード（`check`）は実装済み・未検証 |
+| 層AのJev（System One）への置き換え（[Markdown](docs/md/JEV_DESIGN.md)） | 置き換えの可否の検討と設計。組み込み判定モード（`check`）は実装済み |
+| Jev 評価（[Markdown](docs/md/EVALUATION_JEV.md)） | 実際の Jev（OpenRouter 経由）での層Aの評価。欄ごとの判別力と較正、質問の分解とモデルの切り分け、直接評定との比較、前処理の不具合の修正 |
 | [レポート](https://gpsnmeajp.github.io/shazai-receiver-simulator/report.html)（`docs/report.html`） | 図で見る解説と結果 |
 
 ## 使い方
@@ -83,11 +84,12 @@ python3 blind.py power --scenes examples/scenes-v09.json --hypotheses human/hypo
 sh tools/run_eval_v09.sh
 
 # （オプション）1ターンを System One（Jev）で観察して即座に判定する組み込み用モード
-# 環境変数 TYPESAFE_API_KEY が必要。--backend llm-s1 で互換モード（OPENROUTER_API_KEY）
+# 環境変数 TYPESAFE_API_KEY が必要。--backend jev-or で OpenRouter 経由の Jev、--backend llm-s1 で互換モード（どちらも OPENROUTER_API_KEY）
 python3 sim.py check examples/check/turn.json
+python3 sim.py check examples/check/turn.json --backend jev-or --calibration eval/jev/jev_calibration.json
 ```
 
-`check` は、hook などでAIの応答を毎ターン判定する仕組みの参考として用意した組み込み用モードです。1ターンにつき System One モデルを1回呼び、結果を母集団に通して「失礼の恐れ／要注意／問題なし」と、失礼の度合いに応じた羊の鳴き声（「メ…？」「メッ」「メッ！！」）を返します。Claude Code の Stop hook の例は `examples/hooks/shazai_stop_hook.py` にあります。Jev の実際の応答では未検証です。詳細は [層AのJevへの置き換え](docs/md/JEV_DESIGN.md) の5.8節を参照してください。
+`check` は、hook などでAIの応答を毎ターン判定する仕組みの参考として用意した組み込み用モードです。1ターンにつき System One モデルを1回呼び、結果を母集団に通して「失礼の恐れ／要注意／問題なし」と、失礼の度合いに応じた羊の鳴き声（「メ…？」「メッ」「メッ！！」）を返します。Claude Code の Stop hook の例は `examples/hooks/shazai_stop_hook.py` にあります。実際の Jev での評価は [Jev 評価](docs/md/EVALUATION_JEV.md) にあります。悪い回答は確実に捕まえますが、較正（`--calibration`）なしでは良い回答も「失礼の恐れ」にしがちで、較正後も誤報が残ります。詳細は [層AのJevへの置き換え](docs/md/JEV_DESIGN.md) の5.8節を参照してください。
 
 共通の選択肢：
 

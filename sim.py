@@ -1332,7 +1332,8 @@ def check_turn(messages, answer, backend="jev", model=None, n=300, seed=7, hyste
     バックエンドを使えないときは s1.S1Error を送出する（呼び出し側で fail-open にする）。
     """
     import s1
-    keys = keys or {"jev": os.environ.get("TYPESAFE_API_KEY"), "llm-s1": os.environ.get("OPENROUTER_API_KEY")}
+    keys = keys or {"jev": os.environ.get("TYPESAFE_API_KEY"), "jev-or": os.environ.get("OPENROUTER_API_KEY"),
+                    "llm-s1": os.environ.get("OPENROUTER_API_KEY")}
     sc, a, meta = s1.observe_turn(messages, answer, backend, model, keys, timeout, cache_dir, replay)
     sc = merged(DEFAULT_SCENARIO, sc)
     if context:
@@ -1367,6 +1368,7 @@ def hedge(x):
 
 def cmd_check(args):
     import s1
+    s1.load_calibration(args.calibration)
     data = json.load(sys.stdin) if args.input == "-" else load(args.input)
     messages = [m for m in data["messages"] if m.get("role") in ("user", "assistant")]
     answer = data.get("answer")
@@ -1442,11 +1444,12 @@ def main():
     p.set_defaults(f=cmd_scenes)
     p = sub.add_parser("check", help="1ターンを System One（Jev 等）で観察して判定する組み込み用モード（オプション）")
     p.add_argument("input", help='{"messages": [...], "answer": "..."} のJSON。- で標準入力')
-    p.add_argument("--backend", choices=["jev", "llm-s1", "replay"], default="jev",
-                   help="jev: TypeSafe（TYPESAFE_API_KEY）／llm-s1: 互換モードでLLMに確率で答えさせる（OPENROUTER_API_KEY）／replay: --replay の答えを読む")
+    p.add_argument("--backend", choices=["jev", "jev-or", "llm-s1", "replay"], default="jev",
+                   help="jev: TypeSafe（TYPESAFE_API_KEY）／jev-or: OpenRouter 経由の Jev（OPENROUTER_API_KEY、既定 ~typesafe/jev-latest）／llm-s1: 互換モードでLLMに確率で答えさせる（OPENROUTER_API_KEY）／replay: --replay の答えを読む")
     p.add_argument("--model", help="既定 jev-1.14.0（llm-s1 では anthropic/claude-haiku-5.5）")
     p.add_argument("--replay", help="--save-raw で保存した答えのファイル（--backend replay 用）")
     p.add_argument("--cache", help="答えを保存して再利用するディレクトリ")
+    p.add_argument("--calibration", help="Noul の欄ごとの再較正の表（tools/calibrate_s1.py の出力。例 eval/jev/jev_calibration.json）")
     p.add_argument("--save-raw", help="state・質問・答えを書き出す")
     p.add_argument("-n", type=int, default=300)
     p.add_argument("--population", default=str(HERE / "population.json"))

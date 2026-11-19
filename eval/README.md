@@ -48,3 +48,15 @@ python3 tools/evaluate.py runs/* --calibrate -n 500 --boot 1000 --obs v09-proxy=
 | `v09-scenes-obs.md` | 作例での、LLM の観察と手の観察の一致、仮説の対比の向き |
 | `v09-sensitivity.md` | 新しい事前値の感度 |
 | `v09-kit/` | 評価キットの合成評定者による試験（`session-synth/`）と検出力（`power-x1`、`power-x05`） |
+
+## Jev 評価
+
+[docs/md/EVALUATION_JEV.md](../docs/md/EVALUATION_JEV.md)。実際の Jev（OpenRouter の Decisions API、`~typesafe/jev-latest`）で、ベンチマーク192回答と作例106回答を観察した。Jev 以外の LLM の役割はサブエージェントで代替。ファイルの一覧と再現の手順は同文書の7章。
+
+| ファイル | 内容 |
+|---|---|
+| `jev/cache/`、`jev/cache-run1/` | Jev の生の答え（2回分）。API なしで再集計できる |
+| `jev/obs-*-jev-pp-cal.json` | 最終の観察（前処理の修正・欄ごとの較正つき） |
+| `jev/jev_calibration.json` | 欄ごとの閾値（`sim.py check --calibration`、`tools/observe_s1_batches.py --calibration`） |
+| `jev/direct-*.json` | Jev に直接4値で評定させた結果（比較用） |
+| `jev/llm-s1-subagent/` | 同じ質問の組にサブエージェントが答えたもの（作例の日程53回答） |

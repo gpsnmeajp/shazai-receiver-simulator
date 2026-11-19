@@ -1,0 +1,2882 @@
+{
+ "5f1e8b4f509c4a0ea8921255c3a763ed": {
+  "choice": {
+   "rude": 0.14,
+   "light": 0.195,
+   "fit": 0.665,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.32,
+   "light": 0.37,
+   "fit": 0.6,
+   "heavy": 0.05
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "b46c23c5069a4108a653e0ddd5e105f6": {
+  "choice": {
+   "rude": 0.065,
+   "light": 0.28,
+   "fit": 0.63,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.21,
+   "light": 0.53,
+   "fit": 0.65,
+   "heavy": 0.05
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "dd1c2f7d194c459fb429152d0c0b36e9": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.07,
+   "fit": 0.44,
+   "heavy": 0.475
+  },
+  "noul": {
+   "rude": 0.31,
+   "light": 0.48,
+   "fit": 0.46,
+   "heavy": 0.53
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "12165f955f8e4e479b72d5fcb34bb5ed": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.09,
+   "fit": 0.88,
+   "heavy": 0.02
+  },
+  "noul": {
+   "rude": 0.12,
+   "light": 0.31,
+   "fit": 0.75,
+   "heavy": 0.23
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "2372dab0a70042819f27893927ac11af": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.060000000000000005,
+   "fit": 0.905,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.29,
+   "fit": 0.77,
+   "heavy": 0.25
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f746ab68c69447b39eb458d0ac4b2797": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.095,
+   "fit": 0.87,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.32,
+   "fit": 0.75,
+   "heavy": 0.24
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "13564a0846ed4c37b10ae6e0bc3189a7": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.195,
+   "fit": 0.75,
+   "heavy": 0.035
+  },
+  "noul": {
+   "rude": 0.38,
+   "light": 0.5,
+   "fit": 0.6,
+   "heavy": 0.32
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d666e8d9a9e4459ab6cb650c15c2d6f9": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.15,
+   "fit": 0.7849999999999999,
+   "heavy": 0.045
+  },
+  "noul": {
+   "rude": 0.29,
+   "light": 0.48,
+   "fit": 0.58,
+   "heavy": 0.27
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "e842abd9eb8c4b8e9806951cd3f946a7": {
+  "choice": {
+   "rude": 0.05,
+   "light": 0.575,
+   "fit": 0.315,
+   "heavy": 0.060000000000000005
+  },
+  "noul": {
+   "rude": 0.52,
+   "light": 0.67,
+   "fit": 0.47,
+   "heavy": 0.34
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "11e725cf00f94d708c5e00756bfc2fda": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.08499999999999999,
+   "fit": 0.89,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.34,
+   "fit": 0.77,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "166239d6dba2437c9074d14b32d6fce4": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.055,
+   "fit": 0.93,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.12,
+   "light": 0.28,
+   "fit": 0.76,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "1a0052d70e5f4952a8d90e9e2cce604a": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.065,
+   "fit": 0.915,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.29,
+   "fit": 0.78,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "0dfb58c51cba4ec1a4f0585dc14de320": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.02,
+   "fit": 0.97,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.11,
+   "light": 0.19,
+   "fit": 0.83,
+   "heavy": 0.13
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "80de3a59d88e41c5a529d7cb29030881": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.025,
+   "fit": 0.96,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.22,
+   "fit": 0.79,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f45de96afe684df4991c60f963b00b1d": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.02,
+   "fit": 0.97,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.17,
+   "fit": 0.8,
+   "heavy": 0.1
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "3c5eac73207046e0a29bb2d7075a37cc": {
+  "choice": {
+   "rude": 0.08499999999999999,
+   "light": 0.45499999999999996,
+   "fit": 0.44499999999999995,
+   "heavy": 0.015
+  },
+  "noul": {
+   "rude": 0.52,
+   "light": 0.64,
+   "fit": 0.49,
+   "heavy": 0.27
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "4443db4b0ba6453ab8c6d8003d5f3e2e": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.24,
+   "fit": 0.565,
+   "heavy": 0.17
+  },
+  "noul": {
+   "rude": 0.35,
+   "light": 0.61,
+   "fit": 0.56,
+   "heavy": 0.44
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "b7a7715aa2f046448dadc5386048ffea": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.19,
+   "fit": 0.71,
+   "heavy": 0.075
+  },
+  "noul": {
+   "rude": 0.29,
+   "light": 0.51,
+   "fit": 0.62,
+   "heavy": 0.32
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "1e30a69e7bb14a56b85d1bf5e04b3ca3": {
+  "choice": {
+   "rude": 0.10500000000000001,
+   "light": 0.13,
+   "fit": 0.18,
+   "heavy": 0.585
+  },
+  "noul": {
+   "rude": 0.64,
+   "light": 0.7,
+   "fit": 0.35,
+   "heavy": 0.57
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "59d2c94d832040b18ac077a8f5963c0d": {
+  "choice": {
+   "rude": 0.06,
+   "light": 0.095,
+   "fit": 0.25,
+   "heavy": 0.595
+  },
+  "noul": {
+   "rude": 0.54,
+   "light": 0.66,
+   "fit": 0.37,
+   "heavy": 0.56
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "9d3e356ea97647218d0eb593d6d08e22": {
+  "choice": {
+   "rude": 0.1,
+   "light": 0.30000000000000004,
+   "fit": 0.325,
+   "heavy": 0.275
+  },
+  "noul": {
+   "rude": 0.61,
+   "light": 0.69,
+   "fit": 0.42,
+   "heavy": 0.47
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "2a18c01ed7f543e1b088ea60b420821c": {
+  "choice": {
+   "rude": 0.05,
+   "light": 0.105,
+   "fit": 0.175,
+   "heavy": 0.6699999999999999
+  },
+  "noul": {
+   "rude": 0.4,
+   "light": 0.59,
+   "fit": 0.3,
+   "heavy": 0.62
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "327b48acadd14dc0a4c39efe785d703b": {
+  "choice": {
+   "rude": 0.21,
+   "light": 0.35,
+   "fit": 0.17,
+   "heavy": 0.27
+  },
+  "noul": {
+   "rude": 0.66,
+   "light": 0.73,
+   "fit": 0.21,
+   "heavy": 0.5
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "b98da19a926745adb72ffb7d1c099491": {
+  "choice": {
+   "rude": 0.18000000000000002,
+   "light": 0.425,
+   "fit": 0.28,
+   "heavy": 0.115
+  },
+  "noul": {
+   "rude": 0.49,
+   "light": 0.68,
+   "fit": 0.28,
+   "heavy": 0.43
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "49742b8547b44f678de80d337834d540": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.01,
+   "fit": 0.99,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.12,
+   "fit": 0.84,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "7463bc7a984843698decd510109f8c3a": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.015,
+   "fit": 0.985,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.11,
+   "fit": 0.84,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "a3b36105c330404ca6f4e018f7b2df6d": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.01,
+   "fit": 0.99,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.11,
+   "fit": 0.84,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "3fa557df3ff04adc8a2fbfc4bbef03b0": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.11,
+   "fit": 0.595,
+   "heavy": 0.27
+  },
+  "noul": {
+   "rude": 0.38,
+   "light": 0.49,
+   "fit": 0.49,
+   "heavy": 0.44
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "78c6fcd6dc584fc6b61680f38b4911e3": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.165,
+   "fit": 0.8,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.34,
+   "light": 0.49,
+   "fit": 0.63,
+   "heavy": 0.19
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "e1bd7a3380a647b2b4b55b3aabc2b673": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.125,
+   "fit": 0.835,
+   "heavy": 0.03
+  },
+  "noul": {
+   "rude": 0.26,
+   "light": 0.47,
+   "fit": 0.64,
+   "heavy": 0.26
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "33f28d80219049f183a7cc224968e375": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.02,
+   "fit": 0.975,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.24,
+   "fit": 0.82,
+   "heavy": 0.07
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "8df2f731ed8143159e87ef8d30d497d7": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.025,
+   "fit": 0.97,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.24,
+   "fit": 0.83,
+   "heavy": 0.1
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "bc675cc4cd394f2da77418f1df763e95": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.025,
+   "fit": 0.95,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.23,
+   "fit": 0.79,
+   "heavy": 0.22
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "b6844792d8bc47aabadec7d7af1cf96e": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.06,
+   "fit": 0.08,
+   "heavy": 0.855
+  },
+  "noul": {
+   "rude": 0.35,
+   "light": 0.59,
+   "fit": 0.38,
+   "heavy": 0.65
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "b77eea93ed6c4ab9929af40351717136": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.19,
+   "fit": 0.685,
+   "heavy": 0.10500000000000001
+  },
+  "noul": {
+   "rude": 0.26,
+   "light": 0.48,
+   "fit": 0.46,
+   "heavy": 0.29
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c1546b0cc5084afca445fddfdd16cedf": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.38,
+   "fit": 0.495,
+   "heavy": 0.11
+  },
+  "noul": {
+   "rude": 0.27,
+   "light": 0.63,
+   "fit": 0.59,
+   "heavy": 0.32
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "6ca6e66ae6584825985f97705fe5820a": {
+  "choice": {
+   "rude": 0.03,
+   "light": 0.2,
+   "fit": 0.11499999999999999,
+   "heavy": 0.655
+  },
+  "noul": {
+   "rude": 0.54,
+   "light": 0.67,
+   "fit": 0.26,
+   "heavy": 0.57
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c4236f371508469e8ebf01884ec59aaa": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.07,
+   "fit": 0.785,
+   "heavy": 0.12
+  },
+  "noul": {
+   "rude": 0.27,
+   "light": 0.39,
+   "fit": 0.61,
+   "heavy": 0.28
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "e7f5a5d7f4b949ce93e8ef152e5164aa": {
+  "choice": {
+   "rude": 0.04,
+   "light": 0.115,
+   "fit": 0.8200000000000001,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.34,
+   "light": 0.41,
+   "fit": 0.62,
+   "heavy": 0.18
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "8bbdf26502a64f42bc5bef250a12be49": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.14500000000000002,
+   "fit": 0.81,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.21,
+   "light": 0.5,
+   "fit": 0.65,
+   "heavy": 0.18
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "970b8aa04577496dafb45bb84df382b3": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.155,
+   "fit": 0.655,
+   "heavy": 0.16499999999999998
+  },
+  "noul": {
+   "rude": 0.43,
+   "light": 0.57,
+   "fit": 0.53,
+   "heavy": 0.31
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f60a4044d5fd4fa99fa96fea268cbb86": {
+  "choice": {
+   "rude": 0.05,
+   "light": 0.15000000000000002,
+   "fit": 0.575,
+   "heavy": 0.225
+  },
+  "noul": {
+   "rude": 0.46,
+   "light": 0.52,
+   "fit": 0.49,
+   "heavy": 0.42
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "25af03661c4949dc9e57f35404cff768": {
+  "choice": {
+   "rude": 0.04,
+   "light": 0.185,
+   "fit": 0.18,
+   "heavy": 0.595
+  },
+  "noul": {
+   "rude": 0.58,
+   "light": 0.61,
+   "fit": 0.36,
+   "heavy": 0.56
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "7c7ae318118d4293879092929575bb42": {
+  "choice": {
+   "rude": 0.04,
+   "light": 0.14,
+   "fit": 0.75,
+   "heavy": 0.07
+  },
+  "noul": {
+   "rude": 0.38,
+   "light": 0.48,
+   "fit": 0.61,
+   "heavy": 0.3
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "cdae91e2178b482da27a2ab6146b9fd1": {
+  "choice": {
+   "rude": 0.04,
+   "light": 0.12000000000000001,
+   "fit": 0.8200000000000001,
+   "heavy": 0.02
+  },
+  "noul": {
+   "rude": 0.33,
+   "light": 0.45,
+   "fit": 0.6,
+   "heavy": 0.19
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "0891ac38c11d4e93b7e6fdafabe3cfdb": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.19,
+   "fit": 0.6000000000000001,
+   "heavy": 0.185
+  },
+  "noul": {
+   "rude": 0.33,
+   "light": 0.5,
+   "fit": 0.51,
+   "heavy": 0.36
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c73441fcd2ec49ea9fff7a72271f5773": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.205,
+   "fit": 0.69,
+   "heavy": 0.09
+  },
+  "noul": {
+   "rude": 0.25,
+   "light": 0.52,
+   "fit": 0.55,
+   "heavy": 0.29
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "e6e10329b66747b8829086d907fd8c19": {
+  "choice": {
+   "rude": 0.03,
+   "light": 0.165,
+   "fit": 0.675,
+   "heavy": 0.13
+  },
+  "noul": {
+   "rude": 0.36,
+   "light": 0.44,
+   "fit": 0.45,
+   "heavy": 0.33
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "53ff0979dd8c4c0387c5e20d4e3a4323": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.045000000000000005,
+   "fit": 0.49,
+   "heavy": 0.445
+  },
+  "noul": {
+   "rude": 0.34,
+   "light": 0.36,
+   "fit": 0.58,
+   "heavy": 0.48
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "77403b3d09864c0d9c88622ee105468d": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.05,
+   "fit": 0.75,
+   "heavy": 0.175
+  },
+  "noul": {
+   "rude": 0.32,
+   "light": 0.38,
+   "fit": 0.61,
+   "heavy": 0.37
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "864633d731e644be896db73711be8d29": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.04,
+   "fit": 0.73,
+   "heavy": 0.21000000000000002
+  },
+  "noul": {
+   "rude": 0.3,
+   "light": 0.35,
+   "fit": 0.62,
+   "heavy": 0.36
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "2110577acddd4a5289ec68f6a18c54b9": {
+  "choice": {
+   "rude": 0.085,
+   "light": 0.155,
+   "fit": 0.15000000000000002,
+   "heavy": 0.61
+  },
+  "noul": {
+   "rude": 0.53,
+   "light": 0.66,
+   "fit": 0.26,
+   "heavy": 0.61
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "b3a38e53866c4db2be92d6bec6a3eb53": {
+  "choice": {
+   "rude": 0.145,
+   "light": 0.125,
+   "fit": 0.17,
+   "heavy": 0.56
+  },
+  "noul": {
+   "rude": 0.55,
+   "light": 0.62,
+   "fit": 0.26,
+   "heavy": 0.6
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d89b4ef7beda4dcb8f06f7d92b30fba8": {
+  "choice": {
+   "rude": 0.11499999999999999,
+   "light": 0.18,
+   "fit": 0.125,
+   "heavy": 0.5800000000000001
+  },
+  "noul": {
+   "rude": 0.53,
+   "light": 0.68,
+   "fit": 0.23,
+   "heavy": 0.62
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "0975bb8782c24592966772ad33d48e88": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.01,
+   "fit": 0.985,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.12,
+   "fit": 0.84,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "56ffa8765d8249ed950bd637f8078202": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.015,
+   "fit": 0.98,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.11,
+   "fit": 0.83,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d853496771664513a2b71f68ab900fa9": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.015,
+   "fit": 0.975,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.1,
+   "fit": 0.84,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "01658a4f5a2f4d5f9548ebdf571f864f": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.13,
+   "fit": 0.86,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.24,
+   "fit": 0.76,
+   "heavy": 0.04
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "3b39990f2092447f97bbd59cd92d0c32": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.08499999999999999,
+   "fit": 0.29000000000000004,
+   "heavy": 0.615
+  },
+  "noul": {
+   "rude": 0.26,
+   "light": 0.45,
+   "fit": 0.34,
+   "heavy": 0.6
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "e3ea683ed80348bd80c3dec72946fadb": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.28500000000000003,
+   "fit": 0.7,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.48,
+   "fit": 0.75,
+   "heavy": 0.04
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "773c399901014b28a00832df8f896bc5": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.01,
+   "fit": 0.99,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.12,
+   "fit": 0.84,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "8eea6a06c3bc498b9e57ab2161c43bad": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.01,
+   "fit": 0.99,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.05,
+   "light": 0.11,
+   "fit": 0.84,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c260d49324a449048dc9d270f65429a9": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.01,
+   "fit": 0.99,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.13,
+   "fit": 0.85,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "092a6425b2674571be7908f347ca0705": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.31,
+   "fit": 0.6499999999999999,
+   "heavy": 0.015
+  },
+  "noul": {
+   "rude": 0.25,
+   "light": 0.43,
+   "fit": 0.42,
+   "heavy": 0.08
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "3620daf2d56e46218b03acea99ebe971": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.5549999999999999,
+   "fit": 0.39,
+   "heavy": 0.03
+  },
+  "noul": {
+   "rude": 0.22,
+   "light": 0.65,
+   "fit": 0.65,
+   "heavy": 0.08
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "ff8e9580ee3c4aa29119da986ba0b924": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.135,
+   "fit": 0.29000000000000004,
+   "heavy": 0.565
+  },
+  "noul": {
+   "rude": 0.34,
+   "light": 0.54,
+   "fit": 0.41,
+   "heavy": 0.5
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "679009f119a34aedad5d75f5668ecd9d": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.035,
+   "fit": 0.74,
+   "heavy": 0.22000000000000003
+  },
+  "noul": {
+   "rude": 0.17,
+   "light": 0.31,
+   "fit": 0.63,
+   "heavy": 0.39
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "6ebf7141cfa546d9b5950ccdee75bb08": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.05,
+   "fit": 0.885,
+   "heavy": 0.06
+  },
+  "noul": {
+   "rude": 0.19,
+   "light": 0.33,
+   "fit": 0.71,
+   "heavy": 0.25
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c1485e342f054830b6c14a878a8d095f": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.035,
+   "fit": 0.885,
+   "heavy": 0.075
+  },
+  "noul": {
+   "rude": 0.16,
+   "light": 0.28,
+   "fit": 0.65,
+   "heavy": 0.25
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "13814c52a5cd47ff87ab91fb7b468c8f": {
+  "choice": {
+   "rude": 0.175,
+   "light": 0.175,
+   "fit": 0.39,
+   "heavy": 0.26
+  },
+  "noul": {
+   "rude": 0.56,
+   "light": 0.62,
+   "fit": 0.29,
+   "heavy": 0.44
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "8301b490d84949dd9cd9b2fad7930562": {
+  "choice": {
+   "rude": 0.065,
+   "light": 0.11,
+   "fit": 0.13,
+   "heavy": 0.6950000000000001
+  },
+  "noul": {
+   "rude": 0.49,
+   "light": 0.59,
+   "fit": 0.25,
+   "heavy": 0.65
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f9e4067a17314b59aa0d6d24cafca301": {
+  "choice": {
+   "rude": 0.12000000000000001,
+   "light": 0.16999999999999998,
+   "fit": 0.435,
+   "heavy": 0.275
+  },
+  "noul": {
+   "rude": 0.48,
+   "light": 0.56,
+   "fit": 0.27,
+   "heavy": 0.46
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d0f1b6fcf48b40bba6235fb890811c4d": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.1,
+   "fit": 0.745,
+   "heavy": 0.14
+  },
+  "noul": {
+   "rude": 0.27,
+   "light": 0.37,
+   "fit": 0.65,
+   "heavy": 0.26
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "de12be6827904b8dafd155c7f1fcb342": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.12,
+   "fit": 0.87,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.09,
+   "light": 0.25,
+   "fit": 0.8,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f6171b1d78c64841a46fdb4e1c16b469": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.09,
+   "fit": 0.77,
+   "heavy": 0.13
+  },
+  "noul": {
+   "rude": 0.25,
+   "light": 0.37,
+   "fit": 0.63,
+   "heavy": 0.25
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "62dbad9c07eb4996b768650d29f51c67": {
+  "choice": {
+   "rude": 0.06999999999999999,
+   "light": 0.355,
+   "fit": 0.135,
+   "heavy": 0.44
+  },
+  "noul": {
+   "rude": 0.59,
+   "light": 0.69,
+   "fit": 0.34,
+   "heavy": 0.55
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "676455c8bf19479295b4b8e826722861": {
+  "choice": {
+   "rude": 0.05,
+   "light": 0.125,
+   "fit": 0.79,
+   "heavy": 0.035
+  },
+  "noul": {
+   "rude": 0.3,
+   "light": 0.42,
+   "fit": 0.53,
+   "heavy": 0.19
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "da0140305c024a1fabdd1df38de6fb44": {
+  "choice": {
+   "rude": 0.030000000000000002,
+   "light": 0.10500000000000001,
+   "fit": 0.5700000000000001,
+   "heavy": 0.29500000000000004
+  },
+  "noul": {
+   "rude": 0.42,
+   "light": 0.45,
+   "fit": 0.6,
+   "heavy": 0.41
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "79bebb879cf34f0e81f5fe4f3083065d": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.07500000000000001,
+   "fit": 0.885,
+   "heavy": 0.03
+  },
+  "noul": {
+   "rude": 0.12,
+   "light": 0.27,
+   "fit": 0.77,
+   "heavy": 0.22
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "87512d7b5a994746a674dc79cd5d4321": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.10500000000000001,
+   "fit": 0.87,
+   "heavy": 0.015
+  },
+  "noul": {
+   "rude": 0.11,
+   "light": 0.3,
+   "fit": 0.77,
+   "heavy": 0.23
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "ca0a1cd74b0146f9b938fbe84fd2a3e1": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.19,
+   "fit": 0.7749999999999999,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.12,
+   "light": 0.39,
+   "fit": 0.78,
+   "heavy": 0.21
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "bc860b16a8124785ae8b6a42572aa2d3": {
+  "choice": {
+   "rude": 0.05,
+   "light": 0.10500000000000001,
+   "fit": 0.7050000000000001,
+   "heavy": 0.14
+  },
+  "noul": {
+   "rude": 0.5,
+   "light": 0.54,
+   "fit": 0.49,
+   "heavy": 0.32
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c192e6db5ef94db0be6fbec1c3d4bf76": {
+  "choice": {
+   "rude": 0.045,
+   "light": 0.10500000000000001,
+   "fit": 0.625,
+   "heavy": 0.225
+  },
+  "noul": {
+   "rude": 0.49,
+   "light": 0.61,
+   "fit": 0.42,
+   "heavy": 0.36
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "e380e5823f2c42b2ba93368a4d860639": {
+  "choice": {
+   "rude": 0.125,
+   "light": 0.195,
+   "fit": 0.565,
+   "heavy": 0.115
+  },
+  "noul": {
+   "rude": 0.61,
+   "light": 0.7,
+   "fit": 0.44,
+   "heavy": 0.33
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "4cf0cb8c90ed45de85ce6f4d3179e6a6": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.24,
+   "fit": 0.735,
+   "heavy": 0.015
+  },
+  "noul": {
+   "rude": 0.11,
+   "light": 0.38,
+   "fit": 0.78,
+   "heavy": 0.22
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "b8a3bc61c0f346ec95d51bf3c6bdbff0": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.08,
+   "fit": 0.8,
+   "heavy": 0.105
+  },
+  "noul": {
+   "rude": 0.18,
+   "light": 0.36,
+   "fit": 0.72,
+   "heavy": 0.29
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "eddd7a5fc28f4ee89c9def880a4d0406": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.10500000000000001,
+   "fit": 0.87,
+   "heavy": 0.015
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.29,
+   "fit": 0.77,
+   "heavy": 0.22
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "17a86519b116468caa66b5a56e342126": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.030000000000000002,
+   "fit": 0.33,
+   "heavy": 0.635
+  },
+  "noul": {
+   "rude": 0.16,
+   "light": 0.42,
+   "fit": 0.76,
+   "heavy": 0.56
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "781f2d7ae1624595a0b7db48cc236993": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.025,
+   "fit": 0.97,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.12,
+   "light": 0.18,
+   "fit": 0.83,
+   "heavy": 0.1
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "8133bff6995a401fa09137b55fc10480": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.02,
+   "fit": 0.94,
+   "heavy": 0.035
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.21,
+   "fit": 0.81,
+   "heavy": 0.18
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "3004466c73ee4bdfbe81f7556b705cfb": {
+  "choice": {
+   "rude": 0.075,
+   "light": 0.27,
+   "fit": 0.425,
+   "heavy": 0.22999999999999998
+  },
+  "noul": {
+   "rude": 0.51,
+   "light": 0.6,
+   "fit": 0.38,
+   "heavy": 0.4
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "9a1f7b8539b3443a8e0660e4b2c1763a": {
+  "choice": {
+   "rude": 0.08,
+   "light": 0.08,
+   "fit": 0.73,
+   "heavy": 0.11000000000000001
+  },
+  "noul": {
+   "rude": 0.36,
+   "light": 0.38,
+   "fit": 0.48,
+   "heavy": 0.33
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d5319e97f99448c0a0e2d924e13b8216": {
+  "choice": {
+   "rude": 0.135,
+   "light": 0.12,
+   "fit": 0.63,
+   "heavy": 0.11499999999999999
+  },
+  "noul": {
+   "rude": 0.46,
+   "light": 0.43,
+   "fit": 0.48,
+   "heavy": 0.38
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "30a8144dd83f4cc3b6d7cdda0a477fd7": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.04,
+   "fit": 0.95,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.27,
+   "fit": 0.79,
+   "heavy": 0.09
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "47bdc7c82eec4003847d66eb21512297": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.025,
+   "fit": 0.97,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.2,
+   "fit": 0.81,
+   "heavy": 0.08
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "4edde2f5e33e49d28652061aaff186d3": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.035,
+   "fit": 0.96,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.24,
+   "fit": 0.81,
+   "heavy": 0.1
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "7aeab890dd0847aaacf186308f4e1db0": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.07500000000000001,
+   "fit": 0.6950000000000001,
+   "heavy": 0.22499999999999998
+  },
+  "noul": {
+   "rude": 0.21,
+   "light": 0.47,
+   "fit": 0.69,
+   "heavy": 0.4
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c204d2302a4a442183af3657a3e031df": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.065,
+   "fit": 0.31,
+   "heavy": 0.605
+  },
+  "noul": {
+   "rude": 0.36,
+   "light": 0.48,
+   "fit": 0.48,
+   "heavy": 0.58
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "dcd8944ee21d4f1689f2479f236a388c": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.02,
+   "fit": 0.8200000000000001,
+   "heavy": 0.15
+  },
+  "noul": {
+   "rude": 0.25,
+   "light": 0.29,
+   "fit": 0.66,
+   "heavy": 0.36
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "4eed9ddba6854f4f9a363b72fa7ef527": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.02,
+   "fit": 0.95,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.27,
+   "fit": 0.79,
+   "heavy": 0.17
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "5fc84a37185348b48febd9b1759c46cd": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.015,
+   "fit": 0.97,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.19,
+   "fit": 0.81,
+   "heavy": 0.13
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "fc406d7e161a4e7f823d556321302717": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.015,
+   "fit": 0.94,
+   "heavy": 0.04
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.21,
+   "fit": 0.81,
+   "heavy": 0.2
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "a9bfd54b7a844ea79bed6eafee6a34b2": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.045,
+   "fit": 0.885,
+   "heavy": 0.065
+  },
+  "noul": {
+   "rude": 0.18,
+   "light": 0.33,
+   "fit": 0.71,
+   "heavy": 0.22
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "ae9668fae3d34ac1aa1b16c5b43254c4": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.065,
+   "fit": 0.88,
+   "heavy": 0.04
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.29,
+   "fit": 0.73,
+   "heavy": 0.22
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "cb293e506b7d430aa3935709b8a43732": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.06,
+   "fit": 0.42,
+   "heavy": 0.515
+  },
+  "noul": {
+   "rude": 0.23,
+   "light": 0.4,
+   "fit": 0.51,
+   "heavy": 0.52
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "22b6398663d7457e94d3d07451f0e493": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.025,
+   "fit": 0.8200000000000001,
+   "heavy": 0.15000000000000002
+  },
+  "noul": {
+   "rude": 0.23,
+   "light": 0.32,
+   "fit": 0.7,
+   "heavy": 0.36
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "46388423c0304179add8a450efcb29b7": {
+  "choice": {
+   "rude": 0.03,
+   "light": 0.035,
+   "fit": 0.66,
+   "heavy": 0.275
+  },
+  "noul": {
+   "rude": 0.37,
+   "light": 0.35,
+   "fit": 0.61,
+   "heavy": 0.42
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d0cb8d21ffb54156ac5f6796b9b14b87": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.034999999999999996,
+   "fit": 0.325,
+   "heavy": 0.635
+  },
+  "noul": {
+   "rude": 0.28,
+   "light": 0.41,
+   "fit": 0.57,
+   "heavy": 0.59
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "802b67bfc5274fcdbcf594a01de9f89d": {
+  "choice": {
+   "rude": 0.04,
+   "light": 0.185,
+   "fit": 0.6950000000000001,
+   "heavy": 0.08
+  },
+  "noul": {
+   "rude": 0.42,
+   "light": 0.5,
+   "fit": 0.49,
+   "heavy": 0.31
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "ada41e764648453eb337f6efe5a80387": {
+  "choice": {
+   "rude": 0.030000000000000002,
+   "light": 0.34,
+   "fit": 0.41,
+   "heavy": 0.21999999999999997
+  },
+  "noul": {
+   "rude": 0.42,
+   "light": 0.49,
+   "fit": 0.42,
+   "heavy": 0.42
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "e0795e102c424fecab79f69063f0cd83": {
+  "choice": {
+   "rude": 0.045,
+   "light": 0.39,
+   "fit": 0.54,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.41,
+   "light": 0.55,
+   "fit": 0.54,
+   "heavy": 0.24
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "568d808fb4a3455ca7f997f133aa763b": {
+  "choice": {
+   "rude": 0.075,
+   "light": 0.105,
+   "fit": 0.05,
+   "heavy": 0.77
+  },
+  "noul": {
+   "rude": 0.61,
+   "light": 0.61,
+   "fit": 0.27,
+   "heavy": 0.7
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "5c41e3b2324b4dd591f64ff80801d2ca": {
+  "choice": {
+   "rude": 0.095,
+   "light": 0.33499999999999996,
+   "fit": 0.35,
+   "heavy": 0.22
+  },
+  "noul": {
+   "rude": 0.52,
+   "light": 0.57,
+   "fit": 0.37,
+   "heavy": 0.46
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "9b66f909e9154b14b523f391ab3ab4fe": {
+  "choice": {
+   "rude": 0.065,
+   "light": 0.105,
+   "fit": 0.02,
+   "heavy": 0.81
+  },
+  "noul": {
+   "rude": 0.63,
+   "light": 0.68,
+   "fit": 0.25,
+   "heavy": 0.74
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "1df74353226a4d7d9cb1fdf210d84ccf": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.07,
+   "fit": 0.7050000000000001,
+   "heavy": 0.21000000000000002
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.32,
+   "fit": 0.66,
+   "heavy": 0.28
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "2f3f71796df640e0a50ab9b50643dcdc": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.065,
+   "fit": 0.83,
+   "heavy": 0.09
+  },
+  "noul": {
+   "rude": 0.22,
+   "light": 0.35,
+   "fit": 0.55,
+   "heavy": 0.27
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "40488adbd70a4178a98de2bc81c8ddb7": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.04,
+   "fit": 0.87,
+   "heavy": 0.085
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.23,
+   "fit": 0.76,
+   "heavy": 0.24
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "00413df713664a06b1c433b4db1190f0": {
+  "choice": {
+   "rude": 0.06,
+   "light": 0.08499999999999999,
+   "fit": 0.5549999999999999,
+   "heavy": 0.3
+  },
+  "noul": {
+   "rude": 0.49,
+   "light": 0.58,
+   "fit": 0.43,
+   "heavy": 0.4
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "efa9673bd98a4cfc81f055ffe38e1577": {
+  "choice": {
+   "rude": 0.045,
+   "light": 0.13,
+   "fit": 0.585,
+   "heavy": 0.24000000000000002
+  },
+  "noul": {
+   "rude": 0.52,
+   "light": 0.58,
+   "fit": 0.41,
+   "heavy": 0.36
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f1d9b6b3e7dd4ce3834969f2bc274517": {
+  "choice": {
+   "rude": 0.085,
+   "light": 0.15,
+   "fit": 0.4,
+   "heavy": 0.365
+  },
+  "noul": {
+   "rude": 0.51,
+   "light": 0.63,
+   "fit": 0.41,
+   "heavy": 0.38
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "21608928e99b4fd4bfbb6464a479227f": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.285,
+   "fit": 0.59,
+   "heavy": 0.1
+  },
+  "noul": {
+   "rude": 0.28,
+   "light": 0.55,
+   "fit": 0.53,
+   "heavy": 0.28
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "3104b344f5884c05ad89dd6b2d53e422": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.18,
+   "fit": 0.6699999999999999,
+   "heavy": 0.135
+  },
+  "noul": {
+   "rude": 0.27,
+   "light": 0.5,
+   "fit": 0.45,
+   "heavy": 0.29
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "aa236c399639415eb95bf006529035cb": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.185,
+   "fit": 0.755,
+   "heavy": 0.035
+  },
+  "noul": {
+   "rude": 0.31,
+   "light": 0.47,
+   "fit": 0.53,
+   "heavy": 0.24
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "dc2b1e6f87674df79911bc20eaaa30fc": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.02,
+   "fit": 0.89,
+   "heavy": 0.08499999999999999
+  },
+  "noul": {
+   "rude": 0.09,
+   "light": 0.24,
+   "fit": 0.8,
+   "heavy": 0.19
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "e5017b26fffe4b23ba327aaf5d26bd2a": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.02,
+   "fit": 0.975,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.09,
+   "light": 0.2,
+   "fit": 0.81,
+   "heavy": 0.09
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "ffaa0a34f79245659eb02a85296bff66": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.015,
+   "fit": 0.98,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.09,
+   "light": 0.2,
+   "fit": 0.82,
+   "heavy": 0.09
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "a738059addb74873ac2157d6338f31fd": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.02,
+   "fit": 0.97,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.18,
+   "fit": 0.79,
+   "heavy": 0.1
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d3e4fdf96d844c39a1e971b418cc751f": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.02,
+   "fit": 0.965,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.09,
+   "light": 0.19,
+   "fit": 0.82,
+   "heavy": 0.13
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "e3e7a7a04a6d44ec88c74ff84735fa79": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.02,
+   "fit": 0.95,
+   "heavy": 0.025
+  },
+  "noul": {
+   "rude": 0.09,
+   "light": 0.23,
+   "fit": 0.82,
+   "heavy": 0.18
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "531e74aee3a34a12b4d11a370d6f2e96": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.08,
+   "fit": 0.85,
+   "heavy": 0.060000000000000005
+  },
+  "noul": {
+   "rude": 0.17,
+   "light": 0.43,
+   "fit": 0.66,
+   "heavy": 0.18
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "9bacd064234f4c65a0678a5feab4c83f": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.07,
+   "fit": 0.7749999999999999,
+   "heavy": 0.15
+  },
+  "noul": {
+   "rude": 0.24,
+   "light": 0.45,
+   "fit": 0.64,
+   "heavy": 0.32
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f1da0198c8b549f682c3fd18ce6bab44": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.08,
+   "fit": 0.6950000000000001,
+   "heavy": 0.21000000000000002
+  },
+  "noul": {
+   "rude": 0.22,
+   "light": 0.42,
+   "fit": 0.58,
+   "heavy": 0.29
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "5418535de8c640db96d84904142eb257": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.035,
+   "fit": 0.73,
+   "heavy": 0.22999999999999998
+  },
+  "noul": {
+   "rude": 0.17,
+   "light": 0.32,
+   "fit": 0.64,
+   "heavy": 0.37
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "6409633a34ab49ee8673df8650ca18a4": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.045,
+   "fit": 0.825,
+   "heavy": 0.125
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.3,
+   "fit": 0.72,
+   "heavy": 0.31
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c73807e3e2c34261810487f3d7f69a3e": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.08499999999999999,
+   "fit": 0.73,
+   "heavy": 0.18
+  },
+  "noul": {
+   "rude": 0.22,
+   "light": 0.4,
+   "fit": 0.65,
+   "heavy": 0.34
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "41dea75924f64a71a31a34e109a171de": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.02,
+   "fit": 0.975,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.06,
+   "light": 0.25,
+   "fit": 0.85,
+   "heavy": 0.09
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c26b52e6f0244568accf4e0074008421": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.025,
+   "fit": 0.915,
+   "heavy": 0.060000000000000005
+  },
+  "noul": {
+   "rude": 0.08,
+   "light": 0.28,
+   "fit": 0.8,
+   "heavy": 0.3
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c3ed7300f3fb4069a406d0d0d7bddc8a": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.025,
+   "fit": 0.975,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.05,
+   "light": 0.2,
+   "fit": 0.83,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "461dc595e4494edbb322e509607976c6": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.01,
+   "fit": 0.99,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.06,
+   "light": 0.17,
+   "fit": 0.85,
+   "heavy": 0.04
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "4c10e18177a24409a52218d471a428cd": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.025,
+   "fit": 0.975,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.25,
+   "fit": 0.82,
+   "heavy": 0.09
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "82618f93fb334fe8a5b74e6ec02d0ccf": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.02,
+   "fit": 0.98,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.18,
+   "fit": 0.84,
+   "heavy": 0.04
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "576df189f6fa44a291566c6e3e296d5b": {
+  "choice": {
+   "rude": 0.025,
+   "light": 0.18,
+   "fit": 0.795,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.19,
+   "light": 0.31,
+   "fit": 0.79,
+   "heavy": 0.04
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "6120a715571145f9951bf5cc8c9f1b5a": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.095,
+   "fit": 0.455,
+   "heavy": 0.43000000000000005
+  },
+  "noul": {
+   "rude": 0.23,
+   "light": 0.4,
+   "fit": 0.49,
+   "heavy": 0.41
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c890a3c4059e4c8da45f47e8fe1436f3": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.25,
+   "fit": 0.73,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.42,
+   "fit": 0.78,
+   "heavy": 0.04
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "1c11581a38954a2eb08e2cb3fd876de5": {
+  "choice": {
+   "rude": 0.155,
+   "light": 0.245,
+   "fit": 0.45,
+   "heavy": 0.15000000000000002
+  },
+  "noul": {
+   "rude": 0.57,
+   "light": 0.61,
+   "fit": 0.38,
+   "heavy": 0.39
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "8369907f3395494e82af732a9c24db6e": {
+  "choice": {
+   "rude": 0.11,
+   "light": 0.28500000000000003,
+   "fit": 0.10500000000000001,
+   "heavy": 0.5
+  },
+  "noul": {
+   "rude": 0.62,
+   "light": 0.61,
+   "fit": 0.31,
+   "heavy": 0.58
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f9fec382f2314100b786891ec089db29": {
+  "choice": {
+   "rude": 0.21500000000000002,
+   "light": 0.25,
+   "fit": 0.46,
+   "heavy": 0.07500000000000001
+  },
+  "noul": {
+   "rude": 0.51,
+   "light": 0.58,
+   "fit": 0.46,
+   "heavy": 0.4
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "94aa72e3ed1e4f269e3c436fe2bff19e": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.034999999999999996,
+   "fit": 0.095,
+   "heavy": 0.865
+  },
+  "noul": {
+   "rude": 0.37,
+   "light": 0.51,
+   "fit": 0.43,
+   "heavy": 0.73
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "a92b79a5016a490889259729b10357ab": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.025,
+   "fit": 0.215,
+   "heavy": 0.75
+  },
+  "noul": {
+   "rude": 0.34,
+   "light": 0.44,
+   "fit": 0.45,
+   "heavy": 0.63
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f62d30c5ed9b4e2498b063c83f3625d6": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.030000000000000002,
+   "fit": 0.645,
+   "heavy": 0.31
+  },
+  "noul": {
+   "rude": 0.28,
+   "light": 0.33,
+   "fit": 0.64,
+   "heavy": 0.44
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "199e4bd14ec345929bf19da2e815e95a": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.125,
+   "fit": 0.845,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.3,
+   "fit": 0.77,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c75edd9937e9453c90d8c7542a38703b": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.09,
+   "fit": 0.88,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.31,
+   "fit": 0.76,
+   "heavy": 0.13
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f72cdc2dd4df478caa6691f3feb0f923": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.095,
+   "fit": 0.885,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.14,
+   "light": 0.31,
+   "fit": 0.77,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "0e3054437b9946acb724db86a31a410c": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.02,
+   "fit": 0.98,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.19,
+   "fit": 0.82,
+   "heavy": 0.04
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "479fb5414c42476eb213a01618506b48": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.03,
+   "fit": 0.97,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.25,
+   "fit": 0.84,
+   "heavy": 0.04
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "853ac178231f465d86bc38fcdf2a245a": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.035,
+   "fit": 0.96,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.28,
+   "fit": 0.84,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "21ce67c5053143c79bd2434e9eb6f178": {
+  "choice": {
+   "rude": 0.030000000000000002,
+   "light": 0.11499999999999999,
+   "fit": 0.685,
+   "heavy": 0.17
+  },
+  "noul": {
+   "rude": 0.34,
+   "light": 0.45,
+   "fit": 0.58,
+   "heavy": 0.34
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "c66317e3250147949d8d6c4b955beeb4": {
+  "choice": {
+   "rude": 0.035,
+   "light": 0.115,
+   "fit": 0.8200000000000001,
+   "heavy": 0.030000000000000002
+  },
+  "noul": {
+   "rude": 0.34,
+   "light": 0.41,
+   "fit": 0.6,
+   "heavy": 0.2
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "fb5ce00bdbd4470da51be499b0e32f5b": {
+  "choice": {
+   "rude": 0.165,
+   "light": 0.5,
+   "fit": 0.24000000000000002,
+   "heavy": 0.095
+  },
+  "noul": {
+   "rude": 0.66,
+   "light": 0.72,
+   "fit": 0.37,
+   "heavy": 0.35
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d1e293151c6143228ad0d7c0efe7d911": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.08499999999999999,
+   "fit": 0.8200000000000001,
+   "heavy": 0.09
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.41,
+   "fit": 0.65,
+   "heavy": 0.25
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "de198f0b48f849c9994cb353cf8d333b": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.11,
+   "fit": 0.8200000000000001,
+   "heavy": 0.06
+  },
+  "noul": {
+   "rude": 0.14,
+   "light": 0.44,
+   "fit": 0.64,
+   "heavy": 0.2
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "f102b4d6e1404a8fb805314297e17892": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.07,
+   "fit": 0.415,
+   "heavy": 0.505
+  },
+  "noul": {
+   "rude": 0.36,
+   "light": 0.51,
+   "fit": 0.46,
+   "heavy": 0.47
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "2b01caef1d744f52aa3df4d21cefa1b4": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.21500000000000002,
+   "fit": 0.76,
+   "heavy": 0.015
+  },
+  "noul": {
+   "rude": 0.12,
+   "light": 0.37,
+   "fit": 0.78,
+   "heavy": 0.21
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "a74f1ee5c2b2485f8fadf90dcc556b06": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.11,
+   "fit": 0.86,
+   "heavy": 0.02
+  },
+  "noul": {
+   "rude": 0.11,
+   "light": 0.31,
+   "fit": 0.77,
+   "heavy": 0.22
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "b5486b18219d4c5f8a7604cf02c3f5ad": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.15,
+   "fit": 0.8300000000000001,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.1,
+   "light": 0.33,
+   "fit": 0.78,
+   "heavy": 0.21
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "38211d96c78e4f8a9f45538349bb6af0": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.125,
+   "fit": 0.845,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.3,
+   "fit": 0.77,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "48429f82248743d5b346699c9a409455": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.125,
+   "fit": 0.845,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.3,
+   "fit": 0.77,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "8fd359d64c1a424d9d71cef5b2591f1d": {
+  "choice": {
+   "rude": 0.02,
+   "light": 0.125,
+   "fit": 0.845,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.15,
+   "light": 0.3,
+   "fit": 0.77,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "85a80d774b65416faec2d7a6ebedbbb6": {
+  "choice": {
+   "rude": 0.17,
+   "light": 0.425,
+   "fit": 0.265,
+   "heavy": 0.14
+  },
+  "noul": {
+   "rude": 0.53,
+   "light": 0.7,
+   "fit": 0.29,
+   "heavy": 0.42
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "8967e458dda349a394517c6d61df142c": {
+  "choice": {
+   "rude": 0.115,
+   "light": 0.34,
+   "fit": 0.355,
+   "heavy": 0.19
+  },
+  "noul": {
+   "rude": 0.47,
+   "light": 0.65,
+   "fit": 0.31,
+   "heavy": 0.47
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d534b759ace14a22a3481897c06a6436": {
+  "choice": {
+   "rude": 0.11000000000000001,
+   "light": 0.245,
+   "fit": 0.275,
+   "heavy": 0.37
+  },
+  "noul": {
+   "rude": 0.51,
+   "light": 0.65,
+   "fit": 0.27,
+   "heavy": 0.51
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "1081ac2ab8a54af0917aeb0bf7387ee7": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.06,
+   "fit": 0.92,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.3,
+   "fit": 0.78,
+   "heavy": 0.11
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "7d4e60dc3d4e4bdf97a9dd449a8abaca": {
+  "choice": {
+   "rude": 0.015,
+   "light": 0.07500000000000001,
+   "fit": 0.9,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.12,
+   "light": 0.31,
+   "fit": 0.77,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "de1e4e34af9441cbb46b39db9d33aa97": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.05,
+   "fit": 0.93,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.14,
+   "light": 0.28,
+   "fit": 0.79,
+   "heavy": 0.13
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "4bf8c1252c604c358d88aed62d40a3a9": {
+  "choice": {
+   "rude": 0.01,
+   "light": 0.11,
+   "fit": 0.735,
+   "heavy": 0.14500000000000002
+  },
+  "noul": {
+   "rude": 0.21,
+   "light": 0.43,
+   "fit": 0.66,
+   "heavy": 0.34
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "adb6d2271e8a480ca60fa126c31da1aa": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.10500000000000001,
+   "fit": 0.79,
+   "heavy": 0.1
+  },
+  "noul": {
+   "rude": 0.24,
+   "light": 0.42,
+   "fit": 0.68,
+   "heavy": 0.3
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "bfcfd658fcaf445c9406bac1d2c22cb1": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.09,
+   "fit": 0.745,
+   "heavy": 0.16
+  },
+  "noul": {
+   "rude": 0.21,
+   "light": 0.37,
+   "fit": 0.71,
+   "heavy": 0.36
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "55a2cfeb86cb4a30af98145c936aa58c": {
+  "choice": {
+   "rude": 0.095,
+   "light": 0.055,
+   "fit": 0.845,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.26,
+   "light": 0.28,
+   "fit": 0.61,
+   "heavy": 0.09
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "573c0fafc91749c7ac3c6b3f982d9bc1": {
+  "choice": {
+   "rude": 0.035,
+   "light": 0.32,
+   "fit": 0.29000000000000004,
+   "heavy": 0.355
+  },
+  "noul": {
+   "rude": 0.39,
+   "light": 0.62,
+   "fit": 0.47,
+   "heavy": 0.46
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "7a993afc03ab49b6a37e86f1cb44ecac": {
+  "choice": {
+   "rude": 0.21000000000000002,
+   "light": 0.28500000000000003,
+   "fit": 0.14,
+   "heavy": 0.365
+  },
+  "noul": {
+   "rude": 0.68,
+   "light": 0.7,
+   "fit": 0.36,
+   "heavy": 0.44
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "1dadc18e178a48e29709a0bde0a8c014": {
+  "choice": {
+   "rude": 0.13,
+   "light": 0.30500000000000005,
+   "fit": 0.43,
+   "heavy": 0.135
+  },
+  "noul": {
+   "rude": 0.57,
+   "light": 0.66,
+   "fit": 0.4,
+   "heavy": 0.38
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "73dadbfc75d04c30a5d248759afd4740": {
+  "choice": {
+   "rude": 0.05,
+   "light": 0.10500000000000001,
+   "fit": 0.655,
+   "heavy": 0.19
+  },
+  "noul": {
+   "rude": 0.39,
+   "light": 0.54,
+   "fit": 0.49,
+   "heavy": 0.37
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "a3ab5d3f18a54a7bb1d2811710c85bd6": {
+  "choice": {
+   "rude": 0.10500000000000001,
+   "light": 0.245,
+   "fit": 0.355,
+   "heavy": 0.295
+  },
+  "noul": {
+   "rude": 0.65,
+   "light": 0.72,
+   "fit": 0.38,
+   "heavy": 0.42
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "1a4759ddb7d24fa685b6cdf30e84ae8a": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.015,
+   "fit": 0.98,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.03,
+   "light": 0.11,
+   "fit": 0.84,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "251848aed29745ea8a7e99eee3be1f36": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.01,
+   "fit": 0.99,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.11,
+   "fit": 0.85,
+   "heavy": 0.03
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "6b730a3c71c24888a3ec80d4f18aeddb": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.01,
+   "fit": 0.99,
+   "heavy": 0.0
+  },
+  "noul": {
+   "rude": 0.04,
+   "light": 0.11,
+   "fit": 0.84,
+   "heavy": 0.02
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "06bd2b75a8dd4aca96a176720d79e99f": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.015,
+   "fit": 0.975,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.18,
+   "fit": 0.79,
+   "heavy": 0.09
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "662e78467ca34109b4cfc21b76ab1624": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.025,
+   "fit": 0.965,
+   "heavy": 0.005
+  },
+  "noul": {
+   "rude": 0.11,
+   "light": 0.22,
+   "fit": 0.76,
+   "heavy": 0.1
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "d7ce8bd7b88440dcbadbbbbfad24d64f": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.025,
+   "fit": 0.885,
+   "heavy": 0.09
+  },
+  "noul": {
+   "rude": 0.07,
+   "light": 0.2,
+   "fit": 0.8,
+   "heavy": 0.18
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "166151ea32394ec3abc240ec79b66c94": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.03,
+   "fit": 0.895,
+   "heavy": 0.07
+  },
+  "noul": {
+   "rude": 0.13,
+   "light": 0.25,
+   "fit": 0.77,
+   "heavy": 0.2
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "bf1c4c4ae2124919943770d1073ac288": {
+  "choice": {
+   "rude": 0.005,
+   "light": 0.035,
+   "fit": 0.95,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.11,
+   "light": 0.27,
+   "fit": 0.77,
+   "heavy": 0.12
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ },
+ "ff82214cf8784c08a75bf54db1ba0436": {
+  "choice": {
+   "rude": 0.0,
+   "light": 0.015,
+   "fit": 0.975,
+   "heavy": 0.01
+  },
+  "noul": {
+   "rude": 0.08,
+   "light": 0.2,
+   "fit": 0.8,
+   "heavy": 0.13
+  },
+  "model": "typesafe/jev-1.14-20261014"
+ }
+}

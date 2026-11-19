@@ -1,0 +1,1 @@
+{"model": "typesafe/jev-1.14-20261014", "answers": {"direct": {"type": "choice", "choice": "light", "probabilities": {"heavy": 0.03, "fit": 0.45, "light": 0.5, "rude": 0.02}, "confidence": 0.33}, "is.rude": {"type": "noul", "noul": 0.22}, "is.light": {"type": "noul", "noul": 0.65}, "is.fit": {"type": "noul", "noul": 0.65}, "is.heavy": {"type": "noul", "noul": 0.08}}}

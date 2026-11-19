@@ -2,7 +2,7 @@
 
 層A（観察）の LLM を、TypeSafe AI の System One モデル **Jev**、または同じ API を話す互換バックエンドに置き換えられるかを検討し、置き換える場合の設計をまとめた文書です。層B（受け手モデル）は変えません。設計原則は [DESIGN.md](DESIGN.md)、現行の観察の形式は [ARCHITECTURE.md](ARCHITECTURE.md) と `observe_prompt.md` を参照してください。
 
-状態：**設計。組み込み判定モード（`sim.py check`、5.8節）だけ実装済み。Jev の実際の応答では未検証**。2026-11-18 時点の一次資料に基づきます。この環境からは TypeSafe の API に接続できないため、Jev の日本語での実際の挙動は確認していません。
+状態：**設計。組み込み判定モード（`sim.py check`、5.8節）だけ実装済み。** 2026-11-18 時点の一次資料に基づきます。**2026-11-19 に、OpenRouter 経由の実際の Jev で7章の段階1と、段階3の比較の一部を行いました。結果は [EVALUATION_JEV.md](EVALUATION_JEV.md) にあります**（事実型の欄は正確、規範的な区別の欄と悪い読みは真の側へ寄り、欄ごとの較正が必要。現時点では層Aの既定にしない）。
 
 ## 1. 結論
 
@@ -168,6 +168,7 @@ Jev は点ではなく分布を返します。この分布をどう層Bに渡す
 | バックエンド | 中身 | 用途 |
 |---|---|---|
 | `jev` | `POST https://api.typesafe.ai/v1/systemone`。`TYPESAFE_API_KEY`。版は `jev-1.14.0` に固定 | 本番の観察 |
+| `jev-or` | OpenRouter の Decisions API（`POST https://openrouter.ai/api/alpha/decisions`）。`OPENROUTER_API_KEY`。既定 `~typesafe/jev-latest`（実際に答えた版を記録する）。要求と応答の形は `jev` と同じ | 評価で使用（[EVALUATION_JEV.md](EVALUATION_JEV.md)） |
 | `llm-s1` | 同じ質問の組を OpenRouter の LLM に送り、各問いに確率（Noul）または分布（Score・Choice）を JSON で答えさせる。スキーマで検査し、和を1に正規化する | 互換モデル。Jev との比較、Jev が使えないときの代替、要確認の欄の再判定 |
 | `cache` | 過去の答えを質問のハッシュで引く | 再現性、費用ゼロでの再集計 |
 

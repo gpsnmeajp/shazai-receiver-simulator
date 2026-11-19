@@ -1,0 +1,28 @@
+{
+ "_note": "logit(p') = logit(p) − logit(t)。t は参照の観察（obs-ensemble.json）との一致率が最大になる閾値。tools/calibrate_s1.py で作成。版を上げたら作り直す",
+ "model": [
+  "~typesafe/jev-latest"
+ ],
+ "noul_threshold": {
+  "s.apology": 0.6,
+  "s.excuse": 0.92,
+  "s.blame": 0.54,
+  "s.conditional": 0.95,
+  "s.explain": 0.73,
+  "s.forgive": 0.95,
+  "s.self_dep": 0.33,
+  "s.promise": 0.5,
+  "s.resolution": 0.95,
+  "s.proposal": 0.66,
+  "ans.moves_on": 0.89,
+  "ans.new_errors": 0.71,
+  "ans.prompted": 0.95,
+  "ans.thanks": 0.3,
+  "s.read": 0.83,
+  "a.apology": 0.36,
+  "u.corrects": 0.12,
+  "u.repeat": 0.47,
+  "sc.push": 0.46,
+  "sc.accepted": 0.5
+ }
+}
