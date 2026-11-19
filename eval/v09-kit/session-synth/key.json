@@ -1,467 +1,467 @@
 {
  "schema": "apology-blind-key/1",
- "packet_id": "pk-20261119-87378a",
+ "packet_id": "pk-20261119-26da4e",
  "design": {
   "lists": 30,
   "units": [
    {
-    "id": "7f9d62",
+    "id": "8eb7e6",
     "offset": 18,
     "slots": [
-     "0620b5",
-     "37b46f",
-     "994143",
-     "782806",
-     "e694bd",
-     "9a8f6d",
-     "e00ded",
-     "115591",
-     "ba5748",
-     "e647ff",
-     "e167e8",
-     "1623b9",
-     "f49d92",
-     "c27de0",
-     "be5369",
-     "dc72ce",
-     "12016b",
-     "5751e6",
-     "504b13",
-     "f990d3",
-     "7e75a7",
-     "48ea97",
-     "6d5db0",
-     "0e50ea",
-     "e522f3",
-     "34eaee",
-     "edbacb",
-     "1823ba",
-     "b92140",
-     "11f0b6"
+     "fe137c",
+     "77dd23",
+     "c599e5",
+     "c7d8db",
+     "d7ccb7",
+     "a615d7",
+     "a199cc",
+     "7e566e",
+     "a2a6ef",
+     "591226",
+     "260204",
+     "5ab8c9",
+     "adbb01",
+     "01b259",
+     "211b31",
+     "fe7322",
+     "68f031",
+     "698df7",
+     "c14f60",
+     "e8dd57",
+     "2784bf",
+     "c00655",
+     "fb3890",
+     "96ee93",
+     "fefc84",
+     "28e04b",
+     "8adef0",
+     "c6d794",
+     "6da68a",
+     "b5eaba"
     ]
    },
    {
-    "id": "16b8ed",
+    "id": "3a8114",
     "offset": 24,
     "slots": [
-     "c59e39",
-     "386323",
-     "b4e62b",
-     "52f786",
-     "c4a2c0",
-     "f49eeb",
-     "9f4929",
-     "a596e8",
-     "4d0b43",
-     "ce1372",
-     "5d40ca",
-     "8d237b",
-     "99892d",
-     "1ef2fa",
-     "c92f8b",
-     "39884f",
-     "00727b",
-     "b7ea99",
-     "ccba95",
-     "61317a",
-     "7f796b",
-     "002db5",
-     "c78bec",
-     "8c1e4d",
-     "d6f986",
-     "c4a260",
-     "10f359",
-     "24d094",
-     "6e6711",
-     "9c3ad8"
+     "180200",
+     "0dcabc",
+     "6cf93f",
+     "55a275",
+     "91b814",
+     "88c315",
+     "be822c",
+     "26a23e",
+     "149137",
+     "4c33cc",
+     "eec00b",
+     "c355f8",
+     "aadb2b",
+     "b47ae5",
+     "03e3a5",
+     "d9d40d",
+     "0daa06",
+     "1eb0ed",
+     "72abc5",
+     "6511ab",
+     "d9e4a3",
+     "a366ac",
+     "04fd77",
+     "1a7611",
+     "176655",
+     "a81a65",
+     "b313e9",
+     "ba6ba2",
+     "19262b",
+     "73d667"
     ]
    },
    {
-    "id": "e6f368",
+    "id": "73e98d",
     "offset": 21,
     "slots": [
-     "94fc35",
-     "d5ac55",
-     "2d36dd",
-     "61f0a7",
-     "d3c3ba",
-     "4201bf",
-     "54c1e2",
-     "5a41b6",
-     "ee16d9",
-     "849e77",
-     "243621",
-     "4e925f",
-     "d94f1c",
-     "885f5c",
-     "001ace",
-     "c471e7",
-     "8636d9",
-     "186181",
-     "34befb",
-     "e2af71",
-     "d55b5f",
-     "fea8cd",
-     "cf6425",
-     "9fd219",
-     "721e5f",
-     "dd6224",
-     "44c196",
-     "ed15d2",
-     "088d51",
-     "7e5b42"
+     "40ede5",
+     "480892",
+     "a791af",
+     "be800b",
+     "dd6e8a",
+     "162ddc",
+     "3f708c",
+     "227cc7",
+     "70215d",
+     "7a9d2a",
+     "7bafd7",
+     "50fcdb",
+     "b0f062",
+     "6aa60a",
+     "808364",
+     "703c04",
+     "a2642e",
+     "4394fd",
+     "8c1533",
+     "8ed1d6",
+     "ddabfe",
+     "7c244c",
+     "7ee0ad",
+     "36e88b",
+     "2984c8",
+     "4baa6a",
+     "c99d02",
+     "4abd8c",
+     "2c4d87",
+     "38a7fe"
     ]
    },
    {
-    "id": "a1031b",
+    "id": "378efe",
     "offset": 11,
     "slots": [
-     "9a5c90",
-     "376866",
-     "94b034",
-     "1820d3",
-     "aeb8eb",
-     "262c3f",
-     "973827",
-     "08719c",
-     "958c4b",
-     "49ee3a",
-     "1882bb",
-     "868f22",
-     "d1502c",
-     "bbdba9",
-     "96bd38",
-     "6f3a34",
-     "5b7958",
-     "5c7e3b",
-     "306e1d",
-     "22340c",
-     "822051",
-     "3c4055",
-     "a3b15b",
-     "d9330a",
-     "0fc1cd",
-     "52955f",
-     "522051",
-     "759552",
-     "86b702",
-     "7b5e84"
+     "15d460",
+     "543eb9",
+     "f14ad2",
+     "2b3617",
+     "888bbe",
+     "26a840",
+     "728df1",
+     "1de38f",
+     "9279b6",
+     "7ff667",
+     "60542b",
+     "4f6eb6",
+     "5dd9d7",
+     "91d9bc",
+     "4eb104",
+     "cedf4e",
+     "b24bbd",
+     "38b2b1",
+     "8c26ca",
+     "3e10c1",
+     "ac9cd1",
+     "bf8bef",
+     "d8551b",
+     "2a388b",
+     "1f93e8",
+     "242f98",
+     "987976",
+     "aeb454",
+     "99ee00",
+     "32e07e"
     ]
    },
    {
-    "id": "0d5b0b",
+    "id": "e8f346",
     "offset": 1,
     "slots": [
-     "f931e3",
-     "1d9be8",
-     "c8f5e0",
-     "5f2279",
-     "5ffcbd"
+     "70a712",
+     "e2cce4",
+     "fc3c2a",
+     "547bcd",
+     "0176fc"
     ]
    },
    {
-    "id": "b8d387",
+    "id": "2ca09b",
     "offset": 3,
     "slots": [
-     "500516",
-     "cb0343",
-     "84d021",
-     "297316",
-     "ba58b5"
+     "7b76dc",
+     "abb942",
+     "5dd897",
+     "ebffd8",
+     "0b7a55"
     ]
    },
    {
-    "id": "9dc344",
+    "id": "875e5b",
     "offset": 3,
     "slots": [
-     "efd20e",
-     "5dc9e1",
-     "3112f3",
-     "4d8deb",
-     "46cb42"
+     "f2a2cc",
+     "183ec3",
+     "8d19d5",
+     "31b9c0",
+     "e2b789"
     ]
    },
    {
-    "id": "465e30",
+    "id": "87ce75",
     "offset": 4,
     "slots": [
-     "5328ce",
-     "a42450",
-     "d89de3",
-     "0da1d2",
-     "016379"
+     "56a9eb",
+     "ae58e6",
+     "ea251d",
+     "d9e2ea",
+     "7027e2"
     ]
    },
    {
-    "id": "596c8b",
+    "id": "322ec7",
     "offset": 1,
     "slots": [
-     "795fdd",
-     "d16077",
-     "0dc27d",
-     "557181",
-     "18bf27"
+     "9c1e40",
+     "5499d2",
+     "98cf93",
+     "c4bf7d",
+     "140826"
     ]
    },
    {
-    "id": "7e9000",
+    "id": "657a54",
     "offset": 1,
     "slots": [
-     "d0a28a",
-     "cedc5d",
-     "a99696",
-     "bfe445",
-     "c8c0ca"
+     "20f2c6",
+     "1d0eb3",
+     "eeaa41",
+     "12cae6",
+     "82d186"
     ]
    },
    {
-    "id": "df2e40",
+    "id": "1517d5",
     "offset": 2,
     "slots": [
-     "55ed57",
-     "f228d9",
-     "0b6c2f",
-     "e55b1a",
-     "2b5858"
+     "6c8056",
+     "0e9718",
+     "4c7f4f",
+     "54f9b5",
+     "fbec82"
     ]
    },
    {
-    "id": "93aeb1",
+    "id": "9826fc",
     "offset": 4,
     "slots": [
-     "087dbf",
-     "d75dcf",
-     "f9e92c",
-     "aa3639",
-     "53af3d"
+     "014c9c",
+     "59d61b",
+     "131616",
+     "42c07f",
+     "b5c963"
     ]
    },
    {
-    "id": "a53c46",
+    "id": "9c81d4",
     "offset": 3,
     "slots": [
-     "cd8824",
-     "aa31b3",
-     "7537e3",
-     "25ad3d",
-     "871080"
+     "6bdeee",
+     "b43e84",
+     "f18f0e",
+     "5d310c",
+     "fcd397"
     ]
    },
    {
-    "id": "5f52cf",
+    "id": "b0484d",
     "offset": 3,
     "slots": [
-     "e31ff2",
-     "7b397f",
-     "a8d9ce",
-     "64054a",
-     "0670e6"
+     "836c66",
+     "b93937",
+     "111389",
+     "22099e",
+     "91315f"
     ]
    },
    {
-    "id": "a5394d",
+    "id": "9d6b29",
     "offset": 0,
     "slots": [
-     "3fef96",
-     "cfafe7",
-     "15b5e6",
-     "149934",
-     "24ed58"
+     "ed6952",
+     "adca33",
+     "471d21",
+     "b5ea66",
+     "5eaf90"
     ]
    },
    {
-    "id": "213e44",
+    "id": "f0b587",
     "offset": 1,
     "slots": [
-     "9a7492",
-     "4321fa",
-     "5965c2",
-     "8f0fd9",
-     "44826b"
+     "06d433",
+     "2fc68b",
+     "a2b2d5",
+     "e5af40",
+     "b2be9b"
     ]
    },
    {
-    "id": "737189",
+    "id": "9c0125",
     "offset": 0,
     "slots": [
-     "f77f1c",
-     "34cba7",
-     "c57956",
-     "d2b79f",
-     "db6953"
+     "ee69a3",
+     "90acf4",
+     "adf442",
+     "88a399",
+     "e69164"
     ]
    },
    {
-    "id": "9a6966",
+    "id": "7457dc",
     "offset": 2,
     "slots": [
-     "0b5aa8",
-     "fb1a58",
-     "240a54",
-     "7b2ac7",
-     "1bb6b2"
+     "60f9da",
+     "6e634d",
+     "b64139",
+     "f8a71c",
+     "7fdcef"
     ]
    },
    {
-    "id": "836c0b",
+    "id": "1982b0",
     "offset": 4,
     "slots": [
-     "27f71f",
-     "ecbaad",
-     "d13c42",
-     "d5214f",
-     "5378a5"
+     "2b9016",
+     "6f22ae",
+     "fe9ec5",
+     "e7f286",
+     "7ce710"
     ]
    },
    {
-    "id": "32ab42",
+    "id": "38f3e4",
     "offset": 2,
     "slots": [
-     "eb53d5",
-     "f87529",
-     "55535f",
-     "648c34",
-     "88f22f"
+     "668087",
+     "9b3b86",
+     "5007d1",
+     "49903e",
+     "f8c3c6"
     ]
    },
    {
-    "id": "0ea4d9",
+    "id": "959126",
     "offset": 3,
     "slots": [
-     "cda906",
-     "b438ab",
-     "584663",
-     "157c85",
-     "05241a",
-     "58bbcb"
+     "cf7299",
+     "71d912",
+     "170a20",
+     "d4d274",
+     "600f99",
+     "edb3d1"
     ]
    },
    {
-    "id": "ef32f6",
+    "id": "9f2e94",
     "offset": 1,
     "slots": [
-     "14f400",
-     "5b6d8e",
-     "e66e8d",
-     "e0a406",
-     "c086bb",
-     "e5bc55"
+     "ec6cbb",
+     "923907",
+     "e30037",
+     "938e79",
+     "ad4359",
+     "5ec108"
     ]
    },
    {
-    "id": "7268a0",
+    "id": "8e8df6",
     "offset": 4,
     "slots": [
-     "ff482a",
-     "31be22",
-     "a4db8d",
-     "9f56c6",
-     "71014f",
-     "ebd721"
+     "46e383",
+     "dc6a41",
+     "052f12",
+     "5ef8b2",
+     "fd0233",
+     "0bd92b"
     ]
    },
    {
-    "id": "f58a75",
+    "id": "ea01e0",
     "offset": 4,
     "slots": [
-     "7cad88",
-     "7d2577",
-     "1f9365",
-     "189d26",
-     "a50d47",
-     "6d30ba"
+     "f7d933",
+     "6a70a8",
+     "bac9da",
+     "f3f3de",
+     "0b004a",
+     "ca1344"
     ]
    },
    {
-    "id": "cf39e1",
+    "id": "cb93a6",
     "offset": 1,
     "slots": [
-     "57aaf6",
-     "edbc4e",
-     "2aed1f",
-     "6f58fb",
-     "66a832",
-     "39e0c2"
+     "e8f39c",
+     "65138e",
+     "d4c204",
+     "dd2374",
+     "0b5f19",
+     "aa9e56"
     ]
    },
    {
-    "id": "1e7cd6",
+    "id": "ba90c9",
     "offset": 4,
     "slots": [
-     "73ecc7",
-     "2ab1e1",
-     "206ccf",
-     "428f1a",
-     "3190db",
-     "b9dd4a"
+     "df0848",
+     "d3ca74",
+     "fd622b",
+     "22e28f",
+     "95b31c",
+     "4e0c7c"
     ]
    },
    {
-    "id": "bd7953",
+    "id": "aa5b8a",
     "offset": 1,
     "slots": [
-     "516d37",
-     "78777e",
-     "498c56",
-     "cf2542",
-     "a0681f",
-     "f6a8d5"
+     "8c117a",
+     "f3dfad",
+     "26d6f4",
+     "5c80c3",
+     "8ca7db",
+     "ac52a5"
     ]
    },
    {
-    "id": "2df830",
+    "id": "5d7d68",
     "offset": 0,
     "slots": [
-     "abde53",
-     "278955",
-     "11d022",
-     "5d7d87",
-     "d93f63",
-     "0f9c55"
+     "fb492d",
+     "03c538",
+     "50ecc2",
+     "eac6bd",
+     "d05572",
+     "4ccfd9"
     ]
    }
   ],
   "fixed": [
-   "20876b",
-   "4f511c",
-   "b0a386",
-   "156f00"
+   "981305",
+   "bb3820",
+   "33cea2",
+   "f47223"
   ],
-  "attention": "5fbf3b",
+  "attention": "81c310",
   "retest": 2
  },
  "unit_names": {
-  "7f9d62": "A:code",
-  "16b8ed": "A:fact",
-  "e6f368": "A:file",
-  "a1031b": "A:schedule",
-  "0d5b0b": "B:code:普通:約束を破った後",
-  "b8d387": "B:code:普通:軽い失敗の後",
-  "9dc344": "B:code:親しい:約束を破った後",
-  "465e30": "B:code:親しい:軽い失敗の後",
-  "596c8b": "B:fact:普通:約束を破った後",
-  "7e9000": "B:fact:普通:軽い失敗の後",
-  "df2e40": "B:fact:親しい:約束を破った後",
-  "93aeb1": "B:fact:親しい:軽い失敗の後",
-  "a53c46": "B:file:普通:約束を破った後",
-  "5f52cf": "B:file:普通:軽い失敗の後",
-  "a5394d": "B:file:親しい:約束を破った後",
-  "213e44": "B:file:親しい:軽い失敗の後",
-  "737189": "B:schedule:普通:約束を破った後",
-  "9a6966": "B:schedule:普通:軽い失敗の後",
-  "836c0b": "B:schedule:親しい:約束を破った後",
-  "32ab42": "B:schedule:親しい:軽い失敗の後",
-  "0ea4d9": "C:code:liability",
-  "ef32f6": "C:code:scope",
-  "7268a0": "C:fact:liability",
-  "f58a75": "C:fact:scope",
-  "cf39e1": "C:file:liability",
-  "1e7cd6": "C:file:scope",
-  "bd7953": "C:schedule:liability",
-  "2df830": "C:schedule:scope"
+  "8eb7e6": "A:code",
+  "3a8114": "A:fact",
+  "73e98d": "A:file",
+  "378efe": "A:schedule",
+  "e8f346": "B:code:普通:約束を破った後",
+  "2ca09b": "B:code:普通:軽い失敗の後",
+  "875e5b": "B:code:親しい:約束を破った後",
+  "87ce75": "B:code:親しい:軽い失敗の後",
+  "322ec7": "B:fact:普通:約束を破った後",
+  "657a54": "B:fact:普通:軽い失敗の後",
+  "1517d5": "B:fact:親しい:約束を破った後",
+  "9826fc": "B:fact:親しい:軽い失敗の後",
+  "9c81d4": "B:file:普通:約束を破った後",
+  "b0484d": "B:file:普通:軽い失敗の後",
+  "9d6b29": "B:file:親しい:約束を破った後",
+  "f0b587": "B:file:親しい:軽い失敗の後",
+  "9c0125": "B:schedule:普通:約束を破った後",
+  "7457dc": "B:schedule:普通:軽い失敗の後",
+  "1982b0": "B:schedule:親しい:約束を破った後",
+  "38f3e4": "B:schedule:親しい:軽い失敗の後",
+  "959126": "C:code:liability",
+  "9f2e94": "C:code:scope",
+  "8e8df6": "C:fact:liability",
+  "ea01e0": "C:fact:scope",
+  "cb93a6": "C:file:liability",
+  "ba90c9": "C:file:scope",
+  "aa5b8a": "C:schedule:liability",
+  "5d7d68": "C:schedule:scope"
  },
  "items": {
-  "115591": {
+  "7e566e": {
    "source": "scene:A-code-hedged/a1",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -481,7 +481,7 @@
    },
    "repeat_of": null
   },
-  "791dd2": {
+  "57615d": {
    "source": "scene:A-code-hedged/a1",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -499,9 +499,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "115591"
+   "repeat_of": "7e566e"
   },
-  "34eaee": {
+  "28e04b": {
    "source": "scene:A-code-hedged/a2",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -521,7 +521,7 @@
    },
    "repeat_of": null
   },
-  "144ee5": {
+  "6f1d9a": {
    "source": "scene:A-code-hedged/a2",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -539,9 +539,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "34eaee"
+   "repeat_of": "28e04b"
   },
-  "e522f3": {
+  "fefc84": {
    "source": "scene:A-code-hedged/a3",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -561,7 +561,7 @@
    },
    "repeat_of": null
   },
-  "fe3854": {
+  "346c19": {
    "source": "scene:A-code-hedged/a3",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -579,9 +579,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "e522f3"
+   "repeat_of": "fefc84"
   },
-  "6d5db0": {
+  "fb3890": {
    "source": "scene:A-code-hedged/a4",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -601,7 +601,7 @@
    },
    "repeat_of": null
   },
-  "5cfb56": {
+  "cb43ae": {
    "source": "scene:A-code-hedged/a4",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -619,9 +619,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "6d5db0"
+   "repeat_of": "fb3890"
   },
-  "b92140": {
+  "6da68a": {
    "source": "scene:A-code-hedged/a5",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -641,7 +641,7 @@
    },
    "repeat_of": null
   },
-  "75946e": {
+  "280b60": {
    "source": "scene:A-code-hedged/a5",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -659,9 +659,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "b92140"
+   "repeat_of": "6da68a"
   },
-  "37b46f": {
+  "77dd23": {
    "source": "scene:A-code-hedged/a6",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -681,7 +681,7 @@
    },
    "repeat_of": null
   },
-  "76d087": {
+  "e6258e": {
    "source": "scene:A-code-hedged/a6",
    "group": "A-code-hedged",
    "unit": "A:code",
@@ -699,9 +699,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "37b46f"
+   "repeat_of": "77dd23"
   },
-  "5751e6": {
+  "698df7": {
    "source": "scene:A-code-neutral/a1",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -721,7 +721,7 @@
    },
    "repeat_of": null
   },
-  "d955d3": {
+  "6d9fba": {
    "source": "scene:A-code-neutral/a1",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -739,9 +739,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "5751e6"
+   "repeat_of": "698df7"
   },
-  "e694bd": {
+  "d7ccb7": {
    "source": "scene:A-code-neutral/a2",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -761,7 +761,7 @@
    },
    "repeat_of": null
   },
-  "88eefc": {
+  "332ba6": {
    "source": "scene:A-code-neutral/a2",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -779,9 +779,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "e694bd"
+   "repeat_of": "d7ccb7"
   },
-  "e647ff": {
+  "591226": {
    "source": "scene:A-code-neutral/a3",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -801,7 +801,7 @@
    },
    "repeat_of": null
   },
-  "e560a7": {
+  "ef0fd5": {
    "source": "scene:A-code-neutral/a3",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -819,9 +819,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "e647ff"
+   "repeat_of": "591226"
   },
-  "e00ded": {
+  "a199cc": {
    "source": "scene:A-code-neutral/a4",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -841,7 +841,7 @@
    },
    "repeat_of": null
   },
-  "9404d0": {
+  "ad393d": {
    "source": "scene:A-code-neutral/a4",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -859,9 +859,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "e00ded"
+   "repeat_of": "a199cc"
   },
-  "11f0b6": {
+  "b5eaba": {
    "source": "scene:A-code-neutral/a5",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -881,7 +881,7 @@
    },
    "repeat_of": null
   },
-  "417e72": {
+  "47f8cc": {
    "source": "scene:A-code-neutral/a5",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -899,9 +899,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "11f0b6"
+   "repeat_of": "b5eaba"
   },
-  "48ea97": {
+  "c00655": {
    "source": "scene:A-code-neutral/a6",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -921,7 +921,7 @@
    },
    "repeat_of": null
   },
-  "1395f6": {
+  "8c907e": {
    "source": "scene:A-code-neutral/a6",
    "group": "A-code-neutral",
    "unit": "A:code",
@@ -939,9 +939,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "48ea97"
+   "repeat_of": "c00655"
   },
-  "1823ba": {
+  "c6d794": {
    "source": "scene:A-code-confident/a1",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -961,7 +961,7 @@
    },
    "repeat_of": null
   },
-  "18ed13": {
+  "e1eddb": {
    "source": "scene:A-code-confident/a1",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -979,9 +979,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "1823ba"
+   "repeat_of": "c6d794"
   },
-  "ba5748": {
+  "a2a6ef": {
    "source": "scene:A-code-confident/a2",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1001,7 +1001,7 @@
    },
    "repeat_of": null
   },
-  "52e9d5": {
+  "a34e79": {
    "source": "scene:A-code-confident/a2",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1019,9 +1019,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "ba5748"
+   "repeat_of": "a2a6ef"
   },
-  "c27de0": {
+  "01b259": {
    "source": "scene:A-code-confident/a3",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1041,7 +1041,7 @@
    },
    "repeat_of": null
   },
-  "39efca": {
+  "203252": {
    "source": "scene:A-code-confident/a3",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1059,9 +1059,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "c27de0"
+   "repeat_of": "01b259"
   },
-  "994143": {
+  "c599e5": {
    "source": "scene:A-code-confident/a4",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1081,7 +1081,7 @@
    },
    "repeat_of": null
   },
-  "3a07c0": {
+  "1ec11d": {
    "source": "scene:A-code-confident/a4",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1099,9 +1099,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "994143"
+   "repeat_of": "c599e5"
   },
-  "504b13": {
+  "c14f60": {
    "source": "scene:A-code-confident/a5",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1121,7 +1121,7 @@
    },
    "repeat_of": null
   },
-  "7c9b1a": {
+  "f13d12": {
    "source": "scene:A-code-confident/a5",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1139,9 +1139,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "504b13"
+   "repeat_of": "c14f60"
   },
-  "0e50ea": {
+  "96ee93": {
    "source": "scene:A-code-confident/a6",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1161,7 +1161,7 @@
    },
    "repeat_of": null
   },
-  "7ee6c7": {
+  "ee6aee": {
    "source": "scene:A-code-confident/a6",
    "group": "A-code-confident",
    "unit": "A:code",
@@ -1179,9 +1179,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "0e50ea"
+   "repeat_of": "96ee93"
   },
-  "7e75a7": {
+  "2784bf": {
    "source": "scene:A-code-assertive/a1",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1201,7 +1201,7 @@
    },
    "repeat_of": null
   },
-  "5bb39c": {
+  "b99608": {
    "source": "scene:A-code-assertive/a1",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1219,9 +1219,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "7e75a7"
+   "repeat_of": "2784bf"
   },
-  "12016b": {
+  "68f031": {
    "source": "scene:A-code-assertive/a2",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1241,7 +1241,7 @@
    },
    "repeat_of": null
   },
-  "fe65c6": {
+  "3b502a": {
    "source": "scene:A-code-assertive/a2",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1259,9 +1259,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "12016b"
+   "repeat_of": "68f031"
   },
-  "edbacb": {
+  "8adef0": {
    "source": "scene:A-code-assertive/a3",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1281,7 +1281,7 @@
    },
    "repeat_of": null
   },
-  "995d35": {
+  "c37bdb": {
    "source": "scene:A-code-assertive/a3",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1299,9 +1299,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "edbacb"
+   "repeat_of": "8adef0"
   },
-  "0620b5": {
+  "fe137c": {
    "source": "scene:A-code-assertive/a4",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1321,7 +1321,7 @@
    },
    "repeat_of": null
   },
-  "85495f": {
+  "e37b31": {
    "source": "scene:A-code-assertive/a4",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1339,9 +1339,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "0620b5"
+   "repeat_of": "fe137c"
   },
-  "1623b9": {
+  "5ab8c9": {
    "source": "scene:A-code-assertive/a5",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1361,7 +1361,7 @@
    },
    "repeat_of": null
   },
-  "5d4c6f": {
+  "eaf20a": {
    "source": "scene:A-code-assertive/a5",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1379,9 +1379,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "1623b9"
+   "repeat_of": "5ab8c9"
   },
-  "be5369": {
+  "211b31": {
    "source": "scene:A-code-assertive/a6",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1401,7 +1401,7 @@
    },
    "repeat_of": null
   },
-  "f3e0c4": {
+  "f145c7": {
    "source": "scene:A-code-assertive/a6",
    "group": "A-code-assertive",
    "unit": "A:code",
@@ -1419,9 +1419,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "be5369"
+   "repeat_of": "211b31"
   },
-  "dc72ce": {
+  "fe7322": {
    "source": "scene:A-code-false_verified/a1",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1441,7 +1441,7 @@
    },
    "repeat_of": null
   },
-  "05b52c": {
+  "5d3f2a": {
    "source": "scene:A-code-false_verified/a1",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1459,9 +1459,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "dc72ce"
+   "repeat_of": "fe7322"
   },
-  "f990d3": {
+  "e8dd57": {
    "source": "scene:A-code-false_verified/a2",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1481,7 +1481,7 @@
    },
    "repeat_of": null
   },
-  "b364c5": {
+  "b6be35": {
    "source": "scene:A-code-false_verified/a2",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1499,9 +1499,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "f990d3"
+   "repeat_of": "e8dd57"
   },
-  "f49d92": {
+  "adbb01": {
    "source": "scene:A-code-false_verified/a3",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1521,7 +1521,7 @@
    },
    "repeat_of": null
   },
-  "b29704": {
+  "3653dd": {
    "source": "scene:A-code-false_verified/a3",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1539,9 +1539,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "f49d92"
+   "repeat_of": "adbb01"
   },
-  "e167e8": {
+  "260204": {
    "source": "scene:A-code-false_verified/a4",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1561,7 +1561,7 @@
    },
    "repeat_of": null
   },
-  "2901bc": {
+  "c9fd64": {
    "source": "scene:A-code-false_verified/a4",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1579,9 +1579,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "e167e8"
+   "repeat_of": "260204"
   },
-  "9a8f6d": {
+  "a615d7": {
    "source": "scene:A-code-false_verified/a5",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1601,7 +1601,7 @@
    },
    "repeat_of": null
   },
-  "174091": {
+  "296c76": {
    "source": "scene:A-code-false_verified/a5",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1619,9 +1619,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "9a8f6d"
+   "repeat_of": "a615d7"
   },
-  "782806": {
+  "c7d8db": {
    "source": "scene:A-code-false_verified/a6",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1641,7 +1641,7 @@
    },
    "repeat_of": null
   },
-  "df4afc": {
+  "a134ff": {
    "source": "scene:A-code-false_verified/a6",
    "group": "A-code-false_verified",
    "unit": "A:code",
@@ -1659,9 +1659,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "782806"
+   "repeat_of": "c7d8db"
   },
-  "cb0343": {
+  "abb942": {
    "source": "scene:B-code-neutral-light/b1",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1682,7 +1682,7 @@
    },
    "repeat_of": null
   },
-  "d5bb6a": {
+  "8549fc": {
    "source": "scene:B-code-neutral-light/b1",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1701,9 +1701,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "cb0343"
+   "repeat_of": "abb942"
   },
-  "297316": {
+  "ebffd8": {
    "source": "scene:B-code-neutral-light/b2",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1724,7 +1724,7 @@
    },
    "repeat_of": null
   },
-  "67b39e": {
+  "a6b1bb": {
    "source": "scene:B-code-neutral-light/b2",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1743,9 +1743,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "297316"
+   "repeat_of": "ebffd8"
   },
-  "ba58b5": {
+  "0b7a55": {
    "source": "scene:B-code-neutral-light/b3",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1766,7 +1766,7 @@
    },
    "repeat_of": null
   },
-  "b442f2": {
+  "dc4d48": {
    "source": "scene:B-code-neutral-light/b3",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1785,9 +1785,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "ba58b5"
+   "repeat_of": "0b7a55"
   },
-  "500516": {
+  "7b76dc": {
    "source": "scene:B-code-neutral-light/b4",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1808,7 +1808,7 @@
    },
    "repeat_of": null
   },
-  "4944c3": {
+  "3e1f7c": {
    "source": "scene:B-code-neutral-light/b4",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1827,9 +1827,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "500516"
+   "repeat_of": "7b76dc"
   },
-  "84d021": {
+  "5dd897": {
    "source": "scene:B-code-neutral-light/b5",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1850,7 +1850,7 @@
    },
    "repeat_of": null
   },
-  "39152c": {
+  "8b7050": {
    "source": "scene:B-code-neutral-light/b5",
    "group": "B-code-neutral-light",
    "unit": "B:code:普通:軽い失敗の後",
@@ -1869,9 +1869,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "84d021"
+   "repeat_of": "5dd897"
   },
-  "5f2279": {
+  "547bcd": {
    "source": "scene:B-code-neutral-deep/b1",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -1892,7 +1892,7 @@
    },
    "repeat_of": null
   },
-  "d10f2b": {
+  "863f3e": {
    "source": "scene:B-code-neutral-deep/b1",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -1911,9 +1911,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "5f2279"
+   "repeat_of": "547bcd"
   },
-  "5ffcbd": {
+  "0176fc": {
    "source": "scene:B-code-neutral-deep/b2",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -1934,7 +1934,7 @@
    },
    "repeat_of": null
   },
-  "bd176f": {
+  "055527": {
    "source": "scene:B-code-neutral-deep/b2",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -1953,9 +1953,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "5ffcbd"
+   "repeat_of": "0176fc"
   },
-  "f931e3": {
+  "70a712": {
    "source": "scene:B-code-neutral-deep/b3",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -1976,7 +1976,7 @@
    },
    "repeat_of": null
   },
-  "febd0d": {
+  "595d24": {
    "source": "scene:B-code-neutral-deep/b3",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -1995,9 +1995,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "f931e3"
+   "repeat_of": "70a712"
   },
-  "1d9be8": {
+  "e2cce4": {
    "source": "scene:B-code-neutral-deep/b4",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -2018,7 +2018,7 @@
    },
    "repeat_of": null
   },
-  "6e7b9c": {
+  "a4f7e2": {
    "source": "scene:B-code-neutral-deep/b4",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -2037,9 +2037,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "1d9be8"
+   "repeat_of": "e2cce4"
   },
-  "c8f5e0": {
+  "fc3c2a": {
    "source": "scene:B-code-neutral-deep/b5",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -2060,7 +2060,7 @@
    },
    "repeat_of": null
   },
-  "ace3ba": {
+  "d11d8c": {
    "source": "scene:B-code-neutral-deep/b5",
    "group": "B-code-neutral-deep",
    "unit": "B:code:普通:約束を破った後",
@@ -2079,9 +2079,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "c8f5e0"
+   "repeat_of": "fc3c2a"
   },
-  "d89de3": {
+  "ea251d": {
    "source": "scene:B-code-close-light/b1",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2102,7 +2102,7 @@
    },
    "repeat_of": null
   },
-  "298d5a": {
+  "a57b07": {
    "source": "scene:B-code-close-light/b1",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2121,9 +2121,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "d89de3"
+   "repeat_of": "ea251d"
   },
-  "a42450": {
+  "ae58e6": {
    "source": "scene:B-code-close-light/b2",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2144,7 +2144,7 @@
    },
    "repeat_of": null
   },
-  "009645": {
+  "8765ec": {
    "source": "scene:B-code-close-light/b2",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2163,9 +2163,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "a42450"
+   "repeat_of": "ae58e6"
   },
-  "0da1d2": {
+  "d9e2ea": {
    "source": "scene:B-code-close-light/b3",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2186,7 +2186,7 @@
    },
    "repeat_of": null
   },
-  "a1710e": {
+  "77b854": {
    "source": "scene:B-code-close-light/b3",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2205,9 +2205,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "0da1d2"
+   "repeat_of": "d9e2ea"
   },
-  "016379": {
+  "7027e2": {
    "source": "scene:B-code-close-light/b4",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2228,7 +2228,7 @@
    },
    "repeat_of": null
   },
-  "9ff896": {
+  "2cc5b3": {
    "source": "scene:B-code-close-light/b4",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2247,9 +2247,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "016379"
+   "repeat_of": "7027e2"
   },
-  "5328ce": {
+  "56a9eb": {
    "source": "scene:B-code-close-light/b5",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2270,7 +2270,7 @@
    },
    "repeat_of": null
   },
-  "740cea": {
+  "2e5bc1": {
    "source": "scene:B-code-close-light/b5",
    "group": "B-code-close-light",
    "unit": "B:code:親しい:軽い失敗の後",
@@ -2289,9 +2289,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "5328ce"
+   "repeat_of": "56a9eb"
   },
-  "3112f3": {
+  "8d19d5": {
    "source": "scene:B-code-close-deep/b1",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2312,7 +2312,7 @@
    },
    "repeat_of": null
   },
-  "ef2d9c": {
+  "585e11": {
    "source": "scene:B-code-close-deep/b1",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2331,9 +2331,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "3112f3"
+   "repeat_of": "8d19d5"
   },
-  "efd20e": {
+  "f2a2cc": {
    "source": "scene:B-code-close-deep/b2",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2354,7 +2354,7 @@
    },
    "repeat_of": null
   },
-  "ea15fc": {
+  "065549": {
    "source": "scene:B-code-close-deep/b2",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2373,9 +2373,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "efd20e"
+   "repeat_of": "f2a2cc"
   },
-  "5dc9e1": {
+  "183ec3": {
    "source": "scene:B-code-close-deep/b3",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2396,7 +2396,7 @@
    },
    "repeat_of": null
   },
-  "9376db": {
+  "536f71": {
    "source": "scene:B-code-close-deep/b3",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2415,9 +2415,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "5dc9e1"
+   "repeat_of": "183ec3"
   },
-  "46cb42": {
+  "e2b789": {
    "source": "scene:B-code-close-deep/b4",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2438,7 +2438,7 @@
    },
    "repeat_of": null
   },
-  "1e252a": {
+  "24a7e7": {
    "source": "scene:B-code-close-deep/b4",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2457,9 +2457,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "46cb42"
+   "repeat_of": "e2b789"
   },
-  "4d8deb": {
+  "31b9c0": {
    "source": "scene:B-code-close-deep/b5",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2480,7 +2480,7 @@
    },
    "repeat_of": null
   },
-  "ce1fdf": {
+  "52681b": {
    "source": "scene:B-code-close-deep/b5",
    "group": "B-code-close-deep",
    "unit": "B:code:親しい:約束を破った後",
@@ -2499,9 +2499,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "4d8deb"
+   "repeat_of": "31b9c0"
   },
-  "5b6d8e": {
+  "923907": {
    "source": "scene:C-code-scope-none/c0",
    "group": "C-code-scope-none",
    "unit": "C:code:scope",
@@ -2522,7 +2522,7 @@
    },
    "repeat_of": null
   },
-  "fb56aa": {
+  "bf539f": {
    "source": "scene:C-code-scope-none/c0",
    "group": "C-code-scope-none",
    "unit": "C:code:scope",
@@ -2541,9 +2541,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "5b6d8e"
+   "repeat_of": "923907"
   },
-  "e66e8d": {
+  "e30037": {
    "source": "scene:C-code-scope-prior/c0",
    "group": "C-code-scope-prior",
    "unit": "C:code:scope",
@@ -2564,7 +2564,7 @@
    },
    "repeat_of": null
   },
-  "3f6e51": {
+  "befd09": {
    "source": "scene:C-code-scope-prior/c0",
    "group": "C-code-scope-prior",
    "unit": "C:code:scope",
@@ -2583,9 +2583,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "e66e8d"
+   "repeat_of": "e30037"
   },
-  "14f400": {
+  "ec6cbb": {
    "source": "scene:C-code-scope-apology/c1",
    "group": "C-code-scope-apology",
    "unit": "C:code:scope",
@@ -2606,7 +2606,7 @@
    },
    "repeat_of": null
   },
-  "2f61a1": {
+  "6d7982": {
    "source": "scene:C-code-scope-apology/c1",
    "group": "C-code-scope-apology",
    "unit": "C:code:scope",
@@ -2625,9 +2625,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "14f400"
+   "repeat_of": "ec6cbb"
   },
-  "e5bc55": {
+  "5ec108": {
    "source": "scene:C-code-scope-apology/c2",
    "group": "C-code-scope-apology",
    "unit": "C:code:scope",
@@ -2648,7 +2648,7 @@
    },
    "repeat_of": null
   },
-  "8b4cbd": {
+  "5d256f": {
    "source": "scene:C-code-scope-apology/c2",
    "group": "C-code-scope-apology",
    "unit": "C:code:scope",
@@ -2667,9 +2667,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "e5bc55"
+   "repeat_of": "5ec108"
   },
-  "e0a406": {
+  "938e79": {
    "source": "scene:C-code-scope-repair/c3",
    "group": "C-code-scope-repair",
    "unit": "C:code:scope",
@@ -2690,7 +2690,7 @@
    },
    "repeat_of": null
   },
-  "2b5911": {
+  "737cc6": {
    "source": "scene:C-code-scope-repair/c3",
    "group": "C-code-scope-repair",
    "unit": "C:code:scope",
@@ -2709,9 +2709,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "e0a406"
+   "repeat_of": "938e79"
   },
-  "c086bb": {
+  "ad4359": {
    "source": "scene:C-code-scope-repair/c4",
    "group": "C-code-scope-repair",
    "unit": "C:code:scope",
@@ -2732,7 +2732,7 @@
    },
    "repeat_of": null
   },
-  "88a764": {
+  "614173": {
    "source": "scene:C-code-scope-repair/c4",
    "group": "C-code-scope-repair",
    "unit": "C:code:scope",
@@ -2751,9 +2751,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "c086bb"
+   "repeat_of": "ad4359"
   },
-  "584663": {
+  "170a20": {
    "source": "scene:C-code-liability-none/c0",
    "group": "C-code-liability-none",
    "unit": "C:code:liability",
@@ -2774,7 +2774,7 @@
    },
    "repeat_of": null
   },
-  "03edb2": {
+  "cebedc": {
    "source": "scene:C-code-liability-none/c0",
    "group": "C-code-liability-none",
    "unit": "C:code:liability",
@@ -2793,9 +2793,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "584663"
+   "repeat_of": "170a20"
   },
-  "cda906": {
+  "cf7299": {
    "source": "scene:C-code-liability-prior/c0",
    "group": "C-code-liability-prior",
    "unit": "C:code:liability",
@@ -2816,7 +2816,7 @@
    },
    "repeat_of": null
   },
-  "0faf4b": {
+  "c74dd5": {
    "source": "scene:C-code-liability-prior/c0",
    "group": "C-code-liability-prior",
    "unit": "C:code:liability",
@@ -2835,9 +2835,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "cda906"
+   "repeat_of": "cf7299"
   },
-  "05241a": {
+  "600f99": {
    "source": "scene:C-code-liability-apology/c1",
    "group": "C-code-liability-apology",
    "unit": "C:code:liability",
@@ -2858,7 +2858,7 @@
    },
    "repeat_of": null
   },
-  "1d4d03": {
+  "b9ea3c": {
    "source": "scene:C-code-liability-apology/c1",
    "group": "C-code-liability-apology",
    "unit": "C:code:liability",
@@ -2877,9 +2877,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "05241a"
+   "repeat_of": "600f99"
   },
-  "157c85": {
+  "d4d274": {
    "source": "scene:C-code-liability-apology/c2",
    "group": "C-code-liability-apology",
    "unit": "C:code:liability",
@@ -2900,7 +2900,7 @@
    },
    "repeat_of": null
   },
-  "d4aff9": {
+  "eaddf9": {
    "source": "scene:C-code-liability-apology/c2",
    "group": "C-code-liability-apology",
    "unit": "C:code:liability",
@@ -2919,9 +2919,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "157c85"
+   "repeat_of": "d4d274"
   },
-  "58bbcb": {
+  "edb3d1": {
    "source": "scene:C-code-liability-repair/c3",
    "group": "C-code-liability-repair",
    "unit": "C:code:liability",
@@ -2942,7 +2942,7 @@
    },
    "repeat_of": null
   },
-  "adc52b": {
+  "21fd24": {
    "source": "scene:C-code-liability-repair/c3",
    "group": "C-code-liability-repair",
    "unit": "C:code:liability",
@@ -2961,9 +2961,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "58bbcb"
+   "repeat_of": "edb3d1"
   },
-  "b438ab": {
+  "71d912": {
    "source": "scene:C-code-liability-repair/c4",
    "group": "C-code-liability-repair",
    "unit": "C:code:liability",
@@ -2984,7 +2984,7 @@
    },
    "repeat_of": null
   },
-  "f983d4": {
+  "9afd0e": {
    "source": "scene:C-code-liability-repair/c4",
    "group": "C-code-liability-repair",
    "unit": "C:code:liability",
@@ -3003,9 +3003,9 @@
     "domain": "code",
     "kit": true
    },
-   "repeat_of": "b438ab"
+   "repeat_of": "71d912"
   },
-  "49ee3a": {
+  "7ff667": {
    "source": "scene:A-schedule-hedged/a1",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3025,7 +3025,7 @@
    },
    "repeat_of": null
   },
-  "852ee3": {
+  "8c02ae": {
    "source": "scene:A-schedule-hedged/a1",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3043,9 +3043,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "49ee3a"
+   "repeat_of": "7ff667"
   },
-  "1882bb": {
+  "60542b": {
    "source": "scene:A-schedule-hedged/a2",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3065,7 +3065,7 @@
    },
    "repeat_of": null
   },
-  "0d7607": {
+  "8cae28": {
    "source": "scene:A-schedule-hedged/a2",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3083,9 +3083,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "1882bb"
+   "repeat_of": "60542b"
   },
-  "7b5e84": {
+  "32e07e": {
    "source": "scene:A-schedule-hedged/a3",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3105,7 +3105,7 @@
    },
    "repeat_of": null
   },
-  "eb7771": {
+  "624074": {
    "source": "scene:A-schedule-hedged/a3",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3123,9 +3123,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "7b5e84"
+   "repeat_of": "32e07e"
   },
-  "aeb8eb": {
+  "888bbe": {
    "source": "scene:A-schedule-hedged/a4",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3145,7 +3145,7 @@
    },
    "repeat_of": null
   },
-  "577ea7": {
+  "ac6bb4": {
    "source": "scene:A-schedule-hedged/a4",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3163,9 +3163,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "aeb8eb"
+   "repeat_of": "888bbe"
   },
-  "96bd38": {
+  "4eb104": {
    "source": "scene:A-schedule-hedged/a5",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3185,7 +3185,7 @@
    },
    "repeat_of": null
   },
-  "dc8489": {
+  "dc4c22": {
    "source": "scene:A-schedule-hedged/a5",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3203,9 +3203,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "96bd38"
+   "repeat_of": "4eb104"
   },
-  "262c3f": {
+  "26a840": {
    "source": "scene:A-schedule-hedged/a6",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3225,7 +3225,7 @@
    },
    "repeat_of": null
   },
-  "9a3d6d": {
+  "e8cecf": {
    "source": "scene:A-schedule-hedged/a6",
    "group": "A-schedule-hedged",
    "unit": "A:schedule",
@@ -3243,9 +3243,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "262c3f"
+   "repeat_of": "26a840"
   },
-  "1820d3": {
+  "2b3617": {
    "source": "scene:A-schedule-neutral/a1",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3265,7 +3265,7 @@
    },
    "repeat_of": null
   },
-  "402593": {
+  "918819": {
    "source": "scene:A-schedule-neutral/a1",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3283,9 +3283,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "1820d3"
+   "repeat_of": "2b3617"
   },
-  "bbdba9": {
+  "91d9bc": {
    "source": "scene:A-schedule-neutral/a2",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3305,7 +3305,7 @@
    },
    "repeat_of": null
   },
-  "ae83b2": {
+  "779f5a": {
    "source": "scene:A-schedule-neutral/a2",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3323,9 +3323,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "bbdba9"
+   "repeat_of": "91d9bc"
   },
-  "9a5c90": {
+  "15d460": {
    "source": "scene:A-schedule-neutral/a3",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3345,7 +3345,7 @@
    },
    "repeat_of": null
   },
-  "78c588": {
+  "fae7c1": {
    "source": "scene:A-schedule-neutral/a3",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3363,9 +3363,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "9a5c90"
+   "repeat_of": "15d460"
   },
-  "94b034": {
+  "f14ad2": {
    "source": "scene:A-schedule-neutral/a4",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3385,7 +3385,7 @@
    },
    "repeat_of": null
   },
-  "5c0462": {
+  "cc09c8": {
    "source": "scene:A-schedule-neutral/a4",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3403,9 +3403,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "94b034"
+   "repeat_of": "f14ad2"
   },
-  "0fc1cd": {
+  "1f93e8": {
    "source": "scene:A-schedule-neutral/a5",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3425,7 +3425,7 @@
    },
    "repeat_of": null
   },
-  "613d3a": {
+  "a250b4": {
    "source": "scene:A-schedule-neutral/a5",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3443,9 +3443,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "0fc1cd"
+   "repeat_of": "1f93e8"
   },
-  "3c4055": {
+  "bf8bef": {
    "source": "scene:A-schedule-neutral/a6",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3465,7 +3465,7 @@
    },
    "repeat_of": null
   },
-  "d41718": {
+  "2e1a90": {
    "source": "scene:A-schedule-neutral/a6",
    "group": "A-schedule-neutral",
    "unit": "A:schedule",
@@ -3483,9 +3483,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "3c4055"
+   "repeat_of": "bf8bef"
   },
-  "376866": {
+  "543eb9": {
    "source": "scene:A-schedule-confident/a1",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3505,7 +3505,7 @@
    },
    "repeat_of": null
   },
-  "9aedf8": {
+  "e0d148": {
    "source": "scene:A-schedule-confident/a1",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3523,9 +3523,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "376866"
+   "repeat_of": "543eb9"
   },
-  "08719c": {
+  "1de38f": {
    "source": "scene:A-schedule-confident/a2",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3545,7 +3545,7 @@
    },
    "repeat_of": null
   },
-  "2ee5a2": {
+  "6e0f7e": {
    "source": "scene:A-schedule-confident/a2",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3563,9 +3563,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "08719c"
+   "repeat_of": "1de38f"
   },
-  "5c7e3b": {
+  "38b2b1": {
    "source": "scene:A-schedule-confident/a3",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3585,7 +3585,7 @@
    },
    "repeat_of": null
   },
-  "24c314": {
+  "171632": {
    "source": "scene:A-schedule-confident/a3",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3603,9 +3603,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "5c7e3b"
+   "repeat_of": "38b2b1"
   },
-  "22340c": {
+  "3e10c1": {
    "source": "scene:A-schedule-confident/a4",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3625,7 +3625,7 @@
    },
    "repeat_of": null
   },
-  "29fe9c": {
+  "74f44b": {
    "source": "scene:A-schedule-confident/a4",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3643,9 +3643,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "22340c"
+   "repeat_of": "3e10c1"
   },
-  "6f3a34": {
+  "cedf4e": {
    "source": "scene:A-schedule-confident/a5",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3665,7 +3665,7 @@
    },
    "repeat_of": null
   },
-  "6982d1": {
+  "956465": {
    "source": "scene:A-schedule-confident/a5",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3683,9 +3683,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "6f3a34"
+   "repeat_of": "cedf4e"
   },
-  "759552": {
+  "aeb454": {
    "source": "scene:A-schedule-confident/a6",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3705,7 +3705,7 @@
    },
    "repeat_of": null
   },
-  "08833b": {
+  "a15e02": {
    "source": "scene:A-schedule-confident/a6",
    "group": "A-schedule-confident",
    "unit": "A:schedule",
@@ -3723,9 +3723,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "759552"
+   "repeat_of": "aeb454"
   },
-  "522051": {
+  "987976": {
    "source": "scene:A-schedule-assertive/a1",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3745,7 +3745,7 @@
    },
    "repeat_of": null
   },
-  "fcfc92": {
+  "750b3d": {
    "source": "scene:A-schedule-assertive/a1",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3763,9 +3763,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "522051"
+   "repeat_of": "987976"
   },
-  "822051": {
+  "ac9cd1": {
    "source": "scene:A-schedule-assertive/a2",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3785,7 +3785,7 @@
    },
    "repeat_of": null
   },
-  "59d7a6": {
+  "db0ec2": {
    "source": "scene:A-schedule-assertive/a2",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3803,9 +3803,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "822051"
+   "repeat_of": "ac9cd1"
   },
-  "973827": {
+  "728df1": {
    "source": "scene:A-schedule-assertive/a3",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3825,7 +3825,7 @@
    },
    "repeat_of": null
   },
-  "1ab894": {
+  "e89982": {
    "source": "scene:A-schedule-assertive/a3",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3843,9 +3843,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "973827"
+   "repeat_of": "728df1"
   },
-  "d1502c": {
+  "5dd9d7": {
    "source": "scene:A-schedule-assertive/a4",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3865,7 +3865,7 @@
    },
    "repeat_of": null
   },
-  "1a248c": {
+  "3bbb87": {
    "source": "scene:A-schedule-assertive/a4",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3883,9 +3883,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "d1502c"
+   "repeat_of": "5dd9d7"
   },
-  "a3b15b": {
+  "d8551b": {
    "source": "scene:A-schedule-assertive/a5",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3905,7 +3905,7 @@
    },
    "repeat_of": null
   },
-  "6ca8c8": {
+  "ede841": {
    "source": "scene:A-schedule-assertive/a5",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3923,9 +3923,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "a3b15b"
+   "repeat_of": "d8551b"
   },
-  "868f22": {
+  "4f6eb6": {
    "source": "scene:A-schedule-assertive/a6",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3945,7 +3945,7 @@
    },
    "repeat_of": null
   },
-  "c1e31e": {
+  "f412fc": {
    "source": "scene:A-schedule-assertive/a6",
    "group": "A-schedule-assertive",
    "unit": "A:schedule",
@@ -3963,9 +3963,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "868f22"
+   "repeat_of": "4f6eb6"
   },
-  "86b702": {
+  "99ee00": {
    "source": "scene:A-schedule-false_verified/a1",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -3985,7 +3985,7 @@
    },
    "repeat_of": null
   },
-  "db7512": {
+  "7d85a8": {
    "source": "scene:A-schedule-false_verified/a1",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4003,9 +4003,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "86b702"
+   "repeat_of": "99ee00"
   },
-  "52955f": {
+  "242f98": {
    "source": "scene:A-schedule-false_verified/a2",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4025,7 +4025,7 @@
    },
    "repeat_of": null
   },
-  "9fc335": {
+  "483fbd": {
    "source": "scene:A-schedule-false_verified/a2",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4043,9 +4043,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "52955f"
+   "repeat_of": "242f98"
   },
-  "306e1d": {
+  "8c26ca": {
    "source": "scene:A-schedule-false_verified/a3",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4065,7 +4065,7 @@
    },
    "repeat_of": null
   },
-  "407181": {
+  "d0de35": {
    "source": "scene:A-schedule-false_verified/a3",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4083,9 +4083,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "306e1d"
+   "repeat_of": "8c26ca"
   },
-  "958c4b": {
+  "9279b6": {
    "source": "scene:A-schedule-false_verified/a4",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4105,7 +4105,7 @@
    },
    "repeat_of": null
   },
-  "6affd4": {
+  "278f68": {
    "source": "scene:A-schedule-false_verified/a4",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4123,9 +4123,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "958c4b"
+   "repeat_of": "9279b6"
   },
-  "d9330a": {
+  "2a388b": {
    "source": "scene:A-schedule-false_verified/a5",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4145,7 +4145,7 @@
    },
    "repeat_of": null
   },
-  "0bab77": {
+  "6b2258": {
    "source": "scene:A-schedule-false_verified/a5",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4163,9 +4163,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "d9330a"
+   "repeat_of": "2a388b"
   },
-  "5b7958": {
+  "b24bbd": {
    "source": "scene:A-schedule-false_verified/a6",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4185,7 +4185,7 @@
    },
    "repeat_of": null
   },
-  "c786cd": {
+  "5df8f5": {
    "source": "scene:A-schedule-false_verified/a6",
    "group": "A-schedule-false_verified",
    "unit": "A:schedule",
@@ -4203,9 +4203,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "5b7958"
+   "repeat_of": "b24bbd"
   },
-  "1bb6b2": {
+  "7fdcef": {
    "source": "scene:B-schedule-neutral-light/b1",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4226,7 +4226,7 @@
    },
    "repeat_of": null
   },
-  "39bf6e": {
+  "1e849b": {
    "source": "scene:B-schedule-neutral-light/b1",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4245,9 +4245,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "1bb6b2"
+   "repeat_of": "7fdcef"
   },
-  "7b2ac7": {
+  "f8a71c": {
    "source": "scene:B-schedule-neutral-light/b2",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4268,7 +4268,7 @@
    },
    "repeat_of": null
   },
-  "6f1286": {
+  "24b799": {
    "source": "scene:B-schedule-neutral-light/b2",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4287,9 +4287,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "7b2ac7"
+   "repeat_of": "f8a71c"
   },
-  "240a54": {
+  "b64139": {
    "source": "scene:B-schedule-neutral-light/b3",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4310,7 +4310,7 @@
    },
    "repeat_of": null
   },
-  "a237d9": {
+  "692528": {
    "source": "scene:B-schedule-neutral-light/b3",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4329,9 +4329,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "240a54"
+   "repeat_of": "b64139"
   },
-  "0b5aa8": {
+  "60f9da": {
    "source": "scene:B-schedule-neutral-light/b4",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4352,7 +4352,7 @@
    },
    "repeat_of": null
   },
-  "d7ad26": {
+  "ee3e1c": {
    "source": "scene:B-schedule-neutral-light/b4",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4371,9 +4371,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "0b5aa8"
+   "repeat_of": "60f9da"
   },
-  "fb1a58": {
+  "6e634d": {
    "source": "scene:B-schedule-neutral-light/b5",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4394,7 +4394,7 @@
    },
    "repeat_of": null
   },
-  "2fa5ee": {
+  "eecd12": {
    "source": "scene:B-schedule-neutral-light/b5",
    "group": "B-schedule-neutral-light",
    "unit": "B:schedule:普通:軽い失敗の後",
@@ -4413,9 +4413,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "fb1a58"
+   "repeat_of": "6e634d"
   },
-  "db6953": {
+  "e69164": {
    "source": "scene:B-schedule-neutral-deep/b1",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4436,7 +4436,7 @@
    },
    "repeat_of": null
   },
-  "24c517": {
+  "090abe": {
    "source": "scene:B-schedule-neutral-deep/b1",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4455,9 +4455,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "db6953"
+   "repeat_of": "e69164"
   },
-  "f77f1c": {
+  "ee69a3": {
    "source": "scene:B-schedule-neutral-deep/b2",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4478,7 +4478,7 @@
    },
    "repeat_of": null
   },
-  "162e87": {
+  "71e162": {
    "source": "scene:B-schedule-neutral-deep/b2",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4497,9 +4497,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "f77f1c"
+   "repeat_of": "ee69a3"
   },
-  "d2b79f": {
+  "88a399": {
    "source": "scene:B-schedule-neutral-deep/b3",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4520,7 +4520,7 @@
    },
    "repeat_of": null
   },
-  "bdc69f": {
+  "0b1583": {
    "source": "scene:B-schedule-neutral-deep/b3",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4539,9 +4539,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "d2b79f"
+   "repeat_of": "88a399"
   },
-  "c57956": {
+  "adf442": {
    "source": "scene:B-schedule-neutral-deep/b4",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4562,7 +4562,7 @@
    },
    "repeat_of": null
   },
-  "f08863": {
+  "331620": {
    "source": "scene:B-schedule-neutral-deep/b4",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4581,9 +4581,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "c57956"
+   "repeat_of": "adf442"
   },
-  "34cba7": {
+  "90acf4": {
    "source": "scene:B-schedule-neutral-deep/b5",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4604,7 +4604,7 @@
    },
    "repeat_of": null
   },
-  "dc5bef": {
+  "d7df13": {
    "source": "scene:B-schedule-neutral-deep/b5",
    "group": "B-schedule-neutral-deep",
    "unit": "B:schedule:普通:約束を破った後",
@@ -4623,9 +4623,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "34cba7"
+   "repeat_of": "90acf4"
   },
-  "eb53d5": {
+  "668087": {
    "source": "scene:B-schedule-close-light/b1",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4646,7 +4646,7 @@
    },
    "repeat_of": null
   },
-  "73651b": {
+  "351c01": {
    "source": "scene:B-schedule-close-light/b1",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4665,9 +4665,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "eb53d5"
+   "repeat_of": "668087"
   },
-  "648c34": {
+  "49903e": {
    "source": "scene:B-schedule-close-light/b2",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4688,7 +4688,7 @@
    },
    "repeat_of": null
   },
-  "1e2980": {
+  "5b12f9": {
    "source": "scene:B-schedule-close-light/b2",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4707,9 +4707,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "648c34"
+   "repeat_of": "49903e"
   },
-  "55535f": {
+  "5007d1": {
    "source": "scene:B-schedule-close-light/b3",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4730,7 +4730,7 @@
    },
    "repeat_of": null
   },
-  "c25cf4": {
+  "6806f7": {
    "source": "scene:B-schedule-close-light/b3",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4749,9 +4749,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "55535f"
+   "repeat_of": "5007d1"
   },
-  "88f22f": {
+  "f8c3c6": {
    "source": "scene:B-schedule-close-light/b4",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4772,7 +4772,7 @@
    },
    "repeat_of": null
   },
-  "8aff5c": {
+  "e59a43": {
    "source": "scene:B-schedule-close-light/b4",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4791,9 +4791,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "88f22f"
+   "repeat_of": "f8c3c6"
   },
-  "f87529": {
+  "9b3b86": {
    "source": "scene:B-schedule-close-light/b5",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4814,7 +4814,7 @@
    },
    "repeat_of": null
   },
-  "9d36dc": {
+  "9880f6": {
    "source": "scene:B-schedule-close-light/b5",
    "group": "B-schedule-close-light",
    "unit": "B:schedule:親しい:軽い失敗の後",
@@ -4833,9 +4833,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "f87529"
+   "repeat_of": "9b3b86"
   },
-  "d5214f": {
+  "e7f286": {
    "source": "scene:B-schedule-close-deep/b1",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -4856,7 +4856,7 @@
    },
    "repeat_of": null
   },
-  "e23968": {
+  "9862d1": {
    "source": "scene:B-schedule-close-deep/b1",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -4875,9 +4875,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "d5214f"
+   "repeat_of": "e7f286"
   },
-  "27f71f": {
+  "2b9016": {
    "source": "scene:B-schedule-close-deep/b2",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -4898,7 +4898,7 @@
    },
    "repeat_of": null
   },
-  "a59bca": {
+  "04f465": {
    "source": "scene:B-schedule-close-deep/b2",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -4917,9 +4917,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "27f71f"
+   "repeat_of": "2b9016"
   },
-  "ecbaad": {
+  "6f22ae": {
    "source": "scene:B-schedule-close-deep/b3",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -4940,7 +4940,7 @@
    },
    "repeat_of": null
   },
-  "b19962": {
+  "03092a": {
    "source": "scene:B-schedule-close-deep/b3",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -4959,9 +4959,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "ecbaad"
+   "repeat_of": "6f22ae"
   },
-  "d13c42": {
+  "fe9ec5": {
    "source": "scene:B-schedule-close-deep/b4",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -4982,7 +4982,7 @@
    },
    "repeat_of": null
   },
-  "a70267": {
+  "62fa1f": {
    "source": "scene:B-schedule-close-deep/b4",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -5001,9 +5001,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "d13c42"
+   "repeat_of": "fe9ec5"
   },
-  "5378a5": {
+  "7ce710": {
    "source": "scene:B-schedule-close-deep/b5",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -5024,7 +5024,7 @@
    },
    "repeat_of": null
   },
-  "c6108a": {
+  "0281d3": {
    "source": "scene:B-schedule-close-deep/b5",
    "group": "B-schedule-close-deep",
    "unit": "B:schedule:親しい:約束を破った後",
@@ -5043,9 +5043,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "5378a5"
+   "repeat_of": "7ce710"
   },
-  "278955": {
+  "03c538": {
    "source": "scene:C-schedule-scope-none/c0",
    "group": "C-schedule-scope-none",
    "unit": "C:schedule:scope",
@@ -5066,7 +5066,7 @@
    },
    "repeat_of": null
   },
-  "9558dc": {
+  "72c1c6": {
    "source": "scene:C-schedule-scope-none/c0",
    "group": "C-schedule-scope-none",
    "unit": "C:schedule:scope",
@@ -5085,9 +5085,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "278955"
+   "repeat_of": "03c538"
   },
-  "abde53": {
+  "fb492d": {
    "source": "scene:C-schedule-scope-prior/c0",
    "group": "C-schedule-scope-prior",
    "unit": "C:schedule:scope",
@@ -5108,7 +5108,7 @@
    },
    "repeat_of": null
   },
-  "d18b4c": {
+  "261b94": {
    "source": "scene:C-schedule-scope-prior/c0",
    "group": "C-schedule-scope-prior",
    "unit": "C:schedule:scope",
@@ -5127,9 +5127,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "abde53"
+   "repeat_of": "fb492d"
   },
-  "5d7d87": {
+  "eac6bd": {
    "source": "scene:C-schedule-scope-apology/c1",
    "group": "C-schedule-scope-apology",
    "unit": "C:schedule:scope",
@@ -5150,7 +5150,7 @@
    },
    "repeat_of": null
   },
-  "19fc87": {
+  "3b32d0": {
    "source": "scene:C-schedule-scope-apology/c1",
    "group": "C-schedule-scope-apology",
    "unit": "C:schedule:scope",
@@ -5169,9 +5169,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "5d7d87"
+   "repeat_of": "eac6bd"
   },
-  "d93f63": {
+  "d05572": {
    "source": "scene:C-schedule-scope-apology/c2",
    "group": "C-schedule-scope-apology",
    "unit": "C:schedule:scope",
@@ -5192,7 +5192,7 @@
    },
    "repeat_of": null
   },
-  "fa28a2": {
+  "666e06": {
    "source": "scene:C-schedule-scope-apology/c2",
    "group": "C-schedule-scope-apology",
    "unit": "C:schedule:scope",
@@ -5211,9 +5211,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "d93f63"
+   "repeat_of": "d05572"
   },
-  "0f9c55": {
+  "4ccfd9": {
    "source": "scene:C-schedule-scope-repair/c3",
    "group": "C-schedule-scope-repair",
    "unit": "C:schedule:scope",
@@ -5234,7 +5234,7 @@
    },
    "repeat_of": null
   },
-  "180ac2": {
+  "d7cc9a": {
    "source": "scene:C-schedule-scope-repair/c3",
    "group": "C-schedule-scope-repair",
    "unit": "C:schedule:scope",
@@ -5253,9 +5253,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "0f9c55"
+   "repeat_of": "4ccfd9"
   },
-  "11d022": {
+  "50ecc2": {
    "source": "scene:C-schedule-scope-repair/c4",
    "group": "C-schedule-scope-repair",
    "unit": "C:schedule:scope",
@@ -5276,7 +5276,7 @@
    },
    "repeat_of": null
   },
-  "ec4c37": {
+  "e688c2": {
    "source": "scene:C-schedule-scope-repair/c4",
    "group": "C-schedule-scope-repair",
    "unit": "C:schedule:scope",
@@ -5295,9 +5295,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "11d022"
+   "repeat_of": "50ecc2"
   },
-  "78777e": {
+  "f3dfad": {
    "source": "scene:C-schedule-liability-none/c0",
    "group": "C-schedule-liability-none",
    "unit": "C:schedule:liability",
@@ -5318,7 +5318,7 @@
    },
    "repeat_of": null
   },
-  "bb246d": {
+  "37b5ff": {
    "source": "scene:C-schedule-liability-none/c0",
    "group": "C-schedule-liability-none",
    "unit": "C:schedule:liability",
@@ -5337,9 +5337,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "78777e"
+   "repeat_of": "f3dfad"
   },
-  "f6a8d5": {
+  "ac52a5": {
    "source": "scene:C-schedule-liability-prior/c0",
    "group": "C-schedule-liability-prior",
    "unit": "C:schedule:liability",
@@ -5360,7 +5360,7 @@
    },
    "repeat_of": null
   },
-  "4cef89": {
+  "b06c07": {
    "source": "scene:C-schedule-liability-prior/c0",
    "group": "C-schedule-liability-prior",
    "unit": "C:schedule:liability",
@@ -5379,9 +5379,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "f6a8d5"
+   "repeat_of": "ac52a5"
   },
-  "498c56": {
+  "26d6f4": {
    "source": "scene:C-schedule-liability-apology/c1",
    "group": "C-schedule-liability-apology",
    "unit": "C:schedule:liability",
@@ -5402,7 +5402,7 @@
    },
    "repeat_of": null
   },
-  "562f33": {
+  "15b4e1": {
    "source": "scene:C-schedule-liability-apology/c1",
    "group": "C-schedule-liability-apology",
    "unit": "C:schedule:liability",
@@ -5421,9 +5421,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "498c56"
+   "repeat_of": "26d6f4"
   },
-  "cf2542": {
+  "5c80c3": {
    "source": "scene:C-schedule-liability-apology/c2",
    "group": "C-schedule-liability-apology",
    "unit": "C:schedule:liability",
@@ -5444,7 +5444,7 @@
    },
    "repeat_of": null
   },
-  "58891b": {
+  "b7fc63": {
    "source": "scene:C-schedule-liability-apology/c2",
    "group": "C-schedule-liability-apology",
    "unit": "C:schedule:liability",
@@ -5463,9 +5463,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "cf2542"
+   "repeat_of": "5c80c3"
   },
-  "516d37": {
+  "8c117a": {
    "source": "scene:C-schedule-liability-repair/c3",
    "group": "C-schedule-liability-repair",
    "unit": "C:schedule:liability",
@@ -5486,7 +5486,7 @@
    },
    "repeat_of": null
   },
-  "b8b399": {
+  "1de876": {
    "source": "scene:C-schedule-liability-repair/c3",
    "group": "C-schedule-liability-repair",
    "unit": "C:schedule:liability",
@@ -5505,9 +5505,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "516d37"
+   "repeat_of": "8c117a"
   },
-  "a0681f": {
+  "8ca7db": {
    "source": "scene:C-schedule-liability-repair/c4",
    "group": "C-schedule-liability-repair",
    "unit": "C:schedule:liability",
@@ -5528,7 +5528,7 @@
    },
    "repeat_of": null
   },
-  "9d8766": {
+  "e62952": {
    "source": "scene:C-schedule-liability-repair/c4",
    "group": "C-schedule-liability-repair",
    "unit": "C:schedule:liability",
@@ -5547,9 +5547,9 @@
     "domain": "schedule",
     "kit": true
    },
-   "repeat_of": "a0681f"
+   "repeat_of": "8ca7db"
   },
-  "f49eeb": {
+  "88c315": {
    "source": "scene:A-fact-hedged/a1",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5569,7 +5569,7 @@
    },
    "repeat_of": null
   },
-  "4291ab": {
+  "84adc4": {
    "source": "scene:A-fact-hedged/a1",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5587,9 +5587,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "f49eeb"
+   "repeat_of": "88c315"
   },
-  "24d094": {
+  "ba6ba2": {
    "source": "scene:A-fact-hedged/a2",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5609,7 +5609,7 @@
    },
    "repeat_of": null
   },
-  "55b800": {
+  "5a4ca8": {
    "source": "scene:A-fact-hedged/a2",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5627,9 +5627,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "24d094"
+   "repeat_of": "ba6ba2"
   },
-  "386323": {
+  "0dcabc": {
    "source": "scene:A-fact-hedged/a3",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5649,7 +5649,7 @@
    },
    "repeat_of": null
   },
-  "6172b5": {
+  "b55c5b": {
    "source": "scene:A-fact-hedged/a3",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5667,9 +5667,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "386323"
+   "repeat_of": "0dcabc"
   },
-  "ccba95": {
+  "72abc5": {
    "source": "scene:A-fact-hedged/a4",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5689,7 +5689,7 @@
    },
    "repeat_of": null
   },
-  "53b416": {
+  "f4a38f": {
    "source": "scene:A-fact-hedged/a4",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5707,9 +5707,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "ccba95"
+   "repeat_of": "72abc5"
   },
-  "8c1e4d": {
+  "1a7611": {
    "source": "scene:A-fact-hedged/a5",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5729,7 +5729,7 @@
    },
    "repeat_of": null
   },
-  "2dd5cd": {
+  "79d5bc": {
    "source": "scene:A-fact-hedged/a5",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5747,9 +5747,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "8c1e4d"
+   "repeat_of": "1a7611"
   },
-  "00727b": {
+  "0daa06": {
    "source": "scene:A-fact-hedged/a6",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5769,7 +5769,7 @@
    },
    "repeat_of": null
   },
-  "476289": {
+  "27a226": {
    "source": "scene:A-fact-hedged/a6",
    "group": "A-fact-hedged",
    "unit": "A:fact",
@@ -5787,9 +5787,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "00727b"
+   "repeat_of": "0daa06"
   },
-  "c4a2c0": {
+  "91b814": {
    "source": "scene:A-fact-neutral/a1",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5809,7 +5809,7 @@
    },
    "repeat_of": null
   },
-  "7cfe41": {
+  "e8ff15": {
    "source": "scene:A-fact-neutral/a1",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5827,9 +5827,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "c4a2c0"
+   "repeat_of": "91b814"
   },
-  "10f359": {
+  "b313e9": {
    "source": "scene:A-fact-neutral/a2",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5849,7 +5849,7 @@
    },
    "repeat_of": null
   },
-  "b6378b": {
+  "ee0119": {
    "source": "scene:A-fact-neutral/a2",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5867,9 +5867,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "10f359"
+   "repeat_of": "b313e9"
   },
-  "4d0b43": {
+  "149137": {
    "source": "scene:A-fact-neutral/a3",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5889,7 +5889,7 @@
    },
    "repeat_of": null
   },
-  "d809f4": {
+  "b9463c": {
    "source": "scene:A-fact-neutral/a3",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5907,9 +5907,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "4d0b43"
+   "repeat_of": "149137"
   },
-  "c78bec": {
+  "04fd77": {
    "source": "scene:A-fact-neutral/a4",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5929,7 +5929,7 @@
    },
    "repeat_of": null
   },
-  "ca11a0": {
+  "a51962": {
    "source": "scene:A-fact-neutral/a4",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5947,9 +5947,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "c78bec"
+   "repeat_of": "04fd77"
   },
-  "99892d": {
+  "aadb2b": {
    "source": "scene:A-fact-neutral/a5",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5969,7 +5969,7 @@
    },
    "repeat_of": null
   },
-  "40e67f": {
+  "938cdb": {
    "source": "scene:A-fact-neutral/a5",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -5987,9 +5987,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "99892d"
+   "repeat_of": "aadb2b"
   },
-  "b4e62b": {
+  "6cf93f": {
    "source": "scene:A-fact-neutral/a6",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -6009,7 +6009,7 @@
    },
    "repeat_of": null
   },
-  "648dda": {
+  "4fb8fb": {
    "source": "scene:A-fact-neutral/a6",
    "group": "A-fact-neutral",
    "unit": "A:fact",
@@ -6027,9 +6027,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "b4e62b"
+   "repeat_of": "6cf93f"
   },
-  "6e6711": {
+  "19262b": {
    "source": "scene:A-fact-confident/a1",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6049,7 +6049,7 @@
    },
    "repeat_of": null
   },
-  "b05751": {
+  "70ad15": {
    "source": "scene:A-fact-confident/a1",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6067,9 +6067,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "6e6711"
+   "repeat_of": "19262b"
   },
-  "002db5": {
+  "a366ac": {
    "source": "scene:A-fact-confident/a2",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6089,7 +6089,7 @@
    },
    "repeat_of": null
   },
-  "25845e": {
+  "243881": {
    "source": "scene:A-fact-confident/a2",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6107,9 +6107,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "002db5"
+   "repeat_of": "a366ac"
   },
-  "1ef2fa": {
+  "b47ae5": {
    "source": "scene:A-fact-confident/a3",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6129,7 +6129,7 @@
    },
    "repeat_of": null
   },
-  "9931b1": {
+  "b566cf": {
    "source": "scene:A-fact-confident/a3",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6147,9 +6147,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "1ef2fa"
+   "repeat_of": "b47ae5"
   },
-  "8d237b": {
+  "c355f8": {
    "source": "scene:A-fact-confident/a4",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6169,7 +6169,7 @@
    },
    "repeat_of": null
   },
-  "e8b095": {
+  "c3e78b": {
    "source": "scene:A-fact-confident/a4",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6187,9 +6187,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "8d237b"
+   "repeat_of": "c355f8"
   },
-  "5d40ca": {
+  "eec00b": {
    "source": "scene:A-fact-confident/a5",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6209,7 +6209,7 @@
    },
    "repeat_of": null
   },
-  "49f54f": {
+  "83e332": {
    "source": "scene:A-fact-confident/a5",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6227,9 +6227,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "5d40ca"
+   "repeat_of": "eec00b"
   },
-  "d6f986": {
+  "176655": {
    "source": "scene:A-fact-confident/a6",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6249,7 +6249,7 @@
    },
    "repeat_of": null
   },
-  "a3db56": {
+  "c1f543": {
    "source": "scene:A-fact-confident/a6",
    "group": "A-fact-confident",
    "unit": "A:fact",
@@ -6267,9 +6267,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "d6f986"
+   "repeat_of": "176655"
   },
-  "9c3ad8": {
+  "73d667": {
    "source": "scene:A-fact-assertive/a1",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6289,7 +6289,7 @@
    },
    "repeat_of": null
   },
-  "042fb1": {
+  "c5b9ec": {
    "source": "scene:A-fact-assertive/a1",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6307,9 +6307,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "9c3ad8"
+   "repeat_of": "73d667"
   },
-  "c92f8b": {
+  "03e3a5": {
    "source": "scene:A-fact-assertive/a2",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6329,7 +6329,7 @@
    },
    "repeat_of": null
   },
-  "243b67": {
+  "b375d4": {
    "source": "scene:A-fact-assertive/a2",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6347,9 +6347,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "c92f8b"
+   "repeat_of": "03e3a5"
   },
-  "9f4929": {
+  "be822c": {
    "source": "scene:A-fact-assertive/a3",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6369,7 +6369,7 @@
    },
    "repeat_of": null
   },
-  "3fa1a2": {
+  "8ff3f2": {
    "source": "scene:A-fact-assertive/a3",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6387,9 +6387,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "9f4929"
+   "repeat_of": "be822c"
   },
-  "a596e8": {
+  "26a23e": {
    "source": "scene:A-fact-assertive/a4",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6409,7 +6409,7 @@
    },
    "repeat_of": null
   },
-  "c3247f": {
+  "0f63b0": {
    "source": "scene:A-fact-assertive/a4",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6427,9 +6427,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "a596e8"
+   "repeat_of": "26a23e"
   },
-  "b7ea99": {
+  "1eb0ed": {
    "source": "scene:A-fact-assertive/a5",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6449,7 +6449,7 @@
    },
    "repeat_of": null
   },
-  "336610": {
+  "8e34a8": {
    "source": "scene:A-fact-assertive/a5",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6467,9 +6467,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "b7ea99"
+   "repeat_of": "1eb0ed"
   },
-  "7f796b": {
+  "d9e4a3": {
    "source": "scene:A-fact-assertive/a6",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6489,7 +6489,7 @@
    },
    "repeat_of": null
   },
-  "9c8cdb": {
+  "3c55bd": {
    "source": "scene:A-fact-assertive/a6",
    "group": "A-fact-assertive",
    "unit": "A:fact",
@@ -6507,9 +6507,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "7f796b"
+   "repeat_of": "d9e4a3"
   },
-  "61317a": {
+  "6511ab": {
    "source": "scene:A-fact-false_verified/a1",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6529,7 +6529,7 @@
    },
    "repeat_of": null
   },
-  "2016c8": {
+  "faf0ce": {
    "source": "scene:A-fact-false_verified/a1",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6547,9 +6547,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "61317a"
+   "repeat_of": "6511ab"
   },
-  "ce1372": {
+  "4c33cc": {
    "source": "scene:A-fact-false_verified/a2",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6569,7 +6569,7 @@
    },
    "repeat_of": null
   },
-  "4b788f": {
+  "2b3b30": {
    "source": "scene:A-fact-false_verified/a2",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6587,9 +6587,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "ce1372"
+   "repeat_of": "4c33cc"
   },
-  "52f786": {
+  "55a275": {
    "source": "scene:A-fact-false_verified/a3",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6609,7 +6609,7 @@
    },
    "repeat_of": null
   },
-  "d62562": {
+  "2df62b": {
    "source": "scene:A-fact-false_verified/a3",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6627,9 +6627,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "52f786"
+   "repeat_of": "55a275"
   },
-  "c4a260": {
+  "a81a65": {
    "source": "scene:A-fact-false_verified/a4",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6649,7 +6649,7 @@
    },
    "repeat_of": null
   },
-  "d52f86": {
+  "4e6c44": {
    "source": "scene:A-fact-false_verified/a4",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6667,9 +6667,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "c4a260"
+   "repeat_of": "a81a65"
   },
-  "c59e39": {
+  "180200": {
    "source": "scene:A-fact-false_verified/a5",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6689,7 +6689,7 @@
    },
    "repeat_of": null
   },
-  "d8d149": {
+  "aa3900": {
    "source": "scene:A-fact-false_verified/a5",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6707,9 +6707,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "c59e39"
+   "repeat_of": "180200"
   },
-  "39884f": {
+  "d9d40d": {
    "source": "scene:A-fact-false_verified/a6",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6729,7 +6729,7 @@
    },
    "repeat_of": null
   },
-  "415331": {
+  "91088e": {
    "source": "scene:A-fact-false_verified/a6",
    "group": "A-fact-false_verified",
    "unit": "A:fact",
@@ -6747,9 +6747,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "39884f"
+   "repeat_of": "d9d40d"
   },
-  "bfe445": {
+  "12cae6": {
    "source": "scene:B-fact-neutral-light/b1",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6770,7 +6770,7 @@
    },
    "repeat_of": null
   },
-  "0ffbbe": {
+  "e5aafd": {
    "source": "scene:B-fact-neutral-light/b1",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6789,9 +6789,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "bfe445"
+   "repeat_of": "12cae6"
   },
-  "c8c0ca": {
+  "82d186": {
    "source": "scene:B-fact-neutral-light/b2",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6812,7 +6812,7 @@
    },
    "repeat_of": null
   },
-  "23fe17": {
+  "04ec6f": {
    "source": "scene:B-fact-neutral-light/b2",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6831,9 +6831,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "c8c0ca"
+   "repeat_of": "82d186"
   },
-  "cedc5d": {
+  "1d0eb3": {
    "source": "scene:B-fact-neutral-light/b3",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6854,7 +6854,7 @@
    },
    "repeat_of": null
   },
-  "b21c49": {
+  "94e550": {
    "source": "scene:B-fact-neutral-light/b3",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6873,9 +6873,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "cedc5d"
+   "repeat_of": "1d0eb3"
   },
-  "a99696": {
+  "eeaa41": {
    "source": "scene:B-fact-neutral-light/b4",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6896,7 +6896,7 @@
    },
    "repeat_of": null
   },
-  "ed1a46": {
+  "153bd2": {
    "source": "scene:B-fact-neutral-light/b4",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6915,9 +6915,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "a99696"
+   "repeat_of": "eeaa41"
   },
-  "d0a28a": {
+  "20f2c6": {
    "source": "scene:B-fact-neutral-light/b5",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6938,7 +6938,7 @@
    },
    "repeat_of": null
   },
-  "8be573": {
+  "bf61cc": {
    "source": "scene:B-fact-neutral-light/b5",
    "group": "B-fact-neutral-light",
    "unit": "B:fact:普通:軽い失敗の後",
@@ -6957,9 +6957,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "d0a28a"
+   "repeat_of": "20f2c6"
   },
-  "795fdd": {
+  "9c1e40": {
    "source": "scene:B-fact-neutral-deep/b1",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -6980,7 +6980,7 @@
    },
    "repeat_of": null
   },
-  "df907f": {
+  "37a8e6": {
    "source": "scene:B-fact-neutral-deep/b1",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -6999,9 +6999,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "795fdd"
+   "repeat_of": "9c1e40"
   },
-  "0dc27d": {
+  "98cf93": {
    "source": "scene:B-fact-neutral-deep/b2",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -7022,7 +7022,7 @@
    },
    "repeat_of": null
   },
-  "302610": {
+  "9499f9": {
    "source": "scene:B-fact-neutral-deep/b2",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -7041,9 +7041,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "0dc27d"
+   "repeat_of": "98cf93"
   },
-  "18bf27": {
+  "140826": {
    "source": "scene:B-fact-neutral-deep/b3",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -7064,7 +7064,7 @@
    },
    "repeat_of": null
   },
-  "ae482f": {
+  "d85ac0": {
    "source": "scene:B-fact-neutral-deep/b3",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -7083,9 +7083,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "18bf27"
+   "repeat_of": "140826"
   },
-  "557181": {
+  "c4bf7d": {
    "source": "scene:B-fact-neutral-deep/b4",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -7106,7 +7106,7 @@
    },
    "repeat_of": null
   },
-  "8400a5": {
+  "c6c0b4": {
    "source": "scene:B-fact-neutral-deep/b4",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -7125,9 +7125,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "557181"
+   "repeat_of": "c4bf7d"
   },
-  "d16077": {
+  "5499d2": {
    "source": "scene:B-fact-neutral-deep/b5",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -7148,7 +7148,7 @@
    },
    "repeat_of": null
   },
-  "8bdfd6": {
+  "292772": {
    "source": "scene:B-fact-neutral-deep/b5",
    "group": "B-fact-neutral-deep",
    "unit": "B:fact:普通:約束を破った後",
@@ -7167,9 +7167,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "d16077"
+   "repeat_of": "5499d2"
   },
-  "aa3639": {
+  "42c07f": {
    "source": "scene:B-fact-close-light/b1",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7190,7 +7190,7 @@
    },
    "repeat_of": null
   },
-  "86f369": {
+  "d4a319": {
    "source": "scene:B-fact-close-light/b1",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7209,9 +7209,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "aa3639"
+   "repeat_of": "42c07f"
   },
-  "d75dcf": {
+  "59d61b": {
    "source": "scene:B-fact-close-light/b2",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7232,7 +7232,7 @@
    },
    "repeat_of": null
   },
-  "da1c6f": {
+  "ea4b4d": {
    "source": "scene:B-fact-close-light/b2",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7251,9 +7251,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "d75dcf"
+   "repeat_of": "59d61b"
   },
-  "53af3d": {
+  "b5c963": {
    "source": "scene:B-fact-close-light/b3",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7274,7 +7274,7 @@
    },
    "repeat_of": null
   },
-  "7063d2": {
+  "717b79": {
    "source": "scene:B-fact-close-light/b3",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7293,9 +7293,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "53af3d"
+   "repeat_of": "b5c963"
   },
-  "f9e92c": {
+  "131616": {
    "source": "scene:B-fact-close-light/b4",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7316,7 +7316,7 @@
    },
    "repeat_of": null
   },
-  "8036ee": {
+  "e27856": {
    "source": "scene:B-fact-close-light/b4",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7335,9 +7335,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "f9e92c"
+   "repeat_of": "131616"
   },
-  "087dbf": {
+  "014c9c": {
    "source": "scene:B-fact-close-light/b5",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7358,7 +7358,7 @@
    },
    "repeat_of": null
   },
-  "a4a859": {
+  "83cc1f": {
    "source": "scene:B-fact-close-light/b5",
    "group": "B-fact-close-light",
    "unit": "B:fact:親しい:軽い失敗の後",
@@ -7377,9 +7377,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "087dbf"
+   "repeat_of": "014c9c"
   },
-  "e55b1a": {
+  "54f9b5": {
    "source": "scene:B-fact-close-deep/b1",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7400,7 +7400,7 @@
    },
    "repeat_of": null
   },
-  "016476": {
+  "e9d575": {
    "source": "scene:B-fact-close-deep/b1",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7419,9 +7419,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "e55b1a"
+   "repeat_of": "54f9b5"
   },
-  "2b5858": {
+  "fbec82": {
    "source": "scene:B-fact-close-deep/b2",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7442,7 +7442,7 @@
    },
    "repeat_of": null
   },
-  "8a1af5": {
+  "529a63": {
    "source": "scene:B-fact-close-deep/b2",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7461,9 +7461,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "2b5858"
+   "repeat_of": "fbec82"
   },
-  "55ed57": {
+  "6c8056": {
    "source": "scene:B-fact-close-deep/b3",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7484,7 +7484,7 @@
    },
    "repeat_of": null
   },
-  "112a96": {
+  "9d50fa": {
    "source": "scene:B-fact-close-deep/b3",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7503,9 +7503,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "55ed57"
+   "repeat_of": "6c8056"
   },
-  "f228d9": {
+  "0e9718": {
    "source": "scene:B-fact-close-deep/b4",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7526,7 +7526,7 @@
    },
    "repeat_of": null
   },
-  "d9783a": {
+  "c8095a": {
    "source": "scene:B-fact-close-deep/b4",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7545,9 +7545,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "f228d9"
+   "repeat_of": "0e9718"
   },
-  "0b6c2f": {
+  "4c7f4f": {
    "source": "scene:B-fact-close-deep/b5",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7568,7 +7568,7 @@
    },
    "repeat_of": null
   },
-  "ce6a9b": {
+  "ba03f1": {
    "source": "scene:B-fact-close-deep/b5",
    "group": "B-fact-close-deep",
    "unit": "B:fact:親しい:約束を破った後",
@@ -7587,9 +7587,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "0b6c2f"
+   "repeat_of": "4c7f4f"
   },
-  "6d30ba": {
+  "ca1344": {
    "source": "scene:C-fact-scope-none/c0",
    "group": "C-fact-scope-none",
    "unit": "C:fact:scope",
@@ -7610,7 +7610,7 @@
    },
    "repeat_of": null
   },
-  "f52381": {
+  "37357a": {
    "source": "scene:C-fact-scope-none/c0",
    "group": "C-fact-scope-none",
    "unit": "C:fact:scope",
@@ -7629,9 +7629,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "6d30ba"
+   "repeat_of": "ca1344"
   },
-  "a50d47": {
+  "0b004a": {
    "source": "scene:C-fact-scope-prior/c0",
    "group": "C-fact-scope-prior",
    "unit": "C:fact:scope",
@@ -7652,7 +7652,7 @@
    },
    "repeat_of": null
   },
-  "b211fe": {
+  "1eb12e": {
    "source": "scene:C-fact-scope-prior/c0",
    "group": "C-fact-scope-prior",
    "unit": "C:fact:scope",
@@ -7671,9 +7671,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "a50d47"
+   "repeat_of": "0b004a"
   },
-  "189d26": {
+  "f3f3de": {
    "source": "scene:C-fact-scope-apology/c1",
    "group": "C-fact-scope-apology",
    "unit": "C:fact:scope",
@@ -7694,7 +7694,7 @@
    },
    "repeat_of": null
   },
-  "2b9723": {
+  "0d53f4": {
    "source": "scene:C-fact-scope-apology/c1",
    "group": "C-fact-scope-apology",
    "unit": "C:fact:scope",
@@ -7713,9 +7713,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "189d26"
+   "repeat_of": "f3f3de"
   },
-  "7d2577": {
+  "6a70a8": {
    "source": "scene:C-fact-scope-apology/c2",
    "group": "C-fact-scope-apology",
    "unit": "C:fact:scope",
@@ -7736,7 +7736,7 @@
    },
    "repeat_of": null
   },
-  "9bb06c": {
+  "e43360": {
    "source": "scene:C-fact-scope-apology/c2",
    "group": "C-fact-scope-apology",
    "unit": "C:fact:scope",
@@ -7755,9 +7755,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "7d2577"
+   "repeat_of": "6a70a8"
   },
-  "7cad88": {
+  "f7d933": {
    "source": "scene:C-fact-scope-repair/c3",
    "group": "C-fact-scope-repair",
    "unit": "C:fact:scope",
@@ -7778,7 +7778,7 @@
    },
    "repeat_of": null
   },
-  "204e6d": {
+  "771cd5": {
    "source": "scene:C-fact-scope-repair/c3",
    "group": "C-fact-scope-repair",
    "unit": "C:fact:scope",
@@ -7797,9 +7797,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "7cad88"
+   "repeat_of": "f7d933"
   },
-  "1f9365": {
+  "bac9da": {
    "source": "scene:C-fact-scope-repair/c4",
    "group": "C-fact-scope-repair",
    "unit": "C:fact:scope",
@@ -7820,7 +7820,7 @@
    },
    "repeat_of": null
   },
-  "365e86": {
+  "5207c2": {
    "source": "scene:C-fact-scope-repair/c4",
    "group": "C-fact-scope-repair",
    "unit": "C:fact:scope",
@@ -7839,9 +7839,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "1f9365"
+   "repeat_of": "bac9da"
   },
-  "ebd721": {
+  "0bd92b": {
    "source": "scene:C-fact-liability-none/c0",
    "group": "C-fact-liability-none",
    "unit": "C:fact:liability",
@@ -7862,7 +7862,7 @@
    },
    "repeat_of": null
   },
-  "2fa73b": {
+  "ad00ed": {
    "source": "scene:C-fact-liability-none/c0",
    "group": "C-fact-liability-none",
    "unit": "C:fact:liability",
@@ -7881,9 +7881,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "ebd721"
+   "repeat_of": "0bd92b"
   },
-  "a4db8d": {
+  "052f12": {
    "source": "scene:C-fact-liability-prior/c0",
    "group": "C-fact-liability-prior",
    "unit": "C:fact:liability",
@@ -7904,7 +7904,7 @@
    },
    "repeat_of": null
   },
-  "c7b45b": {
+  "0eac6e": {
    "source": "scene:C-fact-liability-prior/c0",
    "group": "C-fact-liability-prior",
    "unit": "C:fact:liability",
@@ -7923,9 +7923,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "a4db8d"
+   "repeat_of": "052f12"
   },
-  "71014f": {
+  "fd0233": {
    "source": "scene:C-fact-liability-apology/c1",
    "group": "C-fact-liability-apology",
    "unit": "C:fact:liability",
@@ -7946,7 +7946,7 @@
    },
    "repeat_of": null
   },
-  "1ca958": {
+  "a8e5f8": {
    "source": "scene:C-fact-liability-apology/c1",
    "group": "C-fact-liability-apology",
    "unit": "C:fact:liability",
@@ -7965,9 +7965,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "71014f"
+   "repeat_of": "fd0233"
   },
-  "ff482a": {
+  "46e383": {
    "source": "scene:C-fact-liability-apology/c2",
    "group": "C-fact-liability-apology",
    "unit": "C:fact:liability",
@@ -7988,7 +7988,7 @@
    },
    "repeat_of": null
   },
-  "2ad3a6": {
+  "91e120": {
    "source": "scene:C-fact-liability-apology/c2",
    "group": "C-fact-liability-apology",
    "unit": "C:fact:liability",
@@ -8007,9 +8007,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "ff482a"
+   "repeat_of": "46e383"
   },
-  "9f56c6": {
+  "5ef8b2": {
    "source": "scene:C-fact-liability-repair/c3",
    "group": "C-fact-liability-repair",
    "unit": "C:fact:liability",
@@ -8030,7 +8030,7 @@
    },
    "repeat_of": null
   },
-  "197ef6": {
+  "25bbe3": {
    "source": "scene:C-fact-liability-repair/c3",
    "group": "C-fact-liability-repair",
    "unit": "C:fact:liability",
@@ -8049,9 +8049,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "9f56c6"
+   "repeat_of": "5ef8b2"
   },
-  "31be22": {
+  "dc6a41": {
    "source": "scene:C-fact-liability-repair/c4",
    "group": "C-fact-liability-repair",
    "unit": "C:fact:liability",
@@ -8072,7 +8072,7 @@
    },
    "repeat_of": null
   },
-  "98929a": {
+  "dfad7a": {
    "source": "scene:C-fact-liability-repair/c4",
    "group": "C-fact-liability-repair",
    "unit": "C:fact:liability",
@@ -8091,9 +8091,9 @@
     "domain": "fact",
     "kit": true
    },
-   "repeat_of": "31be22"
+   "repeat_of": "dc6a41"
   },
-  "d5ac55": {
+  "480892": {
    "source": "scene:A-file-hedged/a1",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8113,7 +8113,7 @@
    },
    "repeat_of": null
   },
-  "031f52": {
+  "cfa4bc": {
    "source": "scene:A-file-hedged/a1",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8131,9 +8131,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "d5ac55"
+   "repeat_of": "480892"
   },
-  "243621": {
+  "7bafd7": {
    "source": "scene:A-file-hedged/a2",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8153,7 +8153,7 @@
    },
    "repeat_of": null
   },
-  "ce816a": {
+  "8bb71e": {
    "source": "scene:A-file-hedged/a2",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8171,9 +8171,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "243621"
+   "repeat_of": "7bafd7"
   },
-  "d55b5f": {
+  "ddabfe": {
    "source": "scene:A-file-hedged/a3",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8193,7 +8193,7 @@
    },
    "repeat_of": null
   },
-  "d2b7ac": {
+  "1d4266": {
    "source": "scene:A-file-hedged/a3",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8211,9 +8211,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "d55b5f"
+   "repeat_of": "ddabfe"
   },
-  "61f0a7": {
+  "be800b": {
    "source": "scene:A-file-hedged/a4",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8233,7 +8233,7 @@
    },
    "repeat_of": null
   },
-  "bb4ad5": {
+  "fe6a8c": {
    "source": "scene:A-file-hedged/a4",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8251,9 +8251,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "61f0a7"
+   "repeat_of": "be800b"
   },
-  "d94f1c": {
+  "b0f062": {
    "source": "scene:A-file-hedged/a5",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8273,7 +8273,7 @@
    },
    "repeat_of": null
   },
-  "65b251": {
+  "f3b8a1": {
    "source": "scene:A-file-hedged/a5",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8291,9 +8291,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "d94f1c"
+   "repeat_of": "b0f062"
   },
-  "cf6425": {
+  "7ee0ad": {
    "source": "scene:A-file-hedged/a6",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8313,7 +8313,7 @@
    },
    "repeat_of": null
   },
-  "9bec2c": {
+  "aa24ff": {
    "source": "scene:A-file-hedged/a6",
    "group": "A-file-hedged",
    "unit": "A:file",
@@ -8331,9 +8331,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "cf6425"
+   "repeat_of": "7ee0ad"
   },
-  "5a41b6": {
+  "227cc7": {
    "source": "scene:A-file-neutral/a1",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8353,7 +8353,7 @@
    },
    "repeat_of": null
   },
-  "25f09e": {
+  "b25b3c": {
    "source": "scene:A-file-neutral/a1",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8371,9 +8371,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "5a41b6"
+   "repeat_of": "227cc7"
   },
-  "9fd219": {
+  "36e88b": {
    "source": "scene:A-file-neutral/a2",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8393,7 +8393,7 @@
    },
    "repeat_of": null
   },
-  "72dad5": {
+  "2e2fc4": {
    "source": "scene:A-file-neutral/a2",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8411,9 +8411,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "9fd219"
+   "repeat_of": "36e88b"
   },
-  "ee16d9": {
+  "70215d": {
    "source": "scene:A-file-neutral/a3",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8433,7 +8433,7 @@
    },
    "repeat_of": null
   },
-  "aa1d67": {
+  "2b79b3": {
    "source": "scene:A-file-neutral/a3",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8451,9 +8451,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "ee16d9"
+   "repeat_of": "70215d"
   },
-  "721e5f": {
+  "2984c8": {
    "source": "scene:A-file-neutral/a4",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8473,7 +8473,7 @@
    },
    "repeat_of": null
   },
-  "a47ce4": {
+  "e6756c": {
    "source": "scene:A-file-neutral/a4",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8491,9 +8491,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "721e5f"
+   "repeat_of": "2984c8"
   },
-  "7e5b42": {
+  "38a7fe": {
    "source": "scene:A-file-neutral/a5",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8513,7 +8513,7 @@
    },
    "repeat_of": null
   },
-  "8d3d8a": {
+  "052b21": {
    "source": "scene:A-file-neutral/a5",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8531,9 +8531,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "7e5b42"
+   "repeat_of": "38a7fe"
   },
-  "dd6224": {
+  "4baa6a": {
    "source": "scene:A-file-neutral/a6",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8553,7 +8553,7 @@
    },
    "repeat_of": null
   },
-  "76b7d4": {
+  "ee1fd4": {
    "source": "scene:A-file-neutral/a6",
    "group": "A-file-neutral",
    "unit": "A:file",
@@ -8571,9 +8571,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "dd6224"
+   "repeat_of": "4baa6a"
   },
-  "2d36dd": {
+  "a791af": {
    "source": "scene:A-file-confident/a1",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8593,7 +8593,7 @@
    },
    "repeat_of": null
   },
-  "1ea47c": {
+  "fe4ab5": {
    "source": "scene:A-file-confident/a1",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8611,9 +8611,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "2d36dd"
+   "repeat_of": "a791af"
   },
-  "d3c3ba": {
+  "dd6e8a": {
    "source": "scene:A-file-confident/a2",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8633,7 +8633,7 @@
    },
    "repeat_of": null
   },
-  "f1cf0d": {
+  "a310ab": {
    "source": "scene:A-file-confident/a2",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8651,9 +8651,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "d3c3ba"
+   "repeat_of": "dd6e8a"
   },
-  "088d51": {
+  "2c4d87": {
    "source": "scene:A-file-confident/a3",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8673,7 +8673,7 @@
    },
    "repeat_of": null
   },
-  "468fa7": {
+  "4aba06": {
    "source": "scene:A-file-confident/a3",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8691,9 +8691,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "088d51"
+   "repeat_of": "2c4d87"
   },
-  "8636d9": {
+  "a2642e": {
    "source": "scene:A-file-confident/a4",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8713,7 +8713,7 @@
    },
    "repeat_of": null
   },
-  "599954": {
+  "1f262b": {
    "source": "scene:A-file-confident/a4",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8731,9 +8731,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "8636d9"
+   "repeat_of": "a2642e"
   },
-  "186181": {
+  "4394fd": {
    "source": "scene:A-file-confident/a5",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8753,7 +8753,7 @@
    },
    "repeat_of": null
   },
-  "ccbf14": {
+  "369af0": {
    "source": "scene:A-file-confident/a5",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8771,9 +8771,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "186181"
+   "repeat_of": "4394fd"
   },
-  "849e77": {
+  "7a9d2a": {
    "source": "scene:A-file-confident/a6",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8793,7 +8793,7 @@
    },
    "repeat_of": null
   },
-  "af1003": {
+  "5a5a13": {
    "source": "scene:A-file-confident/a6",
    "group": "A-file-confident",
    "unit": "A:file",
@@ -8811,9 +8811,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "849e77"
+   "repeat_of": "7a9d2a"
   },
-  "ed15d2": {
+  "4abd8c": {
    "source": "scene:A-file-assertive/a1",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -8833,7 +8833,7 @@
    },
    "repeat_of": null
   },
-  "2f5239": {
+  "91be86": {
    "source": "scene:A-file-assertive/a1",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -8851,9 +8851,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "ed15d2"
+   "repeat_of": "4abd8c"
   },
-  "4e925f": {
+  "50fcdb": {
    "source": "scene:A-file-assertive/a2",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -8873,7 +8873,7 @@
    },
    "repeat_of": null
   },
-  "fca129": {
+  "994f9d": {
    "source": "scene:A-file-assertive/a2",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -8891,9 +8891,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "4e925f"
+   "repeat_of": "50fcdb"
   },
-  "4201bf": {
+  "162ddc": {
    "source": "scene:A-file-assertive/a3",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -8913,7 +8913,7 @@
    },
    "repeat_of": null
   },
-  "943e31": {
+  "487ae8": {
    "source": "scene:A-file-assertive/a3",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -8931,9 +8931,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "4201bf"
+   "repeat_of": "162ddc"
   },
-  "885f5c": {
+  "6aa60a": {
    "source": "scene:A-file-assertive/a4",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -8953,7 +8953,7 @@
    },
    "repeat_of": null
   },
-  "157f4c": {
+  "34625e": {
    "source": "scene:A-file-assertive/a4",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -8971,9 +8971,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "885f5c"
+   "repeat_of": "6aa60a"
   },
-  "94fc35": {
+  "40ede5": {
    "source": "scene:A-file-assertive/a5",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -8993,7 +8993,7 @@
    },
    "repeat_of": null
   },
-  "904dd0": {
+  "91e5c2": {
    "source": "scene:A-file-assertive/a5",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -9011,9 +9011,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "94fc35"
+   "repeat_of": "40ede5"
   },
-  "fea8cd": {
+  "7c244c": {
    "source": "scene:A-file-assertive/a6",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -9033,7 +9033,7 @@
    },
    "repeat_of": null
   },
-  "bf1936": {
+  "e8e366": {
    "source": "scene:A-file-assertive/a6",
    "group": "A-file-assertive",
    "unit": "A:file",
@@ -9051,9 +9051,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "fea8cd"
+   "repeat_of": "7c244c"
   },
-  "34befb": {
+  "8c1533": {
    "source": "scene:A-file-false_verified/a1",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9073,7 +9073,7 @@
    },
    "repeat_of": null
   },
-  "8ffb60": {
+  "eed0f3": {
    "source": "scene:A-file-false_verified/a1",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9091,9 +9091,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "34befb"
+   "repeat_of": "8c1533"
   },
-  "001ace": {
+  "808364": {
    "source": "scene:A-file-false_verified/a2",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9113,7 +9113,7 @@
    },
    "repeat_of": null
   },
-  "da4089": {
+  "c9af7f": {
    "source": "scene:A-file-false_verified/a2",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9131,9 +9131,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "001ace"
+   "repeat_of": "808364"
   },
-  "54c1e2": {
+  "3f708c": {
    "source": "scene:A-file-false_verified/a3",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9153,7 +9153,7 @@
    },
    "repeat_of": null
   },
-  "3b2987": {
+  "3ce66a": {
    "source": "scene:A-file-false_verified/a3",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9171,9 +9171,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "54c1e2"
+   "repeat_of": "3f708c"
   },
-  "e2af71": {
+  "8ed1d6": {
    "source": "scene:A-file-false_verified/a4",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9193,7 +9193,7 @@
    },
    "repeat_of": null
   },
-  "00ad8b": {
+  "ca7531": {
    "source": "scene:A-file-false_verified/a4",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9211,9 +9211,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "e2af71"
+   "repeat_of": "8ed1d6"
   },
-  "44c196": {
+  "c99d02": {
    "source": "scene:A-file-false_verified/a5",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9233,7 +9233,7 @@
    },
    "repeat_of": null
   },
-  "82e7a2": {
+  "a4551f": {
    "source": "scene:A-file-false_verified/a5",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9251,9 +9251,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "44c196"
+   "repeat_of": "c99d02"
   },
-  "c471e7": {
+  "703c04": {
    "source": "scene:A-file-false_verified/a6",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9273,7 +9273,7 @@
    },
    "repeat_of": null
   },
-  "4aced0": {
+  "c75ed5": {
    "source": "scene:A-file-false_verified/a6",
    "group": "A-file-false_verified",
    "unit": "A:file",
@@ -9291,9 +9291,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "c471e7"
+   "repeat_of": "703c04"
   },
-  "e31ff2": {
+  "836c66": {
    "source": "scene:B-file-neutral-light/b1",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9314,7 +9314,7 @@
    },
    "repeat_of": null
   },
-  "d197db": {
+  "84e2d8": {
    "source": "scene:B-file-neutral-light/b1",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9333,9 +9333,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "e31ff2"
+   "repeat_of": "836c66"
   },
-  "a8d9ce": {
+  "111389": {
    "source": "scene:B-file-neutral-light/b2",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9356,7 +9356,7 @@
    },
    "repeat_of": null
   },
-  "421466": {
+  "fd5343": {
    "source": "scene:B-file-neutral-light/b2",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9375,9 +9375,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "a8d9ce"
+   "repeat_of": "111389"
   },
-  "7b397f": {
+  "b93937": {
    "source": "scene:B-file-neutral-light/b3",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9398,7 +9398,7 @@
    },
    "repeat_of": null
   },
-  "e2c0c8": {
+  "0de6b9": {
    "source": "scene:B-file-neutral-light/b3",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9417,9 +9417,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "7b397f"
+   "repeat_of": "b93937"
   },
-  "64054a": {
+  "22099e": {
    "source": "scene:B-file-neutral-light/b4",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9440,7 +9440,7 @@
    },
    "repeat_of": null
   },
-  "0c4f43": {
+  "7627c2": {
    "source": "scene:B-file-neutral-light/b4",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9459,9 +9459,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "64054a"
+   "repeat_of": "22099e"
   },
-  "0670e6": {
+  "91315f": {
    "source": "scene:B-file-neutral-light/b5",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9482,7 +9482,7 @@
    },
    "repeat_of": null
   },
-  "734202": {
+  "c0d06c": {
    "source": "scene:B-file-neutral-light/b5",
    "group": "B-file-neutral-light",
    "unit": "B:file:普通:軽い失敗の後",
@@ -9501,9 +9501,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "0670e6"
+   "repeat_of": "91315f"
   },
-  "7537e3": {
+  "f18f0e": {
    "source": "scene:B-file-neutral-deep/b1",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9524,7 +9524,7 @@
    },
    "repeat_of": null
   },
-  "65ec98": {
+  "3e1f83": {
    "source": "scene:B-file-neutral-deep/b1",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9543,9 +9543,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "7537e3"
+   "repeat_of": "f18f0e"
   },
-  "cd8824": {
+  "6bdeee": {
    "source": "scene:B-file-neutral-deep/b2",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9566,7 +9566,7 @@
    },
    "repeat_of": null
   },
-  "9f56a6": {
+  "3fa8ac": {
    "source": "scene:B-file-neutral-deep/b2",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9585,9 +9585,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "cd8824"
+   "repeat_of": "6bdeee"
   },
-  "871080": {
+  "fcd397": {
    "source": "scene:B-file-neutral-deep/b3",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9608,7 +9608,7 @@
    },
    "repeat_of": null
   },
-  "50d96a": {
+  "ed6e92": {
    "source": "scene:B-file-neutral-deep/b3",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9627,9 +9627,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "871080"
+   "repeat_of": "fcd397"
   },
-  "aa31b3": {
+  "b43e84": {
    "source": "scene:B-file-neutral-deep/b4",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9650,7 +9650,7 @@
    },
    "repeat_of": null
   },
-  "0ee886": {
+  "646cfe": {
    "source": "scene:B-file-neutral-deep/b4",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9669,9 +9669,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "aa31b3"
+   "repeat_of": "b43e84"
   },
-  "25ad3d": {
+  "5d310c": {
    "source": "scene:B-file-neutral-deep/b5",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9692,7 +9692,7 @@
    },
    "repeat_of": null
   },
-  "d6ebe0": {
+  "97d2e2": {
    "source": "scene:B-file-neutral-deep/b5",
    "group": "B-file-neutral-deep",
    "unit": "B:file:普通:約束を破った後",
@@ -9711,9 +9711,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "25ad3d"
+   "repeat_of": "5d310c"
   },
-  "8f0fd9": {
+  "e5af40": {
    "source": "scene:B-file-close-light/b1",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9734,7 +9734,7 @@
    },
    "repeat_of": null
   },
-  "68727e": {
+  "fdfbf8": {
    "source": "scene:B-file-close-light/b1",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9753,9 +9753,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "8f0fd9"
+   "repeat_of": "e5af40"
   },
-  "44826b": {
+  "b2be9b": {
    "source": "scene:B-file-close-light/b2",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9776,7 +9776,7 @@
    },
    "repeat_of": null
   },
-  "46e815": {
+  "909ae4": {
    "source": "scene:B-file-close-light/b2",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9795,9 +9795,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "44826b"
+   "repeat_of": "b2be9b"
   },
-  "9a7492": {
+  "06d433": {
    "source": "scene:B-file-close-light/b3",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9818,7 +9818,7 @@
    },
    "repeat_of": null
   },
-  "89f143": {
+  "7dbb4e": {
    "source": "scene:B-file-close-light/b3",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9837,9 +9837,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "9a7492"
+   "repeat_of": "06d433"
   },
-  "5965c2": {
+  "a2b2d5": {
    "source": "scene:B-file-close-light/b4",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9860,7 +9860,7 @@
    },
    "repeat_of": null
   },
-  "737b4b": {
+  "50e704": {
    "source": "scene:B-file-close-light/b4",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9879,9 +9879,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "5965c2"
+   "repeat_of": "a2b2d5"
   },
-  "4321fa": {
+  "2fc68b": {
    "source": "scene:B-file-close-light/b5",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9902,7 +9902,7 @@
    },
    "repeat_of": null
   },
-  "2c4b14": {
+  "fbf652": {
    "source": "scene:B-file-close-light/b5",
    "group": "B-file-close-light",
    "unit": "B:file:親しい:軽い失敗の後",
@@ -9921,9 +9921,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "4321fa"
+   "repeat_of": "2fc68b"
   },
-  "24ed58": {
+  "5eaf90": {
    "source": "scene:B-file-close-deep/b1",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -9944,7 +9944,7 @@
    },
    "repeat_of": null
   },
-  "7f8e21": {
+  "da6e2a": {
    "source": "scene:B-file-close-deep/b1",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -9963,9 +9963,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "24ed58"
+   "repeat_of": "5eaf90"
   },
-  "cfafe7": {
+  "adca33": {
    "source": "scene:B-file-close-deep/b2",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -9986,7 +9986,7 @@
    },
    "repeat_of": null
   },
-  "ea9a92": {
+  "326ffe": {
    "source": "scene:B-file-close-deep/b2",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -10005,9 +10005,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "cfafe7"
+   "repeat_of": "adca33"
   },
-  "15b5e6": {
+  "471d21": {
    "source": "scene:B-file-close-deep/b3",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -10028,7 +10028,7 @@
    },
    "repeat_of": null
   },
-  "f0905f": {
+  "399fce": {
    "source": "scene:B-file-close-deep/b3",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -10047,9 +10047,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "15b5e6"
+   "repeat_of": "471d21"
   },
-  "149934": {
+  "b5ea66": {
    "source": "scene:B-file-close-deep/b4",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -10070,7 +10070,7 @@
    },
    "repeat_of": null
   },
-  "236740": {
+  "931948": {
    "source": "scene:B-file-close-deep/b4",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -10089,9 +10089,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "149934"
+   "repeat_of": "b5ea66"
   },
-  "3fef96": {
+  "ed6952": {
    "source": "scene:B-file-close-deep/b5",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -10112,7 +10112,7 @@
    },
    "repeat_of": null
   },
-  "2e89d7": {
+  "0b5492": {
    "source": "scene:B-file-close-deep/b5",
    "group": "B-file-close-deep",
    "unit": "B:file:親しい:約束を破った後",
@@ -10131,9 +10131,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "3fef96"
+   "repeat_of": "ed6952"
   },
-  "2ab1e1": {
+  "d3ca74": {
    "source": "scene:C-file-scope-none/c0",
    "group": "C-file-scope-none",
    "unit": "C:file:scope",
@@ -10154,7 +10154,7 @@
    },
    "repeat_of": null
   },
-  "d6612d": {
+  "97fabc": {
    "source": "scene:C-file-scope-none/c0",
    "group": "C-file-scope-none",
    "unit": "C:file:scope",
@@ -10173,9 +10173,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "2ab1e1"
+   "repeat_of": "d3ca74"
   },
-  "3190db": {
+  "95b31c": {
    "source": "scene:C-file-scope-prior/c0",
    "group": "C-file-scope-prior",
    "unit": "C:file:scope",
@@ -10196,7 +10196,7 @@
    },
    "repeat_of": null
   },
-  "1d9b15": {
+  "01232b": {
    "source": "scene:C-file-scope-prior/c0",
    "group": "C-file-scope-prior",
    "unit": "C:file:scope",
@@ -10215,9 +10215,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "3190db"
+   "repeat_of": "95b31c"
   },
-  "b9dd4a": {
+  "4e0c7c": {
    "source": "scene:C-file-scope-apology/c1",
    "group": "C-file-scope-apology",
    "unit": "C:file:scope",
@@ -10238,7 +10238,7 @@
    },
    "repeat_of": null
   },
-  "fb327a": {
+  "6d5034": {
    "source": "scene:C-file-scope-apology/c1",
    "group": "C-file-scope-apology",
    "unit": "C:file:scope",
@@ -10257,9 +10257,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "b9dd4a"
+   "repeat_of": "4e0c7c"
   },
-  "206ccf": {
+  "fd622b": {
    "source": "scene:C-file-scope-apology/c2",
    "group": "C-file-scope-apology",
    "unit": "C:file:scope",
@@ -10280,7 +10280,7 @@
    },
    "repeat_of": null
   },
-  "50997b": {
+  "244dfb": {
    "source": "scene:C-file-scope-apology/c2",
    "group": "C-file-scope-apology",
    "unit": "C:file:scope",
@@ -10299,9 +10299,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "206ccf"
+   "repeat_of": "fd622b"
   },
-  "73ecc7": {
+  "df0848": {
    "source": "scene:C-file-scope-repair/c3",
    "group": "C-file-scope-repair",
    "unit": "C:file:scope",
@@ -10322,7 +10322,7 @@
    },
    "repeat_of": null
   },
-  "8594dd": {
+  "1d42df": {
    "source": "scene:C-file-scope-repair/c3",
    "group": "C-file-scope-repair",
    "unit": "C:file:scope",
@@ -10341,9 +10341,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "73ecc7"
+   "repeat_of": "df0848"
   },
-  "428f1a": {
+  "22e28f": {
    "source": "scene:C-file-scope-repair/c4",
    "group": "C-file-scope-repair",
    "unit": "C:file:scope",
@@ -10364,7 +10364,7 @@
    },
    "repeat_of": null
   },
-  "e7bda1": {
+  "4aba5b": {
    "source": "scene:C-file-scope-repair/c4",
    "group": "C-file-scope-repair",
    "unit": "C:file:scope",
@@ -10383,9 +10383,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "428f1a"
+   "repeat_of": "22e28f"
   },
-  "66a832": {
+  "0b5f19": {
    "source": "scene:C-file-liability-none/c0",
    "group": "C-file-liability-none",
    "unit": "C:file:liability",
@@ -10406,7 +10406,7 @@
    },
    "repeat_of": null
   },
-  "0d9d7e": {
+  "db6a8b": {
    "source": "scene:C-file-liability-none/c0",
    "group": "C-file-liability-none",
    "unit": "C:file:liability",
@@ -10425,9 +10425,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "66a832"
+   "repeat_of": "0b5f19"
   },
-  "edbc4e": {
+  "65138e": {
    "source": "scene:C-file-liability-prior/c0",
    "group": "C-file-liability-prior",
    "unit": "C:file:liability",
@@ -10448,7 +10448,7 @@
    },
    "repeat_of": null
   },
-  "b09eb8": {
+  "270228": {
    "source": "scene:C-file-liability-prior/c0",
    "group": "C-file-liability-prior",
    "unit": "C:file:liability",
@@ -10467,9 +10467,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "edbc4e"
+   "repeat_of": "65138e"
   },
-  "39e0c2": {
+  "aa9e56": {
    "source": "scene:C-file-liability-apology/c1",
    "group": "C-file-liability-apology",
    "unit": "C:file:liability",
@@ -10490,7 +10490,7 @@
    },
    "repeat_of": null
   },
-  "558e32": {
+  "08ef33": {
    "source": "scene:C-file-liability-apology/c1",
    "group": "C-file-liability-apology",
    "unit": "C:file:liability",
@@ -10509,9 +10509,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "39e0c2"
+   "repeat_of": "aa9e56"
   },
-  "2aed1f": {
+  "d4c204": {
    "source": "scene:C-file-liability-apology/c2",
    "group": "C-file-liability-apology",
    "unit": "C:file:liability",
@@ -10532,7 +10532,7 @@
    },
    "repeat_of": null
   },
-  "fccc5a": {
+  "a5ec5f": {
    "source": "scene:C-file-liability-apology/c2",
    "group": "C-file-liability-apology",
    "unit": "C:file:liability",
@@ -10551,9 +10551,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "2aed1f"
+   "repeat_of": "d4c204"
   },
-  "57aaf6": {
+  "e8f39c": {
    "source": "scene:C-file-liability-repair/c3",
    "group": "C-file-liability-repair",
    "unit": "C:file:liability",
@@ -10574,7 +10574,7 @@
    },
    "repeat_of": null
   },
-  "c429ef": {
+  "48c216": {
    "source": "scene:C-file-liability-repair/c3",
    "group": "C-file-liability-repair",
    "unit": "C:file:liability",
@@ -10593,9 +10593,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "57aaf6"
+   "repeat_of": "e8f39c"
   },
-  "6f58fb": {
+  "dd2374": {
    "source": "scene:C-file-liability-repair/c4",
    "group": "C-file-liability-repair",
    "unit": "C:file:liability",
@@ -10616,7 +10616,7 @@
    },
    "repeat_of": null
   },
-  "194b4b": {
+  "a7461f": {
    "source": "scene:C-file-liability-repair/c4",
    "group": "C-file-liability-repair",
    "unit": "C:file:liability",
@@ -10635,9 +10635,9 @@
     "domain": "file",
     "kit": true
    },
-   "repeat_of": "6f58fb"
+   "repeat_of": "dd2374"
   },
-  "20876b": {
+  "981305": {
    "source": "scene:D-S3/C1",
    "group": "D-S3",
    "unit": null,
@@ -10656,7 +10656,7 @@
    },
    "repeat_of": null
   },
-  "bcd973": {
+  "5ba2db": {
    "source": "scene:D-S3/C1",
    "group": "D-S3",
    "unit": null,
@@ -10673,9 +10673,9 @@
     "anchor": true,
     "kit": true
    },
-   "repeat_of": "20876b"
+   "repeat_of": "981305"
   },
-  "4f511c": {
+  "bb3820": {
    "source": "scene:D-S3/C3",
    "group": "D-S3",
    "unit": null,
@@ -10694,7 +10694,7 @@
    },
    "repeat_of": null
   },
-  "90474a": {
+  "b28a18": {
    "source": "scene:D-S3/C3",
    "group": "D-S3",
    "unit": null,
@@ -10711,9 +10711,9 @@
     "anchor": true,
     "kit": true
    },
-   "repeat_of": "4f511c"
+   "repeat_of": "bb3820"
   },
-  "b0a386": {
+  "33cea2": {
    "source": "scene:D-S5/E1",
    "group": "D-S5",
    "unit": null,
@@ -10732,7 +10732,7 @@
    },
    "repeat_of": null
   },
-  "e9aef3": {
+  "6fd78b": {
    "source": "scene:D-S5/E1",
    "group": "D-S5",
    "unit": null,
@@ -10749,9 +10749,9 @@
     "anchor": true,
     "kit": true
    },
-   "repeat_of": "b0a386"
+   "repeat_of": "33cea2"
   },
-  "156f00": {
+  "f47223": {
    "source": "scene:D-S5/E3",
    "group": "D-S5",
    "unit": null,
@@ -10770,7 +10770,7 @@
    },
    "repeat_of": null
   },
-  "5b00fe": {
+  "197e27": {
    "source": "scene:D-S5/E3",
    "group": "D-S5",
    "unit": null,
@@ -10787,9 +10787,9 @@
     "anchor": true,
     "kit": true
    },
-   "repeat_of": "156f00"
+   "repeat_of": "f47223"
   },
-  "5fbf3b": {
+  "81c310": {
    "source": "attention",
    "group": "attention",
    "unit": null,

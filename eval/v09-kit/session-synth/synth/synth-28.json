@@ -1,6 +1,6 @@
 {
  "schema": "apology-blind-rating/2",
- "packet_id": "pk-20261119-87378a",
+ "packet_id": "pk-20261119-26da4e",
  "synthetic": true,
  "list": 27,
  "rater": {
@@ -11,7 +11,7 @@
  "mode": "independent",
  "duration_s": null,
  "ratings": {
-  "20876b": {
+  "981305": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -24,7 +24,7 @@
    "trust": 5,
    "manip": 0
   },
-  "4f511c": {
+  "bb3820": {
    "mu": {
     "rude": 0.25,
     "light": 0.0,
@@ -37,7 +37,7 @@
    "trust": 5,
    "manip": 1
   },
-  "b0a386": {
+  "33cea2": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -50,7 +50,7 @@
    "trust": 5,
    "manip": 1
   },
-  "156f00": {
+  "f47223": {
    "mu": {
     "rude": 0.0,
     "light": 0.75,
@@ -63,7 +63,7 @@
    "trust": 5,
    "manip": 0
   },
-  "dc72ce": {
+  "fe7322": {
    "mu": {
     "rude": 0.0,
     "light": 0.25,
@@ -76,7 +76,7 @@
    "trust": 3,
    "manip": 3
   },
-  "002db5": {
+  "a366ac": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -89,7 +89,7 @@
    "trust": 5,
    "manip": 3
   },
-  "34befb": {
+  "8c1533": {
    "mu": {
     "rude": 0.75,
     "light": 0.25,
@@ -102,7 +102,7 @@
    "trust": 3,
    "manip": 3
   },
-  "958c4b": {
+  "9279b6": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -115,7 +115,7 @@
    "trust": 2,
    "manip": 3
   },
-  "5f2279": {
+  "547bcd": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -128,7 +128,7 @@
    "trust": 5,
    "manip": 1
   },
-  "500516": {
+  "7b76dc": {
    "mu": {
     "rude": 1.0,
     "light": 0.5,
@@ -141,7 +141,7 @@
    "trust": 5,
    "manip": 2
   },
-  "efd20e": {
+  "f2a2cc": {
    "mu": {
     "rude": 0.5,
     "light": 0.5,
@@ -154,7 +154,7 @@
    "trust": 4,
    "manip": 2
   },
-  "a42450": {
+  "ae58e6": {
    "mu": {
     "rude": 0.5,
     "light": 0.25,
@@ -167,7 +167,7 @@
    "trust": 5,
    "manip": 2
   },
-  "557181": {
+  "c4bf7d": {
    "mu": {
     "rude": 1.0,
     "light": 1.0,
@@ -180,7 +180,7 @@
    "trust": 5,
    "manip": 2
   },
-  "bfe445": {
+  "12cae6": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -193,7 +193,7 @@
    "trust": 5,
    "manip": 2
   },
-  "2b5858": {
+  "fbec82": {
    "mu": {
     "rude": 0.0,
     "light": 0.5,
@@ -206,7 +206,7 @@
    "trust": 5,
    "manip": 2
   },
-  "d75dcf": {
+  "59d61b": {
    "mu": {
     "rude": 0.0,
     "light": 0.25,
@@ -219,7 +219,7 @@
    "trust": 4,
    "manip": 2
   },
-  "cd8824": {
+  "6bdeee": {
    "mu": {
     "rude": 0.0,
     "light": 0.5,
@@ -232,7 +232,7 @@
    "trust": 4,
    "manip": 1
   },
-  "e31ff2": {
+  "836c66": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -245,7 +245,7 @@
    "trust": 5,
    "manip": 2
   },
-  "15b5e6": {
+  "471d21": {
    "mu": {
     "rude": 0.0,
     "light": 1.0,
@@ -258,7 +258,7 @@
    "trust": 5,
    "manip": 2
   },
-  "8f0fd9": {
+  "e5af40": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -271,7 +271,7 @@
    "trust": 4,
    "manip": 2
   },
-  "c57956": {
+  "adf442": {
    "mu": {
     "rude": 1.0,
     "light": 1.0,
@@ -284,7 +284,7 @@
    "trust": 5,
    "manip": 2
   },
-  "1bb6b2": {
+  "7fdcef": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -297,7 +297,7 @@
    "trust": 4,
    "manip": 2
   },
-  "ecbaad": {
+  "6f22ae": {
    "mu": {
     "rude": 1.0,
     "light": 1.0,
@@ -310,7 +310,7 @@
    "trust": 4,
    "manip": 3
   },
-  "88f22f": {
+  "f8c3c6": {
    "mu": {
     "rude": 1.0,
     "light": 0.5,
@@ -323,7 +323,7 @@
    "trust": 5,
    "manip": 2
   },
-  "cda906": {
+  "cf7299": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -336,7 +336,7 @@
    "trust": 5,
    "manip": 1
   },
-  "c086bb": {
+  "ad4359": {
    "mu": {
     "rude": 0.0,
     "light": 0.25,
@@ -349,7 +349,7 @@
    "trust": 5,
    "manip": 3
   },
-  "31be22": {
+  "dc6a41": {
    "mu": {
     "rude": 0.0,
     "light": 0.75,
@@ -362,7 +362,7 @@
    "trust": 5,
    "manip": 3
   },
-  "7d2577": {
+  "6a70a8": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -375,7 +375,7 @@
    "trust": 5,
    "manip": 1
   },
-  "66a832": {
+  "0b5f19": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -388,7 +388,7 @@
    "trust": 5,
    "manip": 1
   },
-  "2ab1e1": {
+  "d3ca74": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -401,7 +401,7 @@
    "trust": 4,
    "manip": 2
   },
-  "a0681f": {
+  "8ca7db": {
    "mu": {
     "rude": 0.0,
     "light": 0.0,
@@ -414,7 +414,7 @@
    "trust": 5,
    "manip": 2
   },
-  "5d7d87": {
+  "eac6bd": {
    "mu": {
     "rude": 0.5,
     "light": 0.0,
@@ -427,7 +427,7 @@
    "trust": 5,
    "manip": 0
   },
-  "bcd973": {
+  "5ba2db": {
    "mu": {
     "rude": 0.25,
     "light": 0.0,
@@ -440,7 +440,7 @@
    "trust": 5,
    "manip": 1
   },
-  "90474a": {
+  "b28a18": {
    "mu": {
     "rude": 0.25,
     "light": 0.5,
@@ -453,7 +453,7 @@
    "trust": 5,
    "manip": 0
   },
-  "5fbf3b": {
+  "81c310": {
    "mu": {
     "rude": 0.5,
     "light": 0.5,

@@ -34,3 +34,17 @@ python3 tools/evaluate.py runs/* --obs v09-proxy=out/obs-proxy.json --obs v08-pr
 python3 tools/evaluate.py runs/* --calibrate -n 500 --boot 1000 --obs v09-proxy=out/obs-proxy.json \
   --obs v09-subagent=eval/obs-subagent.json -o eval/eval-v09-calibrated.json
 ```
+
+## v0.9 の総合評価
+
+[docs/md/EVALUATION_V09.md](../docs/md/EVALUATION_V09.md)。再現は `sh tools/run_eval_v09.sh`。
+
+| ファイル | 内容 |
+|---|---|
+| `v09-observers/` | 観察者の集団（6変種）の観察と作例の盲検の観察（[README](v09-observers/README.md)） |
+| `eval-v09-full.txt` / `.json` | 6変種・集団・代理観察のベンチマークの評価（較正なし） |
+| `eval-v09-full-calibrated.txt` / `.json` | 出どころごとの較正つき |
+| `v09-observer-agreement.md` | 観察者間の一致（α）と、観察方針・モデルの主効果 |
+| `v09-scenes-obs.md` | 作例での、LLM の観察と手の観察の一致、仮説の対比の向き |
+| `v09-sensitivity.md` | 新しい事前値の感度 |
+| `v09-kit/` | 評価キットの合成評定者による試験（`session-synth/`）と検出力（`power-x1`、`power-x05`） |

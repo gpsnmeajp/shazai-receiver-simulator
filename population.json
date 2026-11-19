@@ -261,7 +261,13 @@
       }
     },
     "llm-ensemble": {
-      "_note": "観察者の集団の平均は未較正。集団の観察を集めたあと、同じ手続きで当てはめる。"
+      "_note": "観察者の集団の平均（6変種：観察方針3 × モデル2。eval/v09-observers/obs-ensemble.json）で、場面単位の交差検証の内側から当てはめた中心（全データでの選択）。分割の外側の Brier 0.549 → 0.489。eval/eval-v09-full-calibrated.txt を参照。",
+      "rude": {
+        "center": 2.7
+      },
+      "light": {
+        "center": 1.0
+      }
     }
   }
 }
