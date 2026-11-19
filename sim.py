@@ -484,9 +484,11 @@ def prior_stance(sc):
     w = [share(t.get("caused_failure", False)) for t in turns]
     c = max(min(3.0, float(t.get("confidence", 1))) for t in turns) / 3
     hedged = []
+    claimed = share(ps.get("claimed_verification"))
     for t in turns:
         d = t.get("disclaimer", "none")
-        disc = share(d, "scope") + share(d, "verify") + 0.5 * share(d, "liability")
+        # 「確認済み」と述べた発話の確かめは、控えめさではなく言い切りの裏付けなので数えない
+        disc = share(d, "scope") + (1 - claimed) * share(d, "verify") + 0.5 * share(d, "liability")
         hedged.append(min(1.0, max(0.0, 1.0 - float(t.get("confidence", 1))) + disc))
     h = sum(x * y for x, y in zip(hedged, w)) / sum(w)
     v = 0.5 + 0.5 * max(0.0, min(1.0, float(ps.get("salient", 0.5))))

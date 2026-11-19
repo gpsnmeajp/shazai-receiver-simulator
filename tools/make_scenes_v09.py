@@ -24,6 +24,7 @@ DOMAINS = {
         "ask": "このCSV読み込みの関数、日付が 2025/1/5 みたいな形式だとエラーになるので直してもらえますか？",
         "concern": "ゼロ埋めされていない日付も混ざっているけど、大丈夫ですか？",
         "complaint": "動かしたら、2025/1/15 の行で同じエラーが出ました。原因を調べるのに30分かかりました。",
+        "fv_reveal": "テストが通ったと言っていましたが、テストのファイルはどこにもありませんでした。",
         "stance": {
             "hedged": "修正案です。{art}ただ、手元で実行して確かめてはいないので、数件のデータで動作を確かめてから使ってください。",
             "neutral": "修正しました。{art}",
@@ -55,6 +56,7 @@ DOMAINS = {
         "ask": "来週木曜の定例を15時に移して、参加者にも案内を送っておいてもらえますか？",
         "concern": "今週と来週を取り違えないように気をつけてくださいね。",
         "complaint": "今週の木曜に移っていて、先方から「今日ですか？」と問い合わせが来ました。お詫びの連絡をすることになりました。",
+        "fv_reveal": "日付も確認済みと言っていましたが、カレンダーを開けば一目で今週だと分かる状態でした。",
         "stance": {
             "hedged": "移動して案内を送りました。ただ、「来週」がどの週を指すかは確かめていないので、念のためカレンダーで日付を確かめてください。",
             "neutral": "移動して案内を送りました。",
@@ -86,6 +88,7 @@ DOMAINS = {
         "ask": "Python 3.12 で distutils はまだ使えますか？古いセットアップスクリプトを動かしたいんです。",
         "concern": "廃止されたって話を聞いた気がするんですが、大丈夫ですか？",
         "complaint": "3.12 で実行したら「No module named 'distutils'」でした。使える前提で作業の段取りを組んでしまいました。",
+        "fv_reveal": "3.12 で import できることを確認済みと言っていましたが、3.12 では import した瞬間にこのエラーが出ます。",
         "stance": {
             "hedged": "使える可能性はありますが、バージョンによって扱いが変わっているので、公式のドキュメントで確かめてください。",
             "neutral": "使えます。",
@@ -117,6 +120,7 @@ DOMAINS = {
         "ask": "このフォルダの写真のファイル名を、撮影日の「2025-01-05_001.jpg」みたいな形に一括で変えてもらえますか？",
         "concern": "拡張子が変わったりしませんか？",
         "complaint": "変更後のファイルが全部開けません。拡張子が消えていて、原因が分かるまで写真が壊れたのかと思いました。",
+        "fv_reveal": "全ファイルが開けることも確認済みと言っていましたが、1枚も開けませんでした。",
         "stance": {
             "hedged": "変更しました。ただ、すべてのファイルで確かめたわけではないので、何枚か開けるか確かめてください。",
             "neutral": "変更しました。",
@@ -237,7 +241,8 @@ def apology_scene(sid, title, dom, stance, answers, design, turn_disc=None, prio
     ai = d["stance"][stance].replace("{art}", d["art"])
     ai += {"scope": d["scope"], "liability": d["liab"]}.get(turn_disc, "")
     ask = d["ask"] + (d["concern"] if stance == "assertive" else "")
-    msgs = [{"role": "user", "content": ask}, {"role": "assistant", "content": ai}, {"role": "user", "content": d["complaint"]}]
+    complaint = d["complaint"] + (d["fv_reveal"] if stance == "false_verified" else "")
+    msgs = [{"role": "user", "content": ask}, {"role": "assistant", "content": ai}, {"role": "user", "content": complaint}]
     sc = {"explicit_complaint": 2, "distance_shift": 1, "harm": 1, "violation_type": "competence",
           "turns_since_incident": 0, "prior_stance": dict({"turns": [turn]}, **ps)}
     if prior:  # 二度目の失敗：前にも同じ失敗をして謝り、約束していた
@@ -255,7 +260,7 @@ def repair_scene(sid, title, dom, answers, design, close=False, broken_before=Fa
     stance = "false_verified" if integrity else "confident"
     apology = f"申し訳ありません。{d['fault']}{d['burden']}{d['promise']}{T(d, 'fix')}"
     msgs = [{"role": "user", "content": d["ask"]}, {"role": "assistant", "content": d["stance"][stance].replace("{art}", d["art"])},
-            {"role": "user", "content": d["complaint"]}, {"role": "assistant", "content": apology},
+            {"role": "user", "content": d["complaint"] + (d["fv_reveal"] if integrity else "")}, {"role": "assistant", "content": apology},
             {"role": "user", "content": d["accept_close" if close else accept]}]
     turn_obs, ps = STANCE_OBS[stance]
     sc = {"explicit_complaint": 0, "distance_shift": 1 if accept == "accept_vague" else 0, "harm": 1,
